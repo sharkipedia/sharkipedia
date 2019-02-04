@@ -1,0 +1,3 @@
+--color
+-fdoc
+--require spec_helper

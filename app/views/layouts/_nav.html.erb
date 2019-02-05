@@ -47,12 +47,10 @@
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-          <a class="button is-primary">
+          <%= link_to new_user_registration_path, class: "button is-primary" do %>
             <strong>Sign up</strong>
-          </a>
-          <a class="button is-light">
-            Log in
-          </a>
+          <% end %>
+          <%= link_to "Log in", new_user_session_path, class: "button is-light" %>
         </div>
       </div>
     </div>

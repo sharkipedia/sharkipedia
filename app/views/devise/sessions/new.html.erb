@@ -1,26 +1,40 @@
-<h2>Log in</h2>
+<h2 class="title">Log in</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <p class="control has-icons-left has-icons-right">
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", type: "email", placeholder: "Email", class: "input" %>
+      <span class="icon is-small is-left">
+        <i class="fas fa-envelope"></i>
+      </span>
+      <span class="icon is-small is-right">
+        <i class="fas fa-check"></i>
+      </span>
+    </p>
   </div>
 
   <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
+    <p class="control has-icons-left">
+      <%= f.password_field :password, autocomplete: "current-password", class: "input", type: "password", placeholder: "Password" %>
+      <span class="icon is-small is-left">
+        <i class="fas fa-lock"></i>
+      </span>
+    </p>
   </div>
 
   <% if devise_mapping.rememberable? -%>
     <div class="field">
       <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+      <%= f.label :remember_me, class: "checkbox" %>
     </div>
   <% end -%>
 
   <div class="actions">
-    <%= f.submit "Log in" %>
+    <%= f.submit "Log in", class: "button is-primary" %>
   </div>
 <% end %>
+
+<br />
+<br />
 
 <%= render "devise/shared/links" %>

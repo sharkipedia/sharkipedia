@@ -22,3 +22,8 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+
+## Attributions
+
+The original logo was taken from https://svgsilh.com/image/1085669.html

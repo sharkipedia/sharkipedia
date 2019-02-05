@@ -1,0 +1,17 @@
+<% unless notice.blank? || alert.blank? %>
+  <section class="section">
+    <div class="container">
+      <% unless notice.blank? %>
+        <div class="notification is-primary">
+          <%= notice %>
+        </div>
+      <% end %>
+
+      <% unless alert.blank? %>
+        <div class="notification is-danger">
+          <%= alert %>
+        </div>
+      <% end %>
+    </div>
+  </section>
+<% end %>

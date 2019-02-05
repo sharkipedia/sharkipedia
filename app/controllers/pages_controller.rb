@@ -1,4 +1,4 @@
-class PagesController < ApplicationController
+class PagesController < PreAuthController
   def start
   end
 

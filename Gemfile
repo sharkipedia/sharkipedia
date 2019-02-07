@@ -32,6 +32,8 @@ gem 'devise', '~> 4.5'
 gem 'administrate', '~> 0.11.0'
 gem 'pundit', '~> 2.0', '>= 2.0.1'
 
+gem 'roo', '~> 2.8.0'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

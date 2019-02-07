@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_05_003847) do
+ActiveRecord::Schema.define(version: 2019_02_07_021254) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "species", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "iucn_code"
+    t.bigint "species_superorder_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["species_superorder_id"], name: "index_species_on_species_superorder_id"
+  end
+
+  create_table "species_superorders", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false

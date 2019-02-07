@@ -1,5 +1,11 @@
 require 'csv'
 
+
+CSV.foreach('docs/longhurst_provinces.csv', headers: true) do |row|
+  LonghurstProvince.find_or_create_by! name: row['Province'], code: row['Code']
+end
+puts "# Created #{LonghurstProvince.count} LonghurstProvince"
+
 super_orders = CSV.open('docs/species.csv', &:readline).reject(&:nil?)
 super_orders = super_orders.map do |super_order|
   [

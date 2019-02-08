@@ -29,3 +29,9 @@ CSV.foreach('docs/sex_types.csv') do |row|
 end
 
 puts "# Created #{SexType.count} SexTypes"
+
+%w(Length Age Growth Reproduction Demography Relationships).each do |t|
+  TraitClass.find_or_create_by! name: t
+end
+
+puts "# Created #{TraitClass.count} TraitClass"

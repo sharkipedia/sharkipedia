@@ -55,3 +55,13 @@ CSV.foreach('docs/standards.csv', headers: true) do |row|
 end
 
 puts "# Created #{Standard.count} Standards"
+
+CSV.foreach('docs/methods.csv', headers: true) do |row|
+  TraitClass.all.each do |tc|
+    name = row[tc.name]
+    next if name.blank?
+    MeasurementMethod.find_or_create_by! name: name, trait_class: tc
+  end
+end
+
+puts "# Created #{MeasurementMethod.count} MeasurementMethods"

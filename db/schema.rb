@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_08_002620) do
+ActiveRecord::Schema.define(version: 2019_02_08_003708) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,15 @@ ActiveRecord::Schema.define(version: 2019_02_08_002620) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["code"], name: "index_longhurst_provinces_on_code"
+  end
+
+  create_table "measurement_methods", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
+    t.bigint "trait_class_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["trait_class_id"], name: "index_measurement_methods_on_trait_class_id"
   end
 
   create_table "observations", force: :cascade do |t|
@@ -120,6 +129,7 @@ ActiveRecord::Schema.define(version: 2019_02_08_002620) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "measurement_methods", "trait_classes"
   add_foreign_key "observations", "locations"
   add_foreign_key "observations", "longhurst_provinces"
   add_foreign_key "observations", "resources"

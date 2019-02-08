@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_07_235103) do
+ActiveRecord::Schema.define(version: 2019_02_07_235644) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,26 @@ ActiveRecord::Schema.define(version: 2019_02_07_235103) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["code"], name: "index_longhurst_provinces_on_code"
+  end
+
+  create_table "observations", force: :cascade do |t|
+    t.bigint "resource_id"
+    t.bigint "secondary_resource_id"
+    t.bigint "species_id"
+    t.bigint "longhurst_province_id"
+    t.string "date"
+    t.string "access"
+    t.integer "hidden"
+    t.bigint "user_id"
+    t.bigint "location_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["location_id"], name: "index_observations_on_location_id"
+    t.index ["longhurst_province_id"], name: "index_observations_on_longhurst_province_id"
+    t.index ["resource_id"], name: "index_observations_on_resource_id"
+    t.index ["secondary_resource_id"], name: "index_observations_on_secondary_resource_id"
+    t.index ["species_id"], name: "index_observations_on_species_id"
+    t.index ["user_id"], name: "index_observations_on_user_id"
   end
 
   create_table "resources", force: :cascade do |t|
@@ -76,4 +96,9 @@ ActiveRecord::Schema.define(version: 2019_02_07_235103) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "observations", "locations"
+  add_foreign_key "observations", "longhurst_provinces"
+  add_foreign_key "observations", "resources"
+  add_foreign_key "observations", "species"
+  add_foreign_key "observations", "users"
 end

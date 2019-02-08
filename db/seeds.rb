@@ -36,6 +36,12 @@ end
 
 puts "# Created #{ValueType.count} ValueTypes"
 
+CSV.foreach('docs/precision_types.csv') do |row|
+  PrecisionType.find_or_create_by! name: row.first
+end
+
+puts "# Created #{PrecisionType.count} PrecisionTypes"
+
 %w(Length Age Growth Reproduction Demography Relationships).each do |t|
   TraitClass.find_or_create_by! name: t
 end

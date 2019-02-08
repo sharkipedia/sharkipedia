@@ -19,12 +19,16 @@ By default, it renders:
   <meta name="ROBOTS" content="NOODP">
   <meta name="viewport" content="initial-scale=1">
   <title>
-    <%= content_for(:title) %> - <%= Rails.application.class.parent_name.titlecase %>
+    <%= content_for(:title) %> - Admin - Shark Traits & Trends
   </title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
+  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
   <%= render "stylesheet" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <%= render 'layouts/nav' %>
+
   <%= render "icons" %>
 
   <div class="app-container">

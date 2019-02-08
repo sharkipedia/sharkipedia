@@ -10,8 +10,8 @@ class UserDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     email: Field::String,
-    encrypted_password: Field::String,
-    reset_password_token: Field::String,
+    # encrypted_password: Field::String,
+    # reset_password_token: Field::String,
     reset_password_sent_at: Field::DateTime,
     remember_created_at: Field::DateTime,
     confirmation_token: Field::String,
@@ -30,8 +30,6 @@ class UserDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :id,
     :email,
-    :encrypted_password,
-    :reset_password_token,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -39,8 +37,6 @@ class UserDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = [
     :id,
     :email,
-    :encrypted_password,
-    :reset_password_token,
     :reset_password_sent_at,
     :remember_created_at,
     :confirmation_token,

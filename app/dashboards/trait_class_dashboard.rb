@@ -24,6 +24,7 @@ class TraitClassDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
+    :name,
     :traits,
     :standards,
     :measurement_methods,
@@ -57,7 +58,7 @@ class TraitClassDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how trait classes are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(trait_class)
-  #   "TraitClass ##{trait_class.id}"
-  # end
+  def display_resource(trait_class)
+    trait_class.name
+  end
 end

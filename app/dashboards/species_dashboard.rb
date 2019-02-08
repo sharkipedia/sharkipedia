@@ -23,7 +23,6 @@ class SpeciesDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
     :species_superorder,
-    :id,
     :name,
     :iucn_code,
   ].freeze

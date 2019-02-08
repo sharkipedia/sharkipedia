@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_08_004911) do
+ActiveRecord::Schema.define(version: 2019_02_08_005601) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,39 @@ ActiveRecord::Schema.define(version: 2019_02_08_004911) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["trait_class_id"], name: "index_measurement_models_on_trait_class_id"
+  end
+
+  create_table "measurements", force: :cascade do |t|
+    t.bigint "observation_id"
+    t.bigint "sex_type_id"
+    t.bigint "trait_class_id"
+    t.bigint "trait_id"
+    t.bigint "standard_id"
+    t.bigint "measurement_method_id"
+    t.bigint "measurement_model_id"
+    t.string "value"
+    t.bigint "value_type_id"
+    t.string "precision"
+    t.bigint "precision_type_id"
+    t.string "precision_upper"
+    t.integer "sample_size"
+    t.integer "dubious"
+    t.integer "validated"
+    t.string "validation_type"
+    t.text "notes"
+    t.string "depth"
+    t.string "contributor_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["measurement_method_id"], name: "index_measurements_on_measurement_method_id"
+    t.index ["measurement_model_id"], name: "index_measurements_on_measurement_model_id"
+    t.index ["observation_id"], name: "index_measurements_on_observation_id"
+    t.index ["precision_type_id"], name: "index_measurements_on_precision_type_id"
+    t.index ["sex_type_id"], name: "index_measurements_on_sex_type_id"
+    t.index ["standard_id"], name: "index_measurements_on_standard_id"
+    t.index ["trait_class_id"], name: "index_measurements_on_trait_class_id"
+    t.index ["trait_id"], name: "index_measurements_on_trait_id"
+    t.index ["value_type_id"], name: "index_measurements_on_value_type_id"
   end
 
   create_table "observations", force: :cascade do |t|
@@ -154,6 +187,15 @@ ActiveRecord::Schema.define(version: 2019_02_08_004911) do
 
   add_foreign_key "measurement_methods", "trait_classes"
   add_foreign_key "measurement_models", "trait_classes"
+  add_foreign_key "measurements", "measurement_methods"
+  add_foreign_key "measurements", "measurement_models"
+  add_foreign_key "measurements", "observations"
+  add_foreign_key "measurements", "precision_types"
+  add_foreign_key "measurements", "sex_types"
+  add_foreign_key "measurements", "standards"
+  add_foreign_key "measurements", "trait_classes"
+  add_foreign_key "measurements", "traits"
+  add_foreign_key "measurements", "value_types"
   add_foreign_key "observations", "locations"
   add_foreign_key "observations", "longhurst_provinces"
   add_foreign_key "observations", "resources"

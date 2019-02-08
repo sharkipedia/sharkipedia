@@ -15,6 +15,7 @@ class UserDashboard < Administrate::BaseDashboard
     reset_password_sent_at: Field::DateTime,
     remember_created_at: Field::DateTime,
     confirmation_token: Field::String,
+    user_level: Field::String,
     confirmed_at: Field::DateTime,
     confirmation_sent_at: Field::DateTime,
     unconfirmed_email: Field::String,
@@ -30,6 +31,7 @@ class UserDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :id,
     :email,
+    :user_level,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -37,9 +39,9 @@ class UserDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = [
     :id,
     :email,
+    :user_level,
     :reset_password_sent_at,
     :remember_created_at,
-    :confirmation_token,
     :confirmed_at,
     :confirmation_sent_at,
     :unconfirmed_email,

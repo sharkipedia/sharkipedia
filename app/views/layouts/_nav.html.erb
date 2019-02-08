@@ -36,6 +36,10 @@
     </div>
 
     <div class="navbar-end">
+      <% if user_is_admin? %>
+        <%= link_to 'Admin Dashboard', admin_root_path, class: "navbar-item" %>
+      <% end %>
+
       <div class="navbar-item">
         <% if user_signed_in? %>
           <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: "button is-light" %>

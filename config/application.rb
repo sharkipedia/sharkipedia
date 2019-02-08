@@ -15,6 +15,12 @@ module SharkT
       g.view_specs false
     end
 
+    config.to_prepare do
+      # NOTE: https://github.com/thoughtbot/administrate/issues/334
+      # Autoreloading of code does not work
+      Administrate::ApplicationController.helper SharkT::Application.helpers
+    end
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading

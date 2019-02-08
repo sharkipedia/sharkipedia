@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_08_001657) do
+ActiveRecord::Schema.define(version: 2019_02_08_002620) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,6 +79,15 @@ ActiveRecord::Schema.define(version: 2019_02_08_001657) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "standards", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
+    t.bigint "trait_class_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["trait_class_id"], name: "index_standards_on_trait_class_id"
+  end
+
   create_table "trait_classes", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -116,5 +125,6 @@ ActiveRecord::Schema.define(version: 2019_02_08_001657) do
   add_foreign_key "observations", "resources"
   add_foreign_key "observations", "species"
   add_foreign_key "observations", "users"
+  add_foreign_key "standards", "trait_classes"
   add_foreign_key "traits", "trait_classes"
 end

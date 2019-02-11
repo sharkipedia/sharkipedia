@@ -46,7 +46,7 @@ class LonghurstProvinceDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how longhurst provinces are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(longhurst_province)
-  #   "LonghurstProvince ##{longhurst_province.id}"
-  # end
+  def display_resource(longhurst_province)
+    longhurst_province.name
+  end
 end

@@ -9,15 +9,15 @@ class ObservationDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     user: Field::BelongsTo,
-    resource: Field::BelongsTo,
-    secondary_resource: Field::BelongsTo.with_options(class_name: "Resource"),
+    resources: Field::HasMany,
     species: Field::BelongsTo,
     longhurst_province: Field::BelongsTo,
     location: Field::BelongsTo,
     measurements: Field::HasMany,
     id: Field::Number,
-    secondary_resource_id: Field::Number,
     date: Field::String,
+    external_id: Field::String,
+    contributor_id: Field::String,
     access: Field::String,
     hidden: Field::Number,
     created_at: Field::DateTime,
@@ -30,24 +30,25 @@ class ObservationDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
-    :user,
-    :resource,
-    :secondary_resource,
+    :external_id,
+    :contributor_id,
+    :resources,
     :species,
+    :measurements,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
     :user,
-    :resource,
-    :secondary_resource,
+    :contributor_id,
+    :external_id,
+    :resources,
     :species,
     :longhurst_province,
     :location,
     :measurements,
     :id,
-    :secondary_resource_id,
     :date,
     :access,
     :hidden,
@@ -60,13 +61,13 @@ class ObservationDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
     :user,
-    :resource,
-    :secondary_resource,
+    :contributor_id,
+    :external_id,
+    :resources,
     :species,
     :longhurst_province,
     :location,
     :measurements,
-    :secondary_resource_id,
     :date,
     :access,
     :hidden,
@@ -75,7 +76,7 @@ class ObservationDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how observations are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(observation)
-  #   "Observation ##{observation.id}"
-  # end
+  def display_resource(observation)
+    "#{observation.contributor_id} (#{observation.external_id})"
+  end
 end

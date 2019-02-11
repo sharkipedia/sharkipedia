@@ -50,7 +50,7 @@ class SpeciesDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how species are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(species)
-  #   "Species ##{species.id}"
-  # end
+  def display_resource(species)
+    species.name
+  end
 end

@@ -50,7 +50,7 @@ class MeasurementModelDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how measurement models are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(measurement_model)
-  #   "MeasurementModel ##{measurement_model.id}"
-  # end
+  def display_resource(measurement_model)
+    measurement_model.name
+  end
 end

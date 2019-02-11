@@ -11,6 +11,7 @@ class ResourceDashboard < Administrate::BaseDashboard
     id: Field::Number,
     name: Field::String,
     doi: Field::String,
+    observations: Field::HasMany,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -21,10 +22,9 @@ class ResourceDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
-    :id,
     :name,
     :doi,
-    :created_at,
+    :observations,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -33,8 +33,7 @@ class ResourceDashboard < Administrate::BaseDashboard
     :id,
     :name,
     :doi,
-    :created_at,
-    :updated_at,
+    :observations,
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -48,7 +47,7 @@ class ResourceDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how resources are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(resource)
-  #   "Resource ##{resource.id}"
-  # end
+  def display_resource(resource)
+    "Resource ##{resource.id}"
+  end
 end

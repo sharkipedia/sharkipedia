@@ -50,7 +50,7 @@ class MeasurementMethodDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how measurement methods are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(measurement_method)
-  #   "MeasurementMethod ##{measurement_method.id}"
-  # end
+  def display_resource(measurement_method)
+    measurement_method.name
+  end
 end

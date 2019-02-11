@@ -46,7 +46,7 @@ class PrecisionTypeDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how precision types are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(precision_type)
-  #   "PrecisionType ##{precision_type.id}"
-  # end
+  def display_resource(precision_type)
+    precision_type.name
+  end
 end

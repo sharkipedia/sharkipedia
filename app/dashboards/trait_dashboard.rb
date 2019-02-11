@@ -50,7 +50,7 @@ class TraitDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how traits are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(trait)
-  #   "Trait ##{trait.id}"
-  # end
+  def display_resource(trait)
+    trait.name
+  end
 end

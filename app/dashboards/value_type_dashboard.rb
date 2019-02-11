@@ -46,7 +46,7 @@ class ValueTypeDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how value types are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(value_type)
-  #   "ValueType ##{value_type.id}"
-  # end
+  def display_resource(value_type)
+    value_type.name
+  end
 end

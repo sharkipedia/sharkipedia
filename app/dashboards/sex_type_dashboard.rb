@@ -42,7 +42,7 @@ class SexTypeDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how sex types are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(sex_type)
-  #   "SexType ##{sex_type.id}"
-  # end
+  def display_resource(sex_type)
+    sex_type.name
+  end
 end

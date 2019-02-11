@@ -50,7 +50,7 @@ class StandardDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how standards are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(standard)
-  #   "Standard ##{standard.id}"
-  # end
+  def display_resource(standard)
+    standard.name
+  end
 end

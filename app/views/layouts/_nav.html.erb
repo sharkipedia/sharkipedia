@@ -33,6 +33,10 @@
           </a>
         </div>
       </div>
+
+      <% if user_signed_in? %>
+        <%= link_to 'Upload Data', new_import_path, class: "navbar-item" %>
+      <% end %>
     </div>
 
     <div class="navbar-end">

@@ -22,6 +22,8 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  resources :imports
+
   root 'pages#start'
 
   get 'home/index'

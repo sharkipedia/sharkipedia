@@ -1,0 +1,39 @@
+<h1 class="title">Upload XLSX data</h1>
+
+<%= form_with scope: :import, url: imports_path do |form| %>
+  <div class="field">
+    <div class="control">
+      <%= form.text_field :title, class: 'input', placeholder: "Title of the upload" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="control">
+      <%= form.label(:import_type, class: 'radio') do %>
+        <%= form.radio_button(:import_type, Import.import_types.first, checked: true) %>
+        <%= Import.import_types.first %>
+      <% end %>
+
+      <%= form.label(:import_type, class: 'radio') do %>
+        <%= form.radio_button(:import_type, Import.import_types.last) %>
+        <%= Import.import_types.last %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="control">
+      <%= form.file_field :xlsx_file, multiple: false, direct_upload: true %>
+    </div>
+  </div>
+
+  <div class="field is-grouped">
+    <div class="control">
+      <%= form.submit class: "button is-link" %>
+    </div>
+    <div class="control">
+      <%= link_to "Cancel", root_path, class: "button is-text" %>
+    </div>
+  </div>
+
+<% end %>

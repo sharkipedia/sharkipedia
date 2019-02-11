@@ -1,0 +1,17 @@
+<h1>Listing imports</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Text</th>
+    <th></th>
+  </tr>
+
+  <% @imports.each do |import| %>
+    <tr>
+      <td><%= import.title %></td>
+      <td><%= import.uploaded_by %></td>
+      <td><%= link_to 'Show', import_path(import) %></td>
+    </tr>
+  <% end %>
+</table>

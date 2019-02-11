@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_08_234438) do
+ActiveRecord::Schema.define(version: 2019_02_11_153805) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,7 +68,6 @@ ActiveRecord::Schema.define(version: 2019_02_08_234438) do
     t.string "validation_type"
     t.text "notes"
     t.string "depth"
-    t.string "contributor_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["measurement_method_id"], name: "index_measurements_on_measurement_method_id"
@@ -83,8 +82,6 @@ ActiveRecord::Schema.define(version: 2019_02_08_234438) do
   end
 
   create_table "observations", force: :cascade do |t|
-    t.bigint "resource_id"
-    t.bigint "secondary_resource_id"
     t.bigint "species_id"
     t.bigint "longhurst_province_id"
     t.string "date"
@@ -94,12 +91,20 @@ ActiveRecord::Schema.define(version: 2019_02_08_234438) do
     t.bigint "location_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "external_id"
+    t.string "contributor_id"
+    t.index ["external_id"], name: "index_observations_on_external_id"
     t.index ["location_id"], name: "index_observations_on_location_id"
     t.index ["longhurst_province_id"], name: "index_observations_on_longhurst_province_id"
-    t.index ["resource_id"], name: "index_observations_on_resource_id"
-    t.index ["secondary_resource_id"], name: "index_observations_on_secondary_resource_id"
     t.index ["species_id"], name: "index_observations_on_species_id"
     t.index ["user_id"], name: "index_observations_on_user_id"
+  end
+
+  create_table "observations_resources", id: false, force: :cascade do |t|
+    t.bigint "observation_id", null: false
+    t.bigint "resource_id", null: false
+    t.index ["observation_id", "resource_id"], name: "index_observations_resources_on_observation_id_and_resource_id"
+    t.index ["resource_id", "observation_id"], name: "index_observations_resources_on_resource_id_and_observation_id"
   end
 
   create_table "precision_types", force: :cascade do |t|
@@ -199,7 +204,6 @@ ActiveRecord::Schema.define(version: 2019_02_08_234438) do
   add_foreign_key "measurements", "value_types"
   add_foreign_key "observations", "locations"
   add_foreign_key "observations", "longhurst_provinces"
-  add_foreign_key "observations", "resources"
   add_foreign_key "observations", "species"
   add_foreign_key "observations", "users"
   add_foreign_key "standards", "trait_classes"

@@ -11,6 +11,7 @@ class LonghurstProvinceDashboard < Administrate::BaseDashboard
     id: Field::Number,
     name: Field::String,
     code: Field::String,
+    observations: Field::HasMany,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -23,6 +24,7 @@ class LonghurstProvinceDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :name,
     :code,
+    :observations,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -31,6 +33,7 @@ class LonghurstProvinceDashboard < Administrate::BaseDashboard
     :id,
     :name,
     :code,
+    :observations,
     :created_at,
     :updated_at,
   ].freeze

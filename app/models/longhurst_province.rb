@@ -5,4 +5,6 @@ class LonghurstProvince < ApplicationRecord
   # TODO: add boundaries
   # TODO: add method that checks if a given (lat,long) is within the
   #       bounds of boundary
+
+  has_many :observations
 end

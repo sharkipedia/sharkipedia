@@ -12,6 +12,7 @@ class SpeciesDashboard < Administrate::BaseDashboard
     id: Field::Number,
     name: Field::String,
     iucn_code: Field::String,
+    observations: Field::HasMany,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -25,6 +26,7 @@ class SpeciesDashboard < Administrate::BaseDashboard
     :species_superorder,
     :name,
     :iucn_code,
+    :observations,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -34,6 +36,7 @@ class SpeciesDashboard < Administrate::BaseDashboard
     :id,
     :name,
     :iucn_code,
+    :observations,
     :created_at,
     :updated_at,
   ].freeze

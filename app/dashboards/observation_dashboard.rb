@@ -35,6 +35,7 @@ class ObservationDashboard < Administrate::BaseDashboard
     :resources,
     :species,
     :measurements,
+    :longhurst_province,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES

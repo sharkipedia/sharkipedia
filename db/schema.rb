@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_15_221124) do
+ActiveRecord::Schema.define(version: 2019_02_15_221529) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -227,6 +227,15 @@ ActiveRecord::Schema.define(version: 2019_02_15_221124) do
     t.index ["trait_class_id"], name: "index_traits_on_trait_class_id"
   end
 
+  create_table "trend_observations", force: :cascade do |t|
+    t.bigint "trend_id"
+    t.string "year", null: false
+    t.string "value", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["trend_id"], name: "index_trend_observations_on_trend_id"
+  end
+
   create_table "trends", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "data_source_id"
@@ -310,6 +319,7 @@ ActiveRecord::Schema.define(version: 2019_02_15_221124) do
   add_foreign_key "observations", "users"
   add_foreign_key "standards", "trait_classes"
   add_foreign_key "traits", "trait_classes"
+  add_foreign_key "trend_observations", "trends"
   add_foreign_key "trends", "data_sources"
   add_foreign_key "trends", "data_types"
   add_foreign_key "trends", "locations"

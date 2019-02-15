@@ -4,6 +4,7 @@ class User < ApplicationRecord
 
   has_many :imports
   has_many :observations
+  has_many :trends
 
   def admin?
     user_level == 'admin'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_15_220224) do
+ActiveRecord::Schema.define(version: 2019_02_15_221124) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -227,6 +227,38 @@ ActiveRecord::Schema.define(version: 2019_02_15_220224) do
     t.index ["trait_class_id"], name: "index_traits_on_trait_class_id"
   end
 
+  create_table "trends", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "data_source_id"
+    t.bigint "species_id"
+    t.bigint "location_id"
+    t.bigint "ocean_id"
+    t.bigint "data_type_id"
+    t.bigint "unit_id"
+    t.bigint "sampling_method_id"
+    t.integer "no_years"
+    t.integer "time_min"
+    t.text "taxonomic_notes"
+    t.string "page_and_figure_number"
+    t.string "line_used"
+    t.integer "pdf_page"
+    t.integer "actual_page"
+    t.string "depth"
+    t.string "model"
+    t.string "figure_name"
+    t.string "figure_data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["data_source_id"], name: "index_trends_on_data_source_id"
+    t.index ["data_type_id"], name: "index_trends_on_data_type_id"
+    t.index ["location_id"], name: "index_trends_on_location_id"
+    t.index ["ocean_id"], name: "index_trends_on_ocean_id"
+    t.index ["sampling_method_id"], name: "index_trends_on_sampling_method_id"
+    t.index ["species_id"], name: "index_trends_on_species_id"
+    t.index ["unit_id"], name: "index_trends_on_unit_id"
+    t.index ["user_id"], name: "index_trends_on_user_id"
+  end
+
   create_table "units", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -278,4 +310,12 @@ ActiveRecord::Schema.define(version: 2019_02_15_220224) do
   add_foreign_key "observations", "users"
   add_foreign_key "standards", "trait_classes"
   add_foreign_key "traits", "trait_classes"
+  add_foreign_key "trends", "data_sources"
+  add_foreign_key "trends", "data_types"
+  add_foreign_key "trends", "locations"
+  add_foreign_key "trends", "oceans"
+  add_foreign_key "trends", "sampling_methods"
+  add_foreign_key "trends", "species"
+  add_foreign_key "trends", "units"
+  add_foreign_key "trends", "users"
 end

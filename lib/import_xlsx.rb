@@ -1,5 +1,5 @@
-module XlsxImport
-  def import(file)
+module ImportXlsx
+  def self.import(file)
     puts
     puts
 

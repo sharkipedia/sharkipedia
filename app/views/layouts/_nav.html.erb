@@ -35,7 +35,16 @@
       </div>
 
       <% if user_signed_in? %>
-        <%= link_to 'Upload Data', new_import_path, class: "navbar-item" %>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            Imports
+          </a>
+          <div class="navbar-dropdown">
+            <%= link_to 'List Imports', imports_path, class: "navbar-item" %>
+            <hr class="navbar-divider">
+            <%= link_to 'New Import', new_import_path, class: "navbar-item" %>
+          </div>
+        </div>
       <% end %>
     </div>
 

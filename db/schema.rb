@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_11_184614) do
+ActiveRecord::Schema.define(version: 2019_02_15_215453) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -139,6 +139,12 @@ ActiveRecord::Schema.define(version: 2019_02_11_184614) do
     t.bigint "resource_id", null: false
     t.index ["observation_id", "resource_id"], name: "index_observations_resources_on_observation_id_and_resource_id"
     t.index ["resource_id", "observation_id"], name: "index_observations_resources_on_resource_id_and_observation_id"
+  end
+
+  create_table "oceans", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "precision_types", force: :cascade do |t|

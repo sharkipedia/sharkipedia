@@ -1,5 +1,6 @@
 require 'csv'
 
+puts "Shark Traits Seed data"
 
 CSV.foreach('docs/longhurst_provinces.csv', headers: true) do |row|
   LonghurstProvince.find_or_create_by! name: row['Province'], code: row['Code']
@@ -87,3 +88,30 @@ CSV.foreach('docs/models.csv', headers: true) do |row|
 end
 
 puts "# Created #{MeasurementModel.count} MeasurementModels"
+
+
+puts "Shark Trends Seed data"
+
+CSV.foreach('docs/units.csv') do |row|
+  Unit.find_or_create_by! name: row.first
+end
+
+puts "# Created #{Unit.count} Units"
+
+CSV.foreach('docs/sampling_methods.csv') do |row|
+  SamplingMethod.find_or_create_by! name: row.first
+end
+
+puts "# Created #{SamplingMethod.count} SamplingMethods"
+
+CSV.foreach('docs/oceans.csv') do |row|
+  Ocean.find_or_create_by! name: row.first
+end
+
+puts "# Created #{Ocean.count} Oceans"
+
+CSV.foreach('docs/data_types.csv') do |row|
+  DataType.find_or_create_by! name: row.first
+end
+
+puts "# Created #{DataType.count} DataTypes"

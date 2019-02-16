@@ -2,6 +2,7 @@ require './lib/import_xlsx'
 
 class Import < ApplicationRecord
   include AASM
+  include Rails.application.routes.url_helpers
 
   belongs_to :user
   belongs_to :approved_by, class_name: 'User', optional: true
@@ -15,8 +16,10 @@ class Import < ApplicationRecord
 
   # Approval / Import state machine
   aasm do
-    # A new XLSX file has been uploaded and needs to be reviewed by an editor
-    state :pending_review, initial: true, after: :do_validate
+    # A new XLSX file has been uploaded
+    state :uploaded, initial: true
+    # needs to be reviewed by an editor
+    state :pending_review
     # The editor has decided that further changes are necessary before the
     # data can be imported.
     state :changes_requested
@@ -29,8 +32,12 @@ class Import < ApplicationRecord
     # The data is publicly available
     state :published, before_enter: :do_publish
 
+    event :validate_upload do
+      transitions from: [:uploaded], to: :pending_review
+    end
+
     event :request_changes do
-      transitions from: [:pending_review], to: :changes_requested
+      transitions from: [:pending_review, :uploaded], to: :changes_requested
     end
 
     event :resubmit do
@@ -38,7 +45,8 @@ class Import < ApplicationRecord
     end
 
     event :approve do
-      transitions from: [:pending_review], to: :approved
+      transitions from: [:pending_review], to: :approved,
+                  guard: :xlsx_valid?
     end
 
     event :reject do
@@ -63,6 +71,31 @@ class Import < ApplicationRecord
   end
 
   def do_validate
+    puts "triggered #{self.inspect}"
+    url = Rails.application.routes.url_helpers.rails_blob_url xlsx_file
+    # xlsx_file.service_url
+
+    # TODO: automatically detect the file type from the XLSX
+    i = case self.import_type
+          when 'traits'
+            ImportXlsx::Traits.new url
+          when 'trends'
+            ImportXlsx::Trends.new url
+          end
+
+    i.validate
+
+    self.log = i.log
+    self.xlsx_valid = i.valid
+    self.save!
+
+    if xlsx_valid
+      self.validate_upload!
+    else
+      self.request_changes!
+    end
+
+    # TODO: send email to uploaded
   end
 
   def do_import
@@ -75,6 +108,10 @@ class Import < ApplicationRecord
 
   def uploaded_by
     user.email
+  end
+
+  def xlsx_valid?
+    self.xlsx_valid
   end
 
   def self.import_types

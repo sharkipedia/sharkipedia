@@ -13,6 +13,7 @@ class ImportsController < ApplicationController
 
   def create
     import = current_user.imports.create!(import_params)
+    ImportValidatorJob.perform_later import
 
     redirect_to import_path(import)
   end

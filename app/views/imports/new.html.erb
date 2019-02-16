@@ -1,5 +1,7 @@
 <h1 class="title">Upload XLSX data</h1>
 
+<em>It is advised to upload observations individually</em>
+
 <%= form_with scope: :import, url: imports_path do |form| %>
   <div class="field">
     <div class="control">
@@ -35,5 +37,6 @@
       <%= link_to "Cancel", root_path, class: "button is-text" %>
     </div>
   </div>
+
 
 <% end %>

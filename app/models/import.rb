@@ -1,36 +1,77 @@
+require './lib/import_xlsx'
+
 class Import < ApplicationRecord
-  TYPES = %w( traits trends )
-
-  # TODO: state machine for imports
-  # When a user creates a new import (i.e. uploads a new XLSX file) it is
-  # `pending_review` and needs to be reviewed by an editor.
-  #
-  # An editor can then do one of the following: 
-  # - `approve` the import which actually imports the
-  #   data into the database, or they can 
-  # - `request edits` to signal the uploading use that the data needs further
-  #   attention before it can be edited. this should be accompanied by detailed
-  #   notes.
-  # - `reject` the import. this signifies that the data is not appropriate for
-  #   the database and will not be accepted in this form. if the user wishes to
-  #   attempt again they need to create a new import.
-  #
-  # when edits are requested the user can re-submit the uplaod which puts the
-  # import back into the `pending_review state`
-  # STATES = %w( pending_review edits_requested rejected approved )
-
-  # TODO: add automatic validation of the XLSX file
-  # sort of a dry run of the xlsx import script to see if an import would work
-  # - this could render out the hypothetically created objects and draw up
-  #   their relationships
+  include AASM
 
   belongs_to :user
   belongs_to :approved_by, class_name: 'User', optional: true
 
   validates :title, presence: true
+
+  TYPES = %w( traits trends )
   validates_inclusion_of :import_type, in: TYPES
 
   has_one_attached :xlsx_file
+
+  # Approval / Import state machine
+  aasm do
+    # A new XLSX file has been uploaded and needs to be reviewed by an editor
+    state :pending_review, initial: true, after: :do_validate
+    # The editor has decided that further changes are necessary before the
+    # data can be imported.
+    state :changes_requested
+    # The editor has approved the data
+    state :approved
+    # The data was imported into the database
+    state :imported, before_enter: :do_import
+    # The editor has decided that the data is not appropriate for the database
+    state :rejected
+    # The data is publicly available
+    state :published, before_enter: :do_publish
+
+    event :request_changes do
+      transitions from: [:pending_review], to: :changes_requested
+    end
+
+    event :resubmit do
+      transitions from: [:changes_requested], to: :pending_review
+    end
+
+    event :approve do
+      transitions from: [:pending_review], to: :approved
+    end
+
+    event :reject do
+      transitions from: [:pending_review], to: :rejected
+    end
+
+    event :import do
+      transitions from: [:approved], to: :imported
+    end
+
+    event :publish do
+      transitions from: [:imported], to: :published
+    end
+
+    event :unpublish do
+      transitions from: [:published], to: :imported
+    end
+  end
+
+  def state
+    aasm_state.humanize(capitalize: false)
+  end
+
+  def do_validate
+  end
+
+  def do_import
+    # run the actual import
+  end
+
+  def do_publish
+    # publish the imported data
+  end
 
   def uploaded_by
     user.email

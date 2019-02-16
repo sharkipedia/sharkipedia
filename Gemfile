@@ -38,6 +38,8 @@ gem 'aws-sdk-s3', '~> 1.30', '>= 1.30.1', require: false
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
+gem 'aasm', '~> 5.0', '>= 5.0.1'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

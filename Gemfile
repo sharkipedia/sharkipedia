@@ -40,6 +40,8 @@ gem 'aws-sdk-s3', '~> 1.30', '>= 1.30.1', require: false
 
 gem 'aasm', '~> 5.0', '>= 5.0.1'
 
+gem 'sidekiq', '~> 5.2', '>= 5.2.5'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

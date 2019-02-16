@@ -18,6 +18,11 @@ Rails.application.routes.draw do
     resources :value_types
 
     root to: "users#index"
+
+    authenticate :user, lambda { |u| u.admin? } do
+      require 'sidekiq/web'
+      mount Sidekiq::Web => '/sidekiq'
+    end
   end
 
   devise_for :users

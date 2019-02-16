@@ -1,14 +1,14 @@
 class ImportsController < ApplicationController
   def show
-    @import = Import.find params[:id]
+    @import = current_user.imports.find params[:id]
   end
 
   def index
-    @imports = Import.all
+    @imports = current_user.imports
   end
 
   def new
-    @import = Import.new
+    @import = current_user.imports.new
   end
 
   def create

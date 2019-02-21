@@ -21,6 +21,7 @@ class ImportsController < ApplicationController
   def approve
     # TODO: add policy check
     import = Import.find params[:import_id]
+    import.approved_by = current_user
     import.approve!
     redirect_to import_path(import)
   end

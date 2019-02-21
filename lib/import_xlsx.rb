@@ -25,10 +25,11 @@ module ImportXlsx
     # be used to validate.
     def validate
       self.valid = true
+      self.log += "Automatic validations:\n\n"
       allowed_sheet_names = ["Data Entry", "Values"]
 
       if xlsx.sheets == allowed_sheet_names
-        self.log += "Sheet names comply with the template\n"
+        self.log += "OK: Sheet names comply with the template\n"
       else
         self.valid = false
 
@@ -49,7 +50,7 @@ module ImportXlsx
       headers = data_entry_sheet.row(1)
 
       if headers == allowed_headers
-        self.log += "Data Entry's headers comply with the template.\n"
+        self.log += "OK: Data Entry's headers comply with the template.\n"
       else
         self.valid = false
         self.log += "ERROR: Data Entry$'s headers do not comply with the " \
@@ -59,11 +60,11 @@ module ImportXlsx
       # TODO: Check if referenced species exists / have the user select
       # a species during upload and pull that in from the import object
       if self.valid
-        self.log += "\nAll automated validations passed."
+        self.log += "\nAll automated validations passed.\n"
       else
         self.log += "\nThe automated validations failed. The file can not be " \
                     "imported. Please fix the abovementioned issues and " \
-                    "resubmit the file."
+                    "resubmit the file.\n"
       end
     end
 
@@ -72,21 +73,17 @@ module ImportXlsx
       parsed = data_entry_sheet.parse(headers: true)
       parsed.shift # remove the header row
 
-      # TODO: discard observation_id and go by resource_name as unique identifier.
-      observation_ids = parsed.map do |row|
-        row['observation_id']
+      resources = parsed.map do |row|
+        row['resource_name']
       end.uniq
 
-      puts "The sheet contains #{observation_ids.count} observations"
-      puts
+      self.log += "The sheet contains #{resources.count} observation(s)\n"
 
-      # cluster by observation
-      observations = parsed.group_by { |row| row['observation_id'] }
-      observations.each do |observation_id, sub_table|
+      # cluster by resource
+      observations = parsed.group_by { |row| row['resource_name'] }
+      observations.each do |resource_name, sub_table|
 
-        puts
-        puts "# Starting import of observation #{observation_id}"
-        puts
+        self.log += "Starting import of observation #{resource_name}\n"
 
         # Create Resources
 
@@ -100,7 +97,7 @@ module ImportXlsx
 
         resources.reject! { |name, _| name.blank? }
 
-        puts "Found resources: #{resources.inspect}"
+        self.log += "Found resources: #{resources.inspect}\n"
 
         referenced_resources = resources.map do |name, doi|
 
@@ -115,23 +112,23 @@ module ImportXlsx
           resource
         end
 
-        puts referenced_resources.inspect
+        self.log += referenced_resources.inspect + "\n"
 
         # species_name
-        sanity_check sub_table, 'species_name', observation_id
+        sanity_check sub_table, 'species_name', resource_name
         # XXX: what should happen if the species / species super order can't be found?
         species = Species.find_by name: sub_table.first['species_name']
-        puts species.inspect
+        self.log += species.inspect + "\n"
 
         # marine_province - might be blank
-        sanity_check sub_table, 'marine_province', observation_id
+        sanity_check sub_table, 'marine_province', resource_name
         marine_province = LonghurstProvince.find_by name: sub_table.first['marine_province']
-        puts marine_province.inspect
+        self.log += marine_province.inspect + "\n"
 
         # find or create Location: location_name    lat    long
-        sanity_check sub_table, 'location_name', observation_id
-        sanity_check sub_table, 'lat', observation_id
-        sanity_check sub_table, 'long', observation_id
+        sanity_check sub_table, 'location_name', resource_name
+        sanity_check sub_table, 'lat', resource_name
+        sanity_check sub_table, 'long', resource_name
 
         location_name = sub_table.first['location_name']
         location_lat  = sub_table.first['lat']
@@ -148,19 +145,22 @@ module ImportXlsx
         unless location
           location = Location.create name: location_name, lat: location_lat, lon: location_long
         end
-        puts location.inspect
+        self.log += location.inspect + "\n"
 
         date = sub_table.first['date']
-        puts date.inspect
+        self.log += date.inspect + "\n"
 
         contributor_id = sub_table.first['contributor_id']
-        puts contributor_id.inspect
+        self.log += contributor_id.inspect + "\n"
 
         hidden = sub_table.first['hidden']
-        puts hidden.inspect
+        self.log += hidden.inspect + "\n"
 
-        observation = Observation.find_by external_id: observation_id,
-                                          contributor_id: contributor_id
+        # TODO: find observation by resource name
+        observation = Observation.joins(:resources)
+                                 .where(contributor_id: contributor_id,
+                                        'resources.name': resource_name)
+                                 .first
 
         unless observation
           observation = Observation.create! species: species,
@@ -169,11 +169,10 @@ module ImportXlsx
             date: date,
             resources: referenced_resources,
             hidden: hidden,
-            external_id: observation_id,
             contributor_id: contributor_id
         end
 
-        puts observation.inspect
+        self.log += observation.inspect + "\n"
 
         sub_table.each do |row|
           sex = SexType.find_by name: row['sex']
@@ -212,20 +211,20 @@ module ImportXlsx
             notes: notes,
             depth: depth
         end
-      end
 
-      puts
-      puts "Total Resource count: #{Resource.count}"
-      puts "Total Location count: #{Location.count}"
-      puts "Total Observation count: #{Observation.count}"
-      puts "Total Measurement count: #{Measurement.count}"
+        self.log += observation.measurements.map(&:inspect).join("\n")
+      end
+    rescue => e
+      self.log += "ERROR: Import failed!\n"
+      self.log += e.to_s
+      return false
     end
 
     private
 
-    def sanity_check table, field, observation_id
+    def sanity_check table, field, resource
       if table.map { |row| row[field] }.uniq.size > 1
-        raise "more than one species in observation #{observation_id} detected."
+        raise "more than one species in observation #{resource} detected."
       end
     end
   end

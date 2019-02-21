@@ -24,7 +24,7 @@ class Import < ApplicationRecord
     # data can be imported.
     state :changes_requested
     # The editor has approved the data
-    state :approved, after: :queue_import
+    state :approved
     # The data was imported into the database
     state :imported
     # The editor has decided that the data is not appropriate for the database
@@ -44,7 +44,7 @@ class Import < ApplicationRecord
       transitions from: [:changes_requested], to: :pending_review
     end
 
-    event :approve do
+    event :approve, after_commit: :queue_import do
       transitions from: [:pending_review], to: :approved,
                   guard: :xlsx_valid?
     end
@@ -73,9 +73,9 @@ class Import < ApplicationRecord
   def do_validate
     puts "triggered #{self.inspect}"
     url = Rails.application.routes.url_helpers.rails_blob_url xlsx_file
-    # xlsx_file.service_url
 
     # TODO: automatically detect the file type from the XLSX
+    # i.e. if it's a trend or traits import
     i = case self.import_type
           when 'traits'
             ImportXlsx::Traits.new url
@@ -95,7 +95,7 @@ class Import < ApplicationRecord
       self.request_changes!
     end
 
-    # TODO: send email to uploaded
+    # TODO: send email to uploader
   end
 
   def queue_import
@@ -103,7 +103,23 @@ class Import < ApplicationRecord
   end
 
   def do_import
-    # run the actual import
+    url = Rails.application.routes.url_helpers.rails_blob_url xlsx_file
+
+    # TODO: automatically detect the file type from the XLSX
+    # i.e. if it's a trend or traits import
+    i = case self.import_type
+          when 'traits'
+            ImportXlsx::Traits.new url
+          when 'trends'
+            ImportXlsx::Trends.new url
+          end
+
+    # TODO: handle import failure
+    self.import! if i.import
+    self.log += "\n" + i.log
+    self.save!
+
+    # TODO: send email to uploader
   end
 
   def do_publish

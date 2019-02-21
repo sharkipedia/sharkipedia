@@ -6,5 +6,5 @@ class Observation < ApplicationRecord
   belongs_to :longhurst_province, optional: true
   belongs_to :location
 
-  has_many :measurements
+  has_many :measurements, dependent: :destroy
 end

@@ -19,22 +19,28 @@ class ImportsController < ApplicationController
   end
 
   def approve
+    # TODO: add policy check
     import = Import.find params[:import_id]
     import.approve!
     redirect_to import_path(import)
   end
 
   def request_changes
+    # TODO: add policy check
     import = Import.find params[:import_id]
     import.request_changes!
     redirect_to import_path(import)
   end
 
   def reject
+    # TODO: add policy check
     import = Import.find params[:import_id]
     import.reject!
     redirect_to import_path(import)
   end
+
+  # TODO: Add endpoint to change the visibility of an imported dataset (i.e.
+  # make it public / hide)
 
   private
 

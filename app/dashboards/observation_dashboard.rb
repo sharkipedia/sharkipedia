@@ -16,7 +16,6 @@ class ObservationDashboard < Administrate::BaseDashboard
     measurements: Field::HasMany,
     id: Field::Number,
     date: Field::String,
-    external_id: Field::String,
     contributor_id: Field::String,
     access: Field::String,
     hidden: Field::Number,
@@ -30,7 +29,6 @@ class ObservationDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
-    :external_id,
     :contributor_id,
     :resources,
     :species,
@@ -43,7 +41,6 @@ class ObservationDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = [
     :user,
     :contributor_id,
-    :external_id,
     :resources,
     :species,
     :longhurst_province,
@@ -63,7 +60,6 @@ class ObservationDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = [
     :user,
     :contributor_id,
-    :external_id,
     :resources,
     :species,
     :longhurst_province,
@@ -78,6 +74,6 @@ class ObservationDashboard < Administrate::BaseDashboard
   # across all pages of the admin dashboard.
   #
   def display_resource(observation)
-    "#{observation.contributor_id} (#{observation.external_id})"
+    "#{observation.contributor_id} (#{observation.resources.first.name})"
   end
 end

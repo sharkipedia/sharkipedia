@@ -2,6 +2,7 @@
 
 <table class="table">
   <tr>
+    <th>Type</th>
     <th>Title</th>
     <th>Text</th>
     <th>Status</th>
@@ -10,6 +11,7 @@
 
   <% @imports.each do |import| %>
     <tr>
+      <td><%= import.import_type %></td>
       <td><%= import.title %></td>
       <td><%= import.uploaded_by %></td>
       <td><%= import.state %></td>

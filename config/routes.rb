@@ -27,7 +27,11 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :imports
+  resources :imports do
+    post :approve, to: 'imports#approve'
+    post :request_changes, to: 'imports#request_changes'
+    post :reject, to: 'imports#reject'
+  end
 
   root 'pages#start'
 

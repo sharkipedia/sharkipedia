@@ -24,9 +24,9 @@ class Import < ApplicationRecord
     # data can be imported.
     state :changes_requested
     # The editor has approved the data
-    state :approved
+    state :approved, after: :queue_import
     # The data was imported into the database
-    state :imported, before_enter: :do_import
+    state :imported
     # The editor has decided that the data is not appropriate for the database
     state :rejected
     # The data is publicly available
@@ -96,6 +96,10 @@ class Import < ApplicationRecord
     end
 
     # TODO: send email to uploaded
+  end
+
+  def queue_import
+    ImportJob.perform_later self
   end
 
   def do_import

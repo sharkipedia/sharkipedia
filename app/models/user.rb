@@ -11,14 +11,14 @@ class User < ApplicationRecord
   end
 
   def editor?
-    user_level == 'editor'
+    user_level == 'editor' || admin?
   end
 
   def contributor?
-    user_level == 'contributor'
+    user_level == 'contributor' || editor? || admin?
   end
 
   def user?
-    user_level == 'user'
+    user_level == 'user' || editor? || contributor? || admin?
   end
 end

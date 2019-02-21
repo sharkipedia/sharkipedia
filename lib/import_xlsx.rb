@@ -3,22 +3,17 @@ module ImportXlsx
     attr_reader :xlsx
     attr_accessor :log, :valid
 
+    @allowed_sheet_names = []
+    @allowed_headers = []
+
     def initialize(file_path)
       @xlsx   = Roo::Spreadsheet.open(file_path)
       @valid  = false
       @log    = ""
+
+      @data_entry_sheet = xlsx.sheet(@allowed_sheet_names.first)
     end
 
-    def validate
-      raise "note implement"
-    end
-
-    def import
-      raise "note implement"
-    end
-  end
-
-  class Traits < DataImport
     # Check if the spreadsheet confirms with the template
     #
     # it would be nice if this wasn't hard-coded. ie. the actual template would
@@ -26,39 +21,32 @@ module ImportXlsx
     def validate
       self.valid = true
       self.log += "Automatic validations:\n\n"
-      allowed_sheet_names = ["Data Entry", "Values"]
 
-      if xlsx.sheets == allowed_sheet_names
+      if xlsx.sheets == @allowed_sheet_names
         self.log += "OK: Sheet names comply with the template\n"
       else
         self.valid = false
 
-        sheet_names = allowed_sheet_names.join(' & ')
+        sheet_names = @allowed_sheet_names.join(' & ')
         self.log += "ERROR: The sheets are not named #{sheet_names}\n"
       end
 
-      allowed_headers = %w(
-        observation_id hidden resource_name resource_doi
-        secondary_resource_name secondary_resource_doi species_superorder
-        species_name marine_province location_name lat long date sex
-        trait_class trait_name standard_name method_name model_name value
-        value_type precision precision_type precision_upper sample_size dubious
-        validated validation_type notes contributor_id depth
-      )
+      # TODO: do something a bit prettier than this :/
+      headers = @data_entry_sheet.row(1).map(&:to_s).map(&:strip)
 
-      data_entry_sheet = xlsx.sheet('Data Entry')
-      headers = data_entry_sheet.row(1)
-
-      if headers == allowed_headers
-        self.log += "OK: Data Entry's headers comply with the template.\n"
+      if headers.sort == @allowed_headers.sort
+        self.log += "OK: Data sheet column headers comply with the template.\n"
       else
         self.valid = false
-        self.log += "ERROR: Data Entry$'s headers do not comply with the " \
-                    "template\n"
+        self.log += "ERROR: Data sheet column headers do not comply with the template\n"
+        self.log += "allowed: #{@allowed_headers.inspect}\n"
+        self.log += "found: #{headers.inspect}\n"
+        self.log += "difference: #{(headers - @allowed_headers).inspect}\n"
       end
 
       # TODO: Check if referenced species exists / have the user select
       # a species during upload and pull that in from the import object
+
       if self.valid
         self.log += "\nAll automated validations passed.\n"
       else
@@ -68,9 +56,30 @@ module ImportXlsx
       end
     end
 
+
     def import
-      data_entry_sheet = xlsx.sheet('Data Entry')
-      parsed = data_entry_sheet.parse(headers: true)
+      raise "note implement"
+    end
+  end
+
+  class Traits < DataImport
+    def initialize(file_path)
+      @allowed_headers = %w(
+        observation_id hidden resource_name resource_doi
+        secondary_resource_name secondary_resource_doi species_superorder
+        species_name marine_province location_name lat long date sex
+        trait_class trait_name standard_name method_name model_name value
+        value_type precision precision_type precision_upper sample_size dubious
+        validated validation_type notes contributor_id depth
+      )
+
+      @allowed_sheet_names = ["Data Entry", "Values"]
+
+      super
+    end
+
+    def import
+      parsed = @data_entry_sheet.parse(headers: true)
       parsed.shift # remove the header row
 
       resources = parsed.map do |row|
@@ -230,8 +239,21 @@ module ImportXlsx
   end
 
   class Trends < DataImport
-    def validate
+    def initialize(file_path)
+      @allowed_sheet_names = ["Data", "Notes"]
 
+      super
+
+      @allowed_headers = %w( Class Order Family Genus Species Binomial IUCNcode
+      SourceYear Taxonomic\ Notes AuthorYear DataSource Units SamplingMethod
+      SamplingMethodCode Location Latitude Longitude Ocean DataType NoYears
+      TimeMin PageAndFigureNumber LineUsed PDFPage ActualPage Depth Model
+      FigureName FigureData)
+
+      # allow year-columns
+      year_columns = @data_entry_sheet.row(1).map(&:to_s)
+                                             .select { |e| e =~ /\d{4}/ }
+      @allowed_headers.push(*year_columns)
     end
 
     def import

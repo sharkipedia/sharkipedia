@@ -257,7 +257,74 @@ module ImportXlsx
     end
 
     def import
+      parsed = @data_entry_sheet.parse(headers: true)
+      parsed.shift # remove the header row
 
+      self.log += "The sheet contains #{parsed.count} trend(s)\n"
+
+      parsed.each do |row|
+        begin
+          species = Species.find_by name: row['Binomial'].sub('_', ' ')
+          self.log += "Found species #{row['Binomial']} => #{species.inspect}\n"
+
+          data_source = DataSource.create! name: row['DataSource'],
+                                           year: row['DataSource']
+          self.log += "Created DataSource: #{data_source.inspect}\n"
+
+          # Latitude has a space at the end
+          location = Location.find_or_create_by name: row['Location'],
+                                                lat: row['Latitude '],
+                                                lon: row['Longitude']
+          self.log += "#{location.inspect}\n"
+
+          ocean = Ocean.find_by name: row['Ocean']
+          self.log += "#{ocean.inspect}\n"
+
+          data_type = DataType.find_by name: row['DataType']
+          self.log += "#{data_type.inspect}\n"
+
+          unit = Unit.find_by name: row['Unit']
+          self.log += "#{unit.inspect}\n"
+
+          sampling_method = SamplingMethod.find_by name: row['SamplingMethod']
+          self.log += "#{sampling_method.inspect}\n"
+
+          trend = Trend.create! actual_page: row['ActualPage'],
+                                depth: row['Depth'],
+                                figure_data: row['FigureData'],
+                                figure_name: row['FigureName'],
+                                line_used: row['LineUsed'],
+                                model: row['Model'],
+                                no_years: row['NoYears'],
+                                page_and_figure_number: row['PageAndFigureNumber'],
+                                pdf_page: row['PDFPage'],
+                                taxonomic_notes: row['Taxonomic Notes'],
+                                time_min: row['TimeMin'],
+                                data_source: data_source,
+                                species: species,
+                                location: location,
+                                ocean: ocean,
+                                data_type: data_type,
+                                unit: unit,
+                                sampling_method: sampling_method
+
+          self.log += "Created Trend: #{trend.inspect}\n"
+
+          year_columns = @data_entry_sheet.row(1).map(&:to_s)
+                                                 .select { |e| e =~ /\d{4}/ }
+
+          year_columns.each do |year_col|
+            value = row[year_col]
+            next if value.blank? || value == 'NA' || value == 'na'
+
+            to = trend.trend_observations.create! value: value, year: year_col
+
+            self.log += "Created TrendObservation #{to.inspect}\n"
+          end
+        rescue => e
+          self.log += "failed to import: \n #{row}\n#{e.to_s}"
+        end
+      end
     end
   end
 end

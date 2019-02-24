@@ -26,8 +26,6 @@ class MeasurementDashboard < Administrate::BaseDashboard
     validated: Field::Number,
     validation_type: Field::String,
     notes: Field::Text,
-    depth: Field::String,
-    contributor_id: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -65,8 +63,6 @@ class MeasurementDashboard < Administrate::BaseDashboard
     :validated,
     :validation_type,
     :notes,
-    :depth,
-    :contributor_id,
     :created_at,
     :updated_at,
   ].freeze
@@ -92,8 +88,6 @@ class MeasurementDashboard < Administrate::BaseDashboard
     :validated,
     :validation_type,
     :notes,
-    :depth,
-    :contributor_id,
   ].freeze
 
   # Overwrite this method to customize how measurements are displayed

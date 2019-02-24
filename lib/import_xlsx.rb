@@ -165,6 +165,9 @@ module ImportXlsx
         hidden = sub_table.first['hidden']
         self.log += hidden.inspect + "\n"
 
+        depth = sub_table.first['depth']
+        self.log += depth.inspect + "\n"
+
         # TODO: find observation by resource name
         observation = Observation.joins(:resources)
                                  .where(contributor_id: contributor_id,
@@ -178,7 +181,8 @@ module ImportXlsx
             date: date,
             resources: referenced_resources,
             hidden: hidden,
-            contributor_id: contributor_id
+            contributor_id: contributor_id,
+            depth: depth
         end
 
         self.log += observation.inspect + "\n"
@@ -200,7 +204,6 @@ module ImportXlsx
           validated = row['validated']
           validation_type = row['validation_type']
           notes = row['notes']
-          depth = row['depth']
 
           observation.measurements.create! sex_type: sex,
             trait_class: trait_class,
@@ -217,8 +220,7 @@ module ImportXlsx
             dubious: dubious,
             validated: validated,
             validation_type: validation_type,
-            notes: notes,
-            depth: depth
+            notes: notes
         end
 
         self.log += observation.measurements.map(&:inspect).join("\n")

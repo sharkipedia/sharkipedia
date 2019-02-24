@@ -19,6 +19,7 @@ class ObservationDashboard < Administrate::BaseDashboard
     contributor_id: Field::String,
     access: Field::String,
     hidden: Field::Number,
+    depth: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -46,6 +47,7 @@ class ObservationDashboard < Administrate::BaseDashboard
     :longhurst_province,
     :location,
     :measurements,
+    :depth,
     :id,
     :date,
     :access,
@@ -68,6 +70,7 @@ class ObservationDashboard < Administrate::BaseDashboard
     :date,
     :access,
     :hidden,
+    :depth,
   ].freeze
 
   # Overwrite this method to customize how observations are displayed

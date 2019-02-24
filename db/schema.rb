@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_21_032731) do
+ActiveRecord::Schema.define(version: 2019_02_24_221948) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,7 +117,6 @@ ActiveRecord::Schema.define(version: 2019_02_21_032731) do
     t.integer "validated"
     t.string "validation_type"
     t.text "notes"
-    t.string "depth"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["measurement_method_id"], name: "index_measurements_on_measurement_method_id"
@@ -142,6 +141,7 @@ ActiveRecord::Schema.define(version: 2019_02_21_032731) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "contributor_id"
+    t.string "depth"
     t.index ["location_id"], name: "index_observations_on_location_id"
     t.index ["longhurst_province_id"], name: "index_observations_on_longhurst_province_id"
     t.index ["species_id"], name: "index_observations_on_species_id"

@@ -17,6 +17,14 @@ Rails.application.routes.draw do
     resources :trait_classes
     resources :value_types
 
+    resources :trends
+    resources :trend_observations
+    resources :oceans
+    resources :sampling_methods
+    resources :units
+    resources :data_types
+    resources :data_sources
+
     root to: "users#index"
 
     authenticate :user, lambda { |u| u.admin? } do

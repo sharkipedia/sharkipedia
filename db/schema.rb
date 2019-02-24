@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_24_221948) do
+ActiveRecord::Schema.define(version: 2019_02_24_222857) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -113,7 +113,7 @@ ActiveRecord::Schema.define(version: 2019_02_24_221948) do
     t.bigint "precision_type_id"
     t.string "precision_upper"
     t.integer "sample_size"
-    t.integer "dubious"
+    t.boolean "dubious"
     t.integer "validated"
     t.string "validation_type"
     t.text "notes"
@@ -135,7 +135,7 @@ ActiveRecord::Schema.define(version: 2019_02_24_221948) do
     t.bigint "longhurst_province_id"
     t.string "date"
     t.string "access"
-    t.integer "hidden"
+    t.boolean "hidden"
     t.bigint "user_id"
     t.bigint "location_id"
     t.datetime "created_at", null: false

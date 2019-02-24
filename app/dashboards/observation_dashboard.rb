@@ -18,7 +18,7 @@ class ObservationDashboard < Administrate::BaseDashboard
     date: Field::String,
     contributor_id: Field::String,
     access: Field::String,
-    hidden: Field::Number,
+    hidden: Field::Boolean,
     depth: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,

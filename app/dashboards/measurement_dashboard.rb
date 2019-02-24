@@ -22,7 +22,7 @@ class MeasurementDashboard < Administrate::BaseDashboard
     precision: Field::String,
     precision_upper: Field::String,
     sample_size: Field::Number,
-    dubious: Field::Number,
+    dubious: Field::Boolean,
     validated: Field::Number,
     validation_type: Field::String,
     notes: Field::Text,

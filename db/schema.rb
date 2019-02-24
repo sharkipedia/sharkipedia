@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_24_222857) do
+ActiveRecord::Schema.define(version: 2019_02_24_223742) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,14 +34,6 @@ ActiveRecord::Schema.define(version: 2019_02_24_222857) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
-  end
-
-  create_table "data_sources", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "year", null: false
-    t.string "author_year"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "data_types", force: :cascade do |t|
@@ -173,6 +165,7 @@ ActiveRecord::Schema.define(version: 2019_02_24_222857) do
     t.string "doi"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "data_source"
   end
 
   create_table "sampling_methods", force: :cascade do |t|
@@ -238,7 +231,6 @@ ActiveRecord::Schema.define(version: 2019_02_24_222857) do
 
   create_table "trends", force: :cascade do |t|
     t.bigint "user_id"
-    t.bigint "data_source_id"
     t.bigint "species_id"
     t.bigint "location_id"
     t.bigint "ocean_id"
@@ -258,10 +250,11 @@ ActiveRecord::Schema.define(version: 2019_02_24_222857) do
     t.string "figure_data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["data_source_id"], name: "index_trends_on_data_source_id"
+    t.bigint "resource_id"
     t.index ["data_type_id"], name: "index_trends_on_data_type_id"
     t.index ["location_id"], name: "index_trends_on_location_id"
     t.index ["ocean_id"], name: "index_trends_on_ocean_id"
+    t.index ["resource_id"], name: "index_trends_on_resource_id"
     t.index ["sampling_method_id"], name: "index_trends_on_sampling_method_id"
     t.index ["species_id"], name: "index_trends_on_species_id"
     t.index ["unit_id"], name: "index_trends_on_unit_id"
@@ -320,10 +313,10 @@ ActiveRecord::Schema.define(version: 2019_02_24_222857) do
   add_foreign_key "standards", "trait_classes"
   add_foreign_key "traits", "trait_classes"
   add_foreign_key "trend_observations", "trends"
-  add_foreign_key "trends", "data_sources"
   add_foreign_key "trends", "data_types"
   add_foreign_key "trends", "locations"
   add_foreign_key "trends", "oceans"
+  add_foreign_key "trends", "resources"
   add_foreign_key "trends", "sampling_methods"
   add_foreign_key "trends", "species"
   add_foreign_key "trends", "units"

@@ -269,9 +269,9 @@ module ImportXlsx
           species = Species.find_by name: row['Binomial'].sub('_', ' ')
           self.log += "Found species #{row['Binomial']} => #{species.inspect}\n"
 
-          data_source = DataSource.create! name: row['DataSource'],
-                                           year: row['DataSource']
-          self.log += "Created DataSource: #{data_source.inspect}\n"
+          resource = Resource.create! name: row['AuthorYear'],
+                                      data_source: row['DataSource']
+          self.log += "Created Resource: #{resource.inspect}\n"
 
           # Latitude has a space at the end
           location = Location.find_or_create_by name: row['Location'],
@@ -302,7 +302,7 @@ module ImportXlsx
                                 pdf_page: row['PDFPage'],
                                 taxonomic_notes: row['Taxonomic Notes'],
                                 time_min: row['TimeMin'],
-                                data_source: data_source,
+                                resource: resource,
                                 species: species,
                                 location: location,
                                 ocean: ocean,

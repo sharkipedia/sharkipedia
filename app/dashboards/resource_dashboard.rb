@@ -11,6 +11,7 @@ class ResourceDashboard < Administrate::BaseDashboard
     id: Field::Number,
     name: Field::String,
     doi: Field::String,
+    data_source: Field::String,
     observations: Field::HasMany,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -24,6 +25,7 @@ class ResourceDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :name,
     :doi,
+    :data_source,
     :observations,
   ].freeze
 
@@ -33,6 +35,7 @@ class ResourceDashboard < Administrate::BaseDashboard
     :id,
     :name,
     :doi,
+    :data_source,
     :observations,
   ].freeze
 
@@ -42,6 +45,7 @@ class ResourceDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = [
     :name,
     :doi,
+    :data_source,
   ].freeze
 
   # Overwrite this method to customize how resources are displayed

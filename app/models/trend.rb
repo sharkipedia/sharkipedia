@@ -1,6 +1,6 @@
 class Trend < ApplicationRecord
   belongs_to :user
-  belongs_to :data_source
+  belongs_to :resource
   belongs_to :species
   belongs_to :location
   belongs_to :ocean

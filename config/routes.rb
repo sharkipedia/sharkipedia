@@ -21,7 +21,6 @@ Rails.application.routes.draw do
     resources :trend_observations
     resources :oceans
     resources :sampling_methods
-    resources :units
     resources :data_types
     resources :validation_types
 

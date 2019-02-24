@@ -5,6 +5,6 @@ class Trend < ApplicationRecord
   belongs_to :location
   belongs_to :ocean
   belongs_to :data_type
-  belongs_to :unit
+  belongs_to :standard
   belongs_to :sampling_method
 end

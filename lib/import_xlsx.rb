@@ -285,7 +285,7 @@ module ImportXlsx
           data_type = DataType.find_by name: row['DataType']
           self.log += "#{data_type.inspect}\n"
 
-          unit = Unit.find_by name: row['Unit']
+          unit = Standard.find_by name: row['Unit']
           self.log += "#{unit.inspect}\n"
 
           sampling_method = SamplingMethod.find_by name: row['SamplingMethod']
@@ -307,7 +307,7 @@ module ImportXlsx
                                 location: location,
                                 ocean: ocean,
                                 data_type: data_type,
-                                unit: unit,
+                                standard: unit,
                                 sampling_method: sampling_method
 
           self.log += "Created Trend: #{trend.inspect}\n"

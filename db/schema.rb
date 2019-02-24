@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_24_225234) do
+ActiveRecord::Schema.define(version: 2019_02_24_225957) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -236,7 +236,6 @@ ActiveRecord::Schema.define(version: 2019_02_24_225234) do
     t.bigint "location_id"
     t.bigint "ocean_id"
     t.bigint "data_type_id"
-    t.bigint "unit_id"
     t.bigint "sampling_method_id"
     t.integer "no_years"
     t.integer "time_min"
@@ -252,20 +251,15 @@ ActiveRecord::Schema.define(version: 2019_02_24_225234) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "resource_id"
+    t.bigint "standard_id"
     t.index ["data_type_id"], name: "index_trends_on_data_type_id"
     t.index ["location_id"], name: "index_trends_on_location_id"
     t.index ["ocean_id"], name: "index_trends_on_ocean_id"
     t.index ["resource_id"], name: "index_trends_on_resource_id"
     t.index ["sampling_method_id"], name: "index_trends_on_sampling_method_id"
     t.index ["species_id"], name: "index_trends_on_species_id"
-    t.index ["unit_id"], name: "index_trends_on_unit_id"
+    t.index ["standard_id"], name: "index_trends_on_standard_id"
     t.index ["user_id"], name: "index_trends_on_user_id"
-  end
-
-  create_table "units", force: :cascade do |t|
-    t.string "name", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -328,6 +322,6 @@ ActiveRecord::Schema.define(version: 2019_02_24_225234) do
   add_foreign_key "trends", "resources"
   add_foreign_key "trends", "sampling_methods"
   add_foreign_key "trends", "species"
-  add_foreign_key "trends", "units"
+  add_foreign_key "trends", "standards"
   add_foreign_key "trends", "users"
 end

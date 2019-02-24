@@ -93,10 +93,10 @@ puts "# Created #{MeasurementModel.count} MeasurementModels"
 puts "Shark Trends Seed data"
 
 CSV.foreach('docs/units.csv') do |row|
-  Unit.find_or_create_by! name: row.first
+  Standard.find_or_create_by! name: row.first
 end
 
-puts "# Created #{Unit.count} Units"
+puts "# Created #{Standard.count} Standards"
 
 CSV.foreach('docs/sampling_methods.csv') do |row|
   SamplingMethod.find_or_create_by! name: row.first

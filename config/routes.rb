@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     resources :sampling_methods
     resources :units
     resources :data_types
+    resources :validation_types
 
     root to: "users#index"
 

@@ -9,9 +9,6 @@ class Import < ApplicationRecord
 
   validates :title, presence: true
 
-  TYPES = %w( traits trends )
-  validates_inclusion_of :import_type, in: TYPES
-
   has_one_attached :xlsx_file
 
   # Approval / Import state machine
@@ -50,7 +47,7 @@ class Import < ApplicationRecord
     end
 
     event :reject do
-      transitions from: [:pending_review], to: :rejected
+      transitions from: [:uploaded, :pending_review], to: :rejected
     end
 
     event :import do
@@ -74,25 +71,20 @@ class Import < ApplicationRecord
     puts "triggered #{self.inspect}"
     url = Rails.application.routes.url_helpers.rails_blob_url xlsx_file
 
-    # TODO: automatically detect the file type from the XLSX
-    # i.e. if it's a trend or traits import
-    i = case self.import_type
-          when 'traits'
-            ImportXlsx::Traits.new url
-          when 'trends'
-            ImportXlsx::Trends.new url
-          end
-
-    i.validate
-
-    self.log = i.log
-    self.xlsx_valid = i.valid
+    result = Xlsx::Validator.call(url)
+    self.import_type = result.type
+    self.log = result.messages.join("\n")
+    self.xlsx_valid = result.valid
     self.save!
 
     if xlsx_valid
       self.validate_upload!
     else
-      self.request_changes!
+      if self.import_type == 'invalid'
+        self.reject!
+      else
+        self.request_changes!
+      end
     end
 
     # TODO: send email to uploader

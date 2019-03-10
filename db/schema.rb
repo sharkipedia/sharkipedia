@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_24_225957) do
+ActiveRecord::Schema.define(version: 2019_03_10_190953) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2019_02_24_225957) do
 
   create_table "imports", force: :cascade do |t|
     t.string "title", null: false
-    t.string "import_type", null: false
+    t.string "import_type"
     t.bigint "user_id"
     t.boolean "approved"
     t.bigint "approved_by_id"

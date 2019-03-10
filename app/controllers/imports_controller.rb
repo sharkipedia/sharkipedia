@@ -46,6 +46,6 @@ class ImportsController < ApplicationController
   private
 
   def import_params
-    params.require(:import).permit(:xlsx_file, :import_type, :title)
+    params.require(:import).permit(:xlsx_file, :title)
   end
 end

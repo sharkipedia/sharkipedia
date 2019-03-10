@@ -20,4 +20,17 @@ RSpec.describe Xlsx::Validator do
       end
     end
   end
+
+  context 'invalid file' do
+    file = 'docs/erd.pdf'
+    subject { described_class.call(file) }
+
+    it "#type = invalid" do
+      expect(subject.type).to be :invalid
+    end
+
+    it "#valid = false" do
+      expect(subject.valid).to be false
+    end
+  end
 end

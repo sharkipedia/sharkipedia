@@ -10,7 +10,12 @@ module Xlsx
     def initialize(file_path)
       @messages = []
       @valid = false
-      @xlsx = Xlsx::Document.new(file_path)
+      begin
+        @xlsx = Xlsx::Document.new(file_path)
+      rescue ArgumentError
+        @messages << "Document is not an Excel sheet."
+        @type = :invalid
+      end
 
       @trait = Document.new(TRAIT_TEMPLATE)
       @trend = Document.new(TREND_TEMPLATE)
@@ -24,6 +29,8 @@ module Xlsx
     end
 
     def guess_type
+      return unless @xlsx
+
       if xlsx.sheets == trend.sheets
         @type = :trends
         @messages << "Document is a 'Trends' dataset."

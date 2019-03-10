@@ -41,48 +41,16 @@
   <pre><%= @import.log %></pre>
 </p>
 
-<div class="modal">
-  <div class="modal-background"></div>
-  <div class="modal-card">
-    <header class="modal-card-head">
-      <p class="modal-card-title">
-        <span class="reject is-hidden">
-          Reject
-        </span>
-        <span class="request-changes is-hidden">
-          Request changes
-        </span>
-        <span class="approve is-hidden">
-          Approve
-        </span>
-      </p>
-    </header>
-    <section class="modal-card-body">
-      <span class="reject is-hidden">
-        Are you sure you want to reject this dataset? This action can not be
-        reversed.
 
-        TODO: add a text box for a reason
-      </span>
-      <span class="request-changes is-hidden">
-        Why is the uploaded data not acceptable in this form? What needs to
-        be changed for it to be accepted?
+<% unless @import.reason.blank? %>
+  <br />
+  <p>
+    <strong>Message:</strong>
+    <pre><%= @import.reason %></pre>
+  </p>
+<% end %>
 
-        TODO: add a text box for a reason
-      </span>
-      <span class="approve is-hidden">
-        Are you sure the data is good?
-      </span>
-    </section>
-    <footer class="modal-card-foot">
-      <%= link_to 'Approve and Import', import_approve_path(@import), method: :post, class: 'button is-success approve is-hidden' %>
-      <%= link_to 'Request changes', import_request_changes_path(@import), method: :post, class: 'button is-warning request-changes is-hidden' %>
-      <%= link_to 'Reject', import_reject_path(@import), method: :post, class: 'button is-danger reject is-hidden' %>
-      <button class="button close-modal">Cancel</button>
-    </footer>
-  </div>
-</div>
-
+<%= render "modal" %>
 
 <br />
 <br />

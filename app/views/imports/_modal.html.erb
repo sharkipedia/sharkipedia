@@ -1,0 +1,78 @@
+<div class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">
+        <span class="reject is-hidden">
+          Reject
+        </span>
+        <span class="request-changes is-hidden">
+          Request changes
+        </span>
+        <span class="approve is-hidden">
+          Approve
+        </span>
+      </p>
+    </header>
+
+    <%= form_with url: import_approve_path(@import), class: "approve is-hidden" do |f| %>
+      <section class="modal-card-body">
+        <span>
+          Are you sure the data is good?
+        </span>
+      </section>
+      <footer class="modal-card-foot">
+        <div class="field is-grouped">
+          <div class="control">
+            <%= f.submit "Approve and Import", class: "button is-success" %>
+          </div>
+          <div class="control">
+            <a class="button close-modal">Cancel</a>
+          </div>
+        </div>
+      </footer>
+    <% end %>
+
+    <%= form_with url: import_request_changes_path(@import), class: "request-changes is-hidden" do |f| %>
+      <section class="modal-card-body">
+        <label class="label">
+          What needs to be changed so that the dataset can be accepted?
+        </label>
+        <div class="control">
+          <%= f.text_area :reason, class: 'textarea' %>
+        </div>
+      </section>
+      <footer class="modal-card-foot">
+        <div class="field is-grouped">
+          <div class="control">
+            <%= f.submit "Request changes", class: "button is-warning" %>
+          </div>
+          <div class="control">
+            <a class="button close-modal">Cancel</a>
+          </div>
+        </div>
+      </footer>
+    <% end %>
+
+    <%= form_with url: import_reject_path(@import), class: "reject is-hidden" do |f| %>
+      <section class="modal-card-body">
+        <label class="label">
+          Why is the dataset being rejected?
+        </label>
+        <div class="control">
+          <%= f.text_area :reason, class: 'textarea' %>
+        </div>
+      </section>
+      <footer class="modal-card-foot">
+        <div class="field is-grouped">
+          <div class="control">
+            <%= f.submit "Reject", class: "button is-danger" %>
+          </div>
+          <div class="control">
+            <a class="button close-modal">Cancel</a>
+          </div>
+        </div>
+      </footer>
+    <% end %>
+  </div>
+</div>

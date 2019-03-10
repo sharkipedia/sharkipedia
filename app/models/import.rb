@@ -125,8 +125,4 @@ class Import < ApplicationRecord
   def xlsx_valid?
     self.xlsx_valid
   end
-
-  def self.import_types
-    TYPES
-  end
 end

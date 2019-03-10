@@ -1,10 +1,10 @@
 class ImportsController < ApplicationController
   def show
-    @import = current_user.imports.find params[:id]
+    @import = imports.find params[:id]
   end
 
   def index
-    @imports = current_user.imports
+    @imports = imports
   end
 
   def new
@@ -42,6 +42,7 @@ class ImportsController < ApplicationController
   def request_changes
     # TODO: add policy check
     import = Import.find params[:import_id]
+    import.reason = params[:reason]
     import.request_changes!
     redirect_to import_path(import)
   end
@@ -49,6 +50,7 @@ class ImportsController < ApplicationController
   def reject
     # TODO: add policy check
     import = Import.find params[:import_id]
+    import.reason = params[:reason]
     import.reject!
     redirect_to import_path(import)
   end
@@ -57,6 +59,14 @@ class ImportsController < ApplicationController
   # make it public / hide)
 
   private
+
+  def imports
+    if current_user.editor?
+      Import.all
+    else
+      current_user.imports
+    end
+  end
 
   def import_params
     params.require(:import).permit(:xlsx_file, :title)

@@ -45,3 +45,11 @@
   <pre><%= @import.log %></pre>
 </p>
 
+<% unless @import.reason.blank? %>
+  <br />
+  <p>
+    <strong>Message:</strong>
+    <pre><%= @import.reason %></pre>
+  </p>
+<% end %>
+

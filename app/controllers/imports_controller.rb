@@ -11,6 +11,19 @@ class ImportsController < ApplicationController
     @import = current_user.imports.new
   end
 
+  def edit
+    @import = current_user.imports.find params[:id]
+  end
+
+  def update
+    import = current_user.imports.find params[:id]
+    import.update_attributes import_params
+    import.resubmit!
+    ImportValidatorJob.perform_later import
+
+    redirect_to import_path(import)
+  end
+
   def create
     import = current_user.imports.create!(import_params)
     ImportValidatorJob.perform_later import

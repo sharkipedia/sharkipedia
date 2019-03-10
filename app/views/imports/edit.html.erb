@@ -1,0 +1,47 @@
+<div class="columns">
+  <div class="column">
+    <p>
+      <strong>Title:</strong>
+      <%= @import.title %>
+    </p>
+
+    <p>
+      <strong>Type:</strong>
+      <%= @import.import_type %>
+    </p>
+
+    <p>
+      <strong>Uploaded by:</strong>
+      <%= @import.uploaded_by %>
+    </p>
+
+    <p>
+      <strong>State:</strong>
+      <%= @import.state %>
+    </p>
+
+  </div>
+  <div class="column">
+    <%= form_with scope: :import, url: import_path(@import), method: :patch do |form| %>
+      <div class="field">
+        <div class="control">
+          <%= form.file_field :xlsx_file, multiple: false, direct_upload: true, accept: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' %>
+        </div>
+      </div>
+      <div class="field is-grouped">
+        <div class="control">
+          <%= link_to "Cancel", import_path(@import), class: "button is-text" %>
+        </div>
+        <div class="control">
+          <%= form.submit "Upload", class: "button is-link" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<p>
+  <strong>Log:</strong>
+  <pre><%= @import.log %></pre>
+</p>
+

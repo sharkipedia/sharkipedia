@@ -38,7 +38,7 @@ class Import < ApplicationRecord
     end
 
     event :resubmit do
-      transitions from: [:changes_requested], to: :pending_review
+      transitions from: [:changes_requested], to: :uploaded
     end
 
     event :approve, after_commit: :queue_import do

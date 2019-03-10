@@ -22,6 +22,9 @@
 
   </div>
   <div class="column">
+    <% if current_user == @import.user && @import.changes_requested? %>
+      <%= link_to 'Upload new version', edit_import_path(@import), class: 'button is-warning' %>
+    <% end %>
 
     <% if current_user.editor? && @import.pending_review? %>
       <%# TODO: only editors should see these buttons %>

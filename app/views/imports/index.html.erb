@@ -1,21 +1,36 @@
-<h1 class="title">Listing imports</h1>
+<div class="level">
+  <div class="level-left">
+    <div class="level-item">
+      <h1 class="title">Imports</h1>
+    </div>
+  </div>
+  <div class="level-right">
+    <div class="level-item">
+      <%= link_to 'Start new Import', new_import_path, class: 'button' %>
+    </div>
+  </div>
+</div>
 
-<table class="table">
-  <tr>
-    <th>Type</th>
-    <th>Title</th>
-    <th>Text</th>
-    <th>Status</th>
-    <th></th>
-  </tr>
-
-  <% @imports.each do |import| %>
+<% if @imports.blank? %>
+  <em>Create a new Import by clicking <%= link_to 'here', new_import_path %></em>
+<% else %>
+  <table class="table">
     <tr>
-      <td><%= import.import_type %></td>
-      <td><%= import.title %></td>
-      <td><%= import.uploaded_by %></td>
-      <td><%= import.state %></td>
-      <td><%= link_to 'Show', import_path(import) %></td>
+      <th>Type</th>
+      <th>Title</th>
+      <th>Text</th>
+      <th>Status</th>
+      <th></th>
     </tr>
-  <% end %>
-</table>
+
+    <% @imports.each do |import| %>
+      <tr>
+        <td><%= import.import_type %></td>
+        <td><%= import.title %></td>
+        <td><%= import.uploaded_by %></td>
+        <td><%= import.state %></td>
+        <td><%= link_to 'Show', import_path(import) %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>

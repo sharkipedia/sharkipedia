@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_10_234814) do
+ActiveRecord::Schema.define(version: 2019_03_31_092848) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -189,7 +189,15 @@ ActiveRecord::Schema.define(version: 2019_03_10_234814) do
     t.bigint "species_superorder_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "species_data_type_id"
+    t.index ["species_data_type_id"], name: "index_species_on_species_data_type_id"
     t.index ["species_superorder_id"], name: "index_species_on_species_superorder_id"
+  end
+
+  create_table "species_data_types", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "species_superorders", force: :cascade do |t|
@@ -314,6 +322,7 @@ ActiveRecord::Schema.define(version: 2019_03_10_234814) do
   add_foreign_key "observations", "longhurst_provinces"
   add_foreign_key "observations", "species"
   add_foreign_key "observations", "users"
+  add_foreign_key "species", "species_data_types"
   add_foreign_key "standards", "trait_classes"
   add_foreign_key "traits", "trait_classes"
   add_foreign_key "trend_observations", "trends"

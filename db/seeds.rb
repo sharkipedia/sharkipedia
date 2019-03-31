@@ -1,4 +1,5 @@
 require 'csv'
+require 'roo'
 
 puts "Shark Traits Seed data"
 
@@ -7,13 +8,24 @@ CSV.foreach('docs/longhurst_provinces.csv', headers: true) do |row|
 end
 puts "# Created #{LonghurstProvince.count} LonghurstProvince"
 
+taxonomy_xlsx = Roo::Spreadsheet.open('docs/SharkTraits - Taxonomy and Changes.xlsx')
+taxonomy_data = taxonomy_xlsx.sheet(taxonomy_xlsx.sheets.first)
+taxonomy      = taxonomy_data.parse(headers: true)
+
+# Species Data Types
+s_ds = taxonomy.map { |row| row['Data type'] }.uniq
+s_ds.each do |name|
+  SpeciesDataType.create! name: name
+end
+
+
 super_orders = CSV.open('docs/species.csv', &:readline).reject(&:nil?)
 super_orders = super_orders.map do |super_order|
   [
     super_order, SpeciesSuperorder.find_or_create_by!(name: super_order)
   ]
 end.to_h
-puts "# Created #{SpeciesSuperorder.count} SpeciesSuperorders"
+puts "# Created #{SpeciesSuperorder.count} apeciesSuperorders"
 
 CSV.foreach('docs/species.csv', headers: true) do |row|
   super_orders.each do |sok, so|

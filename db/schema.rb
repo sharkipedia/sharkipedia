@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_31_095055) do
+ActiveRecord::Schema.define(version: 2019_03_31_095354) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -193,6 +193,9 @@ ActiveRecord::Schema.define(version: 2019_03_31_095055) do
     t.bigint "species_subclass_id"
     t.bigint "species_order_id"
     t.bigint "species_family_id"
+    t.string "edge_scientific_name"
+    t.string "scientific_name"
+    t.string "authorship"
     t.index ["species_data_type_id"], name: "index_species_on_species_data_type_id"
     t.index ["species_family_id"], name: "index_species_on_species_family_id"
     t.index ["species_order_id"], name: "index_species_on_species_order_id"

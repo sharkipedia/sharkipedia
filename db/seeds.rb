@@ -11,31 +11,98 @@ puts "# Created #{LonghurstProvince.count} LonghurstProvince"
 taxonomy_xlsx = Roo::Spreadsheet.open('docs/SharkTraits - Taxonomy and Changes.xlsx')
 taxonomy_data = taxonomy_xlsx.sheet(taxonomy_xlsx.sheets.first)
 taxonomy      = taxonomy_data.parse(headers: true)
+taxonomy.shift # remove the header row
 
-# Species Data Types
-s_ds = taxonomy.map { |row| row['Data type'] }.uniq
-s_ds.each do |name|
-  SpeciesDataType.create! name: name
+s_sc = taxonomy.map { |row| row['Subclass'] }.uniq
+s_sc.each do |name|
+  SpeciesSubclass.find_or_create_by! name: name
+end
+puts "# Created #{SpeciesSubclass.count} SpeciesSubclasses"
+
+s_so = taxonomy.map { |row| [row['Subclass'], row['Superorder']] }.uniq
+s_so.each do |subclass, superorder|
+  ss = SpeciesSubclass.find_by name: subclass
+  so = SpeciesSuperorder.find_by name: superorder
+  if so
+    so.species_subclass = ss
+    so.save
+  else
+    SpeciesSuperorder.create! name: superorder, species_subclass: ss
+  end
 end
 
+puts "# Created #{SpeciesSuperorder.count} SpeciesSuperorders"
+
+s_o = taxonomy.map { |row| [row['Subclass'], row['Superorder'], row['Order']] }.uniq
+s_o.each do |subclass, superorder, order|
+  ssc = SpeciesSubclass.find_by name: subclass
+  sso = SpeciesSuperorder.find_by name: superorder
+  SpeciesOrder.find_or_create_by! name: order, species_superorder_id: sso.id,
+    species_subclass_id: ssc.id
+end
+
+puts "# Created #{SpeciesOrder.count} SpeciesOrders"
+
+s_f = taxonomy.map { |row| [row['Subclass'], row['Superorder'],
+                            row['Order'], row['Family']] }.uniq
+s_f.each do |subclass, superorder, order, family|
+  ssc = SpeciesSubclass.find_by name: subclass
+  sso = SpeciesSuperorder.find_by name: superorder
+  so  = SpeciesOrder.find_by name: order
+  SpeciesFamily.find_or_create_by! name: family,
+    species_superorder_id: sso.id,
+    species_subclass_id: ssc.id,
+    species_order_id: so.id
+end
+
+puts "# Created #{SpeciesFamily.count} SpeciesFamilies"
+
+s_ds = taxonomy.map { |row| row['Data type'] }.uniq
+s_ds.each do |name|
+  SpeciesDataType.find_or_create_by! name: name
+end
+
+puts "# Created #{SpeciesDataType.count} SpeciesDataTypes"
+
+taxonomy.each do |row|
+  ssc = SpeciesSubclass.find_by name: row['Subclass']
+  sso = SpeciesSuperorder.find_by name: row['Superorder']
+  so  = SpeciesOrder.find_by name: row['Order']
+  sf  = SpeciesFamily.find_by name: row['Family']
+  sdt = SpeciesDataType.find_by name: row['Data type']
+  species = Species.find_by name: row['SharkTrait Scientific name']
+  if species
+    species.update species_subclass: ssc, species_superorder: sso,
+      species_order: so, species_family: sf, species_data_type: sdt,
+      authorship: row['Species authorship']
+  else
+    Species.create! name: row['SharkTrait Scientific name'],
+      edge_scientific_name: row['EDGE Scientific name'],
+      species_subclass: ssc, species_superorder: sso,
+      species_order: so, species_family: sf, species_data_type: sdt,
+      authorship: row['Species authorship']
+  end
+end
+
+puts "# Created #{Species.count} Species"
 
 super_orders = CSV.open('docs/species.csv', &:readline).reject(&:nil?)
-super_orders = super_orders.map do |super_order|
-  [
-    super_order, SpeciesSuperorder.find_or_create_by!(name: super_order)
-  ]
-end.to_h
-puts "# Created #{SpeciesSuperorder.count} apeciesSuperorders"
-
 CSV.foreach('docs/species.csv', headers: true) do |row|
+
   super_orders.each do |sok, so|
     species_name = row[sok]
     next if species_name.blank?
 
-    Species.find_or_create_by! name: species_name, species_superorder: so
+    species = Species.find_by name: species_name
+    species ||= Species.find_by edge_scientific_name: species_name
+    unless species
+      puts "Species: #{species} not present in 'Taxonomy and Changes'"
+    end
+
+    # Species.find_or_create_by! name: species_name, species_superorder: so
   end
 end
-puts "# Created #{Species.count} Species"
+# puts "# Created #{Species.count} Species"
 
 CSV.foreach('docs/sex_types.csv') do |row|
   SexType.find_or_create_by! name: row.first

@@ -23,7 +23,6 @@ class TrendObservationDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
     :trend,
-    :id,
     :year,
     :value,
   ].freeze

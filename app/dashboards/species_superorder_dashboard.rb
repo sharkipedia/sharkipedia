@@ -9,6 +9,7 @@ class SpeciesSuperorderDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     species: Field::HasMany,
+    species_subclass: Field::BelongsTo,
     id: Field::Number,
     name: Field::String,
     created_at: Field::DateTime,
@@ -23,6 +24,7 @@ class SpeciesSuperorderDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :name,
     :species,
+    :species_subclass,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -31,6 +33,7 @@ class SpeciesSuperorderDashboard < Administrate::BaseDashboard
     :species,
     :id,
     :name,
+    :species_subclass,
     :created_at,
     :updated_at,
   ].freeze
@@ -41,6 +44,7 @@ class SpeciesSuperorderDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = [
     :species,
     :name,
+    :species_subclass,
   ].freeze
 
   # Overwrite this method to customize how species superorders are displayed

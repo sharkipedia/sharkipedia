@@ -21,10 +21,8 @@ class SpeciesDataTypeDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
-    :species,
-    :id,
     :name,
-    :created_at,
+    :species,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -41,14 +39,13 @@ class SpeciesDataTypeDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
-    :species,
     :name,
   ].freeze
 
   # Overwrite this method to customize how species data types are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(species_data_type)
-  #   "SpeciesDataType ##{species_data_type.id}"
-  # end
+  def display_resource(species_data_type)
+    species_data_type.name
+  end
 end

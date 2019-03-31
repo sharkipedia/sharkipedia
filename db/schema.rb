@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_31_094702) do
+ActiveRecord::Schema.define(version: 2019_03_31_095055) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -192,7 +192,9 @@ ActiveRecord::Schema.define(version: 2019_03_31_094702) do
     t.bigint "species_data_type_id"
     t.bigint "species_subclass_id"
     t.bigint "species_order_id"
+    t.bigint "species_family_id"
     t.index ["species_data_type_id"], name: "index_species_on_species_data_type_id"
+    t.index ["species_family_id"], name: "index_species_on_species_family_id"
     t.index ["species_order_id"], name: "index_species_on_species_order_id"
     t.index ["species_subclass_id"], name: "index_species_on_species_subclass_id"
     t.index ["species_superorder_id"], name: "index_species_on_species_superorder_id"
@@ -202,6 +204,18 @@ ActiveRecord::Schema.define(version: 2019_03_31_094702) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "species_families", force: :cascade do |t|
+    t.string "name"
+    t.bigint "species_subclass_id"
+    t.bigint "species_superorder_id"
+    t.bigint "species_order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["species_order_id"], name: "index_species_families_on_species_order_id"
+    t.index ["species_subclass_id"], name: "index_species_families_on_species_subclass_id"
+    t.index ["species_superorder_id"], name: "index_species_families_on_species_superorder_id"
   end
 
   create_table "species_orders", force: :cascade do |t|
@@ -345,8 +359,12 @@ ActiveRecord::Schema.define(version: 2019_03_31_094702) do
   add_foreign_key "observations", "species"
   add_foreign_key "observations", "users"
   add_foreign_key "species", "species_data_types"
+  add_foreign_key "species", "species_families"
   add_foreign_key "species", "species_orders"
   add_foreign_key "species", "species_subclasses"
+  add_foreign_key "species_families", "species_orders"
+  add_foreign_key "species_families", "species_subclasses"
+  add_foreign_key "species_families", "species_superorders"
   add_foreign_key "species_orders", "species_subclasses"
   add_foreign_key "species_orders", "species_superorders"
   add_foreign_key "species_superorders", "species_subclasses"

@@ -5,5 +5,6 @@ class Species < ApplicationRecord
   belongs_to :species_data_type
   belongs_to :species_subclass
   belongs_to :species_order
+  belongs_to :species_family
   has_many :observations
 end

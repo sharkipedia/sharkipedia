@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resources :species_subclasses
     resources :species_superorders
     resources :species_orders
+    resources :species_families
     resources :species
     resources :species_data_types
 

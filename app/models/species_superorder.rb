@@ -3,4 +3,5 @@ class SpeciesSuperorder < ApplicationRecord
 
   has_many :species
   has_many :species_orders
+  has_many :species_families
 end

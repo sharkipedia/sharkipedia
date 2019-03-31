@@ -10,10 +10,13 @@ Rails.application.routes.draw do
     resources :precision_types
     resources :resources
     resources :sex_types
-    resources :species
+
     resources :species_subclasses
-    resources :species_data_types
     resources :species_superorders
+    resources :species_orders
+    resources :species
+    resources :species_data_types
+
     resources :standards
     resources :traits
     resources :trait_classes

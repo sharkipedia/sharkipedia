@@ -1,9 +1,6 @@
-class Species < ApplicationRecord
+class SpeciesOrder < ApplicationRecord
   validates :name, presence: true, uniqueness: true
 
   belongs_to :species_superorder
-  belongs_to :species_data_type
   belongs_to :species_subclass
-  belongs_to :species_order
-  has_many :observations
 end

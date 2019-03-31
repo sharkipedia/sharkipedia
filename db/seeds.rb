@@ -1,6 +1,14 @@
 require 'csv'
 require 'roo'
 
+if Rails.env.development?
+  admin = User.create email: 'admin@example.com', password: '123123123'
+  admin.user_level = 'admin'
+  admin.confirm
+  user = User.create email: 'user@example.com', password: '123123123'
+  user.confirm
+end
+
 puts "Shark Traits Seed data"
 
 CSV.foreach('docs/longhurst_provinces.csv', headers: true) do |row|

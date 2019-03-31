@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :resources
     resources :sex_types
     resources :species
+    resources :species_subclasses
     resources :species_data_types
     resources :species_superorders
     resources :standards

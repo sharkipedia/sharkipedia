@@ -100,4 +100,14 @@ Rails.application.configure do
     :authentication => :login,
     :enable_starttls_auto => true
   }
+
+  host = ENV['DEFAULT_URL_HOST'] ||
+         "#{ENV.fetch('HEROKU_APP_NAME')}.herokuapp.com"
+  default_url = {
+    protocol: 'https',
+    host: host
+  }
+  config.action_mailer.default_url_options = default_url
+  config.action_controller.default_url_options = default_url
+  Rails.application.routes.default_url_options = default_url
 end

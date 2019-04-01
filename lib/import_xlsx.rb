@@ -124,9 +124,13 @@ module ImportXlsx
         self.log += referenced_resources.inspect + "\n"
 
         # species_name
-        sanity_check sub_table, 'species_name', resource_name
+        unless species_check sub_table, resource_name
+          next
+        end
+
         # XXX: what should happen if the species / species super order can't be found?
         species = Species.find_by name: sub_table.first['species_name']
+        species ||= Species.find_by edge_scientific_name: sub_table.first['species_name']
         self.log += species.inspect + "\n"
 
         # marine_province - might be blank
@@ -233,9 +237,26 @@ module ImportXlsx
 
     private
 
+    def species_check sub_table, resource_name
+      if sub_table.first['species_name'].blank?
+        self.log += "ATTN: No species_name set for #{resource_name}"
+        return false
+      end
+
+      begin
+        sanity_check sub_table, 'species_name', resource_name
+      rescue Exception => e
+        self.log += e.message
+        return false
+      end
+
+      true
+    end
+
     def sanity_check table, field, resource
-      if table.map { |row| row[field] }.uniq.size > 1
-        raise "more than one species in observation #{resource} detected."
+      items = table.map { |row| row[field] }.uniq
+      if items.size > 1
+        raise "more than one species in observation #{resource} detected: #{items.inspect}"
       end
     end
   end

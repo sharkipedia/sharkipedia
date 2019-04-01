@@ -33,6 +33,7 @@ gem 'administrate', '~> 0.11.0'
 gem 'pundit', '~> 2.0', '>= 2.0.1'
 
 gem 'roo', '~> 2.8.0'
+gem 'rubyXL'
 gem 'aws-sdk-s3', '~> 1.30', '>= 1.30.1', require: false
 
 # Use ActiveStorage variant

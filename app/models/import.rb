@@ -34,7 +34,8 @@ class Import < ApplicationRecord
     end
 
     event :request_changes do
-      transitions from: [:pending_review, :uploaded], to: :changes_requested
+      transitions from: [:pending_review, :uploaded, :approved],
+        to: :changes_requested
     end
 
     event :resubmit do
@@ -107,7 +108,11 @@ class Import < ApplicationRecord
           end
 
     # TODO: handle import failure
-    self.import! if i.import
+    if i.import
+      self.import!
+    else
+      self.request_changes!
+    end
     self.log += "\n" + i.log
     self.save!
 

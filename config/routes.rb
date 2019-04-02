@@ -30,6 +30,8 @@ Rails.application.routes.draw do
     resources :data_types
     resources :validation_types
 
+    resources :imports
+
     root to: "users#index"
 
     authenticate :user, lambda { |u| u.admin? } do

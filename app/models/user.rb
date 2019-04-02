@@ -6,6 +6,8 @@ class User < ApplicationRecord
   has_many :observations
   has_many :trends
 
+  scope :admins, -> { where(user_level: 'admin') }
+
   def admin?
     user_level == 'admin'
   end
@@ -20,5 +22,9 @@ class User < ApplicationRecord
 
   def user?
     user_level == 'user' || editor? || contributor? || admin?
+  end
+
+  def self.admin_emails
+    User.admins.pluck(:email)
   end
 end

@@ -29,7 +29,9 @@ class Import < ApplicationRecord
     # The data is publicly available
     state :published, before_enter: :do_publish
 
-    event :validate_upload do
+    after_all_transitions :notify_uploader
+
+    event :validate_upload, after: :notify_admins do
       transitions from: [:uploaded], to: :pending_review
     end
 
@@ -87,8 +89,6 @@ class Import < ApplicationRecord
         self.request_changes!
       end
     end
-
-    # TODO: send email to uploader
   end
 
   def queue_import
@@ -115,8 +115,14 @@ class Import < ApplicationRecord
     end
     self.log += "\n" + i.log
     self.save!
+  end
 
-    # TODO: send email to uploader
+  def notify_uploader
+    ImportMailer.with(import: self).update_import_status_email.deliver_later
+  end
+
+  def notify_admins
+    ImportMailer.with(import: self).new_import_email.deliver_later
   end
 
   def do_publish

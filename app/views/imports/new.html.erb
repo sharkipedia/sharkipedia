@@ -1,31 +1,48 @@
-<h1 class="title">Upload XLSX data</h1>
+<section class="section">
+  <h1 class="title">Upload XLSX data</h1>
 
-<%= form_with scope: :import, url: imports_path do |form| %>
-  <div class="field">
-    <label class="label">Title</label>
-    <div class="control">
-      <%= form.text_field :title, class: 'input', placeholder: "Title of the upload" %>
+  <%= form_with scope: :import, url: imports_path do |form| %>
+    <div class="field">
+      <label class="label">Title</label>
+      <div class="control">
+        <%= form.text_field :title, class: 'input', placeholder: "Title of the upload" %>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="control">
+        <%= form.file_field :xlsx_file, multiple: false, direct_upload: true, accept: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' %>
+      </div>
+    </div>
+
+    <div class="field">
+      <em>It is advised to upload observations individually</em>
+    </div>
+
+    <div class="field is-grouped">
+      <div class="control">
+        <%= form.submit "Upload", class: "button is-link" %>
+      </div>
+      <div class="control">
+        <%= link_to "Cancel", root_path, class: "button is-text" %>
+      </div>
+    </div>
+
+
+  <% end %>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="title">Templates</h2>
+    <div>
+      <a href='https://s3.amazonaws.com/shark-traits-dev/SharkTraits-Template.xlsx'>
+        Download Traits Template
+      </a>
+      <br />
+      <a href='https://s3.amazonaws.com/shark-traits-dev/SharkTrends-Template.xlsx'>
+        Download Trends Template
+      </a>
     </div>
   </div>
-
-  <div class="field">
-    <div class="control">
-      <%= form.file_field :xlsx_file, multiple: false, direct_upload: true, accept: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' %>
-    </div>
-  </div>
-
-  <div class="field">
-    <em>It is advised to upload observations individually</em>
-  </div>
-
-  <div class="field is-grouped">
-    <div class="control">
-      <%= form.submit "Upload", class: "button is-link" %>
-    </div>
-    <div class="control">
-      <%= link_to "Cancel", root_path, class: "button is-text" %>
-    </div>
-  </div>
-
-
-<% end %>
+</section>

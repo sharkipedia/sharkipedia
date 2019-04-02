@@ -50,6 +50,8 @@ Rails.application.routes.draw do
 
   root 'pages#start'
 
+  resources :traits, only: :index
+
   get 'home/index'
 
   # static pages

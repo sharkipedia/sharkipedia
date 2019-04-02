@@ -7,4 +7,6 @@ class Observation < ApplicationRecord
   belongs_to :location
 
   has_many :measurements, dependent: :destroy
+
+  scope :published, -> { where(hidden: [false, nil]) }
 end

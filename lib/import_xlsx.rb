@@ -1,15 +1,16 @@
 module ImportXlsx
   class DataImport
-    attr_reader :xlsx
+    attr_reader :xlsx, :user
     attr_accessor :log, :valid
 
     @allowed_sheet_names = []
     @allowed_headers = []
 
-    def initialize(file_path)
+    def initialize(file_path, user)
       @xlsx   = Roo::Spreadsheet.open(file_path)
       @valid  = false
       @log    = ""
+      @user   = user
 
       @data_entry_sheet = xlsx.sheet(@allowed_sheet_names.first)
     end
@@ -63,7 +64,7 @@ module ImportXlsx
   end
 
   class Traits < DataImport
-    def initialize(file_path)
+    def initialize(file_path, user)
       @allowed_headers = %w(
         observation_id hidden resource_name resource_doi
         secondary_resource_name secondary_resource_doi species_superorder
@@ -186,7 +187,8 @@ module ImportXlsx
             resources: referenced_resources,
             hidden: hidden,
             contributor_id: contributor_id,
-            depth: depth
+            depth: depth,
+            user: user
         end
 
         self.log += observation.inspect + "\n"
@@ -262,7 +264,7 @@ module ImportXlsx
   end
 
   class Trends < DataImport
-    def initialize(file_path)
+    def initialize(file_path, user)
       @allowed_sheet_names = ["Data", "Notes"]
 
       super
@@ -287,11 +289,13 @@ module ImportXlsx
 
       parsed.each do |row|
         begin
+          self.log += "\n"
           species = Species.find_by name: row['Binomial'].sub('_', ' ')
           self.log += "Found species #{row['Binomial']} => #{species.inspect}\n"
 
-          resource = Resource.create! name: row['AuthorYear'],
-                                      data_source: row['DataSource']
+          resource = Resource.find_or_create_by! name: row['AuthorYear'],
+                                                 data_source: row['DataSource'],
+                                                 doi: row['doi']
           self.log += "Created Resource: #{resource.inspect}\n"
 
           # Latitude has a space at the end
@@ -306,7 +310,7 @@ module ImportXlsx
           data_type = DataType.find_by name: row['DataType']
           self.log += "#{data_type.inspect}\n"
 
-          unit = Standard.find_by name: row['Unit']
+          unit = Standard.find_by name: row['Units']
           self.log += "#{unit.inspect}\n"
 
           sampling_method = SamplingMethod.find_by name: row['SamplingMethod']
@@ -329,7 +333,8 @@ module ImportXlsx
                                 ocean: ocean,
                                 data_type: data_type,
                                 standard: unit,
-                                sampling_method: sampling_method
+                                sampling_method: sampling_method,
+                                user: user
 
           self.log += "Created Trend: #{trend.inspect}\n"
 
@@ -347,6 +352,7 @@ module ImportXlsx
         rescue => e
           self.log += "failed to import: \n #{row}\n#{e.to_s}"
         end
+        self.log += "\n"
       end
     end
   end

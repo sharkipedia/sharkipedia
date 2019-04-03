@@ -102,9 +102,9 @@ class Import < ApplicationRecord
     # i.e. if it's a trend or traits import
     i = case self.import_type
           when 'traits'
-            ImportXlsx::Traits.new url
+            ImportXlsx::Traits.new url, self.user
           when 'trends'
-            ImportXlsx::Trends.new url
+            ImportXlsx::Trends.new url, self.user
           end
 
     # TODO: handle import failure

@@ -7,4 +7,6 @@ class Trend < ApplicationRecord
   belongs_to :data_type
   belongs_to :standard
   belongs_to :sampling_method
+
+  has_many :trend_observations
 end

@@ -295,7 +295,8 @@ module ImportXlsx
 
           resource = Resource.find_or_create_by! name: row['AuthorYear'],
                                                  data_source: row['DataSource'],
-                                                 doi: row['doi']
+                                                 doi: row['doi'],
+                                                 year: row['SourceYear']
           self.log += "Created Resource: #{resource.inspect}\n"
 
           # Latitude has a space at the end

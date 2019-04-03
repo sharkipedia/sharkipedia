@@ -51,6 +51,7 @@ Rails.application.routes.draw do
   root 'pages#start'
 
   resources :traits, only: :index
+  resources :trends, only: :index
 
   get 'home/index'
 

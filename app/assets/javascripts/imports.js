@@ -1,20 +1,29 @@
 document.addEventListener("turbolinks:load", function() {
   var doCheck = function() {
-    document.getElementById("import_submit").disabled = document.getElementById('import_title').value == '';
+    console.log('t');
+    let has_title = document.getElementById('import_title').value == '';
+    let has_file  = document.getElementById('import_xlsx_file').value == '';
+    document.getElementById("import_submit").disabled = has_title || has_file;
   }
 
   // new import form validation
   let import_title = document.getElementById('import_title');
-  if (import_title !== null)
+  if (import_title !== null && import_title.type === "text")
   {
-    if (import_title.type == "text") {
-      import_title.onkeyup = doCheck;
-      import_title.onblur = doCheck;
+    import_title.onkeyup = doCheck;
+    import_title.onblur = doCheck;
 
-      import_title.focus();
-      import_title.select();
-    }
+    import_title.focus();
+    import_title.select();
   }
+
+  let import_file = document.getElementById('import_xlsx_file');
+  if (import_file !== null && import_file.type === 'file')
+  {
+    import_file.onclick = doCheck;
+    import_file.onchange = doCheck;
+  }
+
 
   // modal related
   let btns = ["reject", "request-changes", "approve"];

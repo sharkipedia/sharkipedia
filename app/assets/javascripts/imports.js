@@ -1,4 +1,22 @@
 document.addEventListener("turbolinks:load", function() {
+  var doCheck = function() {
+    document.getElementById("import_submit").disabled = document.getElementById('import_title').value == '';
+  }
+
+  // new import form validation
+  let import_title = document.getElementById('import_title');
+  if (import_title !== null)
+  {
+    if (import_title.type == "text") {
+      import_title.onkeyup = doCheck;
+      import_title.onblur = doCheck;
+
+      import_title.focus();
+      import_title.select();
+    }
+  }
+
+  // modal related
   let btns = ["reject", "request-changes", "approve"];
   if (document.getElementById(btns[0] + "-btn") === null)
   {

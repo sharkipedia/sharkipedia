@@ -5,7 +5,7 @@
     <div class="field">
       <label class="label">Title</label>
       <div class="control">
-        <%= form.text_field :title, class: 'input', placeholder: "Title of the upload" %>
+        <%= form.text_field :title, class: 'input', placeholder: "Please enter the title of the upload here" %>
       </div>
     </div>
 
@@ -21,7 +21,7 @@
 
     <div class="field is-grouped">
       <div class="control">
-        <%= form.submit "Upload", class: "button is-link" %>
+        <%= form.submit "Upload", class: "button is-link", disabled: true, id: 'import_submit' %>
       </div>
       <div class="control">
         <%= link_to "Cancel", root_path, class: "button is-text" %>

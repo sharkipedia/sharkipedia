@@ -14,7 +14,6 @@ class ImportDashboard < Administrate::BaseDashboard
     title: Field::String,
     import_type: Field::String,
     approved: Field::Boolean,
-    approved_by_id: Field::Number,
     log: Field::Text,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -38,12 +37,11 @@ class ImportDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
     :user,
-    :approved_by,
     :id,
     :title,
     :import_type,
     :approved,
-    :approved_by_id,
+    :approved_by,
     :log,
     :created_at,
     :updated_at,
@@ -57,11 +55,10 @@ class ImportDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
     :user,
+    :approved,
     :approved_by,
     :title,
     :import_type,
-    :approved,
-    :approved_by_id,
     :log,
     :aasm_state,
     :xlsx_valid,

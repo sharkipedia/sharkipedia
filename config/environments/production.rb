@@ -93,10 +93,10 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.action_mailer.smtp_settings = {
-    :address => "email-smtp.us-east-1.amazonaws.com",
+    :address => "smtp.gmail.com",
     :port => 587,
-    :user_name => ENV["SES_SMTP_USERNAME"] || Rails.application.credentials.dig(:ses, :smtp_username),
-    :password => ENV["SES_SMTP_PASSWORD"] || Rails.application.credentials.dig(:ses, :smtp_password),
+    :user_name => ENV["SES_SMTP_USERNAME"] || Rails.application.credentials.dig(:gmail, :smtp_username),
+    :password => ENV["SES_SMTP_PASSWORD"] || Rails.application.credentials.dig(:gmail, :smtp_password),
     :authentication => :login,
     :enable_starttls_auto => true
   }

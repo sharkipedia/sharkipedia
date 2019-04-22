@@ -124,11 +124,6 @@ module ImportXlsx
 
         self.log += referenced_resources.inspect + "\n"
 
-        # species_name
-        unless species_check sub_table, resource_name
-          next
-        end
-
         # XXX: what should happen if the species / species super order can't be found?
         species = Species.find_by name: sub_table.first['species_name']
         species ||= Species.find_by edge_scientific_name: sub_table.first['species_name']

@@ -2,6 +2,7 @@
 <script src="//unpkg.com/canvas-datagrid/dist/canvas-datagrid.js"></script>
 
 <div id="gridctr" style="height: 637px;"></div>
+<%= link_to 'Download CSV', '#', id: 'data-export-link' %>
 
 <script>
   /*jshint browser:true */
@@ -22,6 +23,11 @@
   grid.style.height = '100%';
   grid.style.width = '100%';
 
+  const date = new Date().toISOString().slice(0,10);
+  const fname = 'shark-traits-' + date + '.csv';
+  var a = document.getElementById("data-export-link");
+  a.onclick = function() {
+    XLSX.writeFile(wb, fname)
+    return false;
+  }
 </script>
-
-<%= link_to 'Download CSV', traits_path(format: :csv) %>

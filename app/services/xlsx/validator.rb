@@ -23,7 +23,11 @@ module Xlsx
 
     def call
       guess_type
-      validate_column_headers
+
+      unless type == :invalid
+        validate_column_headers
+        validate_resources
+      end
 
       return Result.new @type, @valid, @messages
     end
@@ -52,8 +56,6 @@ module Xlsx
     end
 
     def validate_column_headers
-      return if type == :invalid
-
       template = case type
                  when :traits
                    @trait
@@ -67,6 +69,25 @@ module Xlsx
       else
         missing = template.headers - xlsx.headers
         @messages << "Data-Sheet column headers #{missing} are missing."
+      end
+    end
+
+    def validate_resources
+      @xlsx.data_sheet.each_with_index do |row, idx|
+        name = (row['resource_name'] || row['AuthorYear']).try(:strip)
+        next if Resource.find_by name: name
+
+        resource = Resource.new name: name,
+          data_source: row['DataSource'].try(:strip),
+          doi: (row['resource_doi'] || row['doi']).try(:strip),
+          year: row['SourceYear']
+
+        unless resource.valid?
+          resource.errors.full_messages.each do |message|
+            # 0 index + row 1 are headers
+            @messages << "Row #{idx + 2}: Resource #{message}"
+          end
+        end
       end
     end
   end

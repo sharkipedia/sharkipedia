@@ -15,6 +15,7 @@ module SharkT
 
     config.generators do |g|
       g.view_specs false
+      g.javascript_engine :js
     end
 
     config.to_prepare do

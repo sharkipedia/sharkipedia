@@ -113,13 +113,6 @@ GEM
     chromedriver-helper (2.1.1)
       archive-zip (~> 0.10)
       nokogiri (~> 1.8)
-    coffee-rails (4.2.2)
-      coffee-script (>= 2.2.0)
-      railties (>= 4.0.0)
-    coffee-script (2.4.1)
-      coffee-script-source
-      execjs
-    coffee-script-source (1.12.2)
     concurrent-ruby (1.1.5)
     connection_pool (2.2.2)
     crass (1.0.4)
@@ -257,14 +250,14 @@ GEM
     rspec-mocks (3.8.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.8.0)
-    rspec-rails (3.8.2)
-      actionpack (>= 3.0)
-      activesupport (>= 3.0)
-      railties (>= 3.0)
-      rspec-core (~> 3.8.0)
-      rspec-expectations (~> 3.8.0)
-      rspec-mocks (~> 3.8.0)
-      rspec-support (~> 3.8.0)
+    rspec-rails (4.0.0.beta2)
+      actionpack (>= 4.2)
+      activesupport (>= 4.2)
+      railties (>= 4.2)
+      rspec-core (~> 3.8)
+      rspec-expectations (~> 3.8)
+      rspec-mocks (~> 3.8)
+      rspec-support (~> 3.8)
     rspec-support (3.8.0)
     ruby-graphviz (1.2.4)
     rubyXL (3.4.3)
@@ -340,7 +333,6 @@ DEPENDENCIES
   byebug
   capybara (>= 2.15)
   chromedriver-helper
-  coffee-rails (~> 4.2)
   devise (~> 4.5)
   factory_bot_rails (~> 5.0, >= 5.0.1)
   jbuilder (~> 2.5)
@@ -353,7 +345,7 @@ DEPENDENCIES
   rails-erd
   redis-namespace (~> 1.6)
   roo (~> 2.8.0)
-  rspec-rails (~> 3.8)
+  rspec-rails (~> 4.0.0.beta2)
   rubyXL
   sass-rails (~> 5.0)
   selenium-webdriver

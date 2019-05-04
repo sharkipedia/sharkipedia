@@ -35,9 +35,6 @@
             "heroku-postgresql"
         ],
         "buildpacks": [
-            {
-                "url": "https://github.com/bundler/heroku-buildpack-bundler2"
-            }
         ],
         "stack": "heroku-18"
 }

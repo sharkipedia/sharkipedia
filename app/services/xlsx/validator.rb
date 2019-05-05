@@ -26,7 +26,11 @@ module Xlsx
 
       unless type == :invalid
         validate_column_headers
-        validate_resources
+
+        @xlsx.data_sheet.each_with_index do |row, idx|
+          validate_resources row, idx
+          validate_species row, idx
+        end
       end
 
       return Result.new @type, @valid, @messages
@@ -72,21 +76,35 @@ module Xlsx
       end
     end
 
-    def validate_resources
-      @xlsx.data_sheet.each_with_index do |row, idx|
-        name = (row['resource_name'] || row['AuthorYear']).try(:strip)
-        next if Resource.find_by name: name
+    def validate_resources row, idx
+      name = (row['resource_name'] || row['AuthorYear']).try(:strip)
+      return if Resource.find_by name: name
 
-        resource = Resource.new name: name,
-          data_source: row['DataSource'].try(:strip),
-          doi: (row['resource_doi'] || row['doi']).try(:strip),
-          year: row['SourceYear']
+      resource = Resource.new name: name,
+        data_source: row['DataSource'].try(:strip),
+        doi: (row['resource_doi'] || row['doi']).try(:strip),
+        year: row['SourceYear']
 
-        unless resource.valid?
-          resource.errors.full_messages.each do |message|
-            # 0 index + row 1 are headers
-            @messages << "Row #{idx + 2}: Resource #{message}"
-          end
+      unless resource.valid?
+        @valid = false
+        resource.errors.full_messages.each do |message|
+          # 0 index + row 1 are headers
+          @messages << "Row #{idx + 2}: Resource #{message}"
+        end
+      end
+    end
+
+    def validate_species row, idx
+      species_name = row['species_name'] || row['Species name']
+      if species_name.blank?
+        @valid = false
+        @messages << "Row #{idx + 2}: No species given."
+      else
+        species = Species.find_by name: species_name
+        species ||= Species.find_by edge_scientific_name: species_name
+        unless species
+          @valid = false
+          @messages << "Row #{idx + 2}: Species '#{species_name}' not found in database."
         end
       end
     end

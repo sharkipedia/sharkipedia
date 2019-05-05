@@ -30,6 +30,7 @@ module Xlsx
         @xlsx.data_sheet.each_with_index do |row, idx|
           validate_resources row, idx
           validate_species row, idx
+          validate_sex row, idx
         end
       end
 
@@ -98,13 +99,29 @@ module Xlsx
       species_name = row['species_name'] || row['Species name']
       if species_name.blank?
         @valid = false
-        @messages << "Row #{idx + 2}: No species given."
+        @messages << "Row #{idx + 2}: No species specified."
       else
         species = Species.find_by name: species_name
         species ||= Species.find_by edge_scientific_name: species_name
         unless species
           @valid = false
           @messages << "Row #{idx + 2}: Species '#{species_name}' not found in database."
+        end
+      end
+    end
+
+    def validate_sex row, idx
+      return if type == :trends
+
+      sex = row['sex']
+      if sex.blank?
+        @valid = false
+        @messages << "Row #{idx + 2}: No sex specified."
+      else
+        sex_type = SexType.find_by name: sex
+        unless sex_type
+          @valid = false
+          @messages << "Row #{idx + 2}: Sex '#{sex}' not found in database."
         end
       end
     end

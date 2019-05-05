@@ -104,7 +104,7 @@ module Xlsx
     end
 
     def validate_species row, idx
-      species_name = row['species_name'] || row['Species name']
+      species_name = (row['species_name'] || row['Species name']).try(:strip)
       if species_name.blank?
         @valid = false
         @messages << "Row #{idx + 2}: No species specified."
@@ -141,7 +141,7 @@ module Xlsx
     end
 
     def validate klass, field, row, idx
-      value = row[field]
+      value = row[field].try(:strip)
       if value.blank?
         @valid = false
         @messages << "Row #{idx + 2}: No #{field} specified."

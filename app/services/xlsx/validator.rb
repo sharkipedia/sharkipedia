@@ -33,6 +33,7 @@ module Xlsx
           validate_sex row, idx
           validate_trait row, idx
           validate_standard row, idx
+          validate_value row, idx
         end
       end
 
@@ -137,6 +138,16 @@ module Xlsx
         validate Standard, 'standard_name', row, idx
       when :trends
         validate Standard, 'Units', row, idx
+      end
+    end
+
+    def validate_value row, idx
+      return if type == :trends
+
+      value = row['value']
+      if value.blank?
+        @valid = false
+        @messages << "Row #{idx + 2}: No value specified."
       end
     end
 

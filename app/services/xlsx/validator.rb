@@ -31,6 +31,7 @@ module Xlsx
           validate_resources row, idx
           validate_species row, idx
           validate_sex row, idx
+          validate_trait row, idx
         end
       end
 
@@ -113,15 +114,26 @@ module Xlsx
     def validate_sex row, idx
       return if type == :trends
 
-      sex = row['sex']
-      if sex.blank?
+      validate SexType, 'sex', row, idx
+    end
+
+    def validate_trait row, idx
+      return if type == :trends
+
+      validate TraitClass, 'trait_class', row, idx
+      validate Trait, 'trait_name', row, idx
+    end
+
+    def validate klass, field, row, idx
+      value = row[field]
+      if value.blank?
         @valid = false
-        @messages << "Row #{idx + 2}: No sex specified."
+        @messages << "Row #{idx + 2}: No #{field} specified."
       else
-        sex_type = SexType.find_by name: sex
-        unless sex_type
+        obj = klass.find_by name: value
+        unless obj
           @valid = false
-          @messages << "Row #{idx + 2}: Sex '#{sex}' not found in database."
+          @messages << "Row #{idx + 2}: #{klass} '#{value}' not found in database."
         end
       end
     end

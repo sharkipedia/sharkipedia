@@ -32,6 +32,7 @@ module Xlsx
           validate_species row, idx
           validate_sex row, idx
           validate_trait row, idx
+          validate_standard row, idx
         end
       end
 
@@ -122,6 +123,15 @@ module Xlsx
 
       validate TraitClass, 'trait_class', row, idx
       validate Trait, 'trait_name', row, idx
+    end
+
+    def validate_standard row, idx
+      case type
+      when :traits
+        validate Standard, 'standard_name', row, idx
+      when :trends
+        validate Standard, 'Units', row, idx
+      end
     end
 
     def validate klass, field, row, idx

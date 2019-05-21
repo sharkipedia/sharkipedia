@@ -1,5 +1,8 @@
 class PagesController < PreAuthController
   def start
+    @measurement_count = Measurement.count
+    @trait_count       = Trait.count
+    @species_count     = Species.count
   end
 
   def about

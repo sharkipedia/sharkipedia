@@ -23,8 +23,6 @@ gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 
-gem 'sprockets', '~> 4.0.0.beta8'
-
 # Use devise for authentication
 gem 'devise', '~> 4.5'
 # Use ActiveModel has_secure_password

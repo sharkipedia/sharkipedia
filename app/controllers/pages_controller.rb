@@ -4,4 +4,10 @@ class PagesController < PreAuthController
 
   def about
   end
+
+  def procedure
+  end
+
+  def contact
+  end
 end

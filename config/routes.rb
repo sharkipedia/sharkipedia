@@ -56,5 +56,7 @@ Rails.application.routes.draw do
   get 'home/index'
 
   # static pages
-  match '/about',   to: 'pages#about',   via: 'get'
+  match '/about',     to: 'pages#about',     via: 'get'
+  match '/contact',   to: 'pages#contact',   via: 'get'
+  match '/procedure', to: 'pages#procedure', via: 'get'
 end

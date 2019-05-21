@@ -1,27 +1,25 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Development setup
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+1. Ensure you have ruby (version 2.6.3) installed, for instructions see the
+   [Install Rails Howto](http://installrails.com).
+1. Ensure you have the postgresql database installed (mac: `brew install
+   postgresql` then follow instructions, windwos:
+   https://www.postgresql.org/download/windows/, then follow instructions and
+   make a note of the username & password)
+1. Clone the repository to your computer
+   ```
+   git clone https://github.com/coffeejunk/sharkT.git
+   ```
+1. Move into the project folder (`cd sharkT`)
+1. Install project dependencies: `bundle install`
+1. Windows only: in the `config/database.yml` configure the username and
+   password under development which you set during the installation of
+   postgresql.
+1. Initialize the database `rake db:setup`
+1. Run the rails server `rails server`
+1. Connect to the application in your browser at `http://localhost:3000`
 
 
 ## Attributions

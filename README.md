@@ -10,7 +10,10 @@
     - windows: https://www.postgresql.org/download/windows/, then follow
       instructions and make a note of the username & password
     - Linux: depending on your distribution install, configure and start
-      postgresql
+      postgresql:
+	  	 1. Create user in posgres: `sudo -u postgres createuser username`
+		 1. Give permission to user to create database:  `sudo -u postgres psql` and in the postgres terminal: `ALTER USER username CREATEDB;`
+
 1. Clone the repository to your computer
    ```
    git clone https://github.com/coffeejunk/sharkT.git
@@ -23,7 +26,7 @@
    macOS: if you installed postgres with `brew` you don't need to do anything,
    if you installed postgres in another way you might have to configure
    a username and password
-1. Initialize the database `rake db:setup`
+1. Initialize the database `rake db:setup` (if this command throws an `role "username" does not exist` or `permission denied to create database` error, see above to create postgres user and give permission)
 1. Run the rails server `rails server`
 1. Connect to the application in your browser at `http://localhost:3000`
 

@@ -24,15 +24,23 @@
             },
             "HEROKU_APP_NAME": {
                 "required": true
+            },
+            "RAILS_MASTER_KEY": {
+                "required": true
             }
         },
         "formation": {
             "web": {
                 "quantity": 1
+            },
+            "worker": {
+                "quantity": 1
             }
         },
         "addons": [
-            "heroku-postgresql"
+            "heroku-postgresql",
+            "heroku-redis",
+            "papertrail"
         ],
         "buildpacks": [
         ],

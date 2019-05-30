@@ -15,6 +15,11 @@
   clear: both;
   display: table;
 }
+
+.roundrect {
+border-radius: 15px;
+}
+
 </style>
 
 <section class="section">
@@ -51,19 +56,19 @@ managing populations in the face of changing threats across the globe.</p>
 
 <div class="row">
   <div class="column">
-    <%= image_tag "chris.jpg", size: 200 %>
+    <%= image_tag "chris.jpg", class: "roundrect", size: 200 %>
     <br>Dr. Christopher Mull
   </div>
   <div class="column">
-    <%= image_tag "seb.jpg", size: 200 %>
+    <%= image_tag "seb.jpg", class: "roundrect", size: 200 %>
     <br>Dr. Sebastián Pardo 
   </div>
   <div class="column">
-    <%= image_tag "holly.jpg", size: 200 %>
+    <%= image_tag "holly.jpg", class: "roundrect", size: 200 %>
     <br>Dr. Holly Kindsvater
 </div>
   <div class="column">
-    <%= image_tag "dulvy.jpg", size: 200 %>
+    <%= image_tag "dulvy.jpg", class: "roundrect", size: 200 %>
     <br>Dr. Nicholas Dulvy 
 </div>
 </div>

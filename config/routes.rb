@@ -53,6 +53,10 @@ Rails.application.routes.draw do
   resources :traits, only: :index
   resources :trends, only: :index
 
+  namespace :search do
+    get 'autocomplete', defaults: { format: 'json' }
+  end
+
   get 'home/index'
 
   # static pages

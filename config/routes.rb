@@ -57,6 +57,8 @@ Rails.application.routes.draw do
     get 'autocomplete', defaults: { format: 'json' }
   end
 
+  resources :data_export, only: :index
+
   get 'home/index'
 
   # static pages

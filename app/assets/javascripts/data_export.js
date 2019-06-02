@@ -1,8 +1,6 @@
 jQuery(document).on('turbolinks:load', function() {
   [
-    'family',
-    'species',
-    'traits'
+    'oceans', 'species[]'
   ].forEach(function(element) {
     runSelect2(element);
   });

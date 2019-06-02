@@ -3,6 +3,7 @@ class SearchController < ApplicationController
     'family' => SpeciesFamily,
     'species' => Species,
     'traits' => Trait,
+    'oceans' => Ocean,
   }
 
   def autocomplete

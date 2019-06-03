@@ -5,7 +5,8 @@
     <section class="section">
       <h2 class="subtitle">Scientific Name</h2>
 
-      <%= form_tag '' do %>
+      <%= form_with url: data_export_index_path, local: true, method: :get do |f| %>
+        <%= hidden_field_tag :export_type, 'Traits' %>
         <div class="field">
           <%= label_tag 'species[]', 'Genus & Species', class: 'label' %>
           <div class="control">

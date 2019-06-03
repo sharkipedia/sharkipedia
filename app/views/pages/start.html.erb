@@ -7,17 +7,17 @@
 
       <%= form_tag '' do %>
         <div class="field">
-          <%= label_tag 'species', 'Genus & Species', class: 'label' %>
+          <%= label_tag 'species[]', 'Genus & Species', class: 'label' %>
           <div class="control">
-            <%= select_tag 'species', nil, style: 'width: 100%', multiple: 'multiple' %>
+            <%= select_tag 'species[]', nil, style: 'width: 100%', multiple: 'multiple' %>
           </div>
           <p class="help">For example: Carcharhinus acronotus</p>
         </div>
 
         <div class="field">
-          <%= label_tag 'traits', 'Traits', class: 'label' %>
+          <%= label_tag 'traits[]', 'Traits', class: 'label' %>
           <div class="control">
-            <%= select_tag 'traits', nil, style: 'width: 100%', multiple: 'multiple' %>
+            <%= select_tag 'traits[]', nil, style: 'width: 100%', multiple: 'multiple' %>
           </div>
           <p class="help">For example: Lmat50 See the procedures document for more details <%= link_to 'here', procedure_path(anchor: 'trait-classes-and-traits') %>.</p>
         </div>
@@ -36,7 +36,7 @@
       <%= form_tag '', class: 'field' do %>
         <div class="field is-grouped">
           <p class="control is-expanded">
-            <%= select_tag 'family', nil, style: 'width: 100%', multiple: 'multiple' %>
+            <%= select_tag 'family[]', nil, style: 'width: 100%', multiple: 'multiple' %>
           </p>
           <p class="control">
             <%= submit_tag 'Search', class: 'button is-info' %>

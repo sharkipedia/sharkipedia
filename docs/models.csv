@@ -1,13 +1,1 @@
-Length,Age,Growth,Reproduction,Demography,Relationships
-back calculated,back calculated,VBFG2 Strong Bayes,,,Length-Length
-directly from growth curves,directly from growth curves,VBFG2 Uninformed Bayes,,,Lenght-Weight
-observational,observational,VBFG2 ML,,,
-logistic,logistic,VBFG3 Strong Bayes,,,
-,,VBFG3 Uninformed Bayes,,,
-,,VBFG3 ML,,,
-,,Gomp Strong Bayes,,,
-,,Gomp Uninformed Bayes,,,
-,,Gomp ML,,,
-,,Fabens,,,
-,,Francis,,,
-,,Other,,,
+Length,Age,Growth,Reproduction,Demography,Relationshipsback calculated,back calculated,VBFG2 Strong Bayes,,,Length-Lengthdirectly from growth curves,directly from growth curves,VBFG2 Uninformed Bayes,,,Lenght-Weightobservational,observational,VBFG2 ML,,,logistic,logistic,VBFG3 Strong Bayes,,,,,VBFG3 Uninformed Bayes,,,,,VBFG3 ML,,,,,Gomp Strong Bayes,,,,,Gomp Uninformed Bayes,,,,,Gomp ML,,,,,Fabens,,,,,Francis,,,,,Other,,,

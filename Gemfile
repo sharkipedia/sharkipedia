@@ -86,3 +86,5 @@ gem "select2-rails", "~> 4.0", github: 'pdobb/select2-rails'
 gem "underscore-rails", "~> 1.8"
 
 gem "pg_search", "~> 2.2"
+
+gem "pagy", "~> 3.2"

@@ -29,21 +29,23 @@
   <table class="table">
     <thead>
       <tr>
-        <th>Resource</th>
         <th>Name</th>
         <th>Value</th>
+        <th>Standard</th>
         <th>ValueType</th>
         <th>Location</th>
+        <th>Resource</th>
       </tr>
     </thead>
     <tbody>
       <% measurements.each do |measurement| %>
         <tr>
-          <td><%= measurement.observation.resources.first.name %></td>
           <td><%= measurement.trait.name %></td>
           <td><%= measurement.value %></td>
+          <td><%= measurement.standard.try(:name) %></td>
           <td><%= measurement.value_type.try(:name) %></td>
           <td><%= measurement.observation.location.try(:name) %></td>
+          <td><%= measurement.observation.resources.first.name %></td>
         </tr>
       <% end %>
     </tbody>

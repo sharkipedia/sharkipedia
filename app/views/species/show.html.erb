@@ -1,1 +1,51 @@
 <h1 class="title"><%= @specie.name %></h1>
+
+<div class="columns">
+  <div class="column">
+    <p>
+      <b>Superorder:</b> <%= @specie.species_superorder.name %>
+    </p>
+    <p>
+      <b>Subclass:</b> <%= @specie.species_subclass.name %>
+    </p>
+    <p>
+      <b>Order:</b> <%= @specie.species_order.name %>
+    </p>
+    <p>
+      <b>Family:</b> <%= @specie.species_family.name %>
+    </p>
+  </div>
+  <div class="column">
+    <p class="title is-6">External resources for this species:</p>
+    TODO: link to iucn redlist
+  </div>
+</div>
+
+<h3 class='subtitle is-3'>Traits</h2>
+
+<% @grouped_measurements.each do |trait_class, measurements| %>
+  <h4 class='subtitle is-4'><%= trait_class.name %></h4>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Resource</th>
+        <th>Name</th>
+        <th>Value</th>
+        <th>ValueType</th>
+        <th>Location</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% measurements.each do |measurement| %>
+        <tr>
+          <td><%= measurement.observation.resources.first.name %></td>
+          <td><%= measurement.trait.name %></td>
+          <td><%= measurement.value %></td>
+          <td><%= measurement.value_type.name %></td>
+          <td><%= measurement.observation.location.name %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

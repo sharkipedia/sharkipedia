@@ -7,5 +7,7 @@ class SpeciesController < ApplicationController
 
   def show
     @specie = Species.find params[:id]
+    @grouped_measurements = Measurement.where(observation: @specie.observations)
+                                       .group_by(&:trait_class)
   end
 end

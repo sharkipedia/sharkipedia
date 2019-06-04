@@ -1,0 +1,24 @@
+<h1 class="title">Species</h1>
+
+<div>
+Search for species name
+<%= select_tag 'species', nil, style: 'width: 50%' %>
+
+</div>
+
+<hr />
+
+or select from list
+<div>
+<table class="table is-fullwidth is-bordered">
+  <tbody>
+    <% @species.each do |specie| %>
+      <tr>
+        <td><%= link_to specie.name, species_path(specie) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%== pagy_bulma_nav(@pagy) %>
+</div>

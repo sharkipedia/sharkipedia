@@ -50,9 +50,9 @@ Rails.application.routes.draw do
 
   root 'pages#start'
 
-  resources :traits, only: :index
   resources :trends, only: :index
 
+  resources :traits, only: [:index, :show]
   resources :species, only: [:index, :show]
 
   namespace :search do

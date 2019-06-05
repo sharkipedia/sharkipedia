@@ -1,36 +1,35 @@
-<script src="//unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
-<script src="//unpkg.com/canvas-datagrid/dist/canvas-datagrid.js"></script>
+<h1 class="title">Traits</h1>
 
-    <h1 class="title">Shark Traits has currently <%= @measurement_count %> measurements of
-      <%= @trait_count %> traits, covering <%= @species_count %> species</h1>
-    
-    <div id="gridctr" style="height: 637px;"></div>
-<%= link_to 'Download CSV', '#', id: 'data-export-link' %>
+<div>
+  Search for Trait name
+  <%= grouped_collection_select(nil, :trait_id, @trait_classes, :traits, :name, :id, :name, {}, style: 'width: 50%') %>
 
-<script>
-  /*jshint browser:true */
-  /* eslint-env browser */
-  /* eslint no-use-before-define:0 */
-  /*global Uint8Array, Uint16Array, ArrayBuffer */
-  /*global XLSX */
+</div>
 
-  var data = `<%= @traits.html_safe %>`;
-  var wb = XLSX.read(data, {type:"binary"});
-  var js = XLSX.utils.sheet_to_json(wb.Sheets.Sheet1, {header:1, raw:true});
+<hr />
 
-  var grid = canvasDatagrid({
-    parentNode: document.getElementById('gridctr'),
-    editable: false,
-    data: js
-  });
-  grid.style.height = '100%';
-  grid.style.width = '100%';
+<div>
+  <div class="tabs is-medium">
+    <ul>
+      <% @trait_classes.each_with_index do |trait_class, idx| %>
+        <li class="<%= idx == 0 ? 'is-active' : nil %>" data-option="<%= idx %>"><a><%= trait_class.name %></a></li>
+      <% end %>
+    </ul>
+  </div>
 
-  const date = new Date().toISOString().slice(0,10);
-  const fname = 'shark-traits-' + date + '.csv';
-  var a = document.getElementById("data-export-link");
-  a.onclick = function() {
-    XLSX.writeFile(wb, fname)
-    return false;
-  }
-</script>
+  <div class="tab-container">
+    <% @trait_classes.each_with_index do |trait_class, idx| %>
+      <div class="tab-item <%= idx == 0 ? 'is-active' : nil %>" data-item="<%= idx %>">
+        <table class="table is-fullwidth is-bordered">
+          <tbody>
+            <% trait_class.traits.each do |trait| %>
+              <tr>
+                <td><%= link_to trait.name, trait_path(trait) %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+  </div>
+</div>

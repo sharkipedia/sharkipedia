@@ -1,7 +1,9 @@
 class PagesController < PreAuthController
   def start
-  end
-
+    @measurement_count = Measurement.count
+    @trait_count       = Measurement.joins(:trait).select(:trait_id).distinct.count #Trait.count
+    @species_count     = Observation.joins(:species).select(:species_id).distinct.count
+  end 
   def about
   end
 

@@ -1,0 +1,36 @@
+<h1 class="title"><%= @trait.name %></h1>
+
+<p><%= @trait.description %></p>
+
+<% if @trait.measurements.blank? %>
+  <em>No measurements for this trait.</em>
+<% else %>
+  <h3 class='subtitle is-3'>Measurements</h2>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Specie</th>
+        <th>Name</th>
+        <th>Value</th>
+        <th>Standard</th>
+        <th>ValueType</th>
+        <th>Location</th>
+        <th>Resource</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @trait.measurements.each do |measurement| %>
+        <tr>
+          <td><%= link_to measurement.observation.species.name, species_path(measurement.observation.species) %></td>
+          <td><%= measurement.trait.name %></td>
+          <td><%= measurement.value %></td>
+          <td><%= measurement.standard.try(:name) %></td>
+          <td><%= measurement.value_type.try(:name) %></td>
+          <td><%= measurement.observation.location.try(:name) %></td>
+          <td><%= measurement.observation.resources.first.name %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

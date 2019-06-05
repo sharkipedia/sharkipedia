@@ -1,7 +1,10 @@
 <script src="//unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
 <script src="//unpkg.com/canvas-datagrid/dist/canvas-datagrid.js"></script>
 
-<div id="gridctr" style="height: 637px;"></div>
+    <h1 class="title">Shark Traits has currently <%= @measurement_count %> measurements of
+      <%= @trait_count %> traits, covering <%= @species_count %> species</h1>
+    
+    <div id="gridctr" style="height: 637px;"></div>
 <%= link_to 'Download CSV', '#', id: 'data-export-link' %>
 
 <script>

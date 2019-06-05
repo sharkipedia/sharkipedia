@@ -3,14 +3,51 @@
   box-sizing: border-box;
 }
 
+/* Responsive grid for funder logos */
 .column {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
+
+/* Create four equal columns that sits next to each other */
+.row {
+  flex: 33%;
+  max-width: 33%;
+  padding: 0 4px;
+}
+
+.row img {
+  margin-top: 8px;
+  vertical-align: middle;
+  width: 100%;
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .row {
+    flex: 100%;
+    max-width: 100%;
+  }
+} 
+  
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 800px) {
+  .row {
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+/* Bio image grid */ 
+
+.columnbio {
   float: left;
   width: 25%;
   padding: 10px;
 }
 
 /* Clearfix (clear floats) */
-.row::after {
+.rowbio::after {
   content: "";
   clear: both;
   display: table;
@@ -18,6 +55,10 @@
 
 .roundrect {
 border-radius: 15px;
+}
+
+.imgborder {
+    border: 30px solid rgba(0,0,0,0);
 }
 
 </style>
@@ -54,20 +95,20 @@ managing populations in the face of changing threats across the globe.</p>
     
     <h3 class="title">Who we are</h3>
 
-<div class="row">
-  <div class="column">
+<div class="rowbio">
+  <div class="columnbio">
     <%= image_tag "chris.jpg", class: "roundrect", size: 200 %>
     <br>Dr. Christopher Mull
   </div>
-  <div class="column">
+  <div class="columnbio">
     <%= image_tag "seb.jpg", class: "roundrect", size: 200 %>
     <br>Dr. Sebastián Pardo 
   </div>
-  <div class="column">
+  <div class="columnbio">
     <%= image_tag "holly.jpg", class: "roundrect", size: 200 %>
     <br>Dr. Holly Kindsvater
 </div>
-  <div class="column">
+  <div class="columnbio">
     <%= image_tag "dulvy.jpg", class: "roundrect", size: 200 %>
     <br>Dr. Nicholas Dulvy 
 </div>
@@ -84,11 +125,21 @@ managing populations in the face of changing threats across the globe.</p>
     <br>
 
 <br><br>
-    <h3 class="title">Funders</h3>
+    <h3 class="title">Funders and Partners</h3>
 
-    <p> Shark Traits and Shark Trends are made possible thanks to the contributions of many donors and funders:</p>
-    <br>
-    - Add list of funders here (probably logos as well)
+<div class="column">
+    <div class="row">        
+        <%= image_tag "SCF.png", class: "imgborder", size: 500 %>
+        <%= image_tag "SFU_2012.png", class: "imgborder", size: 500 %>
+  </div>
+    <div class="row">        
+        <%= image_tag "iucn-ssg-logo.png", class: "imgborder", size: 500 %>
+        <%= image_tag "VT.png", class: "imgborder", size: 500 %>
+  </div>
+    <div class="row">        
+        <%= image_tag "NSF2.png", class: "imgborder", size: 300 %>
+  </div>
+  </div>
 
   </div>
 </section>

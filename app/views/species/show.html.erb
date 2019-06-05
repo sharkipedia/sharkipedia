@@ -43,7 +43,7 @@
       <tbody>
         <% measurements.each do |measurement| %>
           <tr>
-            <td><%= measurement.trait.name %></td>
+            <td><%= link_to measurement.trait.name, trait_path(measurement.trait) %></td>
             <td><%= measurement.value %></td>
             <td><%= measurement.standard.try(:name) %></td>
             <td><%= measurement.value_type.try(:name) %></td>

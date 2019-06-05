@@ -21,33 +21,37 @@
   </div>
 </div>
 
-<h3 class='subtitle is-3'>Traits</h2>
+<% if @grouped_measurements.blank? %>
+  <em>No measurements for this species.</em>
+<% else %>
+  <h3 class='subtitle is-3'>Traits</h2>
 
-<% @grouped_measurements.each do |trait_class, measurements| %>
-  <h4 class='subtitle is-4'><%= trait_class.name %></h4>
+  <% @grouped_measurements.each do |trait_class, measurements| %>
+    <h4 class='subtitle is-4'><%= trait_class.name %></h4>
 
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Value</th>
-        <th>Standard</th>
-        <th>ValueType</th>
-        <th>Location</th>
-        <th>Resource</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% measurements.each do |measurement| %>
+    <table class="table">
+      <thead>
         <tr>
-          <td><%= measurement.trait.name %></td>
-          <td><%= measurement.value %></td>
-          <td><%= measurement.standard.try(:name) %></td>
-          <td><%= measurement.value_type.try(:name) %></td>
-          <td><%= measurement.observation.location.try(:name) %></td>
-          <td><%= measurement.observation.resources.first.name %></td>
+          <th>Name</th>
+          <th>Value</th>
+          <th>Standard</th>
+          <th>ValueType</th>
+          <th>Location</th>
+          <th>Resource</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% measurements.each do |measurement| %>
+          <tr>
+            <td><%= measurement.trait.name %></td>
+            <td><%= measurement.value %></td>
+            <td><%= measurement.standard.try(:name) %></td>
+            <td><%= measurement.value_type.try(:name) %></td>
+            <td><%= measurement.observation.location.try(:name) %></td>
+            <td><%= measurement.observation.resources.first.name %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
 <% end %>

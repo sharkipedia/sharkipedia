@@ -28,9 +28,9 @@ tr:nth-child(even) {
 
 <h1 class="title">Procedures</h1>
 
-<h2 class="subtitle">Overview</h2>
+<h2>Overview</h2>
 
-<p>The Shark Traits Database is an open source research initiative that aims to make all observations and measurements of chondrichthyans (sharks, rays, and chimaeras) accessible in order to more rapidly advance resesearch. The framework behind the database is heavily based on the open source [Coral Trait Database](https://www.coraltraits.org). Anyone collecting chondrichthyan life history data can join and contribute to the growing data compilation. Contributors have control over the privacy of their data and greatly benefit from being able to download complementary public data from the database in a standard format for use in their analyses. We hope that private data will become public once the contributor has published them, which will subsequently be cited when their data are used in analyses by other people. The citation system has been carefully designed to ensure full transparency about the origin of each individual data point as well as larger data compilations of other peoples' data (such as data extracted from literature for meta-analyses).</p>
+<p>The Shark Traits Database is an open source research initiative that aims to make all observations and measurements of chondrichthyans (sharks, rays, and chimaeras) accessible in order to more rapidly advance resesearch. The framework behind the database is heavily based on the open source <a href"https://www.coraltraits.org"> Coral Trait Database<a>. Anyone collecting chondrichthyan life history data can join and contribute to the growing data compilation. Contributors have control over the privacy of their data and greatly benefit from being able to download complementary public data from the database in a standard format for use in their analyses. We hope that private data will become public once the contributor has published them, which will subsequently be cited when their data are used in analyses by other people. The citation system has been carefully designed to ensure full transparency about the origin of each individual data point as well as larger data compilations of other peoples' data (such as data extracted from literature for meta-analyses).</p>
 
 <h2>Mission</h2>
 
@@ -50,18 +50,6 @@ tr:nth-child(even) {
 <h4>Administrator</h4>
 
 <p>Contact the Administrators for any information about the database. <a href"mailto:sharktraits@gmail.com"> sharktraits@gmail.com</a></p>
-
-<h3 id="traitclasses">Trait Classes and Traits</h3>
-
-<p>The database was designed to contain `population-level` characteristic measurements, which are trait estimates of a species at a given location. These traits are grouped into six use-classes: </p>
-<ul>
-<li> <a href="#length"> Length </a></li>
-<li> <a href="#age"> Age </a></li>
-<li> <a href="#growth"> Growth </a></li>
-<li> <a href="#reproduction"> Reproduction </a></li>
-<li> <a href="#demography"> Demography </a> </li>
-<li> <a href="#relationships"> Relationships </a> (conversions between different units, such as length to weight)</li>
-</ul>
 
 
 <h3>Observations and measurements of traits</h3>
@@ -94,13 +82,23 @@ tr:nth-child(even) {
  <li>Standard</li>
 </ul>
 
-<p>The current list of traits is as follows:</p>
+<h3 id="traitclasses">Trait Classes and Traits</h3>
+
+<p>The database was designed to contain `population-level` characteristic measurements, which are trait estimates of a species at a given location. These traits are grouped into six trait-classes: </p>
+<ul>
+<li> <a href="#length"> Length </a></li>
+<li> <a href="#age"> Age </a></li>
+<li> <a href="#growth"> Growth </a></li>
+<li> <a href="#reproduction"> Reproduction </a></li>
+<li> <a href="#demography"> Demography </a> </li>
+<li> <a href="#relationships"> Relationships </a> (conversions between different units, such as length to weight)</li>
+</ul>
+
+A trait should always have a Standard and a Method. In cases where there are multiple models that could be fitted in a method, there should be a Model specified as well.
 
 <h3 id="length"> Length </h3>
 
-<p>A trait should always have a Standard and a Method. In cases where there are multiple models that could be fitted in a method, there should be a Model specified as well.</p> 
-
-<h4>Trait Names: Length</h4>
+<h4>Trait Names: <b>Length</b></h4>
 <table style="width:100%"> 
 <tr>
 <th>Trait</th>

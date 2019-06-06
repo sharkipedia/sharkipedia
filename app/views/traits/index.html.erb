@@ -2,7 +2,7 @@
 
 <div>
   Search for Trait name
-  <%= grouped_collection_select(nil, :trait_id, @trait_classes, :traits, :name, :id, :name, {}, style: 'width: 50%') %>
+  <%= grouped_collection_select(nil, :trait_search, @trait_classes, :traits, :name, :id, :name, {:prompt => 'Select Trait'}, style: 'width: 50%') %>
 
 </div>
 

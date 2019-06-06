@@ -1,11 +1,9 @@
 $(document).on('turbolinks:load', function() {
-  $('#trait_id').select2({
-    placeholder: "Select a trait"
-  });
+  $('#trait_search').select2();
 
-  $('#trait_id').on('select2:select', function (e) {
+  $('#trait_search').on('select2:select', function (e) {
     var data = e.params.data;
-    Turbolinks.visit('/trait/' + data.id);
+    Turbolinks.visit('/traits/' + data.id);
   });
 
   $('.tabs ul li').on('click', function() {

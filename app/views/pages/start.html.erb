@@ -11,10 +11,18 @@
     to everyone.</p>
 
     <section class="section">
-      <h2 class="subtitle">Scientific Name</h2>
-      <%= label_tag 'species', 'Genus & Species', class: 'label' %>
-      <%= select_tag 'species', nil, style: 'width: 30%' %>
-      <p class="help">For example: Carcharhinus acronotus</p>
+    <div class="columns">
+      <div class="column">
+        <%= label_tag 'species', 'Genus & Species', class: 'label' %>
+        <%= select_tag 'species', nil, style: 'width: 50%' %>
+        <p class="help">For example: Carcharhinus acronotus</p>
+      </div>
+      <div class="column">
+        <%= label_tag 'trait', 'Trait', class: 'label' %>
+        <%= grouped_collection_select(nil, :trait_search, @trait_classes, :traits, :name, :id, :name, {:prompt => 'Select Trait'}, style: 'width: 50%') %>
+        <p class="help">For example: Length at maternity</p>
+      </div>
+    </div>
     </section>
 
     <h3 class="title">Funders and Partners</h3>

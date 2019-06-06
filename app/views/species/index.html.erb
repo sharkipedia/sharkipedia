@@ -7,7 +7,12 @@
 
 <hr />
 
-or select from list
+<% if params[:all] %>
+  <p>or select from list (<%= link_to 'show only species with data', species_index_path %>):</p>
+<% else %>
+  <p>or select from list (<%= link_to 'show all species', species_index_path(all: true) %>):</p>
+<% end %>
+
 <div>
   <table class="table is-fullwidth is-bordered">
     <tbody>

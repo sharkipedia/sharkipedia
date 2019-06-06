@@ -2,7 +2,13 @@ class SpeciesController < ApplicationController
   include Pagy::Backend
 
   def index
-    @pagy, @species = pagy(Species.all)
+    species = if params[:all]
+                Species.all
+              else
+                Species.joins(:observations)
+              end
+
+    @pagy, @species = pagy(species)
   end
 
   def show

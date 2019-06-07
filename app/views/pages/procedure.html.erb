@@ -30,9 +30,16 @@ tr:nth-child(even) {
 
 <h2>Overview</h2>
 
-<p>The Shark Traits Database is an open source research initiative that aims to make all observations and measurements of chondrichthyans (sharks, rays, and chimaeras) accessible in order to more rapidly advance resesearch. The framework behind the database is heavily based on the open source <a href"https://www.coraltraits.org"> Coral Trait Database</a>. Anyone collecting chondrichthyan life history data can join and contribute to the growing data compilation. Contributors have control over the privacy of their data and greatly benefit from being able to download complementary public data from the database in a standard format for use in their analyses. We hope that private data will become public once the contributor has published them, which will subsequently be cited when their data are used in analyses by other people. The citation system has been carefully designed to ensure full transparency about the origin of each individual data point as well as larger data compilations of other peoples' data (such as data extracted from literature for meta-analyses).</p>
+<p>The Shark Traits Database is an open source research initiative that aims to make all observations and measurements of chondrichthyans (sharks, rays, and chimaeras) accessible in order to more rapidly advance resesearch. The framework behind the database is heavily based on the open source <a href"https://www.coraltraits.org"> Coral Trait Database</a>. Anyone collecting chondrichthyan life history data can join and contribute to the growing data compilation. Contributors have control over the privacy of their data and greatly benefit from being able to download complementary public data from the database in a standard format for use in their analyses. We hope that private data will become public once the contributor has published them, which will subsequently be cited when their data are used in analyses by other people. The citation system has been carefully designed to ensure full transparency about the origin of each individual data point as well as larger data compilations of other peoples' data (such as data extracted from literature for meta-analyses). This page covers the following:</p>
 
-<h2>Mission</h2>
+<ol>
+<li><a href="mission">Mission</a></li>
+<li>Data Structure</li>
+<li><a href="traitclasses">Details of traits, standards, and methods</a></li>
+<li>User information and Data Uploading</li>
+</ol>
+
+<h2><a id="mission">Mission</a></h2>
 
 <ul>
 <li> Assemble disparate information on life history traits of sharks, rays, and chimaeras </li>
@@ -407,6 +414,7 @@ A trait should always have a Standard and a Method. In cases where there are mul
 
 <h3 id="growth">Growth</h3>
 <p>Given that this trait class deals with model outputs, there is only a single placeholder Standard as the units of each Trait are implicit.</p>
+<h4>Trait Names: Growth</h4>
 <table>
 <thead>
 <tr class="header">
@@ -465,6 +473,8 @@ A trait should always have a Standard and a Method. In cases where there are mul
 </tr>
 </tbody>
 </table>
+
+<h4>Standards: Growth</h4>
 <table>
 <thead>
 <tr class="header">
@@ -479,6 +489,8 @@ A trait should always have a Standard and a Method. In cases where there are mul
 </tr>
 </tbody>
 </table>
+
+<h4>Methods: Growth</h4>
 <table>
 <thead>
 <tr class="header">
@@ -517,6 +529,8 @@ A trait should always have a Standard and a Method. In cases where there are mul
 </tr>
 </tbody>
 </table>
+
+<h4>Models: Growth</h4>
 <table>
 <colgroup>
 <col style="width: 17%" />
@@ -579,8 +593,12 @@ A trait should always have a Standard and a Method. In cases where there are mul
 </tr>
 </tbody>
 </table>
+
 <p><a href="#trait-classes-and-traits">Trait Classes</a></p>
+
 <h3 id="reproduction">Reproduction</h3>
+
+<h4>Trait Names: Reproduciton</h4>
 <table>
 <colgroup>
 <col style="width: 20%" />
@@ -667,6 +685,8 @@ A trait should always have a Standard and a Method. In cases where there are mul
 </tr>
 </tbody>
 </table>
+
+<h4>Standards: Reproduciton</h4>
 <table>
 <colgroup>
 <col style="width: 7%" />
@@ -705,6 +725,8 @@ A trait should always have a Standard and a Method. In cases where there are mul
 </tr>
 </tbody>
 </table>
+
+<h4>Methods: Reproduciton</h4>
 <table>
 <colgroup>
 <col style="width: 22%" />
@@ -735,8 +757,12 @@ A trait should always have a Standard and a Method. In cases where there are mul
 </tr>
 </tbody>
 </table>
+
 <p><a href="#trait-classes-and-traits">Trait Classes</a></p>
+
 <h3 id="demography">Demography</h3>
+
+<h4>Trait Names: Demography</h4>
 <table>
 <thead>
 <tr class="header">
@@ -767,6 +793,8 @@ A trait should always have a Standard and a Method. In cases where there are mul
 </tr>
 </tbody>
 </table>
+
+<h4>Standards: Demography</h4>
 <table>
 <thead>
 <tr class="header">
@@ -777,10 +805,12 @@ A trait should always have a Standard and a Method. In cases where there are mul
 <tbody>
 <tr class="odd">
 <td>Coefficient</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">Coefficient value from model output (Model must be specified)</td>
 </tr>
 </tbody>
 </table>
+
+<h4>Methods: Demography</h4>
 <table>
 <colgroup>
 <col style="width: 9%" />
@@ -803,9 +833,14 @@ A trait should always have a Standard and a Method. In cases where there are mul
 </tr>
 </tbody>
 </table>
+
 <p><a href="#trait-classes-and-traits">Trait Classes</a></p>
+
 <h3 id="relationships">Relationships</h3>
+
 <p>The Relationships Trait Class is a somewhat “catch-all” category that encompasses any time of conversion equations between different types of data, such as length to length conversions (e.g. fork length to total length), and length to weight conversions. The parameters <em>a</em> and <em>b</em> are the most commonly used ones and represent the coefficients on the typical conversion equations of the form <span class="math inline"><em>y</em> = <em>a</em> * <em>x</em><sup><em>b</em></sup></span>. The parameters <em>c</em> and <em>d</em> will probably be seldom used, but are presented in case a conversion equation has more than two coefficients.</p>
+
+<h4>Trait Names: Relationships</h4>
 <table>
 <thead>
 <tr class="header">
@@ -836,6 +871,8 @@ A trait should always have a Standard and a Method. In cases where there are mul
 </tr>
 </tbody>
 </table>
+
+<h4>Standards: Relationships</h4>
 <table>
 <thead>
 <tr class="header">
@@ -846,10 +883,12 @@ A trait should always have a Standard and a Method. In cases where there are mul
 <tbody>
 <tr class="odd">
 <td>Coefficient</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">Coefficient value from model output (Model must be specified)</td>
 </tr>
 </tbody>
 </table>
+
+<h4>Models: Relationships</h4>
 <table>
 <thead>
 <tr class="header">
@@ -868,6 +907,7 @@ A trait should always have a Standard and a Method. In cases where there are mul
 </tr>
 </tbody>
 </table>
+
 <p><a href="#trait-classes-and-traits">Trait Classes</a></p>
 
 <h2 id="data-submission">Data submission</h2>
@@ -895,8 +935,11 @@ A trait should always have a Standard and a Method. In cases where there are mul
 <blockquote>
 <p>Having a primary, peer-reviewed resource is essential for maintaining data quality, contributor recognition and scientific rigor.</p>
 </blockquote>
+
 <h4 id="importing-a-spreadsheet">Importing a spreadsheet</h4>
-<p>Even if only entering small amounts of data, the spreadsheet submission process is recommended. We have developed a fillable template which can be accessed <a href="https://github.com/creeas/SharkTraits/blob/master/SharkTraits-Template.xlsx">here</a>. A spreadsheet import is the fastest way to get data into the database. The import function accepts csv-formatted spreadsheets and runs a number of tests to make sure your data fit the database correctly (note that you can export csv-formatted files from Excel using “Save as…”). Any errors will reject the entire import and the system will attempt to tell you where the errors occur, so you can fix these errors and try the import again.</p>
+
+<p>Even if only entering small amounts of data, the spreadsheet submission process is recommended. We have developed a fillable template which can be accessed <a href="https://github.com/creeas/SharkTraits/blob/master/SharkTraits-Template.xlsx">here</a>. A spreadsheet import is the fastest way to get data into the database. The import function accepts csv-formatted spreadsheets and runs a number of tests to make sure your data fit the database correctly (note that you can export csv-formatted files from Excel using “Save as…”). Any errors will reject the entire import and the system will generat a log and contact the user by e-mail to indicate where the errors occur. You will be able to fix these errors and try the import again. Errors may include incorrect formatting of the spreadsheet (e.g. not all required columns present) or missing values for required fields.</p>
+
 <p>The spreadsheet you import must have a header with <em>at least</em> the following column names:</p>
 <pre><code>observation_id, access, user_id, resource_id, species_name, location_id, trait_name, standard_name, methodology_name, value, value_type, precision, precision_type, precision_upper, sample_size, notes</code></pre>
 <p><code>species_id</code>, <code>trait_id</code>, <code>method_id</code>, and <code>model_id</code> can be included instead of <code>species_name</code>, <code>trait_name</code>, <code>method_name</code>, and <code>model_name</code>, respectively (or you can include both ids and names). Having the names can be useful for navigating large spreadsheets. <strong>These names must exactly reflect the names in the database</strong>, so it is best to copy and paste names directly from the database.</p>
@@ -907,11 +950,11 @@ A trait should always have a Standard and a Method. In cases where there are mul
 <h4 id="observation-level-data">Observation-level data</h4>
 <p>The first six required columns are associated with the observation.</p>
 <p><code>observation_id</code> is an unique integer that groups a set of measurements into one observation. In the example below, the first two rows belong to the same observation of a shark.</p>
-<p><code>access</code> is a boolean value indicating if the observation should be accessible (0 denotes private and 1 denotes public). In the example below, the data are public.</p>
+<p><code>hidden</code> is a boolean value indicating if the observation should be accessible (0 denotes private and 1 denotes public). In the example below, the data are public.</p>
 <p><code>user_id</code> is the unique ID (name or integer) of the person entering the data.</p>
-<p><code>species_name</code> and/or <code>species_id</code> is the unique name or ID of the species of which the observation was taken. IDs occur in grey to the left of <a href="/species">species</a> or at the top of a given species’ observation page.</p>
+<p><code>species_name</code> and/or <code>species_id</code> is the unique name or ID of the species of which the observation was taken. IDs occur in grey to the left of <a href="">species</a> or at the top of a given species’ observation page.</p>
 <p><code>marine_province</code> is the large marine regions (e.g. longhurst province) where the study was conducted. You can see a global map of provinces and associated names here <a href=""></a></p>
-<p><code>location_id</code> is the unique ID of the location where the observation took place.<!--The location_id 374 in the example is [Turneffe Atoll, Belize](/locations/374).--></p>
+<p><code>location_id</code> is the unique ID of the location where the observation took place.</p>
 <p><code>resource_id</code> is the unique ID of the resource (paper) where the observation was published. <code>resource_id</code> can be empty for unpublished data, in which case <code>access</code> must be private (0) until the data are published and the published resource is entered. In the example the resource_id 606 is <a href="/resources/606">Gleason et al. (2009)</a>.</p>
 <h4 id="measurement-level-data">Measurement-level data</h4>
 <p>The remaining columns are associated with measurement-level data. All measurements corresponding to the same observation should have exactly the same observation-level data.</p>

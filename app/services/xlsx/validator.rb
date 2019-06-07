@@ -88,7 +88,13 @@ module Xlsx
         @messages << "Row #{idx + 2}: No #{field} specified."
       end
 
-      return if Resource.find_by name: name
+      if resource = Resource.find_by(name: name)
+        if resource.observations.count > 0
+          @messages << "Row #{idx + 2}: WARNING: Resource #{name} already has observations in the database (Observation IDs: #{resource.observations.map(&:id)})"
+        end
+
+        return
+      end
 
       resource = Resource.new name: name,
         data_source: row['DataSource'].try(:strip),

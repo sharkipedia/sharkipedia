@@ -34,9 +34,9 @@ tr:nth-child(even) {
 
 <ol>
 <li><a href="mission">Mission</a></li>
-<li>Data Structure</li>
+<li><a href="data">Data Structure</a></li>
 <li><a href="traitclasses">Details of traits, standards, and methods</a></li>
-<li>User information and Data Uploading</li>
+<li><a href="importing">User information and Data Uploading</a></li>
 </ol>
 
 <h2><a id="mission">Mission</a></h2>
@@ -59,7 +59,7 @@ tr:nth-child(even) {
 <p>Contact the Administrators for any information about the database <a href"mailto:sharktraits@gmail.com"> sharktraits@gmail.com</a>.</p>
 
 
-<h3>Observations and Masurements</h3>
+<h3><a id="data">Observations and Masurements</a></h3>
 
 <blockquote>
 <p>The Shark Traits Database is a research tool, not a meta-data catalog.</p>
@@ -84,9 +84,7 @@ tr:nth-child(even) {
 
 <p><sup>1</sup>All observations must be associated with a valid species name. We are using the taxonomy of <a href"https://onlinelibrary.wiley.com/doi/full/10.1111/jfb.12874"> Weigmann 2016</a>. Note that this taxonomy does not currently include all the taxonomic nomenclatrual revisions in <a href"https://www.researchgate.net/publication/311043124_The_Rays_of_the_World_project_-_an_explanation_of_nomenclatural_decisions"> Naylor et al 2016</a>. The list of valid species names is built into the spreadsheet template and can be accessed as a dropdown menu. First select the appropriate `species_superorder` (Chimaeriformes, Batoidea, Squalimoroh Sharks, or Galeomorph Sharks) and a reduced taxa set to select from will be provided in the `species_name` column. If you cannot find the species name then you can select `Recently described/Novel Species` from the drop down menu and include the binomial name in the notes column.</p>
 
-
 <p><sup>2</sup>Location information can be entered in several formats/columns: (1) `marine_province` is restricted to the desingated <a href"http://www.marineregions.org/gazetteer.php?p=image&pic=64934">marine longhurst provinces</a>, (2) `location_name` is for general locations provided in the study methods (e.g. Southern Calfifornia Bight, Northern Gulf of Mexico), and (3) `lat` and `long` coordinates if provided.</p>
-
 
 <p><sup>3</sup>The resource ID should be taken from the unique ID found in the <a href"https://sharktraits-refs.shinyapps.io/shark-resources/"> references database</a>. This is a shiny database that contains all materials compiled on <a href"https://shark-references.com/"> Shark-Refences</a>.You can filter the reference databse by year and/or search for author, keyword, species, journal, etc. Resource can be left blank for unpublished data, but data must be kept private.</p>
 
@@ -910,7 +908,7 @@ A trait should always have a Standard and a Method. In cases where there are mul
 
 <p><a href="#trait-classes-and-traits">Trait Classes</a></p>
 
-<h2 id="data-submission">Data submission</h2>
+<h2 id="importing">Data submission</h2>
 
 <h4 id="what-information-can-be-contributed">What information can be contributed</h4>
 <p>The database currently accepts -level measurements of chondrichthyans. Data must be associated with a species name (i.e., not genus- or family-level data) and public data must be associated with a published resource (e.g., paper, monograph, technical report, or book).</p>
@@ -936,7 +934,7 @@ A trait should always have a Standard and a Method. In cases where there are mul
 <p>Having a primary, peer-reviewed resource is essential for maintaining data quality, contributor recognition and scientific rigor.</p>
 </blockquote>
 
-<h4 id="importing-a-spreadsheet">Importing a spreadsheet</h4>
+<h4>Importing a spreadsheet</h4>
 
 <p>Even if only entering small amounts of data, the spreadsheet submission process is recommended. We have developed a fillable template which can be accessed <a href="https://github.com/creeas/SharkTraits/blob/master/SharkTraits-Template.xlsx">here</a>. A spreadsheet import is the fastest way to get data into the database. The import function accepts csv-formatted spreadsheets and runs a number of tests to make sure your data fit the database correctly (note that you can export csv-formatted files from Excel using “Save as…”). Any errors will reject the entire import and the system will generat a log and contact the user by e-mail to indicate where the errors occur. You will be able to fix these errors and try the import again. Errors may include incorrect formatting of the spreadsheet (e.g. not all required columns present) or missing values for required fields.</p>
 

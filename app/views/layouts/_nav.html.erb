@@ -15,14 +15,18 @@
     <div class="navbar-start">
       <%= link_to 'Home', root_path, class: "navbar-item" %>
 
+      <%= link_to 'Species', species_index_path, class: "navbar-item" %>
+
       <%= link_to 'Traits', traits_path, class: "navbar-item" %>
 
       <% if user_is_admin? %>
         <%= link_to 'Trends', trends_path, class: "navbar-item" %>
       <% end %>
 
+      <%= link_to 'Data Export', data_export_index_path, class: "navbar-item" %>
+
       <%= link_to 'About', about_path, class: "navbar-item" %>
-      
+
       <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-link">
           More

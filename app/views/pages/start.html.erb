@@ -1,50 +1,3 @@
-<style>
-* {
-  box-sizing: border-box;
-}
-
-/* Responsive grid for funder logos */
-.column {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0 4px;
-}
-
-/* Create four equal columns that sits next to each other */
-.row {
-  flex: 33%;
-  max-width: 33%;
-  padding: 0 4px;
-}
-
-.row img {
-  margin-top: 8px;
-  vertical-align: middle;
-  width: 100%;
-}
-
-/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 600px) {
-  .row {
-    flex: 100%;
-    max-width: 100%;
-  }
-} 
-  
-/* Responsive layout - makes a two column-layout instead of four columns */
-@media screen and (max-width: 800px) {
-  .row {
-    flex: 50%;
-    max-width: 50%;
-  }
-}
-
-.imgborder {
-    border: 30px solid rgba(0,0,0,0);
-}
-
-</style>
-
 <section class="section">
   <div class="container">
     <h1 class="title">Shark Traits & Trends</h1>
@@ -54,24 +7,39 @@
     <br>
 
     <p>The Shark Traits and Shark Trends Databases are an open source research initiative to
-    make all published biological traits and population trends on sharks, rays, and chimaeras accessible 
+    make all published biological traits and population trends on sharks, rays, and chimaeras accessible
     to everyone.</p>
-    <br>
+
+    <section class="section">
+    <div class="columns">
+      <div class="column">
+        <%= label_tag 'species', 'Genus & Species', class: 'label' %>
+        <%= select_tag 'species', nil, style: 'width: 50%' %>
+        <p class="help">For example: Carcharhinus acronotus</p>
+      </div>
+      <div class="column">
+        <%= label_tag 'trait', 'Trait', class: 'label' %>
+        <%= grouped_collection_select(nil, :trait_search, @trait_classes, :traits, :name, :id, :name, {:prompt => 'Select Trait'}, style: 'width: 50%') %>
+        <p class="help">For example: Length at maternity</p>
+      </div>
+    </div>
+    </section>
+
     <h3 class="title">Funders and Partners</h3>
 
-<div class="column">
-    <div class="row">        
+    <div class="columns">
+      <div class="column">
         <%= image_tag "SCF.png", class: "imgborder", size: 500 %>
         <%= image_tag "SFU_2012_stacked.png", class: "imgborder", size: 500 %>
-  </div>
-    <div class="row">        
+      </div>
+      <div class="column">
         <%= image_tag "iucn-ssg-logo.png", class: "imgborder", size: 500 %>
         <%= image_tag "VT2.png", class: "imgborder", size: 500 %>
-  </div>
-    <div class="row">        
+      </div>
+      <div class="column">
         <%= image_tag "NSF2.png", class: "imgborder", size: 300 %>
-  </div>
-  </div>
+      </div>
+    </div>
 
   </div>
 </section>

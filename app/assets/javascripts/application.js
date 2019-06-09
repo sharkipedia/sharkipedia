@@ -13,4 +13,47 @@
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
+//= require underscore
+//= require select2
 //= require_tree .
+
+function runSelect2 (klass) {
+  $('#' + klass.replace('[]', '_')).select2({
+    ajax: {
+      url: '/search/autocomplete',
+      data: function(params) {
+        return {
+          klass: klass.replace('[]', ''),
+          term: params.term
+        };
+      },
+      dataType: 'json',
+      delay: 500,
+      processResults: function(data, params) {
+        return {
+          results: _.map(data, function(el) {
+            return {
+              id: el.id,
+              name: el.name
+            };
+          })
+        };
+      },
+      cache: true
+    },
+    escapeMarkup: function(markup) {
+      return markup;
+    },
+    minimumInputLength: 2,
+    templateResult: function(item) {
+      return item.name;
+    },
+    templateSelection: function(item) {
+      return item.name;
+    }
+  });
+}
+
+document.addEventListener('turbolinks:before-cache', function() {
+  $('.select2-hidden-accessible').select2('destroy');
+});

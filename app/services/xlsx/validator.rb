@@ -29,11 +29,14 @@ module Xlsx
 
         @xlsx.data_sheet.each_with_index do |row, idx|
           validate_resources row, idx
+
           validate_species row, idx
           validate_sex row, idx
           validate_trait row, idx
           validate_standard row, idx
           validate_value row, idx
+
+          validate_duplicate row, idx
         end
       end
 
@@ -80,6 +83,109 @@ module Xlsx
       end
     end
 
+    def validate_duplicate row, idx
+      name = (row['resource_name'] || row['AuthorYear']).try(:strip)
+      return if name.blank? # this kind of error is handled later
+
+      resources = [name, row['secondary_resource_name']]
+      resources.reject! { |name| name.blank? }
+      referenced_resources = resources.map do |name, doi|
+        Resource.find_by name: name
+      end
+
+      return if referenced_resources.blank? || referenced_resources.first.observations.count == 0
+
+      case type
+      when :traits
+        # this is c&p/hacky from import_xlsx.rb
+        species = Species.find_by name: row['species_name']
+        species ||= Species.find_by edge_scientific_name: row['species_name']
+        return unless species
+
+        marine_province = LonghurstProvince.find_by name: row['marine_province']
+
+        location_name = row['location_name']
+        location_lat  = row['lat']
+        location_long = row['long']
+
+        # TODO: this should be a separate check
+        if location_name.blank? && location_lat.blank? && location_long.blank?
+          @valid = false
+          @messages << "Row #{idx + 2}: location name and lat/long can't be blank!"
+        elsif !location_name.blank? && location_lat.blank? && location_long.blank?
+          location = Location.find_by name: location_name
+        elsif location_name.blank? && !location_lat.blank? && !location_long.blank?
+          location = Location.find_by lat: location_lat, lon: location_long
+        end
+
+        return unless location
+
+        date = row['date']
+        contributor_id = row['contributor_id']
+        hidden = row['hidden']
+        depth = row['depth']
+
+        referenced_resources.each do |resource|
+          observations = resource.observations.where species: species,
+            longhurst_province: marine_province,
+            location: location,
+            date: date,
+            hidden: hidden,
+            contributor_id: contributor_id,
+            depth: depth
+
+          unless observations.blank?
+            @messages << "Row #{idx + 2}: WARNING: This observation is already present in database (Observation IDs: #{observations.map(&:id)})."
+
+            observations.each do |observation|
+              sex = SexType.find_by name: row['sex']
+              trait_class = TraitClass.find_by name: row['trait_class']
+              trait = Trait.find_by name: row['trait_name']
+              standard = Standard.find_by name: row['standard_name']
+              measurement_method = MeasurementMethod.find_by name: row['method_name']
+              measurement_model = MeasurementModel.find_by name: row['model_name']
+              value = row['value']
+              value_type = ValueType.find_by name: row['value_type']
+              precision = row['precision']
+              precision_type = PrecisionType.find_by name: row['precision_type']
+              precision_upper = row['precision_upper']
+              sample_size = row['sample_size']
+              dubious = row['dubious']
+              validated = row['validated']
+              validation_type = row['validation_type']
+              notes = row['notes']
+
+              measurements = observation.measurements.where sex_type: sex,
+                trait_class: trait_class,
+                trait: trait,
+                standard: standard,
+                measurement_method: measurement_method,
+                measurement_model: measurement_model,
+                value: value,
+                value_type: value_type,
+                precision: precision,
+                precision_type: precision_type,
+                precision_upper: precision_upper,
+                sample_size: sample_size,
+                dubious: dubious,
+                validated: validated,
+                validation_type: validation_type,
+                notes: notes
+
+              unless measurements.blank?
+                @valid = false
+                @messages << "Row #{idx + 2}: ERROR: This exact measurement is already present in database (Measurement ID: #{measurements.map(&:id)})."
+              end
+            end
+          end
+        end
+
+      when :trends
+        # TODO / XXX: trend template is going to change, so no point in doing
+        # this right now.
+      end
+    end
+
     def validate_resources row, idx
       name = (row['resource_name'] || row['AuthorYear']).try(:strip)
       if name.blank?
@@ -88,7 +194,13 @@ module Xlsx
         @messages << "Row #{idx + 2}: No #{field} specified."
       end
 
-      return if Resource.find_by name: name
+      if resource = Resource.find_by(name: name)
+        if resource.observations.count > 0
+          @messages << "Row #{idx + 2}: WARNING: Resource #{name} already has observations in the database (Observation IDs: #{resource.observations.map(&:id)})"
+        end
+
+        return
+      end
 
       resource = Resource.new name: name,
         data_source: row['DataSource'].try(:strip),

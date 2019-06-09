@@ -1,8 +1,1021 @@
+<!DOCTYPE html>
+<html>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 4px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+
+<head>
+<title>Shark Traits Procedures</title>
+</head>
+
+<body>
 <section class="section">
-  <div class="container">
-    <h1 class="title">Procedure</h1>
+  <div class="content">
 
-    <p>Procedure info goes here.</p>
+<h1 class="title">Procedures</h1>
 
-  </div>
-</section>
+<h2>Overview</h2>
+
+<p>The Shark Traits Database is an open source research initiative that aims to make all observations and measurements of chondrichthyans (sharks, rays, and chimaeras) accessible in order to more rapidly advance resesearch. The framework behind the database is heavily based on the open source <a href"https://www.coraltraits.org"> Coral Trait Database</a>. Anyone collecting chondrichthyan life history data can join and contribute to the growing data compilation. Contributors have control over the privacy of their data and greatly benefit from being able to download complementary public data from the database in a standard format for use in their analyses. We hope that private data will become public once the contributor has published them, which will subsequently be cited when their data are used in analyses by other people. The citation system has been carefully designed to ensure full transparency about the origin of each individual data point as well as larger data compilations of other peoples' data (such as data extracted from literature for meta-analyses). This page covers the following:</p>
+
+<ol>
+<li><a href="#mission">Mission</a></li>
+<li><a href="#data">Data Structure</a></li>
+<li><a href="#traitclasses">Details of traits, standards, and methods</a></li>
+<li><a href="#importing">User information and Data Uploading</a></li>
+</ol>
+
+<h2 id="mission">Mission</h2>
+
+<ul>
+<li> Assemble disparate information on life history traits of sharks, rays, and chimaeras </li>
+<li> Provide unrestricted, open-source and easy access to shark trait data </li>
+<li> Avoid redundant data gathering efforts </li>
+<li> Facilitate and encourage the appropriate crediting of original data sources </li>
+<li> Engage the shark and ray research community in the collection and quality control of trait data </li>
+<li> Facilitate reproducible science </li>
+<li> Do the above with a sustainable future for the database in mind, in terms of management and longevity </li>
+</ul>
+
+
+<h3>Governance</h3>
+
+<h4>Administrator</h4>
+
+<p>Contact the Administrators for any information about the database <a href"mailto:sharktraits@gmail.com"> sharktraits@gmail.com</a>.</p>
+
+
+<h3 id="data">Observations and Masurements</h3>
+
+<blockquote>
+<p>The Shark Traits Database is a research tool, not a meta-data catalog.</p>
+</blockquote>
+<p><strong>A meta-data repository captures <code>dataset-level</code> information</strong> about your data set, so that people can easily find it. Examples of meta-data repositories include DRYAD, Ecological Archives and Figshare. You are encouraged to submit data sets to meta-data repositories to help ensure their longevity and the reproducibility of the results for which the data were originally collected.</p>
+<p><strong>The Shark Traits Database captures <code>data-level</code> information</strong> so that measurements from multiple data sets can be integrated, extracted, compared and analyzed.</p>
+<blockquote>
+<p>One way to think about The Shark Traits Database is as a very large data-set being cobbled together by the elasmobranch community for everyone to use, avoiding redundant efforts, identifying knowledge gaps, informing management, and speeding up science.</p>
+</blockquote>
+
+<p>Observations bind related trait measurements of the same population. For example, estimates of age at maturity for males and females of the same population results in one observation with two measurements (each corresponding with a different trait of the population).</p>
+
+<p><b>Observation-level</b> data include the chondrichthyan species, location and resource (i.e. reference). These data are the same for all measurements corresponding to the observation. When entering or importing trait data, the following is minimally required:</p>
+
+<ul>
+ <li>Contributor</li>
+ <li>Access (public or private)</li>
+ <li>Species<sup>1</sup></li>
+ <li>Location<sup>2</sup></li>
+ <li>Resource<sup>3</sup></li>
+</ul>
+
+<p><sup>1</sup>All observations must be associated with a valid species name. We are using the taxonomy of <a href"https://onlinelibrary.wiley.com/doi/full/10.1111/jfb.12874"> Weigmann 2016</a>. Note that this taxonomy does not currently include all the taxonomic nomenclatrual revisions in <a href"https://www.researchgate.net/publication/311043124_The_Rays_of_the_World_project_-_an_explanation_of_nomenclatural_decisions"> Naylor et al 2016</a>. The list of valid species names is built into the spreadsheet template and can be accessed as a dropdown menu. First select the appropriate `species_superorder` (Chimaeriformes, Batoidea, Squalimoroh Sharks, or Galeomorph Sharks) and a reduced taxa set to select from will be provided in the `species_name` column. If you cannot find the species name then you can select `Recently described/Novel Species` from the drop down menu and include the binomial name in the notes column.</p>
+
+<p><sup>2</sup>Location information can be entered in several formats/columns: (1) `marine_province` is restricted to the desingated <a href"http://www.marineregions.org/gazetteer.php?p=image&pic=64934">marine longhurst provinces</a>, (2) `location_name` is for general locations provided in the study methods (e.g. Southern Calfifornia Bight, Northern Gulf of Mexico), and (3) `lat` and `long` coordinates if provided.</p>
+
+<p><sup>3</sup>The resource ID should be taken from the unique ID found in the <a href"https://sharktraits-refs.shinyapps.io/shark-resources/"> references database</a>. This is a shiny database that contains all materials compiled on <a href"https://shark-references.com/"> Shark-Refences</a>.You can filter the reference databse by year and/or search for author, keyword, species, journal, etc. Resource can be left blank for unpublished data, but data must be kept private.</p>
+
+<p><b>Measurement-level</b> data include the sex, trait, value, standard (unit), methodology, estimates of precision (if applicable), and model used. When entering or importing trait data, the following is minimally required:</p>
+<ul>
+ <li>Sex</li>
+ <li>Trait</li>
+ <li>Value
+ <li>Standard</li>
+</ul>
+
+<h3 id="traitclasses">Trait Classes and Traits</h3>
+
+<p>The database was designed to contain `population-level` characteristic measurements, which are trait estimates of a species at a given location. These traits are grouped into six trait-classes: </p>
+<ul>
+<li> <a href="#length"> Length </a></li>
+<li> <a href="#age"> Age </a></li>
+<li> <a href="#growth"> Growth </a></li>
+<li> <a href="#reproduction"> Reproduction </a></li>
+<li> <a href="#demography"> Demography </a> </li>
+<li> <a href="#relationships"> Relationships </a> (conversions between different units, such as length to weight)</li>
+</ul>
+
+A trait should always have a Standard and a Method. In cases where there are multiple models that could be fitted in a method, there should be a Model specified as well.
+
+<h3 id="length"> Length </h3>
+
+<h4>Trait Names: <b>Length</b></h4>
+<table style="width:100%"> 
+<tr>
+<th>Trait</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>L<sub>mat50</sub></td>
+<td>Length at 50% maturity</td>
+</tr>
+<tr>
+<td>L<sub>mat95</sub></td> 
+<td>Length at 95% maturity</td>
+</tr>
+<tr>
+<td>Length at first maturity</td>
+<td>Length of smallest mature individual based on gonadal observation (production of gametes) or clasper calcification.</td>
+</tr>
+<tr>
+<td>Length of largest immature</td>
+<td>Length of largest immature individuals based on gonadal observation (production of gametes) or clasper calcification.</td>
+</tr>
+<tr>
+<td>Length at maternity</td>
+<td>Length at first observation of pregnancy</td>
+</tr>
+<tr>
+<td>L<sub>max</sub>-observed</td>
+<td>Maximum observed length</td>
+</tr>
+<tr>
+<td>L<sub>max</sub>-estimated</td>
+<td>Maximum length estimated from model</td>
+</tr>
+<tr>
+<td>L<sub>birth</sub></td>
+<td>Length at birth</td>
+</tr>
+</table>
+
+<h4>Standards: Length</h4>
+<table style="width:100%"> 
+<tr>
+<th>Standard</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>cm TL</td>
+<td>Total length in centimeters</td>
+</tr>
+<tr>
+<td>cm FL</td> 
+<td>Fork length in centimeters</td>
+</tr>
+<tr>
+<td>cm DW</td>
+<td>Disc Width in centimeters</td>
+</tr>
+<tr>
+<td>cm CL</td>
+<td>Chimaera length in centimeters</td>
+</tr>
+<tr>
+<td>cm PCL</td>
+<td>Pre-caudal length length in centimeters</td>
+</tr>
+<tr>
+<td>cm BDL</td> 
+<td>Body length length in centimeters</td>
+</tr>
+<tr>
+<td>cm PSCFL</td>
+<td>Pre-supra-caudal fin length in centimeters</td>
+</tr>
+</table>
+ 
+<h4> Methods: Length</h4>
+<table style="width:100%"> 
+<tr>
+<th>Methods</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>Back-calculated</td>
+<td>Estimated from a model output (Model should be specified)</td>
+</tr>
+<tr>
+<td>Direcetly observed</td> 
+<td></td>
+</tr>
+<tr>
+<td>Histologically</td>
+<td></td>
+</tr>
+<tr>
+<td>Macro-dissection</td> 
+<td></td>
+</tr>
+<tr>
+<td>Smallest free-swimming individual</td>
+<td>Observation of smallest free-swimming individual</td>
+</tr>
+<tr>
+<td>Largest Embryo</td>
+<td>Observation of largest embryo <i>in utero</i></td>
+</tr>
+<tr>
+<td>Free + Embryo</td>
+<td>PBased on combined observations of largest embryo and smallest free-swimming individual</td>
+</tr>
+<tr>
+<td>Embryo growth curve</td> 
+<td>Estimated from a model output (Model should be specified)</td>
+</tr>
+<tr>
+<td>L<sub>95</sub></td>
+<td>95th percentile of observed size distribution</td>
+</tr>
+<tr>
+<td>L<sub>99</sub></td> 
+<td>99th percentile of observed size distribution</td>
+</tr>
+<tr>
+<td>Max observed size</td>
+<td>Observation of largest individual</td>
+</tr>
+<tr>
+<td>Inverse mortality</td>
+<td>Estimated from a model parameter (Model should be specified)</td>
+</tr>
+</table>
+
+<h4>Models: Length</h4>
+<table style="width:100%"> 
+<tr>
+<th>Models</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>Back-calculated</td>
+<td>Estimated from a model output (Model should be specified)</td>
+</tr>
+<tr>
+<td>Directly from growth curves</td> 
+<td>Estimated from growth curve (Model should be specified)</td>
+</tr>
+<tr>
+<td>Observational</td>
+<td>Directly Observed</td>
+</tr>
+<tr>
+<td>Logistic</td> 
+<td>Estimated from logistic model or oogive</td>
+</tr>
+</table>
+
+
+<a href="#traitclasses">Trait Classes</a>
+
+
+<h3 id="age"> Age </h3>
+
+<h4>Trait names: Age</h4>
+<table style="width:100%"> 
+<tr>
+<th>Trait</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>A<sub>mat50</sub></td>
+<td>Age at 50% maturity</td>
+</tr>
+<tr>
+<td>A<sub>mat95</sub></td> 
+<td>Age at 95% maturity</td>
+</tr>
+<tr>
+<td>Age at first maturity</td>
+<td>Age at first maturity based on gonadal observation (production of gametes) or clasper calcification</td>
+</tr>
+<tr>
+<td>Age of largest immature</td> 
+<td>Age largest immature individual based on gonadal observation (production of gametes) or clasper calcification</td>
+</tr>
+<tr>
+<td>Age at maternity</td>
+<td>Age at first observation of pregnancy</td>
+</tr>
+<tr>
+<td>A<sub>max</sub>-observed</td> 
+<td>Maximum observed age</td>
+</tr>
+<tr>
+<td>A<sub>max</sub>-estimatedy</td>
+<td>Maximum age estimated from model</td>
+</tr>
+</table>
+
+<h4>Standard: Age</h4>
+<table style="width:100%"> 
+<tr>
+<th>Standard</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>Year</td>
+<td>Age in years</td>
+</tr>
+</table>                       
+
+<h4>Methods: Age</h4>
+<table style="width:100%">
+<tr>
+<th>Methods</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>Back-calculated</td>
+<td>Estimated from a model output (Model should be specified)</td>
+</tr>
+<tr>
+<td>Direcetly observed</td>
+<td></td>
+</tr>
+<tr>
+<td>Histologically</td>
+<td></td>
+</tr>
+<tr>
+<td>Macro-dissection</td>
+<td></td>
+</tr>
+<tr>
+<td>Smallest free-swimming individual</td>
+<td></td>
+</tr>
+<tr>
+<td> Largest Embryo</td>
+<td></td>
+</tr>
+<tr>
+<td>Free + Embryo</td>
+<td>Based on combined observations of largest embryo and smallest free-swimming individual</td>
+</tr>
+<tr>
+<td>Embryo growth curve</td>
+<td></td>
+</tr>
+<tr>
+<td>L<sub>95</sub></td>
+<td>95th percentile of observed size distribution</td>
+</tr>
+<tr>
+<td>L<sub>99</sub></td>
+<td>99th percentile of observed size distribution</td>
+</tr>
+<tr>
+<td>Max observed size</td>
+<td></td>
+</tr>
+<tr>
+<td>Inverse mortality</td>
+<td></td>
+</tr>
+<tr>
+<td>Mark-recapture</td>
+<td>From mark-recapture data</td>
+</tr>
+</table>
+
+<h4>Models: Age</h4>
+<table style="width:100%">
+<tr>
+<th>Models</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>Back-calculated</td>
+<td></td>
+</tr>
+<tr>
+<td>Direcetly observed</td>
+<td></td>
+</tr>
+<tr>
+<td>Observatioal</td>
+<td></td>
+</tr>
+<tr>
+<td>Logistic</td>
+<td></td>
+</tr>
+<tr>
+</table>
+
+
+<a href="#traitclasses">Trait Classes</a>
+
+<h3 id="growth">Growth</h3>
+<p>Given that this trait class deals with model outputs, there is only a single placeholder Standard as the units of each Trait are implicit.</p>
+<h4>Trait Names: Growth</h4>
+<table>
+<thead>
+<tr class="header">
+<th>Trait</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><em>k</em></td>
+<td style="text-align: left;">von Bertalanffy growth parameter</td>
+</tr>
+<tr class="even">
+<td>L<sub>inf</sub></td>
+<td style="text-align: left;">von Bertalanffy asymptotic size parameter</td>
+</tr>
+<tr class="odd">
+<td>L<sub>0</sub></td>
+<td style="text-align: left;">von Bertalanffy length-at-age zero parameter</td>
+</tr>
+<tr class="even">
+<td><em>t</em><sub>0</sub></td>
+<td style="text-align: left;">von Bertalanffy age-at-length zero parameter</td>
+</tr>
+<tr class="odd">
+<td><em>t</em><sub>1</sub></td>
+<td style="text-align: left;">Lester model</td>
+</tr>
+<tr class="even">
+<td>T<sub>mat</sub></td>
+<td style="text-align: left;">Lester model</td>
+</tr>
+<tr class="odd">
+<td>H</td>
+<td style="text-align: left;">Lester model</td>
+</tr>
+<tr class="even">
+<td>G</td>
+<td style="text-align: left;">Lester model</td>
+</tr>
+<tr class="odd">
+<td>sigma-growth</td>
+<td style="text-align: left;">error estimate of the growth model</td>
+</tr>
+<tr class="even">
+<td>cv_readers</td>
+<td style="text-align: left;">Coefficient of variation between readers</td>
+</tr>
+<tr class="odd">
+<td>APE</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td>PA</td>
+<td style="text-align: left;">Percent agreement between readers</td>
+</tr>
+</tbody>
+</table>
+
+<h4>Standards: Growth</h4>
+<table>
+<thead>
+<tr class="header">
+<th>Standards</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Coefficient</td>
+<td style="text-align: left;">Coefficient value from model output (Model must be specified)</td>
+</tr>
+</tbody>
+</table>
+
+<h4>Methods: Growth</h4>
+<table>
+<thead>
+<tr class="header">
+<th>Method</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Mark-recapture</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td>Length-frequency</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td>Vertebrae</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td>Spines</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td>Tooth Plates</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td>Direct Age</td>
+<td style="text-align: left;">Estimates from individuals of known ages</td>
+</tr>
+<tr class="odd">
+<td>Captive</td>
+<td style="text-align: left;">Data from captive individuals</td>
+</tr>
+</tbody>
+</table>
+
+<h4>Models: Growth</h4>
+<table>
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 82%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Model</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>VBFG2 Strong Bayes</td>
+<td style="text-align: left;">Bayesian implementation of 2 parameter von Bertalanffy growth curve with strong priors</td>
+</tr>
+<tr class="even">
+<td>VBFG2 Uninformed Bayes</td>
+<td style="text-align: left;">Bayesian implementation of 2 parameter von Bertalanffy growth curve with weak/unifmormative priors</td>
+</tr>
+<tr class="odd">
+<td>VBFG2 ML</td>
+<td style="text-align: left;">Maximum Liklihood implementation of 2 parameter von Bertalanffy growth curve</td>
+</tr>
+<tr class="even">
+<td>VBFG3 Strong Bayes</td>
+<td style="text-align: left;">Bayesian implementation of 3 parameter von Bertalanffy growth curve with strong priors</td>
+</tr>
+<tr class="odd">
+<td>VBFG3 Uninformed Bayes</td>
+<td style="text-align: left;">Bayesian implementation of 3 parameter von Bertalanffy growth curve with weak/unifmormative priors</td>
+</tr>
+<tr class="even">
+<td>VBFG3 ML</td>
+<td style="text-align: left;">Maximum Liklihood implementation of 2 parameter von Bertalanffy growth curve</td>
+</tr>
+<tr class="odd">
+<td>Gomp Strong Bayes</td>
+<td style="text-align: left;">Bayesian implementation of Gompertz growth curve with strong priors</td>
+</tr>
+<tr class="even">
+<td>Gomp Uninformed Bayes</td>
+<td style="text-align: left;">Bayesian implementation of Gompertz growth curve with weak/unifmormative priors</td>
+</tr>
+<tr class="odd">
+<td>Gomp ML</td>
+<td style="text-align: left;">Maximum Liklihood implementation of Gompertz growth curve</td>
+</tr>
+<tr class="even">
+<td>Fabens</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td>Francis</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td>Other</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+
+<p><a href="#traitclasses">Trait Classes</a></p>
+
+<h3 id="reproduction">Reproduction</h3>
+
+<h4>Trait Names: Reproduciton</h4>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 79%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Trait</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ovarian fecundity</td>
+<td style="text-align: left;">Maximum number of visible ovarian follicles (generally used in egg-laying species (e.g. skates))</td>
+</tr>
+<tr class="even">
+<td>Uterine fecundity</td>
+<td style="text-align: left;">Max number of visible ovultaed eggs or developing embryos in both embryos</td>
+</tr>
+<tr class="odd">
+<td>Annual reproductive output</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td>Litter size (unspecified)</td>
+<td style="text-align: left;">Number of ova or developing embryos</td>
+</tr>
+<tr class="odd">
+<td>Breeding</td>
+<td style="text-align: left;">Observed timing of mating</td>
+</tr>
+<tr class="even">
+<td>Ovulation</td>
+<td style="text-align: left;">Observed timing of ovulation</td>
+</tr>
+<tr class="odd">
+<td>Parturition</td>
+<td style="text-align: left;">Observed timing of parutrition</td>
+</tr>
+<tr class="even">
+<td>Incubation length</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td>Gestation length</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td>Breeding interval</td>
+<td style="text-align: left;">Biannual, Annual, Biennial, Triennial</td>
+</tr>
+<tr class="odd">
+<td>Ovum size</td>
+<td style="text-align: left;">Maximum observed ova diamter (uterine or recently ovulated)</td>
+</tr>
+<tr class="even">
+<td>Offspring mass</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td>Max oviducal width</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td>Max uterine width</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td>Single uterus</td>
+<td style="text-align: left;">Yes/No</td>
+</tr>
+<tr class="even">
+<td>Seasonal</td>
+<td style="text-align: left;">Yes/No</td>
+</tr>
+<tr class="odd">
+<td>Peak parturition</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td>Embryonic sex ratio</td>
+<td style="text-align: left;">In utero ratio of Males:Females within a litter</td>
+</tr>
+</tbody>
+</table>
+
+<h4>Standards: Reproduciton</h4>
+<table>
+<colgroup>
+<col style="width: 7%" />
+<col style="width: 92%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Standard</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Number</td>
+<td style="text-align: left;">Number</td>
+</tr>
+<tr class="even">
+<td>mm</td>
+<td style="text-align: left;">millimetres</td>
+</tr>
+<tr class="odd">
+<td>g</td>
+<td style="text-align: left;">grams</td>
+</tr>
+<tr class="even">
+<td>Month</td>
+<td style="text-align: left;">Number of months for length traits (e.g. Incubation or Gestation Length) or Calendar month for phenological traits (e.g. breeding, ovulation, parturition)</td>
+</tr>
+<tr class="odd">
+<td>Year</td>
+<td style="text-align: left;">Years for breeding interval (0.5 for biannual, 1 for annual, 2 for biennial, 3 for triennial)</td>
+</tr>
+<tr class="even">
+<td>Logical</td>
+<td style="text-align: left;">Yes/No traits</td>
+</tr>
+</tbody>
+</table>
+
+<h4>Methods: Reproduciton</h4>
+<table>
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 77%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Method</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Captive Observation</td>
+<td style="text-align: left;">Observations from captive individuals</td>
+</tr>
+<tr class="even">
+<td>Modeled</td>
+<td style="text-align: left;">Estmimated from model output (Model must be specified)</td>
+</tr>
+<tr class="odd">
+<td>Proportion Gravid Females</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td>Macroscopic observation</td>
+<td style="text-align: left;">Observation through macroscopic dissection or observation of free swimming individuals</td>
+</tr>
+</tbody>
+</table>
+
+<p><a href="#traitclasses">Trait Classes</a></p>
+
+<h3 id="demography">Demography</h3>
+
+<h4>Trait Names: Demography</h4>
+<table>
+<thead>
+<tr class="header">
+<th>Trait</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Natural mortality</td>
+<td style="text-align: left;"><em>M</em></td>
+</tr>
+<tr class="even">
+<td>Total mortality</td>
+<td style="text-align: left;"><em>Z</em></td>
+</tr>
+<tr class="odd">
+<td>Fishing mortality</td>
+<td style="text-align: left;"><em>F</em></td>
+</tr>
+<tr class="even">
+<td>r<sub>max</sub></td>
+<td style="text-align: left;">Maximum intrinsic rate of population increase</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline"><em>λ</em></span></td>
+<td style="text-align: left;">Population growth rate</td>
+</tr>
+</tbody>
+</table>
+
+<h4>Standards: Demography</h4>
+<table>
+<thead>
+<tr class="header">
+<th>Standards</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Coefficient</td>
+<td style="text-align: left;">Coefficient value from model output (Model must be specified)</td>
+</tr>
+</tbody>
+</table>
+
+<h4>Methods: Demography</h4>
+<table>
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 90%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Method</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Empirical</td>
+<td style="text-align: left;">Estimated directly from abundance/catch data (e.g. stock assessments, catch curves)</td>
+</tr>
+<tr class="even">
+<td>Derived</td>
+<td style="text-align: left;">Estimated indirectly from life history traits (e.g. Hoenig 1983, Chen and Watanabe 1983 mortality estimators)</td>
+</tr>
+</tbody>
+</table>
+
+<p><a href="#traitclasses">Trait Classes</a></p>
+
+<h3 id="relationships">Relationships</h3>
+
+<p>The Relationships Trait Class is a somewhat “catch-all” category that encompasses any time of conversion equations between different types of data, such as length to length conversions (e.g. fork length to total length), and length to weight conversions. The parameters <em>a</em> and <em>b</em> are the most commonly used ones and represent the coefficients on the typical conversion equations of the form <span class="math inline"><em>y</em> = <em>a</em> * <em>x</em><sup><em>b</em></sup></span>. The parameters <em>c</em> and <em>d</em> will probably be seldom used, but are presented in case a conversion equation has more than two coefficients.</p>
+
+<h4>Trait Names: Relationships</h4>
+<table>
+<thead>
+<tr class="header">
+<th>Trait</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>a</td>
+<td style="text-align: left;">Multiplier of the equation (intercept if in log scale)</td>
+</tr>
+<tr class="even">
+<td>b</td>
+<td style="text-align: left;">Exponent of the equation (coefficient if in log scale)</td>
+</tr>
+<tr class="odd">
+<td>c</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td>d</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td>sigma-conv</td>
+<td style="text-align: left;">Error term of the equation</td>
+</tr>
+</tbody>
+</table>
+
+<h4>Standards: Relationships</h4>
+<table>
+<thead>
+<tr class="header">
+<th>Standards</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Coefficient</td>
+<td style="text-align: left;">Coefficient value from model output (Model must be specified)</td>
+</tr>
+</tbody>
+</table>
+
+<h4>Models: Relationships</h4>
+<table>
+<thead>
+<tr class="header">
+<th>Model</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Length-Length</td>
+<td style="text-align: left;">Length to length conversion</td>
+</tr>
+<tr class="even">
+<td>Length-Weight</td>
+<td style="text-align: left;">Length to weight conversion</td>
+</tr>
+</tbody>
+</table>
+
+<p><a href="#traitclasses">Trait Classes</a></p>
+
+<h2 id="importing">Data submission</h2>
+
+<h4 id="what-information-can-be-contributed">What information can be contributed</h4>
+<p>The database currently accepts -level measurements of chondrichthyans. Data must be associated with a species name (i.e., not genus- or family-level data) and public data must be associated with a published resource (e.g., paper, monograph, technical report, or book).</p>
+<p>Data accepted:</p>
+<ul>
+<li>Species-level model-derived data that has been published</li>
+<li>Species-level expert or group opinion data that has been published</li>
+<li>Unpublished data if kept private until published</li>
+</ul>
+<p>Data not accepted:</p>
+<ul>
+<li>Future predictions</li>
+<li>Data for other taxonomic resolutions (e.g., genus or family).</li>
+</ul>
+<p>Unpublished data can also be imported into the database if it is kept private. Private data can be made public once associated with a published resource. Benefits of accepting unpublished data include:</p>
+<ul>
+<li>Being able to easily download the data alongside useful public data for analysis</li>
+<li>Being more likely to contribute the data at end of project and improve its longevity</li>
+<li>Identify duplicate research efforts</li>
+</ul>
+<p>To contribute data, you need to email the database <a href="mailto:sharktraits@gmail.com">Administrator</a> to become a contributor.</p>
+<blockquote>
+<p>Having a primary, peer-reviewed resource is essential for maintaining data quality, contributor recognition and scientific rigor.</p>
+</blockquote>
+
+<h4>Importing a spreadsheet</h4>
+
+<p>Even if only entering small amounts of data, the spreadsheet submission process is recommended. We have developed a fillable template which can be accessed <a href="https://github.com/creeas/SharkTraits/blob/master/SharkTraits-Template.xlsx">here</a>. A spreadsheet import is the fastest way to get data into the database. The import function accepts csv-formatted spreadsheets and runs a number of tests to make sure your data fit the database correctly (note that you can export csv-formatted files from Excel using “Save as…”). Any errors will reject the entire import and the system will generat a log and contact the user by e-mail to indicate where the errors occur. You will be able to fix these errors and try the import again. Errors may include incorrect formatting of the spreadsheet (e.g. not all required columns present) or missing values for required fields.</p>
+
+<p>The spreadsheet you import must have a header with <em>at least</em> the following column names:</p>
+<pre><code>observation_id, access, user_id, resource_id, species_name, location_id, trait_name, standard_name, methodology_name, value, value_type, precision, precision_type, precision_upper, sample_size, notes</code></pre>
+<p><code>species_id</code>, <code>trait_id</code>, <code>method_id</code>, and <code>model_id</code> can be included instead of <code>species_name</code>, <code>trait_name</code>, <code>method_name</code>, and <code>model_name</code>, respectively (or you can include both ids and names). Having the names can be useful for navigating large spreadsheets. <strong>These names must exactly reflect the names in the database</strong>, so it is best to copy and paste names directly from the database.</p>
+<p><code>resource_id</code> is reserved for the original data resource (i.e., the paper that reports the original collection of the measurement). You can credit papers that compiled large datasets from the literature by adding a column named <code>resource_secondary_id</code>. <code>resource_id</code> and <code>resource_secondary_id</code> may be substituted with <code>resource_doi</code> and <code>resource_secondary_doi</code>, respectively (the doi should start with “10.”, not “doi:”). The resource will automatically be added using Crossref if the doi is not already in the database.</p>
+<p>We have collated all the references from <a href="https://sharktraits-refs.shinyapps.io/shark-resources/">shark-references.com</a> and generated a unique <code>resource_id</code> for each reference, so the easiest way to populate this field is by searching for the <code>resource_id</code> in the reference list provided.</p>
+<p><code>user_id</code> must by your own database user id (i.e., you cannot import data for other people). You can find your user id by clicking on your name in the top right corner and selecting “My Observations”.</p>
+<p>Copy and paste the above header into a text file and save as <code>import_trait_author_year.csv</code>, where author and year correspond with the resource (paper). Alternatively, download a <a href="/import_template_author_year.csv">CSV</a> or <a href="/import_template_author_year.xlsx">Excel</a> template.</p>
+<h4 id="observation-level-data">Observation-level data</h4>
+<p>The first six required columns are associated with the observation.</p>
+<p><code>observation_id</code> is an unique integer that groups a set of measurements into one observation. In the example below, the first two rows belong to the same observation of a shark.</p>
+<p><code>hidden</code> is a boolean value indicating if the observation should be accessible (0 denotes private and 1 denotes public). In the example below, the data are public.</p>
+<p><code>user_id</code> is the unique ID (name or integer) of the person entering the data.</p>
+<p><code>species_name</code> and/or <code>species_id</code> is the unique name or ID of the species of which the observation was taken. IDs occur in grey to the left of <a href="">species</a> or at the top of a given species’ observation page.</p>
+<p><code>marine_province</code> is the large marine regions (e.g. longhurst province) where the study was conducted. You can see a global map of provinces and associated names here <a href=""></a></p>
+<p><code>location_id</code> is the unique ID of the location where the observation took place.</p>
+<p><code>resource_id</code> is the unique ID of the resource (paper) where the observation was published. <code>resource_id</code> can be empty for unpublished data, in which case <code>access</code> must be private (0) until the data are published and the published resource is entered.</p>
+<h4 id="measurement-level-data">Measurement-level data</h4>
+<p>The remaining columns are associated with measurement-level data. All measurements corresponding to the same observation should have exactly the same observation-level data.</p>
+<blockquote>
+<p><strong>Warning</strong> All measurements corresponding to the same observation should have exactly the same observation-level data. Use copy and paste or fill down to avoid making errors.</p>
+</blockquote>
+<p><code>trait_name</code> and/or <code>trait_id</code> is the unique name or ID (integer) of the species-level characteristic that was measured.</p>
+<p><code>standard_name</code> is the unique ID of the standard (measurement unit) that was used to measure the trait.</p>
+<p><code>method_name</code> is the unique ID of the methodology used to measure the trait.</p>
+<p><code>model_name</code> is the unique name of the model being used for the given methodology to measure the trait.</p>
+<p><code>value</code> is the actual measured value (number, text, true/false, etc.). If the value is an option of a categorical trait (e.g., growth form), then the value must exactly match the value options for the trait (e.g., massive).</p>
+<p><code>value_type</code> describes the type of value. Current options are:</p>
+<ul>
+<li><code>raw_value</code> for a direct measurement,</li>
+<li><code>mean</code> if the value represents the mean of more than one value,</li>
+<li><code>median</code> if the value represents the median of more than one value,</li>
+<li><code>maximum</code> if the value represents the maximum of more than one value,</li>
+<li><code>minimum</code> if the value represents the minimum of more than one value,</li>
+<li><code>model_derived</code> if the value is derived from a model,</li>
+<li><code>expert_opinion</code> if the actual value has not been measured directly, but an expert feels confident of the value, perhaps based on phylogenetic relatedness or an indirect observation,</li>
+<li><code>group_opinion</code> if the actual value has not been measured directly, but a group of experts feel confident of the value.</li>
+</ul>
+<p><code>precision</code> is the level of uncertainty associated with the value if it is made up from more than one measurement (e.g., mean).</p>
+<p><code>precision_type</code> is the kind of uncertainty that the precision estimate (above) corresponds with. Current options are:</p>
+<ul>
+<li><code>standard_error</code></li>
+<li><code>standard_deviation</code></li>
+<li><code>95_ci</code></li>
+<li><code>range</code></li>
+</ul>
+<p><code>precision_upper</code> is used to capture the maximum (upper) value if range is used (above).</p>
+<p><code>sample_size</code> is the number of data points that were used to calculate the value. Leave this field blank if equal to one (e.g., a raw_value).</p>
+<p>Optional fields include:</p>
+<p><code>notes</code> is an optional field for reporting useful information about how the measurement was made.</p>
+<p><code>dubious</code> is a optional boolean field noting whether the data being reported is classified as dubious (1) or not (0 or blank) by the user entering the data.</p>
+<p><code>validated</code> is a boolean field to be used only for Growth Trait Class measurements, indicating whether any validation of the growth model has been attempted (1) or not (0).</p>
+<p><code>validation_type</code> denotes the method used for validating the growth model. At the moment, this is a text field with pre-determined values.</p>
+<h4 id="back-end-imports">Back-end imports</h4>
+<p>If your data is well-managed, you can ask a <a href="mailto:sharktraits@gmail.com">database programmer</a> to upload it for you. The data will be associated with your name and made private. You are required to make the data public yourself (if desired).</p>
+<h4 id="submitting-data-from-papers">Submitting data from papers</h4>
+<p>Entering published data not already in the database in strongly encouraged to improve the data’s longevity and augment data analysis. A case in which this might occur is a meta-analysis. The data enterer can keep the data they submit private until their study is published.</p>
+<blockquote>
+<p>The key objective is to extract data from resources in such a way as to avoid people ever needing to go back to the that resource again.</p>
+</blockquote>
+<p>For example, extracting only the mean value of a trait measurement from a paper, without extracting any measure of variation or the context in which the trait was measured, will mean that the data may not be useful for other purposes. Someone else might need to go back and extract the information again, and there is a chance your initial efforts won’t be cited.</p>
+<ul>
+<li><p><strong>Primary resources only.</strong> Often people enter data from summary tables in papers that come from other (primary) resources. It is important to enter the data from the primary resource for two reasons: (1) so that the primary resource’s author is credited for their work, and (2) to avoid data duplication, where the same data are entered from both the primary and secondary resource. Secondary resources, such as meta-analyses, can be credited for large data compilations.</p></li>
+<li><p><strong>Careful extraction.</strong> Copy values from tables carefully and double check. Extracting data from figures can be done with software like ImageJ or DataThief, where a scale can be set based on axis values and measurements of plotted data made, including error bars.</p></li>
+</ul>
+<!--
+- **Gather important context.** Enter contextual data as well, which might require reading the methods. This might be as simple as the time of year or depth or habitat in which animals were collected, and potentially the same for all observations. Such information is very useful. However, contextual information can get complicated quickly. Please contact the database [Administrator](mailto:sharktraits@gmail.com) if you have any questions.
+-->
+<h4 id="quality-control">Quality control</h4>
+<p>There are three levels of data review.</p>
+<ol type="1">
+<li><code>Contributor-level</code> review at time of submission, Once submitted, data are tagged as <em>pending</em>.</li>
+<li><code>Editor-level</code> review. The relevant Editor/s for traits in your submission are automatically notified by email. The contributor may be contacted by the Editor if there are any issues with the submission. The Editor will <em>approve</em> the submission once satisfied.</li>
+<li><code>User-level</code> review. Anyone signed-in as a database user can report an issue with an observation record, and the submitter and the Editor will be notified by email.</li>
+</ol>
+<h4 id="error-checking">Error checking</h4>
+<p>Basic error checking will ensure data submissions fit into the database. Error checking will improve as different issues arise. Measurement records with the same species, location, resource and value will be flagged as potential duplicates.</p>
+<p><em><a href="#top">Top</a></em></p>
+<hr />
+</div>
+</body>
+</html>

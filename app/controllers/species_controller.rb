@@ -1,4 +1,4 @@
-class SpeciesController < ApplicationController
+class SpeciesController < PreAuthController
   include Pagy::Backend
 
   def index

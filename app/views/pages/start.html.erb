@@ -2,7 +2,7 @@
   <div class="container">
     <p class="title is-2 has-text-centered">Shark Traits & Trends</p>
     <p class="subtitle is-6 has-text-centered">Shark Traits has currently <%= @measurement_count %> measurements of
-        <%= @trait_count %> traits, covering <%= @species_count %> species.</p>
+        <%= @trait_count %> traits, covering <%= @species_count %> species</p>
     <br>
 
     <p class="subtitle is-4">The Shark Traits and Trends Databases are an open source research initiative to
@@ -18,7 +18,7 @@
       <div class="column">
         <%= label_tag 'trait', 'Trait', class: 'label' %>
         <%= grouped_collection_select(nil, :trait_search, @trait_classes, :traits, :name, :id, :name, {:prompt => 'Select Trait'}, style: 'width: 50%') %>
-        <p class="help">For example: Length first maturity</p>
+        <p class="help">For example: Length at first maturity</p>
       </div>
     </div>
     </section>

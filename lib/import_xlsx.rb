@@ -253,7 +253,7 @@ module ImportXlsx
     def sanity_check table, field, resource
       items = table.map { |row| row[field] }.uniq
       if items.size > 1
-        raise "more than one species in observation #{resource} detected: #{items.inspect}"
+        raise "more than one #{field} in observation #{resource} detected: #{items.inspect}"
       end
     end
   end

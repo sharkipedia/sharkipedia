@@ -91,7 +91,7 @@ module Xlsx
       resources.reject! { |name| name.blank? }
       referenced_resources = resources.map do |name, doi|
         Resource.find_by name: name
-      end
+      end.reject! { |res| res.blank? }
 
       return if referenced_resources.blank? || referenced_resources.first.observations.count == 0
 

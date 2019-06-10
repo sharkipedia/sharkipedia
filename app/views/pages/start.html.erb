@@ -1,15 +1,13 @@
 <section class="section">
   <div class="container">
-    <h1 class="title">Shark Traits & Trends</h1>
-
-    <p>Shark Traits has currently <%= @measurement_count %> measurements of
-      <%= @trait_count %> traits, covering <%= @species_count %> species.</p>
+    <p class="title is-2">Shark Traits & Trends</p>
+    <p class="subtitle is-6">Shark Traits has currently <%= @measurement_count %> measurements of
+        <%= @trait_count %> traits, covering <%= @species_count %> species.</p>
     <br>
 
-    <p>The Shark Traits and Shark Trends Databases are an open source research initiative to
+    <p class="subtitle is-4">The Shark Traits and Trends Databases are an open source research initiative to
     make all published biological traits and population trends on sharks, rays, and chimaeras accessible
     to everyone.</p>
-
     <section class="section">
     <div class="columns">
       <div class="column">
@@ -20,7 +18,7 @@
       <div class="column">
         <%= label_tag 'trait', 'Trait', class: 'label' %>
         <%= grouped_collection_select(nil, :trait_search, @trait_classes, :traits, :name, :id, :name, {:prompt => 'Select Trait'}, style: 'width: 50%') %>
-        <p class="help">For example: Length at maternity</p>
+        <p class="help">For example: Length first maturity</p>
       </div>
     </div>
     </section>

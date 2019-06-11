@@ -11,8 +11,6 @@ class ObservationDashboard < Administrate::BaseDashboard
     user: Field::BelongsTo,
     resources: Field::HasMany,
     species: Field::BelongsTo,
-    longhurst_province: Field::BelongsTo,
-    location: Field::BelongsTo,
     measurements: Field::HasMany,
     id: Field::Number,
     date: Field::String,
@@ -34,7 +32,6 @@ class ObservationDashboard < Administrate::BaseDashboard
     :resources,
     :species,
     :measurements,
-    :longhurst_province,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -44,8 +41,6 @@ class ObservationDashboard < Administrate::BaseDashboard
     :contributor_id,
     :resources,
     :species,
-    :longhurst_province,
-    :location,
     :measurements,
     :depth,
     :id,
@@ -64,8 +59,6 @@ class ObservationDashboard < Administrate::BaseDashboard
     :contributor_id,
     :resources,
     :species,
-    :longhurst_province,
-    :location,
     :measurements,
     :date,
     :access,

@@ -17,6 +17,8 @@ class MeasurementDashboard < Administrate::BaseDashboard
     measurement_model: Field::BelongsTo,
     value_type: Field::BelongsTo,
     precision_type: Field::BelongsTo,
+    longhurst_province: Field::BelongsTo,
+    location: Field::BelongsTo,
     id: Field::Number,
     value: Field::String,
     precision: Field::String,
@@ -63,6 +65,8 @@ class MeasurementDashboard < Administrate::BaseDashboard
     :validated,
     :validation_type,
     :notes,
+    :longhurst_province,
+    :location,
     :created_at,
     :updated_at,
   ].freeze
@@ -88,6 +92,8 @@ class MeasurementDashboard < Administrate::BaseDashboard
     :validated,
     :validation_type,
     :notes,
+    :longhurst_province,
+    :location,
   ].freeze
 
   # Overwrite this method to customize how measurements are displayed

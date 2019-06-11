@@ -129,33 +129,6 @@ module ImportXlsx
         species ||= Species.find_by edge_scientific_name: sub_table.first['species_name']
         self.log += species.inspect + "\n"
 
-        # marine_province - might be blank
-        sanity_check sub_table, 'marine_province', resource_name
-        marine_province = LonghurstProvince.find_by name: sub_table.first['marine_province']
-        self.log += marine_province.inspect + "\n"
-
-        # find or create Location: location_name    lat    long
-        sanity_check sub_table, 'location_name', resource_name
-        sanity_check sub_table, 'lat', resource_name
-        sanity_check sub_table, 'long', resource_name
-
-        location_name = sub_table.first['location_name']
-        location_lat  = sub_table.first['lat']
-        location_long = sub_table.first['long']
-
-        if location_name.blank? && location_lat.blank? && location_long.blank?
-          raise "location name and lat/long can't be blank!"
-        elsif !location_name.blank? && location_lat.blank? && location_long.blank?
-          location = Location.find_by name: location_name
-        elsif location_name.blank? && !location_lat.blank? && !location_long.blank?
-          location = Location.find_by lat: location_lat, lon: location_long
-        end
-
-        unless location
-          location = Location.create name: location_name, lat: location_lat, lon: location_long
-        end
-        self.log += location.inspect + "\n"
-
         date = sub_table.first['date']
         self.log += date.inspect + "\n"
 
@@ -176,8 +149,6 @@ module ImportXlsx
 
         unless observation
           observation = Observation.create! species: species,
-            longhurst_province: marine_province,
-            location: location,
             date: date,
             resources: referenced_resources,
             hidden: hidden,
@@ -206,6 +177,28 @@ module ImportXlsx
           validation_type = row['validation_type']
           notes = row['notes']
 
+          location_name = sub_table.first['location_name']
+          location_lat  = sub_table.first['lat']
+          location_long = sub_table.first['long']
+
+          if location_name.blank? && location_lat.blank? && location_long.blank?
+            raise "location name and lat/long can't be blank!"
+          elsif !location_name.blank? && location_lat.blank? && location_long.blank?
+            location = Location.find_by name: location_name
+          elsif location_name.blank? && !location_lat.blank? && !location_long.blank?
+            location = Location.find_by lat: location_lat, lon: location_long
+          end
+
+          unless location
+            location = Location.create name: location_name, lat: location_lat, lon: location_long
+          end
+          self.log += location.inspect + "\n"
+
+          # marine_province - might be blank
+          marine_province = LonghurstProvince.find_by name: sub_table.first['marine_province']
+          self.log += marine_province.inspect + "\n"
+
+
           observation.measurements.create! sex_type: sex,
             trait_class: trait_class,
             trait: trait,
@@ -221,7 +214,9 @@ module ImportXlsx
             dubious: dubious,
             validated: validated,
             validation_type: validation_type,
-            notes: notes
+            notes: notes,
+            location: location,
+            longhurst_province: marine_province
         end
 
         self.log += observation.measurements.map(&:inspect).join("\n")
@@ -229,6 +224,7 @@ module ImportXlsx
     rescue => e
       self.log += "ERROR: Import failed!\n"
       self.log += e.to_s
+      self.log += e.backtrace.to_s
       return false
     end
 
@@ -347,6 +343,8 @@ module ImportXlsx
           end
         rescue => e
           self.log += "failed to import: \n #{row}\n#{e.to_s}"
+          puts "failed to import: \n #{row}\n#{e.to_s}"
+          puts e.backtrace
         end
         self.log += "\n"
       end

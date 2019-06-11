@@ -27,7 +27,7 @@
           <td><%= measurement.value %></td>
           <td><%= measurement.standard.try(:name) %></td>
           <td><%= measurement.value_type.try(:name) %></td>
-          <td><%= measurement.observation.location.try(:name) %></td>
+          <td><%= measurement.location.name %></td>
           <td><%= measurement.observation.resources.first.name %></td>
         </tr>
       <% end %>

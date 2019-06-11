@@ -2,9 +2,10 @@ class Observation < ApplicationRecord
   belongs_to :user
 
   has_and_belongs_to_many :resources
+  has_and_belongs_to_many :locations
   belongs_to :species
-  belongs_to :longhurst_province, optional: true
-  belongs_to :location
+  has_many :longhurst_province, through: :measurements
+  has_many :locations, through: :measurements
 
   has_many :measurements, dependent: :destroy
 

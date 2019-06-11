@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_04_221126) do
+ActiveRecord::Schema.define(version: 2019_06_11_164334) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -112,6 +112,10 @@ ActiveRecord::Schema.define(version: 2019_05_04_221126) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "validation_type_id"
+    t.bigint "location_id", null: false
+    t.bigint "longhurst_province_id"
+    t.index ["location_id"], name: "index_measurements_on_location_id"
+    t.index ["longhurst_province_id"], name: "index_measurements_on_longhurst_province_id"
     t.index ["measurement_method_id"], name: "index_measurements_on_measurement_method_id"
     t.index ["measurement_model_id"], name: "index_measurements_on_measurement_model_id"
     t.index ["observation_id"], name: "index_measurements_on_observation_id"
@@ -126,18 +130,14 @@ ActiveRecord::Schema.define(version: 2019_05_04_221126) do
 
   create_table "observations", force: :cascade do |t|
     t.bigint "species_id"
-    t.bigint "longhurst_province_id"
     t.string "date"
     t.string "access"
     t.boolean "hidden"
     t.bigint "user_id"
-    t.bigint "location_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "contributor_id"
     t.string "depth"
-    t.index ["location_id"], name: "index_observations_on_location_id"
-    t.index ["longhurst_province_id"], name: "index_observations_on_longhurst_province_id"
     t.index ["species_id"], name: "index_observations_on_species_id"
     t.index ["user_id"], name: "index_observations_on_user_id"
   end
@@ -359,6 +359,8 @@ ActiveRecord::Schema.define(version: 2019_05_04_221126) do
   add_foreign_key "imports", "users", column: "approved_by_id"
   add_foreign_key "measurement_methods", "trait_classes"
   add_foreign_key "measurement_models", "trait_classes"
+  add_foreign_key "measurements", "locations"
+  add_foreign_key "measurements", "longhurst_provinces"
   add_foreign_key "measurements", "measurement_methods"
   add_foreign_key "measurements", "measurement_models"
   add_foreign_key "measurements", "observations"
@@ -369,8 +371,6 @@ ActiveRecord::Schema.define(version: 2019_05_04_221126) do
   add_foreign_key "measurements", "traits"
   add_foreign_key "measurements", "validation_types"
   add_foreign_key "measurements", "value_types"
-  add_foreign_key "observations", "locations"
-  add_foreign_key "observations", "longhurst_provinces"
   add_foreign_key "observations", "species"
   add_foreign_key "observations", "users"
   add_foreign_key "species", "species_data_types"

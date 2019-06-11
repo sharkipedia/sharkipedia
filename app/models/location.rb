@@ -1,5 +1,6 @@
 class Location < ApplicationRecord
-  has_many :observations
+  has_many :observations, through: :measurements
+  has_many :measurements
 
   def display
     if name.blank?

@@ -36,6 +36,7 @@
           <th>Value</th>
           <th>Standard</th>
           <th>ValueType</th>
+          <th>Sex</th>
           <th>Location</th>
           <th>Resource</th>
         </tr>
@@ -47,6 +48,7 @@
             <td><%= measurement.value %></td>
             <td><%= measurement.standard.try(:name) %></td>
             <td><%= measurement.value_type.try(:name) %></td>
+            <td><%= measurement.sex_type.try(:name) %></td>
             <td><%= measurement.location.name %></td>
             <td><%= measurement.observation.resources.first.name %></td>
           </tr>

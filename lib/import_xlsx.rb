@@ -109,6 +109,10 @@ module ImportXlsx
 
         self.log += "Found resources: #{resources.inspect}\n"
 
+        resources.map! do |name, doi|
+          [name.strip, doi.try(:strip)]
+        end
+
         referenced_resources = resources.map do |name, doi|
 
           resource = Resource.find_by name: name
@@ -174,7 +178,7 @@ module ImportXlsx
           sample_size = row['sample_size']
           dubious = row['dubious']
           validated = row['validated']
-          validation_type = row['validation_type']
+          validation_type = ValidationType.find_by name: row['validation_type']
           notes = row['notes']
 
           location_name = sub_table.first['location_name']
@@ -285,9 +289,9 @@ module ImportXlsx
           self.log += "Found species #{row['Binomial']} => #{species.inspect}\n"
 
           resource = Resource.find_or_create_by! name: row['AuthorYear'],
-                                                 data_source: row['DataSource'],
-                                                 doi: row['doi'],
-                                                 year: row['SourceYear']
+            data_source: row['DataSource'],
+            doi: row['doi'],
+            year: row['SourceYear']
           self.log += "Created Resource: #{resource.inspect}\n"
 
           # Latitude has a space at the end

@@ -5,7 +5,16 @@
 
   <div class="field">
     <p class="control has-icons-left has-icons-right">
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", type: "email", placeholder: "Email", class: "input" %>
+      <%= f.text_field :name, autofocus: true, autocomplete: "name", type: "name", placeholder: "Name", class: "input" %>
+      <span class="icon is-small is-right">
+        <i class="fas fa-check"></i>
+      </span>
+    </p>
+  </div>
+
+  <div class="field">
+    <p class="control has-icons-left has-icons-right">
+      <%= f.email_field :email, autocomplete: "email", type: "email", placeholder: "Email", class: "input" %>
       <span class="icon is-small is-left">
         <i class="fas fa-envelope"></i>
       </span>

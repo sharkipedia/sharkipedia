@@ -8,6 +8,8 @@ class User < ApplicationRecord
 
   scope :admins, -> { where(user_level: 'admin') }
 
+  validates :name, presence: true
+
   def admin?
     user_level == 'admin'
   end

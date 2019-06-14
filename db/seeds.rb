@@ -2,10 +2,17 @@ require 'csv'
 require 'roo'
 
 if Rails.env.development?
-  admin = User.create email: 'admin@example.com', password: '123123123'
-  admin.user_level = 'admin'
+  admin = User.create email: 'admin@example.com', password: '123123123',
+    name: 'Admin', user_level: 'admin'
   admin.confirm
-  user = User.create email: 'user@example.com', password: '123123123'
+  editor = User.create email: 'editor@example.com', password: '123123123',
+    name: 'Jane Doe', user_level: 'editor'
+  editor.confirm
+  contributor = User.create email: 'contributor@example.com', password: '123123123',
+    name: 'Max Mustermann', user_level: 'contributor'
+  contributor.confirm
+  user = User.create email: 'user@example.com', password: '123123123',
+    name: 'Martha Musterfrau'
   user.confirm
 end
 

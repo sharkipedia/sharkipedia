@@ -1,8 +1,8 @@
 $(document).on('turbolinks:load', function() {
-  $('#trait_search').select2();
+  runSelect2('resources');
 
-  $('#trait_search').on('select2:select', function (e) {
+  $('#resources').on('select2:select', function (e) {
     var data = e.params.data;
-    Turbolinks.visit('/traits/' + data.id);
+    Turbolinks.visit('/resources/' + data.id);
   });
 });

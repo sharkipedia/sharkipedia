@@ -7,6 +7,8 @@ class User < ApplicationRecord
   has_many :trends
 
   scope :admins, -> { where(user_level: 'admin') }
+  scope :editors, -> { where(user_level: 'editors') }
+  scope :contributors, -> { where(user_level: 'contributor') }
 
   validates :name, presence: true
 

@@ -8,6 +8,8 @@ class PagesController < PreAuthController
   end
 
   def about
+    @editors = User.editors
+    @contributors = User.contributors
   end
 
   def procedure

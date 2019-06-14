@@ -76,12 +76,20 @@ managing populations in the face of changing threats across the globe.</p>
 <br>
 <p>An integral part of Shark Traits and Trends is data curation, which is only possible with the work of the following editors:</p>
     <br>
-    - Add list of editors and affiliations here (probably photos as well)
+    <ul>
+      <% @editors.each do |editor| %>
+        <li><%= editor.name %></li>
+      <% end %>
+    </ul>
     <br>
     <br>
     <p>Our databases would not be possible without the countless data contributors:</p>
     <br>
-    - Add list of data contributors here (this can probably be done automatically by extracting unique names from the database)
+    <ul>
+      <% @contributors.each do |contributor| %>
+        <li><%= contributor.name %></li>
+      <% end %>
+    </ul>
     <br>
 
 <br><br>

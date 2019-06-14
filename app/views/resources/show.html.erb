@@ -1,0 +1,22 @@
+<h1 class="title"><%= @resource.name %></h1>
+
+<div class="columns">
+  <div class="column">
+    <p>
+      <b>Resource:</b> <%= @resource.resource || '-' %>
+    </p>
+    <p>
+      <b>Year:</b> <%= @resource.year || '-' %>
+    </p>
+    <p>
+      <b>DOI:</b> <%= @resource.doi || '-' %>
+    </p>
+    <p>
+      <b>DataSource:</b> <%= @resource.data_source || '-' %>
+    </p>
+  </div>
+</div>
+
+<h2 class="subtitle">Trait Observations</h2>
+<% @resource.observations.joins(:measurements).each do |observation| %>
+<% end %>

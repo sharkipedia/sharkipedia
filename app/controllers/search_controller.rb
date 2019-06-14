@@ -1,9 +1,10 @@
-class SearchController < ApplicationController
+class SearchController < PreAuthController
   KLASSES = {
     'family' => SpeciesFamily,
     'species' => Species,
     'traits' => Trait,
     'oceans' => Ocean,
+    'resources' => Resource,
   }
 
   def autocomplete

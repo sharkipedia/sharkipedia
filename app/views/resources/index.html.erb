@@ -1,0 +1,22 @@
+<h1 class="title">Resources</h1>
+
+<div>
+  Search for resource name
+  <%= select_tag 'resources', nil, style: 'width: 50%' %>
+</div>
+
+<hr />
+
+<div>
+  <table class="table is-fullwidth is-bordered">
+    <tbody>
+      <% @resources.each do |resource| %>
+        <tr>
+          <td><%= link_to resource.name, resource_path(resource) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%== pagy_bulma_nav(@pagy) %>
+</div>

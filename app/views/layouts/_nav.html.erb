@@ -19,6 +19,8 @@
 
       <%= link_to 'Traits', traits_path, class: "navbar-item" %>
 
+      <%= link_to 'Resources', resources_path, class: "navbar-item" %>
+
       <% if user_is_admin? %>
         <%= link_to 'Trends', trends_path, class: "navbar-item" %>
       <% end %>

@@ -54,6 +54,7 @@ Rails.application.routes.draw do
 
   resources :traits, only: [:index, :show]
   resources :species, only: [:index, :show]
+  resources :resources, only: [:index, :show]
 
   namespace :search do
     get 'autocomplete', defaults: { format: 'json' }

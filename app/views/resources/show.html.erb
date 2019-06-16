@@ -30,7 +30,6 @@
           <th>Standard</th>
           <th>ValueType</th>
           <th>Location</th>
-          <th>Resource</th>
         </tr>
       </thead>
       <tbody>
@@ -43,7 +42,6 @@
             <td><%= measurement.standard.try(:name) %></td>
             <td><%= measurement.value_type.try(:name) %></td>
             <td><%= measurement.location.name %></td>
-            <td><%= link_to measurement.observation.resources.first.name, resource_path(measurement.observation.resources.first) %></td>
           </tr>
         <% end %>
       </tbody>

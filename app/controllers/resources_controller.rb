@@ -2,7 +2,12 @@ class ResourcesController < PreAuthController
   include Pagy::Backend
 
   def index
-    @pagy, @resources = pagy(Resource.all)
+    resources = if params[:all]
+                Resource.all
+              else
+                Resource.joins(:observations).order(:name).distinct
+              end
+    @pagy, @resources = pagy(resources)
   end
 
   def show

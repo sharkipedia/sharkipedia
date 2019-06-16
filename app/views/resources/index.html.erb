@@ -7,6 +7,12 @@
 
 <hr />
 
+<% if params[:all] %>
+  <p>or select from list (<%= link_to 'show only resources with data', resources_path %>):</p>
+<% else %>
+  <p>or select from list (<%= link_to 'show all resources', resources_path(all: true) %>):</p>
+<% end %>
+
 <div>
   <table class="table is-fullwidth is-bordered">
     <tbody>

@@ -7,5 +7,6 @@ class ResourcesController < PreAuthController
 
   def show
     @resource = Resource.find params[:id]
+    @observations = @resource.observations
   end
 end

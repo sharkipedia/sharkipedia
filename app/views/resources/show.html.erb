@@ -17,6 +17,36 @@
   </div>
 </div>
 
-<h2 class="subtitle">Trait Observations</h2>
-<% @resource.observations.joins(:measurements).each do |observation| %>
+<% unless @observations.blank? %>
+  <h2 class="subtitle">Trait Observations</h2>
+  <% @observations.each do |observation| %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Specie</th>
+          <th>Class</th>
+          <th>Name</th>
+          <th>Value</th>
+          <th>Standard</th>
+          <th>ValueType</th>
+          <th>Location</th>
+          <th>Resource</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% observation.measurements.each do |measurement| %>
+          <tr>
+            <td><%= link_to measurement.observation.species.name, species_path(measurement.observation.species) %></td>
+            <td><%= measurement.trait_class.name %></td>
+            <td><%= measurement.trait.name %></td>
+            <td><%= measurement.value %></td>
+            <td><%= measurement.standard.try(:name) %></td>
+            <td><%= measurement.value_type.try(:name) %></td>
+            <td><%= measurement.location.name %></td>
+            <td><%= link_to measurement.observation.resources.first.name, resource_path(measurement.observation.resources.first) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
 <% end %>

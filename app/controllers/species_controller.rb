@@ -5,7 +5,7 @@ class SpeciesController < PreAuthController
     species = if params[:all]
                 Species.all
               else
-                Species.joins(:observations)
+                Species.joins(:observations).order(:name).distinct
               end
 
     @pagy, @species = pagy(species)

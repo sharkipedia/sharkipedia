@@ -5,6 +5,9 @@ class PagesController < PreAuthController
     @species_count     = Observation.joins(:species).select(:species_id).distinct.count
 
     @trait_classes = TraitClass.all
+
+    @example_specie = Species.find_by name: 'Carcharhinus acronotus'
+    @example_trait = Trait.find_by name: 'Lmat50'
   end
 
   def about

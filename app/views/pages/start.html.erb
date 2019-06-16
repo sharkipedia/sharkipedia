@@ -13,12 +13,12 @@
       <div class="column">
         <%= label_tag 'species', 'Genus & Species', class: 'label' %>
         <%= select_tag 'species', nil, style: 'width: 50%' %>
-        <p class="help">For example: Carcharhinus acronotus</p>
+        <p class="help">For example: <%= link_to @example_specie.name, species_path(@example_specie) %></p>
       </div>
       <div class="column">
         <%= label_tag 'trait', 'Trait', class: 'label' %>
         <%= grouped_collection_select(nil, :trait_search, @trait_classes, :traits, :name, :id, :name, {:prompt => 'Select Trait'}, style: 'width: 50%') %>
-        <p class="help">For example: Length at first maturity</p>
+        <p class="help">For example: <%= link_to @example_trait.name, trait_path(@example_trait) %></p>
       </div>
     </div>
     </section>

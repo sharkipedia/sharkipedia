@@ -9,7 +9,12 @@
       <b>Year:</b> <%= @resource.year || '-' %>
     </p>
     <p>
-      <b>DOI:</b> <%= @resource.doi || '-' %>
+      <b>DOI:</b> 
+      <% if @resource.doi.blank? %>
+        -
+      <% else %>
+        <%= link_to @resource.doi, "https://www.doi.org/#{@resource.doi}", target: '_blank' %>
+      <% end %>
     </p>
     <p>
       <b>DataSource:</b> <%= @resource.data_source || '-' %>

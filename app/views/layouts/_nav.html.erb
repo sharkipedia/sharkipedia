@@ -19,13 +19,9 @@
 
       <%= link_to 'Traits', traits_path, class: "navbar-item" %>
 
-      <%= link_to 'Resources', resources_path, class: "navbar-item" %>
-
       <% if user_is_admin? %>
         <%= link_to 'Trends', trends_path, class: "navbar-item" %>
       <% end %>
-
-      <%= link_to 'Data Export', data_export_index_path, class: "navbar-item" %>
 
       <%= link_to 'About', about_path, class: "navbar-item" %>
 
@@ -35,6 +31,8 @@
         </a>
 
         <div class="navbar-dropdown">
+          <%= link_to 'Resources', resources_path, class: "navbar-item" %>
+          <%= link_to 'Data Export', data_export_index_path, class: "navbar-item" %>
           <%= link_to 'Procedure', procedure_path, class: "navbar-item" %>
           <%= link_to 'Contact', contact_path, class: "navbar-item" %>
           <hr class="navbar-divider">

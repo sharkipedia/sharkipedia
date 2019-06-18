@@ -1,0 +1,38 @@
+Back-calculated,Estimated from a model output (Model should be specified),Length
+Directly observed,,Length
+Histologically,,Length
+Macro-dissection,,Length
+Smallest free-swimming individual,Observation of smallest free-swimming individual,Length
+Largest Embryo,Observation of largest embryo in utero,Length
+Free + Embryo,Based on combined observations of largest embryo and smallest free-swimming individual,Length
+Embryo growth curve,Estimated from a model output (Model should be specified),Length
+L95,95th percentile of observed size distribution,Length
+L99,99th percentile of observed size distribution,Length
+Max observed size,Observation of largest individual,Length
+Inverse mortality,Estimated from a model parameter (Model should be specified),Length
+Back-calculated,Estimated from a model output (Model should be specified),Age
+Direcetly observed,,Age
+Histologically,,Age
+Macro-dissection,,Age
+Smallest free-swimming individual,,Age
+Largest Embryo,,Age
+Free + Embryo,Based on combined observations of largest embryo and smallest free-swimming individual,Age
+Embryo growth curve,,Age
+L95,95th percentile of observed size distribution,Age
+L99,99th percentile of observed size distribution,Age
+Max observed size,,Age
+Inverse mortality,,Age
+Mark-recapture,From mark-recapture data,Age
+Mark-recapture,,Growth
+Length-frequency,,Growth
+Vertebrae,,Growth
+Spines,,Growth
+Tooth Plates,,Growth
+Direct Age,Estimates from individuals of known ages,Growth
+Captive,Data from captive individuals,Growth
+Captive Observation,Observations from captive individuals,Reproduction
+Modeled,Estmimated from model output (Model must be specified),Reproduction
+Proportion Gravid Females,,Reproduction
+Macroscopic observation,Observation through macroscopic dissection or observation of free swimming individuals,Reproduction
+Empirical,"Estimated directly from abundance/catch data (e.g. stock assessments, catch curves)",Demography
+Derived,"Estimated indirectly from life history traits (e.g. Hoenig 1983, Chen and Watanabe 1983 mortality estimators)",Demography

@@ -1,0 +1,22 @@
+Back-calculated,Estimated from a model output (Model should be specified),Length
+Directly from growth curves,Estimated from growth curve (Model should be specified),Length
+Observational,Directly Observed,Length
+Logistic,Estimated from logistic model or oogive,Length
+Back-calculated,,Age
+Direcetly observed,,Age
+Observatioal,,Age
+Logistic,,Age
+VBFG2 Strong Bayes,Bayesian implementation of 2 parameter von Bertalanffy growth curve with strong priors,Growth
+VBFG2 Uninformed Bayes,Bayesian implementation of 2 parameter von Bertalanffy growth curve with weak/unifmormative priors,Growth
+VBFG2 ML,Maximum Liklihood implementation of 2 parameter von Bertalanffy growth curve,Growth
+VBFG3 Strong Bayes,Bayesian implementation of 3 parameter von Bertalanffy growth curve with strong priors,Growth
+VBFG3 Uninformed Bayes,Bayesian implementation of 3 parameter von Bertalanffy growth curve with weak/unifmormative priors,Growth
+VBFG3 ML,Maximum Liklihood implementation of 2 parameter von Bertalanffy growth curve,Growth
+Gomp Strong Bayes,Bayesian implementation of Gompertz growth curve with strong priors,Growth
+Gomp Uninformed Bayes,Bayesian implementation of Gompertz growth curve with weak/unifmormative priors,Growth
+Gomp ML,Maximum Liklihood implementation of Gompertz growth curve,Growth
+Fabens,,Growth
+Francis,,Growth
+Other,,Growth
+Length-Length,Length to length conversion,Relationships
+Length-Weight,Length to weight conversion,Relationships

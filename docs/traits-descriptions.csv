@@ -1,0 +1,55 @@
+Lmat50,Length at 50% maturity,Length
+Lmat95,Length at 95% maturity,Length
+Length at first maturity,Length of smallest mature individual based on gonadal observation (production of gametes) or clasper calcification.,Length
+Length of largest immature,Length of largest immature individuals based on gonadal observation (production of gametes) or clasper calcification.,Length
+Length at maternity,Length at first observation of pregnancy,Length
+Lmax-observed,Maximum observed length,Length
+Lmax-estimated,Maximum length estimated from model,Length
+Lbirth,Length at birth,Length
+Amat50,Age at 50% maturity,Age
+Amat95,Age at 95% maturity,Age
+Age at first maturity,Age at first maturity based on gonadal observation (production of gametes) or clasper calcification,Age
+Age of largest immature,Age largest immature individual based on gonadal observation (production of gametes) or clasper calcification,Age
+Age at maternity,Age at first observation of pregnancy,Age
+Amax-observed,Maximum observed age,Age
+Amax-estimatedy,Maximum age estimated from model,Age
+k,von Bertalanffy growth parameter,Growth
+Linf,von Bertalanffy asymptotic size parameter,Growth
+L0,von Bertalanffy length-at-age zero parameter,Growth
+t0,von Bertalanffy age-at-length zero parameter,Growth
+t1,Lester model,Growth
+Tmat,Lester model,Growth
+H,Lester model,Growth
+G,Lester model,Growth
+sigma-growth,error estimate of the growth model,Growth
+cv_readers,Coefficient of variation between readers,Growth
+APE,,Growth
+PA,Percent agreement between readers,Growth
+Ovarian fecundity,Maximum number of visible ovarian follicles (generally used in egg-laying species (e.g. skates)),Reproduction
+Uterine fecundity,Max number of visible ovultaed eggs or developing embryos in both embryos,Reproduction
+Annual reproductive output,,Reproduction
+Litter size (unspecified),Number of ova or developing embryos,Reproduction
+Breeding,Observed timing of mating,Reproduction
+Ovulation,Observed timing of ovulation,Reproduction
+Parturition,Observed timing of parutrition,Reproduction
+Incubation length,,Reproduction
+Gestation length,,Reproduction
+Breeding interval,"Biannual, Annual, Biennial, Triennial",Reproduction
+Ovum size,Maximum observed ova diamter (uterine or recently ovulated),Reproduction
+Offspring mass,,Reproduction
+Max oviducal width,,Reproduction
+Max uterine width,,Reproduction
+Single uterus,Yes/No,Reproduction
+Seasonal,Yes/No,Reproduction
+Peak parturition,,Reproduction
+Embryonic sex ratio,In utero ratio of Males:Females within a litter,Reproduction
+Natural mortality,M,Demography
+Total mortality,Z,Demography
+Fishing mortality,F,Demography
+rmax,Maximum intrinsic rate of population increase,Demography
+lambda,Population growth rate,Demography
+a,Multiplier of the equation (intercept if in log scale),Relationships
+b,Exponent of the equation (coefficient if in log scale),Relationships
+c,Additional coefficient,Relationships
+d,Additional coefficient,Relationships
+sigma-conv,Error term of the equation,Relationships

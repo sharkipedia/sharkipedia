@@ -4,13 +4,13 @@
 
   <h2>Overview</h2>
 
-  <p>The Shark Traits Database is an open source research initiative that aims to make all observations and measurements of chondrichthyans (sharks, rays, and chimaeras) accessible in order to more rapidly advance resesearch. The framework behind the database is heavily based on the open source <a href"https://www.coraltraits.org"> Coral Trait Database</a>. Anyone collecting chondrichthyan life history data can join and contribute to the growing data compilation. Contributors have control over the privacy of their data and greatly benefit from being able to download complementary public data from the database in a standard format for use in their analyses. We hope that private data will become public once the contributor has published them, which will subsequently be cited when their data are used in analyses by other people. The citation system has been carefully designed to ensure full transparency about the origin of each individual data point as well as larger data compilations of other peoples' data (such as data extracted from literature for meta-analyses). This page covers the following:</p>
+  <p>The Shark Traits Database is an open source research initiative that aims to make all observations and measurements of chondrichthyans (sharks, rays, and chimaeras) accessible in order to more rapidly advance resesearch. The framework behind the database is heavily based on the open source <a href"https://www.coraltraits.org"> Coral Trait Database</a>. Anyone collecting chondrichthyan life history data can join and contribute to the growing data compilation. Contributors have control over the privacy of their data, but will benefit from being able to download complimentary public data from the database in a standard format for use in their analyses. We hope that private data will become public once the contributor has published them, and a citation is available. The source citation system here has been designed to ensure full transparency about the origin of each individual data point.  This page covers the following:</p>
 
   <ol>
     <li><a href="#mission">Mission</a></li>
-    <li><a href="#data">Data Structure</a></li>
+    <li><a href="#data">Data structure</a></li>
     <li><a href="#traitclasses">Details of traits, standards, and methods</a></li>
-    <li><a href="#importing">User information and Data Uploading</a></li>
+    <li><a href="#importing">User information and data uploading</a></li>
   </ol>
 
   <h2 id="mission">Mission</h2>
@@ -19,7 +19,7 @@
     <li> Assemble disparate information on life history traits of sharks, rays, and chimaeras </li>
     <li> Provide unrestricted, open-source and easy access to shark trait data </li>
     <li> Avoid redundant data-gathering efforts </li>
-    <li> Facilitate and encourage the appropriate crediting of original data sources </li>
+    <li> Facilitate and encourage the appropriate crediting (citation) of original data sources </li>
     <li> Engage the shark and ray research community in the collection and quality control of trait data </li>
     <li> Facilitate reproducible science </li>
     <li> Do the above with a sustainable future for the database in mind, in terms of management and longevity </li>
@@ -36,33 +36,33 @@
   <h3 id="data">Observations and Masurements</h3>
 
   <blockquote>
-    <p>The Shark Traits Database is a research tool, not a meta-data catalogue.</p>
+    <p>The Shark Traits Database is a research tool, not a meta-data repository.</p>
   </blockquote>
   <p><strong>A meta-data repository captures <code>dataset-level</code> information</strong> about your data set, so that people can easily find it. Examples of meta-data repositories include DRYAD, Ecological Archives and Figshare. You are encouraged to submit data sets to meta-data repositories to help ensure their longevity and the reproducibility of the results for which the data were originally collected.</p>
   <p><strong>The Shark Traits Database captures <code>data-level</code> information</strong> so that measurements from multiple data sets can be integrated, extracted, compared and analyzed.</p>
   <blockquote>
-    <p>One way to think about The Shark Traits Database is as a very large data-set being cobbled together by the elasmobranch community for everyone to use, avoiding redundant efforts, identifying knowledge gaps, informing management, and speeding up science.</p>
+    <p>One way to think about The Shark Traits Database is as a very large data-set being cobbled together by the elasmobranch research community for everyone to use, avoiding redundant efforts, identifying knowledge gaps, informing management, and speeding up science.</p>
   </blockquote>
 
-  <p>Observations bind related trait measurements of the same population. For example, estimates of age at maturity for males and females of the same population results in one observation with two measurements (each corresponding with a different trait of the population).</p>
+  <p>The data are organized by <code> observation </code>. Observations bind related trait measurements of the same population. For example, estimates of age at maturity for males and females of the same population results in one <code>observation</code> with two <code>measurements</code> (each corresponding to a different trait of the population).</p>
 
-  <p><b>Observation-level</b> data include the chondrichthyan species, location and resource (i.e. reference). These data are the same for all measurements corresponding to the observation. When entering or importing trait data, the following is minimally required:</p>
+  <p><b>Observation-level</b> data include the chondrichthyan species, location and resource identity (i.e., reference). These data are the same for all measurements corresponding to the observation. When entering or importing trait data, the following observation-level data are minimally required:</p>
 
   <ul>
-    <li>Contributor</li>
+    <li>Contributor ID</li>
     <li>Access (public or private)</li>
     <li>Species<sup>1</sup></li>
     <li>Location<sup>2</sup></li>
     <li>Resource<sup>3</sup></li>
   </ul>
 
-  <p><sup>1</sup>All observations must be associated with a valid species name. We are using the taxonomy of <a href"https://onlinelibrary.wiley.com/doi/full/10.1111/jfb.12874"> Weigmann 2016</a>. Note that this taxonomy does not currently include all the taxonomic nomenclatrual revisions in <a href"https://www.researchgate.net/publication/311043124_The_Rays_of_the_World_project_-_an_explanation_of_nomenclatural_decisions"> Naylor et al 2016</a>. The list of valid species names is built into the spreadsheet template and can be accessed as a dropdown menu. First select the appropriate `species_superorder` (Chimaeriformes, Batoidea, Squalimoroh Sharks, or Galeomorph Sharks) and a reduced taxa set to select from will be provided in the `species_name` column. If you cannot find the species name then you can select `Recently described/Novel Species` from the drop down menu and include the binomial name in the notes column.</p>
+  <p><sup>1</sup>All observations must be associated with a valid species name. We are using the taxonomy of <a href"https://onlinelibrary.wiley.com/doi/full/10.1111/jfb.12874"> Weigmann 2016</a>. Note that this taxonomy does not currently include all the taxonomic nomenclatural revisions in <a href"https://www.researchgate.net/publication/311043124_The_Rays_of_the_World_project_-_an_explanation_of_nomenclatural_decisions"> Naylor et al 2016</a>. The list of valid species names is built into the spreadsheet template and can be accessed as a dropdown menu. First select the appropriate `species_superorder` (Chimaeriformes, Batoidea, Squalimorph Sharks, or Galeomorph Sharks) and a reduced taxa set to select from will be provided in the `species_name` column. If you cannot find the species name then you can select `Recently described/Novel species` from the drop down menu and include the Latin binomial name in the notes column.</p>
 
-  <p><sup>2</sup>Location information can be entered in several formats/columns: (1) `marine_province` is restricted to the desingated <a href"http://www.marineregions.org/gazetteer.php?p=image&pic=64934">marine longhurst provinces</a>, (2) `location_name` is for general locations provided in the study methods (e.g. Southern Calfifornia Bight, Northern Gulf of Mexico), and (3) `lat` and `long` coordinates if provided.</p>
+  <p><sup>2</sup>Location information can be entered in several formats/columns: (1) `marine_province` is restricted to the designated <a href"http://www.marineregions.org/gazetteer.php?p=image&pic=64934">marine Longhurst Provinces</a>, (2) `location_name` is for general locations provided in the study methods (e.g. Southern Calfifornia Bight, Northern Gulf of Mexico), and (3) `lat` and `long` coordinates if available.</p>
 
-  <p><sup>3</sup>The resource ID should be taken from the unique ID found in the <a href"https://sharktraits-refs.shinyapps.io/shark-resources/"> references database</a>. This is a shiny database that contains all materials compiled on <a href"https://shark-references.com/"> Shark-References</a>.You can filter the reference databse by year and/or search for author, keyword, species, journal, etc. Resource can be left blank for unpublished data, but data must be kept private.</p>
+  <p><sup>3</sup>The resource ID should be taken from the unique ID found in the <a href"https://sharktraits-refs.shinyapps.io/shark-resources/"> references database</a>. This is a web application that contains all materials compiled on <a href"https://shark-references.com/"> Shark-References</a>.You can filter the reference databse by year and/or search for author, keyword, species, journal, etc. The resource can be left blank for unpublished data, but those contributions must be kept private.</p>
 
-  <p><b>Measurement-level</b> data include the sex, trait, value, standard (unit), methodology, estimates of precision (if applicable), and model used. When entering or importing trait data, the following is minimally required:</p>
+  <p><b>Measurement-level</b> data include the sex, trait, value, standard (unit), methodology, estimates of precision (if applicable), and model used. When entering or importing trait data, the following information is minimally required:</p>
   <ul>
     <li>Sex</li>
     <li>Trait</li>
@@ -154,7 +154,7 @@
     </tr>
     <tr>
       <td>cm BDL</td> 
-      <td>Body length length in centimeters</td>
+      <td>Body length in centimeters</td>
     </tr>
     <tr>
       <td>cm PSCFL</td>
@@ -238,7 +238,7 @@
     </tr>
     <tr>
       <td>Logistic</td> 
-      <td>Estimated from logistic model or oogive</td>
+      <td>Estimated from logistic model or ogive</td>
     </tr>
   </table>
 
@@ -521,11 +521,11 @@
       </tr>
       <tr class="even">
         <td>VBFG2 Uninformed Bayes</td>
-        <td style="text-align: left;">Bayesian implementation of 2 parameter von Bertalanffy growth curve with weak/unifmormative priors</td>
+        <td style="text-align: left;">Bayesian implementation of 2 parameter von Bertalanffy growth curve with weak/uninformative priors</td>
       </tr>
       <tr class="odd">
         <td>VBFG2 ML</td>
-        <td style="text-align: left;">Maximum Liklihood implementation of 2 parameter von Bertalanffy growth curve</td>
+        <td style="text-align: left;">Maximum Likelihood implementation of 2 parameter von Bertalanffy growth curve</td>
       </tr>
       <tr class="even">
         <td>VBFG3 Strong Bayes</td>
@@ -533,11 +533,11 @@
       </tr>
       <tr class="odd">
         <td>VBFG3 Uninformed Bayes</td>
-        <td style="text-align: left;">Bayesian implementation of 3 parameter von Bertalanffy growth curve with weak/unifmormative priors</td>
+        <td style="text-align: left;">Bayesian implementation of 3 parameter von Bertalanffy growth curve with weak/uninformative priors</td>
       </tr>
       <tr class="even">
         <td>VBFG3 ML</td>
-        <td style="text-align: left;">Maximum Liklihood implementation of 2 parameter von Bertalanffy growth curve</td>
+        <td style="text-align: left;">Maximum Likelihood implementation of 2 parameter von Bertalanffy growth curve</td>
       </tr>
       <tr class="odd">
         <td>Gomp Strong Bayes</td>
@@ -545,11 +545,11 @@
       </tr>
       <tr class="even">
         <td>Gomp Uninformed Bayes</td>
-        <td style="text-align: left;">Bayesian implementation of Gompertz growth curve with weak/unifmormative priors</td>
+        <td style="text-align: left;">Bayesian implementation of Gompertz growth curve with weak/uninformative priors</td>
       </tr>
       <tr class="odd">
         <td>Gomp ML</td>
-        <td style="text-align: left;">Maximum Liklihood implementation of Gompertz growth curve</td>
+        <td style="text-align: left;">Maximum Likelihood implementation of Gompertz growth curve</td>
       </tr>
       <tr class="even">
         <td>Fabens</td>
@@ -589,7 +589,7 @@
       </tr>
       <tr class="even">
         <td>Uterine fecundity</td>
-        <td style="text-align: left;">Max number of visible ovultaed eggs or developing embryos in both embryos</td>
+        <td style="text-align: left;">Max number of visible ovulated eggs or developing embryos in both embryos</td>
       </tr>
       <tr class="odd">
         <td>Annual reproductive output</td>
@@ -609,7 +609,7 @@
       </tr>
       <tr class="odd">
         <td>Parturition</td>
-        <td style="text-align: left;">Observed timing of parutrition</td>
+        <td style="text-align: left;">Observed timing of parturition</td>
       </tr>
       <tr class="even">
         <td>Incubation length</td>
@@ -653,7 +653,7 @@
       </tr>
       <tr class="even">
         <td>Embryonic sex ratio</td>
-        <td style="text-align: left;">In utero ratio of Males:Females within a litter</td>
+        <td style="text-align: left;"> <i>In</i> utero ratio of Males:Females within a litter</td>
       </tr>
     </tbody>
   </table>
@@ -917,7 +917,7 @@
   <p><code>species_id</code>, <code>trait_id</code>, <code>method_id</code>, and <code>model_id</code> can be included instead of <code>species_name</code>, <code>trait_name</code>, <code>method_name</code>, and <code>model_name</code>, respectively (or you can include both ids and names). Having the names can be useful for navigating large spreadsheets. <strong>These names must exactly reflect the names in the database</strong>, so it is best to copy and paste names directly from the database.</p>
   <p><code>resource_id</code> is reserved for the original data resource (i.e., the paper that reports the original collection of the measurement). You can credit papers that compiled large datasets from the literature by adding a column named <code>resource_secondary_id</code>. <code>resource_id</code> and <code>resource_secondary_id</code> may be substituted with <code>resource_doi</code> and <code>resource_secondary_doi</code>, respectively (the doi should start with “10.”, not “doi:”). The resource will automatically be added using Crossref if the doi is not already in the database.</p>
   <p>We have collated all the references from <a href="https://sharktraits-refs.shinyapps.io/shark-resources/">shark-references.com</a> and generated a unique <code>resource_id</code> for each reference, so the easiest way to populate this field is by searching for the <code>resource_id</code> in the reference list provided.</p>
-  <p><code>user_id</code> must by your own database user id (i.e., you cannot import data for other people). You can find your user id by clicking on your name in the top right corner and selecting “My Observations”.</p>
+  <p><code>user_id</code> must be your own database user id (i.e., you cannot import data for other people). You can find your user id by clicking on your name in the top right corner and selecting “My Observations”.</p>
   <p>Copy and paste the above header into a text file and save as <code>import_trait_author_year.csv</code>, where author and year correspond with the resource (paper). Alternatively, download a <a href="/import_template_author_year.csv">CSV</a> or <a href="/import_template_author_year.xlsx">Excel</a> template.</p>
   <h4 id="observation-level-data">Observation-level data</h4>
   <p>The first six required columns are associated with the observation.</p>

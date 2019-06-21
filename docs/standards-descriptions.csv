@@ -1,0 +1,17 @@
+cm TL,Total length in centimeters,Length
+cm FL,Fork length in centimeters,Length
+cm DW,Disc Width in centimeters,Length
+cm CL,Chimaera length in centimeters,Length
+cm PCL,Pre-caudal length length in centimeters,Length
+cm BDL,Body length length in centimeters,Length
+cm PSCFL,Pre-supra-caudal fin length in centimeters,Length
+Year,Age in years,Age
+Coefficient,Coefficient value from model output (Model must be specified),Growth
+Number,Number,Reproduction
+mm,millimetres,Reproduction
+g,grams,Reproduction
+Month,"Number of months for length traits (e.g. Incubation or Gestation Length) or Calendar month for phenological traits (e.g. breeding, ovulation, parturition)",Reproduction
+Year,"Years for breeding interval (0.5 for biannual, 1 for annual, 2 for biennial, 3 for triennial)",Reproduction
+Logical,Yes/No traits,Reproduction
+Coefficient,Coefficient value from model output (Model must be specified),Demography
+Coefficient,Coefficient value from model output (Model must be specified),Relationships

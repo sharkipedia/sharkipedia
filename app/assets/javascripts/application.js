@@ -57,3 +57,11 @@ function runSelect2 (klass) {
 document.addEventListener('turbolinks:before-cache', function() {
   $('.select2-hidden-accessible').select2('destroy');
 });
+
+$(document).on('turbolinks:load', function() {
+  $(".navbar-burger").click(function() {
+    $(".navbar-burger").toggleClass("is-active");
+    $(".navbar-menu").toggleClass("is-active");
+  });
+});
+

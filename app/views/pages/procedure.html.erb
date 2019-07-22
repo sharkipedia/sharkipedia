@@ -6,31 +6,122 @@
 
   <p>The Shark Traits Database is an open source research initiative that aims to make all observations and measurements of chondrichthyans (sharks, rays, and chimaeras) accessible in order to more rapidly advance resesearch. The framework behind the database is heavily based on the open source <a href"https://www.coraltraits.org"> Coral Trait Database</a>. Anyone collecting chondrichthyan life history data can join and contribute to the growing data compilation. Contributors have control over the privacy of their data, but will benefit from being able to download complimentary public data from the database in a standard format for use in their analyses. We hope that private data will become public once the contributor has published them, and a citation is available. The resource citation system here has been designed to ensure full transparency about the origin of each individual data point.  This page covers the following:</p>
 
-  <ol>
-    <li><a href="#mission">Mission</a></li>
-    <li><a href="#data">Data structure</a></li>
-    <li><a href="#traitclasses">Details of traits, standards, and methods</a></li>
-    <li><a href="#importing">User information and data uploading</a></li>
-  </ol>
-
-  <h2 id="mission">Mission</h2>
-
-  <ul>
-    <li> Assemble disparate information on life history traits of sharks, rays, and chimaeras </li>
-    <li> Provide unrestricted, open-source and easy access to shark trait data </li>
-    <li> Avoid redundant data-gathering efforts </li>
-    <li> Facilitate and encourage the appropriate crediting (citation) of original data sources </li>
-    <li> Engage the shark and ray research community in the collection and quality control of trait data </li>
-    <li> Facilitate reproducible science </li>
-    <li> Do the above with a sustainable future for the database in mind, in terms of management and longevity </li>
-  </ul>
-
-
+   
   <h3>Governance</h3>
 
   <h4>Administrator</h4>
 
   <p>Contact the Administrators for any information about the database at <a href"mailto:admin@sharktraits.org"> admin@sharktraits.org</a>.</p>
+
+  <h2 id="importing">Data submission</h2>
+
+  <h4 id="what-information-can-be-contributed">What information can be contributed</h4>
+  <p>The database currently accepts species-level measurements of chondrichthyans. Data must be associated with a species name (i.e., not genus- or family-level data) and public data must be associated with a published resource (e.g., paper, monograph, technical report, or book).</p>
+  <p>Data accepted:</p>
+  <ul>
+    <li>Species-level model-derived data that has been published</li>
+    <li>Species-level expert or group opinion data that has been published</li>
+    <li>Unpublished data, if kept private until published</li>
+  </ul>
+  <p>Data not accepted:</p>
+  <ul>
+    <li>Future predictions</li>
+    <li>Data for other taxonomic resolutions (e.g., genus or family).</li>
+  </ul>
+  <p>Unpublished data can also be imported into the database if it is kept private. Private data can be made public once associated with a published resource. Benefits of submitting unpublished data include:</p>
+  <ul>
+    <li>One can easily download the data alongside useful public data for analysis</li>
+    <li>One can prepare to make the data public at end of project</li>
+    <li>One can identify duplicate research efforts</li>
+  </ul>
+  <p>To contribute data, you need to email the database <a href="mailto:sharktraits@gmail.com">Administrator</a> to become a contributor.</p>
+  <blockquote>
+    <p>Having a primary, peer-reviewed resource is essential for maintaining data quality, contributor recognition and scientific rigor.</p>
+  </blockquote>
+
+  <h4>Importing a spreadsheet</h4>
+
+  <p>Even if only entering small amounts of data, use of the spreadsheet submission template is recommended. The fillable template can be accessed <a href="https://github.com/creeas/SharkTraits/blob/master/SharkTraits-Template.xlsx">here</a>. The spreadsheet import is the fastest way to get data into the database. The import function accepts csv-formatted spreadsheets and runs a number of tests to make sure your data fit the database formats correctly (note that you can export csv-formatted files from Excel using “Save as…”). Any errors will reject the entire import and the system will generat a log and contact the user by e-mail to indicate where the errors occur. If necessary, you will be able to fix these errors and try the import again. Errors may include incorrect formatting of the spreadsheet (e.g. not all required columns present) or missing values for required fields.</p>
+
+  <p>The spreadsheet you import must have a header with <em>at least</em> the following column names:</p>
+  <pre><code>observation_id, access, user_id, resource_id, species_name, location_id, trait_name, standard_name, methodology_name, value, value_type, precision, precision_type, precision_upper, sample_size, notes</code></pre>
+  <p><code>species_id</code>, <code>trait_id</code>, <code>method_id</code>, and <code>model_id</code> can be included instead of <code>species_name</code>, <code>trait_name</code>, <code>method_name</code>, and <code>model_name</code>, respectively (or you can include both ids and names). Having the names can be useful for navigating large spreadsheets. <strong>These names must exactly reflect the names in the database</strong>, so it is best to copy and paste names directly from the database.</p>
+  <p><code>resource_id</code> is reserved for the original data resource (i.e., the paper that reports the original collection of the measurement). You can credit papers that compiled large datasets from the literature by adding a column named <code>resource_secondary_id</code>. <code>resource_id</code> and <code>resource_secondary_id</code> may be substituted with <code>resource_doi</code> and <code>resource_secondary_doi</code>, respectively (the doi should start with “10.”, not “doi:”). The resource will automatically be added using Crossref if the doi is not already in the database.</p>
+  <p>We have collated all the references from <a href="https://sharktraits-refs.shinyapps.io/shark-resources/">shark-references.com</a> and generated a unique <code>resource_id</code> for each reference, so the easiest way to populate this field is by searching for the <code>resource_id</code> in the reference list provided.</p>
+  <p><code>user_id</code> must be your own database user id (i.e., you cannot import data for other people). You can find your user id by clicking on your name in the top right corner and selecting “My Observations”.</p>
+  <p>Copy and paste the above header into a text file and save as <code>import_trait_author_year.csv</code>, where author and year correspond with the resource (paper). Alternatively, download a <a href="/import_template_author_year.csv">CSV</a> or <a href="/import_template_author_year.xlsx">Excel</a> template.</p>
+  <h4 id="observation-level-data">Observation-level data</h4>
+  <p>The first six required columns are associated with the observation.</p>
+  <p><code>observation_id</code> is an unique integer that groups a set of measurements into one observation. In the example below, the first two rows belong to the same observation of a shark.</p>
+  <p><code>hidden</code> is a boolean value indicating if the observation should be accessible (0 denotes private and 1 denotes public). In the example below, the data are public.</p>
+  <p><code>user_id</code> is the unique ID (name or integer) of the person entering the data.</p>
+  <p><code>species_name</code> and/or <code>species_id</code> is the unique name or ID of the species of which the observation was taken. IDs occur in grey to the left of <a href="">species</a> or at the top of a given species’ observation page.</p>
+  <p><code>marine_province</code> is the large marine regions (e.g. longhurst province) where the study was conducted. You can see a global map of provinces and associated names here <a href=""></a></p>
+  <p><code>location_id</code> is the unique ID of the location where the observation took place.</p>
+  <p><code>resource_id</code> is the unique ID of the resource (paper) where the observation was published. <code>resource_id</code> can be empty for unpublished data, in which case <code>access</code> must be private (0) until the data are published and the published resource is entered.</p>
+  <h4 id="measurement-level-data">Measurement-level data</h4>
+  <p>The remaining columns are associated with measurement-level data. All measurements corresponding to the same observation should have exactly the same observation-level data.</p>
+  <blockquote>
+    <p><strong>Warning</strong> All measurements corresponding to the same observation should have exactly the same observation-level data. Use copy and paste or fill down to avoid making errors.</p>
+  </blockquote>
+  <p><code>trait_name</code> and/or <code>trait_id</code> is the unique name or ID (integer) of the species-level characteristic that was measured.</p>
+  <p><code>standard_name</code> is the unique ID of the standard (measurement unit) that was used to measure the trait.</p>
+  <p><code>method_name</code> is the unique ID of the methodology used to measure the trait.</p>
+  <p><code>model_name</code> is the unique name of the model being used for the given methodology to measure the trait.</p>
+  <p><code>value</code> is the actual measured value (number, text, true/false, etc.). If the value is an option of a categorical trait (e.g., growth form), then the value must exactly match the value options for the trait (e.g., massive).</p>
+  <p><code>value_type</code> describes the type of value. Current options are:</p>
+  <ul>
+    <li><code>raw_value</code> for a direct measurement,</li>
+    <li><code>mean</code> if the value represents the mean of more than one value,</li>
+    <li><code>median</code> if the value represents the median of more than one value,</li>
+    <li><code>maximum</code> if the value represents the maximum of more than one value,</li>
+    <li><code>minimum</code> if the value represents the minimum of more than one value,</li>
+    <li><code>model_derived</code> if the value is derived from a model,</li>
+    <li><code>expert_opinion</code> if the actual value has not been measured directly, but an expert feels confident of the value, perhaps based on phylogenetic relatedness or an indirect observation,</li>
+    <li><code>group_opinion</code> if the actual value has not been measured directly, but a group of experts feel confident of the value.</li>
+  </ul>
+  <p><code>precision</code> is the level of uncertainty associated with the value if it is made up from more than one measurement (e.g., mean).</p>
+  <p><code>precision_type</code> is the kind of uncertainty that the precision estimate (above) corresponds with. Current options are:</p>
+  <ul>
+    <li><code>standard_error</code></li>
+    <li><code>standard_deviation</code></li>
+    <li><code>95_ci</code></li>
+    <li><code>range</code></li>
+  </ul>
+  <p><code>precision_upper</code> is used to capture the maximum (upper) value if range is used (above).</p>
+  <p><code>sample_size</code> is the number of data points that were used to calculate the value. Leave this field blank if equal to one (e.g., a raw_value).</p>
+  <p>Optional fields include:</p>
+  <p><code>notes</code> is an optional field for reporting useful information about how the measurement was made.</p>
+  <p><code>dubious</code> is a optional Boolean field noting whether the data being reported is classified as dubious (1) or not (0 or blank) by the user entering the data.</p>
+  <p><code>validated</code> is a boolean field to be used only for Growth Trait Class measurements, indicating whether any validation of the growth model has been attempted (1) or not (0).</p>
+  <p><code>validation_type</code> denotes the method used for validating the growth model. At the moment, this is a text field with pre-determined values.</p>
+  <h4 id="back-end-imports">Back-end imports</h4>
+  <p>If your data is well-managed, you can ask a <a href="mailto:sharktraits@gmail.com">database programmer</a> to upload it for you. The data will be associated with your name and made private. You are required to make the data public yourself (if desired).</p>
+  <h4 id="submitting-data-from-papers">Submitting data from papers</h4>
+  <p>Entering published data not already in the database in strongly encouraged to improve the data’s usability and augment data analysis. A case in which this might occur is a meta-analysis. The data contributor can keep the data they submit private until their study is published.</p>
+  <blockquote>
+    <p>The key objective is to extract data from resources in such a way as to avoid people ever needing to go back to the that resource again.</p>
+  </blockquote>
+  <p>For example, extracting only the mean value of a trait measurement from a paper, without extracting any measure of variation or the context in which the trait was measured, will mean that the data may not be useful for other purposes. Someone else might need to go back and extract the information again, and there is a chance your initial efforts won’t be cited.</p>
+  <ul>
+    <li><p><strong>Primary resources only.</strong> Often people enter data from summary tables in papers that come from other (primary) resources. It is important to enter the data from the primary resource for two reasons: (1) so that the primary resource’s author is credited for their work, and (2) to avoid data duplication, where the same data are entered from both the primary and secondary resource. Secondary resources, such as meta-analyses, can be credited for large data compilations.</p></li>
+    <li><p><strong>Careful extraction.</strong> Copy values from tables carefully and double check. Extracting data from figures can be done with software like ImageJ or DataThief, where a scale can be set based on axis values and measurements of plotted data made, including error bars.</p></li>
+  </ul>
+  <!--
+    - **Gather important context.** Enter contextual data as well, which might require reading the methods. This might be as simple as the time of year or depth or habitat in which animals were collected, and potentially the same for all observations. Such information is very useful. However, contextual information can get complicated quickly. Please contact the database [Administrator](mailto:sharktraits@gmail.com) if you have any questions.
+  -->
+  <h4 id="quality-control">Quality control</h4>
+  <p>There are three levels of data review.</p>
+  <ol type="1">
+    <li><code>Contributor-level</code> review at time of submission, Once submitted, data are tagged as <em>pending</em>.</li>
+    <li><code>Editor-level</code> review. The relevant Editor/s for traits in your submission are automatically notified by email. The contributor may be contacted by the Editor if there are any issues with the submission. The Editor will <em>approve</em> the submission once satisfied.</li>
+    <li><code>User-level</code> review. Anyone signed-in as a database user can report an issue with an observation record, and the submitter and the Editor will be notified by email.</li>
+  </ol>
+  <h4 id="error-checking">Error checking</h4>
+  <p>The import step involves a series of checks by the computer. This basic error checking will ensure data submissions fit into the database format. Measurement records with the same species, location, resource and value will be flagged as potential duplicates. We expect error checking at this step will evolve and improve as different issues arise.  Once past this step, uploaded data contributions will be reviewed by a curator to ensure the database contains high-quality, usable information.</p>
+  <p><em><a href="#top">Top</a></em></p>
+  <hr />
+</div>
 
 
   <h3 id="data">Observations and Masurements</h3>
@@ -882,112 +973,4 @@
 
   <p><a href="#traitclasses">Trait Classes</a></p>
 
-  <h2 id="importing">Data submission</h2>
-
-  <h4 id="what-information-can-be-contributed">What information can be contributed</h4>
-  <p>The database currently accepts species-level measurements of chondrichthyans. Data must be associated with a species name (i.e., not genus- or family-level data) and public data must be associated with a published resource (e.g., paper, monograph, technical report, or book).</p>
-  <p>Data accepted:</p>
-  <ul>
-    <li>Species-level model-derived data that has been published</li>
-    <li>Species-level expert or group opinion data that has been published</li>
-    <li>Unpublished data, if kept private until published</li>
-  </ul>
-  <p>Data not accepted:</p>
-  <ul>
-    <li>Future predictions</li>
-    <li>Data for other taxonomic resolutions (e.g., genus or family).</li>
-  </ul>
-  <p>Unpublished data can also be imported into the database if it is kept private. Private data can be made public once associated with a published resource. Benefits of submitting unpublished data include:</p>
-  <ul>
-    <li>One can easily download the data alongside useful public data for analysis</li>
-    <li>One can prepare to make the data public at end of project</li>
-    <li>One can identify duplicate research efforts</li>
-  </ul>
-  <p>To contribute data, you need to email the database <a href="mailto:sharktraits@gmail.com">Administrator</a> to become a contributor.</p>
-  <blockquote>
-    <p>Having a primary, peer-reviewed resource is essential for maintaining data quality, contributor recognition and scientific rigor.</p>
-  </blockquote>
-
-  <h4>Importing a spreadsheet</h4>
-
-  <p>Even if only entering small amounts of data, use of the spreadsheet submission template is recommended. The fillable template can be accessed <a href="https://github.com/creeas/SharkTraits/blob/master/SharkTraits-Template.xlsx">here</a>. The spreadsheet import is the fastest way to get data into the database. The import function accepts csv-formatted spreadsheets and runs a number of tests to make sure your data fit the database formats correctly (note that you can export csv-formatted files from Excel using “Save as…”). Any errors will reject the entire import and the system will generat a log and contact the user by e-mail to indicate where the errors occur. If necessary, you will be able to fix these errors and try the import again. Errors may include incorrect formatting of the spreadsheet (e.g. not all required columns present) or missing values for required fields.</p>
-
-  <p>The spreadsheet you import must have a header with <em>at least</em> the following column names:</p>
-  <pre><code>observation_id, access, user_id, resource_id, species_name, location_id, trait_name, standard_name, methodology_name, value, value_type, precision, precision_type, precision_upper, sample_size, notes</code></pre>
-  <p><code>species_id</code>, <code>trait_id</code>, <code>method_id</code>, and <code>model_id</code> can be included instead of <code>species_name</code>, <code>trait_name</code>, <code>method_name</code>, and <code>model_name</code>, respectively (or you can include both ids and names). Having the names can be useful for navigating large spreadsheets. <strong>These names must exactly reflect the names in the database</strong>, so it is best to copy and paste names directly from the database.</p>
-  <p><code>resource_id</code> is reserved for the original data resource (i.e., the paper that reports the original collection of the measurement). You can credit papers that compiled large datasets from the literature by adding a column named <code>resource_secondary_id</code>. <code>resource_id</code> and <code>resource_secondary_id</code> may be substituted with <code>resource_doi</code> and <code>resource_secondary_doi</code>, respectively (the doi should start with “10.”, not “doi:”). The resource will automatically be added using Crossref if the doi is not already in the database.</p>
-  <p>We have collated all the references from <a href="https://sharktraits-refs.shinyapps.io/shark-resources/">shark-references.com</a> and generated a unique <code>resource_id</code> for each reference, so the easiest way to populate this field is by searching for the <code>resource_id</code> in the reference list provided.</p>
-  <p><code>user_id</code> must be your own database user id (i.e., you cannot import data for other people). You can find your user id by clicking on your name in the top right corner and selecting “My Observations”.</p>
-  <p>Copy and paste the above header into a text file and save as <code>import_trait_author_year.csv</code>, where author and year correspond with the resource (paper). Alternatively, download a <a href="/import_template_author_year.csv">CSV</a> or <a href="/import_template_author_year.xlsx">Excel</a> template.</p>
-  <h4 id="observation-level-data">Observation-level data</h4>
-  <p>The first six required columns are associated with the observation.</p>
-  <p><code>observation_id</code> is an unique integer that groups a set of measurements into one observation. In the example below, the first two rows belong to the same observation of a shark.</p>
-  <p><code>hidden</code> is a boolean value indicating if the observation should be accessible (0 denotes private and 1 denotes public). In the example below, the data are public.</p>
-  <p><code>user_id</code> is the unique ID (name or integer) of the person entering the data.</p>
-  <p><code>species_name</code> and/or <code>species_id</code> is the unique name or ID of the species of which the observation was taken. IDs occur in grey to the left of <a href="">species</a> or at the top of a given species’ observation page.</p>
-  <p><code>marine_province</code> is the large marine regions (e.g. longhurst province) where the study was conducted. You can see a global map of provinces and associated names here <a href=""></a></p>
-  <p><code>location_id</code> is the unique ID of the location where the observation took place.</p>
-  <p><code>resource_id</code> is the unique ID of the resource (paper) where the observation was published. <code>resource_id</code> can be empty for unpublished data, in which case <code>access</code> must be private (0) until the data are published and the published resource is entered.</p>
-  <h4 id="measurement-level-data">Measurement-level data</h4>
-  <p>The remaining columns are associated with measurement-level data. All measurements corresponding to the same observation should have exactly the same observation-level data.</p>
-  <blockquote>
-    <p><strong>Warning</strong> All measurements corresponding to the same observation should have exactly the same observation-level data. Use copy and paste or fill down to avoid making errors.</p>
-  </blockquote>
-  <p><code>trait_name</code> and/or <code>trait_id</code> is the unique name or ID (integer) of the species-level characteristic that was measured.</p>
-  <p><code>standard_name</code> is the unique ID of the standard (measurement unit) that was used to measure the trait.</p>
-  <p><code>method_name</code> is the unique ID of the methodology used to measure the trait.</p>
-  <p><code>model_name</code> is the unique name of the model being used for the given methodology to measure the trait.</p>
-  <p><code>value</code> is the actual measured value (number, text, true/false, etc.). If the value is an option of a categorical trait (e.g., growth form), then the value must exactly match the value options for the trait (e.g., massive).</p>
-  <p><code>value_type</code> describes the type of value. Current options are:</p>
-  <ul>
-    <li><code>raw_value</code> for a direct measurement,</li>
-    <li><code>mean</code> if the value represents the mean of more than one value,</li>
-    <li><code>median</code> if the value represents the median of more than one value,</li>
-    <li><code>maximum</code> if the value represents the maximum of more than one value,</li>
-    <li><code>minimum</code> if the value represents the minimum of more than one value,</li>
-    <li><code>model_derived</code> if the value is derived from a model,</li>
-    <li><code>expert_opinion</code> if the actual value has not been measured directly, but an expert feels confident of the value, perhaps based on phylogenetic relatedness or an indirect observation,</li>
-    <li><code>group_opinion</code> if the actual value has not been measured directly, but a group of experts feel confident of the value.</li>
-  </ul>
-  <p><code>precision</code> is the level of uncertainty associated with the value if it is made up from more than one measurement (e.g., mean).</p>
-  <p><code>precision_type</code> is the kind of uncertainty that the precision estimate (above) corresponds with. Current options are:</p>
-  <ul>
-    <li><code>standard_error</code></li>
-    <li><code>standard_deviation</code></li>
-    <li><code>95_ci</code></li>
-    <li><code>range</code></li>
-  </ul>
-  <p><code>precision_upper</code> is used to capture the maximum (upper) value if range is used (above).</p>
-  <p><code>sample_size</code> is the number of data points that were used to calculate the value. Leave this field blank if equal to one (e.g., a raw_value).</p>
-  <p>Optional fields include:</p>
-  <p><code>notes</code> is an optional field for reporting useful information about how the measurement was made.</p>
-  <p><code>dubious</code> is a optional Boolean field noting whether the data being reported is classified as dubious (1) or not (0 or blank) by the user entering the data.</p>
-  <p><code>validated</code> is a boolean field to be used only for Growth Trait Class measurements, indicating whether any validation of the growth model has been attempted (1) or not (0).</p>
-  <p><code>validation_type</code> denotes the method used for validating the growth model. At the moment, this is a text field with pre-determined values.</p>
-  <h4 id="back-end-imports">Back-end imports</h4>
-  <p>If your data is well-managed, you can ask a <a href="mailto:sharktraits@gmail.com">database programmer</a> to upload it for you. The data will be associated with your name and made private. You are required to make the data public yourself (if desired).</p>
-  <h4 id="submitting-data-from-papers">Submitting data from papers</h4>
-  <p>Entering published data not already in the database in strongly encouraged to improve the data’s usability and augment data analysis. A case in which this might occur is a meta-analysis. The data contributor can keep the data they submit private until their study is published.</p>
-  <blockquote>
-    <p>The key objective is to extract data from resources in such a way as to avoid people ever needing to go back to the that resource again.</p>
-  </blockquote>
-  <p>For example, extracting only the mean value of a trait measurement from a paper, without extracting any measure of variation or the context in which the trait was measured, will mean that the data may not be useful for other purposes. Someone else might need to go back and extract the information again, and there is a chance your initial efforts won’t be cited.</p>
-  <ul>
-    <li><p><strong>Primary resources only.</strong> Often people enter data from summary tables in papers that come from other (primary) resources. It is important to enter the data from the primary resource for two reasons: (1) so that the primary resource’s author is credited for their work, and (2) to avoid data duplication, where the same data are entered from both the primary and secondary resource. Secondary resources, such as meta-analyses, can be credited for large data compilations.</p></li>
-    <li><p><strong>Careful extraction.</strong> Copy values from tables carefully and double check. Extracting data from figures can be done with software like ImageJ or DataThief, where a scale can be set based on axis values and measurements of plotted data made, including error bars.</p></li>
-  </ul>
-  <!--
-    - **Gather important context.** Enter contextual data as well, which might require reading the methods. This might be as simple as the time of year or depth or habitat in which animals were collected, and potentially the same for all observations. Such information is very useful. However, contextual information can get complicated quickly. Please contact the database [Administrator](mailto:sharktraits@gmail.com) if you have any questions.
-  -->
-  <h4 id="quality-control">Quality control</h4>
-  <p>There are three levels of data review.</p>
-  <ol type="1">
-    <li><code>Contributor-level</code> review at time of submission, Once submitted, data are tagged as <em>pending</em>.</li>
-    <li><code>Editor-level</code> review. The relevant Editor/s for traits in your submission are automatically notified by email. The contributor may be contacted by the Editor if there are any issues with the submission. The Editor will <em>approve</em> the submission once satisfied.</li>
-    <li><code>User-level</code> review. Anyone signed-in as a database user can report an issue with an observation record, and the submitter and the Editor will be notified by email.</li>
-  </ol>
-  <h4 id="error-checking">Error checking</h4>
-  <p>The import step involves a series of checks by the computer. This basic error checking will ensure data submissions fit into the database format. Measurement records with the same species, location, resource and value will be flagged as potential duplicates. We expect error checking at this step will evolve and improve as different issues arise.  Once past this step, uploaded data contributions will be reviewed by a curator to ensure the database contains high-quality, usable information.</p>
-  <p><em><a href="#top">Top</a></em></p>
-  <hr />
-</div>
+  

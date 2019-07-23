@@ -6,7 +6,7 @@
 
   <p>The Shark Traits Database is an open source research initiative that aims to make all observations and measurements of chondrichthyans (sharks, rays, and chimaeras) accessible in order to more rapidly advance resesearch. The framework behind the database is heavily based on the open source <a href"https://www.coraltraits.org"> Coral Trait Database</a>. Anyone collecting chondrichthyan life history data can join and contribute to the growing data compilation. Contributors have control over the privacy of their data, but will benefit from being able to download complimentary public data from the database in a standard format for use in their analyses. We hope that private data will become public once the contributor has published them, and a citation is available. The resource citation system here has been designed to ensure full transparency about the origin of each individual data point.  This page covers the following:</p>
 
-   
+
   <h3>Governance</h3>
 
   <h4>Administrator</h4>
@@ -121,856 +121,856 @@
   <p>The import step involves a series of checks by the computer. This basic error checking will ensure data submissions fit into the database format. Measurement records with the same species, location, resource and value will be flagged as potential duplicates. We expect error checking at this step will evolve and improve as different issues arise.  Once past this step, uploaded data contributions will be reviewed by a curator to ensure the database contains high-quality, usable information.</p>
   <p><em><a href="#top">Top</a></em></p>
   <hr />
-</div>
 
 
-  <h3 id="data">Observations and Masurements</h3>
+<h3 id="data">Observations and Masurements</h3>
 
-  <blockquote>
-    <p>The Shark Traits Database is a research tool, not a meta-data repository.</p>
-  </blockquote>
-  <p><strong>A meta-data repository captures <code>dataset-level</code> information</strong> about your data set, so that people can easily find it. Examples of meta-data repositories include DRYAD, Ecological Archives and Figshare. You are encouraged to submit data sets to meta-data repositories to help ensure their longevity and the reproducibility of the results for which the data were originally collected.</p>
-  <p><strong>The Shark Traits Database captures <code>data-level</code> information</strong> so that measurements from multiple data sets can be integrated, extracted, compared and analyzed.</p>
-  <blockquote>
-    <p>One way to think about The Shark Traits Database is as a very large data-set being cobbled together by the chondrichthyan research community for everyone to use, avoiding redundant efforts, identifying knowledge gaps, informing management, and speeding up science.</p>
-  </blockquote>
+<blockquote>
+  <p>The Shark Traits Database is a research tool, not a meta-data repository.</p>
+</blockquote>
+<p><strong>A meta-data repository captures <code>dataset-level</code> information</strong> about your data set, so that people can easily find it. Examples of meta-data repositories include DRYAD, Ecological Archives and Figshare. You are encouraged to submit data sets to meta-data repositories to help ensure their longevity and the reproducibility of the results for which the data were originally collected.</p>
+<p><strong>The Shark Traits Database captures <code>data-level</code> information</strong> so that measurements from multiple data sets can be integrated, extracted, compared and analyzed.</p>
+<blockquote>
+  <p>One way to think about The Shark Traits Database is as a very large data-set being cobbled together by the chondrichthyan research community for everyone to use, avoiding redundant efforts, identifying knowledge gaps, informing management, and speeding up science.</p>
+</blockquote>
 
-  <p>The data are organized by <code> observation </code>. Observations index related trait measurements of the same population. For example, estimates of age at maturity for males and females of the same population results in one <code>observation</code> with two <code>measurements</code> (each corresponding to a different trait of the population).</p>
+<p>The data are organized by <code> observation </code>. Observations index related trait measurements of the same population. For example, estimates of age at maturity for males and females of the same population results in one <code>observation</code> with two <code>measurements</code> (each corresponding to a different trait of the population).</p>
 
-  <p><b>Observation-level</b> data include the chondrichthyan species, location and resource identity (i.e., reference). These data are the same for all measurements corresponding to the observation. When entering or importing trait data, the following observation-level data are minimally required:</p>
+<p><b>Observation-level</b> data include the chondrichthyan species, location and resource identity (i.e., reference). These data are the same for all measurements corresponding to the observation. When entering or importing trait data, the following observation-level data are minimally required:</p>
 
-  <ul>
-    <li>Contributor ID</li>
-    <li>Access (public or private)</li>
-    <li>Species<sup>1</sup></li>
-    <li>Location<sup>2</sup></li>
-    <li>Resource<sup>3</sup></li>
-  </ul>
+<ul>
+  <li>Contributor ID</li>
+  <li>Access (public or private)</li>
+  <li>Species<sup>1</sup></li>
+  <li>Location<sup>2</sup></li>
+  <li>Resource<sup>3</sup></li>
+</ul>
 
-  <p><sup>1</sup>All observations must be associated with a valid species name. We are using the taxonomy of <a href"https://onlinelibrary.wiley.com/doi/full/10.1111/jfb.12874"> Weigmann 2016</a>. Note that this taxonomy does not currently include all the taxonomic nomenclatural revisions in <a href"https://www.researchgate.net/publication/311043124_The_Rays_of_the_World_project_-_an_explanation_of_nomenclatural_decisions"> Naylor et al 2016</a>. The list of valid species names is built into the spreadsheet template and can be accessed as a dropdown menu. First select the appropriate `species_superorder` (Chimaeriformes, Batoidea, Squalimorph Sharks, or Galeomorph Sharks) and a reduced taxa set to select from will be provided in the `species_name` column. If you cannot find the species name then you can select `Recently described/Novel species` from the drop down menu and include the Latin binomial name in the notes column.</p>
+<p><sup>1</sup>All observations must be associated with a valid species name. We are using the taxonomy of <a href"https://onlinelibrary.wiley.com/doi/full/10.1111/jfb.12874"> Weigmann 2016</a>. Note that this taxonomy does not currently include all the taxonomic nomenclatural revisions in <a href"https://www.researchgate.net/publication/311043124_The_Rays_of_the_World_project_-_an_explanation_of_nomenclatural_decisions"> Naylor et al 2016</a>. The list of valid species names is built into the spreadsheet template and can be accessed as a dropdown menu. First select the appropriate `species_superorder` (Chimaeriformes, Batoidea, Squalimorph Sharks, or Galeomorph Sharks) and a reduced taxa set to select from will be provided in the `species_name` column. If you cannot find the species name then you can select `Recently described/Novel species` from the drop down menu and include the Latin binomial name in the notes column.</p>
 
-  <p><sup>2</sup>Location information can be entered in several formats/columns: (1) `marine_province` is restricted to the designated <a href"http://www.marineregions.org/gazetteer.php?p=image&pic=64934">marine Longhurst Provinces</a>, (2) `location_name` is for general locations provided in the study methods (e.g. Southern Calfifornia Bight, Northern Gulf of Mexico), and (3) `lat` and `long` coordinates if available.</p>
+<p><sup>2</sup>Location information can be entered in several formats/columns: (1) `marine_province` is restricted to the designated <a href"http://www.marineregions.org/gazetteer.php?p=image&pic=64934">marine Longhurst Provinces</a>, (2) `location_name` is for general locations provided in the study methods (e.g. Southern Calfifornia Bight, Northern Gulf of Mexico), and (3) `lat` and `long` coordinates if available.</p>
 
-  <p><sup>3</sup>The resource ID should be taken from the unique ID found in the <a href"https://sharktraits-refs.shinyapps.io/shark-resources/"> references database</a>. This is a web application that contains all materials compiled on <a href"https://shark-references.com/"> Shark-References</a>.You can filter the reference databse by year and/or search for author, keyword, species, journal, etc. The resource can be left blank for unpublished data, but those contributions must be kept private.</p>
+<p><sup>3</sup>The resource ID should be taken from the unique ID found in the <a href"https://sharktraits-refs.shinyapps.io/shark-resources/"> references database</a>. This is a web application that contains all materials compiled on <a href"https://shark-references.com/"> Shark-References</a>.You can filter the reference databse by year and/or search for author, keyword, species, journal, etc. The resource can be left blank for unpublished data, but those contributions must be kept private.</p>
 
-  <p><b>Measurement-level</b> data include the sex, trait, value, standard (unit), methodology, estimates of precision (if applicable), and model used. When entering or importing trait data, the following information is minimally required:</p>
-  <ul>
-    <li>Sex</li>
-    <li>Trait</li>
-    <li>Value
-      <li>Standard</li>
-  </ul>
+<p><b>Measurement-level</b> data include the sex, trait, value, standard (unit), methodology, estimates of precision (if applicable), and model used. When entering or importing trait data, the following information is minimally required:</p>
+<ul>
+  <li>Sex</li>
+  <li>Trait</li>
+  <li>Value
+    <li>Standard</li>
+</ul>
 
-  <h3 id="traitclasses">Trait Classes and Traits</h3>
+<h3 id="traitclasses">Trait Classes and Traits</h3>
 
-  <p>The database was designed to contain `population-level` characteristic measurements, which are trait estimates of a species at a given location. These traits are grouped into six trait-classes: </p>
-  <ul>
-    <li> <a href="#length"> Length </a></li>
-    <li> <a href="#age"> Age </a></li>
-    <li> <a href="#growth"> Growth </a></li>
-    <li> <a href="#reproduction"> Reproduction </a></li>
-    <li> <a href="#demography"> Demography </a> </li>
-    <li> <a href="#relationships"> Relationships </a> (conversions between different units, such as length to weight)</li>
-  </ul>
+<p>The database was designed to contain `population-level` characteristic measurements, which are trait estimates of a species at a given location. These traits are grouped into six trait-classes: </p>
+<ul>
+  <li> <a href="#length"> Length </a></li>
+  <li> <a href="#age"> Age </a></li>
+  <li> <a href="#growth"> Growth </a></li>
+  <li> <a href="#reproduction"> Reproduction </a></li>
+  <li> <a href="#demography"> Demography </a> </li>
+  <li> <a href="#relationships"> Relationships </a> (conversions between different units, such as length to weight)</li>
+</ul>
 
-  A trait should always have a Standard and a Method. In cases where there are multiple models that could be fitted in a method, there should be a Model specified as well.
+A trait should always have a Standard and a Method. In cases where there are multiple models that could be fitted in a method, there should be a Model specified as well.
 
-  <h3 id="length"> Length </h3>
+<h3 id="length"> Length </h3>
 
-  <h4>Trait Names: <b>Length</b></h4>
-  <table style="width:100%"> 
-    <tr>
+<h4>Trait Names: <b>Length</b></h4>
+<table style="width:100%">
+  <tr>
+    <th>Trait</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>L<sub>mat50</sub></td>
+    <td>Length at 50% maturity</td>
+  </tr>
+  <tr>
+    <td>L<sub>mat95</sub></td>
+    <td>Length at 95% maturity</td>
+  </tr>
+  <tr>
+    <td>Length at first maturity</td>
+    <td>Length of smallest mature individual based on gonadal observation (production of gametes) or clasper calcification.</td>
+  </tr>
+  <tr>
+    <td>Length of largest immature</td>
+    <td>Length of largest immature individuals based on gonadal observation (production of gametes) or clasper calcification.</td>
+  </tr>
+  <tr>
+    <td>Length at maternity</td>
+    <td>Length at first observation of pregnancy</td>
+  </tr>
+  <tr>
+    <td>L<sub>max</sub>-observed</td>
+    <td>Maximum observed length</td>
+  </tr>
+  <tr>
+    <td>L<sub>max</sub>-estimated</td>
+    <td>Maximum length estimated from model</td>
+  </tr>
+  <tr>
+    <td>L<sub>birth</sub></td>
+    <td>Length at birth</td>
+  </tr>
+</table>
+
+<h4>Standards: Length</h4>
+<table style="width:100%">
+  <tr>
+    <th>Standard</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>cm TL</td>
+    <td>Total length in centimeters</td>
+  </tr>
+  <tr>
+    <td>cm FL</td>
+    <td>Fork length in centimeters</td>
+  </tr>
+  <tr>
+    <td>cm DW</td>
+    <td>Disc Width in centimeters</td>
+  </tr>
+  <tr>
+    <td>cm CL</td>
+    <td>Chimaera length in centimeters</td>
+  </tr>
+  <tr>
+    <td>cm PCL</td>
+    <td>Pre-caudal length length in centimeters</td>
+  </tr>
+  <tr>
+    <td>cm BDL</td>
+    <td>Body length in centimeters</td>
+  </tr>
+  <tr>
+    <td>cm PSCFL</td>
+    <td>Pre-supra-caudal fin length in centimeters</td>
+  </tr>
+</table>
+
+<h4> Methods: Length</h4>
+<table style="width:100%">
+  <tr>
+    <th>Methods</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>Back-calculated</td>
+    <td>Estimated from a model output (Model should be specified)</td>
+  </tr>
+  <tr>
+    <td>Directly observed</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Histologically</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Macro-dissection</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Smallest free-swimming individual</td>
+    <td>Observation of smallest free-swimming individual</td>
+  </tr>
+  <tr>
+    <td>Largest Embryo</td>
+    <td>Observation of largest embryo <i>in utero</i></td>
+  </tr>
+  <tr>
+    <td>Free + Embryo</td>
+    <td>Based on combined observations of largest embryo and smallest free-swimming individual</td>
+  </tr>
+  <tr>
+    <td>Embryo growth curve</td>
+    <td>Estimated from a model output (Model should be specified)</td>
+  </tr>
+  <tr>
+    <td>L<sub>95</sub></td>
+    <td>95th percentile of observed size distribution</td>
+  </tr>
+  <tr>
+    <td>L<sub>99</sub></td>
+    <td>99th percentile of observed size distribution</td>
+  </tr>
+  <tr>
+    <td>Max observed size</td>
+    <td>Observation of largest individual</td>
+  </tr>
+  <tr>
+    <td>Inverse mortality</td>
+    <td>Estimated from a model parameter (Model should be specified)</td>
+  </tr>
+</table>
+
+<h4>Models: Length</h4>
+<table style="width:100%">
+  <tr>
+    <th>Models</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>Back-calculated</td>
+    <td>Estimated from a model output (Model should be specified)</td>
+  </tr>
+  <tr>
+    <td>Directly from growth curves</td>
+    <td>Estimated from growth curve (Model should be specified)</td>
+  </tr>
+  <tr>
+    <td>Observational</td>
+    <td>Directly Observed</td>
+  </tr>
+  <tr>
+    <td>Logistic</td>
+    <td>Estimated from logistic model or ogive</td>
+  </tr>
+</table>
+
+
+<a href="#traitclasses">Trait Classes</a>
+
+
+<h3 id="age"> Age </h3>
+
+<h4>Trait names: Age</h4>
+<table style="width:100%">
+  <tr>
+    <th>Trait</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>A<sub>mat50</sub></td>
+    <td>Age at 50% maturity</td>
+  </tr>
+  <tr>
+    <td>A<sub>mat95</sub></td>
+    <td>Age at 95% maturity</td>
+  </tr>
+  <tr>
+    <td>Age at first maturity</td>
+    <td>Age at first maturity based on gonadal observation (production of gametes) or clasper calcification</td>
+  </tr>
+  <tr>
+    <td>Age of largest immature</td>
+    <td>Age largest immature individual based on gonadal observation (production of gametes) or clasper calcification</td>
+  </tr>
+  <tr>
+    <td>Age at maternity</td>
+    <td>Age at first observation of pregnancy</td>
+  </tr>
+  <tr>
+    <td>A<sub>max</sub>-observed</td>
+    <td>Maximum observed age</td>
+  </tr>
+  <tr>
+    <td>A<sub>max</sub>-estimatedy</td>
+    <td>Maximum age estimated from model</td>
+  </tr>
+</table>
+
+<h4>Standard: Age</h4>
+<table style="width:100%">
+  <tr>
+    <th>Standard</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>Year</td>
+    <td>Age in years</td>
+  </tr>
+</table>
+
+<h4>Methods: Age</h4>
+<table style="width:100%">
+  <tr>
+    <th>Methods</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>Back-calculated</td>
+    <td>Estimated from a model output (Model should be specified)</td>
+  </tr>
+  <tr>
+    <td>Directly observed</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Histologically</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Macro-dissection</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Smallest free-swimming individual</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td> Largest Embryo</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Free + Embryo</td>
+    <td>Based on combined observations of largest embryo and smallest free-swimming individual</td>
+  </tr>
+  <tr>
+    <td>Embryo growth curve</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>L<sub>95</sub></td>
+    <td>95th percentile of observed size distribution</td>
+  </tr>
+  <tr>
+    <td>L<sub>99</sub></td>
+    <td>99th percentile of observed size distribution</td>
+  </tr>
+  <tr>
+    <td>Max observed size</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Inverse mortality</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Mark-recapture</td>
+    <td>From mark-recapture data</td>
+  </tr>
+</table>
+
+<h4>Models: Age</h4>
+<table style="width:100%">
+  <tr>
+    <th>Models</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>Back-calculated</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Directly observed</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Observational</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Logistic</td>
+    <td></td>
+  </tr>
+  <tr>
+</table>
+
+
+<a href="#traitclasses">Trait Classes</a>
+
+<h3 id="growth">Growth</h3>
+<p>Given that this trait class deals with model outputs, there is only a single placeholder Standard as the units of each Trait are implicit.</p>
+<h4>Trait Names: Growth</h4>
+<table>
+  <thead>
+    <tr class="header">
       <th>Trait</th>
-      <th>Description</th>
+      <th style="text-align: left;">Description</th>
     </tr>
-    <tr>
-      <td>L<sub>mat50</sub></td>
-      <td>Length at 50% maturity</td>
+  </thead>
+  <tbody>
+    <tr class="odd">
+      <td><em>k</em></td>
+      <td style="text-align: left;">von Bertalanffy growth parameter</td>
     </tr>
-    <tr>
-      <td>L<sub>mat95</sub></td> 
-      <td>Length at 95% maturity</td>
+    <tr class="even">
+      <td>L<sub>inf</sub></td>
+      <td style="text-align: left;">von Bertalanffy asymptotic size parameter</td>
     </tr>
-    <tr>
-      <td>Length at first maturity</td>
-      <td>Length of smallest mature individual based on gonadal observation (production of gametes) or clasper calcification.</td>
+    <tr class="odd">
+      <td>L<sub>0</sub></td>
+      <td style="text-align: left;">von Bertalanffy length-at-age zero parameter</td>
     </tr>
-    <tr>
-      <td>Length of largest immature</td>
-      <td>Length of largest immature individuals based on gonadal observation (production of gametes) or clasper calcification.</td>
+    <tr class="even">
+      <td><em>t</em><sub>0</sub></td>
+      <td style="text-align: left;">von Bertalanffy age-at-length zero parameter</td>
     </tr>
-    <tr>
-      <td>Length at maternity</td>
-      <td>Length at first observation of pregnancy</td>
+    <tr class="odd">
+      <td><em>t</em><sub>1</sub></td>
+      <td style="text-align: left;">Lester model</td>
     </tr>
-    <tr>
-      <td>L<sub>max</sub>-observed</td>
-      <td>Maximum observed length</td>
+    <tr class="even">
+      <td>T<sub>mat</sub></td>
+      <td style="text-align: left;">Lester model</td>
     </tr>
-    <tr>
-      <td>L<sub>max</sub>-estimated</td>
-      <td>Maximum length estimated from model</td>
+    <tr class="odd">
+      <td>H</td>
+      <td style="text-align: left;">Lester model</td>
     </tr>
-    <tr>
-      <td>L<sub>birth</sub></td>
-      <td>Length at birth</td>
+    <tr class="even">
+      <td>G</td>
+      <td style="text-align: left;">Lester model</td>
     </tr>
-  </table>
+    <tr class="odd">
+      <td>sigma-growth</td>
+      <td style="text-align: left;">error estimate of the growth model</td>
+    </tr>
+    <tr class="even">
+      <td>cv_readers</td>
+      <td style="text-align: left;">Coefficient of variation between readers</td>
+    </tr>
+    <tr class="odd">
+      <td>APE</td>
+      <td style="text-align: left;"></td>
+    </tr>
+    <tr class="even">
+      <td>PA</td>
+      <td style="text-align: left;">Percent agreement between readers</td>
+    </tr>
+  </tbody>
+</table>
 
-  <h4>Standards: Length</h4>
-  <table style="width:100%"> 
-    <tr>
-      <th>Standard</th>
-      <th>Description</th>
+<h4>Standards: Growth</h4>
+<table>
+  <thead>
+    <tr class="header">
+      <th>Standards</th>
+      <th style="text-align: left;">Description</th>
     </tr>
-    <tr>
-      <td>cm TL</td>
-      <td>Total length in centimeters</td>
+  </thead>
+  <tbody>
+    <tr class="odd">
+      <td>Coefficient</td>
+      <td style="text-align: left;">Coefficient value from model output (Model must be specified)</td>
     </tr>
-    <tr>
-      <td>cm FL</td> 
-      <td>Fork length in centimeters</td>
-    </tr>
-    <tr>
-      <td>cm DW</td>
-      <td>Disc Width in centimeters</td>
-    </tr>
-    <tr>
-      <td>cm CL</td>
-      <td>Chimaera length in centimeters</td>
-    </tr>
-    <tr>
-      <td>cm PCL</td>
-      <td>Pre-caudal length length in centimeters</td>
-    </tr>
-    <tr>
-      <td>cm BDL</td> 
-      <td>Body length in centimeters</td>
-    </tr>
-    <tr>
-      <td>cm PSCFL</td>
-      <td>Pre-supra-caudal fin length in centimeters</td>
-    </tr>
-  </table>
+  </tbody>
+</table>
 
-  <h4> Methods: Length</h4>
-  <table style="width:100%"> 
-    <tr>
-      <th>Methods</th>
-      <th>Description</th>
+<h4>Methods: Growth</h4>
+<table>
+  <thead>
+    <tr class="header">
+      <th>Method</th>
+      <th style="text-align: left;">Description</th>
     </tr>
-    <tr>
-      <td>Back-calculated</td>
-      <td>Estimated from a model output (Model should be specified)</td>
-    </tr>
-    <tr>
-      <td>Directly observed</td> 
-      <td></td>
-    </tr>
-    <tr>
-      <td>Histologically</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>Macro-dissection</td> 
-      <td></td>
-    </tr>
-    <tr>
-      <td>Smallest free-swimming individual</td>
-      <td>Observation of smallest free-swimming individual</td>
-    </tr>
-    <tr>
-      <td>Largest Embryo</td>
-      <td>Observation of largest embryo <i>in utero</i></td>
-    </tr>
-    <tr>
-      <td>Free + Embryo</td>
-      <td>Based on combined observations of largest embryo and smallest free-swimming individual</td>
-    </tr>
-    <tr>
-      <td>Embryo growth curve</td> 
-      <td>Estimated from a model output (Model should be specified)</td>
-    </tr>
-    <tr>
-      <td>L<sub>95</sub></td>
-      <td>95th percentile of observed size distribution</td>
-    </tr>
-    <tr>
-      <td>L<sub>99</sub></td> 
-      <td>99th percentile of observed size distribution</td>
-    </tr>
-    <tr>
-      <td>Max observed size</td>
-      <td>Observation of largest individual</td>
-    </tr>
-    <tr>
-      <td>Inverse mortality</td>
-      <td>Estimated from a model parameter (Model should be specified)</td>
-    </tr>
-  </table>
-
-  <h4>Models: Length</h4>
-  <table style="width:100%"> 
-    <tr>
-      <th>Models</th>
-      <th>Description</th>
-    </tr>
-    <tr>
-      <td>Back-calculated</td>
-      <td>Estimated from a model output (Model should be specified)</td>
-    </tr>
-    <tr>
-      <td>Directly from growth curves</td> 
-      <td>Estimated from growth curve (Model should be specified)</td>
-    </tr>
-    <tr>
-      <td>Observational</td>
-      <td>Directly Observed</td>
-    </tr>
-    <tr>
-      <td>Logistic</td> 
-      <td>Estimated from logistic model or ogive</td>
-    </tr>
-  </table>
-
-
-  <a href="#traitclasses">Trait Classes</a>
-
-
-  <h3 id="age"> Age </h3>
-
-  <h4>Trait names: Age</h4>
-  <table style="width:100%"> 
-    <tr>
-      <th>Trait</th>
-      <th>Description</th>
-    </tr>
-    <tr>
-      <td>A<sub>mat50</sub></td>
-      <td>Age at 50% maturity</td>
-    </tr>
-    <tr>
-      <td>A<sub>mat95</sub></td> 
-      <td>Age at 95% maturity</td>
-    </tr>
-    <tr>
-      <td>Age at first maturity</td>
-      <td>Age at first maturity based on gonadal observation (production of gametes) or clasper calcification</td>
-    </tr>
-    <tr>
-      <td>Age of largest immature</td> 
-      <td>Age largest immature individual based on gonadal observation (production of gametes) or clasper calcification</td>
-    </tr>
-    <tr>
-      <td>Age at maternity</td>
-      <td>Age at first observation of pregnancy</td>
-    </tr>
-    <tr>
-      <td>A<sub>max</sub>-observed</td> 
-      <td>Maximum observed age</td>
-    </tr>
-    <tr>
-      <td>A<sub>max</sub>-estimatedy</td>
-      <td>Maximum age estimated from model</td>
-    </tr>
-  </table>
-
-  <h4>Standard: Age</h4>
-  <table style="width:100%"> 
-    <tr>
-      <th>Standard</th>
-      <th>Description</th>
-    </tr>
-    <tr>
-      <td>Year</td>
-      <td>Age in years</td>
-    </tr>
-  </table>                       
-
-  <h4>Methods: Age</h4>
-  <table style="width:100%">
-    <tr>
-      <th>Methods</th>
-      <th>Description</th>
-    </tr>
-    <tr>
-      <td>Back-calculated</td>
-      <td>Estimated from a model output (Model should be specified)</td>
-    </tr>
-    <tr>
-      <td>Directly observed</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>Histologically</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>Macro-dissection</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>Smallest free-swimming individual</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td> Largest Embryo</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>Free + Embryo</td>
-      <td>Based on combined observations of largest embryo and smallest free-swimming individual</td>
-    </tr>
-    <tr>
-      <td>Embryo growth curve</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>L<sub>95</sub></td>
-      <td>95th percentile of observed size distribution</td>
-    </tr>
-    <tr>
-      <td>L<sub>99</sub></td>
-      <td>99th percentile of observed size distribution</td>
-    </tr>
-    <tr>
-      <td>Max observed size</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>Inverse mortality</td>
-      <td></td>
-    </tr>
-    <tr>
+  </thead>
+  <tbody>
+    <tr class="odd">
       <td>Mark-recapture</td>
-      <td>From mark-recapture data</td>
+      <td style="text-align: left;"></td>
     </tr>
-  </table>
-
-  <h4>Models: Age</h4>
-  <table style="width:100%">
-    <tr>
-      <th>Models</th>
-      <th>Description</th>
+    <tr class="even">
+      <td>Length-frequency</td>
+      <td style="text-align: left;"></td>
     </tr>
-    <tr>
-      <td>Back-calculated</td>
-      <td></td>
+    <tr class="odd">
+      <td>Vertebrae</td>
+      <td style="text-align: left;"></td>
     </tr>
-    <tr>
-      <td>Directly observed</td>
-      <td></td>
+    <tr class="even">
+      <td>Spines</td>
+      <td style="text-align: left;"></td>
     </tr>
-    <tr>
-      <td>Observational</td>
-      <td></td>
+    <tr class="odd">
+      <td>Tooth Plates</td>
+      <td style="text-align: left;"></td>
     </tr>
-    <tr>
-      <td>Logistic</td>
-      <td></td>
+    <tr class="even">
+      <td>Direct Age</td>
+      <td style="text-align: left;">Estimates from individuals of known ages</td>
     </tr>
-    <tr>
-  </table>
+    <tr class="odd">
+      <td>Captive</td>
+      <td style="text-align: left;">Data from captive individuals</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>Models: Growth</h4>
+<table>
+  <colgroup>
+    <col style="width: 17%" />
+    <col style="width: 82%" />
+  </colgroup>
+  <thead>
+    <tr class="header">
+      <th>Model</th>
+      <th style="text-align: left;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="odd">
+      <td>VBFG2 Strong Bayes</td>
+      <td style="text-align: left;">Bayesian implementation of 2 parameter von Bertalanffy growth curve with strong priors</td>
+    </tr>
+    <tr class="even">
+      <td>VBFG2 Uninformed Bayes</td>
+      <td style="text-align: left;">Bayesian implementation of 2 parameter von Bertalanffy growth curve with weak/uninformative priors</td>
+    </tr>
+    <tr class="odd">
+      <td>VBFG2 ML</td>
+      <td style="text-align: left;">Maximum Likelihood implementation of 2 parameter von Bertalanffy growth curve</td>
+    </tr>
+    <tr class="even">
+      <td>VBFG3 Strong Bayes</td>
+      <td style="text-align: left;">Bayesian implementation of 3 parameter von Bertalanffy growth curve with strong priors</td>
+    </tr>
+    <tr class="odd">
+      <td>VBFG3 Uninformed Bayes</td>
+      <td style="text-align: left;">Bayesian implementation of 3 parameter von Bertalanffy growth curve with weak/uninformative priors</td>
+    </tr>
+    <tr class="even">
+      <td>VBFG3 ML</td>
+      <td style="text-align: left;">Maximum Likelihood implementation of 2 parameter von Bertalanffy growth curve</td>
+    </tr>
+    <tr class="odd">
+      <td>Gomp Strong Bayes</td>
+      <td style="text-align: left;">Bayesian implementation of Gompertz growth curve with strong priors</td>
+    </tr>
+    <tr class="even">
+      <td>Gomp Uninformed Bayes</td>
+      <td style="text-align: left;">Bayesian implementation of Gompertz growth curve with weak/uninformative priors</td>
+    </tr>
+    <tr class="odd">
+      <td>Gomp ML</td>
+      <td style="text-align: left;">Maximum Likelihood implementation of Gompertz growth curve</td>
+    </tr>
+    <tr class="even">
+      <td>Fabens</td>
+      <td style="text-align: left;"></td>
+    </tr>
+    <tr class="odd">
+      <td>Francis</td>
+      <td style="text-align: left;"></td>
+    </tr>
+    <tr class="even">
+      <td>Other</td>
+      <td style="text-align: left;"></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="#traitclasses">Trait Classes</a></p>
+
+<h3 id="reproduction">Reproduction</h3>
+
+<h4>Trait Names: Reproduction</h4>
+<table>
+  <colgroup>
+    <col style="width: 20%" />
+    <col style="width: 79%" />
+  </colgroup>
+  <thead>
+    <tr class="header">
+      <th>Trait</th>
+      <th style="text-align: left;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="odd">
+      <td>Ovarian fecundity</td>
+      <td style="text-align: left;">Maximum number of visible ovarian follicles (generally used in egg-laying species (e.g. skates))</td>
+    </tr>
+    <tr class="even">
+      <td>Uterine fecundity</td>
+      <td style="text-align: left;">Max number of visible ovulated eggs or developing embryos in both embryos</td>
+    </tr>
+    <tr class="odd">
+      <td>Annual reproductive output</td>
+      <td style="text-align: left;"></td>
+    </tr>
+    <tr class="even">
+      <td>Litter size (unspecified)</td>
+      <td style="text-align: left;">Number of ova or developing embryos</td>
+    </tr>
+    <tr class="odd">
+      <td>Breeding</td>
+      <td style="text-align: left;">Observed timing of mating</td>
+    </tr>
+    <tr class="even">
+      <td>Ovulation</td>
+      <td style="text-align: left;">Observed timing of ovulation</td>
+    </tr>
+    <tr class="odd">
+      <td>Parturition</td>
+      <td style="text-align: left;">Observed timing of parturition</td>
+    </tr>
+    <tr class="even">
+      <td>Incubation length</td>
+      <td style="text-align: left;"></td>
+    </tr>
+    <tr class="odd">
+      <td>Gestation length</td>
+      <td style="text-align: left;"></td>
+    </tr>
+    <tr class="even">
+      <td>Breeding interval</td>
+      <td style="text-align: left;">Biannual, Annual, Biennial, Triennial</td>
+    </tr>
+    <tr class="odd">
+      <td>Ovum size</td>
+      <td style="text-align: left;">Maximum observed ova diamter (uterine or recently ovulated)</td>
+    </tr>
+    <tr class="even">
+      <td>Offspring mass</td>
+      <td style="text-align: left;"></td>
+    </tr>
+    <tr class="odd">
+      <td>Max oviducal width</td>
+      <td style="text-align: left;"></td>
+    </tr>
+    <tr class="even">
+      <td>Max uterine width</td>
+      <td style="text-align: left;"></td>
+    </tr>
+    <tr class="odd">
+      <td>Single uterus</td>
+      <td style="text-align: left;">Yes/No</td>
+    </tr>
+    <tr class="even">
+      <td>Seasonal</td>
+      <td style="text-align: left;">Yes/No</td>
+    </tr>
+    <tr class="odd">
+      <td>Peak parturition</td>
+      <td style="text-align: left;"></td>
+    </tr>
+    <tr class="even">
+      <td>Embryonic sex ratio</td>
+      <td style="text-align: left;"> <i>In utero</i> ratio of Males:Females within a litter</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>Standards: Reproduction</h4>
+<table>
+  <colgroup>
+    <col style="width: 7%" />
+    <col style="width: 92%" />
+  </colgroup>
+  <thead>
+    <tr class="header">
+      <th>Standard</th>
+      <th style="text-align: left;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="odd">
+      <td>Number</td>
+      <td style="text-align: left;">Number</td>
+    </tr>
+    <tr class="even">
+      <td>mm</td>
+      <td style="text-align: left;">millimetres</td>
+    </tr>
+    <tr class="odd">
+      <td>g</td>
+      <td style="text-align: left;">grams</td>
+    </tr>
+    <tr class="even">
+      <td>Month</td>
+      <td style="text-align: left;">Number of months for length traits (e.g. Incubation or Gestation Length) or Calendar month for phenological traits (e.g. breeding, ovulation, parturition)</td>
+    </tr>
+    <tr class="odd">
+      <td>Year</td>
+      <td style="text-align: left;">Years for breeding interval (0.5 for biannual, 1 for annual, 2 for biennial, 3 for triennial)</td>
+    </tr>
+    <tr class="even">
+      <td>Logical</td>
+      <td style="text-align: left;">Yes/No traits</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>Methods: Reproduction</h4>
+<table>
+  <colgroup>
+    <col style="width: 22%" />
+    <col style="width: 77%" />
+  </colgroup>
+  <thead>
+    <tr class="header">
+      <th>Method</th>
+      <th style="text-align: left;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="odd">
+      <td>Captive Observation</td>
+      <td style="text-align: left;">Observations from captive individuals</td>
+    </tr>
+    <tr class="even">
+      <td>Modeled</td>
+      <td style="text-align: left;">Estmimated from model output (Model must be specified)</td>
+    </tr>
+    <tr class="odd">
+      <td>Proportion Gravid Females</td>
+      <td style="text-align: left;"></td>
+    </tr>
+    <tr class="even">
+      <td>Macroscopic observation</td>
+      <td style="text-align: left;">Observation through macroscopic dissection or observation of free swimming individuals</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="#traitclasses">Trait Classes</a></p>
+
+<h3 id="demography">Demography</h3>
+
+<h4>Trait Names: Demography</h4>
+<table>
+  <thead>
+    <tr class="header">
+      <th>Trait</th>
+      <th style="text-align: left;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="odd">
+      <td>Natural mortality</td>
+      <td style="text-align: left;"><em>M</em></td>
+    </tr>
+    <tr class="even">
+      <td>Total mortality</td>
+      <td style="text-align: left;"><em>Z</em></td>
+    </tr>
+    <tr class="odd">
+      <td>Fishing mortality</td>
+      <td style="text-align: left;"><em>F</em></td>
+    </tr>
+    <tr class="even">
+      <td>r<sub>max</sub></td>
+      <td style="text-align: left;">Maximum intrinsic rate of population increase</td>
+    </tr>
+    <tr class="odd">
+      <td><span class="math inline"><em>λ</em></span></td>
+      <td style="text-align: left;">Population growth rate</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>Standards: Demography</h4>
+<table>
+  <thead>
+    <tr class="header">
+      <th>Standards</th>
+      <th style="text-align: left;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="odd">
+      <td>Coefficient</td>
+      <td style="text-align: left;">Coefficient value from model output (Model must be specified)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>Methods: Demography</h4>
+<table>
+  <colgroup>
+    <col style="width: 9%" />
+    <col style="width: 90%" />
+  </colgroup>
+  <thead>
+    <tr class="header">
+      <th>Method</th>
+      <th style="text-align: left;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="odd">
+      <td>Empirical</td>
+      <td style="text-align: left;">Estimated directly from abundance/catch data (e.g. stock assessments, catch curves)</td>
+    </tr>
+    <tr class="even">
+      <td>Derived</td>
+      <td style="text-align: left;">Estimated indirectly from life history traits (e.g. Hoenig 1983, Chen and Watanabe 1983 mortality estimators)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="#traitclasses">Trait Classes</a></p>
+
+<h3 id="relationships">Relationships</h3>
+
+<p>The Relationships Trait Class is a somewhat “catch-all” category that encompasses any time of conversion equations between different types of data, such as length to length conversions (e.g. fork length to total length), and length to weight conversions. The parameters <em>a</em> and <em>b</em> are the most commonly used and represent the coefficients on the typical conversion equations of the form <span class="math inline"><em>y</em> = <em>a</em> * <em>x</em><sup><em>b</em></sup></span>. The parameters <em>c</em> and <em>d</em> will probably be seldom used, but are presented in case a conversion equation has more than two coefficients.</p>
+
+<h4>Trait Names: Relationships</h4>
+<table>
+  <thead>
+    <tr class="header">
+      <th>Trait</th>
+      <th style="text-align: left;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="odd">
+      <td>a</td>
+      <td style="text-align: left;">Multiplier of the equation (intercept if in log scale)</td>
+    </tr>
+    <tr class="even">
+      <td>b</td>
+      <td style="text-align: left;">Exponent of the equation (coefficient if in log scale)</td>
+    </tr>
+    <tr class="odd">
+      <td>c</td>
+      <td style="text-align: left;"></td>
+    </tr>
+    <tr class="even">
+      <td>d</td>
+      <td style="text-align: left;"></td>
+    </tr>
+    <tr class="odd">
+      <td>sigma-conv</td>
+      <td style="text-align: left;">Error term of the equation</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>Standards: Relationships</h4>
+<table>
+  <thead>
+    <tr class="header">
+      <th>Standards</th>
+      <th style="text-align: left;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="odd">
+      <td>Coefficient</td>
+      <td style="text-align: left;">Coefficient value from model output (Model must be specified)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>Models: Relationships</h4>
+<table>
+  <thead>
+    <tr class="header">
+      <th>Model</th>
+      <th style="text-align: left;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="odd">
+      <td>Length-Length</td>
+      <td style="text-align: left;">Length to length conversion</td>
+    </tr>
+    <tr class="even">
+      <td>Length-Weight</td>
+      <td style="text-align: left;">Length to weight conversion</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="#traitclasses">Trait Classes</a></p>
 
 
-  <a href="#traitclasses">Trait Classes</a>
-
-  <h3 id="growth">Growth</h3>
-  <p>Given that this trait class deals with model outputs, there is only a single placeholder Standard as the units of each Trait are implicit.</p>
-  <h4>Trait Names: Growth</h4>
-  <table>
-    <thead>
-      <tr class="header">
-        <th>Trait</th>
-        <th style="text-align: left;">Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="odd">
-        <td><em>k</em></td>
-        <td style="text-align: left;">von Bertalanffy growth parameter</td>
-      </tr>
-      <tr class="even">
-        <td>L<sub>inf</sub></td>
-        <td style="text-align: left;">von Bertalanffy asymptotic size parameter</td>
-      </tr>
-      <tr class="odd">
-        <td>L<sub>0</sub></td>
-        <td style="text-align: left;">von Bertalanffy length-at-age zero parameter</td>
-      </tr>
-      <tr class="even">
-        <td><em>t</em><sub>0</sub></td>
-        <td style="text-align: left;">von Bertalanffy age-at-length zero parameter</td>
-      </tr>
-      <tr class="odd">
-        <td><em>t</em><sub>1</sub></td>
-        <td style="text-align: left;">Lester model</td>
-      </tr>
-      <tr class="even">
-        <td>T<sub>mat</sub></td>
-        <td style="text-align: left;">Lester model</td>
-      </tr>
-      <tr class="odd">
-        <td>H</td>
-        <td style="text-align: left;">Lester model</td>
-      </tr>
-      <tr class="even">
-        <td>G</td>
-        <td style="text-align: left;">Lester model</td>
-      </tr>
-      <tr class="odd">
-        <td>sigma-growth</td>
-        <td style="text-align: left;">error estimate of the growth model</td>
-      </tr>
-      <tr class="even">
-        <td>cv_readers</td>
-        <td style="text-align: left;">Coefficient of variation between readers</td>
-      </tr>
-      <tr class="odd">
-        <td>APE</td>
-        <td style="text-align: left;"></td>
-      </tr>
-      <tr class="even">
-        <td>PA</td>
-        <td style="text-align: left;">Percent agreement between readers</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h4>Standards: Growth</h4>
-  <table>
-    <thead>
-      <tr class="header">
-        <th>Standards</th>
-        <th style="text-align: left;">Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="odd">
-        <td>Coefficient</td>
-        <td style="text-align: left;">Coefficient value from model output (Model must be specified)</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h4>Methods: Growth</h4>
-  <table>
-    <thead>
-      <tr class="header">
-        <th>Method</th>
-        <th style="text-align: left;">Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="odd">
-        <td>Mark-recapture</td>
-        <td style="text-align: left;"></td>
-      </tr>
-      <tr class="even">
-        <td>Length-frequency</td>
-        <td style="text-align: left;"></td>
-      </tr>
-      <tr class="odd">
-        <td>Vertebrae</td>
-        <td style="text-align: left;"></td>
-      </tr>
-      <tr class="even">
-        <td>Spines</td>
-        <td style="text-align: left;"></td>
-      </tr>
-      <tr class="odd">
-        <td>Tooth Plates</td>
-        <td style="text-align: left;"></td>
-      </tr>
-      <tr class="even">
-        <td>Direct Age</td>
-        <td style="text-align: left;">Estimates from individuals of known ages</td>
-      </tr>
-      <tr class="odd">
-        <td>Captive</td>
-        <td style="text-align: left;">Data from captive individuals</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h4>Models: Growth</h4>
-  <table>
-    <colgroup>
-      <col style="width: 17%" />
-      <col style="width: 82%" />
-    </colgroup>
-    <thead>
-      <tr class="header">
-        <th>Model</th>
-        <th style="text-align: left;">Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="odd">
-        <td>VBFG2 Strong Bayes</td>
-        <td style="text-align: left;">Bayesian implementation of 2 parameter von Bertalanffy growth curve with strong priors</td>
-      </tr>
-      <tr class="even">
-        <td>VBFG2 Uninformed Bayes</td>
-        <td style="text-align: left;">Bayesian implementation of 2 parameter von Bertalanffy growth curve with weak/uninformative priors</td>
-      </tr>
-      <tr class="odd">
-        <td>VBFG2 ML</td>
-        <td style="text-align: left;">Maximum Likelihood implementation of 2 parameter von Bertalanffy growth curve</td>
-      </tr>
-      <tr class="even">
-        <td>VBFG3 Strong Bayes</td>
-        <td style="text-align: left;">Bayesian implementation of 3 parameter von Bertalanffy growth curve with strong priors</td>
-      </tr>
-      <tr class="odd">
-        <td>VBFG3 Uninformed Bayes</td>
-        <td style="text-align: left;">Bayesian implementation of 3 parameter von Bertalanffy growth curve with weak/uninformative priors</td>
-      </tr>
-      <tr class="even">
-        <td>VBFG3 ML</td>
-        <td style="text-align: left;">Maximum Likelihood implementation of 2 parameter von Bertalanffy growth curve</td>
-      </tr>
-      <tr class="odd">
-        <td>Gomp Strong Bayes</td>
-        <td style="text-align: left;">Bayesian implementation of Gompertz growth curve with strong priors</td>
-      </tr>
-      <tr class="even">
-        <td>Gomp Uninformed Bayes</td>
-        <td style="text-align: left;">Bayesian implementation of Gompertz growth curve with weak/uninformative priors</td>
-      </tr>
-      <tr class="odd">
-        <td>Gomp ML</td>
-        <td style="text-align: left;">Maximum Likelihood implementation of Gompertz growth curve</td>
-      </tr>
-      <tr class="even">
-        <td>Fabens</td>
-        <td style="text-align: left;"></td>
-      </tr>
-      <tr class="odd">
-        <td>Francis</td>
-        <td style="text-align: left;"></td>
-      </tr>
-      <tr class="even">
-        <td>Other</td>
-        <td style="text-align: left;"></td>
-      </tr>
-    </tbody>
-  </table>
-
-  <p><a href="#traitclasses">Trait Classes</a></p>
-
-  <h3 id="reproduction">Reproduction</h3>
-
-  <h4>Trait Names: Reproduction</h4>
-  <table>
-    <colgroup>
-      <col style="width: 20%" />
-      <col style="width: 79%" />
-    </colgroup>
-    <thead>
-      <tr class="header">
-        <th>Trait</th>
-        <th style="text-align: left;">Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="odd">
-        <td>Ovarian fecundity</td>
-        <td style="text-align: left;">Maximum number of visible ovarian follicles (generally used in egg-laying species (e.g. skates))</td>
-      </tr>
-      <tr class="even">
-        <td>Uterine fecundity</td>
-        <td style="text-align: left;">Max number of visible ovulated eggs or developing embryos in both embryos</td>
-      </tr>
-      <tr class="odd">
-        <td>Annual reproductive output</td>
-        <td style="text-align: left;"></td>
-      </tr>
-      <tr class="even">
-        <td>Litter size (unspecified)</td>
-        <td style="text-align: left;">Number of ova or developing embryos</td>
-      </tr>
-      <tr class="odd">
-        <td>Breeding</td>
-        <td style="text-align: left;">Observed timing of mating</td>
-      </tr>
-      <tr class="even">
-        <td>Ovulation</td>
-        <td style="text-align: left;">Observed timing of ovulation</td>
-      </tr>
-      <tr class="odd">
-        <td>Parturition</td>
-        <td style="text-align: left;">Observed timing of parturition</td>
-      </tr>
-      <tr class="even">
-        <td>Incubation length</td>
-        <td style="text-align: left;"></td>
-      </tr>
-      <tr class="odd">
-        <td>Gestation length</td>
-        <td style="text-align: left;"></td>
-      </tr>
-      <tr class="even">
-        <td>Breeding interval</td>
-        <td style="text-align: left;">Biannual, Annual, Biennial, Triennial</td>
-      </tr>
-      <tr class="odd">
-        <td>Ovum size</td>
-        <td style="text-align: left;">Maximum observed ova diamter (uterine or recently ovulated)</td>
-      </tr>
-      <tr class="even">
-        <td>Offspring mass</td>
-        <td style="text-align: left;"></td>
-      </tr>
-      <tr class="odd">
-        <td>Max oviducal width</td>
-        <td style="text-align: left;"></td>
-      </tr>
-      <tr class="even">
-        <td>Max uterine width</td>
-        <td style="text-align: left;"></td>
-      </tr>
-      <tr class="odd">
-        <td>Single uterus</td>
-        <td style="text-align: left;">Yes/No</td>
-      </tr>
-      <tr class="even">
-        <td>Seasonal</td>
-        <td style="text-align: left;">Yes/No</td>
-      </tr>
-      <tr class="odd">
-        <td>Peak parturition</td>
-        <td style="text-align: left;"></td>
-      </tr>
-      <tr class="even">
-        <td>Embryonic sex ratio</td>
-        <td style="text-align: left;"> <i>In utero</i> ratio of Males:Females within a litter</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h4>Standards: Reproduction</h4>
-  <table>
-    <colgroup>
-      <col style="width: 7%" />
-      <col style="width: 92%" />
-    </colgroup>
-    <thead>
-      <tr class="header">
-        <th>Standard</th>
-        <th style="text-align: left;">Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="odd">
-        <td>Number</td>
-        <td style="text-align: left;">Number</td>
-      </tr>
-      <tr class="even">
-        <td>mm</td>
-        <td style="text-align: left;">millimetres</td>
-      </tr>
-      <tr class="odd">
-        <td>g</td>
-        <td style="text-align: left;">grams</td>
-      </tr>
-      <tr class="even">
-        <td>Month</td>
-        <td style="text-align: left;">Number of months for length traits (e.g. Incubation or Gestation Length) or Calendar month for phenological traits (e.g. breeding, ovulation, parturition)</td>
-      </tr>
-      <tr class="odd">
-        <td>Year</td>
-        <td style="text-align: left;">Years for breeding interval (0.5 for biannual, 1 for annual, 2 for biennial, 3 for triennial)</td>
-      </tr>
-      <tr class="even">
-        <td>Logical</td>
-        <td style="text-align: left;">Yes/No traits</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h4>Methods: Reproduction</h4>
-  <table>
-    <colgroup>
-      <col style="width: 22%" />
-      <col style="width: 77%" />
-    </colgroup>
-    <thead>
-      <tr class="header">
-        <th>Method</th>
-        <th style="text-align: left;">Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="odd">
-        <td>Captive Observation</td>
-        <td style="text-align: left;">Observations from captive individuals</td>
-      </tr>
-      <tr class="even">
-        <td>Modeled</td>
-        <td style="text-align: left;">Estmimated from model output (Model must be specified)</td>
-      </tr>
-      <tr class="odd">
-        <td>Proportion Gravid Females</td>
-        <td style="text-align: left;"></td>
-      </tr>
-      <tr class="even">
-        <td>Macroscopic observation</td>
-        <td style="text-align: left;">Observation through macroscopic dissection or observation of free swimming individuals</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <p><a href="#traitclasses">Trait Classes</a></p>
-
-  <h3 id="demography">Demography</h3>
-
-  <h4>Trait Names: Demography</h4>
-  <table>
-    <thead>
-      <tr class="header">
-        <th>Trait</th>
-        <th style="text-align: left;">Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="odd">
-        <td>Natural mortality</td>
-        <td style="text-align: left;"><em>M</em></td>
-      </tr>
-      <tr class="even">
-        <td>Total mortality</td>
-        <td style="text-align: left;"><em>Z</em></td>
-      </tr>
-      <tr class="odd">
-        <td>Fishing mortality</td>
-        <td style="text-align: left;"><em>F</em></td>
-      </tr>
-      <tr class="even">
-        <td>r<sub>max</sub></td>
-        <td style="text-align: left;">Maximum intrinsic rate of population increase</td>
-      </tr>
-      <tr class="odd">
-        <td><span class="math inline"><em>λ</em></span></td>
-        <td style="text-align: left;">Population growth rate</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h4>Standards: Demography</h4>
-  <table>
-    <thead>
-      <tr class="header">
-        <th>Standards</th>
-        <th style="text-align: left;">Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="odd">
-        <td>Coefficient</td>
-        <td style="text-align: left;">Coefficient value from model output (Model must be specified)</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h4>Methods: Demography</h4>
-  <table>
-    <colgroup>
-      <col style="width: 9%" />
-      <col style="width: 90%" />
-    </colgroup>
-    <thead>
-      <tr class="header">
-        <th>Method</th>
-        <th style="text-align: left;">Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="odd">
-        <td>Empirical</td>
-        <td style="text-align: left;">Estimated directly from abundance/catch data (e.g. stock assessments, catch curves)</td>
-      </tr>
-      <tr class="even">
-        <td>Derived</td>
-        <td style="text-align: left;">Estimated indirectly from life history traits (e.g. Hoenig 1983, Chen and Watanabe 1983 mortality estimators)</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <p><a href="#traitclasses">Trait Classes</a></p>
-
-  <h3 id="relationships">Relationships</h3>
-
-  <p>The Relationships Trait Class is a somewhat “catch-all” category that encompasses any time of conversion equations between different types of data, such as length to length conversions (e.g. fork length to total length), and length to weight conversions. The parameters <em>a</em> and <em>b</em> are the most commonly used and represent the coefficients on the typical conversion equations of the form <span class="math inline"><em>y</em> = <em>a</em> * <em>x</em><sup><em>b</em></sup></span>. The parameters <em>c</em> and <em>d</em> will probably be seldom used, but are presented in case a conversion equation has more than two coefficients.</p>
-
-  <h4>Trait Names: Relationships</h4>
-  <table>
-    <thead>
-      <tr class="header">
-        <th>Trait</th>
-        <th style="text-align: left;">Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="odd">
-        <td>a</td>
-        <td style="text-align: left;">Multiplier of the equation (intercept if in log scale)</td>
-      </tr>
-      <tr class="even">
-        <td>b</td>
-        <td style="text-align: left;">Exponent of the equation (coefficient if in log scale)</td>
-      </tr>
-      <tr class="odd">
-        <td>c</td>
-        <td style="text-align: left;"></td>
-      </tr>
-      <tr class="even">
-        <td>d</td>
-        <td style="text-align: left;"></td>
-      </tr>
-      <tr class="odd">
-        <td>sigma-conv</td>
-        <td style="text-align: left;">Error term of the equation</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h4>Standards: Relationships</h4>
-  <table>
-    <thead>
-      <tr class="header">
-        <th>Standards</th>
-        <th style="text-align: left;">Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="odd">
-        <td>Coefficient</td>
-        <td style="text-align: left;">Coefficient value from model output (Model must be specified)</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h4>Models: Relationships</h4>
-  <table>
-    <thead>
-      <tr class="header">
-        <th>Model</th>
-        <th style="text-align: left;">Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="odd">
-        <td>Length-Length</td>
-        <td style="text-align: left;">Length to length conversion</td>
-      </tr>
-      <tr class="even">
-        <td>Length-Weight</td>
-        <td style="text-align: left;">Length to weight conversion</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <p><a href="#traitclasses">Trait Classes</a></p>
-
-  
+</div>

@@ -1,11 +1,11 @@
-Back-calculated,Estimated from a model output (Model should be specified),Length
-Directly from growth curves,Estimated from growth curve (Model should be specified),Length
-Observational,Directly Observed,Length
-Logistic,Estimated from logistic model or oogive,Length
-Back-calculated,,Age
-Direcetly observed,,Age
-Observatioal,,Age
-Logistic,,Age
+back calculated,Estimated from a model output (Model should be specified),Length
+directly from growth curves,Estimated from growth curve (Model should be specified),Length
+observational,Directly Observed,Length
+logistic,Estimated from logistic model or oogive,Length
+back calculated,,Age
+direcetly observed,,Age
+observatioal,,Age
+logistic,,Age
 VBFG2 Strong Bayes,Bayesian implementation of 2 parameter von Bertalanffy growth curve with strong priors,Growth
 VBFG2 Uninformed Bayes,Bayesian implementation of 2 parameter von Bertalanffy growth curve with weak/unifmormative priors,Growth
 VBFG2 ML,Maximum Liklihood implementation of 2 parameter von Bertalanffy growth curve,Growth

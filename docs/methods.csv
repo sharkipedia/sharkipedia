@@ -1,1 +1,14 @@
-Length,Age,Growth,Reproduction,Demography,Relationshipsback calculated,back calculated,Tag-Recap,Captive Observation,empirical,deriveddirecetly observed,direcetly,Length-Frequency,Modeled,derived,histologically,histologically,Vertebrae,Proportion Gravid Females,,Macroscopic dissection,Macroscopic observation,Spine,Macroscopic observation,,Smallest Free swimming individual,Smallest Free swimming individual,Tooth Plates,Histological observation,,Largest Embryo,Larget Embryo,Direct Age,,,Free + Embryo,Free + Embryo,Captive,,,Embryo growth curve,Embryo growth curve,,,,L95 (95th percentile of size distribution observed),L95 (95th percentile of age distribution observed),,,,L99 (99th percentile of size distribution observed ),L99 (99th percentile of age distribution observed),,,,Max observed size,Max observed size,,,,Inverse mortality,Inverse mortality,,,,,Mark-Recapture,,,,
+Length,Age,Growth,Reproduction,Demography,Relationships
+back calculated,back calculated,Tag-Recap,Captive Observation,empirical,derived
+direcetly observed,direcetly,Length-Frequency,Modeled,derived,
+histologically,histologically,Vertebrae,Proportion Gravid Females,,
+Macroscopic dissection,Macroscopic observation,Spine,Macroscopic observation,,
+Smallest Free swimming individual,Smallest Free swimming individual,Tooth Plates,Histological observation,,
+Largest Embryo,Larget Embryo,Direct Age,,,
+Free + Embryo,Free + Embryo,Captive,,,
+Embryo growth curve,Embryo growth curve,,,,
+L95 (95th percentile of size distribution observed),L95 (95th percentile of age distribution observed),,,,
+L99 (99th percentile of size distribution observed ),L99 (99th percentile of age distribution observed),,,,
+Max observed size,Max observed size,,,,
+Inverse mortality,Inverse mortality,,,,
+,Mark-Recapture,,,,

@@ -1,1 +1,12 @@
-Length,Age,Growth,Reproduction,Demography,Relationshipscm TL,Year,Year,n,Coefficient,Coefficientcm FL,,cm,mm,,cm DW,,coefficient,g,,cm CL,,,kg,,cm BDL,,,Month,,cm PSCFL,,,Year,,cm PCL,,,Number,,g,,,Yes,,kg,,,No,,,,,Ratio,,,,,Category,,
+Length,Age,Growth,Reproduction,Demography,Relationships
+cm TL,Year,Year,n,Coefficient,Coefficient
+cm FL,,cm,mm,,
+cm DW,,coefficient,g,,
+cm CL,,,kg,,
+cm BDL,,,Month,,
+cm PSCFL,,,Year,,
+cm PCL,,,Number,,
+g,,,Yes,,
+kg,,,No,,
+,,,Ratio,,
+,,,Category,,

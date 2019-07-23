@@ -111,7 +111,8 @@ CSV.foreach('docs/species.csv', headers: true) do |row|
     species = Species.find_by name: species_name
     species ||= Species.find_by edge_scientific_name: species_name
     unless species
-      puts "Species: #{species} not present in 'Taxonomy and Changes'"
+      puts "Species: #{species.inspect} not present in 'Taxonomy and Changes'"
+      puts row.inspect
     end
 
     # Species.find_or_create_by! name: species_name, species_superorder: so
@@ -151,6 +152,17 @@ CSV.foreach('docs/traits.csv', headers: true) do |row|
   end
 end
 
+CSV.foreach('docs/traits-descriptions.csv') do |row|
+  tc = TraitClass.find_or_create_by name: row.third
+  trait = tc.traits.find_by name: row.first
+  if trait
+    trait.update description: row.second
+  else
+    puts "#{row.first} not found creating"
+    tc.traits.create name: row.first, description: row.second
+  end
+end
+
 puts "# Created #{Trait.count} Traits"
 
 CSV.foreach('docs/standards.csv', headers: true) do |row|
@@ -171,6 +183,17 @@ CSV.foreach('docs/methods.csv', headers: true) do |row|
   end
 end
 
+CSV.foreach('docs/methods-descriptions.csv') do |row|
+  tc = TraitClass.find_or_create_by name: row.third
+  method = tc.measurement_methods.find_by name: row.first
+  if method
+    method.update description: row.second
+  else
+    puts "#{row.first} not found creating"
+    tc.measurement_methods.create name: row.first, description: row.second
+  end
+end
+
 puts "# Created #{MeasurementMethod.count} MeasurementMethods"
 
 CSV.foreach('docs/models.csv', headers: true) do |row|
@@ -178,6 +201,17 @@ CSV.foreach('docs/models.csv', headers: true) do |row|
     name = row[tc.name]
     next if name.blank?
     MeasurementModel.find_or_create_by! name: name, trait_class: tc
+  end
+end
+
+CSV.foreach('docs/models-descriptions.csv') do |row|
+  tc = TraitClass.find_or_create_by name: row.third
+  model = tc.measurement_models.find_by name: row.first
+  if model
+    model.update description: row.second
+  else
+    puts "#{row.first} not found creating"
+    tc.measurement_models.create name: row.first, description: row.second
   end
 end
 
@@ -202,6 +236,17 @@ puts "Shark Trends Seed data"
 
 CSV.foreach('docs/units.csv') do |row|
   Standard.find_or_create_by! name: row.first
+end
+
+CSV.foreach('docs/standards-descriptions.csv') do |row|
+  tc = TraitClass.find_or_create_by name: row.third
+  standard = tc.standards.find_by name: row.first
+  if standard
+    standard.update description: row.second
+  else
+    puts "#{row.first} not found creating"
+    tc.standards.create name: row.first, description: row.second
+  end
 end
 
 puts "# Created #{Standard.count} Standards"

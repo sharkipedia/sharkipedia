@@ -47,9 +47,9 @@
   <p>Copy and paste the above header into a text file and save as <code>import_trait_author_year.csv</code>, where author and year correspond with the resource (paper). Alternatively, download a <a href="/import_template_author_year.csv">CSV</a> or <a href="/import_template_author_year.xlsx">Excel</a> template.</p>
   
   <p>Here, we describe the format of the data that are entered in the template. 
-    Below, we describe Shark Traits data in detail.</p>
+    Below, we describe  <a href="#Shark Traits data">Shark Traits data</a> in detail.</p>
   
-  <h4 id="observation-level-data">Observation-level data</h4>
+  <h4 >Observation-level data</h4>
   <p>The first six required columns are associated with the observation.</p>
   <p><code>observation_id</code> is an unique integer that groups a set of measurements into one observation. In the example below, the first two rows belong to the same observation of a shark.</p>
   <p><code>hidden</code> is a boolean value indicating if the observation should be accessible (0 denotes private and 1 denotes public). In the example below, the data are public.</p>
@@ -58,7 +58,7 @@
   <p><code>marine_province</code> is the large marine regions (e.g. longhurst province) where the study was conducted. You can see a global map of provinces and associated names here <a href=""></a></p>
   <p><code>location_id</code> is the unique ID of the location where the observation took place.</p>
   <p><code>resource_id</code> is the unique ID of the resource (paper) where the observation was published. <code>resource_id</code> can be empty for unpublished data, in which case <code>access</code> must be private (0) until the data are published and the published resource is entered.</p>
-  <h4 id="measurement-level-data">Measurement-level data</h4>
+  <h4 >Measurement-level data</h4>
   <p>The remaining columns are associated with measurement-level data. All measurements corresponding to the same observation should have exactly the same observation-level data.</p>
   <blockquote>
     <p><strong>Warning</strong> All measurements corresponding to the same observation should have exactly the same observation-level data. Use copy and paste or fill down to avoid making errors.</p>
@@ -120,7 +120,7 @@
   <p>The import step involves a series of checks by the computer. This basic error checking will ensure data submissions fit into the database format. Measurement records with the same species, location, resource and value will be flagged as potential duplicates. We expect error checking at this step will evolve and improve as different issues arise.  Once past this step, uploaded data contributions will be reviewed by a curator to ensure the database contains high-quality, usable information.</p>
 
  
-<h3 id="data">Detailed Shark Traits data description</h3>
+<h3 id="Shark Traits data"> Detailed Shark Traits data description</h3>
 
 <blockquote>
   <p>The Shark Traits Database is a research tool, not a meta-data repository.</p>

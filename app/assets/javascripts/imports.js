@@ -1,6 +1,5 @@
 document.addEventListener("turbolinks:load", function() {
   var doCheck = function() {
-    console.log('t');
     let has_title = document.getElementById('import_title').value == '';
     let has_file  = document.getElementById('import_xlsx_file').value == '';
     document.getElementById("import_submit").disabled = has_title || has_file;

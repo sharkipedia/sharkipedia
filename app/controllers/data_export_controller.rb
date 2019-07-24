@@ -1,4 +1,4 @@
-class DataExportController < ApplicationController
+class DataExportController < PreAuthController
   def index
     if params[:commit]
       data, exporter = if params[:export_type] == 'Traits'

@@ -12,6 +12,7 @@ class LocationDashboard < Administrate::BaseDashboard
     name: Field::String,
     lat: Field::String.with_options(searchable: false),
     lon: Field::String.with_options(searchable: false),
+    measurements: Field::HasMany,
     observations: Field::HasMany,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -27,6 +28,7 @@ class LocationDashboard < Administrate::BaseDashboard
     :lat,
     :lon,
     :observations,
+    :measurements,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -37,6 +39,7 @@ class LocationDashboard < Administrate::BaseDashboard
     :lat,
     :lon,
     :observations,
+    :measurements,
     :created_at,
     :updated_at,
   ].freeze

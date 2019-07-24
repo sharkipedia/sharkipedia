@@ -219,7 +219,7 @@ puts "# Created #{MeasurementModel.count} MeasurementModels"
 
 puts "# Importing Resources, this can take a few minutes"
 failed = []
-CSV.foreach('docs/shark-resources.190605.csv', headers: true) do |row|
+CSV.foreach('docs/shark-resources-190723.csv', headers: true) do |row|
   begin
     resource = Resource.new name: row['resource_id'], resource: row['resource'],
       year: row['year'], doi: (row['DOI'] == "NA" ? nil : row['DOI']),

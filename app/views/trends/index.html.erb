@@ -20,8 +20,8 @@
   grid.style.height = '100%';
   grid.style.width = '100%';
 
-  const date = new Date().toISOString().slice(0,10);
-  const fname = 'shark-trends-' + date + '.csv';
+  var date = new Date().toISOString().slice(0,10);
+  var fname = 'shark-trends-' + date + '.csv';
   var a = document.getElementById("data-export-link");
   a.onclick = function() {
     XLSX.writeFile(wb, fname)

@@ -17,6 +17,13 @@
 //= require select2
 //= require_tree .
 
+/*jshint browser:true */
+/* eslint-env browser */
+/* eslint no-use-before-define:0 */
+/*global Uint8Array, Uint16Array, ArrayBuffer */
+/*global XLSX */
+
+
 function runSelect2 (klass) {
   $('#' + klass.replace('[]', '_')).select2({
     ajax: {

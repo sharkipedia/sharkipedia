@@ -32,5 +32,8 @@
 <% end %>
 
 <% if @data %>
-  <%= render 'export' %>
+  <%= content_tag :div, class: "export_data", data: { csvdata: @data } do %>
+  <% end %>
+
+  <div id="gridctr" style="height: 637px;"></div>
 <% end %>

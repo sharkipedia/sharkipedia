@@ -1,34 +1,34 @@
-Back-calculated,Estimated from a model output (Model should be specified),Length
-Directly observed,,Length
-Histologically,,Length
-Macro-dissection,,Length
-Smallest free-swimming individual,Observation of smallest free-swimming individual,Length
+back calculated,Estimated from a model output (Model should be specified),Length
+directly observed,,Length
+histologically,,Length
+Macroscopic dissection,,Length
+Smallest Free swimming individual,Observation of smallest free-swimming individual,Length
 Largest Embryo,Observation of largest embryo in utero,Length
 Free + Embryo,Based on combined observations of largest embryo and smallest free-swimming individual,Length
 Embryo growth curve,Estimated from a model output (Model should be specified),Length
-L95,95th percentile of observed size distribution,Length
-L99,99th percentile of observed size distribution,Length
+L95 (95th percentile of size distribution observed),95th percentile of observed size distribution,Length
+L99 (99th percentile of size distribution observed ),99th percentile of observed size distribution,Length
 Max observed size,Observation of largest individual,Length
 Inverse mortality,Estimated from a model parameter (Model should be specified),Length
-Back-calculated,Estimated from a model output (Model should be specified),Age
-Direcetly observed,,Age
-Histologically,,Age
-Macro-dissection,,Age
-Smallest free-swimming individual,,Age
+back calculated,Estimated from a model output (Model should be specified),Age
+direcetly observed,,Age
+histologically,,Age
+Macroscopic dissection,,Age
+Smallest Free swimming individual,,Age
 Largest Embryo,,Age
 Free + Embryo,Based on combined observations of largest embryo and smallest free-swimming individual,Age
 Embryo growth curve,,Age
-L95,95th percentile of observed size distribution,Age
-L99,99th percentile of observed size distribution,Age
+L95 (95th percentile of size distribution observed),95th percentile of observed size distribution,Age
+L99 (99th percentile of size distribution observed ),99th percentile of observed size distribution,Age
 Max observed size,,Age
 Inverse mortality,,Age
-Mark-recapture,From mark-recapture data,Age
-Mark-recapture,,Growth
+Mark-Recapture,From mark-recapture data,Age
+Mark-Recapture,,Growth
 Length-frequency,,Growth
 Vertebrae,,Growth
 Spines,,Growth
 Tooth Plates,,Growth
-Direct Age,Estimates from individuals of known ages,Growth
+direct Age,Estimates from individuals of known ages,Growth
 Captive,Data from captive individuals,Growth
 Captive Observation,Observations from captive individuals,Reproduction
 Modeled,Estmimated from model output (Model must be specified),Reproduction

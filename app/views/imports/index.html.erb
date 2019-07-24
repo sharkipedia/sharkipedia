@@ -18,7 +18,7 @@
     <tr>
       <th>Type</th>
       <th>Title</th>
-      <th>Text</th>
+      <th>Uploader</th>
       <th>Status</th>
       <th></th>
     </tr>
@@ -27,7 +27,7 @@
       <tr>
         <td><%= import.import_type %></td>
         <td><%= import.title %></td>
-        <td><%= import.uploaded_by %></td>
+        <td><%= link_to_admin_dashboard import %></td>
         <td><%= import.state %></td>
         <td><%= link_to 'Show', import_path(import) %></td>
       </tr>

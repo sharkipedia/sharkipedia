@@ -1,8 +1,12 @@
-<h1 class="title">Data Export</h1>
+<h1 class="title">
+  Data Export
+</h1>
 
 <% if params[:commit] %>
-  TODO: display the current query
-  <%= pp params %>
+  <div class="export-info">
+  Exporting trait data for: <%= @species.map(&:name).join(', ') %>
+  <%= link_to 'Download CSV', '#', id: 'data-export-link', class: 'button is-primary is-pulled-right' %>
+  </div>
 <% else %>
   <%= form_with url: data_export_index_path, local: true, method: :get do |f| %>
     <div class="field">

@@ -1,8 +1,5 @@
 class DataExportController < ApplicationController
   def index
-    @oceans = Ocean.all
-    @species = Species.all
-
     if params[:commit]
       data, exporter = if params[:export_type] == 'Traits'
                           [Observation.all, Export::Traits]
@@ -14,6 +11,8 @@ class DataExportController < ApplicationController
         species_ids = params[:species].reject(&:blank?)
         unless species_ids.blank?
           data = data.where species_id: params[:species]
+
+          @species = Species.where id: species_ids
         end
       end
 

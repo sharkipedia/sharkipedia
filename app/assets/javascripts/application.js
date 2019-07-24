@@ -56,6 +56,7 @@ function runSelect2 (klass) {
 
 document.addEventListener('turbolinks:before-cache', function() {
   $('.select2-hidden-accessible').select2('destroy');
+  $('#gridctr canvas-datagrid').remove()
 });
 
 $(document).on('turbolinks:load', function() {

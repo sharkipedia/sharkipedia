@@ -6,26 +6,31 @@
       Shark Traits
     </p>
 
-    <p class="subtitle is-6 has-text-centered">Shark Traits has currently <%= @measurement_count %> measurements of
-        <%= @trait_count %> traits, covering <%= @species_count %> species</p>
+    <p class="subtitle is-6 has-text-centered">
+      Shark Traits has currently <%= @measurement_count %> measurements of
+      <%= @trait_count %> traits, covering <%= @species_count %> species
+    </p>
+
     <br>
 
-    <p class="subtitle is-4">The Shark Traits and Trends Databases are an open source research initiative to
-    make all published biological traits and population trends on sharks, rays, and chimaeras accessible
-    to everyone.</p>
+    <p class="subtitle is-4">
+      The Shark Traits and Trends Databases are an open source research initiative to
+      make all published biological traits and population trends on sharks, rays, and chimaeras accessible
+      to everyone.
+    </p>
     <section class="section">
-    <div class="columns">
-      <div class="column">
-        <%= label_tag 'species', 'Genus & Species', class: 'label' %>
-        <%= select_tag 'species', nil, style: 'width: 50%' %>
-        <p class="help">For example: <%= link_to @example_specie.name, species_path(@example_specie) %></p>
+      <div class="columns">
+        <div class="column">
+          <%= label_tag 'species', 'Genus & Species', class: 'label' %>
+          <%= select_tag 'species', nil, style: 'width: 50%' %>
+          <p class="help">For example: <%= link_to @example_specie.name, species_path(@example_specie) %></p>
+        </div>
+        <div class="column">
+          <%= label_tag 'trait', 'Trait', class: 'label' %>
+          <%= grouped_collection_select(nil, :trait_search, @trait_classes, :traits, :name, :id, :name, {:prompt => 'Select Trait'}, style: 'width: 50%') %>
+          <p class="help">For example: <%= link_to @example_trait.name, trait_path(@example_trait) %></p>
+        </div>
       </div>
-      <div class="column">
-        <%= label_tag 'trait', 'Trait', class: 'label' %>
-        <%= grouped_collection_select(nil, :trait_search, @trait_classes, :traits, :name, :id, :name, {:prompt => 'Select Trait'}, style: 'width: 50%') %>
-        <p class="help">For example: <%= link_to @example_trait.name, trait_path(@example_trait) %></p>
-      </div>
-    </div>
     </section>
 
     <h3 class="title">Funders and Partners</h3>

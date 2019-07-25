@@ -1,0 +1,297 @@
+<h1 class="title is-3 is-spaced"> New Trend </h1>
+
+<%= form_for @trend do |f| %>
+
+  <div class="species">
+    <h3 class="subtitle is-4 is-spaced"> Species </h3>
+
+    <div class="columns">
+      <div class="column">
+        <div class="field">
+          <%= select_tag 'species', nil, style: 'width: 100%' %>
+          <p class="help">For example: <%= link_to @example_specie.name, '#' %></p>
+        </div>
+      </div>
+      <div class="column">
+        <div class="species-info">
+          <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+            <tbody>
+              <tr>
+                <th>Species</th>
+                <td id="species-name"><%= @example_specie.name %></td>
+              </tr>
+              <tr>
+                <th>Superorder</th>
+                <td id="species-superorder"><%= @example_specie.species_superorder.name %></td>
+              </tr>
+              <tr>
+                <th>Order</th>
+                <td id="species-order"><%= @example_specie.species_order.name %></td>
+              </tr>
+              <tr>
+                <th>Subclass</th>
+                <td id="species-subclass"><%= @example_specie.species_subclass.name %></td>
+              </tr>
+              <tr>
+                <th>Family</th>
+                <td id="species-family"><%= @example_specie.species_family.name %></td>
+              </tr>
+              <tr>
+                <th>IUCNcode</th>
+                <td id="species-iucn-code"><%= @example_specie.iucn_code %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="subtitle is-4 is-spaced"> Resource </h3>
+
+
+  <div class="columns">
+    <div class="column">
+      <div class="field">
+        <%= select_tag 'resources', nil, style: 'width: 100%' %>
+        <p class="help">For example: <%= link_to @example_resource.name, '#' %></p>
+      </div>
+
+      <p class="">
+        <em><%= link_to "If the resource doesn't exist in the database please click here to create it.", '#' %></em>
+        TODO: allow user to upload the resource
+      </p>
+    </div>
+
+    <div class="column">
+      <div class="species-info">
+        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+          <tbody>
+            <tr>
+              <th>AuthorYear</th>
+              <td id="author-year"><%= @example_resource.name %></td>
+            </tr>
+            <tr>
+              <th>SourceYear</th>
+              <td id="source-year"><%= @example_resource.year %></td>
+            </tr>
+            <tr>
+              <th>DataSource</th>
+              <td id="data-source"><%= @example_resource.data_source %></td>
+            </tr>
+            <tr>
+              <th>doi</th>
+              <td id="doi"><%= link_to_doi @example_resource.doi %></td>
+            </tr>
+            <tr>
+              <th>Resource</th>
+              <td id="suffix"><%= @example_resource.resource %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="columns">
+    <div class="column">
+      <div class="field">
+        <%= f.label :page_and_figure_number, 'Page and Figure Number', class: 'label' %>
+        <div class="control">
+          <%= f.text_field :page_and_figure_number, class: 'input' %><br />
+        </div>
+      </div>
+
+      <div class="field">
+        <%= f.label :line_used, class: 'label' %>
+        <div class="control">
+          <%= f.text_field :line_used, class: 'input' %><br />
+        </div>
+      </div>
+
+      <div class="field">
+        <%= f.label :pdf_page, class: 'label' %>
+        <div class="control">
+          <%= f.text_field :pdf_page, class: 'input' %><br />
+        </div>
+      </div>
+
+    </div>
+
+    <div class="column">
+
+      <div class="field">
+        <%= f.label :actual_page, class: 'label' %>
+        <div class="control">
+          <%= f.text_field :actual_page, class: 'input' %><br />
+        </div>
+      </div>
+
+      <div class="field">
+        <%= f.label :figure_name, class: 'label' %>
+        <div class="control">
+          <%= f.text_field :figure_name, class: 'input' %><br />
+        </div>
+      </div>
+
+      <div class="field">
+        <%= f.label :figure_data, class: 'label' %>
+        <div class="control">
+          <%= f.text_field :figure_data, class: 'input' %><br />
+        </div>
+      </div>
+
+      TODO: allow user to upload image of the figure
+    </div>
+  </div>
+
+  <h3 class="subtitle is-4 is-spaced"> Measurement metadata </h3>
+
+  <div class="columns">
+    <div class="column">
+
+      <div class="field">
+        <%= label_tag 'unit', 'Unit', class: 'label' %>
+        <%= select_tag 'unit', nil, style: 'width: 20%' %>
+      </div>
+
+      <div class="field">
+        <%= label_tag 'sampling_method', 'Sampling Method', class: 'label' %>
+        <%= select_tag 'sampling_method', nil, style: 'width: 20%' %>
+      </div>
+
+    </div>
+
+    <div class="column">
+
+      <div class="field">
+        <%= label_tag 'measurement_model', 'Measurement Model', class: 'label' %>
+        <%= select_tag 'measurement_model', nil, style: 'width: 20%' %>
+      </div>
+
+      <div class="field">
+        <%= label_tag 'data_type', 'Data Type', class: 'label' %>
+        <%= select_tag 'data_type', nil, style: 'width: 20%' %>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="subtitle is-4 is-spaced"> Location </h3>
+
+  <div class="columns">
+    <div class="column">
+      <div class="field">
+        <%= label_tag 'ocean', 'Ocean', class: 'label' %>
+        <%= select_tag 'ocean', nil, style: 'width: 20%' %>
+      </div>
+
+      <div class="field">
+        <%= label_tag 'location', 'Location', class: 'label' %>
+        <%= select_tag 'location', nil, style: 'width: 20%' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :depth, class: 'label' %>
+        <div class="control">
+          <%= f.text_field :depth, class: 'input' %><br />
+        </div>
+      </div>
+    </div>
+
+    <div class="column">
+      <%= form_for Location.new do |fl| %>
+        <div class="field">
+          <%= fl.label :name, class: 'label' %>
+          <div class="control">
+            <%= fl.text_field :name, class: 'input' %><br />
+          </div>
+        </div>
+
+        <div class="field">
+          <%= fl.label :lat, 'Latitude', class: 'label' %>
+          <div class="control">
+            <%= fl.text_field :lat, class: 'input' %><br />
+          </div>
+        </div>
+
+        <div class="field">
+          <%= fl.label :lon, 'Longitude', class: 'label' %>
+          <div class="control">
+            <%= fl.text_field :lon, class: 'input' %><br />
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <h3 class="subtitle is-4 is-spaced"> Observations </h3>
+
+  <div class="columns">
+    <div class="column">
+      <div class="field">
+        <%= f.label :start_year, class: 'label' %>
+        <div class="control">
+          <%= f.text_field :start_year, class: 'input' %><br />
+        </div>
+      </div>
+
+      <div class="field">
+        <%= f.label :end_year, class: 'label' %>
+        <div class="control">
+          <%= f.text_field :end_year, class: 'input' %><br />
+        </div>
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="field">
+        <%= f.label :no_years, class: 'label' %>
+        <div class="control">
+          <%= f.text_field :no_years, class: 'input' %><br />
+        </div>
+      </div>
+
+      <div class="field">
+        <%= f.label :time_min, class: 'label' %>
+        <div class="control">
+          <%= f.text_field :time_min, class: 'input' %><br />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h4 class="subtitle is-5 is-spaced"> Values </h3>
+
+  <div class="columns">
+    <div class="column">
+      <% (1999..2014).each do |yr| %>
+        <div class="field is-horizontal">
+          <div class="field-body">
+            <%= f.fields_for :trend_observation do |fo| %>
+              <div class="field">
+                <div class="control">
+                  <%= fo.text_field :year, value: yr, class: 'input', readonly: true %><br />
+                </div>
+              </div>
+
+              <div class="field">
+                <div class="control">
+                  <%= fo.text_field :value, class: 'input' %><br />
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="column">
+      <figure class="image is-3by2">
+        <img src="https://bulma.io/images/placeholders/256x256.png">
+      </figure>
+      TODO: plot entered data
+    </div>
+  </div>
+
+  <%= f.submit class: 'button is-primary is-pulled-right' %>
+<% end %>

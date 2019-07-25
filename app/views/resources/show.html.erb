@@ -13,7 +13,7 @@
       <% if @resource.doi.blank? %>
         -
       <% else %>
-        <%= link_to @resource.doi, "https://www.doi.org/#{@resource.doi}", target: '_blank' %>
+        <%= link_to_doi @resource.doi %>
       <% end %>
     </p>
     <p>

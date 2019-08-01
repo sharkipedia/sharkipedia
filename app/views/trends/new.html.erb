@@ -264,26 +264,9 @@
 
   <div class="columns">
     <div class="column">
-      <div class="trend-data">
-        <% (1999..2014).each do |yr| %>
-          <div class="field is-horizontal">
-            <div class="field-body">
-              <%= f.fields_for :trend_observation do |fo| %>
-                <div class="field">
-                  <div class="control">
-                    <%= fo.text_field :year, value: yr, class: 'input', readonly: true, disabled: true %><br />
-                  </div>
-                </div>
-
-                <div class="field">
-                  <div class="control">
-                    <%= fo.text_field :value, type: 'number', pattern: '^[0–9]$', class: 'input trend-value', onkeypress: "return isNumberKey(event)" %><br />
-                  </div>
-                </div>
-              <% end %>
-            </div>
-          </div>
-        <% end %>
+      <div id="trend-data">
+        <%# The input pairs get added by the javascript after the user has entered start and end years %>
+        <p id="trend-help-msg" class="help">Please enter start and end years.</p>
       </div>
     </div>
 

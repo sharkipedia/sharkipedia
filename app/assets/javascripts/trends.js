@@ -1,7 +1,7 @@
 $(document).on('turbolinks:load', function() {
 
   function renderChart() {
-    var trendData = document.querySelectorAll('.trend-data input')
+    var trendData = document.querySelectorAll('#trend-data input')
 
     var years = [];
     var values = [];
@@ -66,22 +66,57 @@ $(document).on('turbolinks:load', function() {
 
   renderChart();
 
-  var valueInputs = document.querySelectorAll('.trend-data input.trend-value');
-  for (i = 0; i < valueInputs.length; i++) {
-    valueInputs[i].addEventListener('change', renderChart);
-  }
-
   function calcNumYears() {
-    var start = document.getElementById('trend_start_year').value;
-    var end = document.getElementById('trend_end_year').value;
+    let start = document.getElementById('trend_start_year').value;
+    let end = document.getElementById('trend_end_year').value;
 
     if (start.match(/^\d{4}$/) && end.match(/^\d{4}$/)) {
-      document.getElementById('trend_no_years').value = end - start;
+      let noYears = end - start;
+      document.getElementById('trend_no_years').value = noYears;
+      adjustYearValueInputs(start, end, noYears);
+
+      let help = document.getElementById('trend-help-msg');
+      if (help) {
+        help.remove();
+      }
     }
   }
 
+  // creates or removes year <> value inputs
+  function adjustYearValueInputs(start, end, noYears) {
+    var trendData = document.getElementById('trend-data');
+    for (let i = 0; i < noYears; i++) {
+      trendData.insertAdjacentHTML('beforeend', yearValueInput(i, parseInt(start) + i));
+    }
+
+    var valueInputs = document.querySelectorAll('input.trend-value');
+    for (i = 0; i < valueInputs.length; i++) {
+      valueInputs[i].addEventListener('change', renderChart);
+    }
+  }
+
+  function yearValueInput(index, year) {
+    return `
+  <div class="field is-horizontal">
+    <div class="field-body">
+        <div class="field">
+          <div class="control">
+            <input value="${year}" class="input" readonly="readonly" disabled="disabled" type="text" name="trend[trend_observations_attributes][${index}][year]" id="trend_trend_observations_attributes_${index}_year"><br>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="control">
+            <input type="number" pattern="^[0–9]$" class="input trend-value" onkeypress="return isNumberKey(event)" name="trend[trend_observations_attributes][${index}][value]" id="trend_trend_observations_attributes_${index}_value"><br>
+          </div>
+        </div>
+    </div>
+  </div>
+    `
+  }
+
   document.getElementById('trend_end_year')
-          .addEventListener('change', calcNumYears);
+    .addEventListener('change', calcNumYears);
   document.getElementById('trend_start_year')
-          .addEventListener('change', calcNumYears);
+    .addEventListener('change', calcNumYears);
 });

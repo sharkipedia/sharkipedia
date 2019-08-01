@@ -71,4 +71,17 @@ $(document).on('turbolinks:load', function() {
     valueInputs[i].addEventListener('change', renderChart);
   }
 
+  function calcNumYears() {
+    var start = document.getElementById('trend_start_year').value;
+    var end = document.getElementById('trend_end_year').value;
+
+    if (start.match(/^\d{4}$/) && end.match(/^\d{4}$/)) {
+      document.getElementById('trend_no_years').value = end - start;
+    }
+  }
+
+  document.getElementById('trend_end_year')
+          .addEventListener('change', calcNumYears);
+  document.getElementById('trend_start_year')
+          .addEventListener('change', calcNumYears);
 });

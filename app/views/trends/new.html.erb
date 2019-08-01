@@ -247,7 +247,7 @@
       <div class="field">
         <%= f.label :no_years, class: 'label' %>
         <div class="control">
-          <%= f.text_field :no_years, type: 'number', pattern: '^[0–9]$', class: 'input', onkeypress: "return isNumberKey(event)" %><br />
+          <%= f.text_field :no_years, class: 'input', disabled: true, placeholder: 'automatically calculated from start & end year' %><br />
         </div>
       </div>
 

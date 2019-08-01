@@ -231,14 +231,14 @@
       <div class="field">
         <%= f.label :start_year, class: 'label' %>
         <div class="control">
-          <%= f.text_field :start_year, class: 'input' %><br />
+          <%= f.text_field :start_year, type: 'number', pattern: '^[0–9]$', class: 'input', onkeypress: "return isNumberKey(event)", maxlength: '4' %><br />
         </div>
       </div>
 
       <div class="field">
         <%= f.label :end_year, class: 'label' %>
         <div class="control">
-          <%= f.text_field :end_year, class: 'input' %><br />
+          <%= f.text_field :end_year, type: 'number', pattern: '^[0–9]$', class: 'input', onkeypress: "return isNumberKey(event)",  min: "1900", max: "2099", step: "1"  %><br />
         </div>
       </div>
     </div>
@@ -247,14 +247,14 @@
       <div class="field">
         <%= f.label :no_years, class: 'label' %>
         <div class="control">
-          <%= f.text_field :no_years, class: 'input' %><br />
+          <%= f.text_field :no_years, type: 'number', pattern: '^[0–9]$', class: 'input', onkeypress: "return isNumberKey(event)" %><br />
         </div>
       </div>
 
       <div class="field">
         <%= f.label :time_min, class: 'label' %>
         <div class="control">
-          <%= f.text_field :time_min, class: 'input' %><br />
+          <%= f.text_field :time_min, type: 'number', pattern: '^[0–9]$', class: 'input', onkeypress: "return isNumberKey(event)" %><br />
         </div>
       </div>
     </div>
@@ -264,32 +264,31 @@
 
   <div class="columns">
     <div class="column">
-      <% (1999..2014).each do |yr| %>
-        <div class="field is-horizontal">
-          <div class="field-body">
-            <%= f.fields_for :trend_observation do |fo| %>
-              <div class="field">
-                <div class="control">
-                  <%= fo.text_field :year, value: yr, class: 'input', readonly: true %><br />
+      <div class="trend-data">
+        <% (1999..2014).each do |yr| %>
+          <div class="field is-horizontal">
+            <div class="field-body">
+              <%= f.fields_for :trend_observation do |fo| %>
+                <div class="field">
+                  <div class="control">
+                    <%= fo.text_field :year, value: yr, class: 'input', readonly: true, disabled: true %><br />
+                  </div>
                 </div>
-              </div>
 
-              <div class="field">
-                <div class="control">
-                  <%= fo.text_field :value, class: 'input' %><br />
+                <div class="field">
+                  <div class="control">
+                    <%= fo.text_field :value, type: 'number', pattern: '^[0–9]$', class: 'input trend-value', onkeypress: "return isNumberKey(event)" %><br />
+                  </div>
                 </div>
-              </div>
-            <% end %>
+              <% end %>
+            </div>
           </div>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
     </div>
 
     <div class="column">
-      <figure class="image is-3by2">
-        <img src="https://bulma.io/images/placeholders/256x256.png">
-      </figure>
-      TODO: plot entered data
+      <canvas id="myChart" width="400" height="400"></canvas>
     </div>
   </div>
 

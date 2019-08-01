@@ -23,7 +23,6 @@
 /*global Uint8Array, Uint16Array, ArrayBuffer */
 /*global XLSX */
 
-
 function runSelect2 (klass) {
   $('#' + klass.replace('[]', '_')).select2({
     ajax: {
@@ -61,12 +60,20 @@ function runSelect2 (klass) {
   });
 }
 
+function isNumberKey(evt){
+  var charCode = (evt.which) ? evt.which : event.keyCode
+  if (charCode > 31 && (charCode < 48 || charCode > 57))
+    return false;
+  return true;
+}
+
 document.addEventListener('turbolinks:before-cache', function() {
   $('.select2-hidden-accessible').select2('destroy');
   $('#gridctr canvas-datagrid').remove()
 });
 
 $(document).on('turbolinks:load', function() {
+
   $(".navbar-burger").click(function() {
     $(".navbar-burger").toggleClass("is-active");
     $(".navbar-menu").toggleClass("is-active");

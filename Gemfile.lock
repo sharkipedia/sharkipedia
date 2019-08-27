@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/pdobb/select2-rails.git
-  revision: 59a86638e67153b0185cca413bf15759e42e5915
+  revision: 229d5e2ee0f0fd9a1fad8522c00c0704615a5ea8
   specs:
-    select2-rails (4.0.7)
+    select2-rails (4.0.8)
 
 GIT
   remote: https://github.com/thoughtbot/administrate.git

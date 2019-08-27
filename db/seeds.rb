@@ -2,17 +2,25 @@ require 'csv'
 require 'roo'
 
 if Rails.env.development? || ENV['HEROKU_APP_NAME'] =~ /staging/
-  admin = User.create email: 'admin@example.com', password: '123123123',
-    name: 'Admin', user_level: 'admin'
+  admin = User.new email: 'admin@example.com', password: '123123123',
+    name: 'Admin', user_level: 'admin', confirmed_at: Time.now.utc
+  admin.skip_confirmation_notification!
+  admin.save!
   admin.confirm
   editor = User.create email: 'editor@example.com', password: '123123123',
-    name: 'Jane Doe', user_level: 'editor'
+    name: 'Jane Doe', user_level: 'editor', confirmed_at: Time.now.utc
+  editor.skip_confirmation_notification!
+  editor.save!
   editor.confirm
   contributor = User.create email: 'contributor@example.com', password: '123123123',
-    name: 'Max Mustermann', user_level: 'contributor'
+    name: 'Max Mustermann', user_level: 'contributor', confirmed_at: Time.now.utc
+  contributor.skip_confirmation_notification!
+  contributor.save!
   contributor.confirm
   user = User.create email: 'user@example.com', password: '123123123',
-    name: 'Martha Musterfrau'
+    name: 'Martha Musterfrau', confirmed_at: Time.now.utc
+  user.skip_confirmation_notification!
+  user.save!
   user.confirm
 end
 

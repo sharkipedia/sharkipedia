@@ -202,7 +202,7 @@ GEM
       activerecord (>= 4.2)
       activesupport (>= 4.2)
     public_suffix (3.0.3)
-    puma (4.0.1)
+    puma (4.1.0)
       nio4r (~> 2.0)
     pundit (2.0.1)
       activesupport (>= 3.0.0)
@@ -370,7 +370,7 @@ DEPENDENCIES
   paper_trail (~> 10.2)
   pg (~> 1.1.4)
   pg_search (~> 2.2)
-  puma (~> 4.0)
+  puma (~> 4.1)
   pundit (~> 2.0, >= 2.0.1)
   rails (~> 6.0.0)
   rails-erd

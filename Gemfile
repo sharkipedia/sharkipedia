@@ -27,7 +27,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise', '~> 4.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-gem 'administrate', '~> 0.11.0'
+gem "administrate", git: "https://github.com/thoughtbot/administrate.git"
 gem 'pundit', '~> 2.0', '>= 2.0.1'
 
 gem 'roo', '~> 2.8.0'

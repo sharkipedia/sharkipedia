@@ -1,22 +1,26 @@
 FactoryBot.define do
   factory :user do
-    email { "user@example.com" }
+    sequence(:name) { |n| "user #{n}" }
+    sequence(:email) { |n| "user#{n}@example.com" }
     user_level { 'user' }
     password { "123456789!password" }
   end
 
   factory :editor, parent: :user do
-    email { "editor@example.com" }
+    sequence(:name) { |n| "editor #{n}" }
+    sequence(:email) { |n| "editor#{n}@example.com" }
     user_level { 'editor' }
   end
 
   factory :contributor, parent: :user do
-    email { "contributor@example.com" }
+    sequence(:name) { |n| "contributor #{n}" }
+    sequence(:email) { |n| "contributor#{n}@example.com" }
     user_level { 'contributor' }
   end
 
   factory :admin, parent: :user do
-    email { "admin@example.com" }
+    sequence(:name) { |n| "admin #{n}" }
+    sequence(:email) { |n| "admin#{n}@example.com" }
     user_level { 'admin' }
   end
 end

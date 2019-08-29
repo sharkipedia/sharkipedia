@@ -90,6 +90,7 @@ $(document).on('turbolinks:load', function() {
   function adjustYearValueInputs(start, end, noYears) {
     var trendData = document.getElementById('trend-data');
     trendData.innerHTML = "";
+
     for (let i = 0; i < noYears; i++) {
       trendData.insertAdjacentHTML('beforeend', yearValueInput(i, parseInt(start) + i));
     }
@@ -98,6 +99,23 @@ $(document).on('turbolinks:load', function() {
     for (i = 0; i < valueInputs.length; i++) {
       valueInputs[i].addEventListener('change', renderChart);
     }
+
+    let target = document.querySelector('#trend_trend_observations_attributes_0_value');
+      target.addEventListener('paste', (event) => {
+        let paste = (event.clipboardData || window.clipboardData).getData('text');
+
+        var values = paste.split(/\s|;|,/);
+        console.log(values);
+
+        $(values).each(function(index) {
+          var inputBox = $("#trend_trend_observations_attributes_" + index + "_value");
+          inputBox.val(values[index])
+        });
+
+        event.preventDefault();
+
+        renderChart();
+      });
   }
 
   function yearValueInput(index, year) {
@@ -112,7 +130,7 @@ $(document).on('turbolinks:load', function() {
 
         <div class="field">
           <div class="control">
-            <input type="number" pattern="^[0–9]$" class="input trend-value" onkeypress="return isNumberKey(event)" name="trend[trend_observations_attributes][${index}][value]" id="trend_trend_observations_attributes_${index}_value"><br>
+            <input type="number" pattern="^[0–9]$" class="input trend-value" name="trend[trend_observations_attributes][${index}][value]" id="trend_trend_observations_attributes_${index}_value"><br>
           </div>
         </div>
     </div>

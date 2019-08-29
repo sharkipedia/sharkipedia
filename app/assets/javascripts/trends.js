@@ -9,11 +9,15 @@ $(document).on('turbolinks:load', function() {
       if (i % 2 === 0) {
         years.push(new Date(trendData[i].value));
       } else {
-        values.push(trendData[i].value);
+        let val = trendData[i].value;
+        values.push(val === "" ? null : val);
       }
     }
 
     var ctx = document.getElementById('myChart').getContext('2d');
+
+    // XXX: do we want this?
+    Chart.defaults.line.spanGaps = true;
 
     const data = {
       labels: years,

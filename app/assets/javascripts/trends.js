@@ -89,6 +89,7 @@ $(document).on('turbolinks:load', function() {
   // creates or removes year <> value inputs
   function adjustYearValueInputs(start, end, noYears) {
     var trendData = document.getElementById('trend-data');
+    trendData.innerHTML = "";
     for (let i = 0; i < noYears; i++) {
       trendData.insertAdjacentHTML('beforeend', yearValueInput(i, parseInt(start) + i));
     }

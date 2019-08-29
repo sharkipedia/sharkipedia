@@ -75,7 +75,7 @@ $(document).on('turbolinks:load', function() {
     let end = document.getElementById('trend_end_year').value;
 
     if (start.match(/^\d{4}$/) && end.match(/^\d{4}$/)) {
-      let noYears = end - start;
+      let noYears = end - start + 1;
       document.getElementById('trend_no_years').value = noYears;
       adjustYearValueInputs(start, end, noYears);
 

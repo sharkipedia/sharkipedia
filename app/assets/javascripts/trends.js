@@ -83,6 +83,9 @@ $(document).on('turbolinks:load', function() {
       if (help) {
         help.remove();
       }
+
+      let chart = document.getElementById('myChart');
+      chart.classList.remove("is-hidden");
     }
   }
 

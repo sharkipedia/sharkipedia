@@ -16,8 +16,8 @@ $(document).on('turbolinks:load', function() {
 
     var ctx = document.getElementById('myChart').getContext('2d');
 
-    // XXX: do we want this?
-    Chart.defaults.line.spanGaps = true;
+    // uncomment this to interpolate between missing data points
+    // Chart.defaults.line.spanGaps = true;
 
     const data = {
       labels: years,

@@ -1,0 +1,24 @@
+<table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+  <tbody>
+    <tr>
+      <th>AuthorYear</th>
+      <td id="author-year"><%= resource.name %></td>
+    </tr>
+    <tr>
+      <th>SourceYear</th>
+      <td id="source-year"><%= resource.year %></td>
+    </tr>
+    <tr>
+      <th>DataSource</th>
+      <td id="data-source"><%= resource.data_source %></td>
+    </tr>
+    <tr>
+      <th>doi</th>
+      <td id="doi"><%= link_to_doi resource.doi %></td>
+    </tr>
+    <tr>
+      <th>Resource</th>
+      <td id="suffix"><%= resource.resource %></td>
+    </tr>
+  </tbody>
+</table>

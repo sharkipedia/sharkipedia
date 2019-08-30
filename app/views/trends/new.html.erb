@@ -27,7 +27,7 @@
     <div class="column">
       <div class="field">
         <%= select_tag 'resources', nil, style: 'width: 100%' %>
-        <p class="help">For example: <%= link_to @example_resource.name, '#' %></p>
+        <p class="help">For example: <%= link_to @example_resource.name, resource_path(@example_resource), remote: true %></p>
       </div>
 
       <p class="">
@@ -37,31 +37,8 @@
     </div>
 
     <div class="column">
-      <div class="species-info">
-        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
-          <tbody>
-            <tr>
-              <th>AuthorYear</th>
-              <td id="author-year"><%= @example_resource.name %></td>
-            </tr>
-            <tr>
-              <th>SourceYear</th>
-              <td id="source-year"><%= @example_resource.year %></td>
-            </tr>
-            <tr>
-              <th>DataSource</th>
-              <td id="data-source"><%= @example_resource.data_source %></td>
-            </tr>
-            <tr>
-              <th>doi</th>
-              <td id="doi"><%= link_to_doi @example_resource.doi %></td>
-            </tr>
-            <tr>
-              <th>Resource</th>
-              <td id="suffix"><%= @example_resource.resource %></td>
-            </tr>
-          </tbody>
-        </table>
+      <div id="resources-info">
+        <%= render partial: 'resources/detail', locals: { resource: @example_resource } %>
       </div>
     </div>
   </div>

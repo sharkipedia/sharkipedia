@@ -9,39 +9,12 @@
       <div class="column">
         <div class="field">
           <%= select_tag 'species', nil, style: 'width: 100%' %>
-          <p class="help">For example: <%= link_to @example_specie.name, '#' %></p>
+          <p class="help">For example: <%= link_to @example_specie.name, species_path(@example_specie), remote: true %></p>
         </div>
       </div>
       <div class="column">
-        <div class="species-info">
-          <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
-            <tbody>
-              <tr>
-                <th>Species</th>
-                <td id="species-name"><%= @example_specie.name %></td>
-              </tr>
-              <tr>
-                <th>Superorder</th>
-                <td id="species-superorder"><%= @example_specie.species_superorder.name %></td>
-              </tr>
-              <tr>
-                <th>Order</th>
-                <td id="species-order"><%= @example_specie.species_order.name %></td>
-              </tr>
-              <tr>
-                <th>Subclass</th>
-                <td id="species-subclass"><%= @example_specie.species_subclass.name %></td>
-              </tr>
-              <tr>
-                <th>Family</th>
-                <td id="species-family"><%= @example_specie.species_family.name %></td>
-              </tr>
-              <tr>
-                <th>IUCNcode</th>
-                <td id="species-iucn-code"><%= @example_specie.iucn_code %></td>
-              </tr>
-            </tbody>
-          </table>
+        <div id="species-info">
+          <%= render partial: 'species/detail', locals: { specie: @example_specie } %>
         </div>
       </div>
     </div>

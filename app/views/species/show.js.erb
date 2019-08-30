@@ -1,0 +1,5 @@
+<% content = capture do %>
+  <%= render partial: 'species/detail', locals: { specie: @specie } %>
+<% end %>
+
+document.getElementById("species-info").innerHTML = "<%= j content %>"

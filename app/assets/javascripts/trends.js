@@ -23,6 +23,28 @@ $(document).on('turbolinks:load', function() {
     })
   });
 
+
+  function previewFile() {
+    var preview = document.querySelector('#img_prev');
+    var file    = document.querySelector('#trend_figure').files[0];
+    var reader  = new FileReader();
+
+    reader.addEventListener("load", function () {
+      preview.src = reader.result;
+    }, false);
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  }
+
+  $('#trend_figure').on('change', function(e) {
+    previewFile();
+
+    let image = document.getElementById('img_prev');
+    image.classList.remove("is-hidden");
+  });
+
   function renderChart() {
     var trendData = document.querySelectorAll('#trend-data input')
 

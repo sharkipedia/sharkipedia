@@ -1,4 +1,7 @@
 $(document).on('turbolinks:load', function() {
+  if (!checkController('trends')) {
+    return;
+  }
 
   function renderChart() {
     var trendData = document.querySelectorAll('#trend-data input')

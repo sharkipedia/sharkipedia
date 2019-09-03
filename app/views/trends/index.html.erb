@@ -2,12 +2,6 @@
 <%= link_to 'Download CSV', '#', id: 'data-export-link' %>
 
 <script>
-  /*jshint browser:true */
-  /* eslint-env browser */
-  /* eslint no-use-before-define:0 */
-  /*global Uint8Array, Uint16Array, ArrayBuffer */
-  /*global XLSX */
-
   var data = `<%= @trends.html_safe %>`;
   var wb = XLSX.read(data, {type:"binary"});
   var js = XLSX.utils.sheet_to_json(wb.Sheets.Sheet1, {header:1, raw:true});

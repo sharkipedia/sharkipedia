@@ -23,6 +23,10 @@
 /*global Uint8Array, Uint16Array, ArrayBuffer */
 /*global XLSX */
 
+function checkController(name) {
+  return $('body').hasClass(name);
+}
+
 function runSelect2 (klass) {
   $('#' + klass.replace('[]', '_')).select2({
     ajax: {

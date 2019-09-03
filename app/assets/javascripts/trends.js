@@ -3,6 +3,26 @@ $(document).on('turbolinks:load', function() {
     return;
   }
 
+  // species autocomplete
+  runSelect2('species');
+  $('#species').on('select2:select', function (e) {
+    var data = e.params.data;
+    Rails.ajax({
+      url: "/species/" + data.id + '.js',
+      type: "get"
+    })
+  });
+
+  // resources autocomplete
+  runSelect2('resources');
+  $('#resources').on('select2:select', function (e) {
+    var data = e.params.data;
+    Rails.ajax({
+      url: "/resources/" + data.id + '.js',
+      type: "get"
+    })
+  });
+
   function renderChart() {
     var trendData = document.querySelectorAll('#trend-data input')
 
@@ -17,7 +37,7 @@ $(document).on('turbolinks:load', function() {
       }
     }
 
-    var ctx = document.getElementById('myChart').getContext('2d');
+    var ctx = document.getElementById('trend-chart').getContext('2d');
 
     // uncomment this to interpolate between missing data points
     // Chart.defaults.line.spanGaps = true;
@@ -87,7 +107,7 @@ $(document).on('turbolinks:load', function() {
         help.remove();
       }
 
-      let chart = document.getElementById('myChart');
+      let chart = document.getElementById('trend-chart');
       chart.classList.remove("is-hidden");
     }
   }

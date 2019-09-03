@@ -91,7 +91,13 @@
         </div>
       </div>
 
-      TODO: allow user to upload image of the figure
+      <div class="field">
+        <%= f.label :figure, class: 'label' %>
+        <div class="control">
+          <%= f.file_field :figure, multiple: false, direct_upload: true, accept: 'image/png, image/jpeg, image/jpg' %>
+          <em>this is optional</em>
+        </div>
+      </div>
     </div>
   </div>
 

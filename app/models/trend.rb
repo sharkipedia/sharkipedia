@@ -10,5 +10,7 @@ class Trend < ApplicationRecord
 
   has_many :trend_observations, dependent: :destroy
 
+  has_one_attached :figure
+
   accepts_nested_attributes_for :trend_observations
 end

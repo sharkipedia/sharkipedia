@@ -4,6 +4,6 @@ module ApplicationHelper
   end
 
   def link_to_doi doi
-    link_to doi, "https://www.doi.org/#{doi}", target: '_blank'
+    link_to doi, "https://www.doi.org/#{doi}", target: '_blank' if doi
   end
 end

@@ -1,0 +1,14 @@
+<table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth" id="trend-data">
+  <tbody>
+    <tr>
+      <th>Year</th>
+      <th>Value</th>
+    </tr>
+    <% observations.each do |observation| %>
+      <tr>
+        <td><%= observation.year %></td>
+        <td><%= observation.value %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_25_134616) do
+ActiveRecord::Schema.define(version: 2019_09_04_201620) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -172,6 +172,7 @@ ActiveRecord::Schema.define(version: 2019_07_25_134616) do
     t.string "suffix"
     t.string "author_year"
     t.string "resource"
+    t.boolean "file_public"
   end
 
   create_table "sampling_methods", force: :cascade do |t|

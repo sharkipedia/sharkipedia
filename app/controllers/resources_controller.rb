@@ -32,6 +32,7 @@ class ResourcesController < PreAuthController
 
   def resource_params
     params.require(:resource).permit(:name, :doi, :data_source, :year,
-                                     :suffix, :author_year, :resource)
+                                     :suffix, :author_year, :resource,
+                                     :file_public, :resource_file)
   end
 end

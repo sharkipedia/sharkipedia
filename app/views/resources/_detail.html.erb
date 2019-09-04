@@ -18,7 +18,13 @@
     </tr>
     <tr>
       <th>Resource</th>
-      <td id="suffix"><%= resource.resource %></td>
+      <td id="resource"><%= resource.resource %></td>
     </tr>
+    <% if resource.file_public %>
+      <tr>
+        <th>Resource File</th>
+        <td id="resource-file"><%= link_to @resource.resource_file.filename, url_for(@resource.resource_file) %></td>
+      </tr>
+    <% end %>
   </tbody>
 </table>

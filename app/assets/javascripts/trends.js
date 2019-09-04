@@ -1,10 +1,5 @@
 $(document).on('turbolinks:load', function() {
-  function renderTrendChart() {
-    var trendData = document.querySelectorAll('#trend-data td')
-    if (trendData === null) {
-      return;
-    }
-
+  function renderTrendChart(trendData, ctx) {
     var years = [];
     var values = [];
     for (i = 0; i < trendData.length; i++) {
@@ -15,8 +10,6 @@ $(document).on('turbolinks:load', function() {
         values.push(val === "" ? null : val);
       }
     }
-
-    var ctx = document.getElementById('trend-chart').getContext('2d');
 
     // uncomment this to interpolate between missing data points
     // Chart.defaults.line.spanGaps = true;
@@ -67,9 +60,24 @@ $(document).on('turbolinks:load', function() {
         }
       }
     }
-    const chart = new Chart(ctx, options);
+    let chart = new Chart(ctx, options);
   }
-  renderTrendChart();
+
+  function renderTrendCharts() {
+    let chartDivs = document.querySelectorAll('.trend-chart')
+    if (chartDivs === null) {
+      return;
+    }
+
+    for (let i = 0; i < chartDivs.length; i++) {
+      let trendData = chartDivs[i].querySelectorAll('.trend-data td');
+      let ctx = chartDivs[i].getElementsByTagName('canvas')[0].getContext('2d');
+
+      renderTrendChart(trendData, ctx);
+    }
+  }
+
+  renderTrendCharts();
 
   if (!checkController('trends')) {
     return;

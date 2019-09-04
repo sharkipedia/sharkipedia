@@ -6,7 +6,7 @@
     <%= render partial: 'location', locals: { location: @trend.location, ocean: @trend.ocean } %>
   </div>
   <div class="column">
-    <canvas id="trend-chart"></canvas>
+    <%= render partial: 'chart', locals: { observations: @trend.trend_observations } %>
   </div>
 </div>
 

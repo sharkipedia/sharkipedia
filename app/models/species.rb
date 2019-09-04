@@ -15,4 +15,5 @@ class Species < ApplicationRecord
   belongs_to :species_order
   belongs_to :species_family
   has_many :observations
+  has_many :trends
 end

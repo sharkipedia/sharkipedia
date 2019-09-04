@@ -17,7 +17,7 @@ class Trend < ApplicationRecord
   def to_csv
     CSV.generate(headers: true) do |csv|
       csv << %w{year value}
-      trend_observations.each do |trend_observation|
+      trend_observations.order(:year).each do |trend_observation|
         csv << [trend_observation.year, trend_observation.value]
       end
     end

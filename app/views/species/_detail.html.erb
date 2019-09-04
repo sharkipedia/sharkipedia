@@ -2,7 +2,15 @@
   <tbody>
     <tr>
       <th>Species</th>
-      <td id="species-name"><%= specie.name %></td>
+      <td id="species-name">
+        <% if local_assigns.has_key? :render_links %>
+          <%= link_to specie.name, species_path(specie) %>
+        <% elsif local_assigns.has_key? :render_links_new_window %>
+          <%= link_to specie.name, species_path(specie), target: '_blank' %>
+        <% else %>
+          <%= specie.name %>
+        <% end %>
+      </td>
     </tr>
     <tr>
       <th>Superorder</th>

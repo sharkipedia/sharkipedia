@@ -11,7 +11,10 @@ class ResourceDashboard < Administrate::BaseDashboard
     id: Field::Number,
     name: Field::String,
     doi: Field::String,
+    year: Field::String,
+    suffix: Field::String,
     data_source: Field::String,
+    resource: Field::String,
     observations: Field::HasMany,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -36,6 +39,9 @@ class ResourceDashboard < Administrate::BaseDashboard
     :name,
     :doi,
     :data_source,
+    :year,
+    :suffix,
+    :resource,
     :observations,
   ].freeze
 
@@ -46,12 +52,15 @@ class ResourceDashboard < Administrate::BaseDashboard
     :name,
     :doi,
     :data_source,
+    :year,
+    :suffix,
+    :resource,
   ].freeze
 
   # Overwrite this method to customize how resources are displayed
   # across all pages of the admin dashboard.
   #
   def display_resource(resource)
-    "Resource ##{resource.id}"
+    "Resource #{resource.name}"
   end
 end

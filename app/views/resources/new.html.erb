@@ -1,0 +1,73 @@
+<h1 class="title is-3 is-spaced"> New Resource </h1>
+
+<%= form_with model: @resource, local: true do |f| %>
+
+  <% if @resource.errors.any? %>
+    <div class="error_messages">
+      <h2>
+        <%= pluralize(@resource.errors.count, "error") %> prohibited this resource from being saved:
+      </h2>
+
+      <ul>
+        <% @resource.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name, 'Author Year', class: 'label' %>
+    <div class="control">
+      <%= f.text_field :name, class: 'input' %><br />
+    </div>
+  </div>
+
+  <div class="field">
+    <%= f.label :suffix, class: 'label' %>
+    <div class="control">
+      <%= f.text_field :suffix, class: 'input' %><br />
+    </div>
+  </div>
+
+  <div class="field">
+    <%= f.label :year, class: 'label' %>
+    <div class="control">
+      <%= f.text_field :year, class: 'input' %><br />
+    </div>
+  </div>
+
+  <div class="field">
+    <%= f.label :doi, class: 'label' %>
+    <div class="control">
+      <%= f.text_field :doi, class: 'input' %><br />
+    </div>
+  </div>
+
+  <div class="field">
+    <%= f.label :data_source, class: 'label' %>
+    <div class="control">
+      <%= f.text_field :data_source, class: 'input' %><br />
+    </div>
+  </div>
+
+  <div class="field">
+    <%= f.label :resource, class: 'label' %>
+    <div class="control">
+      <%= f.text_field :resource, class: 'input' %><br />
+    </div>
+  </div>
+
+  <div class="field">
+    <%= f.label :resource_file, class: 'label' %>
+    <div class="control">
+      <%= f.file_field :resource_file, multiple: false, direct_upload: true, accept: 'application/pdf' %>
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="control">
+      <%= f.submit class: 'button is-primary is-fullwidth' %>
+    </div>
+  </div>
+<% end %>

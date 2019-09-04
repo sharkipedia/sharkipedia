@@ -23,7 +23,7 @@
 </div>
 
 <% if @grouped_measurements.blank? %>
-  <em>No measurements for this species.</em>
+  <em>No trait measurements for this species.</em>
 <% else %>
   <h3 class='subtitle is-3'>Traits</h2>
 
@@ -57,4 +57,9 @@
       </tbody>
     </table>
   <% end %>
+<% end %>
+
+<% if @trends.blank? %>
+  <em>No trends for this species.</em>
+<% else %>
 <% end %>

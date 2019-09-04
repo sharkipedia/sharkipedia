@@ -15,5 +15,6 @@ class SpeciesController < PreAuthController
     @specie = Species.find params[:id]
     @grouped_measurements = Measurement.where(observation: @specie.observations)
                                        .group_by(&:trait_class)
+    @trends = @specie.trends
   end
 end

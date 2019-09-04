@@ -2,7 +2,7 @@ class TrendsController < ApplicationController
   before_action :ensure_admin!
 
   def index
-    @trends = Export::Trends.new.call
+    @trends = Trend.all
   end
 
   def new

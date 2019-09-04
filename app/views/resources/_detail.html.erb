@@ -28,10 +28,10 @@
       <th>Resource</th>
       <td id="resource"><%= resource.resource %></td>
     </tr>
-    <% if resource.file_public %>
+    <% if resource.file_public && resource.resource_file.attached? %>
       <tr>
         <th>Resource File</th>
-        <td id="resource-file"><%= link_to @resource.resource_file.filename, url_for(@resource.resource_file) %></td>
+        <td id="resource-file"><%= link_to @resource.resource_file.filename, url_for(@resource.resource_file), target: '_blank' %></td>
       </tr>
     <% end %>
   </tbody>

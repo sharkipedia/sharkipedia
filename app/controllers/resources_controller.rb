@@ -7,10 +7,14 @@ class ResourcesController < PreAuthController
 
   def create
     @resource = Resource.new resource_params
-    if @resource.save
-      redirect_to @resource
-    else
-      render :new
+    respond_to do |format|
+      if @resource.save
+        format.html { redirect_to @resource }
+        format.js { redirect_to @resource }
+      else
+        format.html { render :new }
+        format.js
+      end
     end
   end
 

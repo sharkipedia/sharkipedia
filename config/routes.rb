@@ -50,7 +50,7 @@ Rails.application.routes.draw do
 
   root 'pages#start'
 
-  resources :trends, only: [:index, :new, :create]
+  resources :trends, only: [:show, :index, :new, :create]
   resources :locations, only: :create
 
   resources :traits, only: [:index, :show]

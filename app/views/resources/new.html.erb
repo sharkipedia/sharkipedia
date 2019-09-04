@@ -16,24 +16,32 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name, 'Author Year', class: 'label' %>
-    <div class="control">
-      <%= f.text_field :name, class: 'input' %><br />
+  <div class="columns">
+    <div class="column">
+      <div class="field">
+        <%= f.label :name, 'Author Year', class: 'label' %>
+        <div class="control">
+          <%= f.text_field :name, class: 'input' %><br />
+        </div>
+      </div>
     </div>
-  </div>
 
-  <div class="field">
-    <%= f.label :suffix, class: 'label' %>
-    <div class="control">
-      <%= f.text_field :suffix, class: 'input' %><br />
+    <div class="column">
+      <div class="field">
+        <%= f.label :suffix, class: 'label' %>
+        <div class="control">
+          <%= f.text_field :suffix, class: 'input' %><br />
+        </div>
+      </div>
     </div>
-  </div>
 
-  <div class="field">
-    <%= f.label :year, class: 'label' %>
-    <div class="control">
-      <%= f.text_field :year, class: 'input' %><br />
+    <div class="column">
+      <div class="field">
+        <%= f.label :year, class: 'label' %>
+        <div class="control">
+          <%= f.text_field :year, class: 'input' %><br />
+        </div>
+      </div>
     </div>
   </div>
 
@@ -58,10 +66,23 @@
     </div>
   </div>
 
-  <div class="field">
-    <%= f.label :resource_file, class: 'label' %>
-    <div class="control">
-      <%= f.file_field :resource_file, multiple: false, direct_upload: true, accept: 'application/pdf' %>
+  <div class="columns">
+    <div class="column">
+      <div class="field">
+        <%= f.label :resource_file, class: 'label' %>
+        <div class="control">
+          <%= f.file_field :resource_file, multiple: false, direct_upload: true, accept: 'application/pdf' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="field">
+        <%= f.label :file_public, 'Make file public?', class: 'label' %>
+        <div class="control">
+          <%= f.check_box :file_public, checked: true %> Allow public access to the resource file
+        </div>
+      </div>
     </div>
   </div>
 

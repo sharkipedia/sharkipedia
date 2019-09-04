@@ -13,4 +13,13 @@ class Trend < ApplicationRecord
   has_one_attached :figure
 
   accepts_nested_attributes_for :trend_observations
+
+  def to_csv
+    CSV.generate(headers: true) do |csv|
+      csv << %w{year value}
+      trend_observations.each do |trend_observation|
+        csv << [trend_observation.year, trend_observation.value]
+      end
+    end
+  end
 end

@@ -1,4 +1,7 @@
-<h1 class="title"><%= @trend.species.name %> - <%= @trend.resource.name %></h1>
+<h1 class="title">
+  <%= @trend.species.name %> - <%= @trend.resource.name %>
+  <%= link_to 'Download trend data as CSV', trend_path(@trend, format: 'csv'), class: 'button is-primary is-pulled-right' %>
+</h1>
 
 <div class="columns">
   <div class="column is-one-third"">

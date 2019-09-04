@@ -76,7 +76,7 @@ document.addEventListener('turbolinks:before-cache', function() {
   $('#gridctr canvas-datagrid').remove()
 });
 
-$(document).on('turbolinks:load', function() {
+document.addEventListener('turbolinks:load', function() {
   $(".navbar-burger").click(function() {
     $(".navbar-burger").toggleClass("is-active");
     $(".navbar-menu").toggleClass("is-active");

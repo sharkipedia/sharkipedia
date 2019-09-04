@@ -8,8 +8,7 @@
     <div class="columns">
       <div class="column">
         <div class="field">
-          <%= select_tag 'species', nil, style: 'width: 100%' %>
-          <p class="help">For example: <%= link_to @example_specie.name, species_path(@example_specie), remote: true %></p>
+          <%= select_tag 'trend[species_id]', nil, style: 'width: 100%' %>
         </div>
       </div>
       <div class="column">
@@ -26,8 +25,7 @@
   <div class="columns">
     <div class="column">
       <div class="field">
-        <%= select_tag 'resources', nil, style: 'width: 100%' %>
-        <p class="help">For example: <%= link_to @example_resource.name, resource_path(@example_resource), remote: true %></p>
+        <%= select_tag 'trend[resource_id]', nil, style: 'width: 100%' %>
       </div>
 
       <p class="">
@@ -95,7 +93,6 @@
         <%= f.label :figure, class: 'label' %>
         <div class="control">
           <%= f.file_field :figure, multiple: false, direct_upload: true, accept: 'image/png, image/jpeg, image/jpg' %>
-          <em>this is optional</em>
           <img id="img_prev" class="is-hidden" />
         </div>
       </div>
@@ -108,27 +105,27 @@
     <div class="column">
 
       <div class="field">
-        <%= label_tag 'unit', 'Unit', class: 'label' %>
-        <%= select_tag 'unit', nil, style: 'width: 20%' %>
+        <%= f.label 'standard', 'Unit', class: 'label' %>
+        <%= f.collection_select(:standard_id, @standards, :id, :name, {:prompt => 'Select Unit'}, style: 'width: 50%') %>
       </div>
 
       <div class="field">
-        <%= label_tag 'sampling_method', 'Sampling Method', class: 'label' %>
-        <%= select_tag 'sampling_method', nil, style: 'width: 20%' %>
+        <%= f.label 'sampling_method', 'Sampling Method', class: 'label' %>
+        <%= f.collection_select(:sampling_method_id, @sampling_methods, :id, :name, {:prompt => 'Select Sampling Method'}, style: 'width: 50%') %>
       </div>
 
     </div>
 
     <div class="column">
 
-      <div class="field">
-        <%= label_tag 'measurement_model', 'Measurement Model', class: 'label' %>
-        <%= select_tag 'measurement_model', nil, style: 'width: 20%' %>
-      </div>
+      <%# <div class="field"> %>
+      <%#   <%= f.label 'measurement_model', 'Measurement Model', class: 'label' %1> %>
+      <%#   <%= f.collection_select(:measurement_model_id, @measurement_models, :name, :name, {:prompt => 'Select Sampling Method'}, style: 'width: 50%') %1> %>
+      <%# </div> %>
 
       <div class="field">
-        <%= label_tag 'data_type', 'Data Type', class: 'label' %>
-        <%= select_tag 'data_type', nil, style: 'width: 20%' %>
+        <%= f.label 'data_type', 'Data Type', class: 'label' %>
+        <%= f.collection_select(:data_type_id, @data_types, :id, :name, {:prompt => 'Select Data Type'}, style: 'width: 50%') %>
       </div>
     </div>
   </div>
@@ -138,13 +135,8 @@
   <div class="columns">
     <div class="column">
       <div class="field">
-        <%= label_tag 'ocean', 'Ocean', class: 'label' %>
-        <%= select_tag 'ocean', nil, style: 'width: 20%' %>
-      </div>
-
-      <div class="field">
-        <%= label_tag 'location', 'Location', class: 'label' %>
-        <%= select_tag 'location', nil, style: 'width: 20%' %>
+        <%= f.label 'ocean', 'Ocean', class: 'label' %>
+        <%= f.collection_select(:ocean_id, @oceans, :id, :name, {:prompt => 'Select Ocean'}, style: 'width: 50%') %>
       </div>
 
       <div class="field">
@@ -156,9 +148,9 @@
     </div>
 
     <div class="column">
-      <%= form_for Location.new do |fl| %>
+      <%= f.fields_for @trend.location do |fl| %>
         <div class="field">
-          <%= fl.label :name, class: 'label' %>
+          <%= fl.label :name, 'Location Name', class: 'label' %>
           <div class="control">
             <%= fl.text_field :name, class: 'input' %><br />
           </div>
@@ -217,7 +209,7 @@
     </div>
   </div>
 
-  <h4 class="subtitle is-5 is-spaced"> Values </h3>
+  <h4 class="subtitle is-5 is-spaced"> Values </h4>
 
   <div class="columns">
     <div class="column is-one-quarter">

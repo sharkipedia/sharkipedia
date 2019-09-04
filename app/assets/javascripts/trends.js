@@ -4,8 +4,8 @@ $(document).on('turbolinks:load', function() {
   }
 
   // species autocomplete
-  runSelect2('species');
-  $('#species').on('select2:select', function (e) {
+  runSelect2('trend_species_id');
+  $('#trend_species_id').on('select2:select', function (e) {
     var data = e.params.data;
     Rails.ajax({
       url: "/species/" + data.id + '.js',
@@ -14,8 +14,8 @@ $(document).on('turbolinks:load', function() {
   });
 
   // resources autocomplete
-  runSelect2('resources');
-  $('#resources').on('select2:select', function (e) {
+  runSelect2('trend_resource_id');
+  $('#trend_resource_id').on('select2:select', function (e) {
     var data = e.params.data;
     Rails.ajax({
       url: "/resources/" + data.id + '.js',
@@ -23,6 +23,15 @@ $(document).on('turbolinks:load', function() {
     })
   });
 
+  // unit / standard autocomplete
+
+  let select2Elements = [
+    'trend_standard_id', 'trend_sampling_method_id',
+    'trend_data_type_id', 'trend_ocean_id', 'trend_location_id'
+  ];
+  select2Elements.forEach(function(element) {
+    $('#' + element).select2();
+  });
 
   function previewFile() {
     var preview = document.querySelector('#img_prev');

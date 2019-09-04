@@ -2,7 +2,15 @@
   <tbody>
     <tr>
       <th>AuthorYear</th>
-      <td id="author-year"><%= resource.name %></td>
+      <td id="author-year">
+        <% if local_assigns.has_key? :render_links %>
+          <%= link_to resource.name, resource_path(resource) %>
+        <% elsif local_assigns.has_key? :render_links_new_window %>
+          <%= link_to resource.name, resource_path(resource), target: '_blank' %>
+        <% else %>
+          <%= resource.name %>
+        <% end %>
+      </td>
     </tr>
     <tr>
       <th>SourceYear</th>

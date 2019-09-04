@@ -30,7 +30,7 @@
 
 <div class="columns">
   <div class="column">
-    <%= render partial: 'resources/detail', locals: { resource: @trend.resource } %>
+    <%= render partial: 'resources/detail', locals: { resource: @trend.resource, render_links: true } %>
   </div>
   <div class="column">
     <% if @trend.figure.attached? %>

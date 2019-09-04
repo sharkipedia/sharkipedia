@@ -2,10 +2,14 @@ class ResourcesController < PreAuthController
   include Pagy::Backend
 
   def new
+    ensure_admin!
+
     @resource = Resource.new
   end
 
   def create
+    ensure_admin!
+
     @resource = Resource.new resource_params
     respond_to do |format|
       if @resource.save

@@ -9,7 +9,32 @@
     <%= render partial: 'location', locals: { location: @trend.location, ocean: @trend.ocean } %>
   </div>
   <div class="column">
-    <%= render partial: 'chart', locals: { observations: @trend.trend_observations } %>
+    <% if @trend.figure.attached? %>
+      <div class="tabs is-small">
+        <ul>
+          <li class="is-active" data-option="0"><a>Plot</a></li>
+          <li data-option="1"><a>Figure</a></li>
+          <li data-option="2"><a>Borth</a></li>
+        </ul>
+      </div>
+    <% end %>
+    <div class="tab-container">
+      <div class="tab-item is-active" data-item="0">
+        <%= render partial: 'chart', locals: { observations: @trend.trend_observations } %>
+      </div>
+
+      <% if @trend.figure.attached? %>
+        <div class="tab-item" data-item="1">
+          <%= image_tag @trend.figure %>
+        </div>
+
+        <div class="tab-item" data-item="2">
+          <%= render partial: 'chart', locals: { observations: @trend.trend_observations } %>
+
+          <%= image_tag @trend.figure %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
 
@@ -33,8 +58,5 @@
     <%= render partial: 'resources/detail', locals: { resource: @trend.resource, render_links: true } %>
   </div>
   <div class="column">
-    <% if @trend.figure.attached? %>
-      <%= image_tag @trend.figure %>
-    <% end %>
   </div>
 </div>

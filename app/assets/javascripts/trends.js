@@ -281,5 +281,12 @@ $(document).on('turbolinks:load', function() {
     document.getElementById('trend_start_year')
       .addEventListener('change', calcNumYears);
   } else if (checkController('show')) {
+    $('.tabs ul li').on('click', function() {
+      var number = $(this).data('option');
+      $('.tabs ul li').removeClass('is-active');
+      $(this).addClass('is-active');
+      $('.tab-container .tab-item').removeClass('is-active');
+      $('div[data-item="' + number + '"]').addClass('is-active');
+    });
   }
 });

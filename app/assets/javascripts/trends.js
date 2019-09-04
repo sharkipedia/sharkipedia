@@ -172,13 +172,13 @@ $(document).on('turbolinks:load', function() {
     <div class="field-body">
         <div class="field">
           <div class="control">
-            <input value="${year}" class="input" readonly="readonly" disabled="disabled" type="text" name="trend[trend_observations_attributes][${index}][year]" id="trend_trend_observations_attributes_${index}_year"><br>
+            <input value="${year}" class="input" readonly="readonly" tabindex="-1" type="text" name="trend[trend_observations_attributes][${index}][year]" id="trend_trend_observations_attributes_${index}_year"><br>
           </div>
         </div>
 
         <div class="field">
           <div class="control">
-            <input type="number" pattern="^[0–9]$" class="input trend-value" name="trend[trend_observations_attributes][${index}][value]" id="trend_trend_observations_attributes_${index}_value"><br>
+            <input type="number" step="any" class="input trend-value" name="trend[trend_observations_attributes][${index}][value]" id="trend_trend_observations_attributes_${index}_value"><br>
           </div>
         </div>
     </div>

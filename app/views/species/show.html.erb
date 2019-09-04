@@ -24,9 +24,7 @@
   </div>
 </div>
 
-<% if @grouped_measurements.blank? %>
-  <em>No trait measurements for this species.</em>
-<% else %>
+<% unless @grouped_measurements.blank? %>
   <h3 class='subtitle is-3'>Traits</h2>
 
   <% @grouped_measurements.each do |trait_class, measurements| %>
@@ -61,7 +59,31 @@
   <% end %>
 <% end %>
 
-<% if @trends.blank? %>
-  <em>No trends for this species.</em>
-<% else %>
+<% if user_is_admin? %>
+  <% unless @trends.blank? %>
+    <h3 class='subtitle is-3'>Trends</h2>
+
+    <table class="table is-fullwidth">
+      <thead>
+        <tr>
+          <th>Location</th>
+          <th></th>
+          <th>Unit</th>
+          <th>Resource</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @trends.each do |trend| %>
+          <tr>
+            <td><%= trend.location.name %></td>
+            <td width="40%"><%= render partial: 'trends/chart', locals: { observations: trend.trend_observations } %></td>
+            <td><%= trend.standard.name %></td>
+            <td><%= link_to trend.resource.name, resource_path(trend.resource) %></td>
+            <td><%= link_to 'Details', trend_path(trend) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
 <% end %>

@@ -194,14 +194,14 @@
       <div class="field">
         <%= f.label :start_year, class: 'label' %>
         <div class="control">
-          <%= f.text_field :start_year, type: 'number', pattern: '^[0–9]$', class: 'input', onkeypress: "return isNumberKey(event)", maxlength: '4' %><br />
+          <%= f.text_field :start_year, type: 'number', pattern: '^[0–9]$', class: 'input', min: "1900", step: "1", maxlength: '4' %><br />
         </div>
       </div>
 
       <div class="field">
         <%= f.label :end_year, class: 'label' %>
         <div class="control">
-          <%= f.text_field :end_year, type: 'number', pattern: '^[0–9]$', class: 'input', onkeypress: "return isNumberKey(event)",  min: "1900", max: "2099", step: "1"  %><br />
+          <%= f.text_field :end_year, type: 'number', pattern: '^[0–9]$', class: 'input', min: "1900", step: "1", maxlength: '4' %><br />
         </div>
       </div>
     </div>
@@ -210,14 +210,14 @@
       <div class="field">
         <%= f.label :no_years, class: 'label' %>
         <div class="control">
-          <%= f.text_field :no_years, class: 'input', disabled: true, placeholder: 'automatically calculated from start & end year' %><br />
+          <%= f.text_field :no_years, class: 'input', readonly: true, tabindex: '-1', placeholder: 'automatically calculated from start & end year' %><br />
         </div>
       </div>
 
       <div class="field">
         <%= f.label :time_min, class: 'label' %>
         <div class="control">
-          <%= f.text_field :time_min, type: 'number', pattern: '^[0–9]$', class: 'input', onkeypress: "return isNumberKey(event)" %><br />
+          <%= f.text_field :time_min, type: 'number', pattern: '^[0–9]$', class: 'input' %><br />
         </div>
       </div>
     </div>

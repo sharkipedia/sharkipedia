@@ -1,0 +1,13 @@
+<div class="error_messages">
+  <% if @trend.errors.any? %>
+    <h2>
+      <%= pluralize(@trend.errors.count, "error") %> prohibited this trend from being saved:
+    </h2>
+
+    <ul>
+      <% @trend.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>

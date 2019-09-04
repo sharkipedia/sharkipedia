@@ -37,19 +37,25 @@ class TrendsController < ApplicationController
     @trend = current_user.trends.new(trend_params)
     @trend.location = location
 
-    if @trend.save
-      redirect_to @trend
-    else
-      @example_specie = Species.find_by name: 'Carcharhinus acronotus'
-      @example_resource = Resource.find_by name: 'everett2015'
-      @standards = Standard.all
-      @sampling_methods = SamplingMethod.all
-      @measurement_models = MeasurementModel.all
-      @data_types = DataType.all
-      @oceans = Ocean.all
-      @locations = Location.all
+    respond_to do |format|
+      if @trend.save
+        format.html { redirect_to @trend }
+        format.js { redirect_to @trend }
+      else
+        format.html do
+          @example_specie = Species.find_by name: 'Carcharhinus acronotus'
+          @example_resource = Resource.find_by name: 'everett2015'
+          @standards = Standard.all
+          @sampling_methods = SamplingMethod.all
+          @measurement_models = MeasurementModel.all
+          @data_types = DataType.all
+          @oceans = Ocean.all
+          @locations = Location.all
 
-      render :new
+          render :new
+        end
+        format.js
+      end
     end
   end
 

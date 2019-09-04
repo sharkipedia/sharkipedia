@@ -1,20 +1,8 @@
 <h1 class="title is-3 is-spaced"> New Trend </h1>
 
-<%= form_with model: @trend, local: true do |f| %>
+<%= form_with model: @trend do |f| %>
 
-  <% if @trend.errors.any? %>
-    <div class="error_messages">
-      <h2>
-        <%= pluralize(@trend.errors.count, "error") %> prohibited this trend from being saved:
-      </h2>
-
-      <ul>
-      <% @trend.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render partial: 'errors', locals: { trend: @trend } %>
 
   <div class="species">
     <h3 class="subtitle is-4 is-spaced"> Species </h3>

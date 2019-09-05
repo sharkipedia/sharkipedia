@@ -34,6 +34,7 @@ class ResourcesController < PreAuthController
   def show
     @resource = Resource.find params[:id]
     @observations = @resource.observations
+    @trends = @resource.trends
   end
 
   private

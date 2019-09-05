@@ -1,6 +1,8 @@
 <% if user_is_admin? %>
   <% unless trends.blank? %>
-    <h3 class='subtitle is-3'>Trends</h2>
+    <% unless local_assigns.has_key? :hide_title %>
+      <h3 class='subtitle is-3'>Trends</h2>
+    <% end %>
 
     <table class="table is-fullwidth">
       <thead>

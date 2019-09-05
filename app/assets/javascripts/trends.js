@@ -29,6 +29,9 @@ $(document).on('turbolinks:load', function() {
       data: data,
       options: {
         fill: false,
+        animation: {
+          duration: 0,
+        },
         responsive: true,
         tooltips: {
           enabled: false,

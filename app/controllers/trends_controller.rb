@@ -6,7 +6,7 @@ class TrendsController < ApplicationController
   end
 
   def new
-    @example_specie = Species.find_by name: 'Carcharhinus acronotus'
+    @example_species = Species.find_by name: 'Carcharhinus acronotus'
     @example_resource = Resource.find_by name: 'everett2015'
 
     @trend = current_user.trends.new
@@ -30,6 +30,17 @@ class TrendsController < ApplicationController
     end
   end
 
+  def edit
+    @trend = Trend.find params[:id]
+
+    @standards = Standard.all
+    @sampling_methods = SamplingMethod.all
+    @measurement_models = MeasurementModel.all
+    @data_types = DataType.all
+    @oceans = Ocean.all
+    @locations = Location.all
+  end
+
   def create
     location = Location.find_or_create_by name: params[:trend][:location][:name],
       lat: params[:trend][:location][:lat],
@@ -50,9 +61,34 @@ class TrendsController < ApplicationController
           @measurement_models = MeasurementModel.all
           @data_types = DataType.all
           @oceans = Ocean.all
-          @locations = Location.all
 
           render :new
+        end
+        format.js
+      end
+    end
+  end
+
+  def update
+    location = Location.find_or_create_by name: params[:trend][:location][:name],
+      lat: params[:trend][:location][:lat],
+      lon: params[:trend][:location][:lon]
+    @trend = Trend.find params[:id]
+    @trend.location = location
+
+    respond_to do |format|
+      if @trend.update(trend_params)
+        format.html { redirect_to @trend }
+        format.js { redirect_to @trend }
+      else
+        format.html do
+          @standards = Standard.all
+          @sampling_methods = SamplingMethod.all
+          @measurement_models = MeasurementModel.all
+          @data_types = DataType.all
+          @oceans = Ocean.all
+
+          render :edit
         end
         format.js
       end

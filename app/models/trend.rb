@@ -12,7 +12,7 @@ class Trend < ApplicationRecord
 
   has_one_attached :figure
 
-  accepts_nested_attributes_for :trend_observations
+  accepts_nested_attributes_for :trend_observations, allow_destroy: true
 
   validates :start_year, presence: true
   validates :end_year, presence: true

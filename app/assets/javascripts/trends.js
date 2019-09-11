@@ -86,7 +86,7 @@ $(document).on('turbolinks:load', function() {
     return;
   }
 
-  if (checkController('new')) {
+  if (checkController('new') || checkController('edit')) {
     // species autocomplete
     runSelect2('trend_species_id');
     $('#trend_species_id').on('select2:select', function (e) {
@@ -96,6 +96,9 @@ $(document).on('turbolinks:load', function() {
         type: "get"
       })
     });
+    // let selected_id = $("#trend_species_id option").val();
+    // let selected_text = $("#trend_species_id option").text();
+    // $("#trend_species_id").select2('data', { id: selected_id, text: selected_text });
 
     // resources autocomplete
     runSelect2('trend_resource_id');
@@ -139,7 +142,7 @@ $(document).on('turbolinks:load', function() {
     });
 
     function renderChart() {
-      var trendData = document.querySelectorAll('#trend-data input')
+      var trendData = document.querySelectorAll('#trend-data input:not([type=hidden]):not([type=checkbox])')
 
       var years = [];
       var values = [];
@@ -208,6 +211,12 @@ $(document).on('turbolinks:load', function() {
 
     renderChart();
 
+    if (checkController('edit')) {
+      setupYearEventListeners();
+      let chart = document.getElementById('trend-chart');
+      chart.classList.remove("is-hidden");
+    }
+
     function calcNumYears() {
       let start = document.getElementById('trend_start_year').value;
       let end = document.getElementById('trend_end_year').value;
@@ -236,27 +245,32 @@ $(document).on('turbolinks:load', function() {
         trendData.insertAdjacentHTML('beforeend', yearValueInput(i, parseInt(start) + i));
       }
 
+      setupYearEventListeners();
+
+      let target = document.querySelector('#trend_trend_observations_attributes_0_value');
+      target.addEventListener('paste', (event) => {
+        let paste = (event.clipboardData || window.clipboardData).getData('text');
+
+        var values = paste.split(/\s|;|,/);
+        console.log(values);
+
+        $(values).each(function(index) {
+          var inputBox = $("#trend_trend_observations_attributes_" + index + "_value");
+          inputBox.val(values[index])
+        });
+
+        event.preventDefault();
+
+        renderChart();
+      });
+    }
+
+    function setupYearEventListeners() {
       var valueInputs = document.querySelectorAll('input.trend-value');
       for (i = 0; i < valueInputs.length; i++) {
         valueInputs[i].addEventListener('change', renderChart);
       }
 
-      let target = document.querySelector('#trend_trend_observations_attributes_0_value');
-        target.addEventListener('paste', (event) => {
-          let paste = (event.clipboardData || window.clipboardData).getData('text');
-
-          var values = paste.split(/\s|;|,/);
-          console.log(values);
-
-          $(values).each(function(index) {
-            var inputBox = $("#trend_trend_observations_attributes_" + index + "_value");
-            inputBox.val(values[index])
-          });
-
-          event.preventDefault();
-
-          renderChart();
-        });
     }
 
     function yearValueInput(index, year) {

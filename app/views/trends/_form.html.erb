@@ -1,0 +1,254 @@
+<%= form_with model: @trend do |f| %>
+
+  <%= render partial: 'errors', locals: { trend: @trend } %>
+
+  <div class="species">
+    <h3 class="subtitle is-4 is-spaced"> Species </h3>
+
+    <div class="columns">
+      <div class="column">
+        <div class="field">
+          <%= select_tag 'trend[species_id]', nil, style: 'width: 100%' %>
+        </div>
+      </div>
+      <div class="column">
+        <div id="species-info">
+          <%= render partial: 'species/detail', locals: { specie: species, render_links_new_window: true } %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="subtitle is-4 is-spaced"> Resource </h3>
+
+
+  <div class="columns">
+    <div class="column">
+      <div class="field">
+        <%= select_tag 'trend[resource_id]', nil, style: 'width: 100%' %>
+      </div>
+
+      <p class="">
+        <em><%= link_to "If the resource doesn't exist in the database please click here to create it.", new_resource_path %></em>
+      </p>
+    </div>
+
+    <div class="column">
+      <div id="resources-info">
+        <%= render partial: 'resources/detail', locals: { resource: resource, render_links_new_window: true } %>
+      </div>
+    </div>
+  </div>
+
+  <div class="columns">
+    <div class="column">
+      <div class="field">
+        <%= f.label :page_and_figure_number, 'Page and Figure Number', class: 'label' %>
+        <div class="control">
+          <%= f.text_field :page_and_figure_number, class: 'input' %><br />
+        </div>
+      </div>
+
+      <div class="field">
+        <%= f.label :line_used, class: 'label' %>
+        <div class="control">
+          <%= f.text_field :line_used, class: 'input' %><br />
+        </div>
+      </div>
+
+      <div class="field">
+        <%= f.label :pdf_page, class: 'label' %>
+        <div class="control">
+          <%= f.text_field :pdf_page, class: 'input' %><br />
+        </div>
+      </div>
+
+    </div>
+
+    <div class="column">
+
+      <div class="field">
+        <%= f.label :actual_page, class: 'label' %>
+        <div class="control">
+          <%= f.text_field :actual_page, class: 'input' %><br />
+        </div>
+      </div>
+
+      <div class="field">
+        <%= f.label :figure_name, class: 'label' %>
+        <div class="control">
+          <%= f.text_field :figure_name, class: 'input' %><br />
+        </div>
+      </div>
+
+      <div class="field">
+        <%= f.label :figure_data, class: 'label' %>
+        <div class="control">
+          <%= f.text_field :figure_data, class: 'input' %><br />
+        </div>
+      </div>
+
+      <div class="field">
+        <%= f.label :figure, class: 'label' %>
+        <div class="control">
+          <% if @trend.figure.attached? %>
+            <%= image_tag @trend.figure %>
+          <% else %>
+            <%= f.file_field :figure, multiple: false, direct_upload: true, accept: 'image/png, image/jpeg, image/jpg' %>
+            <img id="img_prev" class="is-hidden" />
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="subtitle is-4 is-spaced"> Measurement metadata </h3>
+
+  <div class="columns">
+    <div class="column">
+
+      <div class="field">
+        <%= f.label 'standard', 'Unit', class: 'label' %>
+        <%= f.collection_select(:standard_id, @standards, :id, :name, {:prompt => 'Select Unit'}, style: 'width: 50%') %>
+      </div>
+
+      <div class="field">
+        <%= f.label 'sampling_method', 'Sampling Method', class: 'label' %>
+        <%= f.collection_select(:sampling_method_id, @sampling_methods, :id, :name, {:prompt => 'Select Sampling Method'}, style: 'width: 50%') %>
+      </div>
+
+    </div>
+
+    <div class="column">
+
+      <%# <div class="field"> %>
+      <%#   <%= f.label 'measurement_model', 'Measurement Model', class: 'label' %1> %>
+      <%#   <%= f.collection_select(:measurement_model_id, @measurement_models, :name, :name, {:prompt => 'Select Sampling Method'}, style: 'width: 50%') %1> %>
+      <%# </div> %>
+
+      <div class="field">
+        <%= f.label 'data_type', 'Data Type', class: 'label' %>
+        <%= f.collection_select(:data_type_id, @data_types, :id, :name, {:prompt => 'Select Data Type'}, style: 'width: 50%') %>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="subtitle is-4 is-spaced"> Location </h3>
+
+  <div class="columns">
+    <div class="column">
+      <div class="field">
+        <%= f.label 'ocean', 'Ocean', class: 'label' %>
+        <%= f.collection_select(:ocean_id, @oceans, :id, :name, {:prompt => 'Select Ocean'}, style: 'width: 50%') %>
+      </div>
+
+      <div class="field">
+        <%= f.label :depth, class: 'label' %>
+        <div class="control">
+          <%= f.text_field :depth, class: 'input' %><br />
+        </div>
+      </div>
+    </div>
+
+    <div class="column">
+      <%= f.fields_for @trend.location do |fl| %>
+        <div class="field">
+          <%= fl.label :name, 'Location Name', class: 'label' %>
+          <div class="control">
+            <%= fl.text_field :name, class: 'input' %><br />
+          </div>
+        </div>
+
+        <div class="field">
+          <%= fl.label :lat, 'Latitude', class: 'label' %>
+          <div class="control">
+            <%= fl.text_field :lat, class: 'input' %><br />
+          </div>
+        </div>
+
+        <div class="field">
+          <%= fl.label :lon, 'Longitude', class: 'label' %>
+          <div class="control">
+            <%= fl.text_field :lon, class: 'input' %><br />
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <h3 class="subtitle is-4 is-spaced"> Observations </h3>
+
+  <div class="columns">
+    <div class="column">
+      <div class="field">
+        <%= f.label :start_year, class: 'label' %>
+        <div class="control">
+          <%= f.text_field :start_year, type: 'number', pattern: '^[0–9]$', class: 'input', min: "1900", step: "1", maxlength: '4' %><br />
+        </div>
+      </div>
+
+      <div class="field">
+        <%= f.label :end_year, class: 'label' %>
+        <div class="control">
+          <%= f.text_field :end_year, type: 'number', pattern: '^[0–9]$', class: 'input', min: "1900", step: "1", maxlength: '4' %><br />
+        </div>
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="field">
+        <%= f.label :no_years, class: 'label' %>
+        <div class="control">
+          <%= f.text_field :no_years, class: 'input', readonly: true, tabindex: '-1', placeholder: 'automatically calculated from start & end year' %><br />
+        </div>
+      </div>
+
+      <div class="field">
+        <%= f.label :time_min, class: 'label' %>
+        <div class="control">
+          <%= f.text_field :time_min, type: 'number', pattern: '^[0–9]$', class: 'input' %><br />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h4 class="subtitle is-5 is-spaced"> Values </h4>
+
+  <div class="columns">
+    <div class="column is-one-quarter">
+      <div id="trend-data">
+        <% if @trend.trend_observations.blank? %>
+          <%# The input pairs get added by the javascript after the user has entered start and end years %>
+          <p id="trend-help-msg" class="help">Please enter start and end years.</p>
+        <% else %>
+          <%= f.fields_for :trend_observations, @trend.trend_observations.order(:year) do |ff| %>
+            <div class="field is-horizontal">
+              <div class="field-body">
+                <div class="field">
+                  <div class="control">
+                    <%= ff.text_field :year, class: 'input', readonly: true, tabindex: '-1' %><br />
+                  </div>
+                </div>
+
+                <div class="field">
+                  <div class="control">
+                    <%= ff.text_field :value, class: 'input trend-value', step: "any" %>
+                  </div>
+                </div>
+              </div>
+              <% if ff.object.persisted? %>
+                <%= ff.check_box :_destroy, class: 'is-hidden' %>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="column">
+      <canvas id="trend-chart" class="is-hidden"></canvas>
+    </div>
+  </div>
+
+  <%= f.submit class: 'button is-primary is-pulled-right' %>
+<% end %>

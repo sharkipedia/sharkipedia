@@ -14,6 +14,9 @@ class Trend < ApplicationRecord
 
   accepts_nested_attributes_for :trend_observations
 
+  validates :start_year, presence: true
+  validates :end_year, presence: true
+
   def to_csv
     CSV.generate(headers: true) do |csv|
       csv << %w{year value}

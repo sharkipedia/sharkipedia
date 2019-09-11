@@ -113,15 +113,14 @@
     </div>
 
     <div class="column">
-
-      <%# <div class="field"> %>
-      <%#   <%= f.label 'measurement_model', 'Measurement Model', class: 'label' %1> %>
-      <%#   <%= f.collection_select(:measurement_model_id, @measurement_models, :name, :name, {:prompt => 'Select Sampling Method'}, style: 'width: 50%') %1> %>
-      <%# </div> %>
-
       <div class="field">
         <%= f.label 'data_type', 'Data Type', class: 'label' %>
-        <%= f.collection_select(:data_type_id, @data_types, :id, :name, {:prompt => 'Select Data Type'}, style: 'width: 50%') %>
+        <%= f.collection_select(:data_type_id, @data_types, :id, :name, {:prompt => 'Select Data Type'}, style: 'width: 100%') %>
+      </div>
+
+      <div class="field">
+        <%= f.label :model, class: 'label' %>
+        <%= f.text_field :model, class: 'input' %><br />
       </div>
     </div>
   </div>

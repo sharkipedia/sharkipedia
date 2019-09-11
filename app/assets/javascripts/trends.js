@@ -34,7 +34,11 @@ $(document).on('turbolinks:load', function() {
         },
         responsive: true,
         tooltips: {
-          enabled: false,
+          callbacks: {
+            title: function(tooltipItem, data) {
+              return new Date(tooltipItem[0].label).getFullYear() + 1;
+            }
+          }
         },
         legend: {
           display: false

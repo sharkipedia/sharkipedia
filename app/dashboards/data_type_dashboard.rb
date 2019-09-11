@@ -45,7 +45,7 @@ class DataTypeDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how data types are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(data_type)
-  #   "DataType ##{data_type.id}"
-  # end
+  def display_resource(data_type)
+    data_type.name
+  end
 end

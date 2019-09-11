@@ -102,12 +102,12 @@
 
       <div class="field">
         <%= f.label 'standard', 'Unit', class: 'label' %>
-        <%= f.collection_select(:standard_id, @standards, :id, :name, {:prompt => 'Select Unit'}, style: 'width: 50%') %>
+        <%= f.collection_select(:standard_id, @standards, :id, :name, {:prompt => 'Select Unit'}, style: 'width: 100%') %>
       </div>
 
       <div class="field">
         <%= f.label 'sampling_method', 'Sampling Method', class: 'label' %>
-        <%= f.collection_select(:sampling_method_id, @sampling_methods, :id, :name, {:prompt => 'Select Sampling Method'}, style: 'width: 50%') %>
+        <%= f.collection_select(:sampling_method_id, @sampling_methods, :id, :name, {:prompt => 'Select Sampling Method'}, style: 'width: 100%') %>
       </div>
 
     </div>

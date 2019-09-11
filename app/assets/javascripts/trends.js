@@ -14,6 +14,11 @@ $(document).on('turbolinks:load', function() {
     // uncomment this to interpolate between missing data points
     // Chart.defaults.line.spanGaps = true;
 
+    const colours = values.map((value) => value < 0 ? 'red' : 'yellow');
+    const pointRadius = values.map((value) => value < 0 ? '6' : '3');
+    const pointStyles = values.map((value) => value < 0 ? 'rectRot' : 'circle');
+    const pointBorders = values.map((value) => value < 0 ? 'black' : '#f09154');
+
     const data = {
       labels: years,
       datasets: [{
@@ -22,6 +27,11 @@ $(document).on('turbolinks:load', function() {
         borderColor: '#fe8b36',
         backgroundColor: '#fe8b36',
         lineTension: 0,
+        pointRadius: pointRadius,
+        pointHoverRadius: 8,
+        pointBorderColor: pointBorders,
+        pointBackgroundColor: colours,
+        pointStyle: pointStyles,
       }]
     }
     const options = {
@@ -164,6 +174,11 @@ $(document).on('turbolinks:load', function() {
       // uncomment this to interpolate between missing data points
       // Chart.defaults.line.spanGaps = true;
 
+      const colours = values.map((value) => value < 0 ? 'red' : 'yellow');
+      const pointRadius = values.map((value) => value < 0 ? '6' : '3');
+      const pointStyles = values.map((value) => value < 0 ? 'rectRot' : 'circle');
+      const pointBorders = values.map((value) => value < 0 ? 'black' : '#f09154');
+
       const data = {
         labels: years,
         datasets: [{
@@ -172,6 +187,11 @@ $(document).on('turbolinks:load', function() {
           borderColor: '#fe8b36',
           backgroundColor: '#fe8b36',
           lineTension: 0,
+          pointRadius: pointRadius,
+          pointHoverRadius: 8,
+          pointBorderColor: pointBorders,
+          pointBackgroundColor: colours,
+          pointStyle: pointStyles,
         }]
       }
       const options = {
@@ -181,7 +201,11 @@ $(document).on('turbolinks:load', function() {
           fill: false,
           responsive: true,
           tooltips: {
-            enabled: false,
+            callbacks: {
+              title: function(tooltipItem, data) {
+                return new Date(tooltipItem[0].label).getFullYear() + 1;
+              }
+            }
           },
           legend: {
             display: false

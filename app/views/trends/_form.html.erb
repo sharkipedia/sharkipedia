@@ -82,13 +82,6 @@
       </div>
 
       <div class="field">
-        <%= f.label :figure_data, class: 'label' %>
-        <div class="control">
-          <%= f.text_field :figure_data, class: 'input' %><br />
-        </div>
-      </div>
-
-      <div class="field">
         <%= f.label :figure, class: 'label' %>
         <div class="control">
           <% if @trend.figure.attached? %>
@@ -200,13 +193,6 @@
         <%= f.label :no_years, class: 'label' %>
         <div class="control">
           <%= f.text_field :no_years, class: 'input', readonly: true, tabindex: '-1', placeholder: 'automatically calculated from start & end year' %><br />
-        </div>
-      </div>
-
-      <div class="field">
-        <%= f.label :time_min, class: 'label' %>
-        <div class="control">
-          <%= f.text_field :time_min, type: 'number', pattern: '^[0–9]$', class: 'input' %><br />
         </div>
       </div>
     </div>

@@ -15,6 +15,7 @@ class ResourceDashboard < Administrate::BaseDashboard
     suffix: Field::String,
     data_source: Field::String,
     resource: Field::String,
+    file_public: Field::Boolean,
     observations: Field::HasMany,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -42,6 +43,7 @@ class ResourceDashboard < Administrate::BaseDashboard
     :year,
     :suffix,
     :resource,
+    :file_public,
     :observations,
   ].freeze
 
@@ -55,6 +57,7 @@ class ResourceDashboard < Administrate::BaseDashboard
     :year,
     :suffix,
     :resource,
+    :file_public,
   ].freeze
 
   # Overwrite this method to customize how resources are displayed

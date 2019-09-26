@@ -48,7 +48,7 @@ class SamplingMethodDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how sampling methods are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(sampling_method)
-  #   "SamplingMethod ##{sampling_method.id}"
-  # end
+  def display_resource(sampling_method)
+    sampling_method.name
+  end
 end

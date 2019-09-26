@@ -4,23 +4,6 @@ GIT
   specs:
     select2-rails (4.0.8)
 
-GIT
-  remote: https://github.com/thoughtbot/administrate.git
-  revision: 0a0e5f68f0cdf553d11093391138c4f3d4995660
-  specs:
-    administrate (0.11.0)
-      actionpack (>= 4.2)
-      actionview (>= 4.2)
-      activejob (>= 4.2)
-      activerecord (>= 4.2)
-      autoprefixer-rails (>= 6.0)
-      datetime_picker_rails (~> 0.0.7)
-      jquery-rails (>= 4.0)
-      kaminari (>= 1.0)
-      momentjs-rails (~> 2.8)
-      sassc-rails (~> 2.1)
-      selectize-rails (~> 0.6)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -83,6 +66,17 @@ GEM
       zeitwerk (~> 2.1, >= 2.1.8)
     addressable (2.6.0)
       public_suffix (>= 2.0.2, < 4.0)
+    administrate (0.12.0)
+      actionpack (>= 4.2)
+      actionview (>= 4.2)
+      activerecord (>= 4.2)
+      autoprefixer-rails (>= 6.0)
+      datetime_picker_rails (~> 0.0.7)
+      jquery-rails (>= 4.0)
+      kaminari (>= 1.0)
+      momentjs-rails (~> 2.8)
+      sassc-rails (~> 2.1)
+      selectize-rails (~> 0.6)
     autoprefixer-rails (9.6.1.1)
       execjs
     aws-eventstream (1.0.3)
@@ -354,7 +348,7 @@ PLATFORMS
 
 DEPENDENCIES
   aasm (~> 5.0, >= 5.0.1)
-  administrate!
+  administrate (~> 0.12.0)
   aws-sdk-s3 (~> 1.46)
   bootsnap (>= 1.1.0)
   bugsnag (~> 6.11)

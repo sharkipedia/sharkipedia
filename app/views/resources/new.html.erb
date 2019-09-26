@@ -1,0 +1,82 @@
+<h1 class="title is-3 is-spaced"> New Resource </h1>
+
+<%= form_with model: @resource do |f| %>
+
+  <%= render partial: 'errors', locals: { resource: @resource } %>
+
+  <div class="columns">
+    <div class="column">
+      <div class="field">
+        <%= f.label :name, 'Author Year', class: 'label' %>
+        <div class="control">
+          <%= f.text_field :name, class: 'input' %><br />
+        </div>
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="field">
+        <%= f.label :suffix, class: 'label' %>
+        <div class="control">
+          <%= f.text_field :suffix, class: 'input' %><br />
+        </div>
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="field">
+        <%= f.label :year, class: 'label' %>
+        <div class="control">
+          <%= f.text_field :year, class: 'input' %><br />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= f.label :doi, class: 'label' %>
+    <div class="control">
+      <%= f.text_field :doi, class: 'input' %><br />
+    </div>
+  </div>
+
+  <div class="field">
+    <%= f.label :data_source, class: 'label' %>
+    <div class="control">
+      <%= f.text_field :data_source, class: 'input' %><br />
+    </div>
+  </div>
+
+  <div class="field">
+    <%= f.label :resource, class: 'label' %>
+    <div class="control">
+      <%= f.text_field :resource, class: 'input' %><br />
+    </div>
+  </div>
+
+  <div class="columns">
+    <div class="column">
+      <div class="field">
+        <%= f.label :resource_file, class: 'label' %>
+        <div class="control">
+          <%= f.file_field :resource_file, multiple: false, direct_upload: true, accept: 'application/pdf' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="field">
+        <%= f.label :file_public, 'Make file public?', class: 'label' %>
+        <div class="control">
+          <%= f.check_box :file_public, checked: true %> Allow public access to the resource file
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="control">
+      <%= f.submit class: 'button is-primary is-fullwidth' %>
+    </div>
+  </div>
+<% end %>

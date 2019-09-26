@@ -1,5 +1,5 @@
 jQuery(document).on('turbolinks:load', function() {
-  if (!$('body').hasClass('data_export')) {
+  if (!checkController('data_export')) {
     return;
   }
 

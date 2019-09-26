@@ -1,4 +1,8 @@
 $(document).on('turbolinks:load', function() {
+  if (!checkController('species')) {
+    return;
+  }
+
   [
     'species'
   ].forEach(function(element) {

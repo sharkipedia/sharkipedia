@@ -1,0 +1,16 @@
+<div class="error_messages">
+  <% if @resource.errors.any? %>
+    <article class="message is-danger">
+      <div class="message-header">
+        <%= pluralize(@resource.errors.count, "error") %> prohibited this resource from being saved
+      </div>
+      <div class="message-body">
+        <ul>
+          <% @resource.errors.full_messages.each do |msg| %>
+            <li><%= msg.sub 'Name', 'Author Year' %></li>
+          <% end %>
+        </ul>
+      </div>
+    </article>
+  <% end %>
+</div>

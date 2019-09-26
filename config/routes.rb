@@ -50,11 +50,12 @@ Rails.application.routes.draw do
 
   root 'pages#start'
 
-  resources :trends, only: :index
+  resources :trends, only: [:show, :index, :edit, :new, :create, :update]
+  resources :locations, only: :create
 
   resources :traits, only: [:index, :show]
   resources :species, only: [:index, :show]
-  resources :resources, only: [:index, :show]
+  resources :resources, only: [:index, :show, :new, :create]
 
   namespace :search do
     get 'autocomplete', defaults: { format: 'json' }

@@ -16,15 +16,15 @@
     </p>
   </div>
   <div class="column">
-    <%= link_to 'Export trait data as CSV', data_export_index_path(species: [@specie], commit: true, export_type: 'Traits'), class: 'button is-primary is-pulled-right' %>
+    <% unless @grouped_measurements.blank? %>
+      <%= link_to 'Export trait data as CSV', data_export_index_path(species: [@specie], commit: true, export_type: 'Traits'), class: 'button is-primary is-pulled-right' %>
+    <% end %>
     <p class="title is-6">External resources for this species:</p>
     <%= link_to 'IUCN Red List', "https://www.iucnredlist.org/search?query=#{@specie.name}&searchType=species", target: '_blank' %>
   </div>
 </div>
 
-<% if @grouped_measurements.blank? %>
-  <em>No measurements for this species.</em>
-<% else %>
+<% unless @grouped_measurements.blank? %>
   <h3 class='subtitle is-3'>Traits</h2>
 
   <% @grouped_measurements.each do |trait_class, measurements| %>
@@ -58,3 +58,5 @@
     </table>
   <% end %>
 <% end %>
+
+<%= render partial: 'trends/list', locals: { trends: @trends, hide_species: true } %>

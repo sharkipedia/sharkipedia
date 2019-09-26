@@ -9,12 +9,11 @@ class TrendDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     user: Field::BelongsTo,
-    data_source: Field::BelongsTo,
     species: Field::BelongsTo,
     location: Field::BelongsTo,
     ocean: Field::BelongsTo,
     data_type: Field::BelongsTo,
-    unit: Field::BelongsTo,
+    standard: Field::BelongsTo,
     sampling_method: Field::BelongsTo,
     id: Field::Number,
     no_years: Field::Number,
@@ -26,6 +25,7 @@ class TrendDashboard < Administrate::BaseDashboard
     actual_page: Field::Number,
     depth: Field::String,
     model: Field::String,
+    trend_observations: Field::HasMany,
     figure_name: Field::String,
     figure_data: Field::String,
     created_at: Field::DateTime,
@@ -39,7 +39,6 @@ class TrendDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
     :user,
-    :data_source,
     :species,
     :location,
   ].freeze
@@ -48,12 +47,11 @@ class TrendDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
     :user,
-    :data_source,
     :species,
     :location,
     :ocean,
     :data_type,
-    :unit,
+    :standard,
     :sampling_method,
     :id,
     :no_years,
@@ -66,6 +64,7 @@ class TrendDashboard < Administrate::BaseDashboard
     :depth,
     :model,
     :figure_name,
+    :trend_observations,
     :figure_data,
     :created_at,
     :updated_at,
@@ -76,12 +75,11 @@ class TrendDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
     :user,
-    :data_source,
     :species,
     :location,
     :ocean,
     :data_type,
-    :unit,
+    :standard,
     :sampling_method,
     :no_years,
     :time_min,

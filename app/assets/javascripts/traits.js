@@ -1,4 +1,8 @@
 $(document).on('turbolinks:load', function() {
+  if (!checkController('traits')) {
+    return;
+  }
+
   $('#trait_search').select2();
 
   $('#trait_search').on('select2:select', function (e) {

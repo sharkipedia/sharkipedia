@@ -45,7 +45,7 @@ class OceanDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how oceans are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(ocean)
-  #   "Ocean ##{ocean.id}"
-  # end
+  def display_resource(ocean)
+    ocean.name
+  end
 end

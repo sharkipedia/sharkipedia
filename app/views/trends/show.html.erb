@@ -1,0 +1,75 @@
+<div class="columns">
+  <div class="column">
+    <h1 class="title">
+      <%= @trend.species.name %> - <%= @trend.resource.name %>
+    </h1>
+  </div>
+
+  <div class="column is-one-third">
+    <div class="buttons is-pulled-right">
+      <% if user_is_admin? %>
+        <%= link_to 'Edit', edit_trend_path(@trend), class: 'button is-info is-pulled-right' %>
+      <% end %>
+
+      <%= link_to 'Download trend data as CSV', trend_path(@trend, format: 'csv'), class: 'button is-primary' %>
+    </div>
+  </div>
+</div>
+
+<div class="columns">
+  <div class="column is-one-third"">
+    <%= render partial: 'species/detail', locals: { specie: @trend.species, render_links: true } %>
+    <%= render partial: 'location', locals: { location: @trend.location, ocean: @trend.ocean } %>
+  </div>
+  <div class="column">
+    <% if @trend.figure.attached? %>
+      <div class="tabs is-small">
+        <ul>
+          <li class="is-active" data-option="0"><a>Plot</a></li>
+          <li data-option="1"><a>Figure</a></li>
+          <li data-option="2"><a>Both</a></li>
+        </ul>
+      </div>
+    <% end %>
+    <div class="tab-container">
+      <div class="tab-item is-active" data-item="0">
+        <%= render partial: 'chart', locals: { observations: @trend.trend_observations } %>
+      </div>
+
+      <% if @trend.figure.attached? %>
+        <div class="tab-item" data-item="1">
+          <%= image_tag @trend.figure %>
+        </div>
+
+        <div class="tab-item" data-item="2">
+          <%= render partial: 'chart', locals: { observations: @trend.trend_observations } %>
+
+          <%= image_tag @trend.figure %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="columns">
+  <div class="column">
+    <%= render partial: 'raw_data', locals: { observations: @trend.trend_observations } %>
+  </div>
+  <div class="column">
+    <%= render partial: 'meta', locals: { trend: @trend } %>
+  </div>
+  <div class="column">
+    <%= render partial: 'figure_meta', locals: { trend: @trend } %>
+  </div>
+</div>
+
+<div class="columns">
+</div>
+
+<div class="columns">
+  <div class="column">
+    <%= render partial: 'resources/detail', locals: { resource: @trend.resource, render_links: true } %>
+  </div>
+  <div class="column">
+  </div>
+</div>

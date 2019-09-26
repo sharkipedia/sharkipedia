@@ -2,13 +2,14 @@ class SearchController < PreAuthController
   KLASSES = {
     'family' => SpeciesFamily,
     'species' => Species,
-    'traits' => Trait,
-    'oceans' => Ocean,
-    'resources' => Resource,
+    'trait' => Trait,
+    'ocean' => Ocean,
+    'resource' => Resource,
   }
 
   def autocomplete
-    klass = KLASSES[params[:klass]]
+    key = KLASSES.keys.select { |k| params[:klass] =~ /#{k}/ }.first
+    klass = KLASSES[key]
 
     @items = if klass && params[:term]
                klass.search_by_name(params[:term])

@@ -1,26 +1,6 @@
 <h1 class="title"><%= @resource.name %></h1>
 
-<div class="columns">
-  <div class="column">
-    <p>
-      <b>Resource:</b> <%= @resource.resource || '-' %>
-    </p>
-    <p>
-      <b>Year:</b> <%= @resource.year || '-' %>
-    </p>
-    <p>
-      <b>DOI:</b> 
-      <% if @resource.doi.blank? %>
-        -
-      <% else %>
-        <%= link_to @resource.doi, "https://www.doi.org/#{@resource.doi}", target: '_blank' %>
-      <% end %>
-    </p>
-    <p>
-      <b>DataSource:</b> <%= @resource.data_source || '-' %>
-    </p>
-  </div>
-</div>
+<%= render partial: 'detail', locals: { resource: @resource } %>
 
 <% unless @observations.blank? %>
   <h2 class="subtitle">Trait Observations</h2>
@@ -53,3 +33,5 @@
     </table>
   <% end %>
 <% end %>
+
+<%= render partial: 'trends/list', locals: { trends: @trends, hide_resource: true } %>

@@ -12,6 +12,7 @@ class TraitDashboard < Administrate::BaseDashboard
     id: Field::Number,
     name: Field::String,
     description: Field::Text,
+    measurements: Field::HasMany,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -25,6 +26,7 @@ class TraitDashboard < Administrate::BaseDashboard
     :trait_class,
     :name,
     :description,
+    :measurements,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -34,6 +36,7 @@ class TraitDashboard < Administrate::BaseDashboard
     :id,
     :name,
     :description,
+    :measurements,
     :created_at,
     :updated_at,
   ].freeze

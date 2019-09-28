@@ -2,9 +2,9 @@
 
   <%= render partial: 'shared/form_errors', locals: { thing: @trend } %>
 
-  <%= render partial: 'shared/form_species', locals: { species: species } %>
+  <%= render partial: 'shared/form_species', locals: { species: species, target: 'trend' } %>
 
-  <%= render partial: 'shared/form_resource', locals: { resource: resource } %>
+  <%= render partial: 'shared/form_resource', locals: { resource: resource, target: 'trend' } %>
 
   <div class="columns">
     <div class="column">

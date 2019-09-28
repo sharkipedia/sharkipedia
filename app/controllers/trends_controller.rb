@@ -1,28 +1,18 @@
 class TrendsController < ApplicationController
   before_action :ensure_admin!
+  before_action :set_trend, only: [:show, :edit, :update, :destroy]
+  before_action :set_associations, only: [:new, :edit, :create, :update]
 
   def index
     @trends = Trend.all
   end
 
   def new
-    @example_species = Species.find_by name: 'Carcharhinus acronotus'
-    @example_resource = Resource.find_by name: 'everett2015'
-
     @trend = current_user.trends.new
     @trend.location = Location.new
-
-    @standards = Standard.all
-    @sampling_methods = SamplingMethod.all
-    @measurement_models = MeasurementModel.all
-    @data_types = DataType.all
-    @oceans = Ocean.all
-    @locations = Location.all
   end
 
   def show
-    @trend = Trend.find params[:id]
-
     respond_to do |format|
       format.html
       format.csv { send_data @trend.to_csv,
@@ -31,14 +21,6 @@ class TrendsController < ApplicationController
   end
 
   def edit
-    @trend = Trend.find params[:id]
-
-    @standards = Standard.all
-    @sampling_methods = SamplingMethod.all
-    @measurement_models = MeasurementModel.all
-    @data_types = DataType.all
-    @oceans = Ocean.all
-    @locations = Location.all
   end
 
   def create
@@ -54,14 +36,6 @@ class TrendsController < ApplicationController
         format.js { redirect_to @trend }
       else
         format.html do
-          @example_specie = Species.find_by name: 'Carcharhinus acronotus'
-          @example_resource = Resource.find_by name: 'everett2015'
-          @standards = Standard.all
-          @sampling_methods = SamplingMethod.all
-          @measurement_models = MeasurementModel.all
-          @data_types = DataType.all
-          @oceans = Ocean.all
-
           render :new
         end
         format.js
@@ -73,7 +47,7 @@ class TrendsController < ApplicationController
     location = Location.find_or_create_by name: params[:trend][:location][:name],
       lat: params[:trend][:location][:lat],
       lon: params[:trend][:location][:lon]
-    @trend = Trend.find params[:id]
+
     @trend.location = location
 
     respond_to do |format|
@@ -81,21 +55,29 @@ class TrendsController < ApplicationController
         format.html { redirect_to @trend }
         format.js { redirect_to @trend }
       else
-        format.html do
-          @standards = Standard.all
-          @sampling_methods = SamplingMethod.all
-          @measurement_models = MeasurementModel.all
-          @data_types = DataType.all
-          @oceans = Ocean.all
-
-          render :edit
-        end
+        format.html { render :edit }
         format.js
       end
     end
   end
 
   private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_trend
+    @trend = Trend.find params[:id]
+  end
+
+  def set_associations
+    @example_species = Species.find_by name: 'Carcharhinus acronotus'
+    @example_resource = Resource.find_by name: 'everett2015'
+
+    @standards = Standard.all
+    @sampling_methods = SamplingMethod.all
+    @measurement_models = MeasurementModel.all
+    @data_types = DataType.all
+    @oceans = Ocean.all
+  end
 
   def trend_params
     params.require(:trend).permit(

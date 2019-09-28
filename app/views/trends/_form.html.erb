@@ -1,6 +1,6 @@
 <%= form_with model: @trend do |f| %>
 
-  <%= render partial: 'errors', locals: { trend: @trend } %>
+  <%= render partial: 'shared/form_errors', locals: { thing: @trend } %>
 
   <div class="species">
     <h3 class="subtitle is-4 is-spaced"> Species </h3>

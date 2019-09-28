@@ -1,2 +1,2 @@
-$(".error_messages").replaceWith("<%= j render(partial: 'trends/errors', locals: { trend: @trend }) %>");
+$(".error_messages").replaceWith("<%= j render(partial: 'shared/form_errors', locals: { thing: @trend }) %>");
 $(window).scrollTop(0);

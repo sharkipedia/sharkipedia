@@ -1,0 +1,19 @@
+<h3 class="subtitle is-4 is-spaced"> Resource </h3>
+
+<div class="columns">
+  <div class="column">
+    <div class="field">
+      <%= select_tag 'trend[resource_id]', nil, style: 'width: 100%' %>
+    </div>
+
+    <p class="">
+      <em><%= link_to "If the resource doesn't exist in the database please click here to create it.", new_resource_path %></em>
+    </p>
+  </div>
+
+  <div class="column">
+    <div id="resources-info">
+      <%= render partial: 'resources/detail', locals: { resource: resource, render_links_new_window: true } %>
+    </div>
+  </div>
+</div>

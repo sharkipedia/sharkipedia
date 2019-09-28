@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Observations</h1>
+
+<%= link_to 'New Observation', new_observation_path %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>user</th>
+      <th>resources</th>
+      <th>species</th>
+      <th>measurements</th>
+      <th>date</th>
+      <th>contributor_id</th>
+      <th>access</th>
+      <th>hidden</th>
+      <th>depth</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @observations.each do |observation| %>
+      <tr>
+        <td><%= observation.user.name %></td>
+        <td><%= observation.resources.map(&:name) %></td>
+        <td><%= observation.species.name %></td>
+        <td><%= observation.measurements %></td>
+        <td><%= observation.date %></td>
+        <td><%= observation.contributor_id %></td>
+        <td><%= observation.access %></td>
+        <td><%= observation.hidden %></td>
+        <td><%= observation.depth %></td>
+        <td><%= link_to 'Show', observation %></td>
+        <td><%= link_to 'Edit', edit_observation_path(observation) %></td>
+        <td><%= link_to 'Destroy', observation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

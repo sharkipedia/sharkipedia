@@ -52,8 +52,10 @@ Rails.application.routes.draw do
 
   resources :locations, only: :create
 
-  resources :traits
   resources :trends
+  resources :traits, only: [:index, :show]
+  resources :observations
+
   resources :species, only: [:index, :show]
   resources :resources, only: [:index, :show, :new, :create]
 

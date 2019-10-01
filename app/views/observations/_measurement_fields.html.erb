@@ -1,0 +1,145 @@
+<fieldset class="measurement">
+  <div class="columns">
+    <div class="column">
+      <div class="field">
+        <%= f.label :trait, class: 'label' %>
+        <%= f.grouped_collection_select(:trait_id, @trait_classes, :traits, :name, :id, :name, {:prompt => 'Select Trait'}, style: 'width: 100%') %>
+      </div>
+
+      <%# TODO: show trait class when trait is selected %>
+      <%# <div class="field"> %>
+      <%#   <%= f.label :trait_class, class: 'label' %1> %>
+      <%#   <%= f.collection_select(:trait_class_id, @trait_classes, :id, :name, {:prompt => 'Select Trait Class'}, style: 'width: 100%') %1> %>
+      <%# </div> %>
+
+      <div class="field">
+        <%= f.label :sex_type, class: 'label' %>
+        <%= f.collection_select(:sex_type_id, @sex_types, :id, :name, {:prompt => 'Select Sex'}, style: 'width: 100%') %>
+      </div>
+
+      <div class="field">
+        <%= f.label :standard, class: 'label' %>
+        <%= f.collection_select(:standard_id, @standards, :id, :name, {:prompt => 'Select Standard'}, style: 'width: 100%') %>
+      </div>
+
+      <div class="field">
+        <%= f.label :measurement_method, class: 'label' %>
+        <%= f.collection_select(:measurement_method_id, @measurement_methods, :id, :name, {:prompt => 'Select Measurement Method'}, style: 'width: 100%') %>
+      </div>
+
+      <div class="field">
+        <%= f.label :measurement_model, class: 'label' %>
+        <%= f.collection_select(:measurement_model_id, @measurement_models, :id, :name, {:prompt => 'Select Measurement Model'}, style: 'width: 100%') %>
+      </div>
+
+      <%= f.fields_for :location do |fl| %>
+        <div class="field">
+          <%= fl.label :name, 'Location Name', class: 'label' %>
+          <div class="control">
+            <%= fl.text_field :name, class: 'input' %><br />
+          </div>
+        </div>
+
+        <div class="columns">
+          <div class="column">
+            <div class="field">
+              <%= fl.label :lat, 'Latitude', class: 'label' %>
+              <div class="control">
+                <%= fl.text_field :lat, class: 'input' %><br />
+              </div>
+            </div>
+          </div>
+
+          <div class="column">
+            <div class="field">
+              <%= fl.label :lon, 'Longitude', class: 'label' %>
+              <div class="control">
+                <%= fl.text_field :lon, class: 'input' %><br />
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="field">
+        <%= f.label :longhurst_province, class: 'label' %>
+        <%= f.collection_select(:longhurst_province_id, @longhurst_provinces, :id, :name, {:prompt => 'Select Longhurst Province'}, style: 'width: 100%') %>
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="field">
+        <%= f.label :value_type, class: 'label' %>
+        <%= f.collection_select(:value_type_id, @value_types, :id, :name, {:prompt => 'Select Value Type'}, style: 'width: 100%') %>
+      </div>
+
+      <div class="field">
+        <%= f.label :value, class: 'label' %>
+        <%= f.text_field :value, class: 'input' %><br />
+      </div>
+
+      <div class="field">
+        <%= f.label :precision_type, class: 'label' %>
+        <%= f.collection_select(:precision_type_id, @precision_types, :id, :name, {:prompt => 'Select Precision Type'}, style: 'width: 100%') %>
+      </div>
+
+      <div class="columns">
+        <div class="column">
+          <div class="field">
+            <%= f.label :precision, class: 'label' %>
+            <%= f.text_field :precision, class: 'input' %><br />
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="field">
+            <%= f.label :precision_upper, class: 'label' %>
+            <%= f.text_field :precision_upper, class: 'input' %><br />
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <%= f.label :sample_size, class: 'label' %>
+        <%= f.text_field :sample_size, class: 'input' %><br />
+      </div>
+
+      <div class="columns">
+        <div class="column">
+          <%# TODO: We don't have any validation types in the db at the moment %>
+          <%# <div class="field"> %>
+          <%#   <%= f.label :validation_type, class: 'label' %1> %>
+          <%#   <%= f.collection_select(:validation_type_id, @validation_types, :id, :name, {:prompt => 'Select Validation Type'}, style: 'width: 100%') %1> %>
+          <%# </div> %>
+
+          <div class="field">
+            <%= f.label :validated, class: 'label' %>
+            <%= f.check_box :validated %>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="field">
+            <%= f.label :dubious, class: 'label' %>
+            <%= f.check_box :dubious %>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <%= f.label :notes, class: 'label' %>
+        <%= f.text_area :notes, class: 'input' %><br />
+      </div>
+    </div>
+  </div>
+
+
+  <div class="is-pulled-right">
+    <%= f.hidden_field :_destroy %>
+    <%= link_to '[remove]', '#', class: 'remove_fields' %>
+  </div>
+</fieldset>
+
+<script type="text/javascript">
+  $('fieldset.measurement select').select2();
+</script>

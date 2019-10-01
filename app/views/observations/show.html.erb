@@ -1,0 +1,70 @@
+<div class="columns">
+  <div class="column">
+    <h1 class="title"><%= "#{@observation.species.name} - #{@observation.resources.first.name}" %></h1>
+  </div>
+
+  <div class="column is-one-third">
+    <div class="buttons is-pulled-right">
+      <% if user_is_admin? %>
+        <%= link_to 'Edit', edit_observation_path(@observation), class: 'button is-info is-pulled-right' %>
+      <% end %>
+
+      <%# TODO: <%= link_to 'Download data as CSV', observation_path(@observation, format: 'csv'), class: 'button is-primary' %1> %>
+    </div>
+  </div>
+</div>
+
+<div class="columns">
+  <div class="column is-one-third">
+    <%= render partial: 'species/detail', locals: { specie: @species, render_links: true } %>
+  </div>
+  <div class="column">
+    <% @resources.each do |resource| %>
+      <%= render partial: 'resources/detail', locals: { resource: resource, render_links: true } %>
+    <% end %>
+  </div>
+</div>
+
+<div class="columns">
+  <div class="column">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Class</th>
+          <th>Trait</th>
+          <th>Value</th>
+          <th>Standard</th>
+          <th>ValueType</th>
+          <th>Method</th>
+          <th>Model</th>
+          <%# <th>Precision Type</th> %>
+          <th>Precision</th>
+          <th>Recision upper</th>
+          <th>Sample size</th>
+          <th>Notes</th>
+          <th>Location</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @measurements.each do |measurement| %>
+          <tr>
+            <td><%= measurement.trait_class.name %></td>
+            <td><%= link_to measurement.trait.name, trait_path(measurement.trait) %></td>
+            <td><%= measurement.value %></td>
+            <td><%= measurement.standard.try(:name) %></td>
+            <td><%= measurement.value_type.try(:name) %></td>
+            <td><%= measurement.measurement_method.try(:name) %></td>
+            <td><%= measurement.measurement_model.try(:name) %></td>
+            <%# <td><%= measurement.precision_type.try(:name) %1></td> %>
+            <td><%= measurement.precision %></td>
+            <td><%= measurement.precision_upper %></td>
+            <td><%= measurement.sample_size %></td>
+            <td><%= measurement.notes %></td>
+            <td><%= format_location measurement.location %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+

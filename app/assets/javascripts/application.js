@@ -29,6 +29,7 @@ function checkController(name) {
 
 function runSelect2 (klass) {
   $('#' + klass.replace('[]', '_')).select2({
+    selectOnClose: true,
     ajax: {
       url: '/search/autocomplete',
       data: function(params) {

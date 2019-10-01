@@ -1,0 +1,17 @@
+<div class="species">
+  <h3 class="subtitle is-4 is-spaced"> Species </h3>
+
+  <div class="columns">
+    <div class="column">
+      <div class="field">
+        <%= select_tag "#{target}[species_id]", nil, style: 'width: 100%' %>
+      </div>
+    </div>
+    <div class="column">
+      <div id="species-info">
+        <%= render partial: 'species/detail', locals: { specie: species, render_links_new_window: true } %>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,52 @@
+<%= form_with model: @observation do |f| %>
+
+  <%= render partial: 'shared/form_errors', locals: { thing: @observation } %>
+
+  <%= render partial: 'shared/form_species', locals: { species: species, target: 'observation' } %>
+
+  <%= render partial: 'shared/form_resource', locals: { resource: resource, target: 'observation', many: true } %>
+
+  <div class="columns">
+    <div class="column">
+      <div class="field">
+        <%= f.label :date, class: 'label' %>
+        <div class="control">
+          <%= f.text_field :date, class: 'input' %><br />
+        </div>
+      </div>
+
+      <div class="field">
+        <%= f.label :contributor_id, class: 'label' %>
+        <div class="control">
+          <%= f.text_field :contributor_id, class: 'input' %><br />
+        </div>
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="field">
+        <%= f.label :depth, class: 'label' %>
+        <div class="control">
+          <%= f.text_field :depth, class: 'input' %><br />
+        </div>
+      </div>
+
+      <div class="field">
+        <%= f.label :hidden, class: 'label' %>
+        <div class="control">
+          <%= f.check_box :hidden, checked: false %><br />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="subtitle is-4 is-spaced"> Measurements </h3>
+
+  <%= f.fields_for :measurements do |builder| %>
+    <%= render 'measurement_fields', f: builder %>
+  <% end %>
+
+  <%= link_to_add_measurement_fields "Add Measurement", f %>
+
+  <%= f.submit class: 'button is-primary is-pulled-right' %>
+<% end %>

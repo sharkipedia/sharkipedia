@@ -1,0 +1,55 @@
+<div class="columns">
+  <div class="column">
+    <h1 class="title">Trait Observations</h1>
+  </div>
+
+  <div class="column is-one-third">
+    <div class="buttons is-pulled-right">
+      <% if user_is_admin? %>
+        <%= link_to 'New Observation', new_observation_path, class: 'button is-info is-pulled-right' %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="columns">
+  <div class="column">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>resources</th>
+          <th>species</th>
+          <th>measurements</th>
+          <th>date</th>
+          <th>contributor_id</th>
+          <% if user_is_admin? %>
+            <th>hidden</th>
+          <% end %>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @observations.each do |observation| %>
+          <tr>
+            <td><%= observation.resources.first.name %></td>
+            <td><%= observation.species.name %></td>
+            <td><%= observation.measurements.count %></td>
+            <td><%= observation.date %></td>
+            <td><%= observation.contributor_id %></td>
+            <% if user_is_admin? %>
+              <td><%= observation.hidden %></td>
+            <% end %>
+            <td><%= link_to 'Show', observation %></td>
+            <% if user_is_admin? %>
+              <td><%= link_to 'Edit', edit_observation_path(observation) %></td>
+              <td><%= link_to 'Destroy', observation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <%== pagy_bulma_nav(@pagy) %>
+  </div>
+</div>

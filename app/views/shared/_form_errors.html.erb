@@ -1,12 +1,12 @@
 <div class="error_messages">
-  <% if @trend.errors.any? %>
+  <% if thing.errors.any? %>
     <article class="message is-danger">
       <div class="message-header">
-        <%= pluralize(@trend.errors.count, "error") %> prohibited this trend from being saved
+        <%= pluralize(thing.errors.count, "error") %> prohibited this <%= thing.class %> from being saved
       </div>
       <div class="message-body">
         <ul>
-          <% @trend.errors.full_messages.each do |msg| %>
+          <% thing.errors.full_messages.each do |msg| %>
             <li><%= msg %></li>
           <% end %>
         </ul>

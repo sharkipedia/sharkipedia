@@ -1,44 +1,10 @@
 <%= form_with model: @trend do |f| %>
 
-  <%= render partial: 'errors', locals: { trend: @trend } %>
+  <%= render partial: 'shared/form_errors', locals: { thing: @trend } %>
 
-  <div class="species">
-    <h3 class="subtitle is-4 is-spaced"> Species </h3>
+  <%= render partial: 'shared/form_species', locals: { species: species, target: 'trend' } %>
 
-    <div class="columns">
-      <div class="column">
-        <div class="field">
-          <%= select_tag 'trend[species_id]', nil, style: 'width: 100%' %>
-        </div>
-      </div>
-      <div class="column">
-        <div id="species-info">
-          <%= render partial: 'species/detail', locals: { specie: species, render_links_new_window: true } %>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <h3 class="subtitle is-4 is-spaced"> Resource </h3>
-
-
-  <div class="columns">
-    <div class="column">
-      <div class="field">
-        <%= select_tag 'trend[resource_id]', nil, style: 'width: 100%' %>
-      </div>
-
-      <p class="">
-        <em><%= link_to "If the resource doesn't exist in the database please click here to create it.", new_resource_path %></em>
-      </p>
-    </div>
-
-    <div class="column">
-      <div id="resources-info">
-        <%= render partial: 'resources/detail', locals: { resource: resource, render_links_new_window: true } %>
-      </div>
-    </div>
-  </div>
+  <%= render partial: 'shared/form_resource', locals: { resource: resource, target: 'trend', many: false } %>
 
   <div class="columns">
     <div class="column">

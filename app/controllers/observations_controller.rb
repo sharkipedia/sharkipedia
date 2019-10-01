@@ -1,26 +1,18 @@
 class ObservationsController < ApplicationController
   include Pagy::Backend
   before_action :set_observation, only: [:show, :edit, :update, :destroy]
+  before_action :set_associations, only: [:new, :edit, :create, :update]
 
   def index
     @observations = current_user.observations
   end
 
   def show
+    @species = @observation.species
   end
 
   def new
     @observation = current_user.observations.new
-
-    @example_species = Species.find_by name: 'Carcharhinus acronotus'
-    @example_resource = Resource.find_by name: 'driggers2004a'
-
-    @standards = Standard.all
-    @sampling_methods = SamplingMethod.all
-    @measurement_models = MeasurementModel.all
-    @data_types = DataType.all
-    @oceans = Ocean.all
-    @locations = Location.all
   end
 
   def edit
@@ -32,19 +24,9 @@ class ObservationsController < ApplicationController
     respond_to do |format|
       if @observation.save
         format.html { redirect_to @observation, notice: 'Observation was successfully created.' }
-        format.js { redirect_to @trend }
+        format.js { redirect_to @observation }
       else
         format.html do
-          @example_species = Species.find_by name: 'Carcharhinus acronotus'
-          @example_resource = Resource.find_by name: 'driggers2004a'
-
-          @standards = Standard.all
-          @sampling_methods = SamplingMethod.all
-          @measurement_models = MeasurementModel.all
-          @data_types = DataType.all
-          @oceans = Ocean.all
-          @locations = Location.all
-
           render :new
         end
         format.js
@@ -73,36 +55,59 @@ class ObservationsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_observation
-      @observation = current_user.observations.find params[:id]
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def observation_params
-      params.require(:observation).permit(
-        :species_id, :date, :access, :hidden, :user_id,
-        :contributor_id, :depth,
-        measurement_attributes: [ :id,
-                                  :_destroy,
-                                  :sex_type_id,
-                                  :trait_class_id,
-                                  :trait_id,
-                                  :standard_id,
-                                  :measurement_method_id,
-                                  :measurement_model_id,
-                                  :value,
-                                  :value_type_id,
-                                  :precision,
-                                  :precision_type_id,
-                                  :precision_upper,
-                                  :sample_size,
-                                  :dubious,
-                                  :validated,
-                                  :notes,
-                                  :validation_type_id,
-                                  :location_id,
-                                  :longhurst_province_id, ],
-      )
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_observation
+    @observation = current_user.observations.find params[:id]
+  end
+
+  def set_associations
+    @example_species = Species.find_by name: 'Carcharhinus acronotus'
+    @example_resource = Resource.find_by name: 'driggers2004a'
+
+    @sex_types = SexType.all
+    @trait_classes = TraitClass.all
+
+    @resources = Resource.all
+
+    @standards = Standard.all
+    @sampling_methods = SamplingMethod.all
+    @measurement_methods = MeasurementMethod.all
+    @measurement_models = MeasurementModel.all
+    @data_types = DataType.all
+    @value_types = ValueType.all
+    @precision_types = PrecisionType.all
+    @validation_types = ValidationType.all
+    @longhurst_provinces = LonghurstProvince.all
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def observation_params
+    params.require(:observation).permit(
+      :species_id, :date, :access, :hidden, :user_id,
+      :contributor_id, :depth,
+      resource_ids: [],
+      measurements_attributes: [ :id,
+                                :_destroy,
+                                :sex_type_id,
+                                :trait_class_id,
+                                :trait_id,
+                                :standard_id,
+                                :measurement_method_id,
+                                :measurement_model_id,
+                                :value,
+                                :value_type_id,
+                                :precision,
+                                :precision_type_id,
+                                :precision_upper,
+                                :sample_size,
+                                :dubious,
+                                :validated,
+                                :notes,
+                                :validation_type_id,
+                                :longhurst_province_id,
+                                location_attributes: [:name, :lat, :lon],
+    ],
+    )
+  end
 end

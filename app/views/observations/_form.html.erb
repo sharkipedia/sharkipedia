@@ -25,6 +25,13 @@
 
     <div class="column">
       <div class="field">
+        <%= f.label :depth, class: 'label' %>
+        <div class="control">
+          <%= f.text_field :depth, class: 'input' %><br />
+        </div>
+      </div>
+
+      <div class="field">
         <%= f.label :hidden, class: 'label' %>
         <div class="control">
           <%= f.check_box :hidden, checked: false %><br />

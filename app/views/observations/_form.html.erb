@@ -4,7 +4,7 @@
 
   <%= render partial: 'shared/form_species', locals: { species: species, target: 'observation' } %>
 
-  <%= render partial: 'shared/form_resource', locals: { resource: resource, target: 'observation' } %>
+  <%= render partial: 'shared/form_resource', locals: { resource: resource, target: 'observation', many: true } %>
 
   <div class="columns">
     <div class="column">

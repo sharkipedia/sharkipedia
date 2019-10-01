@@ -4,7 +4,12 @@ class ObservationsController < ApplicationController
   before_action :set_associations, only: [:new, :edit, :create, :update]
 
   def index
-    @observations = current_user.observations
+    observations = if current_user.admin?
+                     Observation.all
+                   else
+                     Observation.published
+                   end
+    @pagy, @observations = pagy(observations)
   end
 
   def show
@@ -60,7 +65,11 @@ class ObservationsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_observation
-    @observation = current_user.observations.find params[:id]
+    @observation = if current_user.admin?
+                     Observation.find params[:id]
+                   else
+                     Observation.published.find params[:id]
+                   end
   end
 
   def set_associations

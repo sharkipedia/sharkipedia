@@ -24,12 +24,12 @@
 
       <div class="field">
         <%= f.label :measurement_method, class: 'label' %>
-        <%= f.collection_select(:measurement_method_id, @measurement_methods, :id, :name, {:prompt => 'Select Measurement Method'}, style: 'width: 100%') %>
+        <%= f.grouped_collection_select(:measurement_method_id, @trait_classes, :measurement_methods, :name, :id, :name, {:prompt => 'Select Measurement Method'}, style: 'width: 100%') %>
       </div>
 
       <div class="field">
         <%= f.label :measurement_model, class: 'label' %>
-        <%= f.collection_select(:measurement_model_id, @measurement_models, :id, :name, {:prompt => 'Select Measurement Model'}, style: 'width: 100%') %>
+        <%= f.grouped_collection_select(:measurement_model_id, @trait_classes, :measurement_models, :name, :id, :name, {:prompt => 'Select Measurement Model'}, style: 'width: 100%') %>
       </div>
 
       <%= f.fields_for :location do |fl| %>

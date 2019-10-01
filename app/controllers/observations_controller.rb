@@ -9,6 +9,8 @@ class ObservationsController < ApplicationController
 
   def show
     @species = @observation.species
+    @resources = @observation.resources
+    @measurements = @observation.measurements
   end
 
   def new

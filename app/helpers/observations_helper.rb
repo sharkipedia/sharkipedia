@@ -9,4 +9,12 @@ module ObservationsHelper
     end
     link_to(name, '#', class: "add_fields", data: {id: id, fields: fields.gsub("\n", "")})
   end
+
+  def format_location location
+    if location.lat.blank? && location.lon.blank?
+      location.name
+    else
+      "#{location.name} (#{location.lat},#{location.lon})"
+    end
+  end
 end

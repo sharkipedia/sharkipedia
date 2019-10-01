@@ -23,6 +23,7 @@ class ObservationsController < ApplicationController
   end
 
   def edit
+    authorize @observation
   end
 
   def create
@@ -42,6 +43,7 @@ class ObservationsController < ApplicationController
   end
 
   def update
+    authorize @observation
     respond_to do |format|
       if @observation.update(observation_params)
         format.html { redirect_to @observation, notice: 'Observation was successfully updated.' }

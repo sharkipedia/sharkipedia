@@ -31,6 +31,9 @@
         </a>
 
         <div class="navbar-dropdown">
+          <% if user_signed_in? %>
+            <%= link_to 'Trait Observations', observations_path, class: "navbar-item" %>
+          <% end %>
           <%= link_to 'Resources', resources_path, class: "navbar-item" %>
           <%= link_to 'Data Export', data_export_index_path, class: "navbar-item" %>
           <%= link_to 'Procedures', procedure_path, class: "navbar-item" %>

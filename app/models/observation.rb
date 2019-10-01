@@ -11,4 +11,8 @@ class Observation < ApplicationRecord
   has_many :locations, through: :measurements
 
   scope :published, -> { where(hidden: [false, nil]) }
+
+  validates :date, presence: true
+  validates :resources, presence: true
+  validates :species, presence: true
 end

@@ -7,14 +7,14 @@ module Export
     def call
       CSV.generate do |csv|
         csv << %w{
-resource_name resource_doi species_superorder species_name marine_province location_name lat long date sex trait_class trait_name standard_name method_name model_name value value_type precision precision_type precision_upper sample_size dubious validated validation_type notes contributor_id depth 
+reference_name reference_doi species_superorder species_name marine_province location_name lat long date sex trait_class trait_name standard_name method_name model_name value value_type precision precision_type precision_upper sample_size dubious validated validation_type notes contributor_id depth 
         }
 
         @observations.each do |observation|
           observation.measurements.each do |measurement|
             csv << [
-              observation.resources.first.name,
-              observation.resources.first.doi,
+              observation.references.first.name,
+              observation.references.first.doi,
               observation.species.species_superorder.name,
               observation.species.name,
               observation.longhurst_province.try(:name),

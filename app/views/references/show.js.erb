@@ -1,0 +1,5 @@
+<% content = capture do %>
+  <%= render partial: 'references/detail', locals: { reference: @reference, render_links_new_window: true } %>
+<% end %>
+
+document.getElementById("references-info").innerHTML = "<%= j content %>"

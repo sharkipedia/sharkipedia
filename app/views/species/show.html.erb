@@ -19,7 +19,7 @@
     <% unless @grouped_measurements.blank? %>
       <%= link_to 'Export trait data as CSV', data_export_index_path(species: [@specie], commit: true, export_type: 'Traits'), class: 'button is-primary is-pulled-right' %>
     <% end %>
-    <p class="title is-6">External resources for this species:</p>
+    <p class="title is-6">External references for this species:</p>
     <%= link_to 'IUCN Red List', "https://www.iucnredlist.org/search?query=#{@specie.name}&searchType=species", target: '_blank' %>
   </div>
 </div>
@@ -39,7 +39,7 @@
           <th>ValueType</th>
           <th>Sex</th>
           <th>Location</th>
-          <th>Resource</th>
+          <th>Reference</th>
         </tr>
       </thead>
       <tbody>
@@ -51,7 +51,7 @@
             <td><%= measurement.value_type.try(:name) %></td>
             <td><%= measurement.sex_type.try(:name) %></td>
             <td><%= measurement.location.name %></td>
-            <td><%= link_to measurement.observation.resources.first.name, resource_path(measurement.observation.resources.first) %></td>
+            <td><%= link_to measurement.observation.references.first.name, reference_path(measurement.observation.references.first) %></td>
           </tr>
         <% end %>
       </tbody>

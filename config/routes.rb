@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     resources :measurement_models
     resources :observations
     resources :precision_types
-    resources :resources
+    resources :references
     resources :sex_types
 
     resources :species_subclasses
@@ -57,7 +57,7 @@ Rails.application.routes.draw do
   resources :observations
 
   resources :species, only: [:index, :show]
-  resources :resources, only: [:index, :show, :new, :create]
+  resources :references, only: [:index, :show, :new, :create]
 
   namespace :search do
     get 'autocomplete', defaults: { format: 'json' }

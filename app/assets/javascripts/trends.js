@@ -114,12 +114,12 @@ $(document).on('turbolinks:load', function() {
     // let selected_text = $("#trend_species_id option").text();
     // $("#trend_species_id").select2('data', { id: selected_id, text: selected_text });
 
-    // resources autocomplete
-    runSelect2('trend_resource_id');
-    $('#trend_resource_id').on('select2:select', function (e) {
+    // references autocomplete
+    runSelect2('trend_reference_id');
+    $('#trend_reference_id').on('select2:select', function (e) {
       var data = e.params.data;
       Rails.ajax({
-        url: "/resources/" + data.id + '.js',
+        url: "/references/" + data.id + '.js',
         type: "get"
       })
     });

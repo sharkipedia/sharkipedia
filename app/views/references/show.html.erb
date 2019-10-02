@@ -1,6 +1,6 @@
-<h1 class="title"><%= @resource.name %></h1>
+<h1 class="title"><%= @reference.name %></h1>
 
-<%= render partial: 'detail', locals: { resource: @resource } %>
+<%= render partial: 'detail', locals: { reference: @reference } %>
 
 <% unless @observations.blank? %>
   <h2 class="subtitle">Trait Observations</h2>
@@ -34,4 +34,4 @@
   <% end %>
 <% end %>
 
-<%= render partial: 'trends/list', locals: { trends: @trends, hide_resource: true } %>
+<%= render partial: 'trends/list', locals: { trends: @trends, hide_reference: true } %>

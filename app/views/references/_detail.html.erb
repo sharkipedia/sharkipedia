@@ -1,0 +1,38 @@
+<table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+  <tbody>
+    <tr>
+      <th>AuthorYear</th>
+      <td id="author-year">
+        <% if local_assigns.has_key? :render_links %>
+          <%= link_to reference.name, reference_path(reference) %>
+        <% elsif local_assigns.has_key? :render_links_new_window %>
+          <%= link_to reference.name, reference_path(reference), target: '_blank' %>
+        <% else %>
+          <%= reference.name %>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <th>SourceYear</th>
+      <td id="source-year"><%= reference.year %></td>
+    </tr>
+    <tr>
+      <th>DataSource</th>
+      <td id="data-source"><%= reference.data_source %></td>
+    </tr>
+    <tr>
+      <th>doi</th>
+      <td id="doi"><%= link_to_doi reference.doi %></td>
+    </tr>
+    <tr>
+      <th>Reference</th>
+      <td id="reference"><%= reference.reference %></td>
+    </tr>
+    <% if reference.file_public && reference.reference_file.attached? %>
+      <tr>
+        <th>Reference File</th>
+        <td id="reference-file"><%= link_to @reference.reference_file.filename, url_for(@reference.reference_file), target: '_blank' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -28,7 +28,7 @@ module Xlsx
         validate_column_headers
 
         @xlsx.data_sheet.each_with_index do |row, idx|
-          validate_resources row, idx
+          validate_references row, idx
 
           validate_species row, idx
           validate_sex row, idx
@@ -87,13 +87,13 @@ module Xlsx
       name = (row['resource_name'] || row['AuthorYear']).try(:strip)
       return if name.blank? # this kind of error is handled later
 
-      resources = [name, row['secondary_resource_name']]
-      resources.reject! { |name| name.blank? }
-      referenced_resources = resources.map do |name, doi|
-        Resource.find_by name: name
+      references = [name, row['secondary_resource_name']]
+      references.reject! { |name| name.blank? }
+      referenced_references = references.map do |name, doi|
+        Reference.find_by name: name
       end.reject! { |res| res.blank? }
 
-      return if referenced_resources.blank? || referenced_resources.first.observations.count == 0
+      return if referenced_references.blank? || referenced_references.first.observations.count == 0
 
       case type
       when :traits
@@ -125,8 +125,8 @@ module Xlsx
         hidden = row['hidden']
         depth = row['depth']
 
-        referenced_resources.each do |resource|
-          observations = resource.observations.where species: species,
+        referenced_references.each do |reference|
+          observations = reference.observations.where species: species,
             longhurst_province: marine_province,
             location: location,
             date: date,
@@ -186,32 +186,32 @@ module Xlsx
       end
     end
 
-    def validate_resources row, idx
+    def validate_references row, idx
       name = (row['resource_name'] || row['AuthorYear']).try(:strip)
       if name.blank?
         @valid = false
-        field = type == :traits ? 'standard_name' : 'AuthorYear'
+        field = type == :traits ? 'resource_name' : 'AuthorYear'
         @messages << "Row #{idx + 2}: No #{field} specified."
       end
 
-      if resource = Resource.find_by(name: name)
-        if resource.observations.count > 0
-          @messages << "Row #{idx + 2}: WARNING: Resource #{name} already has observations in the database (Observation IDs: #{resource.observations.map(&:id)})"
+      if reference = Reference.find_by(name: name)
+        if reference.observations.count > 0
+          @messages << "Row #{idx + 2}: WARNING: Reference #{name} already has observations in the database (Observation IDs: #{reference.observations.map(&:id)})"
         end
 
         return
       end
 
-      resource = Resource.new name: name,
+      reference = Reference.new name: name,
         data_source: row['DataSource'].try(:strip),
         doi: (row['resource_doi'] || row['doi']).try(:strip),
         year: row['SourceYear']
 
-      unless resource.valid?
+      unless reference.valid?
         @valid = false
-        resource.errors.full_messages.each do |message|
+        reference.errors.full_messages.each do |message|
           # 0 index + row 1 are headers
-          @messages << "Row #{idx + 2}: Resource #{message}"
+          @messages << "Row #{idx + 2}: Reference #{message}"
         end
       end
     end

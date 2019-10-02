@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_04_201620) do
+ActiveRecord::Schema.define(version: 2019_10_02_161933) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -142,11 +142,11 @@ ActiveRecord::Schema.define(version: 2019_09_04_201620) do
     t.index ["user_id"], name: "index_observations_on_user_id"
   end
 
-  create_table "observations_resources", id: false, force: :cascade do |t|
+  create_table "observations_references", id: false, force: :cascade do |t|
     t.bigint "observation_id", null: false
-    t.bigint "resource_id", null: false
-    t.index ["observation_id", "resource_id"], name: "index_observations_resources_on_observation_id_and_resource_id"
-    t.index ["resource_id", "observation_id"], name: "index_observations_resources_on_resource_id_and_observation_id"
+    t.bigint "reference_id", null: false
+    t.index ["observation_id", "reference_id"], name: "index_obser_refs_on_observation_id_and_reference_id"
+    t.index ["reference_id", "observation_id"], name: "index_obser_refs_on_reference_id_and_observation_id"
   end
 
   create_table "oceans", force: :cascade do |t|
@@ -162,7 +162,7 @@ ActiveRecord::Schema.define(version: 2019_09_04_201620) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "resources", force: :cascade do |t|
+  create_table "references", force: :cascade do |t|
     t.string "name", null: false
     t.string "doi"
     t.datetime "created_at", null: false
@@ -171,7 +171,7 @@ ActiveRecord::Schema.define(version: 2019_09_04_201620) do
     t.string "year"
     t.string "suffix"
     t.string "author_year"
-    t.string "resource"
+    t.string "reference"
     t.boolean "file_public"
   end
 
@@ -303,14 +303,14 @@ ActiveRecord::Schema.define(version: 2019_09_04_201620) do
     t.string "figure_data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "resource_id"
+    t.bigint "reference_id"
     t.bigint "standard_id"
     t.integer "start_year"
     t.integer "end_year"
     t.index ["data_type_id"], name: "index_trends_on_data_type_id"
     t.index ["location_id"], name: "index_trends_on_location_id"
     t.index ["ocean_id"], name: "index_trends_on_ocean_id"
-    t.index ["resource_id"], name: "index_trends_on_resource_id"
+    t.index ["reference_id"], name: "index_trends_on_reference_id"
     t.index ["sampling_method_id"], name: "index_trends_on_sampling_method_id"
     t.index ["species_id"], name: "index_trends_on_species_id"
     t.index ["standard_id"], name: "index_trends_on_standard_id"
@@ -393,10 +393,10 @@ ActiveRecord::Schema.define(version: 2019_09_04_201620) do
   add_foreign_key "standards", "trait_classes"
   add_foreign_key "traits", "trait_classes"
   add_foreign_key "trend_observations", "trends"
+  add_foreign_key "trends", "\"references\"", column: "reference_id"
   add_foreign_key "trends", "data_types"
   add_foreign_key "trends", "locations"
   add_foreign_key "trends", "oceans"
-  add_foreign_key "trends", "resources"
   add_foreign_key "trends", "sampling_methods"
   add_foreign_key "trends", "species"
   add_foreign_key "trends", "standards"

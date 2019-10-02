@@ -9,7 +9,7 @@ class ObservationDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     user: Field::BelongsTo,
-    resources: Field::HasMany,
+    references: Field::HasMany,
     species: Field::BelongsTo,
     measurements: Field::HasMany,
     id: Field::Number,
@@ -29,7 +29,7 @@ class ObservationDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
     :contributor_id,
-    :resources,
+    :references,
     :species,
     :measurements,
   ].freeze
@@ -39,7 +39,7 @@ class ObservationDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = [
     :user,
     :contributor_id,
-    :resources,
+    :references,
     :species,
     :measurements,
     :depth,
@@ -57,7 +57,7 @@ class ObservationDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = [
     :user,
     :contributor_id,
-    :resources,
+    :references,
     :species,
     :measurements,
     :date,
@@ -70,6 +70,6 @@ class ObservationDashboard < Administrate::BaseDashboard
   # across all pages of the admin dashboard.
   #
   def display_resource(observation)
-    "#{observation.contributor_id} (#{observation.resources.first.name})"
+    "#{observation.contributor_id} (#{observation.references.first.name})"
   end
 end

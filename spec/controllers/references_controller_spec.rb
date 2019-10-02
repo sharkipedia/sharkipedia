@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ResourcesController, type: :controller do
+RSpec.describe ReferencesController, type: :controller do
 
   describe "GET #index" do
     it "returns http success" do

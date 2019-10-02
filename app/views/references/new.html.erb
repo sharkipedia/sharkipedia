@@ -1,8 +1,8 @@
-<h1 class="title is-3 is-spaced"> New Resource </h1>
+<h1 class="title is-3 is-spaced"> New Reference </h1>
 
-<%= form_with model: @resource do |f| %>
+<%= form_with model: @reference do |f| %>
 
-  <%= render partial: 'errors', locals: { resource: @resource } %>
+  <%= render partial: 'errors', locals: { reference: @reference } %>
 
   <div class="columns">
     <div class="column">
@@ -48,18 +48,18 @@
   </div>
 
   <div class="field">
-    <%= f.label :resource, class: 'label' %>
+    <%= f.label :reference, class: 'label' %>
     <div class="control">
-      <%= f.text_field :resource, class: 'input' %><br />
+      <%= f.text_field :reference, class: 'input' %><br />
     </div>
   </div>
 
   <div class="columns">
     <div class="column">
       <div class="field">
-        <%= f.label :resource_file, class: 'label' %>
+        <%= f.label :reference_file, class: 'label' %>
         <div class="control">
-          <%= f.file_field :resource_file, multiple: false, direct_upload: true, accept: 'application/pdf' %>
+          <%= f.file_field :reference_file, multiple: false, direct_upload: true, accept: 'application/pdf' %>
         </div>
       </div>
     </div>
@@ -68,7 +68,7 @@
       <div class="field">
         <%= f.label :file_public, 'Make file public?', class: 'label' %>
         <div class="control">
-          <%= f.check_box :file_public, checked: true %> Allow public access to the resource file
+          <%= f.check_box :file_public, checked: true %> Allow public access to the reference file
         </div>
       </div>
     </div>

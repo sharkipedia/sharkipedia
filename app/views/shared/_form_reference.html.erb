@@ -1,0 +1,19 @@
+<h3 class="subtitle is-4 is-spaced"> Reference </h3>
+
+<div class="columns">
+  <div class="column">
+    <div class="field">
+      <%= select_tag "#{target}[reference#{many ? '_ids' : '_id' }]", nil, style: 'width: 100%', multiple: many %>
+    </div>
+
+    <p class="">
+      <em><%= link_to "If the reference doesn't exist in the database please click here to create it.", new_reference_path %></em>
+    </p>
+  </div>
+
+  <div class="column">
+    <div id="references-info">
+      <%= render partial: 'references/detail', locals: { reference: reference, render_links_new_window: true } %>
+    </div>
+  </div>
+</div>

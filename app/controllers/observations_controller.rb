@@ -14,7 +14,7 @@ class ObservationsController < ApplicationController
 
   def show
     @species = @observation.species
-    @resources = @observation.resources
+    @references = @observation.references
     @measurements = @observation.measurements
   end
 
@@ -76,12 +76,12 @@ class ObservationsController < ApplicationController
 
   def set_associations
     @example_species = Species.find_by name: 'Carcharhinus acronotus'
-    @example_resource = Resource.find_by name: 'driggers2004a'
+    @example_reference = Reference.find_by name: 'driggers2004a'
 
     @sex_types = SexType.all
     @trait_classes = TraitClass.all
 
-    @resources = Resource.all
+    @references = Reference.all
 
     @standards = Standard.all
     @sampling_methods = SamplingMethod.all
@@ -99,7 +99,7 @@ class ObservationsController < ApplicationController
     params.require(:observation).permit(
       :species_id, :date, :access, :hidden, :user_id,
       :contributor_id, :depth,
-      resource_ids: [],
+      reference_ids: [],
       measurements_attributes: [ :id,
                                 :_destroy,
                                 :sex_type_id,

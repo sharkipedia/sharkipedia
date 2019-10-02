@@ -1,7 +1,7 @@
 <div class="columns">
   <div class="column">
     <h1 class="title">
-      <%= @trend.species.name %> - <%= @trend.resource.name %>
+      <%= @trend.species.name %> - <%= @trend.reference.name %>
     </h1>
   </div>
 
@@ -68,7 +68,7 @@
 
 <div class="columns">
   <div class="column">
-    <%= render partial: 'resources/detail', locals: { resource: @trend.resource, render_links: true } %>
+    <%= render partial: 'references/detail', locals: { reference: @trend.reference, render_links: true } %>
   </div>
   <div class="column">
   </div>

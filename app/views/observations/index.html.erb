@@ -20,7 +20,6 @@
           <th>references</th>
           <th>species</th>
           <th>measurements</th>
-          <th>date</th>
           <th>contributor_id</th>
           <% if user_is_admin? %>
             <th>hidden</th>
@@ -35,7 +34,6 @@
             <td><%= observation.references.first.name %></td>
             <td><%= observation.species.name %></td>
             <td><%= observation.measurements.count %></td>
-            <td><%= observation.date %></td>
             <td><%= observation.contributor_id %></td>
             <% if user_is_admin? %>
               <td><%= observation.hidden %></td>

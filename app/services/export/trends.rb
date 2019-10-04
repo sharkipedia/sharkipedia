@@ -31,11 +31,11 @@ module Export
               nil,
               trend.species.name,
               trend.species.iucn_code,
-              trend.resource.year,
+              trend.reference.year,
               trend.taxonomic_notes,
-              trend.resource.name,
-              trend.resource.data_source,
-              trend.resource.doi,
+              trend.reference.name,
+              trend.reference.data_source,
+              trend.reference.doi,
             ]
 
             data += trend.trend_observations.pluck(:year, :value).sort.to_h

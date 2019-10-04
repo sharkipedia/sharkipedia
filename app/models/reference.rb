@@ -1,10 +1,10 @@
-class Resource < ApplicationRecord
+class Reference < ApplicationRecord
   validates :name, presence: true, uniqueness: true
 
   has_and_belongs_to_many :observations
   has_many :trends
 
-  has_one_attached :resource_file
+  has_one_attached :reference_file
 
   # taken from altmetric/identifiers
   # https://github.com/altmetric/identifiers/blob/ee2c79beddc5105fe479e8adcd5d22a3fa524fb0/lib/identifiers/doi.rb#L3-L28

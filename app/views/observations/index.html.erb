@@ -17,7 +17,7 @@
     <table class="table">
       <thead>
         <tr>
-          <th>resources</th>
+          <th>references</th>
           <th>species</th>
           <th>measurements</th>
           <th>date</th>
@@ -32,7 +32,7 @@
       <tbody>
         <% @observations.each do |observation| %>
           <tr>
-            <td><%= observation.resources.first.name %></td>
+            <td><%= observation.references.first.name %></td>
             <td><%= observation.species.name %></td>
             <td><%= observation.measurements.count %></td>
             <td><%= observation.date %></td>

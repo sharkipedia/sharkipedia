@@ -95,7 +95,7 @@ module ImportXlsx
 
         self.log += "Starting import of observation #{resource_name}\n"
 
-        # Create Resources
+        # Create References
 
         resources = sub_table.map do |row|
           [row['resource_name'], row['resource_doi']]
@@ -115,12 +115,12 @@ module ImportXlsx
 
         referenced_resources = resources.map do |name, doi|
 
-          resource = Resource.find_by name: name
+          resource = Reference.find_by name: name
           if resource
             resource.doi ||= doi
             resource.save
           else
-            resource = Resource.create name: name, doi: doi
+            resource = Reference.create name: name, doi: doi
           end
 
           resource
@@ -146,15 +146,15 @@ module ImportXlsx
         self.log += depth.inspect + "\n"
 
         # TODO: find observation by resource name
-        observation = Observation.joins(:resources)
+        observation = Observation.joins(:references)
                                  .where(contributor_id: contributor_id,
-                                        'resources.name': resource_name)
+                                        'references.name': resource_name)
                                  .first
 
         unless observation
           observation = Observation.create! species: species,
             date: date,
-            resources: referenced_resources,
+            references: referenced_resources,
             hidden: hidden,
             contributor_id: contributor_id,
             depth: depth,
@@ -288,11 +288,11 @@ module ImportXlsx
           species = Species.find_by name: row['Binomial'].sub('_', ' ')
           self.log += "Found species #{row['Binomial']} => #{species.inspect}\n"
 
-          resource = Resource.find_or_create_by! name: row['AuthorYear'],
+          resource = Reference.find_or_create_by! name: row['AuthorYear'],
             data_source: row['DataSource'],
             doi: row['doi'],
             year: row['SourceYear']
-          self.log += "Created Resource: #{resource.inspect}\n"
+          self.log += "Created Reference: #{resource.inspect}\n"
 
           # Latitude has a space at the end
           location = Location.find_or_create_by name: row['Location'],
@@ -323,7 +323,7 @@ module ImportXlsx
                                 pdf_page: row['PDFPage'],
                                 taxonomic_notes: row['Taxonomic Notes'],
                                 time_min: row['TimeMin'],
-                                resource: resource,
+                                reference: resource,
                                 species: species,
                                 location: location,
                                 ocean: ocean,

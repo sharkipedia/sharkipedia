@@ -16,7 +16,7 @@ class TrendsController < ApplicationController
     respond_to do |format|
       format.html
       format.csv { send_data @trend.to_csv,
-                   filename: "#{@trend.resource.name}.csv" }
+                   filename: "#{@trend.reference.name}.csv" }
     end
   end
 
@@ -70,7 +70,7 @@ class TrendsController < ApplicationController
 
   def set_associations
     @example_species = Species.find_by name: 'Carcharhinus acronotus'
-    @example_resource = Resource.find_by name: 'everett2015'
+    @example_reference = Reference.find_by name: 'everett2015'
 
     @standards = Standard.all
     @sampling_methods = SamplingMethod.all
@@ -82,7 +82,7 @@ class TrendsController < ApplicationController
   def trend_params
     params.require(:trend).permit(
       :species_id,
-      :resource_id,
+      :reference_id,
       :start_year,
       :end_year,
       :no_years,

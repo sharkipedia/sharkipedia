@@ -13,8 +13,8 @@
           <th>Location</th>
           <th></th>
           <th>Unit</th>
-          <% unless local_assigns.has_key? :hide_resource %>
-            <th>Resource</th>
+          <% unless local_assigns.has_key? :hide_reference %>
+            <th>Reference</th>
           <% end %>
           <th></th>
         </tr>
@@ -28,8 +28,8 @@
             <td><%= trend.location.name %></td>
             <td width="40%"><%= render partial: 'trends/chart', locals: { observations: trend.trend_observations } %></td>
             <td><%= trend.standard.name %></td>
-            <% unless local_assigns.has_key? :hide_resource %>
-              <td><%= link_to trend.resource.name, resource_path(trend.resource) %></td>
+            <% unless local_assigns.has_key? :hide_reference %>
+              <td><%= link_to trend.reference.name, reference_path(trend.reference) %></td>
             <% end %>
             <td><%= link_to 'Details', trend_path(trend) %></td>
           </tr>

@@ -1,0 +1,34 @@
+<h1 class="title">
+  References
+  <% if user_is_admin? %>
+    <%= link_to 'Create new Reference', new_reference_path, class: 'button is-primary is-pulled-right' %>
+  <% end %>
+</h1>
+
+<div>
+  Search for reference name
+  <%= select_tag 'references', nil, style: 'width: 50%' %>
+</div>
+
+<hr />
+
+<% if params[:all] %>
+  <p>or select from list (<%= link_to 'show only references with data', references_path %>):</p>
+<% else %>
+  <p>or select from list (<%= link_to 'show all references', references_path(all: true) %>):</p>
+<% end %>
+
+<div>
+  <table class="table is-fullwidth is-bordered">
+    <tbody>
+      <% @references.each do |reference| %>
+        <tr>
+          <td><%= link_to reference.name, reference_path(reference) %></td>
+          <td><%= reference.reference %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%== pagy_bulma_nav(@pagy) %>
+</div>

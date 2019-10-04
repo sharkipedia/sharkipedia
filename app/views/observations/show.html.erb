@@ -1,6 +1,6 @@
 <div class="columns">
   <div class="column">
-    <h1 class="title"><%= "#{@observation.species.name} - #{@observation.resources.first.name}" %></h1>
+    <h1 class="title"><%= "#{@observation.species.name} - #{@observation.references.first.name}" %></h1>
   </div>
 
   <div class="column is-one-third">
@@ -19,8 +19,8 @@
     <%= render partial: 'species/detail', locals: { specie: @species, render_links: true } %>
   </div>
   <div class="column">
-    <% @resources.each do |resource| %>
-      <%= render partial: 'resources/detail', locals: { resource: resource, render_links: true } %>
+    <% @references.each do |reference| %>
+      <%= render partial: 'references/detail', locals: { reference: reference, render_links: true } %>
     <% end %>
   </div>
 </div>

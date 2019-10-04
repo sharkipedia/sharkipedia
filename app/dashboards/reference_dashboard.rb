@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class ResourceDashboard < Administrate::BaseDashboard
+class ReferenceDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -14,7 +14,7 @@ class ResourceDashboard < Administrate::BaseDashboard
     year: Field::String,
     suffix: Field::String,
     data_source: Field::String,
-    resource: Field::String,
+    reference: Field::String,
     file_public: Field::Boolean,
     observations: Field::HasMany,
     created_at: Field::DateTime,
@@ -42,7 +42,7 @@ class ResourceDashboard < Administrate::BaseDashboard
     :data_source,
     :year,
     :suffix,
-    :resource,
+    :reference,
     :file_public,
     :observations,
   ].freeze
@@ -56,14 +56,14 @@ class ResourceDashboard < Administrate::BaseDashboard
     :data_source,
     :year,
     :suffix,
-    :resource,
+    :reference,
     :file_public,
   ].freeze
 
-  # Overwrite this method to customize how resources are displayed
+  # Overwrite this method to customize how references are displayed
   # across all pages of the admin dashboard.
   #
-  def display_resource(resource)
-    "Resource #{resource.name}"
+  def display_resource(reference)
+    "Reference #{reference.name}"
   end
 end

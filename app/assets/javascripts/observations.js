@@ -14,12 +14,12 @@ $(document).on('turbolinks:load', function() {
       })
     });
 
-    // resources autocomplete
-    runSelect2('observation_resource_ids');
-    $('#observation_resource_ids').on('select2:select', function (e) {
+    // references autocomplete
+    runSelect2('observation_reference_ids');
+    $('#observation_reference_ids').on('select2:select', function (e) {
       var data = e.params.data;
       Rails.ajax({
-        url: "/resources/" + data.id + '.js',
+        url: "/references/" + data.id + '.js',
         type: "get"
       })
     });

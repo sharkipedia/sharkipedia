@@ -34,7 +34,7 @@
           <% if user_signed_in? %>
             <%= link_to 'Trait Observations', observations_path, class: "navbar-item" %>
           <% end %>
-          <%= link_to 'Resources', resources_path, class: "navbar-item" %>
+          <%= link_to 'References', references_path, class: "navbar-item" %>
           <%= link_to 'Data Export', data_export_index_path, class: "navbar-item" %>
           <%= link_to 'Procedures', procedure_path, class: "navbar-item" %>
           <%= link_to 'Contact', contact_path, class: "navbar-item" %>
@@ -57,7 +57,7 @@
             <%= link_to 'New Trait Observation', new_observation_path, class: "navbar-item" %>
             <% if user_is_admin? %>
               <%= link_to 'New Trend', new_trend_path, class: "navbar-item" %>
-              <%= link_to 'New Resource', new_resource_path, class: "navbar-item" %>
+              <%= link_to 'New Reference', new_reference_path, class: "navbar-item" %>
             <% end %>
           </div>
         </div>

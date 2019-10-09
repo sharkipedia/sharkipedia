@@ -17,7 +17,7 @@ reference_name reference_doi species_superorder species_name marine_province loc
               observation.references.first.doi,
               observation.species.species_superorder.name,
               observation.species.name,
-              observation.longhurst_province.try(:name),
+              measurement.longhurst_province.try(:name),
               measurement.location.name,
               measurement.location.lat,
               measurement.location.lon,

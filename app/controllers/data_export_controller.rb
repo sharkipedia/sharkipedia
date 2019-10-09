@@ -14,6 +14,7 @@ class DataExportController < PreAuthController
                                   :measurement_model, :measurement_method,
                                   :value_type, :precision_type,
                                   :validation_type, :trait, :trait_class,
+                                  :longhurst_province
                                 ]
                               }
                             ),

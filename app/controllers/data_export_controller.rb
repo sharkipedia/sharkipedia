@@ -2,7 +2,23 @@ class DataExportController < PreAuthController
   def index
     if params[:commit]
       data, exporter = if params[:export_type] == 'Traits'
-                          [Observation.all, Export::Traits]
+                          [
+                            policy_scope(Observation).includes(
+                              :references,
+                              {
+                                species: :species_superorder
+                              },
+                              {
+                                measurements: [
+                                  :location, :sex_type, :standard,
+                                  :measurement_model, :measurement_method,
+                                  :value_type, :precision_type,
+                                  :validation_type, :trait, :trait_class,
+                                ]
+                              }
+                            ),
+                            Export::Traits
+                          ]
                         else
                           [Trend.all, Export::Trends]
                         end

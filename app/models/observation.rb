@@ -7,7 +7,7 @@ class Observation < ApplicationRecord
   has_many :measurements, dependent: :destroy
   accepts_nested_attributes_for :measurements, allow_destroy: true
 
-  has_many :longhurst_province, through: :measurements
+  has_many :longhurst_provinces, through: :measurements
   has_many :locations, through: :measurements
 
   scope :published, -> { where(hidden: [false, nil]) }

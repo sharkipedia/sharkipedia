@@ -21,7 +21,7 @@ class ObservationPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      if user.admin?
+      if user && user.admin?
         Observation.all
       else
         Observation.published

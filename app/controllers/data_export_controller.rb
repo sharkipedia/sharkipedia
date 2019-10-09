@@ -7,20 +7,12 @@ class DataExportController < PreAuthController
                           [Trend.all, Export::Trends]
                         end
 
+      @species = []
       if params[:species]
         species_ids = params[:species].reject(&:blank?)
         unless species_ids.blank?
           data = data.where species_id: params[:species]
-
-          @species = Species.where id: species_ids
-        end
-      end
-
-      if params[:oceans]
-        # TODO: try to match ocean with lat, long / Longhurst code - boundaries
-        ocean_ids = params[:oceans].reject(&:blank?)
-        if !ocean_ids.blank? && params[:export_type] == 'Trends'
-          data = data.where ocean_id: ocean_ids
+          Species.where id: species_ids
         end
       end
 

@@ -32,6 +32,7 @@
         <tr>
           <th>Class</th>
           <th>Trait</th>
+          <th>Sex</th>
           <th>Value</th>
           <th>Standard</th>
           <th>ValueType</th>
@@ -51,6 +52,7 @@
           <tr>
             <td><%= measurement.trait_class.name %></td>
             <td><%= link_to measurement.trait.name, trait_path(measurement.trait) %></td>
+            <td><%= measurement.sex_type.try(:name) %></td>
             <td><%= measurement.value %></td>
             <td><%= measurement.standard.try(:name) %></td>
             <td><%= measurement.value_type.try(:name) %></td>

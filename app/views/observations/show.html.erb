@@ -5,7 +5,7 @@
 
   <div class="column is-one-third">
     <div class="buttons is-pulled-right">
-      <% if user_is_admin? %>
+      <% if policy(@observation).edit? %>
         <%= link_to 'Edit', edit_observation_path(@observation), class: 'button is-info is-pulled-right' %>
       <% end %>
 
@@ -32,6 +32,7 @@
         <tr>
           <th>Class</th>
           <th>Trait</th>
+          <th>Sex</th>
           <th>Value</th>
           <th>Standard</th>
           <th>ValueType</th>
@@ -41,6 +42,7 @@
           <th>Precision</th>
           <th>Recision upper</th>
           <th>Sample size</th>
+          <th>Date</th>
           <th>Notes</th>
           <th>Location</th>
         </tr>
@@ -50,6 +52,7 @@
           <tr>
             <td><%= measurement.trait_class.name %></td>
             <td><%= link_to measurement.trait.name, trait_path(measurement.trait) %></td>
+            <td><%= measurement.sex_type.try(:name) %></td>
             <td><%= measurement.value %></td>
             <td><%= measurement.standard.try(:name) %></td>
             <td><%= measurement.value_type.try(:name) %></td>
@@ -59,6 +62,7 @@
             <td><%= measurement.precision %></td>
             <td><%= measurement.precision_upper %></td>
             <td><%= measurement.sample_size %></td>
+            <td><%= measurement.date %></td>
             <td><%= measurement.notes %></td>
             <td><%= format_location measurement.location %></td>
           </tr>

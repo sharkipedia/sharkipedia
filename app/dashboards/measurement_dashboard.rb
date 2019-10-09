@@ -10,6 +10,7 @@ class MeasurementDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     observation: Field::BelongsTo,
     sex_type: Field::BelongsTo,
+    date: Field::String,
     trait_class: Field::BelongsTo,
     trait: Field::BelongsTo,
     standard: Field::BelongsTo,
@@ -48,6 +49,7 @@ class MeasurementDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
     :observation,
+    :date,
     :sex_type,
     :trait_class,
     :trait,
@@ -76,6 +78,7 @@ class MeasurementDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
     :observation,
+    :date,
     :sex_type,
     :trait_class,
     :trait,

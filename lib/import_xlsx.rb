@@ -153,7 +153,6 @@ module ImportXlsx
 
         unless observation
           observation = Observation.create! species: species,
-            date: date,
             references: referenced_resources,
             hidden: hidden,
             contributor_id: contributor_id,
@@ -178,6 +177,7 @@ module ImportXlsx
           sample_size = row['sample_size']
           dubious = row['dubious']
           validated = row['validated']
+          date = row['date']
           validation_type = ValidationType.find_by name: row['validation_type']
           notes = row['notes']
 
@@ -209,6 +209,7 @@ module ImportXlsx
             standard: standard,
             measurement_method: measurement_method,
             measurement_model: measurement_model,
+            date: date,
             value: value,
             value_type: value_type,
             precision: precision,

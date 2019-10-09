@@ -4,12 +4,7 @@ class ObservationsController < ApplicationController
   before_action :set_associations, only: [:new, :edit, :create, :update]
 
   def index
-    observations = if current_user.admin?
-                     Observation.all
-                   else
-                     Observation.published
-                   end
-    @pagy, @observations = pagy(observations)
+    @pagy, @observations = pagy(policy_scope(Observation))
   end
 
   def show
@@ -20,6 +15,7 @@ class ObservationsController < ApplicationController
 
   def new
     @observation = current_user.observations.new
+    authorize @observation
   end
 
   def edit
@@ -28,6 +24,7 @@ class ObservationsController < ApplicationController
 
   def create
     @observation = current_user.observations.new(observation_params)
+    authorize @observation
 
     respond_to do |format|
       if @observation.save
@@ -56,6 +53,7 @@ class ObservationsController < ApplicationController
   end
 
   def destroy
+    authorize @observation
     @observation.destroy
     respond_to do |format|
       format.html { redirect_to observations_url, notice: 'Observation was successfully destroyed.' }
@@ -67,11 +65,7 @@ class ObservationsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_observation
-    @observation = if current_user.admin?
-                     Observation.find params[:id]
-                   else
-                     Observation.published.find params[:id]
-                   end
+    @observation = policy_scope(Observation).find params[:id]
   end
 
   def set_associations
@@ -97,11 +91,11 @@ class ObservationsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def observation_params
     params.require(:observation).permit(
-      :species_id, :date, :access, :hidden, :user_id,
-      :contributor_id, :depth,
+      :species_id, :access, :hidden, :user_id, :depth,
       reference_ids: [],
       measurements_attributes: [ :id,
                                 :_destroy,
+                                :date,
                                 :sex_type_id,
                                 :trait_class_id,
                                 :trait_id,

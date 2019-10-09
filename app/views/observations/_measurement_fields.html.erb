@@ -2,6 +2,13 @@
   <div class="columns">
     <div class="column">
       <div class="field">
+        <%= f.label :date, class: 'label' %>
+        <div class="control">
+          <%= f.text_field :date, class: 'input' %><br />
+        </div>
+      </div>
+
+      <div class="field">
         <%= f.label :trait, class: 'label' %>
         <%= f.grouped_collection_select(:trait_id, @trait_classes, :traits, :name, :id, :name, {:prompt => 'Select Trait'}, style: 'width: 100%') %>
       </div>

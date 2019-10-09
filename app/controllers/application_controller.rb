@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_permitted_parameters, if: :devise_controller?
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   protected
 
@@ -18,6 +19,15 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def record_not_found exception
+    if Rails.env.development?
+      raise exception
+    else
+      Bugsnag.notify(exception)
+      redirect_to root_path
+    end
+  end
 
   def user_not_authorized exception
     policy_name = exception.policy.class.to_s.underscore

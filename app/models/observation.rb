@@ -12,7 +12,6 @@ class Observation < ApplicationRecord
 
   scope :published, -> { where(hidden: [false, nil]) }
 
-  validates :date, presence: true
   validates :references, presence: true
   validates :species, presence: true
 end

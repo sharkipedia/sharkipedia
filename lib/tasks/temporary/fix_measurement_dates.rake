@@ -41,11 +41,6 @@ namespace :measurements do
           trait: trait, sex_type: sex, sample_size: row['sample_size'],
           notes: row['notes']
 
-        if measurement.count > 1 || measurement.empty?
-          require 'byebug'
-          byebug
-        end
-
         measurement = measurement.first
 
         measurement.update date: row['date']

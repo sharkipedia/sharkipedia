@@ -21,7 +21,7 @@ reference_name reference_doi species_superorder species_name marine_province loc
               measurement.location.name,
               measurement.location.lat,
               measurement.location.lon,
-              observation.date,
+              measurement.date,
               measurement.sex_type.name,
               measurement.trait_class.name,
               measurement.trait.name,

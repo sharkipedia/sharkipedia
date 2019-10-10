@@ -80,153 +80,157 @@ module ImportXlsx
     end
 
     def import
-      parsed = @data_entry_sheet.parse(headers: true)
-      parsed.shift # remove the header row
+      ActiveRecord::Base.transaction do
+        parsed = @data_entry_sheet.parse(headers: true)
+        parsed.shift # remove the header row
 
-      resources = parsed.map do |row|
-        row['resource_name']
-      end.uniq
-
-      self.log += "The sheet contains #{resources.count} observation(s)\n"
-
-      # cluster by resource
-      observations = parsed.group_by { |row| row['resource_name'] }
-      observations.each do |resource_name, sub_table|
-
-        self.log += "Starting import of observation #{resource_name}\n"
-
-        # Create References
-
-        resources = sub_table.map do |row|
-          [row['resource_name'], row['resource_doi']]
+        resources = parsed.map do |row|
+          row['resource_name']
         end.uniq
 
-        resources += sub_table.map do |row|
-          [row['secondary_resource_name'], row['secondary_resource_doi']]
-        end.uniq
+        self.log += "The sheet contains #{resources.count} observation(s)\n"
 
-        resources.reject! { |name, _| name.blank? }
+        # cluster by resource
+        observations = parsed.group_by { |row| row['resource_name'] }
+        observations.each do |resource_name, sub_table|
 
-        self.log += "Found resources: #{resources.inspect}\n"
+          self.log += "Starting import of observation #{resource_name}\n"
 
-        resources.map! do |name, doi|
-          [name.strip, doi.try(:strip)]
-        end
+          # Create References
 
-        referenced_resources = resources.map do |name, doi|
+          resources = sub_table.map do |row|
+            [row['resource_name'], row['resource_doi']]
+          end.uniq
 
-          resource = Reference.find_by name: name
-          if resource
-            resource.doi ||= doi
-            resource.save
-          else
-            resource = Reference.create name: name, doi: doi
+          resources += sub_table.map do |row|
+            [row['secondary_resource_name'], row['secondary_resource_doi']]
+          end.uniq
+
+          resources.reject! { |name, _| name.blank? }
+
+          self.log += "Found resources: #{resources.inspect}\n"
+
+          resources.map! do |name, doi|
+            [name.strip, doi.try(:strip)]
           end
 
-          resource
-        end
+          referenced_resources = resources.map do |name, doi|
 
-        self.log += referenced_resources.inspect + "\n"
+            resource = Reference.find_by name: name
+            if resource
+              resource.doi ||= doi
+              resource.save
+            else
+              resource = Reference.create name: name, doi: doi
+            end
 
-        # XXX: what should happen if the species / species super order can't be found?
-        species = Species.find_by name: sub_table.first['species_name']
-        species ||= Species.find_by edge_scientific_name: sub_table.first['species_name']
-        self.log += species.inspect + "\n"
-
-        date = sub_table.first['date']
-        self.log += date.inspect + "\n"
-
-        contributor_id = sub_table.first['contributor_id']
-        self.log += contributor_id.inspect + "\n"
-
-        hidden = sub_table.first['hidden']
-        self.log += hidden.inspect + "\n"
-
-        depth = sub_table.first['depth']
-        self.log += depth.inspect + "\n"
-
-        # TODO: find observation by resource name
-        observation = Observation.joins(:references)
-                                 .where(contributor_id: contributor_id,
-                                        'references.name': resource_name)
-                                 .first
-
-        unless observation
-          observation = Observation.create! species: species,
-            references: referenced_resources,
-            hidden: hidden,
-            contributor_id: contributor_id,
-            depth: depth,
-            user: user
-        end
-
-        self.log += observation.inspect + "\n"
-
-        sub_table.each do |row|
-          sex = SexType.find_by name: row['sex']
-          trait_class = TraitClass.find_by name: row['trait_class']
-          trait = Trait.find_by name: row['trait_name']
-          standard = Standard.find_by name: row['standard_name']
-          measurement_method = MeasurementMethod.find_by name: row['method_name']
-          measurement_model = MeasurementModel.find_by name: row['model_name']
-          value = row['value']
-          value_type = ValueType.find_by name: row['value_type']
-          precision = row['precision']
-          precision_type = PrecisionType.find_by name: row['precision_type']
-          precision_upper = row['precision_upper']
-          sample_size = row['sample_size']
-          dubious = row['dubious']
-          validated = row['validated']
-          date = row['date']
-          validation_type = ValidationType.find_by name: row['validation_type']
-          notes = row['notes']
-
-          location_name = row['location_name']
-          location_lat  = row['lat']
-          location_long = row['long']
-
-          if location_name.blank? && location_lat.blank? && location_long.blank?
-            raise "location name and lat/long can't be blank!"
-          elsif !location_name.blank? && location_lat.blank? && location_long.blank?
-            location = Location.find_by name: location_name
-          elsif location_name.blank? && !location_lat.blank? && !location_long.blank?
-            location = Location.find_by lat: location_lat, lon: location_long
+            resource
           end
 
-          unless location
-            location = Location.create name: location_name, lat: location_lat, lon: location_long
+          self.log += referenced_resources.inspect + "\n"
+
+          # XXX: what should happen if the species / species super order can't be found?
+          species = Species.find_by name: sub_table.first['species_name']
+          species ||= Species.find_by edge_scientific_name: sub_table.first['species_name']
+          self.log += species.inspect + "\n"
+
+          date = sub_table.first['date']
+          self.log += date.inspect + "\n"
+
+          contributor_id = sub_table.first['contributor_id']
+          self.log += contributor_id.inspect + "\n"
+
+          hidden = sub_table.first['hidden']
+          self.log += hidden.inspect + "\n"
+
+          depth = sub_table.first['depth']
+          self.log += depth.inspect + "\n"
+
+          # TODO: find observation by resource name
+          observation = Observation.joins(:references)
+                                   .where(contributor_id: contributor_id,
+                                          'references.name': resource_name)
+                                   .first
+
+          unless observation
+            observation = Observation.create! species: species,
+              references: referenced_resources,
+              hidden: hidden,
+              contributor_id: contributor_id,
+              depth: depth,
+              user: user
           end
-          self.log += location.inspect + "\n"
 
-          # marine_province - might be blank
-          marine_province = LonghurstProvince.find_by name: sub_table.first['marine_province']
-          self.log += marine_province.inspect + "\n"
+          self.log += observation.inspect + "\n"
+
+          sub_table.each do |row|
+            sex = SexType.find_by name: row['sex']
+            trait_class = TraitClass.find_by name: row['trait_class']
+            trait = Trait.find_by name: row['trait_name']
+            standard = Standard.find_by name: row['standard_name']
+            measurement_method = MeasurementMethod.find_by name: row['method_name']
+            measurement_model = MeasurementModel.find_by name: row['model_name']
+            value = row['value']
+            value_type = ValueType.find_by name: row['value_type']
+            precision = row['precision']
+            precision_type = PrecisionType.find_by name: row['precision_type']
+            precision_upper = row['precision_upper']
+            sample_size = row['sample_size']
+            dubious = row['dubious']
+            validated = row['validated']
+            date = row['date']
+            validation_type = ValidationType.find_by name: row['validation_type']
+            notes = row['notes']
+
+            location_name = row['location_name']
+            location_lat  = row['lat']
+            location_long = row['long']
+
+            if location_name.blank? && location_lat.blank? && location_long.blank?
+              raise "location name and lat/long can't be blank!"
+            elsif !location_name.blank? && location_lat.blank? && location_long.blank?
+              location = Location.find_by name: location_name
+            elsif location_name.blank? && !location_lat.blank? && !location_long.blank?
+              location = Location.find_by lat: location_lat, lon: location_long
+            end
+
+            unless location
+              location = Location.create name: location_name, lat: location_lat, lon: location_long
+            end
+            self.log += location.inspect + "\n"
+
+            # marine_province - might be blank
+            marine_province = LonghurstProvince.find_by name: sub_table.first['marine_province']
+            self.log += marine_province.inspect + "\n"
 
 
-          observation.measurements.create! sex_type: sex,
-            trait_class: trait_class,
-            trait: trait,
-            standard: standard,
-            measurement_method: measurement_method,
-            measurement_model: measurement_model,
-            date: date,
-            value: value,
-            value_type: value_type,
-            precision: precision,
-            precision_type: precision_type,
-            precision_upper: precision_upper,
-            sample_size: sample_size,
-            dubious: dubious,
-            validated: validated,
-            validation_type: validation_type,
-            notes: notes,
-            location: location,
-            longhurst_province: marine_province
+            observation.measurements.create! sex_type: sex,
+              trait_class: trait_class,
+              trait: trait,
+              standard: standard,
+              measurement_method: measurement_method,
+              measurement_model: measurement_model,
+              date: date,
+              value: value,
+              value_type: value_type,
+              precision: precision,
+              precision_type: precision_type,
+              precision_upper: precision_upper,
+              sample_size: sample_size,
+              dubious: dubious,
+              validated: validated,
+              validation_type: validation_type,
+              notes: notes,
+              location: location,
+              longhurst_province: marine_province
+          end
+
+          self.log += observation.measurements.map(&:inspect).join("\n")
         end
-
-        self.log += observation.measurements.map(&:inspect).join("\n")
       end
     rescue => e
+      Bugsnag.notify(e)
+
       self.log += "ERROR: Import failed!\n"
       self.log += e.to_s
       self.log += e.backtrace.to_s

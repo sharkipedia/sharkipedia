@@ -181,9 +181,9 @@ module ImportXlsx
           validation_type = ValidationType.find_by name: row['validation_type']
           notes = row['notes']
 
-          location_name = sub_table.first['location_name']
-          location_lat  = sub_table.first['lat']
-          location_long = sub_table.first['long']
+          location_name = row['location_name']
+          location_lat  = row['lat']
+          location_long = row['long']
 
           if location_name.blank? && location_lat.blank? && location_long.blank?
             raise "location name and lat/long can't be blank!"

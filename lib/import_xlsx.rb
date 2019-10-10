@@ -282,13 +282,13 @@ module ImportXlsx
     end
 
     def import
-      parsed = @data_entry_sheet.parse(headers: true)
-      parsed.shift # remove the header row
+      ActiveRecord::Base.transaction do
+        parsed = @data_entry_sheet.parse(headers: true)
+        parsed.shift # remove the header row
 
-      self.log += "The sheet contains #{parsed.count} trend(s)\n"
+        self.log += "The sheet contains #{parsed.count} trend(s)\n"
 
-      parsed.each do |row|
-        begin
+        parsed.each do |row|
           self.log += "\n"
           species = Species.find_by name: row['Binomial'].sub('_', ' ')
           self.log += "Found species #{row['Binomial']} => #{species.inspect}\n"
@@ -350,13 +350,16 @@ module ImportXlsx
 
             self.log += "Created TrendObservation #{to.inspect}\n"
           end
-        rescue => e
-          self.log += "failed to import: \n #{row}\n#{e.to_s}"
-          puts "failed to import: \n #{row}\n#{e.to_s}"
-          puts e.backtrace
+          self.log += "\n"
         end
-        self.log += "\n"
       end
+    rescue => e
+      Bugsnag.notify(e)
+
+      self.log += "ERROR: Import failed!\n"
+      self.log += "#{e.to_s}\n"
+      self.log += e.backtrace.join("\n")
+      return false
     end
   end
 end

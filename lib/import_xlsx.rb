@@ -232,8 +232,8 @@ module ImportXlsx
       Bugsnag.notify(e)
 
       self.log += "ERROR: Import failed!\n"
-      self.log += e.to_s
-      self.log += e.backtrace.to_s
+      self.log += "#{e.to_s}\n"
+      self.log += e.backtrace.join("\n")
       return false
     end
 

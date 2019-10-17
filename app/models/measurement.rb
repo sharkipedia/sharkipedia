@@ -19,6 +19,10 @@ class Measurement < ApplicationRecord
   private
 
   def find_or_create_location
-    self.location = Location.find_or_create_by name: location.name
+    unless self.location.persisted?
+      require 'byebug'; byebug
+      self.location = Location.find_or_create_by name: location.name,
+        lat: location.lat, lon: location.lon
+    end
   end
 end

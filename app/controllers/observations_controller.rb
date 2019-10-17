@@ -41,6 +41,7 @@ class ObservationsController < ApplicationController
 
   def update
     authorize @observation
+
     respond_to do |format|
       if @observation.update(observation_params)
         format.html { redirect_to @observation, notice: 'Observation was successfully updated.' }
@@ -113,7 +114,7 @@ class ObservationsController < ApplicationController
                                 :notes,
                                 :validation_type_id,
                                 :longhurst_province_id,
-                                location_attributes: [:name, :lat, :lon],
+                                location_attributes: [ :id, :name, :lat, :lon],
     ],
     )
   end

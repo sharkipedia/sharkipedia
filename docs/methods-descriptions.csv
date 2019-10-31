@@ -1,7 +1,7 @@
 back calculated,Estimated from a model output (Model should be specified),Length
-directly observed,,Length
-histologically,,Length
-Macroscopic dissection,,Length
+directly observed, Length directly measured from individuals,Length
+histologically, Length observed from tissue sections,Length
+Macroscopic dissection,Length observed during dissection (e.g. near term pups),Length
 Smallest Free swimming individual,Observation of smallest free-swimming individual,Length
 Largest Embryo,Observation of largest embryo in utero,Length
 Free + Embryo,Based on combined observations of largest embryo and smallest free-swimming individual,Length
@@ -11,8 +11,8 @@ L99 (99th percentile of size distribution observed ),99th percentile of observed
 Max observed size,Observation of largest individual,Length
 Inverse mortality,Estimated from a model parameter (Model should be specified),Length
 back calculated,Estimated from a model output (Model should be specified),Age
-direcetly observed,,Age
-histologically,,Age
+direcetly observed,Observed from known age individual (typically in captive environemnt or recapture,Age
+histologically,Age estimated from sectioned tissue,Age
 Macroscopic dissection,,Age
 Smallest Free swimming individual,,Age
 Largest Embryo,,Age
@@ -20,19 +20,19 @@ Free + Embryo,Based on combined observations of largest embryo and smallest free
 Embryo growth curve,,Age
 L95 (95th percentile of size distribution observed),95th percentile of observed size distribution,Age
 L99 (99th percentile of size distribution observed ),99th percentile of observed size distribution,Age
-Max observed size,,Age
-Inverse mortality,,Age
+Max observed size,Age estimated from maximum observed size and growth curves,Age
+Inverse mortality,Estimated by the inverse of natural mortality,Age
 Mark-Recapture,From mark-recapture data,Age
-Mark-Recapture,,Growth
-Length-frequency,,Growth
-Vertebrae,,Growth
-Spines,,Growth
-Tooth Plates,,Growth
+Mark-Recapture,Age estimated from recapture of known age and time and liberty individuals,Growth
+Length-frequency,Growth determined by length-frequency distribution of population,Growth
+Vertebrae,Growth determined using age calculated from vertebral growth bands,Growth
+Spines,Growth determined using age calculated from spine growth bands,Growth
+Tooth Plates,Grwoth determined from age calculated from tooth plates,Growth
 direct Age,Estimates from individuals of known ages,Growth
 Captive,Data from captive individuals,Growth
 Captive Observation,Observations from captive individuals,Reproduction
 Modeled,Estmimated from model output (Model must be specified),Reproduction
-Proportion Gravid Females,,Reproduction
+Proportion Gravid Females,Breeding interval determined by the proportion of pregnant females in a population,Reproduction
 Macroscopic observation,Observation through macroscopic dissection or observation of free swimming individuals,Reproduction
 Empirical,"Estimated directly from abundance/catch data (e.g. stock assessments, catch curves)",Demography
 Derived,"Estimated indirectly from life history traits (e.g. Hoenig 1983, Chen and Watanabe 1983 mortality estimators)",Demography

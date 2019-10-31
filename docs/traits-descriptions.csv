@@ -23,25 +23,25 @@ H,Lester model,Growth
 G,Lester model,Growth
 sigma-growth,error estimate of the growth model,Growth
 cv_readers,Coefficient of variation between readers,Growth
-APE,,Growth
+APE,Average Percent Error used to estimate variability in age determination between readers,Growth
 PA,Percent agreement between readers,Growth
 Ovarian fecundity,Maximum number of visible ovarian follicles (generally used in egg-laying species (e.g. skates)),Reproduction
 Uterine fecundity,Max number of visible ovultaed eggs or developing embryos in both embryos,Reproduction
-Annual reproductive output,,Reproduction
-Litter size (unspecified),Number of ova or developing embryos,Reproduction
+Annual reproductive output,The total number of offspring or biomass a mother produces per year,Reproduction
+Litter size (unspecified),Number of ova or developing embryos if not stated as uterine or ovarian,Reproduction
 Breeding,Observed timing of mating,Reproduction
 Ovulation,Observed timing of ovulation,Reproduction
 Parturition,Observed timing of parutrition,Reproduction
-Incubation length,,Reproduction
-Gestation length,,Reproduction
-Breeding interval,"Biannual, Annual, Biennial, Triennial",Reproduction
-Ovum size,Maximum observed ova diamter (uterine or recently ovulated),Reproduction
-Offspring mass,,Reproduction
-Max oviducal width,,Reproduction
-Max uterine width,,Reproduction
-Single uterus,Yes/No,Reproduction
-Seasonal,Yes/No,Reproduction
-Peak parturition,,Reproduction
+Incubation length,The length of incubation in months for egg-laying species,Reproduction
+Gestation length,The length of gestation in months for live-bearing species,Reproduction
+Breeding interval,The reproductive interval of females. Can be "Biannual, Annual, Biennial, Triennial",Reproduction
+Ovum diameter,Maximum observed ova diamter (uterine or recently ovulated),Reproduction
+Offspring mass,The body mass of offspring at the time of birth or hatching,Reproduction
+Max oviducal width,Maximum width of the oviducal gland during the reproductive cycle,Reproduction
+Max uterine width,Maximum uterus width during the reproductive cycle,Reproduction
+Single uterus,Do females have only a single functioning uterus, typically both are functional (Logical: Yes/No),Reproduction
+Seasonal,Does reproduction occur seasonally (logical:Yes/No),Reproduction
+Peak parturition,The month of peak parturition (hatching or live-bitrh),Reproduction
 Embryonic sex ratio,In utero ratio of Males:Females within a litter,Reproduction
 Natural mortality,M,Demography
 Total mortality,Z,Demography

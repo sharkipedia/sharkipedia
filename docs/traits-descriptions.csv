@@ -34,7 +34,7 @@ Ovulation,Observed timing of ovulation,Reproduction
 Parturition,Observed timing of parutrition,Reproduction
 Incubation length,The length of incubation in months for egg-laying species,Reproduction
 Gestation length,The length of gestation in months for live-bearing species,Reproduction
-Breeding interval,The reproductive interval of females. Can be "Biannual, Annual, Biennial, Triennial",Reproduction
+Breeding interval,"Biannual, Annual, Biennial, Triennial",Reproduction
 Ovum diameter,Maximum observed ova diamter (uterine or recently ovulated),Reproduction
 Offspring mass,The body mass of offspring at the time of birth or hatching,Reproduction
 Max oviducal width,Maximum width of the oviducal gland during the reproductive cycle,Reproduction

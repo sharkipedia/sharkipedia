@@ -11,7 +11,7 @@ L99 (99th percentile of size distribution observed ),99th percentile of observed
 Max observed size,Observation of largest individual,Length
 Inverse mortality,Estimated from a model parameter (Model should be specified),Length
 back calculated,Estimated from a model output (Model should be specified),Age
-direcetly observed,Observed from known age individual (typically in captive environemnt or recapture,Age
+direcetly observed,Observed from known age individual (typically in captive environment or recapture),Age
 histologically,Age estimated from sectioned tissue,Age
 Macroscopic dissection,,Age
 Smallest Free swimming individual,,Age

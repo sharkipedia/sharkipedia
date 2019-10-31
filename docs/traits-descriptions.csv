@@ -39,7 +39,7 @@ Ovum diameter,Maximum observed ova diamter (uterine or recently ovulated),Reprod
 Offspring mass,The body mass of offspring at the time of birth or hatching,Reproduction
 Max oviducal width,Maximum width of the oviducal gland during the reproductive cycle,Reproduction
 Max uterine width,Maximum uterus width during the reproductive cycle,Reproduction
-Single uterus,Do females have only a single functioning uterus, typically both are functional (Logical: Yes/No),Reproduction
+Single uterus,Do females have only a single functioning uterus? Typically both are functional (Logical: Yes/No),Reproduction
 Seasonal,Does reproduction occur seasonally (logical:Yes/No),Reproduction
 Peak parturition,The month of peak parturition (hatching or live-bitrh),Reproduction
 Embryonic sex ratio,In utero ratio of Males:Females within a litter,Reproduction

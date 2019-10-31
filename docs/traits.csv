@@ -1,1 +1,20 @@
-Length,Age,Growth,Reproduction,Demography,RelationshipsLmat50,Amat50,k,Ovarian Fecundity,natural mortality,aLmat95,Amat95,Linf,Uterine Fecundity,total mortality,bLength at first maturity,Age at first maturity,L0,Annual Reproductive Output,fishing mortality,cLength of largest immature,Age of larger immature,t0,Litter Size (Unspecified),rmax,dLength at maternity,Age at maternity,t1,Breeding,,sigma-convLmax-observed,Amax-observed,Tmat,Ovulation,,Lmax-estimated,Amax-estimated,H,Parturition,,Lbirth,Generation Length,G,Incubation Length,,Body Mass,,sigma-growth,Gestation Length,,,,cv_readers,Breeding Interval,,,,APE,Ovum Size,,,,PA,Offspring Mass,,,,,Max Oviducal Width,,,,,Max Uterine Width,,,,,Single Uterus,,,,,Seasonal,,,,,Embryonic sex ratio,,,,,Reproductive Mode,,,,,Chemical Balance of Development,,
+Length,Age,Growth,Reproduction,Demography,Relationships
+Lmat50,Amat50,k,Ovarian Fecundity,natural mortality,a
+Lmat95,Amat95,Linf,Uterine Fecundity,total mortality,b
+Length at first maturity,Age at first maturity,L0,Annual Reproductive Output,fishing mortality,c
+Length of largest immature,Age of largest immature,t0,Litter Size (Unspecified),rmax,d
+Length at maternity,Age at maternity,t1,Breeding,,sigma-conv
+Lmax-observed,Amax-observed,Tmat,Ovulation,,
+Lmax-estimated,Amax-estimated,H,Parturition,,
+Lbirth,Generation Length,G,Incubation Length,,
+Body Mass,,sigma-growth,Gestation Length,,
+,,cv_readers,Breeding Interval,,
+,,APE,Ovum Diameter,,
+,,PA,Offspring Mass,,
+,,,Max Oviducal Width,,
+,,,Max Uterine Width,,
+,,,Single Uterus,,
+,,,Seasonal,,
+,,,Embryonic sex ratio,,
+,,,Reproductive Mode,,
+,,,Chemical Balance of Development,,

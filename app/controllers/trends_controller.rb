@@ -4,7 +4,11 @@ class TrendsController < ApplicationController
   before_action :set_associations, only: [:new, :edit, :create, :update]
 
   def index
-    @trends = Trend.all
+    @trends = Trend.includes(:reference,
+                             :standard,
+                             :location,
+                             :species,
+                             :trend_observations).all
   end
 
   def new

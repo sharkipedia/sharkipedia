@@ -1,5 +1,5 @@
-class TrendsController < ApplicationController
-  before_action :ensure_admin!
+class TrendsController < PreAuthController
+  before_action :ensure_admin!, only: [:new, :edit, :update, :destroy]
   before_action :set_trend, only: [:show, :edit, :update, :destroy]
   before_action :set_associations, only: [:new, :edit, :create, :update]
 

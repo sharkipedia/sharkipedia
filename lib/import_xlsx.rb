@@ -320,7 +320,7 @@ module ImportXlsx
           else
             ref = ref.sub('_', '')
           end
-          resource = Reference.find_by name: ref
+          resource = Reference.where('lower(name) = ?', ref.downcase).first
           resource ||= Reference.find_or_create_by! name: ref,
             data_source: row['DataSource'],
             doi: row['doi'],

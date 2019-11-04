@@ -4,7 +4,7 @@
       <th>Year</th>
       <th>Value</th>
     </tr>
-    <% observations.order(:year).each do |observation| %>
+    <% observations.each do |observation| %>
       <tr>
         <td><%= observation.year %></td>
         <td><%= observation.value %></td>

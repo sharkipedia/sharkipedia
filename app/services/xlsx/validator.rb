@@ -25,18 +25,22 @@ module Xlsx
       guess_type
 
       unless type == :invalid
-        validate_column_headers
+        if type != :trends
+          validate_column_headers
 
-        @xlsx.data_sheet.each_with_index do |row, idx|
-          validate_references row, idx
+          @xlsx.data_sheet.each_with_index do |row, idx|
+            validate_references row, idx
 
-          validate_species row, idx
-          validate_sex row, idx
-          validate_trait row, idx
-          validate_standard row, idx
-          validate_value row, idx
+            validate_species row, idx
+            validate_sex row, idx
+            validate_trait row, idx
+            validate_standard row, idx
+            validate_value row, idx
 
-          validate_duplicate row, idx
+            validate_duplicate row, idx
+          end
+        else
+          @valid = true
         end
       end
 

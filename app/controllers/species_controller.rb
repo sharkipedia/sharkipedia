@@ -12,7 +12,14 @@ class SpeciesController < PreAuthController
   end
 
   def show
-    @specie = Species.find params[:id]
+    @specie = Species.includes(
+      observations: [
+        measurements: [:standard, :value_type, :location, :trait, :sex_type, :observation]
+      ],
+      trends: [
+        :location, :standard, :trend_observations, :reference
+      ]
+    ).find params[:id]
     @grouped_measurements = Measurement.where(observation: @specie.observations)
                                        .group_by(&:trait_class)
     @trends = @specie.trends

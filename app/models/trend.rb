@@ -8,7 +8,7 @@ class Trend < ApplicationRecord
   belongs_to :standard
   belongs_to :sampling_method
 
-  has_many :trend_observations, dependent: :destroy
+  has_many :trend_observations, -> { order(:year) }, dependent: :destroy
 
   has_one_attached :figure
 

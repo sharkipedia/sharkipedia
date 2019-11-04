@@ -386,6 +386,9 @@ module ImportXlsx
 
             self.log += "Created TrendObservation #{to.inspect}\n"
           end
+
+          trend.no_years = trend.end_year - trend.start_year + 1
+
           trend.save
           self.log += "\n"
         end

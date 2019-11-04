@@ -32,7 +32,14 @@ class ReferencesController < PreAuthController
   end
 
   def show
-    @reference = Reference.find params[:id]
+    @reference = Reference.includes(observations: [
+        :species,
+        measurements: [:standard, :value_type, :location, :trait]
+      ],
+      trends: [
+        :species, :location, :standard,
+        :trend_observations
+      ]).find params[:id]
     @observations = @reference.observations
     @trends = @reference.trends
   end

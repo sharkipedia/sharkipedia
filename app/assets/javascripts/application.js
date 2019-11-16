@@ -45,7 +45,8 @@ function runSelect2 (klass) {
           results: _.map(data, function(el) {
             return {
               id: el.id,
-              name: el.name
+              name: el.name,
+              description: el.description
             };
           })
         };
@@ -56,8 +57,15 @@ function runSelect2 (klass) {
       return markup;
     },
     minimumInputLength: 2,
-    templateResult: function(item) {
-      return item.name;
+    templateResult: function(e) {
+      if (e.name === undefined) {
+        return "<em>loading</em>"
+      } else {
+        let description = e.description === null ? "" : " - " + e.description
+        return $(
+          '<span>' + e.name + description + '</span>'
+        )
+      }
     },
     templateSelection: function(item) {
       return item.name;

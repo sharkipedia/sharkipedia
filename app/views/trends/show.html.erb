@@ -8,12 +8,12 @@
   <div class="column is-one-third">
     <div class="buttons is-pulled-right">
       <% if user_is_admin? %>
-        <%= link_to 'Edit', edit_trend_path(@trend), class: 'button is-info is-pulled-right' %>
+        <%= link_to 'Edit', edit_trend_path(@trend), class: 'button is-info is-pulled-right is-light' %>
       <% end %>
 
-      <%= link_to 'Download trend data as CSV', trend_path(@trend, format: 'csv'), class: 'button is-primary' %>
-
       <%= link_to 'Report Error', "mailto:admin@sharktraits.org?subject=Error in Trend #{@trend.id}&body=Hi,\n\nI found an error in the data for this trend: #{trend_url(@trend)}", class: 'button is-danger is-light' %>
+
+      <%= link_to 'Download as CSV', trend_path(@trend, format: 'csv'), class: 'button is-primary is-light' %>
     </div>
   </div>
 </div>

@@ -28,3 +28,7 @@
 .select2-selection__arrow {
   height: 35px !important;
 }
+
+.has-icons-left .select2-selection__rendered {
+  padding-left: 2.5em !important;
+}

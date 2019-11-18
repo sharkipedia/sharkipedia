@@ -9,34 +9,53 @@
       </div>
 
       <div class="field">
-        <%= f.label :trait, class: 'label' %>
-        <%= f.grouped_collection_select(:trait_id, @trait_classes, :traits, :name, :id, :name, {:prompt => 'Select Trait'}, style: 'width: 100%') %>
+        <%= f.label :trait_class, class: 'label' %>
+        <p class="control has-icons-left">
+          <%= f.collection_select(:trait_class_id, @trait_classes, :id, :name, {:prompt => 'Select Trait Class'}, style: 'width: 100%', class: 'independent') %>
+          <span class="icon is-small is-left">
+            <i class="fas fa-exclamation"></i>
+          </span>
+        </p>
       </div>
 
-      <%# TODO: show trait class when trait is selected %>
-      <%# <div class="field"> %>
-      <%#   <%= f.label :trait_class, class: 'label' %1> %>
-      <%#   <%= f.collection_select(:trait_class_id, @trait_classes, :id, :name, {:prompt => 'Select Trait Class'}, style: 'width: 100%') %1> %>
-      <%# </div> %>
+      <div class="field">
+        <%= f.label :trait, class: 'label' %>
+        <p class="control has-icons-left">
+          <%= f.grouped_collection_select(:trait_id, @trait_classes, :traits, :name, :id, :name, {:prompt => 'Select Trait'}, style: 'width: 100%', class: 'trait-class-relative') %>
+          <span class="icon is-small is-left">
+            <i class="fas fa-exclamation"></i>
+          </span>
+        </p>
+      </div>
 
       <div class="field">
         <%= f.label :sex_type, class: 'label' %>
-        <%= f.collection_select(:sex_type_id, @sex_types, :id, :name, {:prompt => 'Select Sex'}, style: 'width: 100%') %>
+        <p class="control has-icons-left">
+          <%= f.collection_select(:sex_type_id, @sex_types, :id, :name, {:prompt => 'Select Sex'}, style: 'width: 100%', class: 'independent') %>
+          <span class="icon is-small is-left">
+            <i class="fas fa-exclamation"></i>
+          </span>
+        </p>
       </div>
 
       <div class="field">
         <%= f.label :standard, class: 'label' %>
-        <%= f.collection_select(:standard_id, @standards, :id, :name, {:prompt => 'Select Standard'}, style: 'width: 100%') %>
+        <p class="control has-icons-left">
+          <%= f.grouped_collection_select(:standard_id, @trait_classes, :standards, :name, :id, :name, {:prompt => 'Select Standard'}, style: 'width: 100%', class: 'trait-class-relative') %>
+          <span class="icon is-small is-left">
+            <i class="fas fa-exclamation"></i>
+          </span>
+        </p>
       </div>
 
       <div class="field">
         <%= f.label :measurement_method, class: 'label' %>
-        <%= f.grouped_collection_select(:measurement_method_id, @trait_classes, :measurement_methods, :name, :id, :name, {:prompt => 'Select Measurement Method'}, style: 'width: 100%') %>
+        <%= f.grouped_collection_select(:measurement_method_id, @trait_classes, :measurement_methods, :name, :id, :name, {:prompt => 'Select Measurement Method'}, style: 'width: 100%', class: 'trait-class-relative') %>
       </div>
 
       <div class="field">
         <%= f.label :measurement_model, class: 'label' %>
-        <%= f.grouped_collection_select(:measurement_model_id, @trait_classes, :measurement_models, :name, :id, :name, {:prompt => 'Select Measurement Model'}, style: 'width: 100%') %>
+        <%= f.grouped_collection_select(:measurement_model_id, @trait_classes, :measurement_models, :name, :id, :name, {:prompt => 'Select Measurement Model'}, style: 'width: 100%', class: 'trait-class-relative') %>
       </div>
 
       <%= f.fields_for :location do |fl| %>
@@ -70,24 +89,29 @@
 
       <div class="field">
         <%= f.label :longhurst_province, class: 'label' %>
-        <%= f.collection_select(:longhurst_province_id, @longhurst_provinces, :id, :name, {:prompt => 'Select Longhurst Province'}, style: 'width: 100%') %>
+        <%= f.collection_select(:longhurst_province_id, @longhurst_provinces, :id, :name, {:prompt => 'Select Longhurst Province'}, style: 'width: 100%', class: 'independent') %>
       </div>
     </div>
 
     <div class="column">
       <div class="field">
         <%= f.label :value_type, class: 'label' %>
-        <%= f.collection_select(:value_type_id, @value_types, :id, :name, {:prompt => 'Select Value Type'}, style: 'width: 100%') %>
+        <%= f.collection_select(:value_type_id, @value_types, :id, :name, {:prompt => 'Select Value Type'}, style: 'width: 100%', class: 'independent') %>
       </div>
 
       <div class="field">
         <%= f.label :value, class: 'label' %>
-        <%= f.text_field :value, class: 'input' %><br />
+        <p class="control has-icons-left">
+          <%= f.text_field :value, class: 'input' %><br />
+          <span class="icon is-small is-left">
+            <i class="fas fa-exclamation"></i>
+          </span>
+        </p>
       </div>
 
       <div class="field">
         <%= f.label :precision_type, class: 'label' %>
-        <%= f.collection_select(:precision_type_id, @precision_types, :id, :name, {:prompt => 'Select Precision Type'}, style: 'width: 100%') %>
+        <%= f.collection_select(:precision_type_id, @precision_types, :id, :name, {:prompt => 'Select Precision Type'}, style: 'width: 100%', class: 'independent') %>
       </div>
 
       <div class="columns">
@@ -148,5 +172,23 @@
 </fieldset>
 
 <script type="text/javascript">
-  $('fieldset.measurement select').select2({ selectOnClose: true });
+
+  $('fieldset.measurement select.independent').select2({ selectOnClose: true });
+
+  $('fieldset.measurement select.trait-class-relative').select2({
+    selectOnClose: true,
+    matcher: function(params, data) {
+      let traitClassId = $(data.element.parentElement).attr("id").match(/(.*_\d+_)/)[0]
+        + "trait_class_id";
+
+      let traitClass = $("#" + traitClassId + " " + "option:selected").text();
+
+      if (data.text.indexOf(traitClass) > -1) {
+        return data;
+      } else {
+        return null;
+      }
+    }
+  });
+
 </script>

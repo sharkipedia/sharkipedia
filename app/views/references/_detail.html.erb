@@ -34,5 +34,11 @@
         <td id="reference-file"><%= link_to @reference.reference_file.filename, url_for(@reference.reference_file), target: '_blank' %></td>
       </tr>
     <% end %>
+    <tr>
+      <th>data entered</th>
+      <td id="observations">
+        <%= !reference.observations.blank? %>
+      </td>
+    </tr>
   </tbody>
 </table>

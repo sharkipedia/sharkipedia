@@ -16,12 +16,19 @@
  */
 
 // ensure select2 inputs are the same height as other inputs
+.selection--single .select2-selection__rendered {
+  line-height: 36px !important;
+}
 .select2-selection__rendered {
-  line-height: 31px !important;
+  line-height: 36px !important;
 }
 .select2-container .select2-selection--single {
   height: 36px !important;
 }
 .select2-selection__arrow {
   height: 35px !important;
+}
+
+.has-icons-left .select2-selection__rendered {
+  padding-left: 2.5em !important;
 }

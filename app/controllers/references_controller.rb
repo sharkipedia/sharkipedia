@@ -32,16 +32,24 @@ class ReferencesController < PreAuthController
   end
 
   def show
-    @reference = Reference.includes(observations: [
-        :species,
-        measurements: [:standard, :value_type, :location, :trait]
-      ],
-      trends: [
-        :species, :location, :standard,
-        :trend_observations
-      ]).find params[:id]
-    @observations = @reference.observations
-    @trends = @reference.trends
+    respond_to do |format|
+      format.html do
+        @reference = Reference.includes(observations: [
+          :species,
+          measurements: [:standard, :value_type, :location, :trait]
+        ],
+        trends: [
+          :species, :location, :standard,
+          :trend_observations
+        ]).find params[:id]
+        @observations = @reference.observations
+        @trends = @reference.trends
+      end
+
+      format.js do
+        @reference = Reference.find params[:id]
+      end
+    end
   end
 
   private

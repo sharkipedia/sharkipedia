@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.describe Xlsx::Validator do
   files = Dir["spec/fixtures/xlsx/**.xlsx"]
   files.each do |file|
+    next if file =~ /~\$/
+
     filename = file.split('/').last
     type, valid, _ = filename.split('.').first.split('_')
 

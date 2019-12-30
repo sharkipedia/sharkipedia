@@ -10,8 +10,9 @@ RSpec.describe ReferencesController, type: :controller do
   end
 
   describe "GET #show" do
+    let(:reference) { create :reference }
     it "returns http success" do
-      get :show
+      get :show, params: { id: reference.id }
       expect(response).to have_http_status(:success)
     end
   end

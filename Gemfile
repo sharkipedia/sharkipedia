@@ -87,6 +87,6 @@ gem "underscore-rails", "~> 1.8"
 
 gem "pg_search", "~> 2.2"
 
-gem "pagy", "~> 3.5"
+gem "pagy", "~> 3.7"
 
 gem "invisible_captcha", "~> 1.0"

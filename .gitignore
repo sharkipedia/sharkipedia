@@ -33,3 +33,6 @@
 
 # osx noise
 .DS_Store
+
+# Excel temp files
+~$*

@@ -1,12 +1,12 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.5'
+ruby '2.7.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0.1'
+gem 'rails', '~> 6.0.2'
 # Use postgres as the database for Active Record
-gem 'pg', '~> 1.1.4'
+gem 'pg', '~> 1.2'
 # Use Puma as the app server
 gem 'puma', '~> 4.3'
 # Use SCSS for stylesheets
@@ -40,7 +40,7 @@ gem 'aws-sdk-s3', '~> 1.46', require: false
 gem 'aasm', '~> 5.0', '>= 5.0.1'
 
 gem 'sidekiq', '~> 5.2', '>= 5.2.5'
-gem 'redis-namespace', '~> 1.6'
+gem 'redis-namespace', '~> 1.7'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -87,6 +87,6 @@ gem "underscore-rails", "~> 1.8"
 
 gem "pg_search", "~> 2.2"
 
-gem "pagy", "~> 3.5"
+gem "pagy", "~> 3.7"
 
 gem "invisible_captcha", "~> 1.0"

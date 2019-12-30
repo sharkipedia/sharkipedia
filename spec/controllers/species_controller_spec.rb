@@ -10,8 +10,10 @@ RSpec.describe SpeciesController, type: :controller do
   end
 
   describe "GET #show" do
+    let(:species) { create :species }
+
     it "returns http success" do
-      get :show
+      get :show, params: { id: species.id }
       expect(response).to have_http_status(:success)
     end
   end

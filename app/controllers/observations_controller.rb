@@ -28,7 +28,7 @@ class ObservationsController < ApplicationController
 
     respond_to do |format|
       if @observation.save
-        format.html { redirect_to @observation, notice: 'Observation was successfully created.' }
+        format.html { redirect_to @observation, notice: "Observation was successfully created." }
         format.js { redirect_to @observation }
       else
         format.html do
@@ -44,7 +44,7 @@ class ObservationsController < ApplicationController
 
     respond_to do |format|
       if @observation.update(observation_params)
-        format.html { redirect_to @observation, notice: 'Observation was successfully updated.' }
+        format.html { redirect_to @observation, notice: "Observation was successfully updated." }
         format.json { render :show, status: :ok, location: @observation }
       else
         format.html { render :edit }
@@ -57,7 +57,7 @@ class ObservationsController < ApplicationController
     authorize @observation
     @observation.destroy
     respond_to do |format|
-      format.html { redirect_to observations_url, notice: 'Observation was successfully destroyed.' }
+      format.html { redirect_to observations_url, notice: "Observation was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -70,8 +70,8 @@ class ObservationsController < ApplicationController
   end
 
   def set_associations
-    @example_species = Species.find_by name: 'Carcharhinus acronotus'
-    @example_reference = Reference.find_by name: 'driggers2004a'
+    @example_species = Species.find_by name: "Carcharhinus acronotus"
+    @example_reference = Reference.find_by name: "driggers2004a"
 
     @sex_types = SexType.all
     @trait_classes = TraitClass.all
@@ -94,7 +94,7 @@ class ObservationsController < ApplicationController
     params.require(:observation).permit(
       :species_id, :access, :hidden, :user_id, :depth,
       reference_ids: [],
-      measurements_attributes: [ :id,
+      measurements_attributes: [:id,
                                 :_destroy,
                                 :date,
                                 :sex_type_id,
@@ -114,8 +114,7 @@ class ObservationsController < ApplicationController
                                 :notes,
                                 :validation_type_id,
                                 :longhurst_province_id,
-                                location_attributes: [ :id, :name, :lat, :lon],
-    ],
+                                location_attributes: [:id, :name, :lat, :lon],],
     )
   end
 end

@@ -1,15 +1,15 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Xlsx::Validator do
   files = Dir["spec/fixtures/xlsx/**.xlsx"]
   files.each do |file|
-    next if file =~ /~\$/
+    next if /~\$/.match?(file)
 
-    filename = file.split('/').last
-    type, valid, _ = filename.split('.').first.split('_')
+    filename = file.split("/").last
+    type, valid, _ = filename.split(".").first.split("_")
 
-    context "#{filename}" do
-      valid = valid == 'valid'
+    context filename.to_s do
+      valid = valid == "valid"
 
       subject { described_class.call(file) }
 
@@ -25,8 +25,8 @@ RSpec.describe Xlsx::Validator do
     end
   end
 
-  context 'invalid file' do
-    file = 'docs/erd.pdf'
+  context "invalid file" do
+    file = "docs/erd.pdf"
     subject { described_class.call(file) }
 
     it "#type = invalid" do

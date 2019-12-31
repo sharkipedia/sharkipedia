@@ -3,10 +3,10 @@ class SpeciesController < PreAuthController
 
   def index
     species = if params[:all]
-                Species.all
-              else
-                Species.joins(:observations).order(:name).distinct
-              end
+      Species.all
+    else
+      Species.joins(:observations).order(:name).distinct
+    end
 
     @pagy, @species = pagy(species)
   end
@@ -14,14 +14,14 @@ class SpeciesController < PreAuthController
   def show
     @specie = Species.includes(
       observations: [
-        measurements: [:standard, :value_type, :location, :trait, :sex_type, :observation]
+        measurements: [:standard, :value_type, :location, :trait, :sex_type, :observation],
       ],
       trends: [
-        :location, :standard, :trend_observations, :reference
+        :location, :standard, :trend_observations, :reference,
       ]
     ).find params[:id]
     @grouped_measurements = Measurement.where(observation: @specie.observations)
-                                       .group_by(&:trait_class)
+      .group_by(&:trait_class)
     @trends = @specie.trends
   end
 end

@@ -3,13 +3,13 @@ class ImportMailer < ApplicationMailer
   # reviewed
   def new_import_email
     @import = params[:import]
-    mail subject: '[SharkT] - New Import uploaded', to: User.admin_emails
+    mail subject: "[SharkT] - New Import uploaded", to: User.admin_emails
   end
 
   # notification to the uploaded that the state of their upload had changed
   def update_import_status_email
     @import = params[:import]
     mail subject: "[SharkT] - Import status changed to #{@import.state}",
-      to: @import.user.email
+         to: @import.user.email
   end
 end

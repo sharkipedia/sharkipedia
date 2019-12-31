@@ -35,22 +35,22 @@ Rails.application.routes.draw do
     root to: "users#index"
 
     authenticate :user, lambda { |u| u.admin? } do
-      require 'sidekiq/web'
-      mount Sidekiq::Web => '/sidekiq'
+      require "sidekiq/web"
+      mount Sidekiq::Web => "/sidekiq"
     end
   end
 
   devise_for :users, controllers: {
-    sessions: 'users/sessions'
+    sessions: "users/sessions",
   }
 
   resources :imports do
-    post :approve, to: 'imports#approve'
-    post :request_changes, to: 'imports#request_changes'
-    post :reject, to: 'imports#reject'
+    post :approve, to: "imports#approve"
+    post :request_changes, to: "imports#request_changes"
+    post :reject, to: "imports#reject"
   end
 
-  root 'pages#start'
+  root "pages#start"
 
   resources :locations, only: :create
 
@@ -62,15 +62,15 @@ Rails.application.routes.draw do
   resources :references, only: [:index, :show, :new, :create]
 
   namespace :search do
-    get 'autocomplete', defaults: { format: 'json' }
+    get "autocomplete", defaults: {format: "json"}
   end
 
   resources :data_export, only: :index
 
-  get 'home/index'
+  get "home/index"
 
   # static pages
-  match '/about',     to: 'pages#about',     via: 'get'
-  match '/contact',   to: 'pages#contact',   via: 'get'
-  match '/procedure', to: 'pages#procedure', via: 'get'
+  match "/about", to: "pages#about", via: "get"
+  match "/contact", to: "pages#contact", via: "get"
+  match "/procedure", to: "pages#procedure", via: "get"
 end

@@ -1,24 +1,24 @@
 module Export
   class Trends < ApplicationService
-    def initialize(trends=nil)
+    def initialize(trends = nil)
       @trends = trends || Trend.all
     end
 
     def call
       CSV.generate do |csv|
-        header = %w{
+        header = %w[
           Class Order Family Genus Species Binomial IUCNcode SourceYear
           Taxonomic Notes AuthorYear DataSource doi
-        }
+        ]
 
         years = TrendObservation.pluck(:year).uniq.sort
         header += years
 
-        header += %w{
+        header += %w[
           Units SamplingMethod SamplingMethodCode Location Latitude Longitude
           Ocean DataType NoYears TimeMin PageAndFigureNumber LineUsed PDFPage
           ActualPage Depth Model FigureName FigureData
-        }
+        ]
 
         csv << header
 
@@ -39,7 +39,7 @@ module Export
             ]
 
             data += trend.trend_observations.pluck(:year, :value).sort.to_h
-                         .values_at(*years)
+              .values_at(*years)
 
             data += [
               trend.standard.name,

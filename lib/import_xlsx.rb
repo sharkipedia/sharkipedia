@@ -7,10 +7,10 @@ module ImportXlsx
     @allowed_headers = []
 
     def initialize(file_path, user)
-      @xlsx   = Roo::Spreadsheet.open(file_path)
-      @valid  = false
-      @log    = ""
-      @user   = user
+      @xlsx = Roo::Spreadsheet.open(file_path)
+      @valid = false
+      @log = ""
+      @user = user
 
       @data_entry_sheet = xlsx.sheet(@allowed_sheet_names.first)
     end
@@ -28,7 +28,7 @@ module ImportXlsx
       else
         self.valid = false
 
-        sheet_names = @allowed_sheet_names.join(' & ')
+        sheet_names = @allowed_sheet_names.join(" & ")
         self.log += "ERROR: The sheets are not named #{sheet_names}\n"
       end
 
@@ -48,15 +48,14 @@ module ImportXlsx
       # TODO: Check if referenced species exists / have the user select
       # a species during upload and pull that in from the import object
 
-      if self.valid
-        self.log += "\nAll automated validations passed.\n"
+      self.log += if valid
+        "\nAll automated validations passed.\n"
       else
-        self.log += "\nThe automated validations failed. The file can not be " \
+        "\nThe automated validations failed. The file can not be " \
                     "imported. Please fix the abovementioned issues and " \
                     "resubmit the file.\n"
       end
     end
-
 
     def import
       raise "note implement"
@@ -65,14 +64,14 @@ module ImportXlsx
 
   class Traits < DataImport
     def initialize(file_path, user)
-      @allowed_headers = %w(
+      @allowed_headers = %w[
         observation_id hidden resource_name resource_doi
         secondary_resource_name secondary_resource_doi species_superorder
         species_name marine_province location_name lat long date sex
         trait_class trait_name standard_name method_name model_name value
         value_type precision precision_type precision_upper sample_size dubious
         validated validation_type notes contributor_id depth
-      )
+      ]
 
       @allowed_sheet_names = ["Data Entry", "Values"]
 
@@ -84,27 +83,26 @@ module ImportXlsx
         parsed = @data_entry_sheet.parse(headers: true)
         parsed.shift # remove the header row
 
-        resources = parsed.map do |row|
-          row['resource_name']
-        end.uniq
+        resources = parsed.map { |row|
+          row["resource_name"]
+        }.uniq
 
         self.log += "The sheet contains #{resources.count} observation(s)\n"
 
         # cluster by resource
-        observations = parsed.group_by { |row| row['resource_name'] }
+        observations = parsed.group_by { |row| row["resource_name"] }
         observations.each do |resource_name, sub_table|
-
           self.log += "Starting import of observation #{resource_name}\n"
 
           # Create References
 
-          resources = sub_table.map do |row|
-            [row['resource_name'], row['resource_doi']]
-          end.uniq
+          resources = sub_table.map { |row|
+            [row["resource_name"], row["resource_doi"]]
+          }.uniq
 
-          resources += sub_table.map do |row|
-            [row['secondary_resource_name'], row['secondary_resource_doi']]
-          end.uniq
+          resources += sub_table.map { |row|
+            [row["secondary_resource_name"], row["secondary_resource_doi"]]
+          }.uniq
 
           resources.reject! { |name, _| name.blank? }
 
@@ -114,8 +112,7 @@ module ImportXlsx
             [name.strip, doi.try(:strip)]
           end
 
-          referenced_resources = resources.map do |name, doi|
-
+          referenced_resources = resources.map { |name, doi|
             resource = Reference.find_by name: name
             if resource
               resource.doi ||= doi
@@ -125,66 +122,64 @@ module ImportXlsx
             end
 
             resource
-          end
+          }
 
           self.log += referenced_resources.inspect + "\n"
 
           # XXX: what should happen if the species / species super order can't be found?
-          species = Species.find_by name: sub_table.first['species_name']
-          species ||= Species.find_by edge_scientific_name: sub_table.first['species_name']
+          species = Species.find_by name: sub_table.first["species_name"]
+          species ||= Species.find_by edge_scientific_name: sub_table.first["species_name"]
           self.log += species.inspect + "\n"
 
-          date = sub_table.first['date']
+          date = sub_table.first["date"]
           self.log += date.inspect + "\n"
 
-          contributor_id = sub_table.first['contributor_id']
+          contributor_id = sub_table.first["contributor_id"]
           self.log += contributor_id.inspect + "\n"
 
-          hidden = sub_table.first['hidden']
+          hidden = sub_table.first["hidden"]
           self.log += hidden.inspect + "\n"
 
-          depth = sub_table.first['depth']
+          depth = sub_table.first["depth"]
           self.log += depth.inspect + "\n"
 
           # TODO: find observation by resource name
           observation = Observation.joins(:references)
-                                   .where(contributor_id: contributor_id,
-                                          'references.name': resource_name)
-                                   .first
+            .where(contributor_id: contributor_id,
+                   'references.name': resource_name)
+            .first
 
-          unless observation
-            observation = Observation.create! species: species,
-              references: referenced_resources,
-              hidden: hidden,
-              contributor_id: contributor_id,
-              depth: depth,
-              user: user
-          end
+          observation ||= Observation.create! species: species,
+                                              references: referenced_resources,
+                                              hidden: hidden,
+                                              contributor_id: contributor_id,
+                                              depth: depth,
+                                              user: user
 
           self.log += observation.inspect + "\n"
 
           sub_table.each do |row|
-            sex = SexType.find_by name: row['sex']
-            trait_class = TraitClass.find_by name: row['trait_class']
-            trait = Trait.find_by name: row['trait_name']
-            standard = Standard.find_by name: row['standard_name']
-            measurement_method = MeasurementMethod.find_by name: row['method_name']
-            measurement_model = MeasurementModel.find_by name: row['model_name']
-            value = row['value']
-            value_type = ValueType.find_by name: row['value_type']
-            precision = row['precision']
-            precision_type = PrecisionType.find_by name: row['precision_type']
-            precision_upper = row['precision_upper']
-            sample_size = row['sample_size']
-            dubious = row['dubious']
-            validated = row['validated']
-            date = row['date']
-            validation_type = ValidationType.find_by name: row['validation_type']
-            notes = row['notes']
+            sex = SexType.find_by name: row["sex"]
+            trait_class = TraitClass.find_by name: row["trait_class"]
+            trait = Trait.find_by name: row["trait_name"]
+            standard = Standard.find_by name: row["standard_name"]
+            measurement_method = MeasurementMethod.find_by name: row["method_name"]
+            measurement_model = MeasurementModel.find_by name: row["model_name"]
+            value = row["value"]
+            value_type = ValueType.find_by name: row["value_type"]
+            precision = row["precision"]
+            precision_type = PrecisionType.find_by name: row["precision_type"]
+            precision_upper = row["precision_upper"]
+            sample_size = row["sample_size"]
+            dubious = row["dubious"]
+            validated = row["validated"]
+            date = row["date"]
+            validation_type = ValidationType.find_by name: row["validation_type"]
+            notes = row["notes"]
 
-            location_name = row['location_name']
-            location_lat  = row['lat']
-            location_long = row['long']
+            location_name = row["location_name"]
+            location_lat = row["lat"]
+            location_long = row["long"]
 
             if location_name.blank? && location_lat.blank? && location_long.blank?
               raise "location name and lat/long can't be blank!"
@@ -194,35 +189,32 @@ module ImportXlsx
               location = Location.find_by lat: location_lat, lon: location_long
             end
 
-            unless location
-              location = Location.create name: location_name, lat: location_lat, lon: location_long
-            end
+            location ||= Location.create name: location_name, lat: location_lat, lon: location_long
             self.log += location.inspect + "\n"
 
             # marine_province - might be blank
-            marine_province = LonghurstProvince.find_by name: sub_table.first['marine_province']
+            marine_province = LonghurstProvince.find_by name: sub_table.first["marine_province"]
             self.log += marine_province.inspect + "\n"
 
-
             observation.measurements.create! sex_type: sex,
-              trait_class: trait_class,
-              trait: trait,
-              standard: standard,
-              measurement_method: measurement_method,
-              measurement_model: measurement_model,
-              date: date,
-              value: value,
-              value_type: value_type,
-              precision: precision,
-              precision_type: precision_type,
-              precision_upper: precision_upper,
-              sample_size: sample_size,
-              dubious: dubious,
-              validated: validated,
-              validation_type: validation_type,
-              notes: notes,
-              location: location,
-              longhurst_province: marine_province
+                                             trait_class: trait_class,
+                                             trait: trait,
+                                             standard: standard,
+                                             measurement_method: measurement_method,
+                                             measurement_model: measurement_model,
+                                             date: date,
+                                             value: value,
+                                             value_type: value_type,
+                                             precision: precision,
+                                             precision_type: precision_type,
+                                             precision_upper: precision_upper,
+                                             sample_size: sample_size,
+                                             dubious: dubious,
+                                             validated: validated,
+                                             validation_type: validation_type,
+                                             notes: notes,
+                                             location: location,
+                                             longhurst_province: marine_province
           end
 
           self.log += observation.measurements.map(&:inspect).join("\n")
@@ -232,22 +224,22 @@ module ImportXlsx
       Bugsnag.notify(e)
 
       self.log += "ERROR: Import failed!\n"
-      self.log += "#{e.to_s}\n"
+      self.log += "#{e}\n"
       self.log += e.backtrace.join("\n")
-      return false
+      false
     end
 
     private
 
     def species_check sub_table, resource_name
-      if sub_table.first['species_name'].blank?
+      if sub_table.first["species_name"].blank?
         self.log += "ATTN: No species_name set for #{resource_name}"
         return false
       end
 
       begin
-        sanity_check sub_table, 'species_name', resource_name
-      rescue Exception => e
+        sanity_check sub_table, "species_name", resource_name
+      rescue => e
         self.log += e.message
         return false
       end
@@ -269,18 +261,18 @@ module ImportXlsx
 
       super
 
-      @allowed_headers =%w(
+      @allowed_headers = %w[
 
-      Class Order Family Genus Species Taxonomic_Notes Source_year AuthorYear
-      DataSource Fishery_independent General_data_type Unit Unit_time
-      Unit_spatial Unit_gear Unit_transformation Unit_freeform Model
-      Sampling_method_general Sampling_method_info Dataset_location
-      Dataset_representativeness_experts Experts_for_representativeness
-      Coastal_province Pelagic_province Dataset_map Latitude  Longitude Ocean
-      Datamined sd PageAndFigureNumber LineUsed PDFPage ActualPage FigureName
-      FigureData Comments Flag_for_NP_NKD
+        Class Order Family Genus Species Taxonomic_Notes Source_year AuthorYear
+        DataSource Fishery_independent General_data_type Unit Unit_time
+        Unit_spatial Unit_gear Unit_transformation Unit_freeform Model
+        Sampling_method_general Sampling_method_info Dataset_location
+        Dataset_representativeness_experts Experts_for_representativeness
+        Coastal_province Pelagic_province Dataset_map Latitude Longitude Ocean
+        Datamined sd PageAndFigureNumber LineUsed PDFPage ActualPage FigureName
+        FigureData Comments Flag_for_NP_NKD
 
-      )
+      ]
 
       # @allowed_headers = %w( Class Order Family Genus Species Binomial IUCNcode
       # SourceYear Taxonomic\ Notes AuthorYear DataSource Units SamplingMethod
@@ -290,13 +282,13 @@ module ImportXlsx
 
       # allow year-columns
       year_columns = @data_entry_sheet.row(1).map(&:to_s)
-                                             .select { |e| e =~ /\d{4}/ }
+        .select { |e| e =~ /\d{4}/ }
       @allowed_headers.push(*year_columns)
     end
 
     def import
       ActiveRecord::Base.transaction do
-        parsed_tbl = @data_entry_sheet.parse #.parse(headers: true)
+        parsed_tbl = @data_entry_sheet.parse # .parse(headers: true)
         # parsed.shift # remove the header row
 
         p_1 = parsed_tbl.first
@@ -307,57 +299,57 @@ module ImportXlsx
 
           self.log += "\n"
 
-          binomial = "#{row['Genus'].try(:strip)} #{row['Species'].try(:strip)}"
+          binomial = "#{row["Genus"].try(:strip)} #{row["Species"].try(:strip)}"
           species = Species.find_by name: binomial
           self.log += "Found species #{binomial} => #{species.inspect}\n"
 
           next if species.blank?
 
-          ref = row['AuthorYear']
+          ref = row["AuthorYear"]
           if ref.blank?
             self.log += "\nSKIPPING - no AuthorYear: #{row.inspect}\n"
             next
           else
-            ref = ref.sub('_', '')
+            ref = ref.sub("_", "")
           end
-          resource = Reference.where('lower(name) = ?', ref.downcase).first
+          resource = Reference.where("lower(name) = ?", ref.downcase).first
           resource ||= Reference.find_or_create_by! name: ref,
-            data_source: row['DataSource'],
-            doi: row['doi'],
-            year: row['SourceYear']
+                                                    data_source: row["DataSource"],
+                                                    doi: row["doi"],
+                                                    year: row["SourceYear"]
           self.log += "Created Reference: #{resource.inspect}\n"
 
           # Latitude has a space at the end
-          location = Location.find_or_create_by name: row['Dataset_location'],
-                                                lat: row['Latitude '],
-                                                lon: row['Longitude']
+          location = Location.find_or_create_by name: row["Dataset_location"],
+                                                lat: row["Latitude "],
+                                                lon: row["Longitude"]
           self.log += "#{location.inspect}\n"
 
-          ocean = Ocean.where('lower(name) = ?', row['Ocean']).first
+          ocean = Ocean.where("lower(name) = ?", row["Ocean"]).first
           self.log += "#{ocean.inspect}\n"
 
-          data_type = DataType.find_or_create_by name: row['General_data_type']
+          data_type = DataType.find_or_create_by name: row["General_data_type"]
           self.log += "#{data_type.inspect}\n"
 
           # TODO:
-          # Unit	Unit_time 	Unit_spatial	Unit_gear	Unit_transformation	Unit_freeform
-          units_combo = "#{row['Unit']} #{row['Unit_time']} #{row['Unit_spatial']} #{row['Unit_gear']} #{row['Unit_transformation']} #{row['Unit_freeform']}"
-          units_combo = units_combo.gsub 'NA', ''
+          # Unit  Unit_time   Unit_spatial  Unit_gear  Unit_transformation  Unit_freeform
+          units_combo = "#{row["Unit"]} #{row["Unit_time"]} #{row["Unit_spatial"]} #{row["Unit_gear"]} #{row["Unit_transformation"]} #{row["Unit_freeform"]}"
+          units_combo = units_combo.gsub "NA", ""
           unit = Standard.find_or_create_by name: units_combo
           self.log += "#{unit.inspect}\n"
 
-          sampling_method = SamplingMethod.find_or_create_by name: row['Sampling_method_general']
+          sampling_method = SamplingMethod.find_or_create_by name: row["Sampling_method_general"]
           self.log += "#{sampling_method.inspect}\n"
 
-          trend = Trend.create! actual_page: row['ActualPage'],
-                                depth: row['Depth'],
-                                figure_data: row['FigureData'],
-                                figure_name: row['FigureName'],
-                                line_used: row['LineUsed'],
-                                model: row['Model'],
-                                page_and_figure_number: row['PageAndFigureNumber'],
-                                pdf_page: row['PDFPage'],
-                                taxonomic_notes: row['Taxonomic_Notes'],
+          trend = Trend.create! actual_page: row["ActualPage"],
+                                depth: row["Depth"],
+                                figure_data: row["FigureData"],
+                                figure_name: row["FigureName"],
+                                line_used: row["LineUsed"],
+                                model: row["Model"],
+                                page_and_figure_number: row["PageAndFigureNumber"],
+                                pdf_page: row["PDFPage"],
+                                taxonomic_notes: row["Taxonomic_Notes"],
                                 reference: resource,
                                 species: species,
                                 location: location,
@@ -375,7 +367,7 @@ module ImportXlsx
 
           year_columns.each do |year_col|
             value = row[year_col.to_i]
-            next if value.blank? || value == 'NA' || value == 'na'
+            next if value.blank? || value == "NA" || value == "na"
 
             if trend.start_year == 2900
               trend.start_year = year_col
@@ -397,9 +389,9 @@ module ImportXlsx
       Bugsnag.notify(e)
 
       self.log += "ERROR: Import failed!\n"
-      self.log += "#{e.to_s}\n"
+      self.log += "#{e}\n"
       self.log += e.backtrace.join("\n")
-      return false
+      false
     end
   end
 end

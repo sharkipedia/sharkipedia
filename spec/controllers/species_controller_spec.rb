@@ -1,7 +1,6 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe SpeciesController, type: :controller do
-
   describe "GET #index" do
     it "returns http success" do
       get :index
@@ -13,9 +12,8 @@ RSpec.describe SpeciesController, type: :controller do
     let(:species) { create :species }
 
     it "returns http success" do
-      get :show, params: { id: species.id }
+      get :show, params: {id: species.id}
       expect(response).to have_http_status(:success)
     end
   end
-
 end

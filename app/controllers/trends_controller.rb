@@ -5,10 +5,10 @@ class TrendsController < PreAuthController
 
   def index
     @trends = Trend.includes(:reference,
-                             :standard,
-                             :location,
-                             :species,
-                             :trend_observations).all
+      :standard,
+      :location,
+      :species,
+      :trend_observations).all
   end
 
   def new
@@ -19,8 +19,10 @@ class TrendsController < PreAuthController
   def show
     respond_to do |format|
       format.html
-      format.csv { send_data @trend.to_csv,
-                   filename: "#{@trend.reference.name}.csv" }
+      format.csv {
+        send_data @trend.to_csv,
+          filename: "#{@trend.reference.name}.csv"
+      }
     end
   end
 
@@ -29,8 +31,8 @@ class TrendsController < PreAuthController
 
   def create
     location = Location.find_or_create_by name: params[:trend][:location][:name],
-      lat: params[:trend][:location][:lat],
-      lon: params[:trend][:location][:lon]
+                                          lat: params[:trend][:location][:lat],
+                                          lon: params[:trend][:location][:lon]
     @trend = current_user.trends.new(trend_params)
     @trend.location = location
 
@@ -49,8 +51,8 @@ class TrendsController < PreAuthController
 
   def update
     location = Location.find_or_create_by name: params[:trend][:location][:name],
-      lat: params[:trend][:location][:lat],
-      lon: params[:trend][:location][:lon]
+                                          lat: params[:trend][:location][:lat],
+                                          lon: params[:trend][:location][:lon]
 
     @trend.location = location
 
@@ -73,8 +75,8 @@ class TrendsController < PreAuthController
   end
 
   def set_associations
-    @example_species = Species.find_by name: 'Carcharhinus acronotus'
-    @example_reference = Reference.find_by name: 'everett2015'
+    @example_species = Species.find_by name: "Carcharhinus acronotus"
+    @example_reference = Reference.find_by name: "everett2015"
 
     @standards = Standard.all
     @sampling_methods = SamplingMethod.all
@@ -105,7 +107,7 @@ class TrendsController < PreAuthController
       :standard_id,
       :data_type_id,
       :sampling_method_id,
-      trend_observations_attributes: [ :id, :year, :value, :_destroy ],
+      trend_observations_attributes: [:id, :year, :value, :_destroy],
     )
   end
 end

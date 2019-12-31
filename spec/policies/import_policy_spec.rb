@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe ImportPolicy, type: :policy do
   let(:user) { User.new }

@@ -1,11 +1,11 @@
-require './lib/import_xlsx'
+require "./lib/import_xlsx"
 
 class Import < ApplicationRecord
   include AASM
   include Rails.application.routes.url_helpers
 
   belongs_to :user
-  belongs_to :approved_by, class_name: 'User', optional: true
+  belongs_to :approved_by, class_name: "User", optional: true
 
   validates :title, presence: true
 
@@ -37,7 +37,7 @@ class Import < ApplicationRecord
 
     event :request_changes do
       transitions from: [:pending_review, :uploaded, :approved],
-        to: :changes_requested
+                  to: :changes_requested
     end
 
     event :resubmit do
@@ -71,23 +71,21 @@ class Import < ApplicationRecord
   end
 
   def do_validate
-    puts "triggered #{self.inspect}"
+    puts "triggered #{inspect}"
     url = Rails.application.routes.url_helpers.rails_blob_url xlsx_file
 
     result = Xlsx::Validator.call(url)
     self.import_type = result.type
     self.log = result.messages.join("\n")
     self.xlsx_valid = result.valid
-    self.save!
+    save!
 
     if xlsx_valid
-      self.validate_upload!
+      validate_upload!
+    elsif import_type == "invalid"
+      reject!
     else
-      if self.import_type == 'invalid'
-        self.reject!
-      else
-        self.request_changes!
-      end
+      request_changes!
     end
   end
 
@@ -100,21 +98,21 @@ class Import < ApplicationRecord
 
     # TODO: automatically detect the file type from the XLSX
     # i.e. if it's a trend or traits import
-    i = case self.import_type
-          when 'traits'
-            ImportXlsx::Traits.new url, self.user
-          when 'trends'
-            ImportXlsx::Trends.new url, self.user
-          end
+    i = case import_type
+          when "traits"
+            ImportXlsx::Traits.new url, user
+          when "trends"
+            ImportXlsx::Trends.new url, user
+    end
 
     # TODO: handle import failure
     if i.import
-      self.import!
+      import!
     else
-      self.request_changes!
+      request_changes!
     end
     self.log += "\n" + i.log
-    self.save!
+    save!
   end
 
   def notify_uploader
@@ -134,6 +132,6 @@ class Import < ApplicationRecord
   end
 
   def xlsx_valid?
-    self.xlsx_valid
+    xlsx_valid
   end
 end

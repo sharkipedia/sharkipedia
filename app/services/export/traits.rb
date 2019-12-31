@@ -1,14 +1,14 @@
 module Export
   class Traits < ApplicationService
-    def initialize(observations=nil)
+    def initialize(observations = nil)
       @observations = observations || Observation.published
     end
 
     def call
       CSV.generate do |csv|
-        csv << %w{
-reference_name reference_doi species_superorder species_name marine_province location_name lat long date sex trait_class trait_name standard_name method_name model_name value value_type precision precision_type precision_upper sample_size dubious validated validation_type notes contributor_id depth 
-        }
+        csv << %w[
+          reference_name reference_doi species_superorder species_name marine_province location_name lat long date sex trait_class trait_name standard_name method_name model_name value value_type precision precision_type precision_upper sample_size dubious validated validation_type notes contributor_id depth
+        ]
 
         @observations.each do |observation|
           observation.measurements.each do |measurement|

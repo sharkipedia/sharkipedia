@@ -4,8 +4,8 @@ module Xlsx
 
     Result = Struct.new(:type, :valid, :messages)
 
-    TRAIT_TEMPLATE = 'docs/SharkTraits-Template.xlsx'
-    TREND_TEMPLATE = 'docs/SharkTrends-Template.xlsx'
+    TRAIT_TEMPLATE = "docs/SharkTraits-Template.xlsx"
+    TREND_TEMPLATE = "docs/SharkTrends-Template.xlsx"
 
     def initialize(file_path)
       @messages = []
@@ -44,7 +44,7 @@ module Xlsx
         end
       end
 
-      return Result.new @type, @valid, @messages
+      Result.new @type, @valid, @messages
     end
 
     def guess_type
@@ -64,8 +64,8 @@ module Xlsx
         @messages << "Document is probably 'Traits' dataset."
       else
         @type = :invalid
-        @messages << 'Document type could not be detected.'
-        @messages << 'Validation failed. The document can\'t be imported.'
+        @messages << "Document type could not be detected."
+        @messages << "Validation failed. The document can't be imported."
         @valid = false
       end
     end
@@ -76,7 +76,7 @@ module Xlsx
                    @trait
                  when :trends
                    @trend
-                 end
+      end
 
       if @xlsx.headers == template.headers
         @messages << "Data-Sheet column headers are valid."
@@ -88,29 +88,29 @@ module Xlsx
     end
 
     def validate_duplicate row, idx
-      name = (row['resource_name'] || row['AuthorYear']).try(:strip)
+      name = (row["resource_name"] || row["AuthorYear"]).try(:strip)
       return if name.blank? # this kind of error is handled later
 
-      references = [name, row['secondary_resource_name']]
+      references = [name, row["secondary_resource_name"]]
       references.reject! { |name| name.blank? }
-      referenced_references = references.map do |name, doi|
+      referenced_references = references.map { |name, doi|
         Reference.find_by name: name
-      end.reject! { |res| res.blank? }
+      }.reject! { |res| res.blank? }
 
       return if referenced_references.blank? || referenced_references.first.observations.count == 0
 
       case type
       when :traits
         # this is c&p/hacky from import_xlsx.rb
-        species = Species.find_by name: row['species_name']
-        species ||= Species.find_by edge_scientific_name: row['species_name']
+        species = Species.find_by name: row["species_name"]
+        species ||= Species.find_by edge_scientific_name: row["species_name"]
         return unless species
 
-        marine_province = LonghurstProvince.find_by name: row['marine_province']
+        marine_province = LonghurstProvince.find_by name: row["marine_province"]
 
-        location_name = row['location_name']
-        location_lat  = row['lat']
-        location_long = row['long']
+        location_name = row["location_name"]
+        location_lat = row["lat"]
+        location_long = row["long"]
 
         # TODO: this should be a separate check
         if location_name.blank? && location_lat.blank? && location_long.blank?
@@ -124,57 +124,57 @@ module Xlsx
 
         return unless location
 
-        date = row['date']
-        contributor_id = row['contributor_id']
-        hidden = row['hidden']
-        depth = row['depth']
+        date = row["date"]
+        contributor_id = row["contributor_id"]
+        hidden = row["hidden"]
+        depth = row["depth"]
 
         referenced_references.each do |reference|
           observations = reference.observations.where species: species,
-            longhurst_province: marine_province,
-            location: location,
-            date: date,
-            hidden: hidden,
-            contributor_id: contributor_id,
-            depth: depth
+                                                      longhurst_province: marine_province,
+                                                      location: location,
+                                                      date: date,
+                                                      hidden: hidden,
+                                                      contributor_id: contributor_id,
+                                                      depth: depth
 
           unless observations.blank?
             @messages << "Row #{idx + 2}: WARNING: This observation is already present in database (Observation IDs: #{observations.map(&:id)})."
 
             observations.each do |observation|
-              sex = SexType.find_by name: row['sex']
-              trait_class = TraitClass.find_by name: row['trait_class']
-              trait = Trait.find_by name: row['trait_name']
-              standard = Standard.find_by name: row['standard_name']
-              measurement_method = MeasurementMethod.find_by name: row['method_name']
-              measurement_model = MeasurementModel.find_by name: row['model_name']
-              value = row['value']
-              value_type = ValueType.find_by name: row['value_type']
-              precision = row['precision']
-              precision_type = PrecisionType.find_by name: row['precision_type']
-              precision_upper = row['precision_upper']
-              sample_size = row['sample_size']
-              dubious = row['dubious']
-              validated = row['validated']
-              validation_type = row['validation_type']
-              notes = row['notes']
+              sex = SexType.find_by name: row["sex"]
+              trait_class = TraitClass.find_by name: row["trait_class"]
+              trait = Trait.find_by name: row["trait_name"]
+              standard = Standard.find_by name: row["standard_name"]
+              measurement_method = MeasurementMethod.find_by name: row["method_name"]
+              measurement_model = MeasurementModel.find_by name: row["model_name"]
+              value = row["value"]
+              value_type = ValueType.find_by name: row["value_type"]
+              precision = row["precision"]
+              precision_type = PrecisionType.find_by name: row["precision_type"]
+              precision_upper = row["precision_upper"]
+              sample_size = row["sample_size"]
+              dubious = row["dubious"]
+              validated = row["validated"]
+              validation_type = row["validation_type"]
+              notes = row["notes"]
 
               measurements = observation.measurements.where sex_type: sex,
-                trait_class: trait_class,
-                trait: trait,
-                standard: standard,
-                measurement_method: measurement_method,
-                measurement_model: measurement_model,
-                value: value,
-                value_type: value_type,
-                precision: precision,
-                precision_type: precision_type,
-                precision_upper: precision_upper,
-                sample_size: sample_size,
-                dubious: dubious,
-                validated: validated,
-                validation_type: validation_type,
-                notes: notes
+                                                            trait_class: trait_class,
+                                                            trait: trait,
+                                                            standard: standard,
+                                                            measurement_method: measurement_method,
+                                                            measurement_model: measurement_model,
+                                                            value: value,
+                                                            value_type: value_type,
+                                                            precision: precision,
+                                                            precision_type: precision_type,
+                                                            precision_upper: precision_upper,
+                                                            sample_size: sample_size,
+                                                            dubious: dubious,
+                                                            validated: validated,
+                                                            validation_type: validation_type,
+                                                            notes: notes
 
               unless measurements.blank?
                 @valid = false
@@ -183,33 +183,35 @@ module Xlsx
             end
           end
         end
-
-      when :trends
+        # when :trends
         # TODO / XXX: trend template is going to change, so no point in doing
         # this right now.
       end
     end
 
     def validate_references row, idx
-      name = (row['resource_name'] || row['AuthorYear']).try(:strip)
+      name = (row["resource_name"] || row["AuthorYear"]).try(:strip)
       if name.blank?
         @valid = false
-        field = type == :traits ? 'resource_name' : 'AuthorYear'
+        field = type == :traits ? "resource_name" : "AuthorYear"
         @messages << "Row #{idx + 2}: No #{field} specified."
       end
 
-      if reference = Reference.find_by(name: name)
+      reference = Reference.find_by(name: name)
+      if reference
         if reference.observations.count > 0
-          @messages << "Row #{idx + 2}: WARNING: Reference #{name} already has observations in the database (Observation IDs: #{reference.observations.map(&:id)})"
+          @messages << "Row #{idx + 2}: WARNING: Reference #{name} already " \
+                       "has observations in the database (Observation IDs: " \
+                       "#{reference.observations.map(&:id)})"
         end
 
         return
       end
 
       reference = Reference.new name: name,
-        data_source: row['DataSource'].try(:strip),
-        doi: (row['resource_doi'] || row['doi']).try(:strip),
-        year: row['SourceYear']
+                                data_source: row["DataSource"].try(:strip),
+                                doi: (row["resource_doi"] || row["doi"]).try(:strip),
+                                year: row["SourceYear"]
 
       unless reference.valid?
         @valid = false
@@ -221,7 +223,7 @@ module Xlsx
     end
 
     def validate_species row, idx
-      species_name = (row['species_name'] || row['Species name']).try(:strip)
+      species_name = (row["species_name"] || row["Species name"]).try(:strip)
       if species_name.blank?
         @valid = false
         @messages << "Row #{idx + 2}: No species specified."
@@ -238,29 +240,29 @@ module Xlsx
     def validate_sex row, idx
       return if type == :trends
 
-      validate SexType, 'sex', row, idx
+      validate SexType, "sex", row, idx
     end
 
     def validate_trait row, idx
       return if type == :trends
 
-      validate TraitClass, 'trait_class', row, idx
-      validate Trait, 'trait_name', row, idx
+      validate TraitClass, "trait_class", row, idx
+      validate Trait, "trait_name", row, idx
     end
 
     def validate_standard row, idx
       case type
       when :traits
-        validate Standard, 'standard_name', row, idx
+        validate ::Standard, "standard_name", row, idx
       when :trends
-        validate Standard, 'Units', row, idx
+        validate ::Standard, "Units", row, idx
       end
     end
 
     def validate_value row, idx
       return if type == :trends
 
-      value = row['value']
+      value = row["value"]
       if value.blank?
         @valid = false
         @messages << "Row #{idx + 2}: No value specified."

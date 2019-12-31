@@ -19,7 +19,7 @@ module Xlsx
     def data_sheet
       return @sheet unless @sheet.blank?
 
-      title = xlsx.sheets.select { |s| s =~ /data/i }.first
+      title = xlsx.sheets.find { |s| s =~ /data/i }
       sheet = xlsx.sheet title
       parsed = sheet.parse(headers: true)
       parsed.shift # remove the header row

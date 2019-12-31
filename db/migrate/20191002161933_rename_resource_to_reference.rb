@@ -7,7 +7,7 @@ class RenameResourceToReference < ActiveRecord::Migration[6.0]
     rename_table :observations_resources, :observations_references
     rename_column :observations_references, :resource_id, :reference_id
     rename_column :trends, :resource_id, :reference_id
-    add_index :observations_references, [:observation_id, :reference_id], name: 'index_obser_refs_on_observation_id_and_reference_id'
-    add_index :observations_references, [:reference_id, :observation_id], name: 'index_obser_refs_on_reference_id_and_observation_id'
+    add_index :observations_references, [:observation_id, :reference_id], name: "index_obser_refs_on_observation_id_and_reference_id"
+    add_index :observations_references, [:reference_id, :observation_id], name: "index_obser_refs_on_reference_id_and_observation_id"
   end
 end

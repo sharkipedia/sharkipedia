@@ -24,10 +24,10 @@ class ReferencesController < PreAuthController
 
   def index
     references = if params[:all]
-                Reference.all
-              else
-                Reference.joins(:observations).order(:name).distinct
-              end
+      Reference.all
+    else
+      Reference.joins(:observations).order(:name).distinct
+    end
     @pagy, @references = pagy(references)
   end
 
@@ -36,12 +36,12 @@ class ReferencesController < PreAuthController
       format.html do
         @reference = Reference.includes(observations: [
           :species,
-          measurements: [:standard, :value_type, :location, :trait]
+          measurements: [:standard, :value_type, :location, :trait],
         ],
-        trends: [
-          :species, :location, :standard,
-          :trend_observations
-        ]).find params[:id]
+                                        trends: [
+                                          :species, :location, :standard,
+                                          :trend_observations,
+                                        ]).find params[:id]
         @observations = @reference.observations
         @trends = @reference.trends
       end
@@ -56,7 +56,7 @@ class ReferencesController < PreAuthController
 
   def reference_params
     params.require(:reference).permit(:name, :doi, :data_source, :year,
-                                     :suffix, :author_year, :reference,
-                                     :file_public, :reference_file)
+      :suffix, :author_year, :reference,
+      :file_public, :reference_file)
   end
 end

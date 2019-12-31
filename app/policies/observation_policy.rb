@@ -21,7 +21,7 @@ class ObservationPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      if user && user.admin?
+      if user&.admin?
         Observation.includes(:species).all
       else
         Observation.published.includes(:species)

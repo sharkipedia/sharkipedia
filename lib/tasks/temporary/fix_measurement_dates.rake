@@ -12,15 +12,14 @@ namespace :measurements do
     url = Rails.application.routes.url_helpers.rails_blob_url import.xlsx_file
 
     data_sheet = Roo::Spreadsheet.open(url).sheet("Data Entry")
-    parsed     = data_sheet.parse(headers: true)
+    parsed = data_sheet.parse(headers: true)
 
     parsed.shift # remove the header row
-    observations = parsed.group_by { |row| row['resource_name'] }
-
+    observations = parsed.group_by { |row| row["resource_name"] }
 
     observations_to_change = []
     observations.each do |observation|
-      next if observation[1].map { |m| m['date'] }.uniq.count == 1
+      next if observation[1].map { |m| m["date"] }.uniq.count == 1
 
       observations_to_change << observation
     end
@@ -30,20 +29,20 @@ namespace :measurements do
     puts
 
     observations_to_change.each do |ref, values|
-      reference   = Reference.find_by name: ref
+      reference = Reference.find_by name: ref
       observation = reference.observations.first
 
       values.each do |row|
-        trait    = Trait.find_by    name: row['trait_name']
-        sex      = SexType.find_by  name: row['sex']
+        trait = Trait.find_by name: row["trait_name"]
+        sex = SexType.find_by name: row["sex"]
 
-        measurement = observation.measurements.where value: row['value'],
-          trait: trait, sex_type: sex, sample_size: row['sample_size'],
-          notes: row['notes']
+        measurement = observation.measurements.where value: row["value"],
+                                                     trait: trait, sex_type: sex, sample_size: row["sample_size"],
+                                                     notes: row["notes"]
 
         measurement = measurement.first
 
-        measurement.update date: row['date']
+        measurement.update date: row["date"]
 
         print "."
       end

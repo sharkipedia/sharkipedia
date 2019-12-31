@@ -27,19 +27,43 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - name: Set up RVM
-      run: |
-        curl -sSL https://get.rvm.io | bash
-
-    - name: Set up Ruby from .ruby-version
-      run: |
-        source $HOME/.rvm/scripts/rvm
-        rvm install $(cat .ruby-version) --binary
-        rvm --default use $(cat .ruby-version)
-
     - name: Install PostgreSQL 11 client
       run: |
         sudo apt-get -yqq install libpq-dev
+
+    - name: Cache RVM, Ruby and Bundler
+      id: ruby-cache
+      uses: actions/cache@v1
+      with:
+        path: ~/.rvm
+        key: ${{ runner.os }}-ruby-${{ hashFiles('.ruby-version') }}
+        restore-keys: |
+          ${{ runner.os }}-build-${{ env.cache-name }}-
+          ${{ runner.os }}-build-
+          ${{ runner.os }}-
+
+    - name: Set up Ruby from .ruby-version
+      if: steps.ruby-cache.outputs.cache-hit != 'true'
+      run: |
+        curl -sSL https://get.rvm.io | bash
+        source $HOME/.rvm/scripts/rvm
+        rvm install $(cat .ruby-version) --binary
+        rvm --default use $(cat .ruby-version)
+        gem install bundler
+
+    - name: Cache gems
+      uses: actions/cache@v1
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gem-
+
+    - name: Bundle Install
+      run: |
+        source $HOME/.rvm/scripts/rvm
+        bundle config path vendor/bundle
+        bundle install --jobs 4 --retry 3
 
     - name: Build App
       env:
@@ -48,8 +72,6 @@ jobs:
         RAILS_ENV: test
       run: |
         source $HOME/.rvm/scripts/rvm
-        gem install bundler
-        bundle install --jobs 4 --retry 3
         bin/rails db:setup
 
     - name: Run Tests

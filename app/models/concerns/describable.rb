@@ -3,7 +3,7 @@ module Describable
 
   included do
     def name_with_description
-      "#{name}#{ description.blank? ? '' : ' - ' }#{description}"
+      "#{name}#{description.blank? ? "" : " - "}#{description}"
     end
   end
 end

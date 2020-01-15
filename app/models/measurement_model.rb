@@ -9,4 +9,8 @@ class MeasurementModel < ApplicationRecord
                                        prefix: true,
                                      },
                                    }
+
+  def name_with_description
+    "#{name}#{ description.blank? ? '' : ' - ' }#{description}"
+  end
 end

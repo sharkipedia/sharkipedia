@@ -173,9 +173,10 @@
 
 <script type="text/javascript">
 
-  $('fieldset.measurement select.independent').select2({ selectOnClose: true });
+  $('fieldset.measurement select.independent').select2({ selectOnClose: true, width: 'element' });
 
   $('fieldset.measurement select.trait-class-relative').select2({
+    width: 'element',
     selectOnClose: true,
     matcher: function(params, data) {
       let traitClassId = $(data.element.parentElement).attr("id").match(/(.*_\d+_)/)[0]

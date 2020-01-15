@@ -19,7 +19,7 @@ class SpeciesController < PreAuthController
       trends: [
         :location, :standard, :trend_observations, :reference,
       ]
-    ).find params[:id]
+    ).friendly.find params[:id]
     @grouped_measurements = Measurement.where(observation: @specie.observations)
       .group_by(&:trait_class)
     @trends = @specie.trends

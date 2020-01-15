@@ -1,4 +1,6 @@
 class MeasurementModel < ApplicationRecord
+  include Describable
+
   belongs_to :trait_class
   validates :name, presence: true
 
@@ -9,8 +11,4 @@ class MeasurementModel < ApplicationRecord
                                        prefix: true,
                                      },
                                    }
-
-  def name_with_description
-    "#{name}#{ description.blank? ? '' : ' - ' }#{description}"
-  end
 end

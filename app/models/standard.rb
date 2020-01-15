@@ -1,4 +1,6 @@
 class Standard < ApplicationRecord
+  include Describable
+
   belongs_to :trait_class, optional: true
   validates :name, presence: true
 
@@ -9,8 +11,4 @@ class Standard < ApplicationRecord
                                        prefix: true,
                                      },
                                    }
-
-  def name_with_description
-    "#{name}#{ description.blank? ? '' : ' - ' }#{description}"
-  end
 end

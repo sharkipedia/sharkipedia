@@ -6,13 +6,10 @@ class Trait < ApplicationRecord
                                        prefix: true,
                                      },
                                    }
+  include Describable
 
   belongs_to :trait_class
   validates :name, presence: true
 
   has_many :measurements
-
-  def name_with_description
-    "#{name}#{ description.blank? ? '' : ' - ' }#{description}"
-  end
 end

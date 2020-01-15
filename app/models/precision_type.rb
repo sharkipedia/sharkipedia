@@ -1,7 +1,5 @@
 class PrecisionType < ApplicationRecord
-  validates :name, presence: true, uniqueness: true
+  include Describable
 
-  def name_with_description
-    "#{name}#{ description.blank? ? '' : ' - ' }#{description}"
-  end
+  validates :name, presence: true, uniqueness: true
 end

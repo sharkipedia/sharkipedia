@@ -16,6 +16,7 @@
             <i class="fas fa-exclamation"></i>
           </span>
         </p>
+        <p class="help"> The class of trait measured (e.g. Length, Growth, Demography). </p>
       </div>
 
       <div class="field">
@@ -26,6 +27,7 @@
             <i class="fas fa-exclamation"></i>
           </span>
         </p>
+        <p class="help"> The trait measured. NOTE: choose trait class first to see available choices.</p>
       </div>
 
       <div class="field">
@@ -36,6 +38,7 @@
             <i class="fas fa-exclamation"></i>
           </span>
         </p>
+        <p class="help"> The sex assocaited with specific measurement (e.g. female, male, pooled).</p>
       </div>
 
       <div class="field">
@@ -46,16 +49,19 @@
             <i class="fas fa-exclamation"></i>
           </span>
         </p>
+        <p class="help"> The units of the measurement (e.g. kg, cm TL, years).</p>
       </div>
 
       <div class="field">
         <%= f.label :measurement_method, class: 'label' %>
         <%= f.grouped_collection_select(:measurement_method_id, @trait_classes, :measurement_methods, :name, :id, :name_with_description, {:prompt => 'Select Measurement Method'}, style: 'width: 100%', class: 'trait-class-relative') %>
+        <p class="help"> The method used to generate the trait measurement. NOTE: choose trait class first to see available choices</p>
       </div>
 
       <div class="field">
         <%= f.label :measurement_model, class: 'label' %>
         <%= f.grouped_collection_select(:measurement_model_id, @trait_classes, :measurement_models, :name, :id, :name_with_description, {:prompt => 'Select Measurement Model'}, style: 'width: 100%', class: 'trait-class-relative') %>
+        <p class="help"> The model used to genreate the trait measurement (e.g. 3 parameter von Bertalanffy growth function). NOTE: choose trait class first to see available choices</p>
       </div>
 
       <%= f.fields_for :location do |fl| %>
@@ -64,6 +70,7 @@
           <div class="control">
             <%= fl.text_field :name, class: 'input' %><br />
           </div>
+          <p class="help"> The location from which samples/data were collected or traits are attributed (e.g. Southern California Bight, Western North Atlantic).</p>
         </div>
 
         <div class="columns">
@@ -74,6 +81,7 @@
                 <%= fl.text_field :lat, class: 'input' %><br />
               </div>
             </div>
+            <p class="help"> If given the latitude of sampling location in decimal degrees (e.g. 40.446<sup>o</sup>N as 40.446 N).</p>
           </div>
 
           <div class="column">
@@ -84,6 +92,7 @@
               </div>
             </div>
           </div>
+          <p class="help"> If given the longitude of smapling location in decimal degrees (e.g. 79.982<sup>o</sup>W as 79.982W).</p>
         </div>
       <% end %>
 
@@ -91,12 +100,14 @@
         <%= f.label :longhurst_province, class: 'label' %>
         <%= f.collection_select(:longhurst_province_id, @longhurst_provinces, :id, :name, {:prompt => 'Select Longhurst Province'}, style: 'width: 100%', class: 'independent') %>
       </div>
+      <p class="help"> The marine longhurst province where samples/data were collected. See <a href="http://www.marineregions.org/maps.php?album=3264&pic=64934"> MarineRegions.org</a> for the corresponding regions and codes.</p>
     </div>
 
     <div class="column">
       <div class="field">
         <%= f.label :value_type, class: 'label' %>
         <%= f.collection_select(:value_type_id, @value_types, :id, :name_with_description, {:prompt => 'Select Value Type'}, style: 'width: 100%', class: 'independent') %>
+        <p class="help"> The type of value the measurement represents (e.g. mean, minimum, maximum, range).</p>
       </div>
 
       <div class="field">
@@ -107,11 +118,13 @@
             <i class="fas fa-exclamation"></i>
           </span>
         </p>
+        <p class="help"> The measurement value.</p>
       </div>
 
       <div class="field">
         <%= f.label :precision_type, class: 'label' %>
         <%= f.collection_select(:precision_type_id, @precision_types, :id, :name_with_description, {:prompt => 'Select Precision Type'}, style: 'width: 100%', class: 'independent') %>
+        <p class="help"> If provided, the type of precision associated with the measurement (e.g. standard deviation, condidence interval, range).</p>
       </div>
 
       <div class="columns">
@@ -120,6 +133,7 @@
             <%= f.label :precision, class: 'label' %>
             <%= f.text_field :precision, class: 'input' %><br />
           </div>
+          <p class="help"> The value of precision. NOTE for range this will be the lower bound.</p>
         </div>
 
         <div class="column">
@@ -128,11 +142,13 @@
             <%= f.text_field :precision_upper, class: 'input' %><br />
           </div>
         </div>
+        <p class="help"> The upper limit of precision. NOTE for range this will be the upper bound.</p>
       </div>
 
       <div class="field">
         <%= f.label :sample_size, class: 'label' %>
         <%= f.text_field :sample_size, class: 'input' %><br />
+        <p class="help"> The sample size used to generate the measurement value (n).</p>
       </div>
 
       <div class="columns">
@@ -147,6 +163,7 @@
             <%= f.label :validated, class: 'label' %>
             <%= f.check_box :validated %>
           </div>
+          <p class="help"> Logical (yes/no) whether the measurement has been validated (e.g. age and growth parameter estimates using known age individuals).</p>
         </div>
 
         <div class="column">
@@ -155,6 +172,7 @@
             <%= f.check_box :dubious %>
           </div>
         </div>
+        <p class="help"> Logical (yes/no) whether measurement value is dubious. If yes then rationale must be provided in notes (e.g. low sampl size, missing size range).</p>
       </div>
 
       <div class="field">

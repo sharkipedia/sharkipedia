@@ -107,4 +107,6 @@ Rails.application.configure do
   config.action_mailer.default_url_options = default_url
   config.action_controller.default_url_options = default_url
   Rails.application.routes.default_url_options = default_url
+
+  config.lograge.enabled = true
 end

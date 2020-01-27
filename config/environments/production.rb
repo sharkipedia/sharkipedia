@@ -109,4 +109,5 @@ Rails.application.configure do
   Rails.application.routes.default_url_options = default_url
 
   config.lograge.enabled = true
+  config.assets.quiet = true
 end

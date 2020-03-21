@@ -36,11 +36,11 @@ class ReferencesController < PreAuthController
       format.html do
         @reference = Reference.includes(observations: [
           :species,
-          measurements: [:standard, :value_type, :location, :trait],
+          measurements: [:standard, :value_type, :location, :trait]
         ],
                                         trends: [
                                           :species, :location, :standard,
-                                          :trend_observations,
+                                          :trend_observations
                                         ]).find params[:id]
         @observations = @reference.observations
         @trends = @reference.trends

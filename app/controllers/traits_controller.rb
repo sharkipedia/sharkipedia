@@ -11,8 +11,8 @@ class TraitsController < PreAuthController
       :value_type,
       :location,
       observation: [
-        :species,
-      ],
+        :species
+      ]
     ]).find params[:id]
   end
 end

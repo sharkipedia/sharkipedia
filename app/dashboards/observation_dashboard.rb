@@ -18,7 +18,7 @@ class ObservationDashboard < Administrate::BaseDashboard
     hidden: Field::Boolean,
     depth: Field::String,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -30,7 +30,7 @@ class ObservationDashboard < Administrate::BaseDashboard
     :contributor_id,
     :references,
     :species,
-    :measurements,
+    :measurements
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -46,7 +46,7 @@ class ObservationDashboard < Administrate::BaseDashboard
     :access,
     :hidden,
     :created_at,
-    :updated_at,
+    :updated_at
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -60,7 +60,7 @@ class ObservationDashboard < Administrate::BaseDashboard
     :measurements,
     :access,
     :hidden,
-    :depth,
+    :depth
   ].freeze
 
   # Overwrite this method to customize how observations are displayed

@@ -95,14 +95,14 @@ Rails.application.configure do
     user_name: ENV["SES_SMTP_USERNAME"] || Rails.application.credentials.dig(:ses, :smtp_username),
     password: ENV["SES_SMTP_PASSWORD"] || Rails.application.credentials.dig(:ses, :smtp_password),
     authentication: :login,
-    enable_starttls_auto: true,
+    enable_starttls_auto: true
   }
 
   host = ENV["DEFAULT_URL_HOST"] ||
     "#{ENV.fetch("HEROKU_APP_NAME")}.herokuapp.com"
   default_url = {
     protocol: "https",
-    host: host,
+    host: host
   }
   config.action_mailer.default_url_options = default_url
   config.action_controller.default_url_options = default_url

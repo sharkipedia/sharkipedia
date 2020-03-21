@@ -6,7 +6,7 @@ class DataExportController < PreAuthController
           policy_scope(Observation).includes(
             :references,
             {
-              species: :species_superorder,
+              species: :species_superorder
             },
             {
               measurements: [
@@ -14,11 +14,11 @@ class DataExportController < PreAuthController
                 :measurement_model, :measurement_method,
                 :value_type, :precision_type,
                 :validation_type, :trait, :trait_class,
-                :longhurst_province,
-              ],
+                :longhurst_province
+              ]
             }
           ),
-          Export::Traits,
+          Export::Traits
         ]
       else
         [Trend.all, Export::Trends]

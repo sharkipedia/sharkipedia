@@ -35,7 +35,7 @@ module Export
               trend.taxonomic_notes,
               trend.reference.name,
               trend.reference.data_source,
-              trend.reference.doi,
+              trend.reference.doi
             ]
 
             data += trend.trend_observations.pluck(:year, :value).sort.to_h
@@ -59,7 +59,7 @@ module Export
               trend.depth,
               trend.model,
               trend.figure_name,
-              trend.figure_data,
+              trend.figure_data
             ]
             csv << data
           end

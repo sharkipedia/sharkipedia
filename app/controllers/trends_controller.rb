@@ -107,7 +107,7 @@ class TrendsController < PreAuthController
       :standard_id,
       :data_type_id,
       :sampling_method_id,
-      trend_observations_attributes: [:id, :year, :value, :_destroy],
+      trend_observations_attributes: [:id, :year, :value, :_destroy]
     )
   end
 end

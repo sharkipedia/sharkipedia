@@ -19,7 +19,7 @@ class ImportDashboard < Administrate::BaseDashboard
     updated_at: Field::DateTime,
     aasm_state: Field::String,
     xlsx_valid: Field::Boolean,
-    reason: Field::Text,
+    reason: Field::Text
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -30,7 +30,7 @@ class ImportDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :title,
     :user,
-    :approved_by,
+    :approved_by
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -47,7 +47,7 @@ class ImportDashboard < Administrate::BaseDashboard
     :updated_at,
     :aasm_state,
     :xlsx_valid,
-    :reason,
+    :reason
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -62,7 +62,7 @@ class ImportDashboard < Administrate::BaseDashboard
     :log,
     :aasm_state,
     :xlsx_valid,
-    :reason,
+    :reason
   ].freeze
 
   # Overwrite this method to customize how imports are displayed

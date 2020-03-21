@@ -114,7 +114,7 @@ class ObservationsController < ApplicationController
                                 :notes,
                                 :validation_type_id,
                                 :longhurst_province_id,
-                                location_attributes: [:id, :name, :lat, :lon],],
+                                location_attributes: [:id, :name, :lat, :lon]]
     )
   end
 end

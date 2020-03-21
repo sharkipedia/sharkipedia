@@ -13,7 +13,7 @@ class StandardDashboard < Administrate::BaseDashboard
     name: Field::String,
     description: Field::Text,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -24,7 +24,7 @@ class StandardDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :trait_class,
     :name,
-    :description,
+    :description
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -35,7 +35,7 @@ class StandardDashboard < Administrate::BaseDashboard
     :name,
     :description,
     :created_at,
-    :updated_at,
+    :updated_at
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -44,7 +44,7 @@ class StandardDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = [
     :trait_class,
     :name,
-    :description,
+    :description
   ].freeze
 
   # Overwrite this method to customize how standards are displayed

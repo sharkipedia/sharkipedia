@@ -13,7 +13,7 @@ class SpeciesSubclassDashboard < Administrate::BaseDashboard
     species_superorders: Field::HasMany,
     species: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -24,7 +24,7 @@ class SpeciesSubclassDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :name,
     :species,
-    :species_superorders,
+    :species_superorders
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -35,14 +35,14 @@ class SpeciesSubclassDashboard < Administrate::BaseDashboard
     :name,
     :species_superorders,
     :created_at,
-    :updated_at,
+    :updated_at
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
-    :name,
+    :name
   ].freeze
 
   # Overwrite this method to customize how species subclasses are displayed

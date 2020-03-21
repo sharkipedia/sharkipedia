@@ -13,7 +13,7 @@ class SpeciesOrderDashboard < Administrate::BaseDashboard
     id: Field::Number,
     name: Field::String,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -24,7 +24,7 @@ class SpeciesOrderDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :name,
     :species_superorder,
-    :species_subclass,
+    :species_subclass
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -34,7 +34,7 @@ class SpeciesOrderDashboard < Administrate::BaseDashboard
     :species_superorder,
     :species_subclass,
     :created_at,
-    :updated_at,
+    :updated_at
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -43,7 +43,7 @@ class SpeciesOrderDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = [
     :name,
     :species_superorder,
-    :species_subclass,
+    :species_subclass
   ].freeze
 
   # Overwrite this method to customize how species orders are displayed

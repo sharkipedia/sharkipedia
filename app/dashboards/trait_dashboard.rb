@@ -14,7 +14,7 @@ class TraitDashboard < Administrate::BaseDashboard
     description: Field::Text,
     measurements: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -26,7 +26,7 @@ class TraitDashboard < Administrate::BaseDashboard
     :trait_class,
     :name,
     :description,
-    :measurements,
+    :measurements
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -38,7 +38,7 @@ class TraitDashboard < Administrate::BaseDashboard
     :description,
     :measurements,
     :created_at,
-    :updated_at,
+    :updated_at
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -47,7 +47,7 @@ class TraitDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = [
     :trait_class,
     :name,
-    :description,
+    :description
   ].freeze
 
   # Overwrite this method to customize how traits are displayed

@@ -19,7 +19,7 @@ class SpeciesDashboard < Administrate::BaseDashboard
     species_data_type: Field::BelongsTo,
     observations: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -31,7 +31,7 @@ class SpeciesDashboard < Administrate::BaseDashboard
     :name,
     :edge_scientific_name,
     :species_superorder,
-    :observations,
+    :observations
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -47,7 +47,7 @@ class SpeciesDashboard < Administrate::BaseDashboard
     :iucn_code,
     :observations,
     :created_at,
-    :updated_at,
+    :updated_at
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -62,7 +62,7 @@ class SpeciesDashboard < Administrate::BaseDashboard
     :species_family,
     :species_data_type,
     :iucn_code,
-    :species_superorder,
+    :species_superorder
   ].freeze
 
   # Overwrite this method to customize how species are displayed

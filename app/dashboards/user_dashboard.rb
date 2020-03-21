@@ -21,7 +21,7 @@ class UserDashboard < Administrate::BaseDashboard
     confirmation_sent_at: Field::DateTime,
     unconfirmed_email: Field::String,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -32,7 +32,7 @@ class UserDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :name,
     :email,
-    :user_level,
+    :user_level
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -48,7 +48,7 @@ class UserDashboard < Administrate::BaseDashboard
     :confirmation_sent_at,
     :unconfirmed_email,
     :created_at,
-    :updated_at,
+    :updated_at
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -57,7 +57,7 @@ class UserDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = [
     :name,
     :email,
-    :user_level,
+    :user_level
   ].freeze
 
   # Overwrite this method to customize how users are displayed

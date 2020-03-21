@@ -13,7 +13,7 @@ class LonghurstProvinceDashboard < Administrate::BaseDashboard
     code: Field::String,
     observations: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -24,7 +24,7 @@ class LonghurstProvinceDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :name,
     :code,
-    :observations,
+    :observations
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -35,7 +35,7 @@ class LonghurstProvinceDashboard < Administrate::BaseDashboard
     :code,
     :observations,
     :created_at,
-    :updated_at,
+    :updated_at
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -43,7 +43,7 @@ class LonghurstProvinceDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
     :name,
-    :code,
+    :code
   ].freeze
 
   # Overwrite this method to customize how longhurst provinces are displayed

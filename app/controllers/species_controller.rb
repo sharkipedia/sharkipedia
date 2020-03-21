@@ -14,10 +14,10 @@ class SpeciesController < PreAuthController
   def show
     @specie = Species.includes(
       observations: [
-        measurements: [:standard, :value_type, :location, :trait, :sex_type, :observation],
+        measurements: [:standard, :value_type, :location, :trait, :sex_type, :observation]
       ],
       trends: [
-        :location, :standard, :trend_observations, :reference,
+        :location, :standard, :trend_observations, :reference
       ]
     ).friendly.find params[:id]
     @grouped_measurements = Measurement.where(observation: @specie.observations)

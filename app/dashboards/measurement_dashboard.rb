@@ -29,7 +29,7 @@ class MeasurementDashboard < Administrate::BaseDashboard
     validated: Field::Number,
     notes: Field::Text,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -41,7 +41,7 @@ class MeasurementDashboard < Administrate::BaseDashboard
     :observation,
     :sex_type,
     :trait_class,
-    :trait,
+    :trait
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -68,7 +68,7 @@ class MeasurementDashboard < Administrate::BaseDashboard
     :longhurst_province,
     :location,
     :created_at,
-    :updated_at,
+    :updated_at
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -93,7 +93,7 @@ class MeasurementDashboard < Administrate::BaseDashboard
     :validated,
     :notes,
     :longhurst_province,
-    :location,
+    :location
   ].freeze
 
   # Overwrite this method to customize how measurements are displayed

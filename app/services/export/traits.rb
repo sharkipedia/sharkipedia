@@ -39,7 +39,7 @@ module Export
               measurement.validation_type.try(:name),
               measurement.notes,
               observation.contributor_id,
-              observation.depth,
+              observation.depth
             ]
           end
         end

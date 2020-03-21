@@ -29,7 +29,7 @@ class TrendDashboard < Administrate::BaseDashboard
     figure_name: Field::String,
     figure_data: Field::String,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -40,7 +40,7 @@ class TrendDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :user,
     :species,
-    :location,
+    :location
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -67,7 +67,7 @@ class TrendDashboard < Administrate::BaseDashboard
     :trend_observations,
     :figure_data,
     :created_at,
-    :updated_at,
+    :updated_at
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -91,7 +91,7 @@ class TrendDashboard < Administrate::BaseDashboard
     :depth,
     :model,
     :figure_name,
-    :figure_data,
+    :figure_data
   ].freeze
 
   # Overwrite this method to customize how trends are displayed

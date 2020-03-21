@@ -12,7 +12,7 @@ class SamplingMethodDashboard < Administrate::BaseDashboard
     name: Field::String,
     code: Field::String,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -24,7 +24,7 @@ class SamplingMethodDashboard < Administrate::BaseDashboard
     :id,
     :name,
     :code,
-    :created_at,
+    :created_at
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -34,7 +34,7 @@ class SamplingMethodDashboard < Administrate::BaseDashboard
     :name,
     :code,
     :created_at,
-    :updated_at,
+    :updated_at
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -42,7 +42,7 @@ class SamplingMethodDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
     :name,
-    :code,
+    :code
   ].freeze
 
   # Overwrite this method to customize how sampling methods are displayed

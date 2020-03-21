@@ -4,7 +4,7 @@ class SearchController < PreAuthController
     "species" => Species,
     "trait" => Trait,
     "ocean" => Ocean,
-    "reference" => Reference,
+    "reference" => Reference
   }
 
   def autocomplete

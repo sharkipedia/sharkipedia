@@ -15,7 +15,7 @@ class TraitClassDashboard < Administrate::BaseDashboard
     id: Field::Number,
     name: Field::String,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -28,7 +28,7 @@ class TraitClassDashboard < Administrate::BaseDashboard
     :traits,
     :standards,
     :measurement_methods,
-    :measurement_models,
+    :measurement_models
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -41,7 +41,7 @@ class TraitClassDashboard < Administrate::BaseDashboard
     :id,
     :name,
     :created_at,
-    :updated_at,
+    :updated_at
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -52,7 +52,7 @@ class TraitClassDashboard < Administrate::BaseDashboard
     :standards,
     :measurement_methods,
     :measurement_models,
-    :name,
+    :name
   ].freeze
 
   # Overwrite this method to customize how trait classes are displayed

@@ -7,8 +7,8 @@ class Location < ApplicationRecord
   pg_search_scope :search_by_name, against: [:name],
                                    using: {
                                      tsearch: {
-                                       prefix: true,
-                                     },
+                                       prefix: true
+                                     }
                                    }
 
   def display

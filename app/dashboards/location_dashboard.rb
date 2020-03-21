@@ -15,7 +15,7 @@ class LocationDashboard < Administrate::BaseDashboard
     measurements: Field::HasMany,
     observations: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -28,7 +28,7 @@ class LocationDashboard < Administrate::BaseDashboard
     :lat,
     :lon,
     :observations,
-    :measurements,
+    :measurements
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -41,7 +41,7 @@ class LocationDashboard < Administrate::BaseDashboard
     :observations,
     :measurements,
     :created_at,
-    :updated_at,
+    :updated_at
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -50,7 +50,7 @@ class LocationDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = [
     :name,
     :lat,
-    :lon,
+    :lon
   ].freeze
 
   # Overwrite this method to customize how locations are displayed

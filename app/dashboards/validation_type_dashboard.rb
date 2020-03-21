@@ -12,7 +12,7 @@ class ValidationTypeDashboard < Administrate::BaseDashboard
     name: Field::String,
     description: Field::Text,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -22,7 +22,7 @@ class ValidationTypeDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
     :name,
-    :description,
+    :description
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -32,7 +32,7 @@ class ValidationTypeDashboard < Administrate::BaseDashboard
     :name,
     :description,
     :created_at,
-    :updated_at,
+    :updated_at
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -40,7 +40,7 @@ class ValidationTypeDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
     :name,
-    :description,
+    :description
   ].freeze
 
   # Overwrite this method to customize how validation types are displayed

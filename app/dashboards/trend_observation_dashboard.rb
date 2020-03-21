@@ -13,7 +13,7 @@ class TrendObservationDashboard < Administrate::BaseDashboard
     year: Field::String,
     value: Field::String,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -24,7 +24,7 @@ class TrendObservationDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :trend,
     :year,
-    :value,
+    :value
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -35,7 +35,7 @@ class TrendObservationDashboard < Administrate::BaseDashboard
     :year,
     :value,
     :created_at,
-    :updated_at,
+    :updated_at
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -44,7 +44,7 @@ class TrendObservationDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = [
     :trend,
     :year,
-    :value,
+    :value
   ].freeze
 
   # Overwrite this method to customize how trend observations are displayed

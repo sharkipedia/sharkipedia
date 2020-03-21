@@ -18,7 +18,7 @@ class ReferenceDashboard < Administrate::BaseDashboard
     file_public: Field::Boolean,
     observations: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -30,7 +30,7 @@ class ReferenceDashboard < Administrate::BaseDashboard
     :name,
     :doi,
     :data_source,
-    :observations,
+    :observations
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -44,7 +44,7 @@ class ReferenceDashboard < Administrate::BaseDashboard
     :suffix,
     :reference,
     :file_public,
-    :observations,
+    :observations
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -57,7 +57,7 @@ class ReferenceDashboard < Administrate::BaseDashboard
     :year,
     :suffix,
     :reference,
-    :file_public,
+    :file_public
   ].freeze
 
   # Overwrite this method to customize how references are displayed

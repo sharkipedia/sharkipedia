@@ -27,7 +27,7 @@ gem "jbuilder", "~> 2.9"
 gem "devise", "~> 4.7"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-gem "administrate", "~> 0.12.0"
+gem "administrate", "~> 0.13.0"
 gem "pundit", "~> 2.1"
 
 gem "roo", "~> 2.8.0"

@@ -13,6 +13,7 @@
         <div class="control">
           <%= f.text_field :depth, class: 'input' %><br />
         </div>
+        <p call="help"> Depth of the observation in <code>m</code></p>
       </div>
     </div>
 
@@ -22,6 +23,7 @@
         <div class="control">
           <%= f.check_box :hidden, checked: false %><br />
         </div>
+        <p class="help"> Choice to embargo data. If checked then data will be hidden from main daptabase. Can be released by an administrator.</p>
       </div>
     </div>
   </div>

@@ -146,7 +146,7 @@ GEM
       activesupport (>= 4.2.0)
     i18n (1.8.2)
       concurrent-ruby (~> 1.0)
-    invisible_captcha (1.0.0)
+    invisible_captcha (1.0.1)
       rails (>= 4.2)
     jbuilder (2.9.1)
       activesupport (>= 4.2.0)

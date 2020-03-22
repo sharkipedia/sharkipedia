@@ -39,7 +39,7 @@ gem "aws-sdk-s3", "~> 1.61", require: false
 
 gem "aasm", "~> 5.0", ">= 5.0.1"
 
-gem 'sidekiq', '< 7'
+gem "sidekiq", "< 7"
 gem "redis-namespace", "~> 1.7"
 
 # Use Capistrano for deployment

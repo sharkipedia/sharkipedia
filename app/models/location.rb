@@ -3,7 +3,7 @@ class Location < ApplicationRecord
   has_many :observations, through: :measurements
   has_many :trends
 
-  include PgSearch
+  include PgSearch::Model
   pg_search_scope :search_by_name, against: [:name],
                                    using: {
                                      tsearch: {

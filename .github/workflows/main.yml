@@ -25,43 +25,21 @@ jobs:
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
+    - uses: ruby/setup-ruby@v1
 
     - name: Install PostgreSQL 11 client
       run: |
         sudo apt-get -yqq install libpq-dev
 
-    - name: Cache RVM, Ruby and Bundler
-      id: ruby-cache
-      uses: actions/cache@v1
-      with:
-        path: ~/.rvm
-        key: ${{ runner.os }}-ruby-${{ hashFiles('.ruby-version') }}
-        restore-keys: |
-          ${{ runner.os }}-build-${{ env.cache-name }}-
-          ${{ runner.os }}-build-
-          ${{ runner.os }}-
-
-    - name: Set up Ruby from .ruby-version
-      if: steps.ruby-cache.outputs.cache-hit != 'true'
-      run: |
-        curl -sSL https://get.rvm.io | bash
-        source $HOME/.rvm/scripts/rvm
-        rvm install $(cat .ruby-version) --binary
-        rvm --default use $(cat .ruby-version)
-        gem install bundler
-
-    - name: Cache gems
-      uses: actions/cache@v1
+    - uses: actions/cache@v1
       with:
         path: vendor/bundle
-        key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
+        key: bundle-use-ruby-${{ runner.os }}-${{ hashFiles('.ruby-version') }}-${{ hashFiles('**/Gemfile.lock') }}
         restore-keys: |
-          ${{ runner.os }}-gem-
-
-    - name: Bundle Install
+          bundle-use-ruby-${{ runner.os }}-${{ hashFiles('.ruby-version') }}-
+    - name: bundle install
       run: |
-        source $HOME/.rvm/scripts/rvm
         bundle config path vendor/bundle
         bundle install --jobs 4 --retry 3
 
@@ -71,7 +49,6 @@ jobs:
         PGUSER: postgres
         RAILS_ENV: test
       run: |
-        source $HOME/.rvm/scripts/rvm
         bin/rails db:setup
 
     - name: Run Tests
@@ -81,11 +58,9 @@ jobs:
         RAILS_ENV: test
         SES_SMTP_EMAIL_ADDRESS: test@example.com
       run: |
-        source $HOME/.rvm/scripts/rvm
         bundle exec rails spec
 
     - name: Style Check
       run: |
-        source $HOME/.rvm/scripts/rvm
         gem install standard
         standardrb

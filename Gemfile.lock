@@ -99,7 +99,7 @@ GEM
     bindex (0.8.1)
     bootsnap (1.4.6)
       msgpack (~> 1.0)
-    bugsnag (6.12.2)
+    bugsnag (6.13.0)
       concurrent-ruby (~> 1.0)
     builder (3.2.4)
     byebug (11.0.1)

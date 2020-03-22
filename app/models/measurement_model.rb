@@ -4,7 +4,7 @@ class MeasurementModel < ApplicationRecord
   belongs_to :trait_class
   validates :name, presence: true
 
-  include PgSearch
+  include PgSearch::Model
   pg_search_scope :search_by_name, against: [:name],
                                    using: {
                                      tsearch: {

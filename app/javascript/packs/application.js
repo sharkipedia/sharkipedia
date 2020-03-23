@@ -19,3 +19,4 @@ import 'regenerator-runtime/runtime'
 // const imagePath = (name) => images(name, true)
 
 import '../styles'
+import "@fortawesome/fontawesome-free/js/all";

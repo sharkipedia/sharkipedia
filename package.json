@@ -2,7 +2,8 @@
   "name": "sharkT",
   "private": true,
   "dependencies": {
-    "@rails/webpacker": "5.0.0"
+    "@rails/webpacker": "5.0.0",
+    "bulma": "^0.8.1"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.10.3"

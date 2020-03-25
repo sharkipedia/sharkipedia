@@ -20,9 +20,15 @@ class Trend < ApplicationRecord
   def to_csv
     CSV.generate(headers: true) do |csv|
       csv << %w[year value]
-      trend_observations.order(:year).each do |trend_observation|
-        csv << [trend_observation.year, trend_observation.value]
+      observations_data.each do |data_pair|
+        csv << data_pair
       end
+    end
+  end
+
+  def observations_data
+    trend_observations.map do |trend_observation|
+      [trend_observation.year, trend_observation.value]
     end
   end
 end

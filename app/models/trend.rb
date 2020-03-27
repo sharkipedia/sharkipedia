@@ -31,4 +31,21 @@ class Trend < ApplicationRecord
       [trend_observation.year, trend_observation.value]
     end
   end
+
+  def create_or_update_observations observations
+    incoming_years = observations.map(&:first)
+    existing = trend_observations.map(&:year)
+    to_remove = existing - incoming_years
+
+    trend_observations.where(year: to_remove).destroy_all
+
+    observations.each do |year, value|
+      observation = trend_observations.where(year: year).first
+      if observation
+        observation.update(value: value)
+      else
+        trend_observations.create(year: year, value: value)
+      end
+    end
+  end
 end

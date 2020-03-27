@@ -2,7 +2,6 @@ import React from "react"
 import PropTypes from "prop-types"
 import { Line } from 'react-chartjs-2';
 
-
 class TrendChart extends React.Component {
   render () {
     const years = this.props.observations.map(pair => new Date(pair[0]));

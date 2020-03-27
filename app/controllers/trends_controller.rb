@@ -34,14 +34,20 @@ class TrendsController < PreAuthController
   end
 
   def create
-    location = Location.find_or_create_by name: params[:trend][:location][:name],
-                                          lat: params[:trend][:location][:lat],
-                                          lon: params[:trend][:location][:lon]
+    location_params = params[:trend].delete(:location)
+    location = Location.find_or_create_by name: location_params[:name],
+                                          lat: location_params[:lat],
+                                          lon: location_params[:lon]
+
+    trend_observations = JSON.parse(params[:trend].delete(:trend_observations_attributes))
+
     @trend = current_user.trends.new(trend_params)
     @trend.location = location
+    success = @trend.save
+    @trend.create_or_update_observations(trend_observations)
 
     respond_to do |format|
-      if @trend.save
+      if success
         format.html { redirect_to @trend }
         format.js { redirect_to @trend }
       else
@@ -54,11 +60,15 @@ class TrendsController < PreAuthController
   end
 
   def update
-    location = Location.find_or_create_by name: params[:trend][:location][:name],
-                                          lat: params[:trend][:location][:lat],
-                                          lon: params[:trend][:location][:lon]
+    location_params = params[:trend].delete(:location)
+    location = Location.find_or_create_by name: location_params[:name],
+                                          lat: location_params[:lat],
+                                          lon: location_params[:lon]
 
     @trend.location = location
+
+    trend_observations = JSON.parse(params[:trend].delete(:trend_observations_attributes))
+    @trend.create_or_update_observations(trend_observations)
 
     respond_to do |format|
       if @trend.update(trend_params)
@@ -110,8 +120,7 @@ class TrendsController < PreAuthController
       :ocean_id,
       :standard_id,
       :data_type_id,
-      :sampling_method_id,
-      trend_observations_attributes: [:id, :year, :value, :_destroy]
+      :sampling_method_id
     )
   end
 end

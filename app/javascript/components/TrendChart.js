@@ -5,7 +5,13 @@ import { Line } from 'react-chartjs-2';
 class TrendChart extends React.Component {
   render () {
     const years = this.props.observations.map(pair => new Date(pair[0]));
-    const values = this.props.observations.map(pair => pair[1]);
+    const values = this.props.observations.map(pair => {
+      if (pair[1] == "") {
+        return null;
+      } else {
+        return pair[1];
+      }
+    });
     const colours = values.map((value) => value < 0 ? 'red' : 'yellow');
     const pointRadius = values.map((value) => value < 0 ? '6' : '3');
     const pointStyles = values.map((value) => value < 0 ? 'rectRot' : 'circle');

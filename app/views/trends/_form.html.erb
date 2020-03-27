@@ -134,72 +134,7 @@
     </div>
   </div>
 
-  <h3 class="subtitle is-4 is-spaced"> Observations </h3>
-
-  <div class="columns">
-    <div class="column">
-      <div class="field">
-        <%= f.label :start_year, class: 'label' %>
-        <div class="control">
-          <%= f.text_field :start_year, type: 'number', pattern: '^[0–9]$', class: 'input', min: "1900", step: "1", maxlength: '4' %><br />
-        </div>
-      </div>
-
-      <div class="field">
-        <%= f.label :end_year, class: 'label' %>
-        <div class="control">
-          <%= f.text_field :end_year, type: 'number', pattern: '^[0–9]$', class: 'input', min: "1900", step: "1", maxlength: '4' %><br />
-        </div>
-      </div>
-    </div>
-
-    <div class="column">
-      <div class="field">
-        <%= f.label :no_years, class: 'label' %>
-        <div class="control">
-          <%= f.text_field :no_years, class: 'input', readonly: true, tabindex: '-1', placeholder: 'automatically calculated from start & end year' %><br />
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <h4 class="subtitle is-5 is-spaced"> Values </h4>
-
-  <div class="columns">
-    <div class="column is-one-quarter">
-      <div id="trend-data">
-        <% if @trend.trend_observations.blank? %>
-          <%# The input pairs get added by the javascript after the user has entered start and end years %>
-          <p id="trend-help-msg" class="help">Please enter start and end years.</p>
-        <% else %>
-          <%= f.fields_for :trend_observations, @trend.trend_observations.order(:year) do |ff| %>
-            <div class="field is-horizontal">
-              <div class="field-body">
-                <div class="field">
-                  <div class="control">
-                    <%= ff.text_field :year, class: 'input', readonly: true, tabindex: '-1' %><br />
-                  </div>
-                </div>
-
-                <div class="field">
-                  <div class="control">
-                    <%= ff.text_field :value, class: 'input trend-value', step: "any" %>
-                  </div>
-                </div>
-              </div>
-              <% if ff.object.persisted? %>
-                <%= ff.check_box :_destroy, class: 'is-hidden' %>
-              <% end %>
-            </div>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
-
-    <div class="column">
-      <canvas id="trend-chart" class="is-hidden"></canvas>
-    </div>
-  </div>
+  <%= react_component("TrendDataInput", { start_year: @trend.start_year, end_year: @trend.end_year, no_years: @trend.no_years, values: @trend.observations_data }) %>
 
   <%= f.submit class: 'button is-primary is-pulled-right' %>
 <% end %>

@@ -35,7 +35,7 @@
     <% end %>
     <div class="tab-container">
       <div class="tab-item is-active" data-item="0">
-        <%= render partial: 'chart', locals: { observations: @trend.trend_observations } %>
+        <%= react_component("TrendChart", { observations: @trend.observations_data }) %>
       </div>
 
       <% if @trend.figure.attached? %>
@@ -44,7 +44,7 @@
         </div>
 
         <div class="tab-item" data-item="2">
-          <%= render partial: 'chart', locals: { observations: @trend.trend_observations } %>
+          <%= react_component("TrendChart", { observations: @trend.observations_data }) %>
 
           <%= image_tag @trend.figure %>
         </div>

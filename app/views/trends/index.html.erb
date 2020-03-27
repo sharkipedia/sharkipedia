@@ -6,3 +6,5 @@
 </h1>
 
 <%= render partial: 'trends/list', locals: { trends: @trends, hide_title: true } %>
+
+<%== pagy_bulma_nav(@pagy) %>

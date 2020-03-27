@@ -65,35 +65,4 @@ document.addEventListener("turbolinks:load", function() {
       });
     }
   }
-
-  // imports index
-
-  let gridctr = document.getElementById('gridctr');
-  if (gridctr !== null) {
-    let url = gridctr.dataset.url;
-
-    /* set up async GET request */
-    var req = new XMLHttpRequest();
-    req.open("GET", url, true);
-    req.responseType = "arraybuffer";
-
-    req.onload = function(e) {
-      var data = new Uint8Array(req.response);
-      var workbook = XLSX.read(data, {type:"array"});
-
-      var ws = workbook.Sheets[workbook.SheetNames[0]];
-      var data = XLSX.utils.sheet_to_json(ws, {header:1});
-
-      var grid = canvasDatagrid({
-        parentNode: document.getElementById('gridctr'),
-        editable: false,
-        data: data
-      });
-      grid.style.height = '100%';
-      grid.style.width = '100%';
-    }
-
-    req.send();
-  }
-
 });

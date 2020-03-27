@@ -60,4 +60,4 @@
   <%= link_to @import.xlsx_file.filename, url_for(@import.xlsx_file) %>
 </p>
 
-<div id="gridctr" style="height: 637px;" data-url="<%= url_for @import.xlsx_file %>"></div>
+<%= react_component("ExcelPreview", { url: url_for(@import.xlsx_file) }) %>

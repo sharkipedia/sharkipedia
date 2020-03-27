@@ -1,5 +1,23 @@
 {
   "name": "sharkT",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "@babel/preset-react": "^7.9.4",
+    "@fortawesome/fontawesome-free": "^5.13.0",
+    "@rails/webpacker": "5.0.0",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "bulma": "^0.8.1",
+    "canvas-datagrid": "^0.22.13",
+    "chart.js": "^2.9.3",
+    "moment": "^2.24.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "react-chartjs-2": "^2.9.0",
+    "react-dom": "^16.13.1",
+    "react_ujs": "^2.6.1",
+    "xlsx": "^0.15.6"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3.10.3"
+  }
 }

@@ -25,7 +25,9 @@
             <td><%= link_to trend.species.name, species_path(trend.species) %></td>
           <% end %>
           <td><%= trend.location.name %></td>
-          <td width="40%"><%= render partial: 'trends/chart', locals: { observations: trend.trend_observations } %></td>
+          <td width="40%">
+            <%= react_component("TrendChart", { observations: trend.observations_data }) %>
+          </td>
           <td><%= trend.standard.name %></td>
           <% unless local_assigns.has_key? :hide_reference %>
             <td><%= link_to trend.reference.name, reference_path(trend.reference) %></td>

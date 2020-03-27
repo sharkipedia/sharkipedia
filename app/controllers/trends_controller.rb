@@ -44,7 +44,7 @@ class TrendsController < PreAuthController
     @trend = current_user.trends.new(trend_params)
     @trend.location = location
     success = @trend.save
-    @trend.create_or_update_observations(trend_observations)
+    @trend.create_or_update_observations(trend_observations) if success
 
     respond_to do |format|
       if success

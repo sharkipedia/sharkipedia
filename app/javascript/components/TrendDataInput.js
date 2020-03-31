@@ -21,12 +21,15 @@ class YearInput extends React.Component {
     return (
       <div className="field">
         <label className="label">{this.props.name} year</label>
-        <div className="control">
+        <p className="control has-icons-left">
           <input type="number" pattern="^[0–9]$" className={classes} min="1900"
                  step="1" maxLength="4" size="4" value={year}
                  name={name} id={id}
                  onChange={this.handleChange} />
-        </div>
+          <span className="icon is-small is-left">
+            <i className="fas fa-exclamation"></i>
+          </span>
+        </p>
       </div>
     );
   }

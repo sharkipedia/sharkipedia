@@ -68,12 +68,22 @@
 
       <div class="field">
         <%= f.label 'standard', 'Unit', class: 'label' %>
-        <%= f.collection_select(:standard_id, @standards, :id, :name, {:prompt => 'Select Unit'}, style: 'width: 100%') %>
+        <p class="control has-icons-left">
+          <%= f.collection_select(:standard_id, @standards, :id, :name, {:prompt => 'Select Unit'}, style: 'width: 100%') %>
+          <span class="icon is-small is-left">
+            <i class="fas fa-exclamation"></i>
+          </span>
+        </p>
       </div>
 
       <div class="field">
         <%= f.label 'sampling_method', 'Sampling Method', class: 'label' %>
-        <%= f.collection_select(:sampling_method_id, @sampling_methods, :id, :name, {:prompt => 'Select Sampling Method'}, style: 'width: 100%') %>
+        <p class="control has-icons-left">
+          <%= f.collection_select(:sampling_method_id, @sampling_methods, :id, :name, {:prompt => 'Select Sampling Method'}, style: 'width: 100%') %>
+          <span class="icon is-small is-left">
+            <i class="fas fa-exclamation"></i>
+          </span>
+        </p>
       </div>
 
     </div>
@@ -81,7 +91,12 @@
     <div class="column">
       <div class="field">
         <%= f.label 'data_type', 'Data Type', class: 'label' %>
-        <%= f.collection_select(:data_type_id, @data_types, :id, :name, {:prompt => 'Select Data Type'}, style: 'width: 100%') %>
+        <p class="control has-icons-left">
+          <%= f.collection_select(:data_type_id, @data_types, :id, :name, {:prompt => 'Select Data Type'}, style: 'width: 100%') %>
+          <span class="icon is-small is-left">
+            <i class="fas fa-exclamation"></i>
+          </span>
+        </p>
       </div>
 
       <div class="field">
@@ -97,7 +112,12 @@
     <div class="column">
       <div class="field">
         <%= f.label 'ocean', 'Ocean', class: 'label' %>
-        <%= f.collection_select(:ocean_id, @oceans, :id, :name, {:prompt => 'Select Ocean'}, style: 'width: 50%') %>
+        <p class="control has-icons-left">
+          <%= f.collection_select(:ocean_id, @oceans, :id, :name, {:prompt => 'Select Ocean'}, style: 'width: 50%') %>
+          <span class="icon is-small is-left">
+            <i class="fas fa-exclamation"></i>
+          </span>
+        </p>
       </div>
 
       <div class="field">

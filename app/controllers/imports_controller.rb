@@ -55,6 +55,13 @@ class ImportsController < ApplicationController
     redirect_to import_path(import)
   end
 
+  def request_review
+    import = Import.find params[:import_id]
+    import.resubmit!
+    import.validate_upload!
+    redirect_to import_path(import)
+  end
+
   # TODO: Add endpoint to change the visibility of an imported dataset (i.e.
   # make it public / hide)
 

@@ -45,7 +45,12 @@ class TrendsController < PreAuthController
     trend_observations = JSON.parse(params[:trend].delete(:trend_observations_attributes))
 
     @trend = current_user.trends.new(trend_params)
+
+    import = current_user.imports.create title: @trend.title, import_type: 'trend'
+    import.do_validate
+
     @trend.location = location
+    @trend.import = import
     success = @trend.save
     @trend.create_or_update_observations(trend_observations) if success
 

@@ -4,7 +4,7 @@ class ImportsController < ApplicationController
   end
 
   def index
-    @imports = imports
+    @imports = imports.order(created_at: :desc)
   end
 
   def new

@@ -16,6 +16,10 @@ class Trend < ApplicationRecord
   validates :start_year, presence: true
   validates :end_year, presence: true
 
+  def title
+    "#{species.name} - #{reference.name}"
+  end
+
   def to_csv
     CSV.generate(headers: true) do |csv|
       csv << %w[year value]

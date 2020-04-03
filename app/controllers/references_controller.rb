@@ -2,13 +2,13 @@ class ReferencesController < PreAuthController
   include Pagy::Backend
 
   def new
-    ensure_admin!
+    ensure_contributor!
 
     @reference = Reference.new
   end
 
   def create
-    ensure_admin!
+    ensure_contributor!
 
     @reference = Reference.new reference_params
     respond_to do |format|

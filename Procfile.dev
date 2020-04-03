@@ -1,0 +1,3 @@
+web: bin/rails server
+wepbacker: bin/webpack-dev-server
+worker: bundle exec sidekiq -t 25

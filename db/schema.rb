@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_31_132946) do
+ActiveRecord::Schema.define(version: 2020_03_30_143308) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -320,7 +320,9 @@ ActiveRecord::Schema.define(version: 2019_12_31_132946) do
     t.bigint "standard_id"
     t.integer "start_year"
     t.integer "end_year"
+    t.bigint "import_id"
     t.index ["data_type_id"], name: "index_trends_on_data_type_id"
+    t.index ["import_id"], name: "index_trends_on_import_id"
     t.index ["location_id"], name: "index_trends_on_location_id"
     t.index ["ocean_id"], name: "index_trends_on_ocean_id"
     t.index ["reference_id"], name: "index_trends_on_reference_id"
@@ -408,6 +410,7 @@ ActiveRecord::Schema.define(version: 2019_12_31_132946) do
   add_foreign_key "trend_observations", "trends"
   add_foreign_key "trends", "\"references\"", column: "reference_id"
   add_foreign_key "trends", "data_types"
+  add_foreign_key "trends", "imports"
   add_foreign_key "trends", "locations"
   add_foreign_key "trends", "oceans"
   add_foreign_key "trends", "sampling_methods"

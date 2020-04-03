@@ -7,6 +7,8 @@ class Import < ApplicationRecord
   belongs_to :user
   belongs_to :approved_by, class_name: "User", optional: true
 
+  has_many :trends
+
   validates :title, presence: true
 
   has_one_attached :xlsx_file

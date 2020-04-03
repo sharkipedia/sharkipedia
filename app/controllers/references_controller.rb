@@ -38,12 +38,12 @@ class ReferencesController < PreAuthController
           :species,
           measurements: [:standard, :value_type, :location, :trait]
         ],
-                                        trends: [
-                                          :species, :location, :standard,
-                                          :trend_observations
-                                        ]).find params[:id]
+        trends: [ :species, :location, :standard,
+                  :trend_observations ]).find params[:id]
+
         @observations = @reference.observations
-        @trends = @reference.trends
+        @trends = Trend.joins(:import).where(reference: @reference,
+                                             'imports.aasm_state': 'imported')
       end
 
       format.js do

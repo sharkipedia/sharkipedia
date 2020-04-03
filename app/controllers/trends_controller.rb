@@ -6,11 +6,14 @@ class TrendsController < PreAuthController
   before_action :set_associations, only: [:new, :edit, :create, :update]
 
   def index
-    trends = Trend.includes(:reference,
+    trends = Trend.includes(
+      :reference,
       :standard,
       :location,
       :species,
-      :trend_observations).all
+      :trend_observations)
+      .joins(:import)
+      .where('imports.aasm_state': 'imported')
 
     @pagy, @trends = pagy(trends)
   end

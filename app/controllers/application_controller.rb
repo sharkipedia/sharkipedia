@@ -14,6 +14,10 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
   end
 
+  def ensure_contributor!
+    redirect_to root_path unless current_user.try(:contributor?)
+  end
+
   def ensure_admin!
     redirect_to root_path unless current_user.try(:admin?)
   end

@@ -8,6 +8,7 @@ class Import < ApplicationRecord
   belongs_to :approved_by, class_name: "User", optional: true
 
   has_many :trends
+  has_many :observations
 
   validates :title, presence: true
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_30_143308) do
+ActiveRecord::Schema.define(version: 2020_04_03_140209) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -149,6 +149,8 @@ ActiveRecord::Schema.define(version: 2020_03_30_143308) do
     t.datetime "updated_at", null: false
     t.string "contributor_id"
     t.string "depth"
+    t.bigint "import_id"
+    t.index ["import_id"], name: "index_observations_on_import_id"
     t.index ["species_id"], name: "index_observations_on_species_id"
     t.index ["user_id"], name: "index_observations_on_user_id"
   end
@@ -393,6 +395,7 @@ ActiveRecord::Schema.define(version: 2020_03_30_143308) do
   add_foreign_key "measurements", "traits"
   add_foreign_key "measurements", "validation_types"
   add_foreign_key "measurements", "value_types"
+  add_foreign_key "observations", "imports"
   add_foreign_key "observations", "species"
   add_foreign_key "observations", "users"
   add_foreign_key "species", "species_data_types"

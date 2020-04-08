@@ -1,5 +1,6 @@
 class Observation < ApplicationRecord
   belongs_to :user
+  belongs_to :import
 
   has_and_belongs_to_many :references
   belongs_to :species

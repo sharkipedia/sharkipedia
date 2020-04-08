@@ -22,9 +22,13 @@ class ObservationPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       if user&.admin?
-        Observation.includes(:species).all
+        Observation.includes(:species)
+          .joins(:import)
+          .where('imports.aasm_state': 'imported')
       else
         Observation.published.includes(:species)
+          .joins(:import)
+          .where('imports.aasm_state': 'imported')
       end
     end
   end

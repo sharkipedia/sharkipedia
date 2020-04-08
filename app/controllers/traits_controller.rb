@@ -11,8 +11,15 @@ class TraitsController < PreAuthController
       :value_type,
       :location,
       observation: [
-        :species
+        :species,
+        :references
       ]
     ]).find params[:id]
+
+    observations = Observation
+      .joins(:import, :measurements)
+      .where('imports.aasm_state': 'imported', 'measurements.trait_id': @trait)
+
+    @measurements = @trait.measurements.where(observation: observations)
   end
 end

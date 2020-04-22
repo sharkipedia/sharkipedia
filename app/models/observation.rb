@@ -15,4 +15,8 @@ class Observation < ApplicationRecord
 
   validates :references, presence: true
   validates :species, presence: true
+
+  def title
+    "#{species.name} - #{references.map(&:name)}"
+  end
 end

@@ -5,7 +5,7 @@
 
   <div class="column is-one-third">
     <div class="buttons is-pulled-right">
-      <% if policy(Observation).update? %>
+      <% if policy(Observation).new? %>
         <%= link_to 'New Observation', new_observation_path, class: 'button is-info is-pulled-right' %>
       <% end %>
     </div>

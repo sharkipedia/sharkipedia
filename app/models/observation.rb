@@ -11,6 +11,7 @@ class Observation < ApplicationRecord
   has_many :longhurst_provinces, through: :measurements
   has_many :locations, through: :measurements
 
+  default_scope { order(created_at: :asc) }
   scope :published, -> { where(hidden: [false, nil]) }
 
   validates :references, presence: true

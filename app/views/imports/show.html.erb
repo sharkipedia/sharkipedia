@@ -68,80 +68,104 @@
 
   <%= react_component("ExcelPreview", { url: url_for(@import.xlsx_file) }) %>
 <% else %>
-  <h2 class="title">Trends to import</h2>
+  <% unless @import.trends.blank? %>
+    <h2 class="title">Trends to import</h2>
 
-  <% @import.trends.each do |trend| %>
-    <div class="columns">
-      <div class="column">
-        <h3 class="subtitle"><%= trend.title %></h3>
-      </div>
+    <% @import.trends.each do |trend| %>
+      <div class="columns">
+        <div class="column">
+          <h3 class="subtitle"><%= trend.title %></h3>
+        </div>
 
-      <div class="column is-one-third">
-        <div class="buttons is-pulled-right">
-          <% if (current_user == @import.user || user_is_admin?) && @import.changes_requested? %>
-            <%= link_to 'Edit', edit_trend_path(trend), class: 'button is-warning is-pulled-right' %>
-          <% end %>
+        <div class="column is-one-third">
+          <div class="buttons is-pulled-right">
+            <% if (current_user == @import.user || user_is_admin?) && @import.changes_requested? %>
+              <%= link_to 'Edit', edit_trend_path(trend), class: 'button is-warning is-pulled-right' %>
+            <% end %>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="columns">
-      <div class="column is-one-third">
-        <%= render partial: 'species/detail', locals: { specie: trend.species, render_links: true } %>
-        <%= render partial: 'trends/location', locals: { location: trend.location, ocean: trend.ocean } %>
-      </div>
-      <div class="column">
-        <% if trend.figure.attached? %>
-          <div class="tabs is-small">
-            <ul>
-              <li class="is-active" data-option="0"><a>Plot</a></li>
-              <li data-option="1"><a>Figure</a></li>
-              <li data-option="2"><a>Both</a></li>
-            </ul>
-          </div>
-        <% end %>
-        <div class="tab-container">
-          <div class="tab-item is-active" data-item="0">
-            <%= react_component("TrendChart", { observations: trend.observations_data }) %>
-          </div>
-
+      <div class="columns">
+        <div class="column is-one-third">
+          <%= render partial: 'species/detail', locals: { specie: trend.species, render_links: true } %>
+          <%= render partial: 'trends/location', locals: { location: trend.location, ocean: trend.ocean } %>
+        </div>
+        <div class="column">
           <% if trend.figure.attached? %>
-            <div class="tab-item" data-item="1">
-              <%= image_tag trend.figure %>
-            </div>
-
-            <div class="tab-item" data-item="2">
-              <%= react_component("TrendChart", { observations: trend.observations_data }) %>
-
-              <%= image_tag trend.figure %>
+            <div class="tabs is-small">
+              <ul>
+                <li class="is-active" data-option="0"><a>Plot</a></li>
+                <li data-option="1"><a>Figure</a></li>
+                <li data-option="2"><a>Both</a></li>
+              </ul>
             </div>
           <% end %>
+          <div class="tab-container">
+            <div class="tab-item is-active" data-item="0">
+              <%= react_component("TrendChart", { observations: trend.observations_data }) %>
+            </div>
+
+            <% if trend.figure.attached? %>
+              <div class="tab-item" data-item="1">
+                <%= image_tag trend.figure %>
+              </div>
+
+              <div class="tab-item" data-item="2">
+                <%= react_component("TrendChart", { observations: trend.observations_data }) %>
+
+                <%= image_tag trend.figure %>
+              </div>
+            <% end %>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="columns">
-      <div class="column">
-        <%= render partial: 'trends/raw_data', locals: { observations: trend.trend_observations } %>
+      <div class="columns">
+        <div class="column">
+          <%= render partial: 'trends/raw_data', locals: { observations: trend.trend_observations } %>
+        </div>
+        <div class="column">
+          <%= render partial: 'trends/meta', locals: { trend: trend } %>
+        </div>
+        <div class="column">
+          <%= render partial: 'trends/figure_meta', locals: { trend: trend } %>
+        </div>
       </div>
-      <div class="column">
-        <%= render partial: 'trends/meta', locals: { trend: trend } %>
-      </div>
-      <div class="column">
-        <%= render partial: 'trends/figure_meta', locals: { trend: trend } %>
-      </div>
-    </div>
 
-    <div class="columns">
-    </div>
+      <div class="columns">
+      </div>
 
-    <div class="columns">
-      <div class="column">
-        <%= render partial: 'references/detail', locals: { reference: trend.reference, render_links: true } %>
+      <div class="columns">
+        <div class="column">
+          <%= render partial: 'references/detail', locals: { reference: trend.reference, render_links: true } %>
+        </div>
+        <div class="column">
+        </div>
       </div>
-      <div class="column">
-      </div>
-    </div>
+    <% end %>
   <% end %>
 
+  <% unless @import.observations.blank? %>
+    <h2 class="title">Trait Measurements to import</h2>
+
+    <% @import.observations.each do |observation| %>
+      <div class="columns">
+        <div class="column">
+          <h3 class="subtitle"><%= observation.title %></h3>
+        </div>
+
+        <div class="column is-one-third">
+          <div class="buttons is-pulled-right">
+            <% if (current_user == @import.user || user_is_admin?) && @import.changes_requested? %>
+              <%= link_to 'Edit', edit_observation_path(observation), class: 'button is-warning is-pulled-right' %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <%= render partial: 'observations/details', locals: { species: observation.species, references: observation.references, measurements: observation.measurements } %>
+
+    <% end %>
+  <% end %>
 <% end %>

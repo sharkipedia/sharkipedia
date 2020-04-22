@@ -56,8 +56,9 @@ class TrendsController < PreAuthController
 
     respond_to do |format|
       if success
-        format.html { redirect_to @trend }
-        format.js { redirect_to @trend }
+        # NOTE: we redirect_to the import _NOT_ the trend
+        format.html { redirect_to import }
+        format.js { redirect_to import }
       else
         format.html do
           render :new
@@ -78,10 +79,12 @@ class TrendsController < PreAuthController
     trend_observations = JSON.parse(params[:trend].delete(:trend_observations_attributes))
     @trend.create_or_update_observations(trend_observations)
 
+    success = @trend.update(trend_params)
+
     respond_to do |format|
-      if @trend.update(trend_params)
-        format.html { redirect_to @trend }
-        format.js { redirect_to @trend }
+      if success
+        format.html { redirect_to @trend.import }
+        format.js { redirect_to @trend.import }
       else
         format.html { render :edit }
         format.js

@@ -8,9 +8,7 @@ class ObservationsController < ApplicationController
   end
 
   def show
-    @species = @observation.species
-    @references = @observation.references
-    @measurements = @observation.measurements
+    authorize @observation
   end
 
   def new

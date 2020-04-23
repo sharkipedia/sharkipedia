@@ -25,7 +25,7 @@ class ObservationsController < ApplicationController
     @observation = current_user.observations.new(observation_params)
     authorize @observation
 
-    import = current_user.imports.create title: @observation.title, import_type: 'traits'
+    import = current_user.imports.create title: @observation.title, import_type: "traits"
     import.do_validate
 
     @observation.import = import

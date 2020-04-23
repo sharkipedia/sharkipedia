@@ -8,12 +8,12 @@ class ImportsController < ApplicationController
 
   def index
     imports = case params[:query]
-    when 'my'
+    when "my"
       Import.where(user: current_user)
-    when 'trait'
-      Import.where(import_type: ['trait', 'traits'])
-    when 'trend'
-      Import.where(import_type: ['trend', 'trends'])
+    when "trait"
+      Import.where(import_type: ["trait", "traits"])
+    when "trend"
+      Import.where(import_type: ["trend", "trends"])
     else
       Import
     end
@@ -83,7 +83,7 @@ class ImportsController < ApplicationController
   private
 
   def set_import
-    @import = Import.find (params[:import_id] || params[:id])
+    @import = Import.find(params[:import_id] || params[:id])
   end
 
   def import_params

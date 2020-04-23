@@ -7,7 +7,7 @@ class SpeciesController < PreAuthController
     else
       policy_scope(Species)
         .joins(observations: :import)
-        .where('imports.aasm_state': 'imported')
+        .where('imports.aasm_state': "imported")
         .order(:name).distinct
     end
 
@@ -25,7 +25,7 @@ class SpeciesController < PreAuthController
     ).friendly.find params[:id]
     observations = @specie.observations
       .joins(:import)
-      .where('imports.aasm_state': 'imported')
+      .where('imports.aasm_state': "imported")
     @grouped_measurements = Measurement.where(observation: observations)
       .group_by(&:trait_class)
     @trends = @specie.trends

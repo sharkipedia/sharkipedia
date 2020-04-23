@@ -42,7 +42,7 @@ class TrendsController < PreAuthController
 
     authorize @trend
 
-    import = current_user.imports.create title: @trend.title, import_type: 'trend'
+    import = current_user.imports.create title: @trend.title, import_type: "trend"
     import.do_validate
 
     @trend.location = location

@@ -13,13 +13,13 @@ class TrendPolicy < ApplicationPolicy
 
   def edit?
     user.admin? || (
-      record.import&.user == user && record.import&.state == 'changes requested'
+      record.import&.user == user && record.import&.state == "changes requested"
     )
   end
 
   def update?
     user.admin? || (
-      record.import&.user == user && record.import&.state == 'changes requested'
+      record.import&.user == user && record.import&.state == "changes requested"
     )
   end
 
@@ -29,14 +29,15 @@ class TrendPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      trends = Trend.includes(
+      Trend.includes(
         :reference,
         :standard,
         :location,
         :species,
-        :trend_observations)
+        :trend_observations
+      )
         .joins(:import)
-        .where('imports.aasm_state': 'imported')
+        .where('imports.aasm_state': "imported")
     end
   end
 end

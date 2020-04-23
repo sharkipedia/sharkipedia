@@ -13,13 +13,13 @@ class ImportPolicy < ApplicationPolicy
 
   def edit?
     user.admin? || (
-      record.import&.user == user && record.import&.state == 'changes requested'
+      record.import&.user == user && record.import&.state == "changes requested"
     )
   end
 
   def update?
     user.admin? || (
-      record.import&.user == user && record.import&.state == 'changes requested'
+      record.import&.user == user && record.import&.state == "changes requested"
     )
   end
 

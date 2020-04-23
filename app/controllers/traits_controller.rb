@@ -18,7 +18,7 @@ class TraitsController < PreAuthController
 
     observations = Observation
       .joins(:import, :measurements)
-      .where('imports.aasm_state': 'imported', 'measurements.trait_id': @trait)
+      .where('imports.aasm_state': "imported", 'measurements.trait_id': @trait)
 
     @measurements = @trait.measurements.where(observation: observations)
   end

@@ -49,7 +49,7 @@
             Upload Data
           </a>
           <div class="navbar-dropdown">
-            <%= link_to 'My Uploads', imports_path, class: "navbar-item" %>
+            <%= link_to 'My Uploads', imports_path(query: "my"), class: "navbar-item" %>
             <% if user_is_contributor? %>
               <hr class="navbar-divider">
 
@@ -68,8 +68,8 @@
               Review
             </a>
             <div class="navbar-dropdown">
-              <%= link_to 'Trend Uploads', imports_path, class: "navbar-item" %>
-              <%= link_to 'Trait Uploads', imports_path, class: "navbar-item" %>
+              <%= link_to 'Trend Uploads', imports_path(query: "trend"), class: "navbar-item" %>
+              <%= link_to 'Trait Uploads', imports_path(query: "trait"), class: "navbar-item" %>
               <hr class="navbar-divider">
               <%= link_to 'All Uploads', imports_path, class: "navbar-item" %>
             </div>

@@ -7,7 +7,18 @@ class ImportsController < ApplicationController
   end
 
   def index
-    @imports = policy_scope(Import.order(created_at: :desc))
+    imports = case params[:query]
+    when 'my'
+      Import.where(user: current_user)
+    when 'trait'
+      Import.where(import_type: ['trait', 'traits'])
+    when 'trend'
+      Import.where(import_type: ['trend', 'trends'])
+    else
+      Import
+    end
+
+    @imports = policy_scope(imports.order(created_at: :desc))
   end
 
   def new

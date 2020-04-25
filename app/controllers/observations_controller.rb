@@ -1,6 +1,6 @@
 class ObservationsController < ApplicationController
   include Pagy::Backend
-  before_action :set_observation, only: [:show, :edit, :update, :destroy]
+  before_action :set_observation, only: [:show, :destroy]
   before_action :set_associations, only: [:new, :edit, :create, :update]
 
   def index
@@ -8,9 +8,7 @@ class ObservationsController < ApplicationController
   end
 
   def show
-    @species = @observation.species
-    @references = @observation.references
-    @measurements = @observation.measurements
+    authorize @observation
   end
 
   def new
@@ -19,6 +17,7 @@ class ObservationsController < ApplicationController
   end
 
   def edit
+    @observation = Observation.find params[:id]
     authorize @observation
   end
 
@@ -26,10 +25,16 @@ class ObservationsController < ApplicationController
     @observation = current_user.observations.new(observation_params)
     authorize @observation
 
+    import = current_user.imports.create title: @observation.title, import_type: "traits"
+    import.do_validate
+
+    @observation.import = import
+
     respond_to do |format|
       if @observation.save
-        format.html { redirect_to @observation, notice: "Observation was successfully created." }
-        format.js { redirect_to @observation }
+        # NOTE: we redirect_to the import _NOT_ the observation
+        format.html { redirect_to import, notice: "Observation was successfully created." }
+        format.js { redirect_to import }
       else
         format.html do
           render :new
@@ -40,12 +45,16 @@ class ObservationsController < ApplicationController
   end
 
   def update
+    @observation = Observation.find params[:id]
     authorize @observation
 
+    success = @observation.update(observation_params)
+
     respond_to do |format|
-      if @observation.update(observation_params)
-        format.html { redirect_to @observation, notice: "Observation was successfully updated." }
-        format.json { render :show, status: :ok, location: @observation }
+      if success
+        # NOTE: we redirect_to the import _NOT_ the observation
+        format.html { redirect_to @observation.import, notice: "Observation was successfully updated." }
+        format.json { redirect_to @observation.import }
       else
         format.html { render :edit }
         format.json { render json: @observation.errors, status: :unprocessable_entity }

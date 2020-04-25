@@ -1,22 +1,37 @@
 class ImportsController < ApplicationController
+  before_action :set_import, only: [:show, :edit, :update, :approve,
+                                    :request_changes, :reject, :request_review]
+
   def show
-    @import = imports.find params[:id]
+    authorize @import
   end
 
   def index
-    @imports = imports
+    imports = case params[:query]
+    when "my"
+      Import.where(user: current_user)
+    when "trait"
+      Import.where(import_type: ["trait", "traits"])
+    when "trend"
+      Import.where(import_type: ["trend", "trends"])
+    else
+      Import
+    end
+
+    @imports = policy_scope(imports.order(created_at: :desc))
   end
 
   def new
     @import = current_user.imports.new
+    authorize @import
   end
 
   def edit
-    @import = current_user.imports.find params[:id]
+    authorize @import
   end
 
   def update
-    import = current_user.imports.find params[:id]
+    authorize @import
     import.update_attributes import_params
     import.resubmit!
     ImportValidatorJob.perform_later import
@@ -25,34 +40,41 @@ class ImportsController < ApplicationController
   end
 
   def create
-    import = current_user.imports.create!(import_params)
+    import = current_user.imports.new(import_params)
+    authorize import
+    import.save!
+
     ImportValidatorJob.perform_later import
 
     redirect_to import_path(import)
   end
 
   def approve
-    # TODO: add policy check
-    import = Import.find params[:import_id]
-    import.approved_by = current_user
-    import.approve!
-    redirect_to import_path(import)
+    authorize @import
+    @import.approved_by = current_user
+    @import.approve!
+    redirect_to import_path(@import)
   end
 
   def request_changes
-    # TODO: add policy check
-    import = Import.find params[:import_id]
-    import.reason = params[:reason]
-    import.request_changes!
-    redirect_to import_path(import)
+    authorize @import
+    @import.reason = params[:reason]
+    @import.request_changes!
+    redirect_to import_path(@import)
   end
 
   def reject
-    # TODO: add policy check
-    import = Import.find params[:import_id]
-    import.reason = params[:reason]
-    import.reject!
-    redirect_to import_path(import)
+    authorize @import
+    @import.reason = params[:reason]
+    @import.reject!
+    redirect_to import_path(@import)
+  end
+
+  def request_review
+    authorize @import
+    @import.resubmit!
+    @import.validate_upload!
+    redirect_to import_path(@import)
   end
 
   # TODO: Add endpoint to change the visibility of an imported dataset (i.e.
@@ -60,12 +82,8 @@ class ImportsController < ApplicationController
 
   private
 
-  def imports
-    if current_user.editor?
-      Import.all
-    else
-      current_user.imports
-    end
+  def set_import
+    @import = Import.find(params[:import_id] || params[:id])
   end
 
   def import_params

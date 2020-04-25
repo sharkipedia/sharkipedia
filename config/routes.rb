@@ -48,6 +48,7 @@ Rails.application.routes.draw do
     post :approve, to: "imports#approve"
     post :request_changes, to: "imports#request_changes"
     post :reject, to: "imports#reject"
+    post :request_review, to: "imports#request_review"
   end
 
   root "pages#start"

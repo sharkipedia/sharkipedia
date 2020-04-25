@@ -7,6 +7,9 @@ class Import < ApplicationRecord
   belongs_to :user
   belongs_to :approved_by, class_name: "User", optional: true
 
+  has_many :trends
+  has_many :observations
+
   validates :title, presence: true
 
   has_one_attached :xlsx_file
@@ -71,6 +74,11 @@ class Import < ApplicationRecord
   end
 
   def do_validate
+    unless mass_import?
+      validate_upload!
+      return
+    end
+
     puts "triggered #{inspect}"
     url = Rails.application.routes.url_helpers.rails_blob_url xlsx_file
 
@@ -90,10 +98,19 @@ class Import < ApplicationRecord
   end
 
   def queue_import
-    ImportJob.perform_later self
+    if mass_import?
+      ImportJob.perform_later self
+    else
+      import!
+    end
   end
 
   def do_import
+    unless mass_import?
+      import!
+      return
+    end
+
     url = Rails.application.routes.url_helpers.rails_blob_url xlsx_file
 
     # TODO: automatically detect the file type from the XLSX
@@ -127,11 +144,19 @@ class Import < ApplicationRecord
     # publish the imported data
   end
 
+  def mass_import?
+    xlsx_file.present?
+  end
+
   def uploaded_by
     user.email
   end
 
   def xlsx_valid?
-    xlsx_valid
+    if mass_import?
+      xlsx_valid
+    else
+      true
+    end
   end
 end

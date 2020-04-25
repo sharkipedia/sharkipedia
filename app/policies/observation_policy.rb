@@ -1,18 +1,22 @@
 class ObservationPolicy < ApplicationPolicy
   def create?
-    user.admin?
+    user.contributor?
   end
 
   def new?
-    user.admin?
+    user.contributor?
   end
 
   def edit?
-    user.admin?
+    user.admin? || (
+      record.import&.user == user && record.import&.state == "changes requested"
+    )
   end
 
   def update?
-    user.admin?
+    user.admin? || (
+      record.import&.user == user && record.import&.state == "changes requested"
+    )
   end
 
   def destroy?
@@ -22,9 +26,13 @@ class ObservationPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       if user&.admin?
-        Observation.includes(:species).all
+        Observation.includes(:species)
+          .joins(:import)
+          .where('imports.aasm_state': "imported")
       else
         Observation.published.includes(:species)
+          .joins(:import)
+          .where('imports.aasm_state': "imported")
       end
     end
   end

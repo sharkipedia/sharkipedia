@@ -1,26 +1,21 @@
 class TrendsController < PreAuthController
   include Pagy::Backend
 
-  before_action :ensure_admin!, only: [:new, :edit, :update, :destroy]
-  before_action :set_trend, only: [:show, :edit, :update, :destroy]
+  before_action :set_trend, only: [:show, :destroy]
   before_action :set_associations, only: [:new, :edit, :create, :update]
 
   def index
-    trends = Trend.includes(:reference,
-      :standard,
-      :location,
-      :species,
-      :trend_observations).all
-
-    @pagy, @trends = pagy(trends)
+    @pagy, @trends = pagy(policy_scope(Trend))
   end
 
   def new
     @trend = current_user.trends.new
     @trend.location = Location.new
+    authorize @trend
   end
 
   def show
+    authorize @trend
     respond_to do |format|
       format.html
       format.csv {
@@ -31,6 +26,8 @@ class TrendsController < PreAuthController
   end
 
   def edit
+    @trend = Trend.find params[:id]
+    authorize @trend
   end
 
   def create
@@ -42,14 +39,22 @@ class TrendsController < PreAuthController
     trend_observations = JSON.parse(params[:trend].delete(:trend_observations_attributes))
 
     @trend = current_user.trends.new(trend_params)
+
+    authorize @trend
+
+    import = current_user.imports.create title: @trend.title, import_type: "trend"
+    import.do_validate
+
     @trend.location = location
+    @trend.import = import
     success = @trend.save
     @trend.create_or_update_observations(trend_observations) if success
 
     respond_to do |format|
       if success
-        format.html { redirect_to @trend }
-        format.js { redirect_to @trend }
+        # NOTE: we redirect_to the import _NOT_ the trend
+        format.html { redirect_to import }
+        format.js { redirect_to import }
       else
         format.html do
           render :new
@@ -60,6 +65,9 @@ class TrendsController < PreAuthController
   end
 
   def update
+    @trend = Trend.find params[:id]
+    authorize @trend
+
     location_params = params[:trend].delete(:location)
     location = Location.find_or_create_by name: location_params[:name],
                                           lat: location_params[:lat],
@@ -70,10 +78,12 @@ class TrendsController < PreAuthController
     trend_observations = JSON.parse(params[:trend].delete(:trend_observations_attributes))
     @trend.create_or_update_observations(trend_observations)
 
+    success = @trend.update(trend_params)
+
     respond_to do |format|
-      if @trend.update(trend_params)
-        format.html { redirect_to @trend }
-        format.js { redirect_to @trend }
+      if success
+        format.html { redirect_to @trend.import }
+        format.js { redirect_to @trend.import }
       else
         format.html { render :edit }
         format.js
@@ -85,12 +95,12 @@ class TrendsController < PreAuthController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_trend
-    @trend = Trend.find params[:id]
+    @trend = policy_scope(Trend).find params[:id]
   end
 
   def set_associations
-    @example_species = Species.find_by name: "Carcharhinus acronotus"
-    @example_reference = Reference.find_by name: "everett2015"
+    @example_species = Species.first
+    @example_reference = Reference.first
 
     @standards = Standard.all
     @sampling_methods = SamplingMethod.all

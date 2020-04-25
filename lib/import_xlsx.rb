@@ -6,11 +6,12 @@ module ImportXlsx
     @allowed_sheet_names = []
     @allowed_headers = []
 
-    def initialize(file_path, user)
+    def initialize(file_path, user, import)
       @xlsx = Roo::Spreadsheet.open(file_path)
       @valid = false
       @log = ""
       @user = user
+      @import = import
 
       @data_entry_sheet = xlsx.sheet(@allowed_sheet_names.first)
     end
@@ -359,7 +360,8 @@ module ImportXlsx
                                 sampling_method: sampling_method,
                                 user: user,
                                 start_year: 2900,
-                                end_year: 2900
+                                end_year: 2900,
+                                import: @import
 
           self.log += "Created Trend: #{trend.inspect}\n"
 

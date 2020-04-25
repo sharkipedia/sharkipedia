@@ -1,5 +1,6 @@
 class Trend < ApplicationRecord
   belongs_to :user
+  belongs_to :import
   belongs_to :reference
   belongs_to :species
   belongs_to :location
@@ -14,6 +15,10 @@ class Trend < ApplicationRecord
 
   validates :start_year, presence: true
   validates :end_year, presence: true
+
+  def title
+    "#{species.name} - #{reference.name}"
+  end
 
   def to_csv
     CSV.generate(headers: true) do |csv|

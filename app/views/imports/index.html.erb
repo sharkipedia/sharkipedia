@@ -4,11 +4,6 @@
       <h1 class="title">Imports</h1>
     </div>
   </div>
-  <div class="level-right">
-    <div class="level-item">
-      <%= link_to 'Start new Import', new_import_path, class: 'button' %>
-    </div>
-  </div>
 </div>
 
 <% if @imports.blank? %>
@@ -17,6 +12,7 @@
   <table class="table">
     <tr>
       <th>Type</th>
+      <th></th>
       <th>Title</th>
       <th>Uploader</th>
       <th>Status</th>
@@ -25,7 +21,8 @@
 
     <% @imports.order(:aasm_state).each do |import| %>
       <tr>
-        <td><%= import.import_type %></td>
+        <td><%= import.import_type&.capitalize %></td>
+        <td><%= import.mass_import? ? "Excel" : "Form" %></td>
         <td><%= import.title %></td>
         <td><%= link_to_admin_dashboard import %></td>
         <td><%= import.state %></td>

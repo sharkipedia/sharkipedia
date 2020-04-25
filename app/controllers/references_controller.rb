@@ -2,13 +2,13 @@ class ReferencesController < PreAuthController
   include Pagy::Backend
 
   def new
-    ensure_admin!
+    ensure_contributor!
 
     @reference = Reference.new
   end
 
   def create
-    ensure_admin!
+    ensure_contributor!
 
     @reference = Reference.new reference_params
     respond_to do |format|
@@ -38,12 +38,13 @@ class ReferencesController < PreAuthController
           :species,
           measurements: [:standard, :value_type, :location, :trait]
         ],
-                                        trends: [
-                                          :species, :location, :standard,
-                                          :trend_observations
-                                        ]).find params[:id]
-        @observations = @reference.observations
-        @trends = @reference.trends
+                                        trends: [:species, :location, :standard,
+                                                 :trend_observations]).find params[:id]
+
+        @observations = @reference.observations.joins(:import)
+          .where('imports.aasm_state': "imported")
+        @trends = Trend.joins(:import).where(reference: @reference,
+                                             'imports.aasm_state': "imported")
       end
 
       format.js do

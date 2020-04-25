@@ -3,9 +3,12 @@ class SpeciesController < PreAuthController
 
   def index
     species = if params[:all]
-      Species.all
+      policy_scope(Species)
     else
-      Species.joins(:observations).order(:name).distinct
+      policy_scope(Species)
+        .joins(observations: :import)
+        .where('imports.aasm_state': "imported")
+        .order(:name).distinct
     end
 
     @pagy, @species = pagy(species)
@@ -20,7 +23,10 @@ class SpeciesController < PreAuthController
         :location, :standard, :trend_observations, :reference
       ]
     ).friendly.find params[:id]
-    @grouped_measurements = Measurement.where(observation: @specie.observations)
+    observations = @specie.observations
+      .joins(:import)
+      .where('imports.aasm_state': "imported")
+    @grouped_measurements = Measurement.where(observation: observations)
       .group_by(&:trait_class)
     @trends = @specie.trends
   end

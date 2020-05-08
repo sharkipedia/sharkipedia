@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pdobb/select2-rails.git
-  revision: 229d5e2ee0f0fd9a1fad8522c00c0704615a5ea8
+  revision: e0c2559b7dc351cb9ee9d26a0f728e5112289968
   specs:
     select2-rails (4.0.8)
 

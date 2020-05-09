@@ -68,8 +68,8 @@ puts "# Created #{SpeciesOrder.count} SpeciesOrders"
 
 s_f = taxonomy.map { |row|
   [row["Subclass"], row["Superorder"],
-   row["Order"], row["Family"]]
-} .uniq
+    row["Order"], row["Family"]]
+}.uniq
 s_f.each do |subclass, superorder, order, family|
   ssc = SpeciesSubclass.find_by name: subclass
   sso = SpeciesSuperorder.find_by name: superorder

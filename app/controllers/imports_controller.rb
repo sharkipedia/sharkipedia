@@ -1,6 +1,6 @@
 class ImportsController < ApplicationController
   before_action :set_import, only: [:show, :edit, :update, :approve,
-                                    :request_changes, :reject, :request_review]
+    :request_changes, :reject, :request_review]
 
   def show
     authorize @import

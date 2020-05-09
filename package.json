@@ -4,7 +4,7 @@
   "dependencies": {
     "@babel/preset-react": "^7.9.4",
     "@fortawesome/fontawesome-free": "^5.13.0",
-    "@rails/webpacker": "5.0.0",
+    "@rails/webpacker": "5.1.1",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "bulma": "^0.8.1",
     "canvas-datagrid": "^0.22.13",
@@ -15,7 +15,7 @@
     "react-chartjs-2": "^2.9.0",
     "react-dom": "^16.13.1",
     "react_ujs": "^2.6.1",
-    "xlsx": "^0.15.6"
+    "xlsx": "^0.16.0"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.10.3"

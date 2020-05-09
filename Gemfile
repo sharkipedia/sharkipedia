@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "2.7.0"
+ruby "2.7.1"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 6.0.2"
@@ -15,7 +15,7 @@ gem "sass-rails", "~> 6.0"
 gem "uglifier", ">= 1.3.0"
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
-gem "webpacker", "~> 5.0"
+gem "webpacker", "~> 5.1"
 
 gem "react-rails"
 
@@ -54,7 +54,7 @@ gem "bootsnap", ">= 1.1.0", require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
-  gem "rspec-rails", "~> 4.0.0.rc1"
+  gem "rspec-rails", "~> 4.0.0"
 end
 
 group :development do
@@ -71,7 +71,7 @@ group :test do
   # Adds support for Capybara system testing and selenium driver
   gem "capybara"
   gem "selenium-webdriver"
-  gem "webdrivers", "~> 4.1"
+  gem "webdrivers", "~> 4.3"
 
   gem "factory_bot_rails", "~> 5.0", ">= 5.0.1"
 end

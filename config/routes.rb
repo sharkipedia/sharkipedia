@@ -76,5 +76,6 @@ Rails.application.routes.draw do
   # static pages
   match "/about", to: "pages#about", via: "get"
   match "/contact", to: "pages#contact", via: "get"
+  match "/api", to: "pages#api", via: "get"
   match "/procedure", to: "pages#procedure", via: "get"
 end

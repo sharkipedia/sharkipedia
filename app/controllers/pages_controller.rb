@@ -23,4 +23,7 @@ class PagesController < PreAuthController
 
   def contact
   end
+
+  def api
+  end
 end

@@ -1,0 +1,15 @@
+<h1 class="title">Shark Traits & Trends API</h1>
+
+<p>
+  Shark Traits &amp; Trends offers a basic REST-API, which allows third parties
+  to build integrations or export data.
+</p>
+
+<% if current_user %>
+
+<% else %>
+  <p>
+    While the API is open for everyone to use it is required that you authenticate
+    your API requests with an API token. You can create an account <%= link_to "here", new_user_registration_path %>.
+  </p>
+<% end %>

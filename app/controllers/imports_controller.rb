@@ -32,11 +32,11 @@ class ImportsController < ApplicationController
 
   def update
     authorize @import
-    import.update_attributes import_params
-    import.resubmit!
-    ImportValidatorJob.perform_later import
+    @import.update_attributes import_params
+    @import.resubmit!
+    ImportValidatorJob.perform_later @import
 
-    redirect_to import_path(import)
+    redirect_to import_path(@import)
   end
 
   def create

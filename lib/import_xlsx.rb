@@ -64,7 +64,7 @@ module ImportXlsx
   end
 
   class Traits < DataImport
-    def initialize(file_path, user)
+    def initialize(file_path, user, import)
       @allowed_headers = %w[
         observation_id hidden resource_name resource_doi
         secondary_resource_name secondary_resource_doi species_superorder
@@ -155,7 +155,8 @@ module ImportXlsx
                                               hidden: hidden,
                                               contributor_id: contributor_id,
                                               depth: depth,
-                                              user: user
+                                              user: user,
+                                              import: @import
 
           self.log += observation.inspect + "\n"
 
@@ -257,7 +258,7 @@ module ImportXlsx
   end
 
   class Trends < DataImport
-    def initialize(file_path, user)
+    def initialize(file_path, user, import)
       @allowed_sheet_names = ["Data", "Notes"]
 
       super

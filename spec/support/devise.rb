@@ -15,3 +15,11 @@ module ControllerMacros
     end
   end
 end
+
+RSpec.configure do |config|
+  config.include Devise::Test::IntegrationHelpers, type: :request
+  config.include Devise::Test::IntegrationHelpers, type: :system
+  config.include Devise::Test::ControllerHelpers, type: :controller
+
+  config.extend ControllerMacros, type: :controller
+end

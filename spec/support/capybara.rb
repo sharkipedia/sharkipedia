@@ -1,0 +1,9 @@
+require "capybara/rspec"
+require "capybara/cuprite"
+
+Capybara.server = :puma, {Silent: true}
+
+Capybara.javascript_driver = :cuprite
+Capybara.register_driver(:cuprite) do |app|
+  Capybara::Cuprite::Driver.new(app, window_size: [1200, 800], process_timeout: 6, inspector: ENV["INSPECTOR"])
+end

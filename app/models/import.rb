@@ -79,10 +79,10 @@ class Import < ApplicationRecord
       return
     end
 
-    puts "triggered #{inspect}"
-    url = Rails.application.routes.url_helpers.rails_blob_url xlsx_file
-
-    result = Xlsx::Validator.call(url)
+    result = nil
+    xlsx_file.open do |file|
+      result = Xlsx::Validator.call(file)
+    end
     self.import_type = result.type
     self.log = result.messages.join("\n")
     self.xlsx_valid = result.valid

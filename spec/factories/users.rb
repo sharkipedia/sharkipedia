@@ -4,6 +4,7 @@ FactoryBot.define do
     sequence(:email) { |n| "user#{n}@example.com" }
     user_level { "user" }
     password { "123456789!password" }
+    confirmed_at { Time.now.utc }
   end
 
   factory :editor, parent: :user do

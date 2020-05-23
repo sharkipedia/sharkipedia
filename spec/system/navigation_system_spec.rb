@@ -2,8 +2,6 @@ require "rails_helper"
 
 RSpec.describe "navbar" do
   before do
-    driven_by(:cuprite)
-
     # these are the examples on the homepage
     create(:species, name: "Carcharhinus acronotus")
     create(:trait, name: "Lmat50")

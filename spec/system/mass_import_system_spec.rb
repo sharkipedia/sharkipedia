@@ -4,8 +4,6 @@ RSpec.describe "Mass Import" do
   let(:contributor) { create(:contributor) }
 
   before do
-    driven_by(:cuprite)
-
     # these are the examples on the homepage
     create(:species, name: "Carcharhinus acronotus")
     create(:trait, name: "Lmat50")

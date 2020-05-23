@@ -16,8 +16,6 @@ end
 
 RSpec.describe "Enforce authentication by default" do
   before do
-    driven_by(:cuprite)
-
     Rails.application.routes.draw do
       resources :test_auth, only: :index
       resources :ok, only: :index

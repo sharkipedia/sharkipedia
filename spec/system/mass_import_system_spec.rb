@@ -98,7 +98,7 @@ RSpec.describe "Mass Import" do
         expect(import).to be_changes_requested
       end
 
-      it "allows admins to accept" do
+      it "allows admins to approve" do
         import = create("#{kind}_import")
 
         sign_in admin
@@ -116,7 +116,7 @@ RSpec.describe "Mass Import" do
         sleep 0.1
 
         import.reload
-        expect(import).to be_approved
+        expect(import).to be_imported
       end
     end
   end

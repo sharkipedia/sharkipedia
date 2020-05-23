@@ -400,7 +400,7 @@ DEPENDENCIES
   react-rails
   redis-namespace (~> 1.7)
   roo (~> 2.8.0)
-  rspec-rails (~> 4.0.0)
+  rspec-rails (~> 4.0.1)
   rubyXL
   sass-rails (~> 6.0)
   select2-rails (~> 4.0)!

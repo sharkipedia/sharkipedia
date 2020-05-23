@@ -20,7 +20,7 @@ class YearInput extends React.Component {
     const classes =  "input " + (valid ? '' : "is-danger");
     return (
       <div className="field">
-        <label className="label">{this.props.name} year</label>
+        <label className="label" htmlFor={id}>{this.props.name} year</label>
         <p className="control has-icons-left">
           <input type="number" pattern="^[0–9]$" className={classes} min="1900"
                  step="1" maxLength="4" size="4" value={year}

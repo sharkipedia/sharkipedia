@@ -69,7 +69,7 @@ RSpec.describe "Mass Import" do
         visit import_path(import)
 
         # click_link "Reject"
-        find("#reject-btn").click()
+        find("#reject-btn").click
 
         fill_in "reason", with: "just say no"
         click_on "Reject"
@@ -87,7 +87,7 @@ RSpec.describe "Mass Import" do
         visit import_path(import)
 
         # click_link "Request Changes"
-        find("#request-changes-btn").click()
+        find("#request-changes-btn").click
 
         fill_in "reason", with: "please try again"
         click_on "Request changes"
@@ -105,7 +105,7 @@ RSpec.describe "Mass Import" do
         visit import_path(import)
 
         # click_link "Approve"
-        find("#approve-btn").click()
+        find("#approve-btn").click
 
         click_on "Approve and Import"
 
@@ -113,10 +113,30 @@ RSpec.describe "Mass Import" do
           pending "Trend mass imports are defunct at the moment"
         end
 
-        sleep 0.1
+        sleep 0.2
 
         import.reload
         expect(import).to be_imported
+      end
+
+      it "allows users to upload new versions" do
+        sign_in contributor
+        import = create("#{kind}_import", aasm_state: "changes_requested",
+                                          user: contributor)
+
+        visit import_path(import)
+
+        expect(page).to have_content("State: changes requested")
+
+        click_on "Upload new version"
+
+        attach_file "import_xlsx_file", "spec/fixtures/xlsx/#{kind}_valid.xlsx"
+        click_button "Upload"
+
+        sleep 0.1
+
+        expect(page).to have_content("Type: #{kind}")
+        expect(page).to have_content("State: pending review")
       end
     end
   end

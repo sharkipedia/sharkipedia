@@ -3,7 +3,7 @@
 <div class="columns">
   <div class="column">
     <div class="field">
-      <p class="control has-icons-left">
+      <p class="control has-icons-left" id="reference_selector">
         <%= select_tag "#{target}[reference#{many ? '_ids' : '_id' }]", nil, style: 'width: 100%', multiple: many %>
         <span class="icon is-small is-left">
           <i class="fas fa-exclamation"></i>

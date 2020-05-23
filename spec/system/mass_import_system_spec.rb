@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.describe "Mass Import" do
   let(:contributor) { create(:contributor) }
+  let(:admin) { create(:admin) }
 
   before do
     # these are the examples on the homepage
@@ -14,7 +15,7 @@ RSpec.describe "Mass Import" do
     create(:sex_type, name: "Male")
 
     # Import#notify_admins needs at least one admin
-    create(:admin)
+    admin
   end
 
   %w[traits trends].each do |kind|
@@ -59,6 +60,63 @@ RSpec.describe "Mass Import" do
 
         expect(page).to have_content("Type: #{kind}")
         expect(page).to have_content("State: pending review")
+      end
+
+      it "allows admins to reject" do
+        import = create("#{kind}_import")
+
+        sign_in admin
+        visit import_path(import)
+
+        # click_link "Reject"
+        find("#reject-btn").click()
+
+        fill_in "reason", with: "just say no"
+        click_on "Reject"
+
+        sleep 0.1
+
+        import.reload
+        expect(import).to be_rejected
+      end
+
+      it "allows admins to request changes" do
+        import = create("#{kind}_import")
+
+        sign_in admin
+        visit import_path(import)
+
+        # click_link "Request Changes"
+        find("#request-changes-btn").click()
+
+        fill_in "reason", with: "please try again"
+        click_on "Request changes"
+
+        sleep 0.1
+
+        import.reload
+        expect(import).to be_changes_requested
+      end
+
+      it "allows admins to accept" do
+        import = create("#{kind}_import")
+
+        sign_in admin
+        visit import_path(import)
+
+        # click_link "Approve"
+        find("#approve-btn").click()
+
+        click_on "Approve and Import"
+
+        if kind == "trends"
+          pending "Trend mass imports are defunct at the moment"
+        end
+
+        sleep 0.1
+
+        import.reload
+        expect(import).to be_approved
       end
     end
   end

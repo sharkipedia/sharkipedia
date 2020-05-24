@@ -69,7 +69,7 @@ jobs:
         PGUSER: postgres
         RAILS_ENV: test
       run: |
-        bin/rails db:setup
+        bin/rails db:create db:schema:load
 
     - name: Run Tests
       env:

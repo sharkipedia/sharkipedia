@@ -32,7 +32,8 @@ jobs:
       run: |
         sudo apt-get -yqq install libpq-dev
 
-    - uses: actions/cache@v1
+    - name: cache vendor/bundle
+      uses: actions/cache@v1
       with:
         path: vendor/bundle
         key: bundle-use-ruby-${{ runner.os }}-${{ hashFiles('.ruby-version') }}-${{ hashFiles('**/Gemfile.lock') }}
@@ -43,13 +44,32 @@ jobs:
         bundle config path vendor/bundle
         bundle install --jobs 4 --retry 3
 
+    - name: cache node_modules
+      uses: actions/cache@v1
+      with:
+        path: node_modules
+        key: yarn-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
+        restore-keys: |
+          yarn-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-
+    - name: yarn install
+      run: |
+        yarn install
+
+    - name: Compile assets
+      env:
+        PGHOST: localhost
+        PGUSER: postgres
+        RAILS_ENV: test
+      run: |
+        bin/rails webpacker:compile
+
     - name: Build App
       env:
         PGHOST: localhost
         PGUSER: postgres
         RAILS_ENV: test
       run: |
-        bin/rails db:setup
+        bin/rails db:create db:schema:load
 
     - name: Run Tests
       env:

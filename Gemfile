@@ -54,7 +54,7 @@ gem "bootsnap", ">= 1.1.0", require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
-  gem "rspec-rails", "~> 4.0.0"
+  gem "rspec-rails", "~> 4.0.1"
 end
 
 group :development do
@@ -68,10 +68,11 @@ group :development do
 end
 
 group :test do
-  # Adds support for Capybara system testing and selenium driver
-  gem "capybara"
-  gem "selenium-webdriver"
+  gem "capybara", "~> 3.32.2"
   gem "webdrivers", "~> 4.3"
+  gem "cuprite", "~> 0.10"
+
+  gem "capybara-select-2", "~> 0.5.0"
 
   gem "factory_bot_rails", "~> 5.0", ">= 5.0.1"
 end

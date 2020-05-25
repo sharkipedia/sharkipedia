@@ -79,10 +79,10 @@ class Import < ApplicationRecord
       return
     end
 
-    puts "triggered #{inspect}"
-    url = Rails.application.routes.url_helpers.rails_blob_url xlsx_file
-
-    result = Xlsx::Validator.call(url)
+    result = nil
+    xlsx_file.open do |file|
+      result = Xlsx::Validator.call(file)
+    end
     self.import_type = result.type
     self.log = result.messages.join("\n")
     self.xlsx_valid = result.valid
@@ -111,15 +111,17 @@ class Import < ApplicationRecord
       return
     end
 
-    url = Rails.application.routes.url_helpers.rails_blob_url xlsx_file
+    i = nil
 
-    # TODO: automatically detect the file type from the XLSX
-    # i.e. if it's a trend or traits import
-    i = case import_type
-          when "traits"
-            ImportXlsx::Traits.new url, user, self
-          when "trends"
-            ImportXlsx::Trends.new url, user, self
+    xlsx_file.open do |file|
+      # TODO: automatically detect the file type from the XLSX
+      # i.e. if it's a trend or traits import
+      i = case import_type
+      when "traits"
+        ImportXlsx::Traits.new file, user, self
+      when "trends"
+        ImportXlsx::Trends.new file, user, self
+      end
     end
 
     # TODO: handle import failure

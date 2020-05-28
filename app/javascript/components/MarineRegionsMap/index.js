@@ -22,9 +22,8 @@ import {fromLonLat} from 'ol/proj';
 
 // http://www.marineregions.org/webservices.php
 const LONGHURST_WMS_URL = "http://geo.vliz.be/geoserver/MarineRegions/wms?service=WMS&version=1.1.0&request=GetMap&layers=MarineRegions:longhurst&styles=&bbox=-179.999,-78.5,179.99,89.899&width=705&height=330&srs=EPSG:4326&format=application/openlayers";
-const MEOW_WMS_URL = "http://geo.vliz.be/geoserver/MarineRegions/wms?service=WMS&version=1.1.0&request=GetMap&layers=MarineRegions:lme&styles=&bbox=-180.0,-85.47,180.0,82.893&width=705&height=330&srs=EPSG:4326&format=application/openlayers"
 // https://data.unep-wcmc.org/
-const PPOW_URL = "https://gis.unep-wcmc.org/arcgis/rest/services/marine/WCMC_036_MEOW_PPOW_2007_2012/MapServer"
+const PPOW_MEOW_URL = "https://gis.unep-wcmc.org/arcgis/rest/services/marine/WCMC_036_MEOW_PPOW_2007_2012/MapServer"
 
 class MarineRegionsMap extends React.Component {
   constructor(props) {
@@ -44,22 +43,12 @@ class MarineRegionsMap extends React.Component {
       })
     });
 
-    const meowWMSImageLayer = new ImageLayer({
-      title: "Large Marine Ecosystems of the World",
-      source: new ImageWMS({
-        url: MEOW_WMS_URL,
-        params: {},
-        serverType: 'geoserver',
-        crossOrigin: 'anonymous'
-      })
-    });
-
-    const ppoe = new ImageLayer({
-      title: 'Pelagic Provinces of the World',
+    const ppoe_meow = new ImageLayer({
+      title: 'Marine Ecoregions of the World',
       source: new SourceImageArcGISRest({
         ratio: 1,
         params: {'LAYERS': 'show:0'},
-        url: PPOW_URL
+        url: PPOW_MEOW_URL
       })
     })
 
@@ -102,7 +91,7 @@ class MarineRegionsMap extends React.Component {
         }),
         new LayerGroup({
           title: 'Marine Regions',
-          layers: [ ppoe, meowWMSImageLayer, longhurstWMSImageLayer ]
+          layers: [ ppoe_meow, longhurstWMSImageLayer ]
         }),
         new LayerGroup({
           layers: [ vectorLayer ]

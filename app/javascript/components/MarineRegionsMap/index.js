@@ -20,7 +20,7 @@ import {Circle as CircleStyle, Fill, Stroke, Style} from 'ol/style';
 import {fromLonLat} from 'ol/proj';
 
 // http://www.marineregions.org/webservices.php
-const LONGHURST_WMS_URL = "https://geo.vliz.be/geoserver/MarineRegions/wms?service=WMS&version=1.1.0&request=GetMap&layers=MarineRegions:longhurst&styles=&bbox=-179.999,-78.5,179.99,89.899&width=705&height=330&srs=EPSG:4326&format=application/openlayers";
+const LONGHURST_WMS_URL = "https://geo.vliz.be/geoserver/MarineRegions/wms";
 // https://data.unep-wcmc.org/
 const PPOW_MEOW_URL = "https://gis.unep-wcmc.org/arcgis/rest/services/marine/WCMC_036_MEOW_PPOW_2007_2012/MapServer"
 

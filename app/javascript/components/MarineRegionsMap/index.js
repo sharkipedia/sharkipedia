@@ -32,14 +32,35 @@ class MarineRegionsMap extends React.Component {
   }
 
   componentDidMount() {
-    const longhurstWMSImageLayer = new ImageLayer({
-      title: "Longhurst Provinces",
+    // the "selected" layer
+    const longhurstWMSFilteredImageLayer = new ImageLayer({
       source: new ImageWMS({
         url: LONGHURST_WMS_URL,
-        params: {},
+        params: {
+          LAYERS: 'longhurst',
+          STYLES: 'polygon_black', // 'gazetteer_red',
+          FILTER: `<Filter><Intersects><PropertyName>the_geom</PropertyName><Point><coordinates>${this.props.longitude},${this.props.latitude}</coordinates></Point></Intersects></Filter>`
+        },
         serverType: 'geoserver',
         crossOrigin: 'anonymous'
       })
+    });
+
+    const longhurstWMSAllImageLayer = new ImageLayer({
+      source: new ImageWMS({
+        url: LONGHURST_WMS_URL,
+        params: { LAYERS: 'MarineRegions:longhurst' },
+        serverType: 'geoserver',
+        crossOrigin: 'anonymous'
+      })
+    });
+
+    const longhurstGroup = new LayerGroup({
+      title: "Longhurst Provinces",
+      layers: [
+        longhurstWMSAllImageLayer,
+        longhurstWMSFilteredImageLayer
+      ]
     });
 
     const ppoe_meow = new ImageLayer({
@@ -79,7 +100,7 @@ class MarineRegionsMap extends React.Component {
       target: this.mapContainerRef.current,
       layers: [
         new LayerGroup({
-          'title': 'Base map',
+          title: 'Base map',
           layers: [
             new TileLayer({
               title: 'OSM',
@@ -91,11 +112,12 @@ class MarineRegionsMap extends React.Component {
         }),
         new LayerGroup({
           title: 'Marine Regions',
-          layers: [ ppoe_meow, longhurstWMSImageLayer ]
+          layers: [
+            ppoe_meow,
+            longhurstGroup
+          ]
         }),
-        new LayerGroup({
-          layers: [ vectorLayer ]
-        }),
+        vectorLayer
       ],
       view: new View({
         center: trendLocation,

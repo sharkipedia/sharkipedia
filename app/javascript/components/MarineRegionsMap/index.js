@@ -46,8 +46,9 @@ class MarineRegionsMap extends React.Component {
       title: 'Marine Ecoregions of the World',
       source: new SourceImageArcGISRest({
         ratio: 1,
-        params: {'LAYERS': 'show:0'},
-        url: PPOW_MEOW_URL
+        params: {},
+        url: PPOW_MEOW_URL,
+        projection: 'EPSG:4326'
       })
     })
 

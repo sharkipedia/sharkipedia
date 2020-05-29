@@ -8,8 +8,8 @@ import View from 'ol/View';
 import LayerGroup from 'ol/layer/Group';
 import ImageLayer from 'ol/layer/Image';
 import VectorLayer from 'ol/layer/Vector';
+import TileLayer from 'ol/layer/Tile';
 import Feature from 'ol/Feature';
-import LayerTile from 'ol/layer/Tile';
 import ImageWMS from 'ol/source/ImageWMS';
 import SourceImageArcGISRest from 'ol/source/ImageArcGISRest';
 import SourceOSM from 'ol/source/OSM';
@@ -17,7 +17,6 @@ import VectorSource from 'ol/source/Vector';
 import LayerSwitcher from 'ol-layerswitcher';
 import Point from 'ol/geom/Point';
 import {Circle as CircleStyle, Fill, Stroke, Style} from 'ol/style';
-
 import {fromLonLat} from 'ol/proj';
 
 // http://www.marineregions.org/webservices.php
@@ -81,7 +80,7 @@ class MarineRegionsMap extends React.Component {
         new LayerGroup({
           'title': 'Base map',
           layers: [
-            new LayerTile({
+            new TileLayer({
               title: 'OSM',
               type: 'base',
               visible: true,

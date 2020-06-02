@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_03_140209) do
+ActiveRecord::Schema.define(version: 2020_06_02_131400) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,6 +83,17 @@ ActiveRecord::Schema.define(version: 2020_04_03_140209) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["code"], name: "index_longhurst_provinces_on_code"
+  end
+
+  create_table "marine_ecoregions_worlds", force: :cascade do |t|
+    t.integer "unep_fid", null: false
+    t.string "region_type", null: false
+    t.string "province", null: false
+    t.string "ecoregion"
+    t.string "biome"
+    t.integer "trend_reg_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "measurement_methods", force: :cascade do |t|

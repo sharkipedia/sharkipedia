@@ -19,14 +19,18 @@ import LayerSwitcher from 'ol-layerswitcher';
 import Point from 'ol/geom/Point';
 import {Circle as CircleStyle, Fill, Stroke, Style} from 'ol/style';
 import {fromLonLat} from 'ol/proj';
-
-import EsriJSON from 'ol/format/EsriJSON';
+import {WFS, GeoJSON, EsriJSON} from 'ol/format';
 import {all} from 'ol/loadingstrategy';
+import {or, equalTo} from 'ol/format/filter';
 
 // http://www.marineregions.org/webservices.php
 const LONGHURST_WMS_URL = "https://geo.vliz.be/geoserver/MarineRegions/wms";
 // https://data.unep-wcmc.org/
 const PPOW_MEOW_URL = "https://gis.unep-wcmc.org/arcgis/rest/services/marine/WCMC_036_MEOW_PPOW_2007_2012/MapServer"
+// http://www.fao.org/geonetwork/srv/en/main.home#fisheries - FAO Statistical Areas for Fishery Purposes
+// note: they don't have SSL
+const FAO_WFS_URL = 'http://www.fao.org/figis/geoserver/area/ows?service=WFS&request=GetFeature&version=1.0.0&typeName=area:FAO_AREAS'
+const FAO_WMS_URL = 'http://www.fao.org/figis/geoserver/area/ows?service=WMS'
 
 const esrijsonFormat = new EsriJSON();
 
@@ -59,6 +63,7 @@ class MarineRegionsMap extends React.Component {
   }
 
   componentDidMount() {
+    // LONGHURST REGIONS
     // the "selected" layer
     const longhurstWMSFilteredImageLayer = new ImageLayer({
       source: new ImageWMS({
@@ -90,6 +95,7 @@ class MarineRegionsMap extends React.Component {
       ]
     });
 
+    // MARINE ECOREGIONS OF THE WORLD
     const ppoe_meow_tiled = new TileLayer({
       opacity: 0.6,
       source: new TileArcGISRest({
@@ -101,7 +107,7 @@ class MarineRegionsMap extends React.Component {
     })
 
     const url = `${PPOW_MEOW_URL}/0/query?where=FID+IN+(${this.props.marine_ecoregions_world.join('%2C+')})&outFields=FID%2CTYPE%2CPROVINC&returnGeometry=true&returnTrueCurves=false&returnIdsOnly=false&returnCountOnly=false&returnZ=false&returnM=false&returnDistinctValues=false&f=pjson`
-    const vectorSource = new VectorSource({
+    const filteredPPOEMEOWSource = new VectorSource({
       loader: function(_extent, _resolution, projection) {
         fetch(url)
           .then(response => response.json())
@@ -111,7 +117,7 @@ class MarineRegionsMap extends React.Component {
             });
 
             if (features.length > 0) {
-              vectorSource.addFeatures(features);
+              filteredPPOEMEOWSource.addFeatures(features);
             }
           });
       },
@@ -119,7 +125,7 @@ class MarineRegionsMap extends React.Component {
     });
 
     const filteredPPOEMEOWLayer = new VectorLayer({
-      source: vectorSource,
+      source: filteredPPOEMEOWSource,
       opacity: 0.6,
       style: (feature) => {
         const prov_type = feature.get('TYPE');
@@ -132,6 +138,63 @@ class MarineRegionsMap extends React.Component {
       layers: [
         ppoe_meow_tiled,
         filteredPPOEMEOWLayer
+      ]
+    });
+
+    // FAO REGIONS
+    const faoWMSLayer = new ImageLayer({
+      opacity: 0.6,
+      source: new ImageWMS({
+        url: FAO_WMS_URL,
+        params: { LAYERS: 'FAO_AREAS' },
+        serverType: 'geoserver',
+        crossOrigin: 'anonymous'
+      })
+    });
+
+    const filteredFaoSource = new VectorSource({
+      loader: function(_extent, _resolution, _projection) {
+        const featureRequest = new WFS().writeGetFeature({
+          srsName: 'EPSG:3857',
+          featurePrefix: 'area',
+          featureTypes: ['FAO_AREAS'],
+          outputFormat: 'application/json',
+          filter: or(
+            equalTo('F_CODE', '34'),
+            equalTo('F_CODE', '37')
+          )
+        });
+
+        fetch(FAO_WFS_URL, {
+          method: 'POST',
+          body: new XMLSerializer().serializeToString(featureRequest)
+        }).then(response => response.json()
+        ).then(json => {
+          const features = new GeoJSON().readFeatures(json);
+          filteredFaoSource.addFeatures(features);
+        });
+      }
+    });
+
+    const filteredFaoLayer = new VectorLayer({
+      source: filteredFaoSource,
+      opacity: 0.3,
+      style: new Style({
+        fill: new Fill({
+          color: 'rgba(0, 0, 255, 1.0)',
+        }),
+        stroke: new Stroke({
+          color: 'rgba(0, 0, 79, 1)',
+          width: 1.5
+        })
+      })
+    });
+
+    const faoGroup = new LayerGroup({
+      title: 'FAO areas',
+      layers: [
+        faoWMSLayer,
+        filteredFaoLayer
       ]
     });
 
@@ -176,7 +239,8 @@ class MarineRegionsMap extends React.Component {
           title: 'Marine Regions',
           layers: [
             longhurstGroup,
-            ppoemeowGroup
+            ppoemeowGroup,
+            faoGroup
           ]
         }),
         measurementMarker
@@ -206,5 +270,6 @@ MarineRegionsMap.propTypes = {
   latitude: PropTypes.string,
   longitude: PropTypes.string,
   marine_ecoregions_world: PropTypes.array,
+  fao_areas: PropTypes.array,
 };
 export default MarineRegionsMap

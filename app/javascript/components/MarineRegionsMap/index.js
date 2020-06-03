@@ -147,7 +147,10 @@ class MarineRegionsMap extends React.Component {
       opacity: 0.6,
       source: new ImageWMS({
         url: FAO_WMS_URL,
-        params: { LAYERS: 'FAO_AREAS' },
+        params: {
+          LAYERS: 'FAO_AREAS',
+          FILTER: `<Filter><PropertyIsEqualTo><PropertyName>F_LEVEL</PropertyName><Literal>MAJOR</Literal></PropertyIsEqualTo></Filter>`
+        },
         serverType: 'geoserver',
         crossOrigin: 'anonymous'
       })

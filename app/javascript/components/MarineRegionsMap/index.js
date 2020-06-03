@@ -238,9 +238,9 @@ class MarineRegionsMap extends React.Component {
         new LayerGroup({
           title: 'Marine Regions',
           layers: [
+            faoGroup,
             longhurstGroup,
-            ppoemeowGroup,
-            faoGroup
+            ppoemeowGroup
           ]
         }),
         measurementMarker

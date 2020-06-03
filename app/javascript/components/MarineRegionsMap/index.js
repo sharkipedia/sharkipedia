@@ -25,12 +25,13 @@ import {or, equalTo} from 'ol/format/filter';
 
 // http://www.marineregions.org/webservices.php
 const LONGHURST_WMS_URL = "https://geo.vliz.be/geoserver/MarineRegions/wms";
+
 // https://data.unep-wcmc.org/
 const PPOW_MEOW_URL = "https://gis.unep-wcmc.org/arcgis/rest/services/marine/WCMC_036_MEOW_PPOW_2007_2012/MapServer"
-// http://www.fao.org/geonetwork/srv/en/main.home#fisheries - FAO Statistical Areas for Fishery Purposes
-// note: they don't have SSL
-const FAO_WFS_URL = 'http://www.fao.org/figis/geoserver/area/ows?service=WFS&request=GetFeature&version=1.0.0&typeName=area:FAO_AREAS'
-const FAO_WMS_URL = 'http://www.fao.org/figis/geoserver/area/ows?service=WMS'
+
+// FAO Statistical Areas for Fishery Purposes
+const FAO_WFS_URL = 'https://geo.holmes-iv.com/geoserver/ows?service=wfs&version=2.0.0&request=GetCapabilities'
+const FAO_WMS_URL = 'https://geo.holmes-iv.com/geoserver/fao_area/wms'
 
 const esrijsonFormat = new EsriJSON();
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_04_100906) do
+ActiveRecord::Schema.define(version: 2020_06_04_171450) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -282,6 +282,13 @@ ActiveRecord::Schema.define(version: 2020_06_04_100906) do
     t.datetime "updated_at", null: false
     t.index ["species_subclass_id"], name: "index_species_orders_on_species_subclass_id"
     t.index ["species_superorder_id"], name: "index_species_orders_on_species_superorder_id"
+  end
+
+  create_table "species_species_groups", id: false, force: :cascade do |t|
+    t.bigint "species_id", null: false
+    t.bigint "species_group_id", null: false
+    t.index ["species_group_id", "species_id"], name: "index_species_species_groups_on_species_group_id_and_species_id"
+    t.index ["species_id", "species_group_id"], name: "index_species_species_groups_on_species_id_and_species_group_id"
   end
 
   create_table "species_subclasses", force: :cascade do |t|

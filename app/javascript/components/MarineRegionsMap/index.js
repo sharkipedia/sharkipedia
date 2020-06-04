@@ -156,6 +156,10 @@ class MarineRegionsMap extends React.Component {
       })
     });
 
+    const orFilter = or(
+      ...this.props.fao_areas.map(f_code => equalTo('F_CODE', f_code))
+    );
+
     const filteredFaoSource = new VectorSource({
       loader: function(_extent, _resolution, _projection) {
         const featureRequest = new WFS().writeGetFeature({
@@ -163,10 +167,7 @@ class MarineRegionsMap extends React.Component {
           featurePrefix: 'area',
           featureTypes: ['FAO_AREAS'],
           outputFormat: 'application/json',
-          filter: or(
-            equalTo('F_CODE', '34'),
-            equalTo('F_CODE', '37')
-          )
+          filter: orFilter
         });
 
         fetch(FAO_WFS_URL, {

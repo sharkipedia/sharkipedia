@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :species_orders
     resources :species_families
     resources :species
+    resources :species_groups
     resources :species_data_types
 
     resources :standards

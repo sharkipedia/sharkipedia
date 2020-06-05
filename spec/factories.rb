@@ -129,7 +129,6 @@ FactoryBot.define do
     end
   end
 
-
   factory :measurement_model do
     sequence(:name) { |n| "measurement_model #{n}" }
     trait_class

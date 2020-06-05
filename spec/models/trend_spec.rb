@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Trend, type: :model do
-  describe 'associations' do
+  describe "associations" do
     it { should belong_to(:user) }
     it { should belong_to(:import) }
     it { should belong_to(:reference) }
@@ -16,7 +16,7 @@ RSpec.describe Trend, type: :model do
     it { should have_many(:trend_observations) }
   end
 
-  describe 'validations' do
+  describe "validations" do
     it { should validate_presence_of(:start_year) }
     it { should validate_presence_of(:end_year) }
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_03_140209) do
+ActiveRecord::Schema.define(version: 2020_06_04_092122) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,22 @@ ActiveRecord::Schema.define(version: 2020_04_03_140209) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "fao_areas", force: :cascade do |t|
+    t.string "f_code", null: false
+    t.string "f_level", null: false
+    t.bigint "ocean_id", null: false
+    t.string "f_area"
+    t.string "f_subarea"
+    t.string "f_division"
+    t.string "f_subdivision"
+    t.string "f_subunit"
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["f_code"], name: "index_fao_areas_on_f_code"
+    t.index ["ocean_id"], name: "index_fao_areas_on_ocean_id"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -83,6 +99,17 @@ ActiveRecord::Schema.define(version: 2020_04_03_140209) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["code"], name: "index_longhurst_provinces_on_code"
+  end
+
+  create_table "marine_ecoregions_worlds", force: :cascade do |t|
+    t.integer "unep_fid", null: false
+    t.string "region_type", null: false
+    t.string "province", null: false
+    t.string "ecoregion"
+    t.string "biome"
+    t.integer "trend_reg_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "measurement_methods", force: :cascade do |t|
@@ -379,6 +406,7 @@ ActiveRecord::Schema.define(version: 2020_04_03_140209) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "fao_areas", "oceans"
   add_foreign_key "imports", "users"
   add_foreign_key "imports", "users", column: "approved_by_id"
   add_foreign_key "measurement_methods", "trait_classes"

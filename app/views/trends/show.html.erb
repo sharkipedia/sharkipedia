@@ -55,6 +55,14 @@
 
 <div class="columns">
   <div class="column">
+    <% if @trend.location.lat && @trend.location.lon %>
+      <%= react_component("MarineRegionsMap", { latitude: @trend.location.lat, longitude: @trend.location.lon, marine_ecoregions_world: MarineEcoregionsWorld.where(trend_reg_id: [528,31,32]).map(&:unep_fid), fao_areas: FaoArea.where(f_area: ['31', '21']).map(&:f_code) } ) %>
+    <% end %>
+  </div>
+</div>
+
+<div class="columns">
+  <div class="column">
     <%= render partial: 'raw_data', locals: { observations: @trend.trend_observations } %>
   </div>
   <div class="column">
@@ -63,9 +71,6 @@
   <div class="column">
     <%= render partial: 'figure_meta', locals: { trend: @trend } %>
   </div>
-</div>
-
-<div class="columns">
 </div>
 
 <div class="columns">

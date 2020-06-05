@@ -38,6 +38,10 @@ FactoryBot.define do
     trait_class
   end
 
+  factory :unit_time do
+    sequence(:name) { |n| "unit_time #{n}" }
+  end
+
   factory :sampling_method do
     sequence(:name) { |n| "sampling_method #{n}" }
   end

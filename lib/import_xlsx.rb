@@ -259,28 +259,22 @@ module ImportXlsx
 
   class Trends < DataImport
     def initialize(file_path, user, import)
-      @allowed_sheet_names = ["Data", "Notes"]
+      @allowed_sheet_names = ["Data"]
 
       super
 
       @allowed_headers = %w[
 
-        Class Order Family Genus Species Taxonomic_Notes Source_year AuthorYear
-        DataSource Fishery_independent General_data_type Unit Unit_time
+        Superorder Order Family Genus Species Source_year AuthorYear
+        DataSource Source_observation General_data_type Unit Unit_time
         Unit_spatial Unit_gear Unit_transformation Unit_freeform Model
         Sampling_method_general Sampling_method_info Dataset_location
         Dataset_representativeness_experts Experts_for_representativeness
-        Coastal_province Pelagic_province Dataset_map Latitude Longitude Ocean
-        Datamined sd PageAndFigureNumber LineUsed PDFPage ActualPage FigureName
-        FigureData Comments Flag_for_NP_NKD
+        Coastal_province Pelagic_province FAO_area Dataset_map Latitude
+        Longitude Ocean Datamined Variance PageAndFigureNumber LineUsed
+        PDFPage ActualPage FigureName FigureData Comments
 
       ]
-
-      # @allowed_headers = %w( Class Order Family Genus Species Binomial IUCNcode
-      # SourceYear Taxonomic\ Notes AuthorYear DataSource Units SamplingMethod
-      # SamplingMethodCode Location Latitude Longitude Ocean DataType NoYears
-      # TimeMin PageAndFigureNumber LineUsed PDFPage ActualPage Depth Model
-      # FigureName FigureData)
 
       # allow year-columns
       year_columns = @data_entry_sheet.row(1).map(&:to_s)
@@ -293,7 +287,7 @@ module ImportXlsx
         parsed_tbl = @data_entry_sheet.parse # .parse(headers: true)
         # parsed.shift # remove the header row
 
-        p_1 = parsed_tbl.first
+        p_1 = @data_entry_sheet.row 1
 
         self.log += "The sheet contains #{parsed_tbl.count} trend(s)\n"
         parsed_tbl.each do |p_2|
@@ -301,11 +295,40 @@ module ImportXlsx
 
           self.log += "\n"
 
-          binomial = "#{row["Genus"].try(:strip)} #{row["Species"].try(:strip)}"
-          species = Species.find_by name: binomial
-          self.log += "Found species #{binomial} => #{species.inspect}\n"
+          # check if single or species group
+          species, species_group = nil
+          if row["Species"].include? ","
+            species_group = SpeciesGroup.find_or_create_by name: "#{row["Genus"].try(:strip)} #{row["Species"].try(:strip)}"
+            self.log += "-> #{species_group.inspect}\n"
 
-          next if species.blank?
+            row["Species"].split(/,\s*/).each do |name|
+              # double groups
+              binomial = if name.include?(".")
+                genera = row["Genus"].split(/,\s*/)
+
+                genus = genera.find { |genus| genus.starts_with? name[0] }
+                name.sub name[0..1], genus
+              else
+                "#{row["Genus"].try(:strip)} #{name.try(:strip)}"
+              end
+
+              s = Species.find_by name: binomial
+              self.log += "==> Found species #{binomial} => #{s.inspect}\n"
+              species_group.species << s unless species_group.species.include?(s)
+            end
+          else
+            binomial = "#{row["Genus"].try(:strip)} #{row["Species"].try(:strip)}"
+            species = Species.find_by name: binomial
+            self.log += "Found species #{binomial} => #{species.inspect}\n"
+
+            # NOTE: spp when species is unknown
+          end
+
+          if species.blank? && species_group.blank?
+            self.log += "Couldn't find species / species_group for #{row["Species"]}\n"
+
+            next
+          end
 
           ref = row["AuthorYear"]
           if ref.blank?
@@ -315,30 +338,45 @@ module ImportXlsx
             ref = ref.sub("_", "")
           end
           resource = Reference.where("lower(name) = ?", ref.downcase).first
-          resource ||= Reference.find_or_create_by! name: ref,
-                                                    data_source: row["DataSource"],
-                                                    doi: row["doi"],
-                                                    year: row["SourceYear"]
-          self.log += "Created Reference: #{resource.inspect}\n"
+          if resource
+            self.log += "Found Reference: #{resource.inspect}\n"
+          else
+            doi, data_source = nil
+            if /^10./.match?(row["DataSource"])
+              doi = row["DataSource"]
+            else
+              data_source = row["DataSource"]
+            end
+            resource ||= Reference.find_or_create_by! name: ref,
+                                                      data_source: data_source,
+                                                      doi: doi,
+                                                      year: row["SourceYear"]
+
+            self.log += "Created Reference: #{resource.inspect}\n"
+          end
 
           # Latitude has a space at the end
           location = Location.find_or_create_by name: row["Dataset_location"],
-                                                lat: row["Latitude "],
+                                                lat: (row["Latitude"] || row["Latitude "]),
                                                 lon: row["Longitude"]
           self.log += "#{location.inspect}\n"
-
-          ocean = Ocean.where("lower(name) = ?", row["Ocean"]).first
-          self.log += "#{ocean.inspect}\n"
 
           data_type = DataType.find_or_create_by name: row["General_data_type"]
           self.log += "#{data_type.inspect}\n"
 
           # TODO:
           # Unit  Unit_time   Unit_spatial  Unit_gear  Unit_transformation  Unit_freeform
-          units_combo = "#{row["Unit"]} #{row["Unit_time"]} #{row["Unit_spatial"]} #{row["Unit_gear"]} #{row["Unit_transformation"]} #{row["Unit_freeform"]}"
-          units_combo = units_combo.gsub "NA", ""
-          unit = Standard.find_or_create_by name: units_combo
+          # units_combo = "#{row["Unit"]} #{row["Unit_time"]} #{row["Unit_spatial"]} #{row["Unit_gear"]} #{row["Unit_transformation"]} #{row["Unit_freeform"]}"
+          # units_combo = units_combo.gsub "NA", ""
+          unit = Standard.find_or_create_by name: row["Unit"]
           self.log += "#{unit.inspect}\n"
+
+          unit_freeform = row["Unit_freeform"].sub "NA", ""
+          unit_time = UnitTime.find_or_create_by name: row["Unit_time"]
+          unit_spatial = UnitSpatial.find_or_create_by name: row["Unit_spatial"]
+          unit_gear = UnitGear.find_or_create_by name: row["Unit_gear"]
+          unit_transformation = UnitTransformation.find_or_create_by name: row["Unit_transformation"]
+          analysis_model = AnalysisModel.find_or_create_by name: row["Model"]
 
           sampling_method = SamplingMethod.find_or_create_by name: row["Sampling_method_general"]
           self.log += "#{sampling_method.inspect}\n"
@@ -348,25 +386,59 @@ module ImportXlsx
                                 figure_data: row["FigureData"],
                                 figure_name: row["FigureName"],
                                 line_used: row["LineUsed"],
-                                model: row["Model"],
+                                analysis_model: analysis_model,
                                 page_and_figure_number: row["PageAndFigureNumber"],
                                 pdf_page: row["PDFPage"],
-                                taxonomic_notes: row["Taxonomic_Notes"],
+                                comments: row["Comments"],
                                 reference: resource,
                                 species: species,
+                                species_group: species_group,
                                 location: location,
-                                ocean: ocean,
                                 data_type: data_type,
                                 standard: unit,
                                 sampling_method: sampling_method,
                                 user: user,
                                 start_year: 2900,
                                 end_year: 2900,
+                                unit_freeform: unit_freeform,
+                                unit_time: unit_time,
+                                unit_spatial: unit_spatial,
+                                unit_gear: unit_gear,
+                                unit_transformation: unit_transformation,
+                                sampling_method_info: row["Sampling_method_info"],
+                                variance: (row["Variance"] == "Y"),
+                                dataset_map: (row["Dataset_map"] == "Y"),
+                                data_mined: (row["Datamined"] == "Y"),
+                                dataset_representativeness_experts: row["Dataset_representativeness_experts"],
+                                experts_for_representativeness: row["Experts_for_representativeness"],
                                 import: @import
+
+          row["Ocean"].downcase.split(/,\s?/).each do |ocean_name|
+            ocean = Ocean.where("lower(name) = ?", ocean_name).first
+            self.log += "#{ocean.inspect}\n"
+            trend.oceans << ocean
+          end
+
+          source_observations = SourceObservation.where name: row["Source_observation"]
+          trend.source_observations = source_observations
+
+          marine_provinces = MarineEcoregionsWorld.where(
+            trend_reg_id: [
+              row["Coastal_province"].to_s.split(",").map(&:to_i),
+              row["Pelagic_province"].to_s.split(",").map(&:to_i)
+            ].flatten
+          )
+          trend.marine_ecoregions_worlds = marine_provinces
+          fao_areas = FaoArea.where(
+            f_area: [
+              row["FAO_area"].to_s.split(",")
+            ].flatten
+          )
+          trend.fao_areas = fao_areas
 
           self.log += "Created Trend: #{trend.inspect}\n"
 
-          year_columns = parsed_tbl.first.map(&:to_s).select { |e| e =~ /\d{4}/ }
+          year_columns = @data_entry_sheet.row(1).map(&:to_s).select { |e| e =~ /\d{4}/ }
 
           year_columns.each do |year_col|
             value = row[year_col.to_i]
@@ -384,7 +456,7 @@ module ImportXlsx
 
           trend.no_years = trend.end_year - trend.start_year + 1
 
-          trend.save
+          trend.save!
           self.log += "\n"
         end
       end

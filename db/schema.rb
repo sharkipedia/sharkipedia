@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_05_144316) do
+ActiveRecord::Schema.define(version: 2020_06_05_145832) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -116,6 +116,13 @@ ActiveRecord::Schema.define(version: 2020_06_05_144316) do
     t.integer "trend_reg_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "marine_ecoregions_worlds_trends", id: false, force: :cascade do |t|
+    t.bigint "marine_ecoregions_world_id", null: false
+    t.bigint "trend_id", null: false
+    t.index ["marine_ecoregions_world_id", "trend_id"], name: "marine_ecoregions_worlds_trends_index"
+    t.index ["trend_id", "marine_ecoregions_world_id"], name: "trends_marine_ecoregions_worlds_index"
   end
 
   create_table "measurement_methods", force: :cascade do |t|

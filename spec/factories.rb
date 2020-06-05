@@ -46,6 +46,10 @@ FactoryBot.define do
     sequence(:name) { |n| "unit_spatial #{n}" }
   end
 
+  factory :unit_gear do
+    sequence(:name) { |n| "unit_gear #{n}" }
+  end
+
   factory :sampling_method do
     sequence(:name) { |n| "sampling_method #{n}" }
   end

@@ -34,4 +34,18 @@ namespace :import do
 
     puts ""
   end
+
+  desc "Seed Unit Gear"
+  task unit_gear: :environment do
+    %w[
+      10000hook 1000hook 100hook 100net 10power-3hook 50hook BRUV angler dive
+      drumline gillnet_day haul hook km-lift km.net kmnet lift line net set
+      tow trawl
+    ].each do |name|
+      UnitGear.find_or_create_by! name: name
+      print "."
+    end
+
+    puts ""
+  end
 end

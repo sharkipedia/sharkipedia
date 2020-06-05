@@ -14,6 +14,7 @@ RSpec.describe Trend, type: :model do
     it { should belong_to(:sampling_method) }
 
     it { should have_many(:trend_observations) }
+    it { should have_and_belong_to_many(:source_observations) }
   end
 
   describe "validations" do

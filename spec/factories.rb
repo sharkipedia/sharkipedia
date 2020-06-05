@@ -183,4 +183,8 @@ FactoryBot.define do
     sequence(:year) { |n| 1900 + n }
     value { rand(1..200) }
   end
+
+  factory :source_observation do
+    sequence(:name) { |n| "source_observation #{n}" }
+  end
 end

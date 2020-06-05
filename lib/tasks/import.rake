@@ -48,4 +48,35 @@ namespace :import do
 
     puts ""
   end
+
+  desc "Seed Unit Transformation"
+  task unit_transformation: :environment do
+    [
+      "N/Nmsy",
+      "Weighted mean across models",
+      "average betweem summer and fall",
+      "divided by 1 st year",
+      "divided by coefficient of variation",
+      "divided by maximum",
+      "divided_by_1000",
+      "divided_by_first_value",
+      "divided_by_max",
+      "divided_by_mean",
+      "divided_by_unfished_biomass",
+      "ln",
+      "log",
+      "log10",
+      "mean",
+      "million",
+      "multiplied by 100000",
+      "normalised",
+      "relative to 2001",
+      "relative to first year"
+    ].each do |name|
+      UnitTransformation.find_or_create_by! name: name
+      print "."
+    end
+
+    puts ""
+  end
 end

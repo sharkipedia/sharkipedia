@@ -50,6 +50,10 @@ FactoryBot.define do
     sequence(:name) { |n| "unit_gear #{n}" }
   end
 
+  factory :unit_transformation do
+    sequence(:name) { |n| "unit_transformation #{n}" }
+  end
+
   factory :sampling_method do
     sequence(:name) { |n| "sampling_method #{n}" }
   end

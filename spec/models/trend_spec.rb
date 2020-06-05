@@ -15,6 +15,7 @@ RSpec.describe Trend, type: :model do
 
     it { should have_many(:trend_observations) }
     it { should have_and_belong_to_many(:source_observations) }
+    it { should have_and_belong_to_many(:fao_areas) }
   end
 
   describe "validations" do

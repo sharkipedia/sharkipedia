@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_05_145832) do
+ActiveRecord::Schema.define(version: 2020_06_05_160123) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,13 @@ ActiveRecord::Schema.define(version: 2020_06_05_145832) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["f_code"], name: "index_fao_areas_on_f_code"
     t.index ["ocean_id"], name: "index_fao_areas_on_ocean_id"
+  end
+
+  create_table "fao_areas_trends", id: false, force: :cascade do |t|
+    t.bigint "fao_area_id", null: false
+    t.bigint "trend_id", null: false
+    t.index ["fao_area_id", "trend_id"], name: "index_fao_areas_trends_on_fao_area_id_and_trend_id"
+    t.index ["trend_id", "fao_area_id"], name: "index_fao_areas_trends_on_trend_id_and_fao_area_id"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|

@@ -13,6 +13,7 @@ class Trend < ApplicationRecord
   has_many :trend_observations, -> { order(:year) }, dependent: :destroy
   has_and_belongs_to_many :source_observations
   has_and_belongs_to_many :marine_ecoregions_worlds
+  has_and_belongs_to_many :fao_areas
 
   has_one_attached :figure
 

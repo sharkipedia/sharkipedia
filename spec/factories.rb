@@ -212,4 +212,11 @@ FactoryBot.define do
     sequence(:province) { |n| "province #{n}" }
     region_type { "PPOW" }
   end
+
+  factory :fao_area do
+    sequence(:f_code) { |n| "f_code #{n}" }
+    sequence(:name) { |n| "fao_area #{n}" }
+    f_level { "MAJOR" }
+    ocean
+  end
 end

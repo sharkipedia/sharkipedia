@@ -186,8 +186,12 @@ FactoryBot.define do
     location
     ocean
     data_type
-    standard
     sampling_method
+    standard
+    unit_time
+    unit_spatial
+    unit_gear
+    unit_transformation
 
     start_year { 1900 }
     end_year { 2020 }

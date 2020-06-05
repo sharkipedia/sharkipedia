@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_05_191216) do
+ActiveRecord::Schema.define(version: 2020_06_05_193530) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -403,6 +403,12 @@ ActiveRecord::Schema.define(version: 2020_06_05_191216) do
     t.boolean "dataset_map"
     t.boolean "variance"
     t.boolean "data_mined"
+    t.bigint "unit_time_id"
+    t.bigint "unit_spatial_id"
+    t.bigint "unit_gear_id"
+    t.bigint "unit_transformation_id"
+    t.bigint "analysis_model_id"
+    t.index ["analysis_model_id"], name: "index_trends_on_analysis_model_id"
     t.index ["data_type_id"], name: "index_trends_on_data_type_id"
     t.index ["import_id"], name: "index_trends_on_import_id"
     t.index ["location_id"], name: "index_trends_on_location_id"
@@ -412,6 +418,10 @@ ActiveRecord::Schema.define(version: 2020_06_05_191216) do
     t.index ["species_group_id"], name: "index_trends_on_species_group_id"
     t.index ["species_id"], name: "index_trends_on_species_id"
     t.index ["standard_id"], name: "index_trends_on_standard_id"
+    t.index ["unit_gear_id"], name: "index_trends_on_unit_gear_id"
+    t.index ["unit_spatial_id"], name: "index_trends_on_unit_spatial_id"
+    t.index ["unit_time_id"], name: "index_trends_on_unit_time_id"
+    t.index ["unit_transformation_id"], name: "index_trends_on_unit_transformation_id"
     t.index ["user_id"], name: "index_trends_on_user_id"
   end
 
@@ -519,6 +529,7 @@ ActiveRecord::Schema.define(version: 2020_06_05_191216) do
   add_foreign_key "traits", "trait_classes"
   add_foreign_key "trend_observations", "trends"
   add_foreign_key "trends", "\"references\"", column: "reference_id"
+  add_foreign_key "trends", "analysis_models"
   add_foreign_key "trends", "data_types"
   add_foreign_key "trends", "imports"
   add_foreign_key "trends", "locations"
@@ -527,5 +538,9 @@ ActiveRecord::Schema.define(version: 2020_06_05_191216) do
   add_foreign_key "trends", "species"
   add_foreign_key "trends", "species_groups"
   add_foreign_key "trends", "standards"
+  add_foreign_key "trends", "unit_gears"
+  add_foreign_key "trends", "unit_spatials"
+  add_foreign_key "trends", "unit_times"
+  add_foreign_key "trends", "unit_transformations"
   add_foreign_key "trends", "users"
 end

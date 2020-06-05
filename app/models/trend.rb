@@ -7,8 +7,13 @@ class Trend < ApplicationRecord
   belongs_to :location
   belongs_to :ocean
   belongs_to :data_type
-  belongs_to :standard
   belongs_to :sampling_method
+  belongs_to :standard
+  belongs_to :unit_time, optional: true
+  belongs_to :unit_spatial, optional: true
+  belongs_to :unit_gear, optional: true
+  belongs_to :unit_transformation, optional: true
+  belongs_to :analysis_model, optional: true
 
   has_many :trend_observations, -> { order(:year) }, dependent: :destroy
   has_and_belongs_to_many :source_observations

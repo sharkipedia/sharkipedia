@@ -7,4 +7,8 @@ RSpec.describe UnitTime, type: :model do
     it { should validate_presence_of(:name) }
     it { should validate_uniqueness_of(:name) }
   end
+
+  describe "associations" do
+    it { should have_many(:trends) }
+  end
 end

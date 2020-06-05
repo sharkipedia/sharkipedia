@@ -2,7 +2,8 @@ class Trend < ApplicationRecord
   belongs_to :user
   belongs_to :import
   belongs_to :reference
-  belongs_to :species
+  belongs_to :species, optional: true
+  belongs_to :species_group, optional: true
   belongs_to :location
   belongs_to :ocean
   belongs_to :data_type
@@ -15,6 +16,15 @@ class Trend < ApplicationRecord
 
   validates :start_year, presence: true
   validates :end_year, presence: true
+
+  validate :species_or_species_group
+
+  def species_or_species_group
+    if species.blank? && species_group.blank?
+      errors.add(:species_id, "species or species_group must be set")
+      errors.add(:species_group_id, "species or species_group must be set")
+    end
+  end
 
   def title
     "#{species.name} - #{reference.name}"

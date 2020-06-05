@@ -115,6 +115,21 @@ FactoryBot.define do
     species_data_type
   end
 
+  factory :species_group do
+    sequence(:name) { |n| "species group #{n}" }
+
+    factory :species_group_with_species do
+      transient do
+        species_count { 5 }
+      end
+
+      after(:create) do |species_group, evaluator|
+        create_list(:species, evaluator.species_count, species_groups: [species_group])
+      end
+    end
+  end
+
+
   factory :measurement_model do
     sequence(:name) { |n| "measurement_model #{n}" }
     trait_class
@@ -136,5 +151,36 @@ FactoryBot.define do
 
   factory :precision_type do
     sequence(:name) { |n| "precision_type #{n}" }
+  end
+
+  factory :location do
+    sequence(:name) { |n| "location #{n}" }
+    sequence(:lat) { |n| n }
+    sequence(:lon) { |n| n }
+  end
+
+  factory :trend do
+    user
+    import
+    reference
+    species
+    location
+    ocean
+    data_type
+    standard
+    sampling_method
+
+    start_year { 1900 }
+    end_year { 2020 }
+
+    factory :trend_with_species_group do
+      species { nil }
+      species_group
+    end
+  end
+
+  factory :trend_observation do
+    sequence(:year) { |n| 1900 + n }
+    value { rand(1..200) }
   end
 end

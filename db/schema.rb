@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_05_170954) do
+ActiveRecord::Schema.define(version: 2020_06_05_191216) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -380,7 +380,7 @@ ActiveRecord::Schema.define(version: 2020_06_05_170954) do
     t.bigint "sampling_method_id"
     t.integer "no_years"
     t.integer "time_min"
-    t.text "taxonomic_notes"
+    t.text "comments"
     t.string "page_and_figure_number"
     t.string "line_used"
     t.integer "pdf_page"

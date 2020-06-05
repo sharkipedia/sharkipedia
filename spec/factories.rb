@@ -54,6 +54,10 @@ FactoryBot.define do
     sequence(:name) { |n| "unit_transformation #{n}" }
   end
 
+  factory :analysis_model do
+    sequence(:name) { |n| "analysis_model #{n}" }
+  end
+
   factory :sampling_method do
     sequence(:name) { |n| "sampling_method #{n}" }
   end

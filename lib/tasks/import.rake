@@ -79,4 +79,68 @@ namespace :import do
 
     puts ""
   end
+
+  desc "Seed Analysis Model"
+  task analysis_model: :environment do
+    [
+      "zero-inflated negative binomial GLM",
+      "Bayesian negative binomial generalised additive mixed effects models",
+      "GAM",
+      "GAM_Poisson",
+      "GAM_negbin",
+      "GLM",
+      "GLM zero-inflated",
+      "GLM_binomial",
+      "GLM_delta",
+      "GLM_delta_negbin",
+      "GLM_hurdle",
+      "GLM_negbin",
+      "GLM_quasipoisson",
+      "GLM_tweedie",
+      "JABBA",
+      "MULTIFAN-CL",
+      "NA",
+      "Poisson",
+      "Poisson_GAM",
+      "Ricker stock-recruitment",
+      "Stock Synthesis",
+      "Stock synthesis",
+      "age-structured_population",
+      "age_sex_structured_population",
+      "aged-surplus production model",
+      "biomass dynamic, state-space model",
+      "catch-only-model",
+      "delta lognormal GLM",
+      "delta-lognormal GLM",
+      "delta_geoGLMM",
+      "delta_lognormal_GLM",
+      "delta_lognormal_GLMM",
+      "gamma_GLM",
+      "hierarchical Bayesian framework",
+      "loess_smoothing",
+      "log_gamma",
+      "multispecies State-space model",
+      "neg_bin",
+      "negative_binomial_GAM",
+      "negative_binomial_model",
+      "series_of_GLM_poisson",
+      "stage-structured",
+      "state-space, age-structured production model",
+      "stock_synthesis",
+      "surplus production model",
+      "surplus production model, logistic ",
+      "surplus_production",
+      "swept-volume",
+      "tweedie_GLMM",
+      "two-stage delta-GLM",
+      "zero inflated negative binomial GLM",
+      "zero-altered_negative_binomial ",
+      "zero-inflated"
+    ].each do |name|
+      AnalysisModel.find_or_create_by! name: name
+      print "."
+    end
+
+    puts ""
+  end
 end

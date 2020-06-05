@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_05_142320) do
+ActiveRecord::Schema.define(version: 2020_06_05_144316) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -383,6 +383,9 @@ ActiveRecord::Schema.define(version: 2020_06_05_142320) do
     t.bigint "import_id"
     t.bigint "species_group_id"
     t.text "unit_freeform"
+    t.string "sampling_method_info"
+    t.string "dataset_representativeness_experts"
+    t.string "experts_for_representativeness"
     t.index ["data_type_id"], name: "index_trends_on_data_type_id"
     t.index ["import_id"], name: "index_trends_on_import_id"
     t.index ["location_id"], name: "index_trends_on_location_id"

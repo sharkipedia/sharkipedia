@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_05_160123) do
+ActiveRecord::Schema.define(version: 2020_06_05_170954) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -400,6 +400,9 @@ ActiveRecord::Schema.define(version: 2020_06_05_160123) do
     t.string "sampling_method_info"
     t.string "dataset_representativeness_experts"
     t.string "experts_for_representativeness"
+    t.boolean "dataset_map"
+    t.boolean "variance"
+    t.boolean "data_mined"
     t.index ["data_type_id"], name: "index_trends_on_data_type_id"
     t.index ["import_id"], name: "index_trends_on_import_id"
     t.index ["location_id"], name: "index_trends_on_location_id"

@@ -20,7 +20,11 @@
 
 <div class="columns">
   <div class="column is-one-third">
-    <%= render partial: 'species/detail', locals: { specie: @trend.species, render_links: true } %>
+    <% if @trend.species %>
+      <%= render partial: 'species/detail', locals: { specie: @trend.species, render_links: true } %>
+    <% else %>
+      <%= render partial: 'species/group_detail', locals: { species_group: @trend.species_group } %>
+    <% end %>
     <%= render partial: 'location', locals: { location: @trend.location, ocean: @trend.ocean } %>
   </div>
   <div class="column">

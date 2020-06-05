@@ -35,7 +35,7 @@ class Trend < ApplicationRecord
   end
 
   def title
-    "#{species.name} - #{reference.name}"
+    "#{(species || species_group).name} - #{reference.name}"
   end
 
   def to_csv

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_05_134638) do
+ActiveRecord::Schema.define(version: 2020_06_05_142320) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -372,7 +372,6 @@ ActiveRecord::Schema.define(version: 2020_06_05_134638) do
     t.integer "pdf_page"
     t.integer "actual_page"
     t.string "depth"
-    t.string "model"
     t.string "figure_name"
     t.string "figure_data"
     t.datetime "created_at", null: false

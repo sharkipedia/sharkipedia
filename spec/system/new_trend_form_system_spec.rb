@@ -30,7 +30,6 @@ RSpec.describe "New Trend form" do
     select2 standard.name, from: "Unit"
     select2 sampling_method.name, from: "Sampling Method"
     select2 data_type.name, from: "Data Type"
-    fill_in "Model", with: "none"
     select2 ocean.name, from: "Ocean"
     fill_in "Depth", with: "100"
     fill_in "Location Name", with: "Test Location"

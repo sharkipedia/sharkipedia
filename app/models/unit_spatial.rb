@@ -1,0 +1,3 @@
+class UnitSpatial < ApplicationRecord
+  validates :name, presence: true, uniqueness: true
+end

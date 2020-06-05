@@ -22,4 +22,16 @@ namespace :import do
 
     puts ""
   end
+
+  desc "Seed Unit Spatial"
+  task unit_spatial: :environment do
+    %w[
+      1000000m3 km km2 quarter square_nautical_mile_area_swept
+    ].each do |name|
+      UnitSpatial.find_or_create_by! name: name
+      print "."
+    end
+
+    puts ""
+  end
 end

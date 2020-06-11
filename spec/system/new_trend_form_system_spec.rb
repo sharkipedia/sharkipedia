@@ -76,5 +76,11 @@ RSpec.describe "New Trend form" do
 
     expect(page).to have_content(species.name)
     expect(page).to have_content(reference.name)
+
+    visit trend_path(import.trends.first)
+
+    expect(page).to have_content(species.name)
+    expect(page).to have_content(reference.name)
+    expect(page).to have_content(ocean.name)
   end
 end

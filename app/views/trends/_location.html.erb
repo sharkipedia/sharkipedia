@@ -2,7 +2,11 @@
   <tbody>
     <tr>
       <th>Ocean</th>
-      <td id="ocean"><%= ocean.name %></td>
+      <td id="oceans">
+        <% oceans.each do |ocean| %>
+          <%= ocean.name %>
+        <% end %>
+      </td>
     </tr>
     <tr>
       <th>Name</th>

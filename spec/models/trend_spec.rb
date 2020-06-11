@@ -8,7 +8,6 @@ RSpec.describe Trend, type: :model do
     it { should belong_to(:species).optional }
     it { should belong_to(:species_group).optional }
     it { should belong_to(:location) }
-    it { should belong_to(:ocean) }
     it { should belong_to(:data_type) }
     it { should belong_to(:sampling_method) }
     it { should belong_to(:standard) }
@@ -21,6 +20,7 @@ RSpec.describe Trend, type: :model do
     it { should have_many(:trend_observations) }
     it { should have_and_belong_to_many(:source_observations) }
     it { should have_and_belong_to_many(:fao_areas) }
+    it { should have_and_belong_to_many(:oceans) }
   end
 
   describe "validations" do

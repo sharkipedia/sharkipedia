@@ -27,7 +27,7 @@ $(document).on('turbolinks:load', function() {
     // unit / standard autocomplete
     let select2Elements = [
       'trend_standard_id', 'trend_sampling_method_id',
-      'trend_data_type_id', 'trend_ocean_id', 'trend_location_id'
+      'trend_data_type_id', 'trend_ocean_ids', 'trend_location_id'
     ];
     select2Elements.forEach(function(element) {
       $('#' + element).select2({ selectOnClose: true });

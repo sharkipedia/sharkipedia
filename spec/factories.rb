@@ -84,9 +84,21 @@ FactoryBot.define do
     end
 
     factory :trends_import do
-      sequence(:title) { |n| "traits import #{n}" }
-      import_type { "traits" }
+      sequence(:title) { |n| "trends import #{n}" }
+      import_type { "trends" }
       xlsx_file { Rack::Test::UploadedFile.new("spec/fixtures/xlsx/trends_valid.xlsx") }
+    end
+
+    factory :imported_trends do
+      aasm_state { "imported" }
+
+      transient do
+        trends_count { 2 }
+      end
+
+      after(:create) do |import, evaluator|
+        create_list(:trend, evaluator.trends_count, import: import)
+      end
     end
   end
 
@@ -184,7 +196,6 @@ FactoryBot.define do
     reference
     species
     location
-    ocean
     data_type
     sampling_method
     standard
@@ -195,6 +206,14 @@ FactoryBot.define do
 
     start_year { 1900 }
     end_year { 2020 }
+
+    transient do
+      ocean_count { 2 }
+    end
+
+    after(:create) do |trend, evaluator|
+      create_list(:ocean, evaluator.ocean_count, trends: [trend])
+    end
 
     factory :trend_with_species_group do
       species { nil }

@@ -127,7 +127,6 @@ class TrendsController < PreAuthController
       :figure_name,
       :figure_data,
       :figure,
-      :ocean_id,
       :standard_id,
       :unit_time_id,
       :unit_spatial_id,
@@ -141,7 +140,8 @@ class TrendsController < PreAuthController
       :variance,
       :data_mined,
       :data_type_id,
-      :sampling_method_id
+      :sampling_method_id,
+      ocean_ids: []
     )
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_05_193530) do
+ActiveRecord::Schema.define(version: 2020_06_11_201314) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -215,6 +215,13 @@ ActiveRecord::Schema.define(version: 2020_06_05_193530) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "oceans_trends", id: false, force: :cascade do |t|
+    t.bigint "trend_id", null: false
+    t.bigint "ocean_id", null: false
+    t.index ["ocean_id", "trend_id"], name: "index_oceans_trends_on_ocean_id_and_trend_id"
+    t.index ["trend_id", "ocean_id"], name: "index_oceans_trends_on_trend_id_and_ocean_id"
+  end
+
   create_table "precision_types", force: :cascade do |t|
     t.string "name", null: false
     t.text "description"
@@ -375,7 +382,6 @@ ActiveRecord::Schema.define(version: 2020_06_05_193530) do
     t.bigint "user_id"
     t.bigint "species_id"
     t.bigint "location_id"
-    t.bigint "ocean_id"
     t.bigint "data_type_id"
     t.bigint "sampling_method_id"
     t.integer "no_years"
@@ -412,7 +418,6 @@ ActiveRecord::Schema.define(version: 2020_06_05_193530) do
     t.index ["data_type_id"], name: "index_trends_on_data_type_id"
     t.index ["import_id"], name: "index_trends_on_import_id"
     t.index ["location_id"], name: "index_trends_on_location_id"
-    t.index ["ocean_id"], name: "index_trends_on_ocean_id"
     t.index ["reference_id"], name: "index_trends_on_reference_id"
     t.index ["sampling_method_id"], name: "index_trends_on_sampling_method_id"
     t.index ["species_group_id"], name: "index_trends_on_species_group_id"
@@ -463,7 +468,6 @@ ActiveRecord::Schema.define(version: 2020_06_05_193530) do
     t.datetime "updated_at", null: false
     t.string "user_level", default: "user"
     t.string "name"
-    t.string "api_token"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -533,7 +537,6 @@ ActiveRecord::Schema.define(version: 2020_06_05_193530) do
   add_foreign_key "trends", "data_types"
   add_foreign_key "trends", "imports"
   add_foreign_key "trends", "locations"
-  add_foreign_key "trends", "oceans"
   add_foreign_key "trends", "sampling_methods"
   add_foreign_key "trends", "species"
   add_foreign_key "trends", "species_groups"

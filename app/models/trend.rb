@@ -5,7 +5,6 @@ class Trend < ApplicationRecord
   belongs_to :species, optional: true
   belongs_to :species_group, optional: true
   belongs_to :location
-  belongs_to :ocean
   belongs_to :data_type
   belongs_to :sampling_method
   belongs_to :standard
@@ -19,6 +18,7 @@ class Trend < ApplicationRecord
   has_and_belongs_to_many :source_observations
   has_and_belongs_to_many :marine_ecoregions_worlds
   has_and_belongs_to_many :fao_areas
+  has_and_belongs_to_many :oceans
 
   has_one_attached :figure
 

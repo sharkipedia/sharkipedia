@@ -2,22 +2,40 @@ class Trend < ApplicationRecord
   belongs_to :user
   belongs_to :import
   belongs_to :reference
-  belongs_to :species
+  belongs_to :species, optional: true
+  belongs_to :species_group, optional: true
   belongs_to :location
-  belongs_to :ocean
   belongs_to :data_type
-  belongs_to :standard
   belongs_to :sampling_method
+  belongs_to :standard
+  belongs_to :unit_time, optional: true
+  belongs_to :unit_spatial, optional: true
+  belongs_to :unit_gear, optional: true
+  belongs_to :unit_transformation, optional: true
+  belongs_to :analysis_model, optional: true
 
   has_many :trend_observations, -> { order(:year) }, dependent: :destroy
+  has_and_belongs_to_many :source_observations
+  has_and_belongs_to_many :marine_ecoregions_worlds
+  has_and_belongs_to_many :fao_areas
+  has_and_belongs_to_many :oceans
 
   has_one_attached :figure
 
   validates :start_year, presence: true
   validates :end_year, presence: true
 
+  validate :species_or_species_group
+
+  def species_or_species_group
+    if species.blank? && species_group.blank?
+      errors.add(:species_id, "species or species_group must be set")
+      errors.add(:species_group_id, "species or species_group must be set")
+    end
+  end
+
   def title
-    "#{species.name} - #{reference.name}"
+    "#{(species || species_group).name} - #{reference.name}"
   end
 
   def to_csv

@@ -48,7 +48,7 @@ module Export
               trend.location.name,
               trend.location.lat,
               trend.location.lon,
-              trend.ocean.name,
+              trend.oceans.map(&:name).join(","),
               trend.data_type.name,
               trend.no_years,
               trend.time_min,

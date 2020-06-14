@@ -20,4 +20,6 @@ class Species < ApplicationRecord
 
   has_many :observations
   has_many :trends
+
+  has_and_belongs_to_many :species_groups
 end

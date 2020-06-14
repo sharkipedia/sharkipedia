@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_04_092122) do
+ActiveRecord::Schema.define(version: 2020_06_11_201314) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,12 @@ ActiveRecord::Schema.define(version: 2020_06_04_092122) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "analysis_models", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "data_types", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -56,6 +62,13 @@ ActiveRecord::Schema.define(version: 2020_06_04_092122) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["f_code"], name: "index_fao_areas_on_f_code"
     t.index ["ocean_id"], name: "index_fao_areas_on_ocean_id"
+  end
+
+  create_table "fao_areas_trends", id: false, force: :cascade do |t|
+    t.bigint "fao_area_id", null: false
+    t.bigint "trend_id", null: false
+    t.index ["fao_area_id", "trend_id"], name: "index_fao_areas_trends_on_fao_area_id_and_trend_id"
+    t.index ["trend_id", "fao_area_id"], name: "index_fao_areas_trends_on_trend_id_and_fao_area_id"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -110,6 +123,13 @@ ActiveRecord::Schema.define(version: 2020_06_04_092122) do
     t.integer "trend_reg_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "marine_ecoregions_worlds_trends", id: false, force: :cascade do |t|
+    t.bigint "marine_ecoregions_world_id", null: false
+    t.bigint "trend_id", null: false
+    t.index ["marine_ecoregions_world_id", "trend_id"], name: "marine_ecoregions_worlds_trends_index"
+    t.index ["trend_id", "marine_ecoregions_world_id"], name: "trends_marine_ecoregions_worlds_index"
   end
 
   create_table "measurement_methods", force: :cascade do |t|
@@ -195,6 +215,13 @@ ActiveRecord::Schema.define(version: 2020_06_04_092122) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "oceans_trends", id: false, force: :cascade do |t|
+    t.bigint "trend_id", null: false
+    t.bigint "ocean_id", null: false
+    t.index ["ocean_id", "trend_id"], name: "index_oceans_trends_on_ocean_id_and_trend_id"
+    t.index ["trend_id", "ocean_id"], name: "index_oceans_trends_on_trend_id_and_ocean_id"
+  end
+
   create_table "precision_types", force: :cascade do |t|
     t.string "name", null: false
     t.text "description"
@@ -226,6 +253,19 @@ ActiveRecord::Schema.define(version: 2020_06_04_092122) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "source_observations", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "source_observations_trends", id: false, force: :cascade do |t|
+    t.bigint "trend_id", null: false
+    t.bigint "source_observation_id", null: false
+    t.index ["source_observation_id", "trend_id"], name: "source_observations_trends_index"
+    t.index ["trend_id", "source_observation_id"], name: "trends_source_observations_index"
   end
 
   create_table "species", force: :cascade do |t|
@@ -268,6 +308,12 @@ ActiveRecord::Schema.define(version: 2020_06_04_092122) do
     t.index ["species_superorder_id"], name: "index_species_families_on_species_superorder_id"
   end
 
+  create_table "species_groups", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "species_orders", force: :cascade do |t|
     t.string "name"
     t.bigint "species_superorder_id"
@@ -276,6 +322,13 @@ ActiveRecord::Schema.define(version: 2020_06_04_092122) do
     t.datetime "updated_at", null: false
     t.index ["species_subclass_id"], name: "index_species_orders_on_species_subclass_id"
     t.index ["species_superorder_id"], name: "index_species_orders_on_species_superorder_id"
+  end
+
+  create_table "species_species_groups", id: false, force: :cascade do |t|
+    t.bigint "species_id", null: false
+    t.bigint "species_group_id", null: false
+    t.index ["species_group_id", "species_id"], name: "index_species_species_groups_on_species_group_id_and_species_id"
+    t.index ["species_id", "species_group_id"], name: "index_species_species_groups_on_species_id_and_species_group_id"
   end
 
   create_table "species_subclasses", force: :cascade do |t|
@@ -329,18 +382,16 @@ ActiveRecord::Schema.define(version: 2020_06_04_092122) do
     t.bigint "user_id"
     t.bigint "species_id"
     t.bigint "location_id"
-    t.bigint "ocean_id"
     t.bigint "data_type_id"
     t.bigint "sampling_method_id"
     t.integer "no_years"
     t.integer "time_min"
-    t.text "taxonomic_notes"
+    t.text "comments"
     t.string "page_and_figure_number"
     t.string "line_used"
     t.integer "pdf_page"
     t.integer "actual_page"
     t.string "depth"
-    t.string "model"
     t.string "figure_name"
     t.string "figure_data"
     t.datetime "created_at", null: false
@@ -350,15 +401,57 @@ ActiveRecord::Schema.define(version: 2020_06_04_092122) do
     t.integer "start_year"
     t.integer "end_year"
     t.bigint "import_id"
+    t.bigint "species_group_id"
+    t.text "unit_freeform"
+    t.string "sampling_method_info"
+    t.string "dataset_representativeness_experts"
+    t.string "experts_for_representativeness"
+    t.boolean "dataset_map"
+    t.boolean "variance"
+    t.boolean "data_mined"
+    t.bigint "unit_time_id"
+    t.bigint "unit_spatial_id"
+    t.bigint "unit_gear_id"
+    t.bigint "unit_transformation_id"
+    t.bigint "analysis_model_id"
+    t.index ["analysis_model_id"], name: "index_trends_on_analysis_model_id"
     t.index ["data_type_id"], name: "index_trends_on_data_type_id"
     t.index ["import_id"], name: "index_trends_on_import_id"
     t.index ["location_id"], name: "index_trends_on_location_id"
-    t.index ["ocean_id"], name: "index_trends_on_ocean_id"
     t.index ["reference_id"], name: "index_trends_on_reference_id"
     t.index ["sampling_method_id"], name: "index_trends_on_sampling_method_id"
+    t.index ["species_group_id"], name: "index_trends_on_species_group_id"
     t.index ["species_id"], name: "index_trends_on_species_id"
     t.index ["standard_id"], name: "index_trends_on_standard_id"
+    t.index ["unit_gear_id"], name: "index_trends_on_unit_gear_id"
+    t.index ["unit_spatial_id"], name: "index_trends_on_unit_spatial_id"
+    t.index ["unit_time_id"], name: "index_trends_on_unit_time_id"
+    t.index ["unit_transformation_id"], name: "index_trends_on_unit_transformation_id"
     t.index ["user_id"], name: "index_trends_on_user_id"
+  end
+
+  create_table "unit_gears", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "unit_spatials", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "unit_times", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "unit_transformations", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -440,12 +533,17 @@ ActiveRecord::Schema.define(version: 2020_06_04_092122) do
   add_foreign_key "traits", "trait_classes"
   add_foreign_key "trend_observations", "trends"
   add_foreign_key "trends", "\"references\"", column: "reference_id"
+  add_foreign_key "trends", "analysis_models"
   add_foreign_key "trends", "data_types"
   add_foreign_key "trends", "imports"
   add_foreign_key "trends", "locations"
-  add_foreign_key "trends", "oceans"
   add_foreign_key "trends", "sampling_methods"
   add_foreign_key "trends", "species"
+  add_foreign_key "trends", "species_groups"
   add_foreign_key "trends", "standards"
+  add_foreign_key "trends", "unit_gears"
+  add_foreign_key "trends", "unit_spatials"
+  add_foreign_key "trends", "unit_times"
+  add_foreign_key "trends", "unit_transformations"
   add_foreign_key "trends", "users"
 end

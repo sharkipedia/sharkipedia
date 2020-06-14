@@ -22,7 +22,11 @@
       <% trends.each do |trend| %>
         <tr>
           <% unless local_assigns.has_key? :hide_species %>
-            <td><%= link_to trend.species.name, species_path(trend.species) %></td>
+            <% if trend.species %>
+              <td><%= link_to trend.species.name, species_path(trend.species) %></td>
+            <% else %>
+              <td><%= link_to trend.species_group.name, '' %></td>
+            <% end %>
           <% end %>
           <td><%= trend.location.name %></td>
           <td width="40%">

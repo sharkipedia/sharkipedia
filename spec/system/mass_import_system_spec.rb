@@ -109,10 +109,6 @@ RSpec.describe "Mass Import" do
 
         click_on "Approve and Import"
 
-        if kind == "trends"
-          pending "Trend mass imports are defunct at the moment"
-        end
-
         sleep 0.2
 
         import.reload

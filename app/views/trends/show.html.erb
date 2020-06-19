@@ -39,7 +39,7 @@
     <% end %>
     <div class="tab-container">
       <div class="tab-item is-active" data-item="0">
-        <%= react_component("TrendChart", { observations: @trend.observations_data }) %>
+        <%= react_component("TrendChart", { observations: @trend.observations_data, unit: @trend.standard.name }) %>
       </div>
 
       <% if @trend.figure.attached? %>

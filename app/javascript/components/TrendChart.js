@@ -69,6 +69,7 @@ class TrendChart extends React.Component {
           display: true,
           scaleLabel: {
             display: true,
+            labelString: this.props.unit || ''
           }
         }]
       }
@@ -83,6 +84,7 @@ class TrendChart extends React.Component {
 }
 
 TrendChart.propTypes = {
-  observations: PropTypes.array
+  observations: PropTypes.array,
+  unit: PropTypes.string
 };
 export default TrendChart

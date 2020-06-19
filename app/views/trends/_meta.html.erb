@@ -1,24 +1,30 @@
 <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
   <tbody>
     <tr>
+      <th>
+        Source observation
+      </th>
+      <td id="source_observations">
+        <%= trend.source_observations.map(&:name).join(", ") %>
+      </td>
+    </tr>
+    <tr>
+      <th>
+        General data type
+      </th>
+      <td id="data-type"><%= trend.data_type.name %></td>
+    </tr>
+    <tr>
       <th>Unit</th>
       <td id="unit"><%= trend.standard.name %></td>
     </tr>
     <tr>
-      <th>Sampling Method</th>
+      <th>Unit transformation</th>
+      <td id="data-type"><%= trend.unit_transformation&.name %></td>
+    </tr>
+    <tr>
+      <th>Sampling Method general</th>
       <td id="sampling-method"><%= trend.sampling_method.name %></td>
-    </tr>
-    <tr>
-      <th>Data Type</th>
-      <td id="data-type"><%= trend.data_type.name %></td>
-    </tr>
-    <tr>
-      <th>No Years</th>
-      <td id="no-years"><%= trend.no_years %></td>
-    </tr>
-    <tr>
-      <th>Depth</th>
-      <td id="depth"><%= trend.depth %></td>
     </tr>
   </tbody>
 </table>

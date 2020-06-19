@@ -3,7 +3,11 @@
     <tr>
       <th>Species Group</th>
       <td id="species-name">
-        <%= species_group.name %>
+        <ul>
+          <% species_group.species.each do |species| %>
+            <li><%= link_to species.name, species_path(species) %></li>
+          <% end %>
+        </ul>
       </td>
     </tr>
   </tbody>

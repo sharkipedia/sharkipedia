@@ -60,3 +60,8 @@
 <% end %>
 
 <%= render partial: 'trends/list', locals: { trends: @trends, hide_species: true } %>
+
+<% if @group_trends.any? %>
+  <h4 class='subtitle is-4'>Group Trends</h2>
+  <%= render partial: 'trends/list', locals: { trends: @group_trends, hide_species: true, hide_title: true } %>
+<% end %>

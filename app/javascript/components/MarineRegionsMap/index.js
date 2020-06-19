@@ -156,9 +156,15 @@ class MarineRegionsMap extends React.Component {
       })
     });
 
-    const orFilter = or(
-      ...this.props.fao_areas.map(f_code => equalTo('F_CODE', f_code))
-    );
+    const f_code_filter = function(fao_areas) {
+      if (fao_areas.length > 1) {
+        return or(
+          ...fao_areas.map(f_code => equalTo('F_CODE', f_code))
+        );
+      } else {
+        return equalTo('F_CODE', fao_areas[0]);
+      }
+    }(this.props.fao_areas);
 
     const filteredFaoSource = new VectorSource({
       loader: function(_extent, _resolution, _projection) {
@@ -167,7 +173,7 @@ class MarineRegionsMap extends React.Component {
           featurePrefix: 'area',
           featureTypes: ['FAO_AREAS'],
           outputFormat: 'application/json',
-          filter: orFilter
+          filter: f_code_filter
         });
 
         fetch(FAO_WFS_URL, {

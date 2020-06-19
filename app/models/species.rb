@@ -22,4 +22,8 @@ class Species < ApplicationRecord
   has_many :trends
 
   has_and_belongs_to_many :species_groups
+
+  def group_trends
+    Trend.where(species_group: species_groups)
+  end
 end

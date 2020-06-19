@@ -25,7 +25,13 @@
             <% if trend.species %>
               <td><%= link_to trend.species.name, species_path(trend.species) %></td>
             <% else %>
-              <td><%= link_to trend.species_group.name, '' %></td>
+              <td>
+                <ul>
+                  <% trend.species_group.species.each do |species| %>
+                    <li><%= link_to species.name, species_path(species) %></li>
+                  <% end %>
+                </ul>
+              </td>
             <% end %>
           <% end %>
           <td><%= trend.location.name %></td>

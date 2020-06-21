@@ -60,7 +60,7 @@
 <div class="columns">
   <div class="column">
     <% if @trend.location.lat && @trend.location.lon %>
-      <%= react_component("MarineRegionsMap", { latitude: @trend.location.lat, longitude: @trend.location.lon, marine_ecoregions_world: @trend&.marine_ecoregions_worlds&.map(&:unep_fid), fao_areas: @trend&.fao_areas&.map(&:f_code) } ) %>
+      <%= react_component("MarineRegionsMap", { latitude: @trend.location.lat, longitude: @trend.location.lon, marine_ecoregions_world: @trend&.marine_ecoregions_worlds.map(&:trend_reg_id).uniq, fao_areas: @trend&.fao_areas&.map(&:f_code) } ) %>
     <% end %>
   </div>
 </div>

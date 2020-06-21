@@ -9,6 +9,7 @@ import LayerGroup from 'ol/layer/Group';
 import ImageLayer from 'ol/layer/Image';
 import VectorLayer from 'ol/layer/Vector';
 import TileLayer from 'ol/layer/Tile';
+import TileWMS from 'ol/source/TileWMS';
 import Feature from 'ol/Feature';
 import ImageWMS from 'ol/source/ImageWMS';
 // import SourceImageArcGISRest from 'ol/source/ImageArcGISRest';
@@ -26,35 +27,11 @@ import {or, equalTo} from 'ol/format/filter';
 // http://www.marineregions.org/webservices.php
 const LONGHURST_WMS_URL = "https://geo.vliz.be/geoserver/MarineRegions/wms";
 
-// https://data.unep-wcmc.org/
-const PPOW_MEOW_URL = "https://gis.unep-wcmc.org/arcgis/rest/services/marine/WCMC_036_MEOW_PPOW_2007_2012/MapServer"
+const PPOW_MEOW_WMS_URL = 'https://geo.holmes-iv.com/geoserver/ppow_meow_simplified/wms'
 
 // FAO Statistical Areas for Fishery Purposes
 const FAO_WFS_URL = 'https://geo.holmes-iv.com/geoserver/ows?service=wfs&version=2.0.0&request=GetCapabilities'
 const FAO_WMS_URL = 'https://geo.holmes-iv.com/geoserver/fao_area/wms'
-
-const esrijsonFormat = new EsriJSON();
-
-const ppoe_meowStyles = {
-  'MEOW': new Style({
-    fill: new Fill({
-      color: 'rgba(71, 71, 71, 0.57)'
-    }),
-    stroke: new Stroke({
-      color: 'rgba(255, 36, 36, 1)',
-      width: 2.5
-    })
-  }),
-  'PPOW': new Style({
-    fill: new Fill({
-      color: 'rgba(19, 117, 202, 0.54)'
-    }),
-    stroke: new Stroke({
-      color: 'rgba(0, 0, 0, 1)',
-      width: 2.5
-    })
-  })
-};
 
 class MarineRegionsMap extends React.Component {
   constructor(props) {
@@ -96,49 +73,42 @@ class MarineRegionsMap extends React.Component {
       ]
     });
 
-    // MARINE ECOREGIONS OF THE WORLD
-    const ppoe_meow_tiled = new TileLayer({
-      opacity: 0.6,
-      source: new TileArcGISRest({
-        ratio: 1,
-        params: {},
-        url: PPOW_MEOW_URL,
-        projection: 'EPSG:4326'
+    const ppow_meow_tiled = new TileLayer({
+      title: 'all',
+      opacity: 0.1,
+      source: new TileWMS({
+        url: PPOW_MEOW_WMS_URL,
+        params: {
+          'LAYERS': 'ppow_meow_simplified:ppow_meow_simplified',
+          'TILED': true,
+        },
+        serverType: 'geoserver',
+        crossOrigin: 'anonymous'
       })
     })
 
-    const url = `${PPOW_MEOW_URL}/0/query?where=FID+IN+(${this.props.marine_ecoregions_world.join('%2C+')})&outFields=FID%2CTYPE%2CPROVINC&returnGeometry=true&returnTrueCurves=false&returnIdsOnly=false&returnCountOnly=false&returnZ=false&returnM=false&returnDistinctValues=false&f=pjson`
-    const filteredPPOEMEOWSource = new VectorSource({
-      loader: function(_extent, _resolution, projection) {
-        fetch(url)
-          .then(response => response.json())
-          .then(info => {
-            const features = esrijsonFormat.readFeatures(info, {
-              featureProjection: projection
-            });
+    const cqlFilter = `OBJECTID in (${this.props.marine_ecoregions_world.map(e => `'${e}'`).join(', ')})`
 
-            if (features.length > 0) {
-              filteredPPOEMEOWSource.addFeatures(features);
-            }
-          });
-      },
-      strategy: all
-    });
-
-    const filteredPPOEMEOWLayer = new VectorLayer({
-      source: filteredPPOEMEOWSource,
+    const filteredPPOWMEOWLayer = new TileLayer({
+      title: 'dataset',
       opacity: 0.6,
-      style: (feature) => {
-        const prov_type = feature.get('TYPE');
-        return ppoe_meowStyles[prov_type];
-      }
-    });
+      source: new TileWMS({
+        url: PPOW_MEOW_WMS_URL,
+        params: {
+          'LAYERS': 'ppow_meow_simplified:ppow_meow_simplified',
+          'TILED': true,
+          'CQL_FILTER': cqlFilter,
+        },
+        serverType: 'geoserver',
+        crossOrigin: 'anonymous'
+      })
+    })
 
-    const ppoemeowGroup = new LayerGroup({
+    const ppowmeowGroup = new LayerGroup({
       title: 'Marine Ecoregions of the World',
       layers: [
-        ppoe_meow_tiled,
-        filteredPPOEMEOWLayer
+        ppow_meow_tiled,
+        filteredPPOWMEOWLayer
       ]
     });
 
@@ -251,7 +221,7 @@ class MarineRegionsMap extends React.Component {
           layers: [
             faoGroup,
             longhurstGroup,
-            ppoemeowGroup
+            ppowmeowGroup
           ]
         }),
         measurementMarker

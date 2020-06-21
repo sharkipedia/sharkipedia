@@ -12,17 +12,12 @@ import TileLayer from 'ol/layer/Tile';
 import TileWMS from 'ol/source/TileWMS';
 import Feature from 'ol/Feature';
 import ImageWMS from 'ol/source/ImageWMS';
-// import SourceImageArcGISRest from 'ol/source/ImageArcGISRest';
-import TileArcGISRest from 'ol/source/TileArcGISRest';
 import SourceOSM from 'ol/source/OSM';
 import VectorSource from 'ol/source/Vector';
 import LayerSwitcher from 'ol-layerswitcher';
 import Point from 'ol/geom/Point';
 import {Circle as CircleStyle, Fill, Stroke, Style} from 'ol/style';
 import {fromLonLat} from 'ol/proj';
-import {WFS, GeoJSON, EsriJSON} from 'ol/format';
-import {all} from 'ol/loadingstrategy';
-import {or, equalTo} from 'ol/format/filter';
 
 // http://www.marineregions.org/webservices.php
 const LONGHURST_WMS_URL = "https://geo.vliz.be/geoserver/MarineRegions/wms";
@@ -30,7 +25,6 @@ const LONGHURST_WMS_URL = "https://geo.vliz.be/geoserver/MarineRegions/wms";
 const PPOW_MEOW_WMS_URL = 'https://geo.holmes-iv.com/geoserver/ppow_meow_simplified/wms'
 
 // FAO Statistical Areas for Fishery Purposes
-const FAO_WFS_URL = 'https://geo.holmes-iv.com/geoserver/ows?service=wfs&version=2.0.0&request=GetCapabilities'
 const FAO_WMS_URL = 'https://geo.holmes-iv.com/geoserver/fao_area/wms'
 
 class MarineRegionsMap extends React.Component {
@@ -87,7 +81,7 @@ class MarineRegionsMap extends React.Component {
       })
     })
 
-    const cqlFilter = `OBJECTID in (${this.props.marine_ecoregions_world.map(e => `'${e}'`).join(', ')})`
+    const regionCqlFilter = `OBJECTID in (${this.props.marine_ecoregions_world.map(e => `'${e}'`).join(', ')})`
 
     const filteredPPOWMEOWLayer = new TileLayer({
       title: 'dataset',
@@ -97,7 +91,7 @@ class MarineRegionsMap extends React.Component {
         params: {
           'LAYERS': 'ppow_meow_simplified:ppow_meow_simplified',
           'TILED': true,
-          'CQL_FILTER': cqlFilter,
+          'CQL_FILTER': regionCqlFilter,
         },
         serverType: 'geoserver',
         crossOrigin: 'anonymous'
@@ -113,61 +107,34 @@ class MarineRegionsMap extends React.Component {
     });
 
     // FAO REGIONS
-    const faoWMSLayer = new ImageLayer({
-      opacity: 0.6,
-      source: new ImageWMS({
+    const faoWMSLayer = new TileLayer({
+      title: 'all',
+      opacity: 0.1,
+      source: new TileWMS({
         url: FAO_WMS_URL,
         params: {
           LAYERS: 'FAO_AREAS',
-          FILTER: `<Filter><PropertyIsEqualTo><PropertyName>F_LEVEL</PropertyName><Literal>MAJOR</Literal></PropertyIsEqualTo></Filter>`
+          CQL_FILTER: `F_LEVEL = 'MAJOR'`
         },
         serverType: 'geoserver',
         crossOrigin: 'anonymous'
       })
     });
 
-    const f_code_filter = function(fao_areas) {
-      if (fao_areas.length > 1) {
-        return or(
-          ...fao_areas.map(f_code => equalTo('F_CODE', f_code))
-        );
-      } else {
-        return equalTo('F_CODE', fao_areas[0]);
-      }
-    }(this.props.fao_areas);
+    const f_code_cqlFilter = `F_CODE in (${this.props.fao_areas.map(e => `'${e}'`).join(', ')})`
 
-    const filteredFaoSource = new VectorSource({
-      loader: function(_extent, _resolution, _projection) {
-        const featureRequest = new WFS().writeGetFeature({
-          srsName: 'EPSG:3857',
-          featurePrefix: 'area',
-          featureTypes: ['FAO_AREAS'],
-          outputFormat: 'application/json',
-          filter: f_code_filter
-        });
-
-        fetch(FAO_WFS_URL, {
-          method: 'POST',
-          body: new XMLSerializer().serializeToString(featureRequest)
-        }).then(response => response.json()
-        ).then(json => {
-          const features = new GeoJSON().readFeatures(json);
-          filteredFaoSource.addFeatures(features);
-        });
-      }
-    });
-
-    const filteredFaoLayer = new VectorLayer({
-      source: filteredFaoSource,
-      opacity: 0.3,
-      style: new Style({
-        fill: new Fill({
-          color: 'rgba(0, 0, 255, 1.0)',
-        }),
-        stroke: new Stroke({
-          color: 'rgba(0, 0, 79, 1)',
-          width: 1.5
-        })
+    const filteredFaoLayer = new TileLayer({
+      title: 'dataset',
+      opacity: 0.4,
+      source: new TileWMS({
+        url: FAO_WMS_URL,
+        params: {
+          LAYERS: 'FAO_AREAS',
+          CQL_FILTER: f_code_cqlFilter,
+          STYLES: 'fao_area:fao_style_active',
+        },
+        serverType: 'geoserver',
+        crossOrigin: 'anonymous'
       })
     });
 

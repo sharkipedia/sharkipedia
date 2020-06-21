@@ -6,12 +6,10 @@ import './style.scss'
 import Map from 'ol/Map';
 import View from 'ol/View';
 import LayerGroup from 'ol/layer/Group';
-import ImageLayer from 'ol/layer/Image';
 import VectorLayer from 'ol/layer/Vector';
 import TileLayer from 'ol/layer/Tile';
 import TileWMS from 'ol/source/TileWMS';
 import Feature from 'ol/Feature';
-import ImageWMS from 'ol/source/ImageWMS';
 import SourceOSM from 'ol/source/OSM';
 import VectorSource from 'ol/source/Vector';
 import LayerSwitcher from 'ol-layerswitcher';
@@ -20,7 +18,7 @@ import {Circle as CircleStyle, Fill, Stroke, Style} from 'ol/style';
 import {fromLonLat} from 'ol/proj';
 
 // http://www.marineregions.org/webservices.php
-const LONGHURST_WMS_URL = "https://geo.vliz.be/geoserver/MarineRegions/wms";
+const LONGHURST_WMS_URL = "https://geo.holmes-iv.com/geoserver/longhurst/wms";
 
 const PPOW_MEOW_WMS_URL = 'https://geo.holmes-iv.com/geoserver/ppow_meow_simplified/wms'
 
@@ -37,23 +35,31 @@ class MarineRegionsMap extends React.Component {
   componentDidMount() {
     // LONGHURST REGIONS
     // the "selected" layer
-    const longhurstWMSFilteredImageLayer = new ImageLayer({
-      source: new ImageWMS({
+    const longhurstCqlFilter = `INTERSECTS(the_geom, POINT(${this.props.longitude} ${this.props.latitude}))`;
+    const longhurstWMSFilteredImageLayer = new TileLayer({
+      title: 'dataset',
+      opacity: 0.6,
+      source: new TileWMS({
         url: LONGHURST_WMS_URL,
         params: {
-          LAYERS: 'longhurst',
-          STYLES: 'polygon_black', // 'gazetteer_red',
-          FILTER: `<Filter><Intersects><PropertyName>the_geom</PropertyName><Point><coordinates>${this.props.longitude},${this.props.latitude}</coordinates></Point></Intersects></Filter>`
+          LAYERS: 'longhurst:Longhurst_world_v4_2010',
+          STYLES: 'polygon_black',
+          CQL_FILTER: longhurstCqlFilter,
         },
         serverType: 'geoserver',
         crossOrigin: 'anonymous'
       })
     });
 
-    const longhurstWMSAllImageLayer = new ImageLayer({
-      source: new ImageWMS({
+    const longhurstWMSAllImageLayer = new TileLayer({
+      title: 'all',
+      opacity: 0.1,
+      source: new TileWMS({
         url: LONGHURST_WMS_URL,
-        params: { LAYERS: 'MarineRegions:longhurst' },
+        params: {
+          STYLES: 'black_line',
+          LAYERS: 'longhurst:Longhurst_world_v4_2010'
+        },
         serverType: 'geoserver',
         crossOrigin: 'anonymous'
       })

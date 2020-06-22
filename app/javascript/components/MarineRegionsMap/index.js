@@ -53,6 +53,7 @@ class MarineRegionsMap extends React.Component {
 
     const longhurstWMSAllImageLayer = new TileLayer({
       title: 'all',
+      visible: false,
       opacity: 0.1,
       source: new TileWMS({
         url: LONGHURST_WMS_URL,
@@ -75,6 +76,7 @@ class MarineRegionsMap extends React.Component {
 
     const ppow_meow_tiled = new TileLayer({
       title: 'all',
+      visible: false,
       opacity: 0.1,
       source: new TileWMS({
         url: PPOW_MEOW_WMS_URL,
@@ -115,6 +117,7 @@ class MarineRegionsMap extends React.Component {
     // FAO REGIONS
     const faoWMSLayer = new TileLayer({
       title: 'all',
+      visible: false,
       opacity: 0.1,
       source: new TileWMS({
         url: FAO_WMS_URL,

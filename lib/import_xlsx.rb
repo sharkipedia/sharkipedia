@@ -423,12 +423,21 @@ module ImportXlsx
           trend.source_observations = source_observations
 
           marine_provinces = MarineEcoregionsWorld.where(
+            region_type: "MEOW",
             trend_reg_id: [
-              row["Coastal_province"].to_s.split(",").map(&:to_i),
-              row["Pelagic_province"].to_s.split(",").map(&:to_i)
+              row["Coastal_province"].to_s.split(",").map(&:to_i)
             ].flatten
+          ).or(
+            MarineEcoregionsWorld.where(
+              region_type: "PPOW",
+              trend_reg_id: [
+                row["Pelagic_province"].to_s.split(",").map(&:to_i)
+              ].flatten
+            )
           )
+
           trend.marine_ecoregions_worlds = marine_provinces
+
           fao_areas = FaoArea.where(
             f_area: [
               row["FAO_area"].to_s.split(",")

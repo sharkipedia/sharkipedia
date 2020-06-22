@@ -87,7 +87,7 @@ class MarineRegionsMap extends React.Component {
       })
     })
 
-    const regionCqlFilter = `OBJECTID in (${this.props.marine_ecoregions_world.map(e => `'${e}'`).join(', ')})`
+    const regionCqlFilter = `FIRST_Numb in (${this.props.marine_ecoregions_world.map(e => `'${e}'`).join(', ')})`
 
     const filteredPPOWMEOWLayer = new TileLayer({
       title: 'dataset',

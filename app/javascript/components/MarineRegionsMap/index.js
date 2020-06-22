@@ -53,6 +53,7 @@ class MarineRegionsMap extends React.Component {
 
     const longhurstWMSAllImageLayer = new TileLayer({
       title: 'all',
+      visible: false,
       opacity: 0.1,
       source: new TileWMS({
         url: LONGHURST_WMS_URL,
@@ -75,6 +76,7 @@ class MarineRegionsMap extends React.Component {
 
     const ppow_meow_tiled = new TileLayer({
       title: 'all',
+      visible: false,
       opacity: 0.1,
       source: new TileWMS({
         url: PPOW_MEOW_WMS_URL,
@@ -87,7 +89,9 @@ class MarineRegionsMap extends React.Component {
       })
     })
 
-    const regionCqlFilter = `OBJECTID in (${this.props.marine_ecoregions_world.map(e => `'${e}'`).join(', ')})`
+    const meowFilter = `("FIRST_Numb" IN (${this.props.meow.map(e => `'${e}'`).join(', ')}) AND "Type" = 'coastal')`
+    const ppowFilter = `("FIRST_Numb" IN (${this.props.ppow.map(e => `'${e}'`).join(', ')}) AND "Type" = 'pelagic')`
+    const regionCqlFilter = `${meowFilter} OR ${ppowFilter}`
 
     const filteredPPOWMEOWLayer = new TileLayer({
       title: 'dataset',
@@ -115,6 +119,7 @@ class MarineRegionsMap extends React.Component {
     // FAO REGIONS
     const faoWMSLayer = new TileLayer({
       title: 'all',
+      visible: false,
       opacity: 0.1,
       source: new TileWMS({
         url: FAO_WMS_URL,
@@ -223,7 +228,8 @@ class MarineRegionsMap extends React.Component {
 MarineRegionsMap.propTypes = {
   latitude: PropTypes.string,
   longitude: PropTypes.string,
-  marine_ecoregions_world: PropTypes.array,
+  meow: PropTypes.array,
+  ppow: PropTypes.array,
   fao_areas: PropTypes.array,
 };
 export default MarineRegionsMap

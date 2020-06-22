@@ -69,4 +69,13 @@ class Trend < ApplicationRecord
       end
     end
   end
+
+  def combined_unit
+    [
+      standard.name,
+      unit_time&.name,
+      unit_spatial&.name,
+      unit_gear&.name
+    ].reject { |u| u.blank? || u == "NA" }.join(" per ")
+  end
 end

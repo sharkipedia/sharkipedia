@@ -16,6 +16,11 @@ class TrendsController < PreAuthController
 
   def show
     authorize @trend
+    @meow_regions = @trend.marine_ecoregions_worlds
+      .where(region_type: "MEOW").map(&:trend_reg_id).uniq
+    @ppow_regions = @trend.marine_ecoregions_worlds
+      .where(region_type: "PPOW").map(&:trend_reg_id).uniq
+
     respond_to do |format|
       format.html
       format.csv {

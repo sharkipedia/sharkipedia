@@ -364,21 +364,17 @@ module ImportXlsx
           data_type = DataType.find_or_create_by name: row["General_data_type"]
           self.log += "#{data_type.inspect}\n"
 
-          # TODO:
-          # Unit  Unit_time   Unit_spatial  Unit_gear  Unit_transformation  Unit_freeform
-          # units_combo = "#{row["Unit"]} #{row["Unit_time"]} #{row["Unit_spatial"]} #{row["Unit_gear"]} #{row["Unit_transformation"]} #{row["Unit_freeform"]}"
-          # units_combo = units_combo.gsub "NA", ""
           unit = Standard.find_or_create_by name: row["Unit"]
           self.log += "#{unit.inspect}\n"
 
           unit_freeform = row["Unit_freeform"].sub "NA", ""
-          unit_time = UnitTime.find_or_create_by name: row["Unit_time"]
-          unit_spatial = UnitSpatial.find_or_create_by name: row["Unit_spatial"]
-          unit_gear = UnitGear.find_or_create_by name: row["Unit_gear"]
-          unit_transformation = UnitTransformation.find_or_create_by name: row["Unit_transformation"]
-          analysis_model = AnalysisModel.find_or_create_by name: row["Model"]
+          unit_time = UnitTime.find_or_create_by(name: row["Unit_time"]) unless row["Unit_time"] == "NA"
+          unit_spatial = UnitSpatial.find_or_create_by(name: row["Unit_spatial"]) unless row["Unit_spatial"] == "NA"
+          unit_gear = UnitGear.find_or_create_by(name: row["Unit_gear"]) unless row["Unit_gear"] == "NA"
+          unit_transformation = UnitTransformation.find_or_create_by(name: row["Unit_transformation"]) unless row["Unit_transformation"] == "NA"
+          analysis_model = AnalysisModel.find_or_create_by(name: row["Model"]) unless row["Model"] == "NA"
 
-          sampling_method = SamplingMethod.find_or_create_by name: row["Sampling_method_general"]
+          sampling_method = SamplingMethod.find_or_create_by(name: row["Sampling_method_general"]) unless row["Sampling_method_general"] == "NA"
           self.log += "#{sampling_method.inspect}\n"
 
           trend = Trend.create! actual_page: row["ActualPage"],

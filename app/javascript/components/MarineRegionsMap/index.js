@@ -89,9 +89,22 @@ class MarineRegionsMap extends React.Component {
       })
     })
 
-    const meowFilter = `("FIRST_Numb" IN (${this.props.meow.map(e => `'${e}'`).join(', ')}) AND "Type" = 'coastal')`
-    const ppowFilter = `("FIRST_Numb" IN (${this.props.ppow.map(e => `'${e}'`).join(', ')}) AND "Type" = 'pelagic')`
-    const regionCqlFilter = `${meowFilter} OR ${ppowFilter}`
+    const ppow_meow_filter = (ids, kind) => {
+      if (ids.length > 0) {
+        return `("FIRST_Numb" IN (${ids.map(e => `'${e}'`).join(', ')}) AND "Type" = '${kind}')`;
+      } else {
+        return undefined;
+      }
+    };
+
+    const regionCqlFilter = [
+      ppow_meow_filter(this.props.meow, 'coastal'),
+      ppow_meow_filter(this.props.ppow, 'pelagic')
+    ].filter(e => e != undefined).join(" OR ");
+
+    if (regionCqlFilter === '') {
+      regionCqlFilter = '1 = 0';
+    }
 
     const filteredPPOWMEOWLayer = new TileLayer({
       title: 'dataset',

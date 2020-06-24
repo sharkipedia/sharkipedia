@@ -15,6 +15,7 @@
 //= require turbolinks
 //= require underscore
 //= require select2
+//= require filterrific/filterrific-jquery
 //= require_tree .
 
 function checkController(name) {

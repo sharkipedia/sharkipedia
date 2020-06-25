@@ -5,7 +5,18 @@ class TrendsController < PreAuthController
   before_action :set_associations, only: [:new, :edit, :create, :update]
 
   def index
-    @pagy, @trends = pagy(policy_scope(Trend))
+    (@filterrific = initialize_filterrific(
+      policy_scope(Trend),
+      params[:filterrific],
+      persistence_id: false
+    )) || return
+
+    @pagy, @trends = pagy(@filterrific.find)
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def new

@@ -34,7 +34,6 @@ class TrendPolicy < ApplicationPolicy
         :standard,
         :location,
         :species,
-        :trend_observations
       )
         .joins(:import)
         .where('imports.aasm_state': "imported")

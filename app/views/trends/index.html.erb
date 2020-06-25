@@ -5,6 +5,94 @@
   <% end %>
 </h1>
 
-<%= render partial: 'trends/list', locals: { trends: @trends, hide_title: true } %>
+<% unless @trends.blank? %>
+  <%= form_for_filterrific @filterrific do |f| %>
+    <table class="table is-fullwidth">
+      <thead>
+        <tr>
+          <th>Family</th>
+          <th>Species</th>
+          <th>Author Year</th>
+          <th>Source Observation</th>
+          <th>General Data Type</th>
+          <th>Unit</th>
+          <th>Location</th>
+          <th>Ocean</th>
+          <th></th>
+        </tr>
+      </thead>
 
-<%== pagy_bulma_nav(@pagy) %>
+      <tbody>
+        <tr>
+          <td>
+            <%= f.text_field(
+              :search_family,
+              class: 'filterrific-periodically-observed input'
+            ) %>
+          </td>
+          <td>
+            <%= f.text_field(
+              :search,
+              class: 'filterrific-periodically-observed input'
+            ) %>
+          </td>
+          <td>
+            <%= f.text_field(
+              :search_author_year,
+              class: 'filterrific-periodically-observed input'
+            ) %>
+          </td>
+          <td>
+            <%= f.text_field(
+              :search_source_observation,
+              class: 'filterrific-periodically-observed input'
+            ) %>
+          </td>
+          <td>
+            <%= f.text_field(
+              :search_data_type,
+              class: 'filterrific-periodically-observed input'
+            ) %>
+          </td>
+          <td>
+            <%= f.text_field(
+              :search_unit,
+              class: 'filterrific-periodically-observed input'
+            ) %>
+          </td>
+          <td>
+            <%= f.text_field(
+              :search_location,
+              class: 'filterrific-periodically-observed input'
+            ) %>
+          </td>
+          <td>
+            <%= f.text_field(
+              :search_oceans,
+              class: 'filterrific-periodically-observed input'
+            ) %>
+          </td>
+          <td>
+            <%= link_to(
+              'Reset filters',
+              reset_filterrific_url,
+              class: "button"
+            ) %>
+          </td>
+          <%= render_filterrific_spinner %>
+        </tr>
+      </tbody>
+
+      <tbody id="filterrific_results">
+        <%= render(
+          partial: 'trends/table_contents',
+          locals: { trends: @trends }
+        ) %>
+      </tbody>
+    </table>
+  <% end %>
+<% end %>
+
+<div id="pagy-containter">
+  <%== pagy_bulma_nav(@pagy) %>
+</div>

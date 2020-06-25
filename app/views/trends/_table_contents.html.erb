@@ -1,0 +1,31 @@
+<% trends.each do |trend| %>
+  <tr>
+    <% if trend.species %>
+      <td><%= trend.species.species_family.name %></td>
+      <td width="20%"><%= link_to trend.species.name, species_path(trend.species) %></td>
+    <% else %>
+      <td>
+        <ul>
+          <% trend.species_group.species.map { |species| species.species_family.name }.flatten.uniq.each do |name| %>
+            <li><%= name %></li>
+          <% end %>
+        </ul>
+      </td>
+      <td width="20%">
+        <ul>
+          <% trend.species_group.species.each do |species| %>
+            <li><%= link_to species.name, species_path(species) %></li>
+          <% end %>
+        </ul>
+      </td>
+    <% end %>
+    <td><%= link_to trend.reference.name, reference_path(trend.reference) %></td>
+    <td><%= trend.source_observations.map(&:name).uniq.join(", ") %></td>
+    <td><%= trend.data_type&.name %></td>
+    <td><%= trend.standard.name %></td>
+    <td><%= trend.location.name %></td>
+    <td><%= trend.oceans.map(&:name).uniq.join(", ") %></td>
+    <td><%= link_to 'Details', trend_path(trend) %></td>
+  </tr>
+
+<% end %>

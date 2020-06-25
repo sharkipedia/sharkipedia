@@ -1,0 +1,8 @@
+<% js = escape_javascript(
+  render(partial: 'trends/table_contents', locals: { trends: @trends })
+) %>
+$("#filterrific_results").html("<%= js %>");
+<% pagy = escape_javascript(
+  pagy_bulma_nav(@pagy)
+) %>
+$("#pagy-containter").html("<%== pagy %>");

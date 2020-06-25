@@ -41,46 +41,46 @@ class Trend < ApplicationRecord
     ]
   )
 
-  scope :search_family, -> (name) {
-    joins(species: :species_family).where('species_families.name ILIKE ?', "%#{name}%")
+  scope :search_family, ->(name) {
+    joins(species: :species_family).where("species_families.name ILIKE ?", "%#{name}%")
   }
 
-  scope :search, -> (name) {
-    found_species = Species.where('species.name ILIKE ?', "%#{name}%")
+  scope :search, ->(name) {
+    found_species = Species.where("species.name ILIKE ?", "%#{name}%")
 
     where(species_group: SpeciesGroup.joins(:species).where("species.id": found_species))
       .or(Trend.where(species: found_species))
   }
 
   scope :search_species_groups, ->(name) {
-    joins(species_group: :species).where('species.name ILIKE ?', "%#{name}%")
+    joins(species_group: :species).where("species.name ILIKE ?", "%#{name}%")
   }
 
   scope :search_species, ->(name) {
   }
 
   scope :search_author_year, ->(name) {
-    where(reference: Reference.where('name ILIKE ?', "%#{name}%"))
+    where(reference: Reference.where("name ILIKE ?", "%#{name}%"))
   }
 
   scope :search_unit, ->(name) {
-    joins(:standard).where('standards.name ILIKE ?', "%#{name}%")
+    joins(:standard).where("standards.name ILIKE ?", "%#{name}%")
   }
 
   scope :search_data_type, ->(name) {
-    joins(:data_type).where('data_types.name ILIKE ?', "%#{name}%")
+    joins(:data_type).where("data_types.name ILIKE ?", "%#{name}%")
   }
 
   scope :search_source_observation, ->(name) {
-    joins(:source_observations).where('source_observations.name ILIKE ?', "%#{name}%")
+    joins(:source_observations).where("source_observations.name ILIKE ?", "%#{name}%")
   }
 
   scope :search_location, ->(name) {
-    joins(:location).where('locations.name ILIKE ?', "%#{name}%")
+    joins(:location).where("locations.name ILIKE ?", "%#{name}%")
   }
 
   scope :search_oceans, ->(name) {
-    joins(:oceans).where('oceans.name ILIKE ?', "%#{name}%")
+    joins(:oceans).where("oceans.name ILIKE ?", "%#{name}%")
   }
 
   def species_or_species_group

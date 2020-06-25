@@ -37,7 +37,7 @@ gem "roo", "~> 2.8.0"
 gem "rubyXL"
 gem "aws-sdk-s3", "~> 1.61", require: false
 
-gem 'filterrific', '~> 5.2'
+gem "filterrific", "~> 5.2"
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

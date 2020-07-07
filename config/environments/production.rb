@@ -90,10 +90,10 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.action_mailer.smtp_settings = {
-    address: ENV["SES_SMTP_HOST"] || Rails.application.credentials.dig(:ses, :smtp_host),
-    port: 587,
-    user_name: ENV["SES_SMTP_USERNAME"] || Rails.application.credentials.dig(:ses, :smtp_username),
-    password: ENV["SES_SMTP_PASSWORD"] || Rails.application.credentials.dig(:ses, :smtp_password),
+    address: ENV["SMTP_HOST"] || Rails.application.credentials.dig(:email, :smtp_host),
+    port: 465,
+    user_name: ENV["SMTP_USERNAME"] || Rails.application.credentials.dig(:email, :smtp_username),
+    password: ENV["SMTP_PASSWORD"] || Rails.application.credentials.dig(:email, :smtp_password),
     authentication: :login,
     enable_starttls_auto: true
   }

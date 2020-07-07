@@ -145,9 +145,9 @@
     <% @contributors.each do |contributor| %>
       <li><%= contributor.name %></li>
     <% end %>
-  </ul>
 
-  <div>
-    <%= @contributor_codes.join(', ') %>
-  </div>
+    <% @contributor_codes.each do |code| %>
+      <li><%= code %></li>
+    <% end %>
+  </ul>
 </div>

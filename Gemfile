@@ -88,7 +88,7 @@ gem "paper_trail", "~> 10.2"
 
 gem "coffee-rails", "~> 5.0"
 
-gem "select2-rails", "~> 4.0", github: "pdobb/select2-rails"
+gem "select2-rails", "~> 4.0", github: "argerim/select2-rails"
 gem "underscore-rails", "~> 1.8"
 
 gem "pg_search", "~> 2.2"

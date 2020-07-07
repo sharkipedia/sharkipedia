@@ -1,8 +1,8 @@
 GIT
-  remote: https://github.com/pdobb/select2-rails.git
-  revision: e0c2559b7dc351cb9ee9d26a0f728e5112289968
+  remote: https://github.com/argerim/select2-rails.git
+  revision: 96839c7643f90beb5ad4b603c4a33fbf9b489be1
   specs:
-    select2-rails (4.0.8)
+    select2-rails (4.1.0.pre.beta.1)
 
 GEM
   remote: https://rubygems.org/

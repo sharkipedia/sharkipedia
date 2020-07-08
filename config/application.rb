@@ -6,7 +6,7 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module SharkT
+module Sharkipedia
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
@@ -21,7 +21,7 @@ module SharkT
     config.to_prepare do
       # NOTE: https://github.com/thoughtbot/administrate/issues/334
       # Autoreloading of code does not work
-      Administrate::ApplicationController.helper SharkT::Application.helpers
+      Administrate::ApplicationController.helper Sharkipedia::Application.helpers
     end
 
     # Settings in config/environments/* take precedence over those specified here.

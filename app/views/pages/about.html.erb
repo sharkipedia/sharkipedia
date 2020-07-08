@@ -25,10 +25,10 @@
 
 </style>
 
-<h1 class="title">About Shark Traits and Shark Trends</h1>
+<h1 class="title">About Sharkipedia</h1>
 
 <p>
-  The Shark Traits and Shark Trends Databases are an open source research initiative to
+  Sharkipedia is an open source research initiative to
   make all published biological traits and population trends on sharks, rays, and chimaeras accessible
   to everyone. Originally inspired by <a href=https://fishbase.org>FishBase</a>, our databases are modelled after <a href="https://coraltraits.org">Coral Traits database</a> and the <a href="https://www.ramlegacy.org/">RAM legacy database</a>.
 </p>
@@ -82,6 +82,10 @@
     <br />Dr. Christopher Mull<br /><a href"mailto:creeas@gmail.com">creeas@gmail.com</a>
   </div>
   <div class="columnbio">
+    <%= image_tag "Nathan_Pacoureau-300x300.jpg", class: "roundrect", size: 200 %>
+    <br />Dr. Nathan Pacoureau<br /><a href"mailto:pacoureau_nathan@sfu.ca">pacoureau_nathan@sfu.ca</a>
+  </div>
+  <div class="columnbio">
     <%= image_tag "seb.jpg", class: "roundrect", size: 200 %>
     <br />Dr. Sebastián Pardo<br /><a href"mailto:spardo@dal.ca">spardo@dal.ca</a>
   </div>
@@ -97,8 +101,23 @@
 
 <br />
 
+<h3 class="subtitle">Software Development</h3>
+
+<div class="rowbio">
+  <div class="columnbio">
+    <%= image_tag "max.jpg", class: "roundrect", size: 200 %>
+    <br />Maximilian Haack<br /><a href"mailto:max@holmes-iv.com">max@holmes-iv.com</a>
+  </div>
+</div>
+
+<br />
+
+
+<% if @editors.size > 0 %>
+<h3 class="subtitle">Editors</h3>
+
 <p>
-  An integral part of Shark Traits and Trends is data curation, which is only possible with the work of the following editors:
+  An integral part of Sharkipedia is data curation, which is only possible with the work of the following editors:
 </p>
 
 <br />
@@ -114,6 +133,9 @@
 <br />
 <br />
 
+<% end %>
+
+<h3 class="subtitle">Contributors</h3>
 <p>Our databases would not be possible without the countless data contributors:</p>
 
 <br />
@@ -123,9 +145,9 @@
     <% @contributors.each do |contributor| %>
       <li><%= contributor.name %></li>
     <% end %>
-  </ul>
 
-  <div>
-    <%= @contributor_codes.join(', ') %>
-  </div>
+    <% @contributor_codes.each do |code| %>
+      <li><%= code %></li>
+    <% end %>
+  </ul>
 </div>

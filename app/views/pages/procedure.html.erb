@@ -4,9 +4,9 @@
 
   <h2>Overview</h2>
 
-  <p>The Shark Traits Database is an open source research initiative that aims to make all observations and measurements of chondrichthyans (sharks, rays, and chimaeras) accessible in order to more rapidly advance resesearch. The framework behind the database is heavily based on the open source <a href"https://www.coraltraits.org"> Coral Trait Database</a>. Anyone collecting chondrichthyan life history data can join and contribute to the growing data compilation. Contributors have control over the privacy of their data, but will benefit from being able to download complimentary public data from the database in a standard format for use in their analyses. We hope that private data will become public once the contributor has published them, and a citation is available. The reference citation system here has been designed to ensure full transparency about the origin of each individual data point. </p>
+  <p>Sharkipedia is an open source research initiative that aims to make all observations and measurements of chondrichthyans (sharks, rays, and chimaeras) accessible in order to more rapidly advance resesearch. The framework behind the database is heavily based on the open source <a href"https://www.coraltraits.org"> Coral Trait Database</a>. Anyone collecting chondrichthyan life history data can join and contribute to the growing data compilation. Contributors have control over the privacy of their data, but will benefit from being able to download complimentary public data from the database in a standard format for use in their analyses. We hope that private data will become public once the contributor has published them, and a citation is available. The reference citation system here has been designed to ensure full transparency about the origin of each individual data point. </p>
  
-  <p>Contact the Administrators for any inquiries about the database at <a href"mailto:admin@sharktraits.org"> admin@sharktraits.org</a>.</p>
+  <p>Contact the Administrators for any inquiries about the database at <a href"mailto:admin@sharkipedia.org"> admin@sharkipedia.org</a>.</p>
 
   <h2 id="importing">Data submission</h2>
 
@@ -31,14 +31,14 @@
     <li>One can prepare to make the data public at end of project</li>
     <li>One can identify duplicate research efforts</li>
   </ul>
-  <p>To contribute data, you need to email the database <a href="mailto:admin@sharktraits.org">Administrator</a> to become a contributor.</p>
+  <p>To contribute data, you need to email the database <a href="mailto:admin@sharkipedia.org">Administrator</a> to become a contributor.</p>
   <blockquote>
     <p>Having a primary, peer-reviewed reference is essential for maintaining data quality, contributor recognition and scientific rigor.</p>
   </blockquote>
 
   <h4>Importing a spreadsheet</h4>
 
-  <p>Even if only entering small amounts of data, use of the spreadsheet submission template is recommended. The fillable template can be accessed <a href="https://github.com/creeas/SharkTraits/blob/master/SharkTraits-Template.xlsx">here</a>. The spreadsheet import is the fastest way to get data into the database. The import function accepts csv-formatted spreadsheets and runs a number of tests to make sure your data fit the database formats correctly (note that you can export csv-formatted files from Excel using “Save as…”). Any errors will reject the entire import and the system will generat a log and contact the user by e-mail to indicate where the errors occur. If necessary, you will be able to fix these errors and try the import again. Errors may include incorrect formatting of the spreadsheet (e.g. not all required columns present) or missing values for required fields.</p>
+  <p>Even if only entering small amounts of data, use of the spreadsheet submission template is recommended. The fillable template can be accessed <a href="https://github.com/sharkipedia/sharkipedia/blob/master/SharkTraits-Template.xlsx">here</a>. The spreadsheet import is the fastest way to get data into the database. The import function accepts csv-formatted spreadsheets and runs a number of tests to make sure your data fit the database formats correctly (note that you can export csv-formatted files from Excel using “Save as…”). Any errors will reject the entire import and the system will generat a log and contact the user by e-mail to indicate where the errors occur. If necessary, you will be able to fix these errors and try the import again. Errors may include incorrect formatting of the spreadsheet (e.g. not all required columns present) or missing values for required fields.</p>
 
   <p>The spreadsheet you import must have a header with <em>at least</em> the following column names:</p>
   <pre><code>observation_id, access, user_id, reference_id, species_name, location_id, trait_name, standard_name, methodology_name, value, value_type, precision, precision_type, precision_upper, sample_size, notes</code></pre>
@@ -96,7 +96,7 @@
   <p><code>validated</code> is a boolean field to be used only for Growth Trait Class measurements, indicating whether any validation of the growth model has been attempted (1) or not (0).</p>
   <p><code>validation_type</code> denotes the method used for validating the growth model. At the moment, this is a text field with pre-determined values.</p>
   <h4 id="back-end-imports">Back-end imports</h4>
-  <p>If your data is well-managed, you can ask a <a href="mailto:admin@sharktraits.org">database programmer</a> to upload it for you. The data will be associated with your name and made private. You are required to make the data public yourself (if desired).</p>
+  <p>If your data is well-managed, you can ask a <a href="mailto:admin@sharkipedia.org">database programmer</a> to upload it for you. The data will be associated with your name and made private. You are required to make the data public yourself (if desired).</p>
   <h4 id="submitting-data-from-papers">Submitting data from papers</h4>
   <p>Entering published data not already in the database in strongly encouraged to improve the data’s usability and augment data analysis. A case in which this might occur is a meta-analysis. The data contributor can keep the data they submit private until their study is published.</p>
   <blockquote>
@@ -108,7 +108,7 @@
     <li><p><strong>Careful extraction.</strong> Copy values from tables carefully and double check. Extracting data from figures can be done with software like ImageJ or DataThief, where a scale can be set based on axis values and measurements of plotted data made, including error bars.</p></li>
   </ul>
   <!--
-    - **Gather important context.** Enter contextual data as well, which might require reading the methods. This might be as simple as the time of year or depth or habitat in which animals were collected, and potentially the same for all observations. Such information is very useful. However, contextual information can get complicated quickly. Please contact the database [Administrator](mailto:admin@sharktraits.org) if you have any questions.
+    - **Gather important context.** Enter contextual data as well, which might require reading the methods. This might be as simple as the time of year or depth or habitat in which animals were collected, and potentially the same for all observations. Such information is very useful. However, contextual information can get complicated quickly. Please contact the database [Administrator](mailto:admin@sharkipedia.org) if you have any questions.
   -->
   <h4 id="quality-control">Quality control</h4>
   <p>There are three levels of data review.</p>

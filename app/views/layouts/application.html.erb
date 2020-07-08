@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Shark Traits & Trends</title>
+    <title>sharkipedia - elasmobranch traits & trends</title>
 
     <%= favicon_link_tag %>
     <%= favicon_link_tag 'apple-icon.png', rel: 'apple-touch-icon', type: 'image/png' %>
@@ -32,25 +32,15 @@
     </section>
 
     <% if Rails.env.production? %>
-      <% if request.original_url.include?('sharktraits.org') %>
+      <% if request.original_url.include?('sharkipedia.org') %>
         <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141899264-1"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141899264-2"></script>
         <script>
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
 
-          gtag('config', 'UA-141899264-1');
-        </script>
-      <% elsif request.original_url.include?('globalsharktrends.org') %>
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141896335-1"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', 'UA-141896335-1');
+          gtag('config', 'UA-141899264-2');
         </script>
       <% end %>
     <% end %>

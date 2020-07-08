@@ -92,7 +92,7 @@ Rails.application.configure do
   config.action_mailer.default_options = {from: ENV["SMTP_EMAIL_ADDRESS"] || Rails.application.credentials.dig(:email, :email_address)}
   config.action_mailer.smtp_settings = {
     address: ENV["SMTP_HOST"] || Rails.application.credentials.dig(:email, :smtp_host),
-    port: 465,
+    port: ENV["SMTP_PORT"] || Rails.application.credentials.dig(:email, :smtp_port),
     user_name: ENV["SMTP_USERNAME"] || Rails.application.credentials.dig(:email, :smtp_username),
     password: ENV["SMTP_PASSWORD"] || Rails.application.credentials.dig(:email, :smtp_password),
     authentication: :login,

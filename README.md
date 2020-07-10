@@ -16,9 +16,9 @@
 
 1. Clone the repository to your computer
    ```
-   git clone https://github.com/coffeejunk/sharkT.git
+   git clone https://github.com/sharkipedia/sharkipedia.git
    ```
-1. Move into the project folder (`cd sharkT`)
+1. Move into the project folder (`cd sharkipedia`)
 1. Install project dependencies: `bundle install`
 1. Windows/Linux: in the `config/database.yml` configure the username and
    password under development which you set during the installation of

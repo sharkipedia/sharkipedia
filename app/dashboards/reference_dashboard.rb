@@ -64,6 +64,6 @@ class ReferenceDashboard < Administrate::BaseDashboard
   # across all pages of the admin dashboard.
   #
   def display_resource(reference)
-    "Reference #{reference.name}"
+    reference.name
   end
 end

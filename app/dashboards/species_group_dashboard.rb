@@ -60,6 +60,6 @@ class SpeciesGroupDashboard < Administrate::BaseDashboard
   # across all pages of the admin dashboard.
   #
   def display_resource(species_group)
-    "SpeciesGroup #{species_group.name}"
+    species_group.name
   end
 end

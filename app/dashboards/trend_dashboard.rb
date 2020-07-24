@@ -8,10 +8,13 @@ class TrendDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
+    id: Field::Number,
     user: Field::BelongsTo,
     species: Field::BelongsTo,
+    species_group: Field::BelongsTo,
     location: Field::BelongsTo,
-    ocean: Field::BelongsTo,
+    reference: Field::BelongsTo,
+    oceans: Field::HasMany,
     data_type: Field::BelongsTo,
     standard: Field::BelongsTo,
     unit_time: Field::BelongsTo,
@@ -20,7 +23,6 @@ class TrendDashboard < Administrate::BaseDashboard
     unit_transformation: Field::BelongsTo,
     unit_freeform: Field::Text,
     sampling_method: Field::BelongsTo,
-    id: Field::Number,
     no_years: Field::Number,
     time_min: Field::Number,
     comments: Field::Text,
@@ -43,18 +45,20 @@ class TrendDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
-    :user,
     :species,
-    :location
+    :species_group,
+    :location,
+    :reference
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
     :user,
+    :reference,
     :species,
     :location,
-    :ocean,
+    :oceans,
     :data_type,
     :standard,
     :sampling_method,
@@ -80,9 +84,10 @@ class TrendDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
     :user,
+    :reference,
     :species,
     :location,
-    :ocean,
+    :oceans,
     :data_type,
     :standard,
     :sampling_method,
@@ -102,7 +107,7 @@ class TrendDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how trends are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(trend)
-  #   "Trend ##{trend.id}"
-  # end
+  def display_resource(trend)
+    trend.title
+  end
 end

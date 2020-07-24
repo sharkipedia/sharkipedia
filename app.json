@@ -1,5 +1,5 @@
 {
-    "name": "sharkT",
+    "name": "sharkipedia",
         "scripts": {
             "postdeploy": "bundle exec rake db:schema:load db:seed"
         },

@@ -12,6 +12,8 @@ class StandardDashboard < Administrate::BaseDashboard
     id: Field::Number,
     name: Field::String,
     description: Field::Text,
+    measurements: Field::HasMany,
+    trends: Field::HasMany,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
   }.freeze
@@ -24,7 +26,9 @@ class StandardDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :trait_class,
     :name,
-    :description
+    :description,
+    :measurements,
+    :trends
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -34,6 +38,8 @@ class StandardDashboard < Administrate::BaseDashboard
     :id,
     :name,
     :description,
+    :measurements,
+    :trends,
     :created_at,
     :updated_at
   ].freeze

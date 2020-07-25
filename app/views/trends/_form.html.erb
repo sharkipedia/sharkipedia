@@ -2,7 +2,7 @@
 
   <%= render partial: 'shared/form_errors', locals: { thing: @trend } %>
 
-  <%= render partial: 'shared/form_species', locals: { species: species, target: 'trend' } %>
+  <%= render partial: 'shared/form_species', locals: { species: @trend.species, species_group: @trend.species_group, target: 'trend' } %>
 
   <%= render partial: 'shared/form_reference', locals: { reference: reference, target: 'trend', many: false } %>
 

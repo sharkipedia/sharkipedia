@@ -149,6 +149,19 @@
     </div>
   </div>
 
+  <h3 class="subtitle is-4 is-spaced"> Marine Regions </h3>
+
+  <div class="columns">
+    <div class="column">
+      <div class="field">
+        <%= f.label 'fao_areas', 'FAO Areas', class: 'label' %>
+        <p class="control has-icons-left">
+          <%= f.collection_select(:fao_area_ids, @fao_areas, :id, :name, {}, style: 'width: 100%', multiple: true) %>
+        </p>
+      </div>
+    </div>
+  </div>
+
   <%= react_component("TrendDataInput", { start_year: @trend.start_year, end_year: @trend.end_year, no_years: @trend.no_years, values: @trend.observations_data }) %>
 
   <%= f.submit class: 'button is-primary is-pulled-right' %>

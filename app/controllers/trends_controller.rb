@@ -44,6 +44,11 @@ class TrendsController < PreAuthController
   def edit
     @trend = Trend.find params[:id]
     authorize @trend
+
+    @meow_regions = @trend.marine_ecoregions_worlds
+      .where(region_type: "MEOW").map(&:trend_reg_id).uniq
+    @ppow_regions = @trend.marine_ecoregions_worlds
+      .where(region_type: "PPOW").map(&:trend_reg_id).uniq
   end
 
   def create
@@ -123,6 +128,7 @@ class TrendsController < PreAuthController
     @measurement_models = MeasurementModel.all
     @data_types = DataType.all
     @oceans = Ocean.all
+    @fao_areas = FaoArea.all
   end
 
   def trend_params
@@ -157,7 +163,8 @@ class TrendsController < PreAuthController
       :data_mined,
       :data_type_id,
       :sampling_method_id,
-      ocean_ids: []
+      ocean_ids: [],
+      fao_area_ids: []
     )
   end
 end

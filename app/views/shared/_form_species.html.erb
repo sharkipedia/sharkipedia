@@ -4,24 +4,24 @@
   <div class="columns">
     <div class="column">
       <div class="field">
-        <% if @trend.species %>
+        <% if species %>
           <p class="control has-icons-left" id="species_selector">
             <%= select_tag "#{target}[species_id]", nil, style: 'width: 100%' %>
             <span class="icon is-small is-left">
               <i class="fas fa-exclamation"></i>
             </span>
           </p>
-        <% else %>
-          <%= link_to "To change the Species Group please click here", admin_species_group_path(@trend.species_group) %>
+        <% elsif species_group %>
+          <%= link_to "To change the Species Group please click here", admin_species_group_path(species_group) %>
         <% end %>
       </div>
     </div>
     <div class="column">
       <div id="species-info">
-        <% if @trend.species %>
-          <%= render partial: 'species/detail', locals: { specie: @trend.species, render_links: true } %>
-        <% else %>
-          <%= render partial: 'species/group_detail', locals: { species_group: @trend.species_group } %>
+        <% if species %>
+          <%= render partial: 'species/detail', locals: { specie: species, render_links: true } %>
+        <% elsif species_group %>
+          <%= render partial: 'species/group_detail', locals: { species_group: species_group } %>
         <% end %>
       </div>
     </div>

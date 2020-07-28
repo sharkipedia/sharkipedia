@@ -8,11 +8,8 @@ namespace :import do
 
     marine_ecoregions_worlds = JSON.parse(File.read("docs/ppow-meow.json"))
     marine_ecoregions_worlds.each do |entry|
-      MarineEcoregionsWorld.create! unep_fid: entry["FID"],
-                                    region_type: entry["TYPE"],
+      MarineEcoregionsWorld.create! region_type: entry["TYPE"],
                                     province: entry["PROVINC"],
-                                    ecoregion: entry["ECOREGION"],
-                                    biome: entry["BIOME"],
                                     trend_reg_id: entry["TREND_REG_ID"]
     end
   end

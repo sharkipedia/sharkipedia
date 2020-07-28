@@ -231,7 +231,6 @@ FactoryBot.define do
   end
 
   factory :marine_ecoregions_world do
-    sequence(:unep_fid) { |n| "unep_fid #{n}" }
     sequence(:province) { |n| "province #{n}" }
     region_type { "PPOW" }
   end

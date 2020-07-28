@@ -1,16 +1,44 @@
 namespace :import do
   desc "Import MarineEcoregionsWorld"
   task marine_ecoregions_worlds: :environment do
-    if MarineEcoregionsWorld.count == 269
-      puts "MarineEcoregionsWorld already imported"
-      exit 1
+    savepoint = []
+
+    if MarineEcoregionsWorld.count > 200
+      puts "Clearing duplicate MarineEcoregionsWorld entries"
+
+      Trend.find_each do |trend|
+        savepoint << [
+          trend.id,
+          trend.marine_ecoregions_worlds.where(region_type: "MEOW").map(&:trend_reg_id).uniq,
+          trend.marine_ecoregions_worlds.where(region_type: "PPOW").map(&:trend_reg_id).uniq
+        ]
+      end
+
+      MarineEcoregionsWorld.destroy_all
     end
 
-    marine_ecoregions_worlds = JSON.parse(File.read("docs/ppow-meow.json"))
+    marine_ecoregions_worlds = CSV.read("docs/ppow-meow.csv", headers: true)
+      .map(&:to_h)
+
     marine_ecoregions_worlds.each do |entry|
-      MarineEcoregionsWorld.create! region_type: entry["TYPE"],
-                                    province: entry["PROVINC"],
-                                    trend_reg_id: entry["TREND_REG_ID"]
+      MarineEcoregionsWorld.find_or_create_by! region_type: entry["TYPE"],
+                                               province: entry["PROVINCE"],
+                                               trend_reg_id: entry["FIRST_NUMB"]
+    end
+
+    savepoint.each do |trend_id, meow_ids, ppow_ids|
+      trend = Trend.find trend_id
+      marine_provinces = MarineEcoregionsWorld.where(
+        region_type: "MEOW",
+        trend_reg_id: meow_ids
+      ).or(
+        MarineEcoregionsWorld.where(
+          region_type: "PPOW",
+          trend_reg_id: ppow_ids
+        )
+      )
+      trend.marine_ecoregions_worlds = marine_provinces
+      trend.save!
     end
   end
 

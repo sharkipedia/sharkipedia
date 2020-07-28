@@ -1,0 +1,100 @@
+PROVINCE,FIRST_NUMB,TYPE
+Agulhas,51,MEOW
+Amsterdam-St Paul,52,MEOW
+Andaman,24,MEOW
+Arctic,1,MEOW
+Bay of Bengal,23,MEOW
+Benguela,50,MEOW
+Black Sea,7,MEOW
+Central Indian Ocean Islands,22,MEOW
+Central Polynesia,39,MEOW
+Cold Temperate Northeast Pacific,10,MEOW
+Cold Temperate Northwest Atlantic,5,MEOW
+Cold Temperate Northwest Pacific,8,MEOW
+Continental High Antarctic,61,MEOW
+East Central Australian Shelf,55,MEOW
+Easter Island,42,MEOW
+Eastern Coral Triangle,31,MEOW
+Galapagos,44,MEOW
+Gulf of Guinea,17,MEOW
+Hawaii,37,MEOW
+Java Transitional,27,MEOW
+Juan Fernández and Desventuradas,46,MEOW
+Lord Howe and Norfolk Islands,36,MEOW
+Lusitanian,3,MEOW
+Magellanic,48,MEOW
+Marquesas,41,MEOW
+"Marshall, Gilbert and Ellis Islands",38,MEOW
+Mediterranean Sea,4,MEOW
+North Brazil Shelf,13,MEOW
+Northeast Australian Shelf,33,MEOW
+Northern European Seas,2,MEOW
+Northern New Zealand,53,MEOW
+Northwest Australian Shelf,34,MEOW
+Red Sea and Gulf of Aden,18,MEOW
+Sahul Shelf,32,MEOW
+Scotia Sea,60,MEOW
+Somali/Arabian,19,MEOW
+South China Sea,25,MEOW
+South Kuroshio,28,MEOW
+Southeast Australian Shelf,56,MEOW
+Southeast Polynesia,40,MEOW
+Southern New Zealand,54,MEOW
+Southwest Australian Shelf,57,MEOW
+St. Helena and Ascension Islands,15,MEOW
+Subantarctic Islands,59,MEOW
+Subantarctic New Zealand,62,MEOW
+Sunda Shelf,26,MEOW
+Tristan Gough,49,MEOW
+Tropical East Pacific,43,MEOW
+Tropical Northwestern Atlantic,12,MEOW
+Tropical Northwestern Pacific,29,MEOW
+Tropical Southwestern Atlantic,14,MEOW
+Tropical Southwestern Pacific,35,MEOW
+Warm Temperate Northeast Pacific,11,MEOW
+Warm Temperate Northwest Atlantic,6,MEOW
+Warm Temperate Northwest Pacific,9,MEOW
+Warm Temperate Southeastern Pacific,45,MEOW
+Warm Temperate Southwestern Atlantic,47,MEOW
+West African Transition,16,MEOW
+West and South Indian Shelf,21,MEOW
+West Central Australian Shelf,58,MEOW
+Western Coral Triangle,30,MEOW
+Western Indian Ocean,20,MEOW
+Agulhas Current,4,PPOW
+Antarctic,34,PPOW
+Antarctic Polar Front,35,PPOW
+Arctic,1,PPOW
+Benguela Current,23,PPOW
+Black Sea,24,PPOW
+California Current,5,PPOW
+Canary Current,25,PPOW
+Eastern Tropical Pacific,7,PPOW
+Equatorial Atlantic,8,PPOW
+Equatorial Pacific,9,PPOW
+Guinea Current,27,PPOW
+Gulf Stream,28,PPOW
+Humboldt Current,10,PPOW
+Indian Ocean Gyre,21,PPOW
+Indian Ocean Monsoon Gyre,16,PPOW
+Indonesian Through-Flow,11,PPOW
+Inter American Seas,26,PPOW
+Kuroshio,12,PPOW
+Leeuwin Current,13,PPOW
+Malvinas Current,29,PPOW
+Mediterranean,30,PPOW
+Non-gyral Southwest Pacific,22,PPOW
+North Atlantic Transitional,31,PPOW
+North Central Atlantic Gyre,32,PPOW
+North Central Pacific Gyre,15,PPOW
+North Pacific Transitional,14,PPOW
+Red Sea,17,PPOW
+Sea of Japan/East Sea,6,PPOW
+Somali Current,18,PPOW
+South Central Atlantic Gyre,33,PPOW
+South Central Pacific Gyre,20,PPOW
+South China Sea,19,PPOW
+Subantarctic,37,PPOW
+Subarctic Atlantic,2,PPOW
+Subarctic Pacific,3,PPOW
+Subtropical Convergence,36,PPOW

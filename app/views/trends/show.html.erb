@@ -71,6 +71,7 @@
   </div>
   <div class="column">
     <%= render partial: 'location', locals: { location: @trend.location, oceans: @trend.oceans } %>
+    <%= render partial: 'marine_regions_table', locals: { trend: @trend } %>
   </div>
 </div>
 

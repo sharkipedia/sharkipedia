@@ -8,10 +8,7 @@ RSpec.describe MarineEcoregionsWorld, type: :model do
   end
 
   describe "validations" do
-    it { should validate_presence_of(:unep_fid) }
     it { should validate_presence_of(:region_type) }
     it { should validate_presence_of(:province) }
-
-    it { should validate_uniqueness_of(:unep_fid) }
   end
 end

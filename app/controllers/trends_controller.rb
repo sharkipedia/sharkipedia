@@ -27,10 +27,8 @@ class TrendsController < PreAuthController
 
   def show
     authorize @trend
-    @meow_regions = @trend.marine_ecoregions_worlds
-      .where(region_type: "MEOW").map(&:trend_reg_id).uniq
-    @ppow_regions = @trend.marine_ecoregions_worlds
-      .where(region_type: "PPOW").map(&:trend_reg_id).uniq
+    @meow_regions = @trend.marine_ecoregions_worlds.meow.map(&:trend_reg_id)
+    @ppow_regions = @trend.marine_ecoregions_worlds.ppow.map(&:trend_reg_id)
 
     respond_to do |format|
       format.html
@@ -94,12 +92,19 @@ class TrendsController < PreAuthController
     trend_observations = JSON.parse(params[:trend].delete(:trend_observations_attributes))
     @trend.create_or_update_observations(trend_observations)
 
+    marine_ecoregions_world_ids = [
+      params.fetch(:trend).delete(:ppow_region_ids),
+      params.fetch(:trend).delete(:meow_region_ids)
+    ].flatten
+
+    params[:trend][:marine_ecoregions_world_ids] = marine_ecoregions_world_ids
+
     success = @trend.update(trend_params)
 
     respond_to do |format|
       if success
-        format.html { redirect_to @trend.import }
-        format.js { redirect_to @trend.import }
+        format.html { redirect_to @trend }
+        format.js { redirect_to @trend }
       else
         format.html { render :edit }
         format.js
@@ -123,6 +128,10 @@ class TrendsController < PreAuthController
     @measurement_models = MeasurementModel.all
     @data_types = DataType.all
     @oceans = Ocean.all
+    @meow_regions = MarineEcoregionsWorld.meow
+    @ppow_regions = MarineEcoregionsWorld.ppow
+    @fao_areas = FaoArea.all
+    @longhurst_provinces = LonghurstProvince.all
   end
 
   def trend_params
@@ -157,7 +166,9 @@ class TrendsController < PreAuthController
       :data_mined,
       :data_type_id,
       :sampling_method_id,
-      ocean_ids: []
+      ocean_ids: [],
+      fao_area_ids: [],
+      marine_ecoregions_world_ids: []
     )
   end
 end

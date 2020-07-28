@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_11_201314) do
+ActiveRecord::Schema.define(version: 2020_07_28_193056) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,11 +115,8 @@ ActiveRecord::Schema.define(version: 2020_06_11_201314) do
   end
 
   create_table "marine_ecoregions_worlds", force: :cascade do |t|
-    t.integer "unep_fid", null: false
     t.string "region_type", null: false
     t.string "province", null: false
-    t.string "ecoregion"
-    t.string "biome"
     t.integer "trend_reg_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

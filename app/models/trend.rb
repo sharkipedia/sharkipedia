@@ -134,4 +134,12 @@ class Trend < ApplicationRecord
       unit_gear&.name
     ].reject { |u| u.blank? || u == "NA" }.join(" per ")
   end
+
+  def ppow_region_ids
+    marine_ecoregions_worlds.ppow.map(&:id)
+  end
+
+  def meow_region_ids
+    marine_ecoregions_worlds.meow.map(&:id)
+  end
 end

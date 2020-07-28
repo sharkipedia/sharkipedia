@@ -28,7 +28,7 @@ $(document).on('turbolinks:load', function() {
     let select2Elements = [
       'trend_standard_id', 'trend_sampling_method_id',
       'trend_data_type_id', 'trend_ocean_ids', 'trend_location_id',
-      'trend_fao_area_ids'
+      'trend_meow_region_ids', 'trend_ppow_region_ids', 'trend_fao_area_ids'
     ];
     select2Elements.forEach(function(element) {
       $('#' + element).select2({ selectOnClose: true });

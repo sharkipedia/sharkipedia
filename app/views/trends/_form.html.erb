@@ -154,6 +154,22 @@
   <div class="columns">
     <div class="column">
       <div class="field">
+        <%= f.label 'meow', 'MEOW', class: 'label' %>
+        <p class="control has-icons-left">
+          <%= collection_select(:trend, :meow_region_ids, @meow_regions, :id, :province, {}, style: 'width: 100%', multiple: true) %>
+        </p>
+      </div>
+
+      <div class="field">
+        <%= f.label 'ppow', 'PPOW', class: 'label' %>
+        <p class="control has-icons-left">
+          <%= collection_select(:trend, :ppow_region_ids, @ppow_regions, :id, :province, {}, style: 'width: 100%', multiple: true) %>
+        </p>
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="field">
         <%= f.label 'fao_areas', 'FAO Areas', class: 'label' %>
         <p class="control has-icons-left">
           <%= f.collection_select(:fao_area_ids, @fao_areas, :id, :name, {}, style: 'width: 100%', multiple: true) %>

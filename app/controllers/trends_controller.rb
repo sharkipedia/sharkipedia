@@ -27,10 +27,8 @@ class TrendsController < PreAuthController
 
   def show
     authorize @trend
-    @meow_regions = @trend.marine_ecoregions_worlds
-      .where(region_type: "MEOW").map(&:trend_reg_id).uniq
-    @ppow_regions = @trend.marine_ecoregions_worlds
-      .where(region_type: "PPOW").map(&:trend_reg_id).uniq
+    @meow_regions = @trend.marine_ecoregions_worlds.meow.map(&:trend_reg_id)
+    @ppow_regions = @trend.marine_ecoregions_worlds.ppow.map(&:trend_reg_id)
 
     respond_to do |format|
       format.html
@@ -45,10 +43,8 @@ class TrendsController < PreAuthController
     @trend = Trend.find params[:id]
     authorize @trend
 
-    @meow_regions = @trend.marine_ecoregions_worlds
-      .where(region_type: "MEOW").map(&:trend_reg_id).uniq
-    @ppow_regions = @trend.marine_ecoregions_worlds
-      .where(region_type: "PPOW").map(&:trend_reg_id).uniq
+    @meow_regions = @trend.marine_ecoregions_worlds.meow.map(&:trend_reg_id)
+    @ppow_regions = @trend.marine_ecoregions_worlds.ppow.map(&:trend_reg_id)
   end
 
   def create

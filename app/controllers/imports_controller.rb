@@ -32,7 +32,7 @@ class ImportsController < ApplicationController
 
   def update
     authorize @import
-    @import.update_attributes import_params
+    @import.update import_params
     @import.resubmit!
     ImportValidatorJob.perform_later @import
 

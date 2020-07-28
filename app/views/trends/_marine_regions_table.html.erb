@@ -1,0 +1,22 @@
+<table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+  <tbody>
+    <tr>
+      <th>PPOW</th>
+      <td id="ppow">
+        <%= trend.marine_ecoregions_worlds.ppow.map(&:province).join("; ") %>
+      </td>
+    </tr>
+    <tr>
+      <th>MEOW</th>
+      <td id="meow">
+        <%= trend.marine_ecoregions_worlds.meow.map(&:province).join("; ") %>
+      </td>
+    </tr>
+    <tr>
+      <th>FAO</th>
+      <td id="fao">
+        <%= trend.fao_areas.map(&:name).join("; ") %>
+      </td>
+    </tr>
+  </tbody>
+</table>

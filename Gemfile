@@ -75,7 +75,7 @@ group :test do
 
   gem "capybara-select-2", "~> 0.5.0"
 
-  gem "factory_bot_rails", "~> 5.0", ">= 5.0.1"
+  gem "factory_bot_rails", "~> 6.1"
   gem "shoulda-matchers", "~> 4.3"
 end
 

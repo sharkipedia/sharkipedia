@@ -73,7 +73,7 @@ group :test do
   gem "webdrivers", "~> 4.4"
   gem "cuprite", "~> 0.11"
 
-  gem "capybara-select-2", "~> 0.5.0"
+  gem "capybara-select-2", "~> 0.5.1"
 
   gem "factory_bot_rails", "~> 6.1"
   gem "shoulda-matchers", "~> 4.3"

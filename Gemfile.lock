@@ -115,7 +115,7 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (~> 1.5)
       xpath (~> 3.2)
-    capybara-select-2 (0.5.0)
+    capybara-select-2 (0.5.1)
     childprocess (3.0.0)
     choice (0.2.0)
     cliver (0.3.2)
@@ -381,7 +381,7 @@ DEPENDENCIES
   bugsnag (~> 6.15)
   byebug
   capybara (~> 3.33.0)
-  capybara-select-2 (~> 0.5.0)
+  capybara-select-2 (~> 0.5.1)
   coffee-rails (~> 5.0)
   cuprite (~> 0.11)
   devise (~> 4.7)

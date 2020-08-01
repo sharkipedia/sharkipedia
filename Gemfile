@@ -41,7 +41,7 @@ gem "filterrific", "~> 5.2"
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
-gem "aasm", "~> 5.0", ">= 5.0.1"
+gem "aasm", "~> 5.1"
 
 gem "sidekiq", "< 7"
 gem "redis-namespace", "~> 1.7"

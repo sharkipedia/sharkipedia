@@ -44,7 +44,7 @@ gem "filterrific", "~> 5.2"
 gem "aasm", "~> 5.1"
 
 gem "sidekiq", "< 7"
-gem "redis-namespace", "~> 1.7"
+gem "redis-namespace", "~> 1.8"
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

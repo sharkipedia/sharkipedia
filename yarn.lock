@@ -988,9 +988,9 @@
   integrity sha1-zlblOfg1UrWNENZy6k1vya3HsjQ=
 
 "@mapbox/mapbox-gl-style-spec@^13.14.0":
-  version "13.16.0"
-  resolved "https://registry.yarnpkg.com/@mapbox/mapbox-gl-style-spec/-/mapbox-gl-style-spec-13.16.0.tgz#fe0dc62c22697ff3e38966a3f44e57ade48b4260"
-  integrity sha512-HtQCLg8NLgnYI0uOSbMNtTcwiCJc9WR5uZekhFaXbyjUWwZVNMW7ElKrDLYkaZ4lvUvbqjotyvZC2Holn/yhpg==
+  version "13.17.0"
+  resolved "https://registry.yarnpkg.com/@mapbox/mapbox-gl-style-spec/-/mapbox-gl-style-spec-13.17.0.tgz#4b9f16e4cc94ce13a254d61a139b28c716925de4"
+  integrity sha512-ZxOdHiuUmDcvQNc1uTnBLVJZxiQVYvoNZaQVxWwl+6Id6tjGQFtieZxXiv/RXIOpQQT35JuioatTKdsjpMsULA==
   dependencies:
     "@mapbox/jsonlint-lines-primitives" "~2.0.2"
     "@mapbox/point-geometry" "^0.1.0"
@@ -5100,18 +5100,18 @@ ol-layerswitcher@^3.6.0:
   integrity sha512-15Xt35GIvZRinZFnMy330X0ZHahlTdgi8hTKE08VpnrAvayrabWVztzy2oBIDRPDSNUD7onAvG8UXeopqaQ5hg==
 
 ol-mapbox-style@^6.1.1:
-  version "6.1.2"
-  resolved "https://registry.yarnpkg.com/ol-mapbox-style/-/ol-mapbox-style-6.1.2.tgz#611f918c2b713fb66de0ee85bc688aebbbb290af"
-  integrity sha512-0n+6K1dhMH7/AMA1eAEb1Pt4ZRFWr1fiJWSgwHfDFQpK4yuhJgtLcn9dtxprB1NOpTHeJ5XbTKOrgTY/DR0oxQ==
+  version "6.1.4"
+  resolved "https://registry.yarnpkg.com/ol-mapbox-style/-/ol-mapbox-style-6.1.4.tgz#5caec1e26e45371091cb68488541b0f9d56d531f"
+  integrity sha512-XyOk6oGTGtFnj6gRvMwdKZft9s1QeSh9toQRGT7vFr8fS9yV8fSVJnrdmicGTYDYkUVmL+B3Sebi2jc1oEdouQ==
   dependencies:
     "@mapbox/mapbox-gl-style-spec" "^13.14.0"
     mapbox-to-css-font "^2.4.0"
     webfont-matcher "^1.1.0"
 
 ol@^6.3.1:
-  version "6.4.2"
-  resolved "https://registry.yarnpkg.com/ol/-/ol-6.4.2.tgz#727e17072d7819bdb932cd302e51805197f4991f"
-  integrity sha512-8aoBiJIn4dDwmj4aJScg7JT7f6qqWHh5hV8vpFZA69KAGNsq3SZnm8XB5xq2xfASyPUAqLJ9LWvpVGVZJb0fBw==
+  version "6.4.3"
+  resolved "https://registry.yarnpkg.com/ol/-/ol-6.4.3.tgz#2277bb583fe2848e4b2062f85f1c5136b4b0c1b2"
+  integrity sha512-JcoZ/VJE9cUoxfhpa2EFYH0AHFYty1x47aITsQgLkyvWIWWigWp1N9LBcCSlCuu2QkE+DutomI2oKfnFbQA/xw==
   dependencies:
     ol-mapbox-style "^6.1.1"
     pbf "3.2.1"

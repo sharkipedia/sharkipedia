@@ -314,7 +314,7 @@ GEM
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
     semantic_range (2.3.0)
-    shoulda-matchers (4.3.0)
+    shoulda-matchers (4.4.1)
       activesupport (>= 4.2.0)
     sidekiq (6.1.2)
       connection_pool (>= 2.2.2)
@@ -401,7 +401,7 @@ DEPENDENCIES
   rubyXL
   sass-rails (~> 6.0)
   select2-rails (~> 4.0)!
-  shoulda-matchers (~> 4.3)
+  shoulda-matchers (~> 4.4)
   sidekiq (< 7)
   spring
   spring-watcher-listen (~> 2.0.0)

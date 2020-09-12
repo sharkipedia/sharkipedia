@@ -76,7 +76,7 @@ group :test do
   gem "capybara-select-2", "~> 0.5.1"
 
   gem "factory_bot_rails", "~> 6.1"
-  gem "shoulda-matchers", "~> 4.3"
+  gem "shoulda-matchers", "~> 4.4"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

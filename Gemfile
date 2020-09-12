@@ -97,4 +97,4 @@ gem "pagy", "~> 3.8"
 
 gem "invisible_captcha", "~> 1.0"
 
-gem "friendly_id", "~> 5.3.0"
+gem "friendly_id", "~> 5.4.0"

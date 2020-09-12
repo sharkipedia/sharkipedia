@@ -163,7 +163,7 @@ GEM
       concurrent-ruby (~> 1.0)
     invisible_captcha (1.1.0)
       rails (>= 4.2)
-    jbuilder (2.10.0)
+    jbuilder (2.10.1)
       activesupport (>= 5.0.0)
     jmespath (1.4.0)
     jquery-rails (4.4.0)

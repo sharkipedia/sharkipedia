@@ -126,10 +126,10 @@
           <%= render partial: 'trends/raw_data', locals: { observations: trend.trend_observations } %>
         </div>
         <div class="column">
-          <%= render partial: 'trends/meta', locals: { trend: trend } %>
+          <%= render partial: 'trends/data_meta', locals: { trend: trend } %>
         </div>
         <div class="column">
-          <%= render partial: 'trends/figure_meta', locals: { trend: trend } %>
+          <%= render partial: 'trends/trend_meta', locals: { trend: trend } %>
         </div>
       </div>
 

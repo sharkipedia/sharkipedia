@@ -95,6 +95,6 @@ gem "pg_search", "~> 2.2"
 
 gem "pagy", "~> 3.8"
 
-gem "invisible_captcha", "~> 1.0"
+gem "invisible_captcha", "~> 1.1"
 
 gem "friendly_id", "~> 5.4.0"

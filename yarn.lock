@@ -1950,9 +1950,9 @@ caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000981, caniuse-lite@^1.0.30001093, can
   integrity sha512-4JIXRodHzdS3HdK8nSgIqXYLExOvG+D2/EenSvcub2Kp3QEADjo2v2oUn5g0n0D+UNwG9BtwKOyGcSq2qvQXvQ==
 
 canvas-datagrid@^0.22.13:
-  version "0.22.16"
-  resolved "https://registry.yarnpkg.com/canvas-datagrid/-/canvas-datagrid-0.22.16.tgz#d013d29e8335dcb0ee5f2383501d3265e283fb10"
-  integrity sha512-GwU5pQ6z0U60Xwmoc63dMvanyIdXYwyIOU2KkBhelYHh9IjoKokXu8j0Hi4DALiTph3xj1wRZNO17z5YbJXIyw==
+  version "0.22.17"
+  resolved "https://registry.yarnpkg.com/canvas-datagrid/-/canvas-datagrid-0.22.17.tgz#51c54b6abf0ef0caf5e01fac797a7e8669460246"
+  integrity sha512-4qB9SyvEE+C6pOWx8iN3dfrR0A8uSMRkboH1xnTjdAgHpH99Ma7xgjtHKnyuf+QoOw0G2Y/BLwIuL8bna/gyeA==
 
 case-sensitive-paths-webpack-plugin@^2.3.0:
   version "2.3.0"

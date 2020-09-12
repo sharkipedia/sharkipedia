@@ -30,6 +30,8 @@ class CanvasDatagrid extends React.Component {
 
   componentDidMount() {
     this.grid = ReactDOM.findDOMNode(this);
+    this.grid.style.height = '100%';
+    this.grid.style.width = '100%';
     this.updateAttributes();
   }
 

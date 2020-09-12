@@ -25,7 +25,7 @@
     <% else %>
       <%= render partial: 'species/group_detail', locals: { species_group: @trend.species_group } %>
     <% end %>
-    <%= render partial: 'meta', locals: { trend: @trend } %>
+    <%= render partial: 'data_meta', locals: { trend: @trend } %>
   </div>
   <div class="column">
     <% if @trend.figure.attached? %>

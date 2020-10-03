@@ -1949,10 +1949,12 @@ caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000981, caniuse-lite@^1.0.30001093, can
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001109.tgz#a9f3f26a0c3753b063d7acbb48dfb9c0e46f2b19"
   integrity sha512-4JIXRodHzdS3HdK8nSgIqXYLExOvG+D2/EenSvcub2Kp3QEADjo2v2oUn5g0n0D+UNwG9BtwKOyGcSq2qvQXvQ==
 
-canvas-datagrid@^0.22.13:
-  version "0.22.17"
-  resolved "https://registry.yarnpkg.com/canvas-datagrid/-/canvas-datagrid-0.22.17.tgz#51c54b6abf0ef0caf5e01fac797a7e8669460246"
-  integrity sha512-4qB9SyvEE+C6pOWx8iN3dfrR0A8uSMRkboH1xnTjdAgHpH99Ma7xgjtHKnyuf+QoOw0G2Y/BLwIuL8bna/gyeA==
+canvas-datagrid@^0.24.4:
+  version "0.24.4"
+  resolved "https://registry.yarnpkg.com/canvas-datagrid/-/canvas-datagrid-0.24.4.tgz#3e72d16ee2dcfc685f63d89bd8ee3ed1cd32e308"
+  integrity sha512-8/dMK4/cTWRCLsgJEXuv7RB0+DvlgS4T8PU9Z4ZeLWgnqC4Mza90ABSVTscnC5Q+IliwKNHKoqUA0jEZ7ViYug==
+  dependencies:
+    is-printable-key-event "1.0.0"
 
 case-sensitive-paths-webpack-plugin@^2.3.0:
   version "2.3.0"
@@ -4139,6 +4141,11 @@ is-plain-object@^2.0.3, is-plain-object@^2.0.4:
   integrity sha512-h5PpgXkWitc38BBMYawTYMWJHFZJVnBquFE57xFpjB8pJFiF6gZ+bU+WyI/yqXiFR5mdLsgYNaPe8uao6Uv9Og==
   dependencies:
     isobject "^3.0.1"
+
+is-printable-key-event@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/is-printable-key-event/-/is-printable-key-event-1.0.0.tgz#1ea47b8abe1a2e53a1f5ea6aecbd6d24da707c66"
+  integrity sha512-C/GJ8ApSdY6/RGQrSSkBzuWDtYI9/mOTRLCOu/5iYH46pI7Ki6y6B71kPL7OWRzqv9KkWSEmskKdq5IvgAGPHA==
 
 is-regex@^1.0.4, is-regex@^1.1.0:
   version "1.1.0"

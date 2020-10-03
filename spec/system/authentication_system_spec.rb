@@ -1,4 +1,4 @@
-require "rails_helper"
+require "system_helper"
 
 class TestAuthController < ApplicationController
   MESSAGE = "you should not see this"

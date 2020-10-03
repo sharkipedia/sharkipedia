@@ -1,4 +1,4 @@
-require "rails_helper"
+require "system_helper"
 
 RSpec.describe "Mass Import" do
   let(:contributor) { create(:contributor) }

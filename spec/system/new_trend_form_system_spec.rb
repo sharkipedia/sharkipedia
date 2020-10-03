@@ -1,4 +1,4 @@
-require "rails_helper"
+require "system_helper"
 
 RSpec.describe "New Trend form" do
   let(:contributor) { create(:contributor) }

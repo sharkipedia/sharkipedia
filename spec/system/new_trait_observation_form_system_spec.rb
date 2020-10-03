@@ -1,4 +1,4 @@
-require "rails_helper"
+require "system_helper"
 
 RSpec.describe "New Trait Observation form" do
   let(:contributor) { create(:contributor) }

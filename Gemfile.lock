@@ -77,6 +77,8 @@ GEM
       momentjs-rails (~> 2.8)
       sassc-rails (~> 2.1)
       selectize-rails (~> 0.6)
+    after_commit_everywhere (0.1.5)
+      activerecord (>= 4.2)
     autoprefixer-rails (9.8.6.3)
       execjs
     aws-eventstream (1.1.0)
@@ -371,6 +373,7 @@ PLATFORMS
 DEPENDENCIES
   aasm (~> 5.1)
   administrate (~> 0.14.0)
+  after_commit_everywhere (~> 0.1, >= 0.1.5)
   aws-sdk-s3 (~> 1.83)
   bootsnap (>= 1.1.0)
   bugsnag (~> 6.15)

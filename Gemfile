@@ -91,7 +91,7 @@ gem "coffee-rails", "~> 5.0"
 gem "select2-rails", "~> 4.0", github: "argerim/select2-rails"
 gem "underscore-rails", "~> 1.8"
 
-gem "pg_search", "~> 2.2"
+gem "pg_search", "~> 2.3"
 
 gem "pagy", "~> 3.8"
 

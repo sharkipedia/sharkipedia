@@ -1,4 +1,4 @@
-require "rails_helper"
+require "system_helper"
 
 RSpec.describe "Mass Import" do
   let(:contributor) { create(:contributor) }
@@ -7,7 +7,9 @@ RSpec.describe "Mass Import" do
   before do
     # these are the examples on the homepage
     create(:species, name: "Carcharhinus acronotus")
+    create(:species, name: "Prionace glauca")
     create(:trait, name: "Lmat50")
+    create(:ocean, name: "Atlantic")
 
     # these are required for the validation of the valid traits xlsx sheet
     length = create(:trait_class, name: "Length")

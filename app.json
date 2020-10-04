@@ -1,7 +1,7 @@
 {
     "name": "sharkipedia",
     "scripts": {
-      "postdeploy": "pg_dump $STAGING_DATABASE_URL | psql $DATABASE_URL && bundle exec rake db:migrate"
+      "postdeploy": "pg_dump $STAGING_DATABASE_URL | psql $DATABASE_URL && bundle exec rake db:migrate db:gis:setup"
     },
     "env": {
       "SECRET_KEY_BASE": {

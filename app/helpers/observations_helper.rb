@@ -11,10 +11,10 @@ module ObservationsHelper
   end
 
   def format_location location
-    if location.lat.blank? && location.lon.blank?
+    if location.latitude.blank? && location.longitude.blank?
       location.name
     else
-      "#{location.name} (#{location.lat},#{location.lon})"
+      "#{location.name} (#{location.latitude},#{location.longitude})"
     end
   end
 end

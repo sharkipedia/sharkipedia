@@ -11,9 +11,17 @@ class Location < ApplicationRecord
                                      }
                                    }
 
+  def longitude
+    lonlat.try :x || lon
+  end
+
+  def latitude
+    lonlat.try :y || lat
+  end
+
   def display
     if name.blank?
-      "lat: #{lat}, long: #{lon}"
+      "lat: #{latitude}, long: #{longitude}"
     else
       name
     end

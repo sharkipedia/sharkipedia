@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_28_193056) do
+ActiveRecord::Schema.define(version: 2020_10_11_201746) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "postgis"
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -104,6 +105,8 @@ ActiveRecord::Schema.define(version: 2020_07_28_193056) do
     t.string "lon"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.geography "lonlat", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}
+    t.index ["lonlat"], name: "index_locations_on_lonlat", using: :gist
   end
 
   create_table "longhurst_provinces", force: :cascade do |t|

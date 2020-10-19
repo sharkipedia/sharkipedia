@@ -20,8 +20,11 @@ jobs:
         options: --entrypoint redis-server
 
       postgres:
-        image: postgres:11.5
-        ports: ["5432:5432"]
+        image: postgis/postgis:11-2.5
+        env:
+          POSTGRES_PASSWORD: password
+        ports:
+          - 5432:5432
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
@@ -59,6 +62,7 @@ jobs:
       env:
         PGHOST: localhost
         PGUSER: postgres
+        PGPASSWORD: password
         RAILS_ENV: test
       run: |
         bin/rails webpacker:compile
@@ -67,6 +71,7 @@ jobs:
       env:
         PGHOST: localhost
         PGUSER: postgres
+        PGPASSWORD: password
         RAILS_ENV: test
       run: |
         bin/rails db:create db:schema:load
@@ -75,6 +80,7 @@ jobs:
       env:
         PGHOST: localhost
         PGUSER: postgres
+        PGPASSWORD: password
         RAILS_ENV: test
         SES_SMTP_EMAIL_ADDRESS: test@example.com
       run: |

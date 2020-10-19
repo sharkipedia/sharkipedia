@@ -1,9 +1,10 @@
 default: &default
-  adapter: postgresql
+  adapter: postgis
   encoding: unicode
   # For details on connection pooling, see Rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  schema_search_path: public
 
 development:
   <<: *default
@@ -17,5 +18,4 @@ test:
   database: sharkipedia_test
 
 production:
-  url: <%= ENV['DATABASE_URL'] %>
-
+  url: <%= ENV['DATABASE_URL'].try(:sub, /^postgres/, "postgis") %>

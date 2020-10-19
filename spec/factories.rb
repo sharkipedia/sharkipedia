@@ -186,8 +186,9 @@ FactoryBot.define do
 
   factory :location do
     sequence(:name) { |n| "location #{n}" }
-    sequence(:lat) { |n| n }
-    sequence(:lon) { |n| n }
+    lat { 47 }
+    lon { -122 }
+    lonlat { "POINT(-122 47)" }
   end
 
   factory :trend do

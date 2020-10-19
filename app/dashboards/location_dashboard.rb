@@ -12,6 +12,7 @@ class LocationDashboard < Administrate::BaseDashboard
     name: Field::String,
     lat: Field::String.with_options(searchable: false),
     lon: Field::String.with_options(searchable: false),
+    lonlat: Field::String,
     measurements: Field::HasMany,
     observations: Field::HasMany,
     created_at: Field::DateTime,
@@ -27,6 +28,7 @@ class LocationDashboard < Administrate::BaseDashboard
     :name,
     :lat,
     :lon,
+    :lonlat,
     :observations,
     :measurements
   ].freeze
@@ -38,6 +40,7 @@ class LocationDashboard < Administrate::BaseDashboard
     :name,
     :lat,
     :lon,
+    :lonlat,
     :observations,
     :measurements,
     :created_at,
@@ -50,7 +53,8 @@ class LocationDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = [
     :name,
     :lat,
-    :lon
+    :lon,
+    :lonlat
   ].freeze
 
   # Overwrite this method to customize how locations are displayed

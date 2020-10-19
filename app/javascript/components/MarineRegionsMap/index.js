@@ -97,7 +97,7 @@ class MarineRegionsMap extends React.Component {
       }
     };
 
-    const regionCqlFilter = [
+    let regionCqlFilter = [
       ppow_meow_filter(this.props.meow, 'coastal'),
       ppow_meow_filter(this.props.ppow, 'pelagic')
     ].filter(e => e != undefined).join(" OR ");

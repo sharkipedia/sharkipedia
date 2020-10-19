@@ -8,7 +8,7 @@
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "bulma": "^0.9.1",
     "canvas-datagrid": "^0.24.4",
-    "chart.js": "^2.9.3",
+    "chart.js": "^2.9.4",
     "moment": "^2.29.1",
     "ol": "^6.3.1",
     "ol-layerswitcher": "^3.7.0",

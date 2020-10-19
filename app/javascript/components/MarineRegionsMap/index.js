@@ -239,8 +239,8 @@ class MarineRegionsMap extends React.Component {
 }
 
 MarineRegionsMap.propTypes = {
-  latitude: PropTypes.string,
-  longitude: PropTypes.string,
+  latitude: PropTypes.number,
+  longitude: PropTypes.number,
   meow: PropTypes.array,
   ppow: PropTypes.array,
   fao_areas: PropTypes.array,

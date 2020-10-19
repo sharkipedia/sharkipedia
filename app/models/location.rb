@@ -3,6 +3,14 @@ class Location < ApplicationRecord
   has_many :observations, through: :measurements
   has_many :trends
 
+  before_validation :set_lonlat
+
+  # TODO: remove the lat & lon columns
+  validates :lat, numericality: {greater_than_or_equal_to: -90,
+                                 less_than_or_equal_to: 90}, allow_nil: true
+  validates :lon, numericality: {greater_than_or_equal_to: -180,
+                                 less_than_or_equal_to: 180}, allow_nil: true
+
   include PgSearch::Model
   pg_search_scope :search_by_name, against: [:name],
                                    using: {
@@ -12,11 +20,11 @@ class Location < ApplicationRecord
                                    }
 
   def longitude
-    lonlat.try :x || lon
+    lonlat.try :lon || lon
   end
 
   def latitude
-    lonlat.try :y || lat
+    lonlat.try :lat || lat
   end
 
   def display
@@ -24,6 +32,14 @@ class Location < ApplicationRecord
       "lat: #{latitude}, long: #{longitude}"
     else
       name
+    end
+  end
+
+  private
+
+  def set_lonlat
+    if lat.present? && lon.present?
+      self.lonlat = "POINT(#{lon} #{lat})"
     end
   end
 end

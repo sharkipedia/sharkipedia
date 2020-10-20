@@ -45,11 +45,6 @@ class TrendsController < PreAuthController
   end
 
   def create
-    location_params = params[:trend].delete(:location)
-    location = Location.find_or_create_by name: location_params[:name],
-                                          lat: location_params[:lat],
-                                          lon: location_params[:lon]
-
     trend_observations = JSON.parse(params[:trend].delete(:trend_observations_attributes))
 
     @trend = current_user.trends.new(trend_params)
@@ -59,7 +54,6 @@ class TrendsController < PreAuthController
     import = current_user.imports.create title: @trend.title, import_type: "trend"
     import.do_validate
 
-    @trend.location = location
     @trend.import = import
     success = @trend.save
     @trend.create_or_update_observations(trend_observations) if success
@@ -81,13 +75,6 @@ class TrendsController < PreAuthController
   def update
     @trend = Trend.find params[:id]
     authorize @trend
-
-    location_params = params[:trend].delete(:location)
-    location = Location.find_or_create_by name: location_params[:name],
-                                          lat: location_params[:lat],
-                                          lon: location_params[:lon]
-
-    @trend.location = location
 
     trend_observations = JSON.parse(params[:trend].delete(:trend_observations_attributes))
     @trend.create_or_update_observations(trend_observations)
@@ -168,7 +155,8 @@ class TrendsController < PreAuthController
       :sampling_method_id,
       ocean_ids: [],
       fao_area_ids: [],
-      marine_ecoregions_world_ids: []
+      marine_ecoregions_world_ids: [],
+      location_attributes: [:id, :name, :lat, :lon]
     )
   end
 end

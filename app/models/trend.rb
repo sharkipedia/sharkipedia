@@ -14,6 +14,9 @@ class Trend < ApplicationRecord
   belongs_to :unit_transformation, optional: true
   belongs_to :analysis_model, optional: true
 
+  accepts_nested_attributes_for :location, allow_destroy: true
+  before_save :find_or_create_location
+
   has_many :trend_observations, -> { order(:year) }, dependent: :destroy
   has_and_belongs_to_many :source_observations
   has_and_belongs_to_many :marine_ecoregions_worlds
@@ -141,5 +144,15 @@ class Trend < ApplicationRecord
 
   def meow_region_ids
     marine_ecoregions_worlds.meow.map(&:id)
+  end
+
+  private
+
+  def find_or_create_location
+    unless location.persisted?
+      self.location = Location.find_or_create_by name: location.name,
+                                                 lat: location.lat,
+                                                 lon: location.lon
+    end
   end
 end

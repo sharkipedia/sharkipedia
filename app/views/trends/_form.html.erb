@@ -135,7 +135,7 @@
         <div class="field">
           <%= fl.label :lat, 'Latitude', class: 'label' %>
           <div class="control">
-            <%= fl.text_field :lat, class: 'input' %><br />
+            <%= fl.text_field :lat, class: 'input', pattern: '^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)$', placeholder: 'Value between -90.0 and 90.0' %><br />
           </div>
           <p class="help"> If given the latitude of sampling location in decimal degrees (e.g. 40.446<sup>o</sup>N as 40.446).</p>
         </div>
@@ -143,7 +143,7 @@
         <div class="field">
           <%= fl.label :lon, 'Longitude', class: 'label' %>
           <div class="control">
-            <%= fl.text_field :lon, class: 'input' %><br />
+            <%= fl.text_field :lon, class: 'input', pattern: '^[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$', placeholder: 'Value between -180.0 and 180.0' %><br />
           </div>
           <p class="help"> If given the longitude of smapling location in decimal degrees (e.g. 79.982<sup>o</sup>W as 79.982).</p>
         </div>

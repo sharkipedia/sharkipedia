@@ -21,7 +21,8 @@ class Measurement < ApplicationRecord
   def find_or_create_location
     unless location.persisted?
       self.location = Location.find_or_create_by name: location.name,
-                                                 lat: location.lat, lon: location.lon
+                                                 lat: location.lat,
+                                                 lon: location.lon
     end
   end
 end

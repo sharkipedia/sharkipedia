@@ -11,6 +11,10 @@ RSpec.describe "New Trend form" do
   let!(:sampling_method) { create(:sampling_method) }
   let!(:data_type) { create(:data_type) }
 
+  let(:location_name) { "Southern California Bight" }
+  let(:latitude) { "32.838512" }
+  let(:longitude) { "-121.0736997" }
+
   # Import#notify_admins needs at least one admin
   let!(:admin) { create(:admin) }
 
@@ -32,9 +36,9 @@ RSpec.describe "New Trend form" do
     select2 data_type.name, from: "Data Type"
     select2 ocean.name, from: "Ocean"
     fill_in "Depth", with: "100"
-    fill_in "Location Name", with: "Test Location"
-    fill_in "Latitude", with: "1"
-    fill_in "Longitude", with: "1"
+    fill_in "Location Name", with: location_name
+    fill_in "Latitude", with: latitude
+    fill_in "Longitude", with: longitude
 
     expect(page).not_to have_selector(".trend-chart > canvas")
 
@@ -82,5 +86,8 @@ RSpec.describe "New Trend form" do
     expect(page).to have_content(species.name)
     expect(page).to have_content(reference.name)
     expect(page).to have_content(ocean.name)
+    expect(page).to have_content(location_name)
+    expect(page).to have_content(latitude)
+    expect(page).to have_content(longitude)
   end
 end

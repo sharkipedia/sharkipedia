@@ -124,7 +124,7 @@
     </div>
 
     <div class="column">
-      <%= f.fields_for @trend.location do |fl| %>
+      <%= f.fields_for :location do |fl| %>
         <div class="field">
           <%= fl.label :name, 'Location Name', class: 'label' %>
           <div class="control">

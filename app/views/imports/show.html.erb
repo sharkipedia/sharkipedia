@@ -36,6 +36,11 @@
       <a class="button is-success" id="approve-btn">Approve and Import</a>
     <% end %>
 
+    <% if @import.imported? && @import.trends.size < 5 %>
+      <% @import.trends.each do |trend| %>
+        <%= link_to "View", trend, class: "button is-info" %>
+      <% end %>
+    <% end %>
   </div>
 </div>
 

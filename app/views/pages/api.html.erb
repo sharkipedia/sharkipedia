@@ -6,11 +6,17 @@
 </p>
 
 <% if current_user %>
-
   <p>
     Your API token is <code><%== current_user.token %></code>.
   </p>
 
+  <p>
+    This token is required as a HTTP header in all requests to the API. For example:
+  </p>
+
+  <pre>
+curl -s -H 'Authorization: Token <%= current_user.token %>' <%= request.base_url %>/api/v1/species
+  </pre>
 <% else %>
   <p>
     While the API is open for everyone to use it is required that you authenticate

@@ -7,6 +7,10 @@
 
 <% if current_user %>
 
+  <p>
+    Your API token is <code><%== current_user.token %></code>.
+  </p>
+
 <% else %>
   <p>
     While the API is open for everyone to use it is required that you authenticate

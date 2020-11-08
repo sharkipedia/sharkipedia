@@ -10,7 +10,10 @@ class User < ApplicationRecord
   scope :editors, -> { where(user_level: "editors") }
   scope :contributors, -> { where(user_level: "contributor") }
 
-  validates :name, presence: true
+  validates :name, :token, presence: true
+  validates :token, uniqueness: true
+
+  after_initialize :ensure_token
 
   def admin?
     user_level == "admin"
@@ -30,5 +33,11 @@ class User < ApplicationRecord
 
   def self.admin_emails
     User.admins.pluck(:email)
+  end
+
+  private
+
+  def ensure_token
+    update token: SecureRandom.hex(10) if token.blank?
   end
 end

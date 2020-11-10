@@ -94,7 +94,7 @@ GEM
     aws-sdk-kms (1.39.0)
       aws-sdk-core (~> 3, >= 3.109.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-s3 (1.83.2)
+    aws-sdk-s3 (1.84.0)
       aws-sdk-core (~> 3, >= 3.109.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.1)
@@ -382,7 +382,7 @@ DEPENDENCIES
   activerecord-postgis-adapter (~> 6.0)
   administrate (~> 0.14.0)
   after_commit_everywhere (~> 0.1, >= 0.1.5)
-  aws-sdk-s3 (~> 1.83)
+  aws-sdk-s3 (~> 1.84)
   bootsnap (>= 1.1.0)
   bugsnag (~> 6.18)
   byebug

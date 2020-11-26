@@ -3,6 +3,7 @@ require "rails_helper"
 RSpec.describe API::V1::SpeciesController, type: :controller do
   set_token
   let!(:species) { create :species }
+  let(:document) { JSON.parse(response.body) }
 
   describe "GET #index" do
     it "returns http success" do
@@ -19,6 +20,26 @@ RSpec.describe API::V1::SpeciesController, type: :controller do
   end
 
   describe "POST #query" do
+    context "when :ocean given" do
+      let!(:trend_species) { create :species }
+      let!(:trend) { create :trend, species: trend_species }
+
+      it "should return the correct species" do
+        post :query, params: {oceans: trend.oceans.map(&:name)}
+
+        expect(response.body).to match(/#{trend_species.name}/)
+        expect(response.body).not_to match(/#{species.name}/)
+      end
+
+      context "when invalid ocean name" do
+        it "should return nothing" do
+          post :query, params: {oceans: ["hi-mom"]}
+
+          expect(document["meta"]["total"]).to eq(0)
+        end
+      end
+    end
+
     context "when :geometry (geojson polygon)" do
       let!(:trend_species) { create :species }
       let!(:trait_species) { create :species }
@@ -34,7 +55,6 @@ RSpec.describe API::V1::SpeciesController, type: :controller do
       let!(:other_measurement) { create :measurement, observation: other_observation }
 
       let(:hawaii_geojson) { File.read("spec/fixtures/geo/hawaii.geojson") }
-      let(:document) { JSON.parse(response.body) }
 
       it "should return the correct species" do
         post :query, params: {geometry: hawaii_geojson}

@@ -18,6 +18,8 @@ module API::V1
     def query
       results = if params[:geometry]
         find_species_by_geometry
+      elsif params[:oceans]
+        find_species_by_oceans
       else
         []
       end
@@ -40,6 +42,11 @@ module API::V1
         total: (resources.count if resources.respond_to?(:count)),
         pagination: (pagination if pagination.present?)
       }.compact
+    end
+
+    def find_species_by_oceans
+      oceans = Ocean.where name: params[:oceans]
+      oceans&.map(&:species)&.flatten
     end
 
     def find_species_by_geometry

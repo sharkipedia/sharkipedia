@@ -15,6 +15,17 @@ module API::V1
       render jsonapi: species
     end
 
+    def query
+      locations = Location.where("ST_Intersects(lonlat, '" + geometry.first.geometry.as_text + "')")
+
+      results = Species.joins(:trends).where(trends: {location: locations}) +
+        Species.joins(observations: :measurements).where(measurements: {location_id: locations})
+
+      jsonapi_paginate(results) do |paginated|
+        render jsonapi: paginated
+      end
+    end
+
     private
 
     def jsonapi_include
@@ -28,6 +39,12 @@ module API::V1
         total: (resources.count if resources.respond_to?(:count)),
         pagination: (pagination if pagination.present?)
       }.compact
+    end
+
+    def geometry
+      RGeo::GeoJSON.decode params[:geometry]
+    rescue JSON::ParserError
+      {}
     end
   end
 end

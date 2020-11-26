@@ -186,9 +186,19 @@ FactoryBot.define do
 
   factory :location do
     sequence(:name) { |n| "location #{n}" }
-    lat { 47 }
-    lon { -122 }
     lonlat { "POINT(-122 47)" }
+  end
+
+  factory :observation do
+    user
+    import
+    species
+  end
+
+  factory :measurement do
+    sex_type
+    location
+    association :trait
   end
 
   factory :trend do

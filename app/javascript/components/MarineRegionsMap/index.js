@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import 'ol/ol.css';
-import 'ol-layerswitcher/src/ol-layerswitcher.css';
+import 'ol-layerswitcher/dist/ol-layerswitcher.css';
 import './style.scss'
 import Map from 'ol/Map';
 import View from 'ol/View';

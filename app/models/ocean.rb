@@ -9,4 +9,5 @@ class Ocean < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
   has_and_belongs_to_many :trends
+  has_many :species, through: :trends
 end

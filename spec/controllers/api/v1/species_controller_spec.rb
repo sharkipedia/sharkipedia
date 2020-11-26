@@ -34,7 +34,7 @@ RSpec.describe API::V1::SpeciesController, type: :controller do
       let!(:other_measurement) { create :measurement, observation: other_observation }
 
       let(:hawaii_geojson) { File.read("spec/fixtures/geo/hawaii.geojson") }
-      let(:document) { JSON.parse(response.body)["data"] }
+      let(:document) { JSON.parse(response.body) }
 
       it "should return the correct species" do
         post :query, params: {geometry: hawaii_geojson}
@@ -42,6 +42,14 @@ RSpec.describe API::V1::SpeciesController, type: :controller do
         expect(response.body).to match(/#{trend_species.name}/)
         expect(response.body).to match(/#{trait_species.name}/)
         expect(response.body).not_to match(/#{species.name}/)
+      end
+
+      context "when no query given" do
+        it "should return the nothing" do
+          post :query, params: {geometry: {}}
+
+          expect(document["meta"]["total"]).to eq(0)
+        end
       end
     end
   end

@@ -16,10 +16,11 @@ module API::V1
     end
 
     def query
-      locations = Location.where("ST_Intersects(lonlat, '" + geometry.first.geometry.as_text + "')")
-
-      results = Species.joins(:trends).where(trends: {location: locations}) +
-        Species.joins(observations: :measurements).where(measurements: {location_id: locations})
+      results = if params[:geometry]
+        find_species_by_geometry
+      else
+        []
+      end
 
       jsonapi_paginate(results) do |paginated|
         render jsonapi: paginated
@@ -39,6 +40,13 @@ module API::V1
         total: (resources.count if resources.respond_to?(:count)),
         pagination: (pagination if pagination.present?)
       }.compact
+    end
+
+    def find_species_by_geometry
+      locations = Location.where("ST_Intersects(lonlat, '" + geometry.first.geometry.as_text + "')")
+
+      Species.joins(:trends).where(trends: {location: locations}) +
+        Species.joins(observations: :measurements).where(measurements: {location_id: locations})
     end
 
     def geometry

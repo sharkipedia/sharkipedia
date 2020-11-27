@@ -72,7 +72,7 @@ group :development do
 end
 
 group :test do
-  gem "capybara", "~> 3.33.0"
+  gem "capybara", "~> 3.34.0"
   gem "webdrivers", "~> 4.4"
   gem "cuprite", "~> 0.11"
 

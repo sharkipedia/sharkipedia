@@ -7,6 +7,13 @@ module API::V1
       render jsonapi: BOUNDARIES
     end
 
+    def show
+      case params[:name]
+      when /Oceans?/i
+        render jsonapi: Ocean.all
+      end
+    end
+
     private
 
     def jsonapi_serializer_class(resource, is_collection)

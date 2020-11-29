@@ -1849,6 +1849,120 @@ $ curl -s -H 'Authorization: Token <%= current_user.token %>' \
 }
 </pre>
 
+
+<h4 class="title is-4">Boundaries</h4>
+
+<h5 class="subtitle is-5">List all available Boundary types</h5>
+
+<pre>
+$ curl -s -H 'Authorization: Token <%= current_user.token %>' \
+             "https://www.sharkipedia.org/api/v1/boundaries" | jq '.'
+
+{
+  "data": [
+    {
+      "id": "1",
+      "type": "boundaries",
+      "attributes": {
+        "id": 1,
+        "name": "Ocean"
+      },
+      "relationships": {}
+    },
+    {
+      "id": "2",
+      "type": "boundaries",
+      "attributes": {
+        "id": 2,
+        "name": "Eez"
+      },
+      "relationships": {}
+    }
+  ],
+  "meta": {
+    "total": 2,
+    "pagination": {
+      "current": 1,
+      "records": 2
+    }
+  },
+  "links": {
+    "self": "https://www.sharkipedia.org/api/v1/boundaries",
+    "current": "https://www.sharkipedia.org/api/v1/boundaries?page[number]=1",
+    "records": "https://www.sharkipedia.org/api/v1/boundaries?page[number]=2"
+  }
+}
+</pre>
+
+<h5 class="subtitle is-5">List all available Boundaries by type</h5>
+
+<pre>
+$ curl -s -H 'Authorization: Token <%= current_user.token %>' \
+             "https://www.sharkipedia.org/api/v1/boundaries/ocean" | jq '.'
+
+{
+  "data": [
+    {
+      "id": "1",
+      "type": "ocean",
+      "attributes": {
+        "id": 1,
+        "name": "Atlantic"
+      },
+      "relationships": {}
+    },
+    {
+      "id": "2",
+      "type": "ocean",
+      "attributes": {
+        "id": 2,
+        "name": "Indian"
+      },
+      "relationships": {}
+    },
+    {
+      "id": "3",
+      "type": "ocean",
+      "attributes": {
+        "id": 3,
+        "name": "Mediterranean"
+      },
+      "relationships": {}
+    },
+    {
+      "id": "4",
+      "type": "ocean",
+      "attributes": {
+        "id": 4,
+        "name": "Pacific"
+      },
+      "relationships": {}
+    },
+    {
+      "id": "5",
+      "type": "ocean",
+      "attributes": {
+        "id": 5,
+        "name": "Arctic"
+      },
+      "relationships": {}
+    }
+  ],
+  "meta": {
+    "total": 5,
+    "pagination": {
+      "current": 1,
+      "records": 5
+    }
+  },
+  "links": {
+    "self": "https://www.sharkipedia.org/api/v1/boundaries/ocean",
+    "current": "https://www.sharkipedia.org/api/v1/boundaries/ocean?page[number]=1",
+    "records": https://www.sharkipedia.org/api/v1/boundaries/ocean?page[number]=5"
+  }
+}
+</pre>
+
 <% else %>
   <p>
     While the API is open for everyone to use it is required that you authenticate

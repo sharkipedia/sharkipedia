@@ -1969,8 +1969,8 @@ $ curl -s -H 'Authorization: Token <%= current_user.token %>' \
 
 <pre>
 $ curl -s -H 'Authorization: Token <%= current_user.token %>' \
-             -XPOST -d 'oceans[]=Atlantic&oceans[]=Pacific'
-             "https://www.sharkipedia.org/api/v1/boundaries/ocean" | jq '.'
+             "https://www.sharkipedia.org/api/v1/species/query" \
+             -XPOST -d 'oceans[]=Atlantic&oceans[]=Pacific' | jq '.'
 
 {
   "data": [
@@ -1983,12 +1983,36 @@ $ curl -s -H 'Authorization: Token <%= current_user.token %>' \
         "iucn_code": null,
         "authorship": "White & Naylor 2017"
       },
-      "relationships": { ...  }
+      "relationships": { ... }
     }
   ]
 }
 </pre>
 
+<h5 class="subtitle is-5">By Boundary (EEZ)</h5>
+
+<pre>
+$ curl -s -H 'Authorization: Token <%= current_user.token %>' \
+             "https://www.sharkipedia.org/api/v1/species/query" \
+             -XPOST -d 'eez_id=4' | jq '.'
+
+{
+  "data": [
+    {
+      "id": "372",
+      "type": "species",
+      "attributes": {
+        "binomial_name": "Bathyraja albomaculata",
+        "edge_scientific_name": "Rhinoraja albomaculata",
+        "iucn_code": null,
+        "authorship": "Last et al 2016"
+      },
+      "relationships": { ... }
+    }
+  ]
+}
+
+</pre>
 
 <% else %>
   <p>

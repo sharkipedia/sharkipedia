@@ -20,6 +20,8 @@ module API::V1
         find_species_by_geometry
       elsif params[:oceans]
         find_species_by_oceans
+      elsif params[:eez_id]
+        find_species_by_eez
       else
         []
       end
@@ -42,6 +44,22 @@ module API::V1
         total: (resources.count if resources.respond_to?(:count)),
         pagination: (pagination if pagination.present?)
       }.compact
+    end
+
+    def find_species_by_eez
+      query = <<~SQL
+        SELECT * FROM locations
+        WHERE ST_Intersects(lonlat, (
+          SELECT geom FROM #{Eez.table_name} WHERE fid = ?
+        ))
+      SQL
+
+      locations = Location.find_by_sql([query, params[:eez_id]])
+
+      Species.joins(:trends).where(trends: {location: locations}) +
+        Species.joins(observations: :measurements).where(measurements: {location_id: locations})
+    rescue ActiveRecord::StatementInvalid
+      []
     end
 
     def find_species_by_oceans

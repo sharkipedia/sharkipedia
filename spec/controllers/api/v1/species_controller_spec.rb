@@ -40,6 +40,27 @@ RSpec.describe API::V1::SpeciesController, type: :controller do
       end
     end
 
+    context "when EEZ ID given" do
+      let!(:trend_species) { create :species }
+      let!(:location) { create :location, name: "Falkland Islands", lat: "-50", lon: "-59" }
+      let!(:trend) { create :trend, location: location, species: trend_species }
+
+      it "should return the correct species" do
+        post :query, params: {eez_id: 4}
+
+        expect(response.body).to match(/#{trend_species.name}/)
+        expect(response.body).not_to match(/#{species.name}/)
+      end
+
+      context "when invalid eez id" do
+        it "should return nothing" do
+          post :query, params: {eez_id: "hi-mom"}
+
+          expect(document["meta"]["total"]).to eq(0)
+        end
+      end
+    end
+
     context "when :geometry (geojson polygon)" do
       let!(:trend_species) { create :species }
       let!(:trait_species) { create :species }

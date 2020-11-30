@@ -1963,6 +1963,33 @@ $ curl -s -H 'Authorization: Token <%= current_user.token %>' \
 }
 </pre>
 
+<h4 class="subtitle is-5">Query for Species</h4>
+
+<h5 class="subtitle is-5">By Boundary (Ocean)</h5>
+
+<pre>
+$ curl -s -H 'Authorization: Token <%= current_user.token %>' \
+             -XPOST -d 'oceans[]=Atlantic&oceans[]=Pacific'
+             "https://www.sharkipedia.org/api/v1/boundaries/ocean" | jq '.'
+
+{
+  "data": [
+    {
+      "id": "158",
+      "type": "species",
+      "attributes": {
+        "binomial_name": "Aetobatus narinari",
+        "edge_scientific_name": "Aetobatus narinari",
+        "iucn_code": null,
+        "authorship": "White & Naylor 2017"
+      },
+      "relationships": { ...  }
+    }
+  ]
+}
+</pre>
+
+
 <% else %>
   <p>
     While the API is open for everyone to use it is required that you authenticate

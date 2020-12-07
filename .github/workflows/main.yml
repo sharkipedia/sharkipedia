@@ -76,6 +76,17 @@ jobs:
       run: |
         bin/rails db:create db:schema:load
 
+    - name: Seed Database
+      env:
+        PGHOST: localhost
+        PGUSER: postgres
+        PGPASSWORD: password
+        RAILS_ENV: test
+      run: |
+        wget -q https://d3ci4pmn27yclp.cloudfront.net/eez.tgz
+        tar xvzf eez.tgz
+        cat eez_v11.sql | psql sharkipedia_test
+
     - name: Run Tests
       env:
         PGHOST: localhost

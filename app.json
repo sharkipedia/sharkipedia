@@ -21,5 +21,13 @@
       "heroku-postgresql",
       "heroku-redis",
       "papertrail"
-    ]
+    ],
+    "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-geo-buildpack"
+    },
+    {
+      "url": "heroku/ruby"
+    }
+  ]
 }

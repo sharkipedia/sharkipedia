@@ -1,0 +1,2022 @@
+<h1 class="title is-1">API</h1>
+
+<% if current_user %>
+  <h3 class="title is-3">Access token</h3>
+  <p>
+    Your API token is <code><%== current_user.token %></code>.
+  </p>
+
+  <p>
+    This token is required to be present in the Authorization HTTP header in all requests to the API. For example:
+  </p>
+
+  <pre>
+curl -s -H 'Authorization: Token <%= current_user.token %>' <%= request.base_url %>/api/v1/species
+{"data":[{"id":"1283","type":"species","attributes":{"binomial_name":"Rajella leopardus","edg...
+  </pre>
+
+
+  <h3 class="title is-3">Documentation</h3>
+  <p>
+    The API follows the <a href="https://jsonapi.org/" target="_blank">jsonapi specification</a>. There are many implementations for various
+    programming languages which will make integration straightforward.
+  </p>
+
+  <p>
+  Data is returned in JSON, in a single line. The following examples use <a href="https://curl.se/" target="_blank">cURL</a> for making the requests and <a href="https://stedolan.github.io/jq/" target="_blank">jq</a> for pretty printing the JSON.
+  </p>
+
+<h4 class="title is-4">Retrieve a single species</h4>
+
+<h5 class="subtitle is-5">by name</h5>
+
+<pre>
+$ curl -s -H 'Authorization: Token <%= current_user.token %>' \
+             "https://www.sharkipedia.org/api/v1/species/chimaera-lignaria" | jq '.'
+{
+  "data": {
+    "id": "9",
+    "type": "species",
+    "attributes": {
+      "binomial_name": "Chimaera lignaria",
+      "edge_scientific_name": "Chimaera lignaria",
+      "iucn_code": null,
+      "authorship": "Didier 2002 "
+    },
+    "relationships": {}
+  },
+  "links": {
+    "self": "https://www.sharkipedia.org/api/v1/species/chimaera-lignaria"
+  }
+}
+</pre>
+
+<h5 class="subtitle is-5">by id</h5>
+
+<pre>
+$ curl -s -H 'Authorization: Token <%= current_user.token %>' \
+             "https://www.sharkipedia.org/api/v1/species/9" | jq '.'
+{
+  "data": {
+    "id": "9",
+    "type": "species",
+    "attributes": {
+      "binomial_name": "Chimaera lignaria",
+      "edge_scientific_name": "Chimaera lignaria",
+      "iucn_code": null,
+      "authorship": "Didier 2002 "
+    },
+    "relationships": {}
+  },
+  "links": {
+    "self": "https://www.sharkipedia.org/api/v1/species/9"
+  }
+}
+</pre>
+
+
+<h4 class="title is-4">Including Observation &amp; Measurements</h4>
+
+<pre>
+$ curl -s -H 'Authorization: Token <%= current_user.token %>' \
+             "https://www.sharkipedia.org/api/v1/species/9?include=observations,observations.measurements" | jq '.'
+{
+  "data": {
+    "id": "9",
+    "type": "species",
+    "attributes": {
+      "binomial_name": "Chimaera lignaria",
+      "edge_scientific_name": "Chimaera lignaria",
+      "iucn_code": null,
+      "authorship": "Didier 2002 "
+    },
+    "relationships": {
+      "observations": {
+        "data": [
+          {
+            "id": "52",
+            "type": "observation"
+          }
+        ]
+      },
+      "trends": {
+        "data": []
+      }
+    }
+  },
+  "links": {
+    "self": "https://www.sharkipedia.org/api/v1/species/9?include=observations,observations.measurements"
+  },
+  "included": [
+    {
+      "id": "605",
+      "type": "measurement",
+      "attributes": {
+        "value": "77.9",
+        "sex_type": "Male",
+        "trait_class": "Length",
+        "trait": "Lmax-observed",
+        "standard": "cm BDL",
+        "measurement_method": "Directly observed",
+        "measurement_model": "Observational",
+        "value_type": "max",
+        "precision": null,
+        "precision_type": null,
+        "precision_upper": null,
+        "sample_size": 8,
+        "dubious": null,
+        "validated": null,
+        "notes": "TASM",
+        "validation_type": null,
+        "location": "SW of Veryan Bank, Chatham Rise",
+        "ocean": "SW of Veryan Bank, Chatham Rise",
+        "longhurst_province": "New Zealand coast"
+      },
+      "relationships": {
+        "observation": {
+          "data": {
+            "id": "52",
+            "type": "observation"
+          }
+        }
+      }
+    },
+    {
+      "id": "606",
+      "type": "measurement",
+      "attributes": {
+        "value": "60",
+        "sex_type": "Pooled",
+        "trait_class": "Length",
+        "trait": "Length at first maturity",
+        "standard": "cm BDL",
+        "measurement_method": "Directly observed",
+        "measurement_model": "Observational",
+        "value_type": "min",
+        "precision": null,
+        "precision_type": "range",
+        "precision_upper": "70",
+        "sample_size": 18,
+        "dubious": null,
+        "validated": null,
+        "notes": "TASM",
+        "validation_type": null,
+        "location": "SW of Veryan Bank, Chatham Rise",
+        "ocean": "SW of Veryan Bank, Chatham Rise",
+        "longhurst_province": "New Zealand coast"
+      },
+      "relationships": {
+        "observation": {
+          "data": {
+            "id": "52",
+            "type": "observation"
+          }
+        }
+      }
+    },
+    {
+      "id": "609",
+      "type": "measurement",
+      "attributes": {
+        "value": "142",
+        "sex_type": "Female",
+        "trait_class": "Length",
+        "trait": "Lmax-observed",
+        "standard": "cm TL",
+        "measurement_method": "Directly observed",
+        "measurement_model": "Observational",
+        "value_type": "max",
+        "precision": null,
+        "precision_type": null,
+        "precision_upper": null,
+        "sample_size": 9,
+        "dubious": null,
+        "validated": null,
+        "notes": "TASM",
+        "validation_type": null,
+        "location": "SW of Veryan Bank, Chatham Rise",
+        "ocean": "SW of Veryan Bank, Chatham Rise",
+        "longhurst_province": "New Zealand coast"
+      },
+      "relationships": {
+        "observation": {
+          "data": {
+            "id": "52",
+            "type": "observation"
+          }
+        }
+      }
+    },
+    {
+      "id": "610",
+      "type": "measurement",
+      "attributes": {
+        "value": "125.1",
+        "sex_type": "Male",
+        "trait_class": "Length",
+        "trait": "Lmax-observed",
+        "standard": "cm TL",
+        "measurement_method": "Directly observed",
+        "measurement_model": "Observational",
+        "value_type": "max",
+        "precision": null,
+        "precision_type": null,
+        "precision_upper": null,
+        "sample_size": 8,
+        "dubious": null,
+        "validated": null,
+        "notes": "TASM",
+        "validation_type": null,
+        "location": "SW of Veryan Bank, Chatham Rise",
+        "ocean": "SW of Veryan Bank, Chatham Rise",
+        "longhurst_province": "New Zealand coast"
+      },
+      "relationships": {
+        "observation": {
+          "data": {
+            "id": "52",
+            "type": "observation"
+          }
+        }
+      }
+    },
+    {
+      "id": "612",
+      "type": "measurement",
+      "attributes": {
+        "value": "86.7",
+        "sex_type": "Male",
+        "trait_class": "Length",
+        "trait": "Lmax-observed",
+        "standard": "cm TL",
+        "measurement_method": "Directly observed",
+        "measurement_model": "Observational",
+        "value_type": "max",
+        "precision": null,
+        "precision_type": null,
+        "precision_upper": null,
+        "sample_size": 10,
+        "dubious": null,
+        "validated": null,
+        "notes": null,
+        "validation_type": null,
+        "location": "N of Mernoo Bank",
+        "ocean": "N of Mernoo Bank",
+        "longhurst_province": "New Zealand coast"
+      },
+      "relationships": {
+        "observation": {
+          "data": {
+            "id": "52",
+            "type": "observation"
+          }
+        }
+      }
+    },
+    {
+      "id": "611",
+      "type": "measurement",
+      "attributes": {
+        "value": "111.5",
+        "sex_type": "Female",
+        "trait_class": "Length",
+        "trait": "Lmax-observed",
+        "standard": "cm TL",
+        "measurement_method": "Directly observed",
+        "measurement_model": "Observational",
+        "value_type": "max",
+        "precision": null,
+        "precision_type": null,
+        "precision_upper": null,
+        "sample_size": 8,
+        "dubious": null,
+        "validated": null,
+        "notes": null,
+        "validation_type": null,
+        "location": "N of Mernoo Bank",
+        "ocean": "N of Mernoo Bank",
+        "longhurst_province": "New Zealand coast"
+      },
+      "relationships": {
+        "observation": {
+          "data": {
+            "id": "52",
+            "type": "observation"
+          }
+        }
+      }
+    },
+    {
+      "id": "608",
+      "type": "measurement",
+      "attributes": {
+        "value": "42.5",
+        "sex_type": "Male",
+        "trait_class": "Length",
+        "trait": "Lmax-observed",
+        "standard": "cm BDL",
+        "measurement_method": "Directly observed",
+        "measurement_model": "Observational",
+        "value_type": "max",
+        "precision": null,
+        "precision_type": null,
+        "precision_upper": null,
+        "sample_size": 10,
+        "dubious": null,
+        "validated": null,
+        "notes": null,
+        "validation_type": null,
+        "location": "N of Mernoo Bank",
+        "ocean": "N of Mernoo Bank",
+        "longhurst_province": "New Zealand coast"
+      },
+      "relationships": {
+        "observation": {
+          "data": {
+            "id": "52",
+            "type": "observation"
+          }
+        }
+      }
+    },
+    {
+      "id": "607",
+      "type": "measurement",
+      "attributes": {
+        "value": "57.2",
+        "sex_type": "Female",
+        "trait_class": "Length",
+        "trait": "Lmax-observed",
+        "standard": "cm BDL",
+        "measurement_method": "Directly observed",
+        "measurement_model": "Observational",
+        "value_type": "max",
+        "precision": null,
+        "precision_type": null,
+        "precision_upper": null,
+        "sample_size": 8,
+        "dubious": null,
+        "validated": null,
+        "notes": null,
+        "validation_type": null,
+        "location": "N of Mernoo Bank",
+        "ocean": "N of Mernoo Bank",
+        "longhurst_province": "New Zealand coast"
+      },
+      "relationships": {
+        "observation": {
+          "data": {
+            "id": "52",
+            "type": "observation"
+          }
+        }
+      }
+    },
+    {
+      "id": "604",
+      "type": "measurement",
+      "attributes": {
+        "value": "89",
+        "sex_type": "Female",
+        "trait_class": "Length",
+        "trait": "Lmax-observed",
+        "standard": "cm BDL",
+        "measurement_method": "Directly observed",
+        "measurement_model": "Observational",
+        "value_type": "max",
+        "precision": null,
+        "precision_type": null,
+        "precision_upper": null,
+        "sample_size": 9,
+        "dubious": null,
+        "validated": null,
+        "notes": "TASM",
+        "validation_type": null,
+        "location": "SW of Veryan Bank, Chatham Rise",
+        "ocean": "SW of Veryan Bank, Chatham Rise",
+        "longhurst_province": "New Zealand coast"
+      },
+      "relationships": {
+        "observation": {
+          "data": {
+            "id": "52",
+            "type": "observation"
+          }
+        }
+      }
+    },
+    {
+      "id": "52",
+      "type": "observation",
+      "attributes": {
+        "depth": "400-1800",
+        "references": [
+          "didier2002a"
+        ]
+      },
+      "relationships": {
+        "measurements": {
+          "data": [
+            {
+              "id": "605",
+              "type": "measurement"
+            },
+            {
+              "id": "606",
+              "type": "measurement"
+            },
+            {
+              "id": "609",
+              "type": "measurement"
+            },
+            {
+              "id": "610",
+              "type": "measurement"
+            },
+            {
+              "id": "612",
+              "type": "measurement"
+            },
+            {
+              "id": "611",
+              "type": "measurement"
+            },
+            {
+              "id": "608",
+              "type": "measurement"
+            },
+            {
+              "id": "607",
+              "type": "measurement"
+            },
+            {
+              "id": "604",
+              "type": "measurement"
+            }
+          ]
+        },
+        "species": {
+          "data": {
+            "id": "9",
+            "type": "species"
+          }
+        }
+      }
+    }
+  ]
+}
+</pre>
+
+<h4 class="title is-4">Including Trend &amp; TrendObservation</h4>
+
+<pre>
+$ curl -s -H 'Authorization: Token <%= current_user.token %>' \
+             "https://www.sharkipedia.org/api/v1/species/acroteriobatus-annulatus?include=trends,trends.trend_observations" | jq '.'
+{
+  "data": {
+    "id": "562",
+    "type": "species",
+    "attributes": {
+      "binomial_name": "Acroteriobatus annulatus",
+      "edge_scientific_name": "Acroteriobatus annulatus",
+      "iucn_code": null,
+      "authorship": "Müller & Henle 1841 "
+    },
+    "relationships": {
+      "observations": {
+        "data": []
+      },
+      "trends": {
+        "data": [
+          {
+            "id": "1818",
+            "type": "trend"
+          },
+          {
+            "id": "1819",
+            "type": "trend"
+          },
+          {
+            "id": "1820",
+            "type": "trend"
+          },
+          {
+            "id": "1821",
+            "type": "trend"
+          },
+          {
+            "id": "1822",
+            "type": "trend"
+          }
+        ]
+      }
+    }
+  },
+  "links": {
+    "self": "https://www.sharkipedia.org/api/v1/species/acroteriobatus-annulatus?include=trends,trends.trend_observations"
+  },
+  "included": [
+    {
+      "id": "36916",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "1991",
+        "value": "2775.215478981"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1818",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "36917",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "1992",
+        "value": "2722.02573665366"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1818",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "36918",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "1993",
+        "value": "2882.34305704685"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1818",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "36919",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "1994",
+        "value": "3567.94378273346"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1818",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "36920",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "1995",
+        "value": "1508.42688527218"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1818",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "36921",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "1996",
+        "value": "1203.13386715965"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1818",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "36922",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "1997",
+        "value": "978.247254997898"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1818",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "36923",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "1999",
+        "value": "1303.13740794073"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1818",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "36924",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "2003",
+        "value": "679.15265628679"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1818",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "36925",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "2006",
+        "value": "787.267676504215"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1818",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "36926",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "2010",
+        "value": "223.186581153005"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1818",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "1818",
+      "type": "trend",
+      "attributes": {
+        "location": "south coast of South Africa",
+        "data_type": "sCPUE",
+        "sampling_method": "trawl",
+        "no_years": 20,
+        "time_min": null,
+        "comments": "trawl surveys commenced in 1984, IUCN Red List only considered the period from 1991 onwards due to improvements in chondrichthyan identification following the initial survey years",
+        "page_and_figure_number": "NA",
+        "line_used": "NA",
+        "pdf_page": null,
+        "actual_page": null,
+        "depth": null,
+        "figure_name": null,
+        "figure_data": null,
+        "reference": "Winkerunpubl",
+        "standard": "kg",
+        "start_year": 1991,
+        "end_year": 2010,
+        "species_group": null,
+        "unit_freeform": "",
+        "sampling_method_info": "demersal, autumn, old gear",
+        "dataset_representativeness_experts": "South Africa",
+        "experts_for_representativeness": "IUCN Sub-Equatorial Africa sharks and rays - South Africa 2018",
+        "dataset_map": false,
+        "variance": true,
+        "data_mined": false,
+        "unit_time": null,
+        "unit_spatial": "square_nautical_mile_area_swept",
+        "unit_gear": null,
+        "unit_transformation": null,
+        "analysis_model": "delta_geoGLMM",
+        "oceans": [
+          "Atlantic",
+          "Indian"
+        ]
+      },
+      "relationships": {
+        "species": {
+          "data": {
+            "id": "562",
+            "type": "species"
+          }
+        },
+        "trend_observations": {
+          "data": [
+            {
+              "id": "36916",
+              "type": "trend_observation"
+            },
+            {
+              "id": "36917",
+              "type": "trend_observation"
+            },
+            {
+              "id": "36918",
+              "type": "trend_observation"
+            },
+            {
+              "id": "36919",
+              "type": "trend_observation"
+            },
+            {
+              "id": "36920",
+              "type": "trend_observation"
+            },
+            {
+              "id": "36921",
+              "type": "trend_observation"
+            },
+            {
+              "id": "36922",
+              "type": "trend_observation"
+            },
+            {
+              "id": "36923",
+              "type": "trend_observation"
+            },
+            {
+              "id": "36924",
+              "type": "trend_observation"
+            },
+            {
+              "id": "36925",
+              "type": "trend_observation"
+            },
+            {
+              "id": "36926",
+              "type": "trend_observation"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "36927",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "2004",
+        "value": "177.24733152935"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1819",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "36928",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "2005",
+        "value": "47.4558611288131"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1819",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "36929",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "2007",
+        "value": "72.9481963477065"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1819",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "36930",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "2008",
+        "value": "123.876758027821"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1819",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "36931",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "2009",
+        "value": "190.061790115181"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1819",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "36932",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "2011",
+        "value": "864.117279706905"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1819",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "36933",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "2014",
+        "value": "346.414701274951"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1819",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "36934",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "2015",
+        "value": "359.048890958407"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1819",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "36935",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "2016",
+        "value": "557.340280272092"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1819",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "1819",
+      "type": "trend",
+      "attributes": {
+        "location": "south coast of South Africa",
+        "data_type": "sCPUE",
+        "sampling_method": "trawl",
+        "no_years": 13,
+        "time_min": null,
+        "comments": "trawl surveys commenced in 1984, IUCN Red List only considered the period from 1991 onwards due to improvements in chondrichthyan identification following the initial survey years",
+        "page_and_figure_number": "NA",
+        "line_used": "NA",
+        "pdf_page": null,
+        "actual_page": null,
+        "depth": null,
+        "figure_name": null,
+        "figure_data": null,
+        "reference": "Winkerunpubl",
+        "standard": "kg",
+        "start_year": 2004,
+        "end_year": 2016,
+        "species_group": null,
+        "unit_freeform": "",
+        "sampling_method_info": "demersal, autumn, new gear",
+        "dataset_representativeness_experts": "South Africa",
+        "experts_for_representativeness": "IUCN Sub-Equatorial Africa sharks and rays - South Africa 2018",
+        "dataset_map": false,
+        "variance": true,
+        "data_mined": false,
+        "unit_time": null,
+        "unit_spatial": "square_nautical_mile_area_swept",
+        "unit_gear": null,
+        "unit_transformation": null,
+        "analysis_model": "delta_geoGLMM",
+        "oceans": [
+          "Atlantic",
+          "Indian"
+        ]
+      },
+      "relationships": {
+        "species": {
+          "data": {
+            "id": "562",
+            "type": "species"
+          }
+        },
+        "trend_observations": {
+          "data": [
+            {
+              "id": "36927",
+              "type": "trend_observation"
+            },
+            {
+              "id": "36928",
+              "type": "trend_observation"
+            },
+            {
+              "id": "36929",
+              "type": "trend_observation"
+            },
+            {
+              "id": "36930",
+              "type": "trend_observation"
+            },
+            {
+              "id": "36931",
+              "type": "trend_observation"
+            },
+            {
+              "id": "36932",
+              "type": "trend_observation"
+            },
+            {
+              "id": "36933",
+              "type": "trend_observation"
+            },
+            {
+              "id": "36934",
+              "type": "trend_observation"
+            },
+            {
+              "id": "36935",
+              "type": "trend_observation"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "36936",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "2001",
+        "value": "1944.87751583194"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1820",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "36937",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "2006",
+        "value": "901.869646841857"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1820",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "1820",
+      "type": "trend",
+      "attributes": {
+        "location": "south coast of South Africa",
+        "data_type": "sCPUE",
+        "sampling_method": "trawl",
+        "no_years": 6,
+        "time_min": null,
+        "comments": "trawl surveys commenced in 1984, IUCN Red List only considered the period from 1991 onwards due to improvements in chondrichthyan identification following the initial survey years",
+        "page_and_figure_number": "NA",
+        "line_used": "NA",
+        "pdf_page": null,
+        "actual_page": null,
+        "depth": null,
+        "figure_name": null,
+        "figure_data": null,
+        "reference": "Winkerunpubl",
+        "standard": "kg",
+        "start_year": 2001,
+        "end_year": 2006,
+        "species_group": null,
+        "unit_freeform": "",
+        "sampling_method_info": "demersal, spring, old gear",
+        "dataset_representativeness_experts": "South Africa",
+        "experts_for_representativeness": "IUCN Sub-Equatorial Africa sharks and rays - South Africa 2018",
+        "dataset_map": false,
+        "variance": true,
+        "data_mined": false,
+        "unit_time": null,
+        "unit_spatial": "square_nautical_mile_area_swept",
+        "unit_gear": null,
+        "unit_transformation": null,
+        "analysis_model": "delta_geoGLMM",
+        "oceans": [
+          "Atlantic",
+          "Indian"
+        ]
+      },
+      "relationships": {
+        "species": {
+          "data": {
+            "id": "562",
+            "type": "species"
+          }
+        },
+        "trend_observations": {
+          "data": [
+            {
+              "id": "36936",
+              "type": "trend_observation"
+            },
+            {
+              "id": "36937",
+              "type": "trend_observation"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "36938",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "2003",
+        "value": "951.193384724797"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1821",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "36939",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "2004",
+        "value": "674.835902861578"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1821",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "36940",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "2007",
+        "value": "1075.91967922498"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1821",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "36941",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "2008",
+        "value": "1117.42397857322"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1821",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "36942",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "2016",
+        "value": "326.962485347036"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1821",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "1821",
+      "type": "trend",
+      "attributes": {
+        "location": "south coast of South Africa",
+        "data_type": "sCPUE",
+        "sampling_method": "trawl",
+        "no_years": 14,
+        "time_min": null,
+        "comments": "trawl surveys commenced in 1984, IUCN Red List only considered the period from 1991 onwards due to improvements in chondrichthyan identification following the initial survey years",
+        "page_and_figure_number": "NA",
+        "line_used": "NA",
+        "pdf_page": null,
+        "actual_page": null,
+        "depth": null,
+        "figure_name": null,
+        "figure_data": null,
+        "reference": "Winkerunpubl",
+        "standard": "kg",
+        "start_year": 2003,
+        "end_year": 2016,
+        "species_group": null,
+        "unit_freeform": "",
+        "sampling_method_info": "demersal, spring, new gear",
+        "dataset_representativeness_experts": "South Africa",
+        "experts_for_representativeness": "IUCN Sub-Equatorial Africa sharks and rays - South Africa 2018",
+        "dataset_map": false,
+        "variance": true,
+        "data_mined": false,
+        "unit_time": null,
+        "unit_spatial": "square_nautical_mile_area_swept",
+        "unit_gear": null,
+        "unit_transformation": null,
+        "analysis_model": "delta_geoGLMM",
+        "oceans": [
+          "Atlantic",
+          "Indian"
+        ]
+      },
+      "relationships": {
+        "species": {
+          "data": {
+            "id": "562",
+            "type": "species"
+          }
+        },
+        "trend_observations": {
+          "data": [
+            {
+              "id": "36938",
+              "type": "trend_observation"
+            },
+            {
+              "id": "36939",
+              "type": "trend_observation"
+            },
+            {
+              "id": "36940",
+              "type": "trend_observation"
+            },
+            {
+              "id": "36941",
+              "type": "trend_observation"
+            },
+            {
+              "id": "36942",
+              "type": "trend_observation"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "36943",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "1998",
+        "value": "3.34214804815134"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1822",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "36944",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "1999",
+        "value": "4.4637862034953"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1822",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "36945",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "2000",
+        "value": "2.48466117213693"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1822",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "36946",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "2001",
+        "value": "4.95144621063543"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1822",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "36947",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "2002",
+        "value": "4.60890718828081"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1822",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "36948",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "2003",
+        "value": "3.94431057359786"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1822",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "36949",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "2004",
+        "value": "5.6086783269951"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1822",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "36950",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "2005",
+        "value": "3.51212399470004"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1822",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "36951",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "2006",
+        "value": "4.16194231308653"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1822",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "36952",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "2007",
+        "value": "3.01909607061774"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1822",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "36953",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "2008",
+        "value": "9.75405773803405"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1822",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "36954",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "2009",
+        "value": "3.19470430993294"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1822",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "36955",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "2010",
+        "value": "3.77919644191187"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1822",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "36956",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "2011",
+        "value": "3.94260085173281"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1822",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "36957",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "2012",
+        "value": "5.42379275262669"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1822",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "36958",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "2013",
+        "value": "2.62715163323554"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1822",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "36959",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "2014",
+        "value": "5.55307200712719"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1822",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "36960",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "2015",
+        "value": "4.01653482019453"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1822",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "36961",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "2016",
+        "value": "5.8526346514081"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1822",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "36962",
+      "type": "trend_observation",
+      "attributes": {
+        "year": "2017",
+        "value": "4.4674674236987"
+      },
+      "relationships": {
+        "trend": {
+          "data": {
+            "id": "1822",
+            "type": "trend"
+          }
+        }
+      }
+    },
+    {
+      "id": "1822",
+      "type": "trend",
+      "attributes": {
+        "location": "de Hoop Marine Protected Area, south coast of South Africa",
+        "data_type": "sCPUE",
+        "sampling_method": "line",
+        "no_years": 20,
+        "time_min": null,
+        "comments": null,
+        "page_and_figure_number": "NA",
+        "line_used": "NA",
+        "pdf_page": null,
+        "actual_page": null,
+        "depth": null,
+        "figure_name": null,
+        "figure_data": null,
+        "reference": "Winkerunpubl",
+        "standard": "individual",
+        "start_year": 1998,
+        "end_year": 2017,
+        "species_group": null,
+        "unit_freeform": "",
+        "sampling_method_info": "shore-based angling",
+        "dataset_representativeness_experts": "South Africa",
+        "experts_for_representativeness": "IUCN Sub-Equatorial Africa sharks and rays - South Africa 2018",
+        "dataset_map": false,
+        "variance": true,
+        "data_mined": false,
+        "unit_time": null,
+        "unit_spatial": null,
+        "unit_gear": "angler",
+        "unit_transformation": null,
+        "analysis_model": "GLM",
+        "oceans": [
+          "Atlantic",
+          "Indian"
+        ]
+      },
+      "relationships": {
+        "species": {
+          "data": {
+            "id": "562",
+            "type": "species"
+          }
+        },
+        "trend_observations": {
+          "data": [
+            {
+              "id": "36943",
+              "type": "trend_observation"
+            },
+            {
+              "id": "36944",
+              "type": "trend_observation"
+            },
+            {
+              "id": "36945",
+              "type": "trend_observation"
+            },
+            {
+              "id": "36946",
+              "type": "trend_observation"
+            },
+            {
+              "id": "36947",
+              "type": "trend_observation"
+            },
+            {
+              "id": "36948",
+              "type": "trend_observation"
+            },
+            {
+              "id": "36949",
+              "type": "trend_observation"
+            },
+            {
+              "id": "36950",
+              "type": "trend_observation"
+            },
+            {
+              "id": "36951",
+              "type": "trend_observation"
+            },
+            {
+              "id": "36952",
+              "type": "trend_observation"
+            },
+            {
+              "id": "36953",
+              "type": "trend_observation"
+            },
+            {
+              "id": "36954",
+              "type": "trend_observation"
+            },
+            {
+              "id": "36955",
+              "type": "trend_observation"
+            },
+            {
+              "id": "36956",
+              "type": "trend_observation"
+            },
+            {
+              "id": "36957",
+              "type": "trend_observation"
+            },
+            {
+              "id": "36958",
+              "type": "trend_observation"
+            },
+            {
+              "id": "36959",
+              "type": "trend_observation"
+            },
+            {
+              "id": "36960",
+              "type": "trend_observation"
+            },
+            {
+              "id": "36961",
+              "type": "trend_observation"
+            },
+            {
+              "id": "36962",
+              "type": "trend_observation"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
+</pre>
+
+
+<h4 class="title is-4">Filtering / Searching</h4>
+
+<pre>
+$ curl -s -H 'Authorization: Token <%= current_user.token %>' \
+             "https://www.sharkipedia.org/api/v1/species?filter\[name_matches\]=%25<b>alphus</b>" | jq '.'
+{
+  "data": [
+    {
+      "id": "21",
+      "type": "species",
+      "attributes": {
+        "binomial_name": "Hydrolagus alphus",
+        "edge_scientific_name": "Hydrolagus alphus",
+        "iucn_code": null,
+        "authorship": "Quaranta, Didier, Long & Ebert 2006 "
+      },
+      "relationships": {}
+    },
+    {
+      "id": "1271",
+      "type": "species",
+      "attributes": {
+        "binomial_name": "Etmopterus alphus",
+        "edge_scientific_name": null,
+        "iucn_code": null,
+        "authorship": "Ebert, Straube, Leslie & Weigmann 2016"
+      },
+      "relationships": {}
+    }
+  ],
+  "meta": {
+    "total": 2,
+    "pagination": {
+      "current": 1
+    }
+  },
+  "links": {
+    "self": "https://www.sharkipedia.org/api/v1/species?filter[name_matches]=%25alphus",
+    "current": "https://www.sharkipedia.org/api/v1/species?filter[name_matches]=%alphus&page[number]=1"
+  }
+}
+</pre>
+
+<h4 class="title is-4">Pagination</h4>
+
+<p>
+The API is paginated. When available, the <code>links</code> object will reference surrounding pages.
+The <code>meta</code> object contains general information about the size and number of the pages.
+</p>
+
+<pre>
+$ curl -s -H 'Authorization: Token <%= current_user.token %>' \
+             https://www.sharkipedia.org/api/v1/species | jq '.'
+{
+  "data": [
+...
+    {
+      "id": "21",
+      "type": "species",
+      "attributes": {
+        "binomial_name": "Hydrolagus alphus",
+        "edge_scientific_name": "Hydrolagus alphus",
+        "iucn_code": null,
+        "authorship": "Quaranta, Didier, Long & Ebert 2006 "
+      },
+      "relationships": {}
+    }
+  ],
+  "meta": {
+    "total": 30,
+    "pagination": {
+      "current": 1,
+      "next": 2,
+      "last": 43
+    }
+  },
+  "links": {
+    "self": "https://www.sharkipedia.org/api/v1/species",
+    "current": "https://www.sharkipedia.org/api/v1/species?page[number]=1",
+    "next": "https://www.sharkipedia.org/api/v1/species?page[number]=2",
+    "last": "https://www.sharkipedia.org/api/v1/species?page[number]=43"
+  }
+}
+</pre>
+
+<p>
+Accessing a page:
+</p>
+
+<pre>
+$ curl -s -H 'Authorization: Token <%= current_user.token %>' \
+             "https://www.sharkipedia.org/api/v1/species?page[number]=2" | jq '.'
+{
+  "data": [
+...
+    {
+      "id": "51",
+      "type": "species",
+      "attributes": {
+        "binomial_name": "Hemitrygon akajei",
+        "edge_scientific_name": "Dasyatis akajei",
+        "iucn_code": null,
+        "authorship": "Last et al 2016"
+      },
+      "relationships": {}
+    }
+  ],
+  "meta": {
+    "total": 30,
+    "pagination": {
+      "current": 2,
+      "first": 1,
+      "prev": 1,
+      "next": 3,
+      "last": 43
+    }
+  },
+  "links": {
+    "self": "https://www.sharkipedia.org/api/v1/species?page[number]=2",
+    "current": "https://www.sharkipedia.org/api/v1/species?page[number]=2",
+    "first": "https://www.sharkipedia.org/api/v1/species?page[number]=1",
+    "prev": "https://www.sharkipedia.org/api/v1/species?page[number]=1",
+    "next": "https://www.sharkipedia.org/api/v1/species?page[number]=3",
+    "last": "https://www.sharkipedia.org/api/v1/species?page[number]=43"
+  }
+}
+</pre>
+
+
+<h4 class="title is-4">Boundaries</h4>
+
+<h5 class="subtitle is-5">List all available Boundary types</h5>
+
+<pre>
+$ curl -s -H 'Authorization: Token <%= current_user.token %>' \
+             "https://www.sharkipedia.org/api/v1/boundaries" | jq '.'
+
+{
+  "data": [
+    {
+      "id": "1",
+      "type": "boundaries",
+      "attributes": {
+        "id": 1,
+        "name": "Ocean"
+      },
+      "relationships": {}
+    },
+    {
+      "id": "2",
+      "type": "boundaries",
+      "attributes": {
+        "id": 2,
+        "name": "Eez"
+      },
+      "relationships": {}
+    }
+  ],
+  "meta": {
+    "total": 2,
+    "pagination": {
+      "current": 1,
+      "records": 2
+    }
+  },
+  "links": {
+    "self": "https://www.sharkipedia.org/api/v1/boundaries",
+    "current": "https://www.sharkipedia.org/api/v1/boundaries?page[number]=1",
+    "records": "https://www.sharkipedia.org/api/v1/boundaries?page[number]=2"
+  }
+}
+</pre>
+
+<h5 class="subtitle is-5">List all available Boundaries by type</h5>
+
+<pre>
+$ curl -s -H 'Authorization: Token <%= current_user.token %>' \
+             "https://www.sharkipedia.org/api/v1/boundaries/ocean" | jq '.'
+
+{
+  "data": [
+    {
+      "id": "1",
+      "type": "ocean",
+      "attributes": {
+        "id": 1,
+        "name": "Atlantic"
+      },
+      "relationships": {}
+    },
+    {
+      "id": "2",
+      "type": "ocean",
+      "attributes": {
+        "id": 2,
+        "name": "Indian"
+      },
+      "relationships": {}
+    },
+    {
+      "id": "3",
+      "type": "ocean",
+      "attributes": {
+        "id": 3,
+        "name": "Mediterranean"
+      },
+      "relationships": {}
+    },
+    {
+      "id": "4",
+      "type": "ocean",
+      "attributes": {
+        "id": 4,
+        "name": "Pacific"
+      },
+      "relationships": {}
+    },
+    {
+      "id": "5",
+      "type": "ocean",
+      "attributes": {
+        "id": 5,
+        "name": "Arctic"
+      },
+      "relationships": {}
+    }
+  ],
+  "meta": {
+    "total": 5,
+    "pagination": {
+      "current": 1,
+      "records": 5
+    }
+  },
+  "links": {
+    "self": "https://www.sharkipedia.org/api/v1/boundaries/ocean",
+    "current": "https://www.sharkipedia.org/api/v1/boundaries/ocean?page[number]=1",
+    "records": https://www.sharkipedia.org/api/v1/boundaries/ocean?page[number]=5"
+  }
+}
+</pre>
+
+<h4 class="subtitle is-5">Query for Species</h4>
+
+<h5 class="subtitle is-5">By Boundary (Ocean)</h5>
+
+<pre>
+$ curl -s -H 'Authorization: Token <%= current_user.token %>' \
+             "https://www.sharkipedia.org/api/v1/species/query" \
+             -XPOST -d 'oceans[]=Atlantic&oceans[]=Pacific' | jq '.'
+
+{
+  "data": [
+    {
+      "id": "158",
+      "type": "species",
+      "attributes": {
+        "binomial_name": "Aetobatus narinari",
+        "edge_scientific_name": "Aetobatus narinari",
+        "iucn_code": null,
+        "authorship": "White & Naylor 2017"
+      },
+      "relationships": { ... }
+    }
+  ]
+}
+</pre>
+
+<h5 class="subtitle is-5">By Boundary (EEZ)</h5>
+
+<pre>
+$ curl -s -H 'Authorization: Token <%= current_user.token %>' \
+             "https://www.sharkipedia.org/api/v1/species/query" \
+             -XPOST -d 'eez_id=4' | jq '.'
+
+{
+  "data": [
+    {
+      "id": "372",
+      "type": "species",
+      "attributes": {
+        "binomial_name": "Bathyraja albomaculata",
+        "edge_scientific_name": "Rhinoraja albomaculata",
+        "iucn_code": null,
+        "authorship": "Last et al 2016"
+      },
+      "relationships": { ... }
+    }
+  ]
+}
+
+</pre>
+
+<% else %>
+  <p>
+    While the API is open for everyone to use it is required that you authenticate
+    your API requests with an API token. You can create an account <%= link_to "here", new_user_registration_path %>.
+  </p>
+<% end %>

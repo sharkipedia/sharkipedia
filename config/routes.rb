@@ -47,6 +47,14 @@ Rails.application.routes.draw do
     sessions: "users/sessions"
   }
 
+  namespace :api do
+    namespace :v1 do
+      resources :boundaries, only: [:index, :show], param: :name
+      resources :species, only: [:index, :show]
+      post "species/query", to: "species#query"
+    end
+  end
+
   resources :imports do
     post :approve, to: "imports#approve"
     post :request_changes, to: "imports#request_changes"
@@ -76,5 +84,6 @@ Rails.application.routes.draw do
   # static pages
   match "/about", to: "pages#about", via: "get"
   match "/contact", to: "pages#contact", via: "get"
+  match "/api", to: "pages#api", via: "get"
   match "/procedure", to: "pages#procedure", via: "get"
 end

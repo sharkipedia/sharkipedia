@@ -34,7 +34,7 @@ class Trend < ApplicationRecord
     default_filter_params: {},
     available_filters: [
       :search_family,
-      :search,
+      :search_name,
       :search_author_year,
       :search_source_observation,
       :search_data_type,
@@ -48,7 +48,7 @@ class Trend < ApplicationRecord
     joins(species: :species_family).where("species_families.name ILIKE ?", "%#{name}%")
   }
 
-  scope :search, ->(name) {
+  scope :search_name, ->(name) {
     found_species = Species.where("species.name ILIKE ?", "%#{name}%")
 
     where(species_group: SpeciesGroup.joins(:species).where("species.id": found_species))

@@ -34,8 +34,3 @@
 1. Enable the PostGIS extension `rake db:gis:setup`
 1. Run the rails server `rails server`
 1. Connect to the application in your browser at `http://localhost:3000`
-
-
-## Attributions
-
-The original logo was taken from https://svgsilh.com/image/1085669.html

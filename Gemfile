@@ -61,7 +61,7 @@ gem "jsonapi.rb", github: "coffeejunk/jsonapi.rb", branch: "use_size_not_count"
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
-  gem "rspec-rails", "~> 4.0.1"
+  gem "rspec-rails", "~> 4.0.2"
 end
 
 group :development do

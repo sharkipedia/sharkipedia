@@ -105,4 +105,4 @@ gem "pagy", "~> 3.10"
 
 gem "invisible_captcha", "~> 1.1"
 
-gem "friendly_id", "~> 5.4.1"
+gem "friendly_id", "~> 5.4.2"

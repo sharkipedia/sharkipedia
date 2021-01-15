@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_08_161657) do
+ActiveRecord::Schema.define(version: 2021_01_15_020114) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -240,6 +240,8 @@ ActiveRecord::Schema.define(version: 2020_11_08_161657) do
     t.string "author_year"
     t.string "reference"
     t.boolean "file_public"
+    t.string "slug", null: false
+    t.index ["slug"], name: "index_references_on_slug"
   end
 
   create_table "sampling_methods", force: :cascade do |t|

@@ -34,12 +34,11 @@ class ReferencesController < PreAuthController
   def show
     respond_to do |format|
       format.html do
-        @reference = Reference.includes(observations: [
-          :species,
-          measurements: [:standard, :value_type, :location, :trait]
-        ],
-                                        trends: [:species, :location, :standard,
-                                          :trend_observations]).find params[:id]
+        @reference = Reference.includes(
+          observations: [
+            :species, measurements: [:standard, :value_type, :location, :trait]
+          ], trends: [:species, :location, :standard, :trend_observations]
+        ).friendly.find params[:id]
 
         @observations = @reference.observations.joins(:import)
           .where('imports.aasm_state': "imported")
@@ -48,7 +47,7 @@ class ReferencesController < PreAuthController
       end
 
       format.js do
-        @reference = Reference.find params[:id]
+        @reference = Reference.friendly.find params[:id]
       end
     end
   end

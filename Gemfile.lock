@@ -178,7 +178,7 @@ GEM
       concurrent-ruby (~> 1.0)
     invisible_captcha (1.1.0)
       rails (>= 4.2)
-    jbuilder (2.10.1)
+    jbuilder (2.11.1)
       activesupport (>= 5.0.0)
     jmespath (1.4.0)
     jquery-rails (4.4.0)
@@ -418,7 +418,7 @@ DEPENDENCIES
   filterrific (~> 5.2)
   friendly_id (~> 5.4.2)
   invisible_captcha (~> 1.1)
-  jbuilder (~> 2.10)
+  jbuilder (~> 2.11)
   jsonapi-rspec
   jsonapi.rb!
   listen (>= 3.2, < 3.5)

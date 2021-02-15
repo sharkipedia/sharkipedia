@@ -12,10 +12,10 @@ class PagesController < PreAuthController
 
   def about
     @editors = User.editors
-    @contributors = User.contributors
-    @contributor_codes = Observation.unscoped.all.select("contributor_id")
+    @contributors = User.contributors.map(&:name) + Observation.unscoped.all.select("contributor_id")
       .distinct.map(&:contributor_id)
       .reject(&:blank?)
+    @contributors = @contributors.uniq
   end
 
   def procedure

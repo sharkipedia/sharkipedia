@@ -30,5 +30,8 @@ class SpeciesController < PreAuthController
       .group_by(&:trait_class)
     @trends = @specie.trends
     @group_trends = @specie.group_trends
+    @contributors = observations.map(&:contributor_id).reject(&:blank?)
+    @contributors += @trends.map(&:import).map(&:user).map(&:name)
+    @contributors = @contributors.uniq
   end
 end

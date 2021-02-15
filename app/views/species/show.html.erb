@@ -65,3 +65,12 @@
   <h4 class='subtitle is-4'>Group Trends</h2>
   <%= render partial: 'trends/list', locals: { trends: @group_trends, hide_species: true, hide_title: true } %>
 <% end %>
+
+<h3 class="subtitle is-3">Contributors to the data of this species</h3>
+<div class="content">
+  <ul>
+    <% @contributors.each do |contributor| %>
+      <li><%= contributor %></li>
+    <% end %>
+  </ul>
+</div>

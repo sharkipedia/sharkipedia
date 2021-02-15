@@ -1,5 +1,8 @@
 class SpeciesSerializer < BaseSerializer
   attribute :binomial_name, &:name
+  attribute :binomial_name do |obj|
+    obj.name
+  end
 
   attributes :edge_scientific_name, :iucn_code, :authorship
 

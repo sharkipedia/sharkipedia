@@ -22,6 +22,6 @@ class TraitsController < PreAuthController
           :references
         ]
       ]
-    ).order('species.name').where(observation: observations)
+    ).order("species.name, \"references\".name").where(observation: observations)
   end
 end

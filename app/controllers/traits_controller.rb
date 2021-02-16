@@ -12,6 +12,12 @@ class TraitsController < PreAuthController
       .joins(:import, :measurements)
       .where('imports.aasm_state': "imported", 'measurements.trait_id': @trait)
 
+    order = if params[:order] == "references"
+      "\"references\".name, species.name"
+    else
+      "species.name, \"references\".name"
+    end
+
     @measurements = @trait.measurements.includes(
       [
         :standard,
@@ -22,6 +28,6 @@ class TraitsController < PreAuthController
           :references
         ]
       ]
-    ).order("species.name, \"references\".name").where(observation: observations)
+    ).order(order).where(observation: observations)
   end
 end

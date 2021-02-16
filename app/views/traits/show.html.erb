@@ -10,17 +10,17 @@
   <table class="table">
     <thead>
       <tr>
-        <th>Species</th>
+        <th>Species <%= link_to '↕', trait_path(@trait, order: :species) %></th>
         <th>Name</th>
         <th>Value</th>
         <th>Standard</th>
         <th>ValueType</th>
         <th>Location</th>
-        <th>Reference</th>
+        <th>Reference <%= link_to '↕', trait_path(@trait, order: :references) %></th>
       </tr>
     </thead>
     <tbody>
-      <% @trait.measurements.each do |measurement| %>
+      <% @measurements.each do |measurement| %>
         <tr>
           <td><%= link_to measurement.observation.species.name, species_path(measurement.observation.species) %></td>
           <td><%= measurement.trait.name %></td>

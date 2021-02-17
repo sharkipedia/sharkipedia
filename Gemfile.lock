@@ -6,7 +6,7 @@ GIT
 
 GIT
   remote: https://github.com/stas/jsonapi.rb.git
-  revision: e62c5c35d7f540409958da02c78d82c8c42e9fff
+  revision: 7cd36989c9e4f708071fdf95b70aa7db6c7ea0bc
   specs:
     jsonapi.rb (1.6.0)
       jsonapi-serializer

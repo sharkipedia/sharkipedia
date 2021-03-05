@@ -35,7 +35,7 @@ gem "pundit", "~> 2.1"
 
 gem "roo", "~> 2.8.0"
 gem "rubyXL"
-gem "aws-sdk-s3", "~> 1.88", require: false
+gem "aws-sdk-s3", "~> 1.89", require: false
 
 gem "filterrific", "~> 5.2"
 # Use ActiveStorage variant
@@ -104,6 +104,6 @@ gem "pg_search", "~> 2.3"
 
 gem "pagy", "~> 3.11"
 
-gem "invisible_captcha", "~> 1.1"
+gem "invisible_captcha", "~> 2.0"
 
 gem "friendly_id", "~> 5.4.2"

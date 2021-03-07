@@ -36,6 +36,7 @@ class SpeciesController < PreAuthController
 
     respond_to do |format|
       format.html
+      format.js
       format.csv {
         send_data Export::Traits.new(@species.observations).call,
           filename: "#{@species.name}.csv"

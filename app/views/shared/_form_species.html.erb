@@ -19,7 +19,7 @@
     <div class="column">
       <div id="species-info">
         <% if species %>
-          <%= render partial: 'species/detail', locals: { specie: species, render_links: true } %>
+          <%= render partial: 'species/detail', locals: { species: species, render_links: true } %>
         <% elsif species_group %>
           <%= render partial: 'species/group_detail', locals: { species_group: species_group } %>
         <% end %>

@@ -15,7 +15,7 @@ class SpeciesController < PreAuthController
   end
 
   def show
-    @specie = Species.includes(
+    @species = Species.includes(
       observations: [
         measurements: [:standard, :value_type, :location, :trait, :sex_type, :observation]
       ],
@@ -23,13 +23,13 @@ class SpeciesController < PreAuthController
         :location, :standard, :trend_observations, :reference
       ]
     ).friendly.find params[:id]
-    observations = @specie.observations
+    observations = @species.observations
       .joins(:import)
       .where('imports.aasm_state': "imported")
     @grouped_measurements = Measurement.where(observation: observations)
       .group_by(&:trait_class)
-    @trends = @specie.trends
-    @group_trends = @specie.group_trends
+    @trends = @species.trends
+    @group_trends = @species.group_trends
     @contributors = observations.map(&:contributor_id).reject(&:blank?)
     @contributors += @trends.map(&:import).map(&:user).map(&:name)
     @contributors = @contributors.uniq
@@ -37,8 +37,8 @@ class SpeciesController < PreAuthController
     respond_to do |format|
       format.html
       format.csv {
-        send_data Export::Traits.new(@specie.observations).call,
-        filename: "#{@specie.name}.csv"
+        send_data Export::Traits.new(@species.observations).call,
+          filename: "#{@species.name}.csv"
       }
     end
   end

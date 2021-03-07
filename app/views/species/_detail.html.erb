@@ -4,33 +4,33 @@
       <th>Species</th>
       <td id="species-name">
         <% if local_assigns.has_key? :render_links %>
-          <%= link_to specie.name, species_path(specie) %>
+          <%= link_to species.name, species_path(species) %>
         <% elsif local_assigns.has_key? :render_links_new_window %>
-          <%= link_to specie.name, species_path(specie), target: '_blank' %>
+          <%= link_to species.name, species_path(species), target: '_blank' %>
         <% else %>
-          <%= specie.name %>
+          <%= species.name %>
         <% end %>
       </td>
     </tr>
     <tr>
       <th>Superorder</th>
-      <td id="species-superorder"><%= specie.species_superorder.name %></td>
+      <td id="species-superorder"><%= species.species_superorder.name %></td>
     </tr>
     <tr>
       <th>Order</th>
-      <td id="species-order"><%= specie.species_order.name %></td>
+      <td id="species-order"><%= species.species_order.name %></td>
     </tr>
     <tr>
       <th>Subclass</th>
-      <td id="species-subclass"><%= specie.species_subclass.name %></td>
+      <td id="species-subclass"><%= species.species_subclass.name %></td>
     </tr>
     <tr>
       <th>Family</th>
-      <td id="species-family"><%= specie.species_family.name %></td>
+      <td id="species-family"><%= species.species_family.name %></td>
     </tr>
     <tr>
       <th>IUCNcode</th>
-      <td id="species-iucn-code"><%= specie.iucn_code %></td>
+      <td id="species-iucn-code"><%= species.iucn_code %></td>
     </tr>
   </tbody>
 </table>

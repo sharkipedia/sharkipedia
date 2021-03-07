@@ -6,7 +6,7 @@ class PagesController < PreAuthController
 
     @trait_classes = TraitClass.all
 
-    @example_specie = Species.find_by name: "Carcharhinus acronotus"
+    @example_species = Species.find_by name: "Carcharhinus acronotus"
     @example_trait = Trait.find_by name: "Lmat50"
   end
 

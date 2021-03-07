@@ -1,26 +1,26 @@
-<h1 class="title"><%= @specie.name %></h1>
+<h1 class="title"><%= @species.name %></h1>
 
 <div class="columns">
   <div class="column">
     <p>
-      <b>Superorder:</b> <%= @specie.species_superorder.name %>
+      <b>Superorder:</b> <%= @species.species_superorder.name %>
     </p>
     <p>
-      <b>Subclass:</b> <%= @specie.species_subclass.name %>
+      <b>Subclass:</b> <%= @species.species_subclass.name %>
     </p>
     <p>
-      <b>Order:</b> <%= @specie.species_order.name %>
+      <b>Order:</b> <%= @species.species_order.name %>
     </p>
     <p>
-      <b>Family:</b> <%= @specie.species_family.name %>
+      <b>Family:</b> <%= @species.species_family.name %>
     </p>
   </div>
   <div class="column">
     <% unless @grouped_measurements.blank? %>
-      <%= link_to 'Export trait data as CSV', data_export_index_path(species: [@specie], commit: true, export_type: 'Traits'), class: 'button is-primary is-pulled-right' %>
+      <%= link_to 'Export trait data as CSV', species_path(@species, format: 'csv'), class: 'button is-primary is-pulled-right' %>
     <% end %>
     <p class="title is-6">External references for this species:</p>
-    <%= link_to 'IUCN Red List', "https://www.iucnredlist.org/search?query=#{@specie.name}&searchType=species", target: '_blank' %>
+    <%= link_to 'IUCN Red List', "https://www.iucnredlist.org/search?query=#{@species.name}&searchType=species", target: '_blank' %>
   </div>
 </div>
 

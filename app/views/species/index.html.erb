@@ -16,9 +16,9 @@
 <div>
   <table class="table is-fullwidth is-bordered">
     <tbody>
-      <% @species.each do |specie| %>
+      <% @species.each do |species| %>
         <tr>
-          <td><%= link_to specie.name, species_path(specie) %></td>
+          <td><%= link_to species.name, species_path(species) %></td>
         </tr>
       <% end %>
     </tbody>

@@ -21,7 +21,7 @@
 <div class="columns">
   <div class="column is-one-third">
     <% if @trend.species %>
-      <%= render partial: 'species/detail', locals: { specie: @trend.species, render_links: true } %>
+      <%= render partial: 'species/detail', locals: { species: @trend.species, render_links: true } %>
     <% else %>
       <%= render partial: 'species/group_detail', locals: { species_group: @trend.species_group } %>
     <% end %>

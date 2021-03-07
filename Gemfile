@@ -57,7 +57,7 @@ gem "rgeo-geojson", "~> 2.1.1"
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", ">= 1.1.0", require: false
 
-gem "jsonapi.rb", github: "stas/jsonapi.rb"
+gem "jsonapi.rb", "~> 1.7.0"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

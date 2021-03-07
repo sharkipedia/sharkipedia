@@ -33,5 +33,13 @@ class SpeciesController < PreAuthController
     @contributors = observations.map(&:contributor_id).reject(&:blank?)
     @contributors += @trends.map(&:import).map(&:user).map(&:name)
     @contributors = @contributors.uniq
+
+    respond_to do |format|
+      format.html
+      format.csv {
+        send_data Export::Traits.new(@specie.observations).call,
+        filename: "#{@specie.name}.csv"
+      }
+    end
   end
 end

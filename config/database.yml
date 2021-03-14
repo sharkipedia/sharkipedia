@@ -6,6 +6,21 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   schema_search_path: public
 
+<% if File.exists?('config/database.local.yml') %>
+  # I run postgis locally in a docker container
+  # (https://github.com/postgis/docker-postgis)
+  #
+  # $ cat config/database.local.yml
+  # development:
+  #   <<: *default
+  #   url: postgis://postgres:postgres@localhost:5432/sharkipedia_development
+  #
+  # test:
+  #   <<: *default
+  #   url: postgis://postgres:postgres@localhost:5432/sharkipedia_test
+<%= File.read('config/database.local.yml') %>
+<% else %>
+
 development:
   <<: *default
   database: sharkipedia_development
@@ -16,6 +31,8 @@ development:
 test:
   <<: *default
   database: sharkipedia_test
+
+<% end %>
 
 production:
   url: <%= ENV['DATABASE_URL'].try(:sub, /^postgres/, "postgis") %>

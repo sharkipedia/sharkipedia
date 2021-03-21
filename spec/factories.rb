@@ -193,6 +193,16 @@ FactoryBot.define do
     user
     import
     species
+
+    after(:build) do |o|
+      o.references << create(:reference)
+    end
+
+    hidden { false }
+
+    trait :unpublished do
+      hidden { true }
+    end
   end
 
   factory :measurement do

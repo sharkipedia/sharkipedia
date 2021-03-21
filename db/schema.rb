@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_14_205919) do
+ActiveRecord::Schema.define(version: 2021_03_21_010512) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -248,6 +248,7 @@ ActiveRecord::Schema.define(version: 2021_02_14_205919) do
     t.string "reference"
     t.boolean "file_public"
     t.string "slug", null: false
+    t.index ["name"], name: "index_references_on_name", unique: true
     t.index ["slug"], name: "index_references_on_slug"
   end
 

@@ -19,12 +19,22 @@ RSpec.describe Location, type: :model do
       it { expect(location.longitude).to eq(lon.to_f) }
     end
 
-    context "when no coordinates" do
-      subject(:location) { create(:location, lat: nil, lon: nil, lonlat: nil) }
-
+    shared_examples "valid with blank latitude & longitude" do
       it { should be_valid }
       it { expect(location.latitude).to be_nil }
       it { expect(location.longitude).to be_nil }
+    end
+
+    context "when nil coordinates" do
+      subject(:location) { create(:location, lat: nil, lon: nil, lonlat: nil) }
+
+      it_behaves_like "valid with blank latitude & longitude"
+    end
+
+    context "when '' coordinates" do
+      subject(:location) { create(:location, lat: "", lon: "", lonlat: "") }
+
+      it_behaves_like "valid with blank latitude & longitude"
     end
 
     context "when invalid longitude" do

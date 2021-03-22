@@ -32,7 +32,7 @@
         <% @observations.each do |observation| %>
           <tr>
             <td><%= observation.references.first.name %></td>
-            <td><%= observation.species.name %></td>
+            <td><%= observation.species.map(&:name).join(", ") %></td>
             <td><%= observation.measurements.count %></td>
             <td><%= observation.contributor_id %></td>
             <% if user_is_admin? %>

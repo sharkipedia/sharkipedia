@@ -1,6 +1,8 @@
 <div class="columns">
   <div class="column is-one-third">
-    <%= render partial: 'species/detail', locals: { species: species, render_links: true } %>
+    <% species.each do |observation_species| %>
+      <%= render partial: 'species/detail', locals: { species: observation_species, render_links: true } %>
+    <% end %>
   </div>
   <div class="column">
     <% references.each do |reference| %>

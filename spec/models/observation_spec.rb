@@ -8,18 +8,28 @@ RSpec.describe Observation, type: :model do
     it { should have_many(:measurements) }
     it { should have_many(:longhurst_provinces) }
     it { should have_many(:locations) }
+    it { should have_many(:species) }
   end
 
   describe "validations" do
     it { should validate_presence_of(:references) }
-    it { should validate_presence_of(:species) }
   end
 
   describe "#title" do
     subject { observation.title }
-    let(:observation) { create(:observation) }
+    let!(:observation) { create(:observation) }
+    let!(:measurement) { create(:measurement, observation: observation) }
+    let!(:species_names) { observation.species.map(&:name).join }
+    let!(:reference_names) { observation.references.map(&:name).join }
 
-    it { should eq("#{observation.species.name} - #{observation.references.map(&:name)}") }
+    it { should eq("#{species_names} - #{reference_names}") }
+
+    context "when no species" do
+      let!(:observation) { create(:observation) }
+      let!(:measurement) { nil }
+
+      it { should eq(reference_names) }
+    end
   end
 
   describe "default scope" do
@@ -35,5 +45,18 @@ RSpec.describe Observation, type: :model do
 
     it { is_expected.to include(observation) }
     it { is_expected.not_to include(hidden_observation) }
+  end
+
+  describe "#species through measurements" do
+    let(:species) { create(:species) }
+    let(:observation) { create(:observation) }
+    before do
+      create(:measurement, species: species, observation: observation)
+      create(:measurement, species: species, observation: observation)
+    end
+
+    it "is expected to be distinct" do
+      expect(observation.species).to match_array([species])
+    end
   end
 end

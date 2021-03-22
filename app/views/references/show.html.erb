@@ -20,7 +20,7 @@
       <tbody>
         <% observation.measurements.each do |measurement| %>
           <tr>
-            <td><%= link_to measurement.observation.species.name, species_path(measurement.observation.species) %></td>
+            <td><%= link_to measurement.species.name, species_path(measurement.species) %></td>
             <td><%= measurement.trait_class.name %></td>
             <td><%= measurement.trait.name %></td>
             <td><%= measurement.value %></td>

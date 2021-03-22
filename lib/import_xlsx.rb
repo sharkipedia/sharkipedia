@@ -127,11 +127,6 @@ module ImportXlsx
 
           self.log += referenced_resources.inspect + "\n"
 
-          # XXX: what should happen if the species / species super order can't be found?
-          species = Species.find_by name: sub_table.first["species_name"]
-          species ||= Species.find_by edge_scientific_name: sub_table.first["species_name"]
-          self.log += species.inspect + "\n"
-
           date = sub_table.first["date"]
           self.log += date.inspect + "\n"
 
@@ -150,8 +145,7 @@ module ImportXlsx
                    'references.name': resource_name)
             .first
 
-          observation ||= Observation.create! species: species,
-                                              references: referenced_resources,
+          observation ||= Observation.create! references: referenced_resources,
                                               hidden: hidden,
                                               contributor_id: contributor_id,
                                               depth: depth,
@@ -161,6 +155,11 @@ module ImportXlsx
           self.log += observation.inspect + "\n"
 
           sub_table.each do |row|
+            # XXX: what should happen if the species / species super order can't be found?
+            species = Species.find_by name: row["species_name"]
+            species ||= Species.find_by edge_scientific_name: row["species_name"]
+            self.log += species.inspect + "\n"
+
             sex = SexType.find_by name: row["sex"]
             trait_class = TraitClass.find_by name: row["trait_class"]
             trait = Trait.find_by name: row["trait_name"]
@@ -198,7 +197,8 @@ module ImportXlsx
             marine_province = LonghurstProvince.find_by name: sub_table.first["marine_province"]
             self.log += marine_province.inspect + "\n"
 
-            observation.measurements.create! sex_type: sex,
+            observation.measurements.create! species: species,
+                                             sex_type: sex,
                                              trait_class: trait_class,
                                              trait: trait,
                                              standard: standard,

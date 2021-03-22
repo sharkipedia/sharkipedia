@@ -81,6 +81,7 @@ class ObservationsController < ApplicationController
   def set_associations
     @example_species = Species.find_by name: "Carcharhinus acronotus"
     @example_reference = Reference.find_by name: "driggers2004a"
+    @all_species = Species.all
 
     @sex_types = SexType.all
     @trait_classes = TraitClass.all
@@ -101,10 +102,11 @@ class ObservationsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def observation_params
     params.require(:observation).permit(
-      :species_id, :access, :hidden, :user_id, :depth,
+      :access, :hidden, :user_id, :depth,
       reference_ids: [],
       measurements_attributes: [:id,
         :_destroy,
+        :species_id,
         :date,
         :sex_type_id,
         :trait_class_id,

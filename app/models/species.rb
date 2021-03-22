@@ -18,7 +18,8 @@ class Species < ApplicationRecord
   belongs_to :species_order
   belongs_to :species_family
 
-  has_many :observations
+  has_many :measurements
+  has_many :observations, through: :measurements
   has_many :trends
 
   has_and_belongs_to_many :species_groups

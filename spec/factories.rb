@@ -192,7 +192,6 @@ FactoryBot.define do
   factory :observation do
     user
     import
-    species
 
     after(:build) do |o|
       o.references << create(:reference)
@@ -206,6 +205,7 @@ FactoryBot.define do
   end
 
   factory :measurement do
+    species
     sex_type
     location
     association :trait

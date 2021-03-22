@@ -3,6 +3,7 @@ require "rails_helper"
 RSpec.describe Measurement, type: :model do
   describe "associations" do
     it { should belong_to(:observation) }
+    it { should belong_to(:species) }
     it { should belong_to(:longhurst_province).optional }
     it { should belong_to(:sex_type) }
     it { should belong_to(:trait) }

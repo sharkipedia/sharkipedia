@@ -1,5 +1,6 @@
 class Measurement < ApplicationRecord
   belongs_to :observation
+  belongs_to :species
   belongs_to :longhurst_province, optional: true
   belongs_to :sex_type
   belongs_to :trait

@@ -15,8 +15,8 @@ module Export
             csv << [
               observation.references.first.name,
               observation.references.first.doi,
-              observation.species.species_superorder.name,
-              observation.species.name,
+              measurement.species.species_superorder.name,
+              measurement.species.name,
               measurement.longhurst_province.try(:name),
               measurement.location.name,
               measurement.location.latitude,

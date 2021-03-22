@@ -67,13 +67,13 @@ RSpec.describe API::V1::SpeciesController, type: :controller do
       let!(:location) { create :location, name: "Hawaii", lat: 20, lon: -160 }
       let!(:trend) { create :trend, location: location, species: trend_species }
       let!(:reference) { create :reference }
-      let!(:observation) { create :observation, species: trait_species, references: [reference] }
-      let!(:measurement) { create :measurement, location: location, observation: observation }
+      let!(:observation) { create :observation, references: [reference] }
+      let!(:measurement) { create :measurement, species: trait_species, location: location, observation: observation }
 
       let!(:other_trend) { create :trend, species: species }
       let!(:other_reference) { create :reference }
-      let!(:other_observation) { create :observation, species: species, references: [other_reference] }
-      let!(:other_measurement) { create :measurement, observation: other_observation }
+      let!(:other_observation) { create :observation, references: [other_reference] }
+      let!(:other_measurement) { create :measurement, species: species, observation: other_observation }
 
       let(:hawaii_geojson) { File.read("spec/fixtures/geo/hawaii.geojson") }
 

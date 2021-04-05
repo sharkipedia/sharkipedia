@@ -5,6 +5,7 @@ RSpec.describe Species, type: :model do
 
   describe "associations" do
     it { should have_and_belong_to_many(:species_groups) }
+    it { should have_many(:measurements) }
     it { should have_many(:observations) }
     it { should have_many(:trends) }
 

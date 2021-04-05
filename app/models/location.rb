@@ -7,9 +7,9 @@ class Location < ApplicationRecord
 
   # TODO: remove the lat & lon columns
   validates :lat, numericality: {greater_than_or_equal_to: -90,
-                                 less_than_or_equal_to: 90}, allow_nil: true
+                                 less_than_or_equal_to: 90}, allow_blank: true
   validates :lon, numericality: {greater_than_or_equal_to: -180,
-                                 less_than_or_equal_to: 180}, allow_nil: true
+                                 less_than_or_equal_to: 180}, allow_blank: true
 
   include PgSearch::Model
   pg_search_scope :search_by_name, against: [:name],

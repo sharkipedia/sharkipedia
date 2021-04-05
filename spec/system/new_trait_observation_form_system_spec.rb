@@ -20,6 +20,7 @@ RSpec.describe "New Trait Observation form" do
   let!(:admin) { create(:admin) }
 
   def fill_measurement(value)
+    select2 species.name, from: "Species"
     fill_in "Date", with: "2020"
     select2 trait_class.name, from: "Trait class"
     select2 trait.name, xpath: ".//div[label[text()='Trait']]"
@@ -46,7 +47,6 @@ RSpec.describe "New Trait Observation form" do
 
     visit new_observation_path
 
-    select2 species.name, css: "#species_selector", search: true
     select2 reference.name, css: "#reference_selector", search: true
     fill_in "Depth", with: "100"
 

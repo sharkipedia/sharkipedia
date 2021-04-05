@@ -22,7 +22,7 @@
     <tbody>
       <% @measurements.each do |measurement| %>
         <tr>
-          <td><%= link_to measurement.observation.species.name, species_path(measurement.observation.species) %></td>
+          <td><%= link_to measurement.species.name, species_path(measurement.species) %></td>
           <td><%= measurement.trait.name %></td>
           <td><%= measurement.value %></td>
           <td><%= measurement.standard.try(:name) %></td>

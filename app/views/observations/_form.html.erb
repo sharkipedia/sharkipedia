@@ -2,8 +2,6 @@
 
   <%= render partial: 'shared/form_errors', locals: { thing: @observation } %>
 
-  <%= render partial: 'shared/form_species', locals: { species: species, target: 'observation' } %>
-
   <%= render partial: 'shared/form_reference', locals: { reference: reference, target: 'observation', many: true } %>
 
   <div class="columns">

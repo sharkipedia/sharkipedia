@@ -2,6 +2,20 @@
   <div class="columns">
     <div class="column is-half">
       <div class="field">
+        <%= f.label :species, class: 'label' %>
+        <p class="control has-icons-left">
+          <%= f.collection_select(:species_id, @all_species, :id, :name, {:prompt => 'Select Species'}, style: 'width: 100%', class: 'independent') %>
+          <span class="icon is-small is-left">
+            <i class="fas fa-exclamation"></i>
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="columns">
+    <div class="column is-half">
+      <div class="field">
         <%= f.label :date, class: 'label' %>
         <div class="control">
           <%= f.text_field :date, class: 'input' %><br />

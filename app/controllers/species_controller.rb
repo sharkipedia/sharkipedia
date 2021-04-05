@@ -16,9 +16,7 @@ class SpeciesController < PreAuthController
 
   def show
     @species = Species.includes(
-      observations: [
-        measurements: [:standard, :value_type, :location, :trait, :sex_type, :observation]
-      ],
+      measurements: [:standard, :value_type, :location, :trait, :sex_type, :observation],
       trends: [
         :location, :standard, :trend_observations, :reference
       ]

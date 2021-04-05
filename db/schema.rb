@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_14_205919) do
+ActiveRecord::Schema.define(version: 2021_03_22_012553) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -180,6 +180,7 @@ ActiveRecord::Schema.define(version: 2021_02_14_205919) do
     t.bigint "location_id", null: false
     t.bigint "longhurst_province_id"
     t.string "date"
+    t.bigint "species_id", null: false
     t.index ["location_id"], name: "index_measurements_on_location_id"
     t.index ["longhurst_province_id"], name: "index_measurements_on_longhurst_province_id"
     t.index ["measurement_method_id"], name: "index_measurements_on_measurement_method_id"
@@ -187,6 +188,7 @@ ActiveRecord::Schema.define(version: 2021_02_14_205919) do
     t.index ["observation_id"], name: "index_measurements_on_observation_id"
     t.index ["precision_type_id"], name: "index_measurements_on_precision_type_id"
     t.index ["sex_type_id"], name: "index_measurements_on_sex_type_id"
+    t.index ["species_id"], name: "index_measurements_on_species_id"
     t.index ["standard_id"], name: "index_measurements_on_standard_id"
     t.index ["trait_class_id"], name: "index_measurements_on_trait_class_id"
     t.index ["trait_id"], name: "index_measurements_on_trait_id"
@@ -195,7 +197,6 @@ ActiveRecord::Schema.define(version: 2021_02_14_205919) do
   end
 
   create_table "observations", force: :cascade do |t|
-    t.bigint "species_id"
     t.string "access"
     t.boolean "hidden"
     t.bigint "user_id"
@@ -205,7 +206,6 @@ ActiveRecord::Schema.define(version: 2021_02_14_205919) do
     t.string "depth"
     t.bigint "import_id"
     t.index ["import_id"], name: "index_observations_on_import_id"
-    t.index ["species_id"], name: "index_observations_on_species_id"
     t.index ["user_id"], name: "index_observations_on_user_id"
   end
 
@@ -248,6 +248,7 @@ ActiveRecord::Schema.define(version: 2021_02_14_205919) do
     t.string "reference"
     t.boolean "file_public"
     t.string "slug", null: false
+    t.index ["name"], name: "index_references_on_name", unique: true
     t.index ["slug"], name: "index_references_on_slug"
   end
 
@@ -523,13 +524,13 @@ ActiveRecord::Schema.define(version: 2021_02_14_205919) do
   add_foreign_key "measurements", "observations"
   add_foreign_key "measurements", "precision_types"
   add_foreign_key "measurements", "sex_types"
+  add_foreign_key "measurements", "species"
   add_foreign_key "measurements", "standards"
   add_foreign_key "measurements", "trait_classes"
   add_foreign_key "measurements", "traits"
   add_foreign_key "measurements", "validation_types"
   add_foreign_key "measurements", "value_types"
   add_foreign_key "observations", "imports"
-  add_foreign_key "observations", "species"
   add_foreign_key "observations", "users"
   add_foreign_key "species", "species_data_types"
   add_foreign_key "species", "species_families"

@@ -34,7 +34,8 @@ module API::V1
     private
 
     def jsonapi_include
-      super & ["observations", "observations.measurements", "trends", "trends.trend_observations"]
+      super & ["observations", "observations.measurements", "measurements",
+        "trends", "trends.trend_observations"]
     end
 
     def jsonapi_meta(resources)

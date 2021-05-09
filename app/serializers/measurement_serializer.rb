@@ -1,4 +1,6 @@
 class MeasurementSerializer < BaseSerializer
+  belongs_to :species
+
   attributes :value
   attribute :sex_type do |object|
     object.sex_type&.name

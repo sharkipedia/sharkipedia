@@ -51,7 +51,7 @@ gem "redis-namespace", "~> 1.8.1"
 # gem 'capistrano-rails', group: :development
 
 gem "activerecord-postgis-adapter", "~> 7.1.0"
-gem "rgeo", "~> 2.2.0"
+gem "rgeo", "~> 2.3.0"
 gem "rgeo-geojson", "~> 2.1.1"
 
 # Reduces boot times through caching; required in config/boot.rb

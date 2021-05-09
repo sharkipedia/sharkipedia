@@ -24,7 +24,7 @@ class SpeciesController < PreAuthController
     observations = @species.observations
       .joins(:import)
       .where('imports.aasm_state': "imported")
-    @grouped_measurements = Measurement.where(observation: observations)
+    @grouped_measurements = Measurement.where(observation: observations, species: @species)
       .group_by(&:trait_class)
     @trends = @species.trends
     @group_trends = @species.group_trends

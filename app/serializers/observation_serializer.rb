@@ -7,5 +7,5 @@ class ObservationSerializer < BaseSerializer
 
   has_many :measurements
 
-  belongs_to :species
+  has_many :species
 end

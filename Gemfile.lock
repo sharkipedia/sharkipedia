@@ -73,7 +73,7 @@ GEM
       zeitwerk (~> 2.3)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
-    administrate (0.15.0)
+    administrate (0.16.0)
       actionpack (>= 5.0)
       actionview (>= 5.0)
       activerecord (>= 5.0)
@@ -395,7 +395,7 @@ PLATFORMS
 DEPENDENCIES
   aasm (~> 5.1)
   activerecord-postgis-adapter (~> 7.1.0)
-  administrate (~> 0.15.0)
+  administrate (~> 0.16.0)
   after_commit_everywhere (~> 1.0)
   aws-sdk-s3 (~> 1.94)
   bootsnap (>= 1.1.0)

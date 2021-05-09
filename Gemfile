@@ -8,7 +8,7 @@ gem "rails", "~> 6.1"
 # Use postgres as the database for Active Record
 gem "pg", "~> 1.2"
 # Use Puma as the app server
-gem "puma", "~> 5.2"
+gem "puma", "~> 5.3"
 # Use SCSS for stylesheets
 gem "sass-rails", "~> 6.0"
 # Use Uglifier as compressor for JavaScript assets
@@ -27,10 +27,10 @@ gem "jbuilder", "~> 2.11"
 # gem 'redis', '~> 4.0'
 
 # Use devise for authentication
-gem "devise", "~> 4.7"
+gem "devise", "~> 4.8"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-gem "administrate", "~> 0.15.0"
+gem "administrate", "~> 0.16.0"
 gem "pundit", "~> 2.1"
 
 gem "roo", "~> 2.8.0"
@@ -41,7 +41,7 @@ gem "filterrific", "~> 5.2"
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
-gem "aasm", "~> 5.1"
+gem "aasm", "~> 5.2"
 gem "after_commit_everywhere", "~> 1.0"
 
 gem "sidekiq", "< 7"
@@ -82,7 +82,7 @@ group :test do
 
   gem "capybara-select-2", "~> 0.5.1"
 
-  gem "factory_bot_rails", "~> 6.1"
+  gem "factory_bot_rails", "~> 6.2"
   gem "shoulda-matchers", "~> 4.5"
 
   gem "jsonapi-rspec"

@@ -19,7 +19,7 @@
     "react_ujs": "^2.6.1",
     "webpack": "^4.46.0",
     "webpack-cli": "^4.7.0",
-    "xlsx": "^0.16.9"
+    "xlsx": "^0.17.0"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.11.2"

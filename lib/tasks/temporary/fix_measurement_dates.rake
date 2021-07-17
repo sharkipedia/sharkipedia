@@ -37,8 +37,8 @@ namespace :measurements do
         sex = SexType.find_by name: row["sex"]
 
         measurement = observation.measurements.where value: row["value"],
-                                                     trait: trait, sex_type: sex, sample_size: row["sample_size"],
-                                                     notes: row["notes"]
+          trait: trait, sex_type: sex, sample_size: row["sample_size"],
+          notes: row["notes"]
 
         measurement = measurement.first
 

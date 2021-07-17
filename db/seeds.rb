@@ -3,22 +3,22 @@ require "roo"
 
 if Rails.env.development? || ENV["HEROKU_APP_NAME"] =~ /staging/
   admin = User.new email: "admin@example.com", password: "123123123",
-                   name: "Admin", user_level: "admin", confirmed_at: Time.now.utc
+    name: "Admin", user_level: "admin", confirmed_at: Time.now.utc
   admin.skip_confirmation_notification!
   admin.save!
   admin.confirm
   editor = User.create email: "editor@example.com", password: "123123123",
-                       name: "Jane Doe", user_level: "editor", confirmed_at: Time.now.utc
+    name: "Jane Doe", user_level: "editor", confirmed_at: Time.now.utc
   editor.skip_confirmation_notification!
   editor.save!
   editor.confirm
   contributor = User.create email: "contributor@example.com", password: "123123123",
-                            name: "Max Mustermann", user_level: "contributor", confirmed_at: Time.now.utc
+    name: "Max Mustermann", user_level: "contributor", confirmed_at: Time.now.utc
   contributor.skip_confirmation_notification!
   contributor.save!
   contributor.confirm
   user = User.create email: "user@example.com", password: "123123123",
-                     name: "Martha Musterfrau", confirmed_at: Time.now.utc
+    name: "Martha Musterfrau", confirmed_at: Time.now.utc
   user.skip_confirmation_notification!
   user.save!
   user.confirm
@@ -61,7 +61,7 @@ s_o.each do |subclass, superorder, order|
   ssc = SpeciesSubclass.find_by name: subclass
   sso = SpeciesSuperorder.find_by name: superorder
   SpeciesOrder.find_or_create_by! name: order, species_superorder_id: sso.id,
-                                  species_subclass_id: ssc.id
+    species_subclass_id: ssc.id
 end
 
 puts "# Created #{SpeciesOrder.count} SpeciesOrders"
@@ -75,9 +75,9 @@ s_f.each do |subclass, superorder, order, family|
   sso = SpeciesSuperorder.find_by name: superorder
   so = SpeciesOrder.find_by name: order
   SpeciesFamily.find_or_create_by! name: family,
-                                   species_superorder_id: sso.id,
-                                   species_subclass_id: ssc.id,
-                                   species_order_id: so.id
+    species_superorder_id: sso.id,
+    species_subclass_id: ssc.id,
+    species_order_id: so.id
 end
 
 puts "# Created #{SpeciesFamily.count} SpeciesFamilies"
@@ -98,14 +98,14 @@ taxonomy.each do |row|
   species = Species.find_by name: row["SharkTrait Scientific name"]
   if species
     species.update species_subclass: ssc, species_superorder: sso,
-                   species_order: so, species_family: sf, species_data_type: sdt,
-                   authorship: row["Species authorship"]
+      species_order: so, species_family: sf, species_data_type: sdt,
+      authorship: row["Species authorship"]
   else
     Species.create! name: row["SharkTrait Scientific name"],
-                    edge_scientific_name: row["EDGE Scientific name"],
-                    species_subclass: ssc, species_superorder: sso,
-                    species_order: so, species_family: sf, species_data_type: sdt,
-                    authorship: row["Species authorship"]
+      edge_scientific_name: row["EDGE Scientific name"],
+      species_subclass: ssc, species_superorder: sso,
+      species_order: so, species_family: sf, species_data_type: sdt,
+      authorship: row["Species authorship"]
   end
 end
 
@@ -230,8 +230,8 @@ puts "# Importing References, this can take a few minutes"
 failed = []
 CSV.foreach("docs/shark-resources-190723.csv", headers: true) do |row|
   resource = Reference.new name: row["resource_id"], reference: row["resource"],
-                           year: row["year"], doi: (row["DOI"] == "NA" ? nil : row["DOI"]),
-                           suffix: row["suffix"], data_source: row["source"]
+    year: row["year"], doi: (row["DOI"] == "NA" ? nil : row["DOI"]),
+    suffix: row["suffix"], data_source: row["source"]
   resource.save!
 rescue
   failed.push row["resource_id"]

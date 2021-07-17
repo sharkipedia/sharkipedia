@@ -10,6 +10,6 @@ class ImportMailer < ApplicationMailer
   def update_import_status_email
     @import = params[:import]
     mail subject: "[sharkipedia] - Import status changed to #{@import.state}",
-         to: @import.user.email
+      to: @import.user.email
   end
 end

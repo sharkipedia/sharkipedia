@@ -22,8 +22,8 @@ namespace :import do
 
     marine_ecoregions_worlds.each do |entry|
       MarineEcoregionsWorld.find_or_create_by! region_type: entry["TYPE"],
-                                               province: entry["PROVINCE"],
-                                               trend_reg_id: entry["FIRST_NUMB"]
+        province: entry["PROVINCE"],
+        trend_reg_id: entry["FIRST_NUMB"]
     end
 
     savepoint.each do |trend_id, meow_ids, ppow_ids|
@@ -61,14 +61,14 @@ namespace :import do
     fao.each do |entry|
       ocean = Ocean.find_by name: entry["OCEAN"]
       FaoArea.find_or_create_by! f_code: entry["F_CODE"],
-                                 f_level: entry["F_LEVEL"],
-                                 f_area: entry["F_AREA"],
-                                 f_subarea: entry["F_SUBAREA"],
-                                 f_division: entry["F_DIVISION"],
-                                 f_subdivision: entry["F_SUBDIVISION"],
-                                 f_subunit: entry["F_SUBUNIT"],
-                                 ocean: ocean,
-                                 name: entry["NAME_EN"]
+        f_level: entry["F_LEVEL"],
+        f_area: entry["F_AREA"],
+        f_subarea: entry["F_SUBAREA"],
+        f_division: entry["F_DIVISION"],
+        f_subdivision: entry["F_SUBDIVISION"],
+        f_subunit: entry["F_SUBUNIT"],
+        ocean: ocean,
+        name: entry["NAME_EN"]
       print "."
     end
 

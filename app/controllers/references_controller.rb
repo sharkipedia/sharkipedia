@@ -43,7 +43,7 @@ class ReferencesController < PreAuthController
         @observations = @reference.observations.joins(:import)
           .where('imports.aasm_state': "imported")
         @trends = Trend.joins(:import).where(reference: @reference,
-                                             'imports.aasm_state': "imported")
+          'imports.aasm_state': "imported")
       end
 
       format.js do

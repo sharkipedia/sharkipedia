@@ -66,7 +66,7 @@ jobs:
         key: yarn-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
         restore-keys: |
           yarn-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-
-    - name: yarn install
+    - name: Run yarn install
       run: |
         yarn install --pure-lockfile
 

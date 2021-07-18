@@ -76,7 +76,8 @@ jobs:
         path: |
           tmp/cache/webpacker
           public/packs
-        key: assets-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
+          public/packs-test
+        key: assets-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-${{ hashFiles('app/assets/**') }}
         restore-keys: |
           assets-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-
     - name: Compile assets

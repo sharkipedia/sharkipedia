@@ -9,7 +9,24 @@ on:
       - 'master'
 
 jobs:
-  build:
+  linters:
+    name: Linters
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Ruby and install gems
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Ruby linters
+        run: |
+          gem install standard
+          standardrb
+
+  tests:
     runs-on: ubuntu-latest
 
     services:
@@ -29,23 +46,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - uses: ruby/setup-ruby@v1
+
+    - name: Setup Ruby and install gems
+      uses: ruby/setup-ruby@v1
+      with:
+        bundler-cache: true
 
     - name: Install PostgreSQL 11 client
       run: |
         sudo apt-get -yqq install libpq-dev
-
-    - name: cache vendor/bundle
-      uses: actions/cache@v1
-      with:
-        path: vendor/bundle
-        key: bundle-use-ruby-${{ runner.os }}-${{ hashFiles('.ruby-version') }}-${{ hashFiles('**/Gemfile.lock') }}
-        restore-keys: |
-          bundle-use-ruby-${{ runner.os }}-${{ hashFiles('.ruby-version') }}-
-    - name: bundle install
-      run: |
-        bundle config path vendor/bundle
-        bundle install --jobs 4 --retry 3
 
     - name: cache node_modules
       uses: actions/cache@v1
@@ -56,7 +65,7 @@ jobs:
           yarn-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-
     - name: yarn install
       run: |
-        yarn install
+        yarn install --pure-lockfile
 
     - name: Compile assets
       env:
@@ -96,8 +105,3 @@ jobs:
         SES_SMTP_EMAIL_ADDRESS: test@example.com
       run: |
         bundle exec rails spec
-
-    - name: Style Check
-      run: |
-        gem install standard
-        standardrb

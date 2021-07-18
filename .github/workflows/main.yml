@@ -59,7 +59,7 @@ jobs:
       run: |
         sudo apt-get -yqq install libpq-dev
 
-    - name: cache node_modules
+    - name: Cache node_modules
       uses: actions/cache@v1
       with:
         path: node_modules
@@ -70,6 +70,15 @@ jobs:
       run: |
         yarn install --pure-lockfile
 
+    - name: Cache assets
+      uses: actions/cache@v1
+      with:
+        path: |
+          tmp/cache/webpacker
+          public/packs
+        key: assets-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
+        restore-keys: |
+          assets-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-
     - name: Compile assets
       run: |
         bin/rails webpacker:compile

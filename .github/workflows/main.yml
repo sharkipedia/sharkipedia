@@ -1,17 +1,31 @@
 name: CI
-
 on:
-  pull_request:
-    branches:
-      - 'master'
   push:
-    branches:
-      - 'master'
+    branches: ['**']
+  pull_request:
+    branches: ['**']
 
 jobs:
-  build:
+  linters:
+    name: Linters
     runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
+      - name: Setup Ruby and install gems
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Ruby linters
+        run: |
+          gem install standard
+          standardrb
+
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
     services:
       redis:
         image: redis
@@ -26,78 +40,57 @@ jobs:
         ports:
           - 5432:5432
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+    env:
+      PGHOST: localhost
+      PGUSER: postgres
+      PGPASSWORD: password
+      RAILS_ENV: test
+      SES_SMTP_EMAIL_ADDRESS: test@example.com
 
     steps:
     - uses: actions/checkout@v2
-    - uses: ruby/setup-ruby@v1
+
+    - name: Setup Ruby and install gems
+      uses: ruby/setup-ruby@v1
+      with:
+        bundler-cache: true
 
     - name: Install PostgreSQL 11 client
       run: |
         sudo apt-get -yqq install libpq-dev
 
-    - name: cache vendor/bundle
-      uses: actions/cache@v1
-      with:
-        path: vendor/bundle
-        key: bundle-use-ruby-${{ runner.os }}-${{ hashFiles('.ruby-version') }}-${{ hashFiles('**/Gemfile.lock') }}
-        restore-keys: |
-          bundle-use-ruby-${{ runner.os }}-${{ hashFiles('.ruby-version') }}-
-    - name: bundle install
-      run: |
-        bundle config path vendor/bundle
-        bundle install --jobs 4 --retry 3
-
-    - name: cache node_modules
-      uses: actions/cache@v1
+    - name: Cache node_modules
+      uses: actions/cache@v2
       with:
         path: node_modules
         key: yarn-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
         restore-keys: |
           yarn-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-
-    - name: yarn install
+    - name: Run yarn install
       run: |
-        yarn install
+        yarn install --pure-lockfile
 
+    - name: Cache assets
+      uses: actions/cache@v2
+      with:
+        path: |
+          tmp/cache/webpacker
+          public/packs
+          public/packs-test
+        key: assets-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-${{ hashFiles('app/assets/**') }}
+        restore-keys: |
+          assets-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-
     - name: Compile assets
-      env:
-        PGHOST: localhost
-        PGUSER: postgres
-        PGPASSWORD: password
-        RAILS_ENV: test
       run: |
         bin/rails webpacker:compile
 
-    - name: Build App
-      env:
-        PGHOST: localhost
-        PGUSER: postgres
-        PGPASSWORD: password
-        RAILS_ENV: test
+    - name: Seed Database
       run: |
         bin/rails db:create db:schema:load
-
-    - name: Seed Database
-      env:
-        PGHOST: localhost
-        PGUSER: postgres
-        PGPASSWORD: password
-        RAILS_ENV: test
-      run: |
         wget -q https://d3ci4pmn27yclp.cloudfront.net/eez.tgz
         tar xvzf eez.tgz
         cat eez_v11.sql | psql sharkipedia_test
 
     - name: Run Tests
-      env:
-        PGHOST: localhost
-        PGUSER: postgres
-        PGPASSWORD: password
-        RAILS_ENV: test
-        SES_SMTP_EMAIL_ADDRESS: test@example.com
       run: |
         bundle exec rails spec
-
-    - name: Style Check
-      run: |
-        gem install standard
-        standardrb

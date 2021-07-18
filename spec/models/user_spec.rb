@@ -15,7 +15,7 @@ RSpec.describe User, type: :model do
   describe "#send_devise_notification" do
     let(:user) do
       User.create!(name: "Test User", email: "test@example.com",
-                   password: "123456789")
+        password: "123456789")
     end
 
     before { ActiveJob::Base.queue_adapter = :test }

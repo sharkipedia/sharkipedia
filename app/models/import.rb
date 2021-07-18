@@ -40,7 +40,7 @@ class Import < ApplicationRecord
 
     event :request_changes do
       transitions from: [:pending_review, :uploaded, :approved],
-                  to: :changes_requested
+        to: :changes_requested
     end
 
     event :resubmit do
@@ -49,7 +49,7 @@ class Import < ApplicationRecord
 
     event :approve, after_commit: :queue_import do
       transitions from: [:pending_review], to: :approved,
-                  guard: :xlsx_valid?
+        guard: :xlsx_valid?
     end
 
     event :reject do

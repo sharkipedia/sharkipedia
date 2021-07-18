@@ -131,12 +131,12 @@ module Xlsx
 
         referenced_references.each do |reference|
           observations = reference.observations.where species: species,
-                                                      longhurst_province: marine_province,
-                                                      location: location,
-                                                      date: date,
-                                                      hidden: hidden,
-                                                      contributor_id: contributor_id,
-                                                      depth: depth
+            longhurst_province: marine_province,
+            location: location,
+            date: date,
+            hidden: hidden,
+            contributor_id: contributor_id,
+            depth: depth
 
           unless observations.blank?
             @messages << "Row #{idx + 2}: WARNING: This observation is already present in database (Observation IDs: #{observations.map(&:id)})."
@@ -160,21 +160,21 @@ module Xlsx
               notes = row["notes"]
 
               measurements = observation.measurements.where sex_type: sex,
-                                                            trait_class: trait_class,
-                                                            trait: trait,
-                                                            standard: standard,
-                                                            measurement_method: measurement_method,
-                                                            measurement_model: measurement_model,
-                                                            value: value,
-                                                            value_type: value_type,
-                                                            precision: precision,
-                                                            precision_type: precision_type,
-                                                            precision_upper: precision_upper,
-                                                            sample_size: sample_size,
-                                                            dubious: dubious,
-                                                            validated: validated,
-                                                            validation_type: validation_type,
-                                                            notes: notes
+                trait_class: trait_class,
+                trait: trait,
+                standard: standard,
+                measurement_method: measurement_method,
+                measurement_model: measurement_model,
+                value: value,
+                value_type: value_type,
+                precision: precision,
+                precision_type: precision_type,
+                precision_upper: precision_upper,
+                sample_size: sample_size,
+                dubious: dubious,
+                validated: validated,
+                validation_type: validation_type,
+                notes: notes
 
               unless measurements.blank?
                 @valid = false
@@ -209,9 +209,9 @@ module Xlsx
       end
 
       reference = Reference.new name: name,
-                                data_source: row["DataSource"].try(:strip),
-                                doi: (row["resource_doi"] || row["doi"]).try(:strip),
-                                year: row["SourceYear"]
+        data_source: row["DataSource"].try(:strip),
+        doi: (row["resource_doi"] || row["doi"]).try(:strip),
+        year: row["SourceYear"]
 
       unless reference.valid?
         @valid = false

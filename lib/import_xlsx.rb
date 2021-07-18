@@ -142,15 +142,15 @@ module ImportXlsx
           # TODO: find observation by resource name
           observation = Observation.joins(:references)
             .where(contributor_id: contributor_id,
-                   'references.name': resource_name)
+              'references.name': resource_name)
             .first
 
           observation ||= Observation.create! references: referenced_resources,
-                                              hidden: hidden,
-                                              contributor_id: contributor_id,
-                                              depth: depth,
-                                              user: user,
-                                              import: @import
+            hidden: hidden,
+            contributor_id: contributor_id,
+            depth: depth,
+            user: user,
+            import: @import
 
           self.log += observation.inspect + "\n"
 
@@ -198,25 +198,25 @@ module ImportXlsx
             self.log += marine_province.inspect + "\n"
 
             observation.measurements.create! species: species,
-                                             sex_type: sex,
-                                             trait_class: trait_class,
-                                             trait: trait,
-                                             standard: standard,
-                                             measurement_method: measurement_method,
-                                             measurement_model: measurement_model,
-                                             date: date,
-                                             value: value,
-                                             value_type: value_type,
-                                             precision: precision,
-                                             precision_type: precision_type,
-                                             precision_upper: precision_upper,
-                                             sample_size: sample_size,
-                                             dubious: dubious,
-                                             validated: validated,
-                                             validation_type: validation_type,
-                                             notes: notes,
-                                             location: location,
-                                             longhurst_province: marine_province
+              sex_type: sex,
+              trait_class: trait_class,
+              trait: trait,
+              standard: standard,
+              measurement_method: measurement_method,
+              measurement_model: measurement_model,
+              date: date,
+              value: value,
+              value_type: value_type,
+              precision: precision,
+              precision_type: precision_type,
+              precision_upper: precision_upper,
+              sample_size: sample_size,
+              dubious: dubious,
+              validated: validated,
+              validation_type: validation_type,
+              notes: notes,
+              location: location,
+              longhurst_province: marine_province
           end
 
           self.log += observation.measurements.map(&:inspect).join("\n")
@@ -348,17 +348,17 @@ module ImportXlsx
               data_source = row["DataSource"]
             end
             resource ||= Reference.find_or_create_by! name: ref,
-                                                      data_source: data_source,
-                                                      doi: doi,
-                                                      year: row["SourceYear"]
+              data_source: data_source,
+              doi: doi,
+              year: row["SourceYear"]
 
             self.log += "Created Reference: #{resource.inspect}\n"
           end
 
           # Latitude has a space at the end
           location = Location.find_or_create_by name: row["Dataset_location"],
-                                                lat: (row["Latitude"] || row["Latitude "]),
-                                                lon: row["Longitude"]
+            lat: (row["Latitude"] || row["Latitude "]),
+            lon: row["Longitude"]
           self.log += "#{location.inspect}\n"
 
           data_type = DataType.find_or_create_by name: row["General_data_type"]
@@ -378,36 +378,36 @@ module ImportXlsx
           self.log += "#{sampling_method.inspect}\n"
 
           trend = Trend.create! actual_page: row["ActualPage"],
-                                depth: row["Depth"],
-                                figure_data: row["FigureData"],
-                                figure_name: row["FigureName"],
-                                line_used: row["LineUsed"],
-                                analysis_model: analysis_model,
-                                page_and_figure_number: row["PageAndFigureNumber"],
-                                pdf_page: row["PDFPage"],
-                                comments: row["Comments"],
-                                reference: resource,
-                                species: species,
-                                species_group: species_group,
-                                location: location,
-                                data_type: data_type,
-                                standard: unit,
-                                sampling_method: sampling_method,
-                                user: user,
-                                start_year: 2900,
-                                end_year: 2900,
-                                unit_freeform: unit_freeform,
-                                unit_time: unit_time,
-                                unit_spatial: unit_spatial,
-                                unit_gear: unit_gear,
-                                unit_transformation: unit_transformation,
-                                sampling_method_info: row["Sampling_method_info"],
-                                variance: (row["Variance"] == "Y"),
-                                dataset_map: (row["Dataset_map"] == "Y"),
-                                data_mined: (row["Datamined"] == "Y"),
-                                dataset_representativeness_experts: row["Dataset_representativeness_experts"],
-                                experts_for_representativeness: row["Experts_for_representativeness"],
-                                import: @import
+            depth: row["Depth"],
+            figure_data: row["FigureData"],
+            figure_name: row["FigureName"],
+            line_used: row["LineUsed"],
+            analysis_model: analysis_model,
+            page_and_figure_number: row["PageAndFigureNumber"],
+            pdf_page: row["PDFPage"],
+            comments: row["Comments"],
+            reference: resource,
+            species: species,
+            species_group: species_group,
+            location: location,
+            data_type: data_type,
+            standard: unit,
+            sampling_method: sampling_method,
+            user: user,
+            start_year: 2900,
+            end_year: 2900,
+            unit_freeform: unit_freeform,
+            unit_time: unit_time,
+            unit_spatial: unit_spatial,
+            unit_gear: unit_gear,
+            unit_transformation: unit_transformation,
+            sampling_method_info: row["Sampling_method_info"],
+            variance: (row["Variance"] == "Y"),
+            dataset_map: (row["Dataset_map"] == "Y"),
+            data_mined: (row["Datamined"] == "Y"),
+            dataset_representativeness_experts: row["Dataset_representativeness_experts"],
+            experts_for_representativeness: row["Experts_for_representativeness"],
+            import: @import
 
           row["Ocean"].downcase.split(/,\s?/).each do |ocean_name|
             ocean = Ocean.where("lower(name) = ?", ocean_name).first

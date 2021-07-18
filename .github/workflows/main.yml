@@ -24,8 +24,8 @@ jobs:
           standardrb
 
   tests:
+    name: Tests
     runs-on: ubuntu-latest
-
     services:
       redis:
         image: redis
@@ -40,6 +40,12 @@ jobs:
         ports:
           - 5432:5432
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+    env:
+      PGHOST: localhost
+      PGUSER: postgres
+      PGPASSWORD: password
+      RAILS_ENV: test
+      SES_SMTP_EMAIL_ADDRESS: test@example.com
 
     steps:
     - uses: actions/checkout@v2
@@ -65,40 +71,16 @@ jobs:
         yarn install --pure-lockfile
 
     - name: Compile assets
-      env:
-        PGHOST: localhost
-        PGUSER: postgres
-        PGPASSWORD: password
-        RAILS_ENV: test
       run: |
         bin/rails webpacker:compile
 
-    - name: Build App
-      env:
-        PGHOST: localhost
-        PGUSER: postgres
-        PGPASSWORD: password
-        RAILS_ENV: test
+    - name: Seed Database
       run: |
         bin/rails db:create db:schema:load
-
-    - name: Seed Database
-      env:
-        PGHOST: localhost
-        PGUSER: postgres
-        PGPASSWORD: password
-        RAILS_ENV: test
-      run: |
         wget -q https://d3ci4pmn27yclp.cloudfront.net/eez.tgz
         tar xvzf eez.tgz
         cat eez_v11.sql | psql sharkipedia_test
 
     - name: Run Tests
-      env:
-        PGHOST: localhost
-        PGUSER: postgres
-        PGPASSWORD: password
-        RAILS_ENV: test
-        SES_SMTP_EMAIL_ADDRESS: test@example.com
       run: |
         bundle exec rails spec

@@ -42,7 +42,7 @@ gem "filterrific", "~> 5.2"
 # gem 'mini_magick', '~> 4.8'
 
 gem "aasm", "~> 5.2"
-gem "after_commit_everywhere", "~> 1.0"
+gem "after_commit_everywhere", "~> 1.1"
 
 gem "sidekiq", "< 7"
 gem "redis-namespace", "~> 1.8.1"

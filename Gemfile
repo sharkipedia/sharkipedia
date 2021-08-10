@@ -91,7 +91,7 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem "bugsnag", "~> 6.21"
+gem "bugsnag", "~> 6.22"
 
 gem "paper_trail", "~> 12.0"
 

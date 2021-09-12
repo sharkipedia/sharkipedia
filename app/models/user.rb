@@ -13,7 +13,7 @@ class User < ApplicationRecord
   validates :name, :token, presence: true
   validates :token, uniqueness: true
 
-  after_initialize :ensure_token
+  before_validation :ensure_token
 
   def admin?
     user_level == "admin"
@@ -42,6 +42,6 @@ class User < ApplicationRecord
   private
 
   def ensure_token
-    update token: SecureRandom.hex(10) if token.blank?
+    self.token ||= SecureRandom.hex(10)
   end
 end

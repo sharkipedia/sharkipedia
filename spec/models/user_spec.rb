@@ -9,7 +9,6 @@ RSpec.describe User, type: :model do
 
   describe "validations" do
     it { should validate_presence_of(:name) }
-    it { should validate_presence_of(:token) }
   end
 
   describe "#send_devise_notification" do
@@ -23,6 +22,16 @@ RSpec.describe User, type: :model do
 
     it do
       expect { user }.to have_enqueued_mail(Devise::Mailer, :confirmation_instructions)
+    end
+  end
+
+  describe "token assignment" do
+    let(:user) do
+      User.new(name: "Test User", email: "test@example.com", password: "123456789")
+    end
+
+    it "is expected to assign a token" do
+      expect { user.save }.to change { user.token }
     end
   end
 end

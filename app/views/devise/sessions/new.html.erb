@@ -1,25 +1,25 @@
 <h2 class="title">Log in</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
   <div class="field">
-    <p class="control has-icons-left has-icons-right">
+    <%= f.label :email, class: 'label' %>
+    <div class="control has-icons-left">
       <%= f.email_field :email, autofocus: true, autocomplete: "email", type: "email", placeholder: "Email", class: "input" %>
       <span class="icon is-small is-left">
         <i class="fas fa-envelope"></i>
       </span>
-      <span class="icon is-small is-right">
-        <i class="fas fa-check"></i>
-      </span>
-    </p>
+    </div>
   </div>
 
   <div class="field">
-    <p class="control has-icons-left">
+    <%= f.label :password, class: 'label' %>
+    <div class="control has-icons-left">
       <%= f.password_field :password, autocomplete: "current-password", class: "input", type: "password", placeholder: "Password" %>
       <span class="icon is-small is-left">
         <i class="fas fa-lock"></i>
       </span>
-    </p>
+    </div>
   </div>
 
   <% if devise_mapping.rememberable? -%>
@@ -32,9 +32,9 @@
   <div class="actions">
     <%= f.submit "Log in", class: "button is-primary" %>
   </div>
+
 <% end %>
 
-<br />
 <br />
 
 <%= render "devise/shared/links" %>

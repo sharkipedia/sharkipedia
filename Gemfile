@@ -50,7 +50,7 @@ gem "redis-namespace", "~> 1.8.1"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem "activerecord-postgis-adapter", "~> 7.1.0"
+gem "activerecord-postgis-adapter", "~> 7.1.1"
 gem "rgeo", "~> 2.3.0"
 gem "rgeo-geojson", "~> 2.1.1"
 
@@ -62,7 +62,7 @@ gem "jsonapi.rb", "~> 1.7.0"
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
-  gem "rspec-rails", "~> 5.0.1"
+  gem "rspec-rails", "~> 5.0.2"
 end
 
 group :development do

@@ -50,7 +50,7 @@ gem "redis-namespace", "~> 1.8.1"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem "activerecord-postgis-adapter", "~> 7.1.0"
+gem "activerecord-postgis-adapter", "~> 7.1.1"
 gem "rgeo", "~> 2.3.0"
 gem "rgeo-geojson", "~> 2.1.1"
 

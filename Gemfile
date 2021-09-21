@@ -35,7 +35,7 @@ gem "pundit", "~> 2.1"
 
 gem "roo", "~> 2.8.0"
 gem "rubyXL"
-gem "aws-sdk-s3", "~> 1.100", require: false
+gem "aws-sdk-s3", "~> 1.103", require: false
 
 gem "filterrific", "~> 5.2"
 # Use ActiveStorage variant
@@ -50,7 +50,7 @@ gem "redis-namespace", "~> 1.8.1"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem "activerecord-postgis-adapter", "~> 7.1.0"
+gem "activerecord-postgis-adapter", "~> 7.1.1"
 gem "rgeo", "~> 2.3.0"
 gem "rgeo-geojson", "~> 2.1.1"
 

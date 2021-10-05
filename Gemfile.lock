@@ -160,7 +160,7 @@ GEM
       cliver (~> 0.3)
       concurrent-ruby (~> 1.1)
       websocket-driver (>= 0.6, < 0.8)
-    ffi (1.15.3)
+    ffi (1.15.4)
     filterrific (5.2.2)
     friendly_id (5.4.2)
       activerecord (>= 4.0.0)
@@ -198,7 +198,7 @@ GEM
       activerecord
       kaminari-core (= 1.2.1)
     kaminari-core (1.2.1)
-    listen (3.6.0)
+    listen (3.7.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     loofah (2.12.0)
@@ -414,7 +414,7 @@ DEPENDENCIES
   jbuilder (~> 2.11)
   jsonapi-rspec
   jsonapi.rb (~> 1.7.0)
-  listen (>= 3.2, < 3.7)
+  listen (>= 3.2, < 3.8)
   pagy (~> 4.10)
   paper_trail (~> 12.1)
   pg (~> 1.2)

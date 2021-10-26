@@ -76,7 +76,7 @@ group :development do
 end
 
 group :test do
-  gem "capybara", "~> 3.35.3"
+  gem "capybara", "~> 3.36.0"
   gem "webdrivers", "~> 5.0"
   gem "cuprite", "~> 0.13"
 

@@ -102,7 +102,7 @@ gem "underscore-rails", "~> 1.8"
 
 gem "pg_search", "~> 2.3"
 
-gem "pagy", "~> 4.11"
+gem "pagy", "~> 5.1"
 
 gem "invisible_captcha", "~> 2.0"
 

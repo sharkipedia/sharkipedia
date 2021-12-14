@@ -2,7 +2,7 @@
   "name": "sharkipedia",
   "private": true,
   "dependencies": {
-    "@babel/preset-react": "^7.16.0",
+    "@babel/preset-react": "^7.16.5",
     "@fortawesome/fontawesome-free": "^5.15.4",
     "@rails/webpacker": "5.4.3",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",

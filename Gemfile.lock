@@ -87,8 +87,8 @@ GEM
       activerecord (>= 4.2)
       activesupport
     aws-eventstream (1.2.0)
-    aws-partitions (1.543.0)
-    aws-sdk-core (3.125.0)
+    aws-partitions (1.544.0)
+    aws-sdk-core (3.125.1)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.525.0)
       aws-sigv4 (~> 1.1)
@@ -96,7 +96,7 @@ GEM
     aws-sdk-kms (1.53.0)
       aws-sdk-core (~> 3, >= 3.125.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-s3 (1.110.0)
+    aws-sdk-s3 (1.111.0)
       aws-sdk-core (~> 3, >= 3.125.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.4)
@@ -402,7 +402,7 @@ DEPENDENCIES
   activerecord-postgis-adapter (~> 7.1.1)
   administrate (~> 0.16.0)
   after_commit_everywhere (~> 1.1)
-  aws-sdk-s3 (~> 1.110)
+  aws-sdk-s3 (~> 1.111)
   bootsnap (>= 1.1.0)
   bugsnag (~> 6.24)
   byebug

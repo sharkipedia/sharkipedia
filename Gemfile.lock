@@ -219,6 +219,10 @@ GEM
     momentjs-rails (2.20.1)
       railties (>= 3.1)
     msgpack (1.4.2)
+    net-pop (0.1.1)
+      digest
+      net-protocol
+      timeout
     net-protocol (0.1.2)
       io-wait
       timeout
@@ -429,6 +433,7 @@ DEPENDENCIES
   jsonapi-rspec
   jsonapi.rb (~> 1.7.0)
   listen (>= 3.2, < 3.8)
+  net-pop
   net-smtp
   pagy (~> 5.7)
   paper_trail (~> 12.1)

@@ -44,7 +44,7 @@ class ImportPolicy < ApplicationPolicy
       if user.admin? || user.editor?
         scope.all
       else
-        scope.where(user: user)
+        scope.where(user:)
       end
     end
   end

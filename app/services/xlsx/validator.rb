@@ -1,3 +1,4 @@
+# rubocop:todo Style/HashSyntax
 module Xlsx
   class Validator < ApplicationService
     attr_reader :type, :xlsx, :trait, :trend
@@ -284,3 +285,4 @@ module Xlsx
     end
   end
 end
+# rubocop:enable Style/HashSyntax

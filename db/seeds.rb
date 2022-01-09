@@ -38,7 +38,7 @@ taxonomy.shift # remove the header row
 
 s_sc = taxonomy.map { |row| row["Subclass"] }.uniq
 s_sc.each do |name|
-  SpeciesSubclass.find_or_create_by! name: name
+  SpeciesSubclass.find_or_create_by! name:
 end
 puts "# Created #{SpeciesSubclass.count} SpeciesSubclasses"
 
@@ -84,7 +84,7 @@ puts "# Created #{SpeciesFamily.count} SpeciesFamilies"
 
 s_ds = taxonomy.map { |row| row["Data type"] }.uniq
 s_ds.each do |name|
-  SpeciesDataType.find_or_create_by! name: name
+  SpeciesDataType.find_or_create_by! name:
 end
 
 puts "# Created #{SpeciesDataType.count} SpeciesDataTypes"
@@ -157,7 +157,7 @@ CSV.foreach("docs/traits.csv", headers: true) do |row|
   TraitClass.all.each do |tc|
     name = row[tc.name]
     next if name.blank?
-    Trait.find_or_create_by! name: name, trait_class: tc
+    Trait.find_or_create_by! name:, trait_class: tc
   end
 end
 
@@ -178,7 +178,7 @@ CSV.foreach("docs/standards.csv", headers: true) do |row|
   TraitClass.all.each do |tc|
     name = row[tc.name]
     next if name.blank?
-    Standard.find_or_create_by! name: name, trait_class: tc
+    Standard.find_or_create_by! name:, trait_class: tc
   end
 end
 
@@ -188,7 +188,7 @@ CSV.foreach("docs/methods.csv", headers: true) do |row|
   TraitClass.all.each do |tc|
     name = row[tc.name]
     next if name.blank?
-    MeasurementMethod.find_or_create_by! name: name, trait_class: tc
+    MeasurementMethod.find_or_create_by! name:, trait_class: tc
   end
 end
 
@@ -209,7 +209,7 @@ CSV.foreach("docs/models.csv", headers: true) do |row|
   TraitClass.all.each do |tc|
     name = row[tc.name]
     next if name.blank?
-    MeasurementModel.find_or_create_by! name: name, trait_class: tc
+    MeasurementModel.find_or_create_by! name:, trait_class: tc
   end
 end
 

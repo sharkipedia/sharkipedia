@@ -97,7 +97,7 @@ FactoryBot.define do
       end
 
       after(:create) do |import, evaluator|
-        create_list(:trend, evaluator.trends_count, import: import)
+        create_list(:trend, evaluator.trends_count, import:)
       end
     end
   end

@@ -113,17 +113,15 @@ module ImportXlsx
             [name.strip, doi.try(:strip)]
           end
 
-          referenced_resources = resources.map { |name, doi|
-            resource = Reference.find_by name: name
-            if resource
+          referenced_resources = resources.map do |name, doi|
+            if (resource = Reference.find_by(name:))
               resource.doi ||= doi
               resource.save
+              resource
             else
-              resource = Reference.create name: name, doi: doi
+              Reference.create name:, doi:
             end
-
-            resource
-          }
+          end
 
           self.log += referenced_resources.inspect + "\n"
 
@@ -141,15 +139,15 @@ module ImportXlsx
 
           # TODO: find observation by resource name
           observation = Observation.joins(:references)
-            .where(contributor_id: contributor_id,
+            .where(contributor_id:,
               'references.name': resource_name)
             .first
 
           observation ||= Observation.create! references: referenced_resources,
-            hidden: hidden,
-            contributor_id: contributor_id,
-            depth: depth,
-            user: user,
+            hidden:,
+            contributor_id:,
+            depth:,
+            user:,
             import: @import
 
           self.log += observation.inspect + "\n"
@@ -197,25 +195,25 @@ module ImportXlsx
             marine_province = LonghurstProvince.find_by name: sub_table.first["marine_province"]
             self.log += marine_province.inspect + "\n"
 
-            observation.measurements.create! species: species,
+            observation.measurements.create! species:,
               sex_type: sex,
-              trait_class: trait_class,
-              trait: trait,
-              standard: standard,
-              measurement_method: measurement_method,
-              measurement_model: measurement_model,
-              date: date,
-              value: value,
-              value_type: value_type,
-              precision: precision,
-              precision_type: precision_type,
-              precision_upper: precision_upper,
-              sample_size: sample_size,
-              dubious: dubious,
-              validated: validated,
-              validation_type: validation_type,
-              notes: notes,
-              location: location,
+              trait_class:,
+              trait:,
+              standard:,
+              measurement_method:,
+              measurement_model:,
+              date:,
+              value:,
+              value_type:,
+              precision:,
+              precision_type:,
+              precision_upper:,
+              sample_size:,
+              dubious:,
+              validated:,
+              validation_type:,
+              notes:,
+              location:,
               longhurst_province: marine_province
           end
 
@@ -348,8 +346,8 @@ module ImportXlsx
               data_source = row["DataSource"]
             end
             resource ||= Reference.find_or_create_by! name: ref,
-              data_source: data_source,
-              doi: doi,
+              data_source:,
+              doi:,
               year: row["SourceYear"]
 
             self.log += "Created Reference: #{resource.inspect}\n"
@@ -382,25 +380,25 @@ module ImportXlsx
             figure_data: row["FigureData"],
             figure_name: row["FigureName"],
             line_used: row["LineUsed"],
-            analysis_model: analysis_model,
+            analysis_model:,
             page_and_figure_number: row["PageAndFigureNumber"],
             pdf_page: row["PDFPage"],
             comments: row["Comments"],
             reference: resource,
-            species: species,
-            species_group: species_group,
-            location: location,
-            data_type: data_type,
+            species:,
+            species_group:,
+            location:,
+            data_type:,
             standard: unit,
-            sampling_method: sampling_method,
-            user: user,
+            sampling_method:,
+            user:,
             start_year: 2900,
             end_year: 2900,
-            unit_freeform: unit_freeform,
-            unit_time: unit_time,
-            unit_spatial: unit_spatial,
-            unit_gear: unit_gear,
-            unit_transformation: unit_transformation,
+            unit_freeform:,
+            unit_time:,
+            unit_spatial:,
+            unit_gear:,
+            unit_transformation:,
             sampling_method_info: row["Sampling_method_info"],
             variance: (row["Variance"] == "Y"),
             dataset_map: (row["Dataset_map"] == "Y"),
@@ -454,7 +452,7 @@ module ImportXlsx
             end
             trend.end_year = year_col
 
-            to = trend.trend_observations.create! value: value, year: year_col
+            to = trend.trend_observations.create! value:, year: year_col
 
             self.log += "Created TrendObservation #{to.inspect}\n"
           end

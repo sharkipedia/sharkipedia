@@ -111,7 +111,7 @@ Rails.application.configure do
     "#{ENV.fetch("HEROKU_APP_NAME")}.herokuapp.com"
   default_url = {
     protocol: "https",
-    host: host
+    host:
   }
   config.action_mailer.default_url_options = default_url
   config.action_controller.default_url_options = default_url

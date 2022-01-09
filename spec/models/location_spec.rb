@@ -9,7 +9,7 @@ RSpec.describe Location, type: :model do
 
   describe "coordinates" do
     context "when valid latitude & longitude" do
-      subject(:location) { create(:location, lat: lat, lon: lon) }
+      subject(:location) { create(:location, lat:, lon:) }
 
       let(:lat) { "33" }
       let(:lon) { "147" }

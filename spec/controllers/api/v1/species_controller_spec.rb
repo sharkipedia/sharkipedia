@@ -43,7 +43,7 @@ RSpec.describe API::V1::SpeciesController, type: :controller do
     context "when EEZ ID given" do
       let!(:trend_species) { create :species }
       let!(:location) { create :location, name: "Falkland Islands", lat: "-50", lon: "-59" }
-      let!(:trend) { create :trend, location: location, species: trend_species }
+      let!(:trend) { create :trend, location:, species: trend_species }
 
       it "should return the correct species" do
         post :query, params: {eez_id: 4}
@@ -65,15 +65,15 @@ RSpec.describe API::V1::SpeciesController, type: :controller do
       let!(:trend_species) { create :species }
       let!(:trait_species) { create :species }
       let!(:location) { create :location, name: "Hawaii", lat: 20, lon: -160 }
-      let!(:trend) { create :trend, location: location, species: trend_species }
+      let!(:trend) { create :trend, location:, species: trend_species }
       let!(:reference) { create :reference }
       let!(:observation) { create :observation, references: [reference] }
-      let!(:measurement) { create :measurement, species: trait_species, location: location, observation: observation }
+      let!(:measurement) { create :measurement, species: trait_species, location:, observation: }
 
-      let!(:other_trend) { create :trend, species: species }
+      let!(:other_trend) { create :trend, species: }
       let!(:other_reference) { create :reference }
       let!(:other_observation) { create :observation, references: [other_reference] }
-      let!(:other_measurement) { create :measurement, species: species, observation: other_observation }
+      let!(:other_measurement) { create :measurement, species:, observation: other_observation }
 
       let(:hawaii_geojson) { File.read("spec/fixtures/geo/hawaii.geojson") }
 

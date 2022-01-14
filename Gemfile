@@ -61,6 +61,7 @@ gem "jsonapi.rb", "~> 1.7.0"
 
 gem "net-smtp", require: false
 gem "net-pop", require: false
+gem "net-imap", require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

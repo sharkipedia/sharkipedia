@@ -9,9 +9,9 @@ RSpec.describe "New Trait Observation form" do
   let!(:trait) { create(:trait) }
   let!(:trait_class) { trait.trait_class }
   let!(:sex_type) { create(:sex_type) }
-  let!(:standard) { create(:standard, trait_class: trait_class) }
-  let!(:measurement_method) { create(:measurement_method, trait_class: trait_class) }
-  let!(:measurement_model) { create(:measurement_model, trait_class: trait_class) }
+  let!(:standard) { create(:standard, trait_class:) }
+  let!(:measurement_method) { create(:measurement_method, trait_class:) }
+  let!(:measurement_model) { create(:measurement_model, trait_class:) }
   let!(:longhurst_province) { create(:longhurst_province) }
   let!(:value_type) { create(:value_type) }
   let!(:precision_type) { create(:precision_type) }

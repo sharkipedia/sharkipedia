@@ -51,7 +51,7 @@ namespace :import do
 
     puts "Ensuring all Oceans are present in database"
     ["Arctic", "Pacific", "Atlantic", "Indian"].each do |name|
-      Ocean.find_or_create_by name: name
+      Ocean.find_or_create_by name:
     end
 
     puts "Importing FAO Areas"

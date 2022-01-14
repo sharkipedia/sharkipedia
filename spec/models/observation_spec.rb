@@ -18,7 +18,7 @@ RSpec.describe Observation, type: :model do
   describe "#title" do
     subject { observation.title }
     let!(:observation) { create(:observation) }
-    let!(:measurement) { create(:measurement, observation: observation) }
+    let!(:measurement) { create(:measurement, observation:) }
     let!(:species_names) { observation.species.map(&:name).join }
     let!(:reference_names) { observation.references.map(&:name).join }
 
@@ -51,8 +51,8 @@ RSpec.describe Observation, type: :model do
     let(:species) { create(:species) }
     let(:observation) { create(:observation) }
     before do
-      create(:measurement, species: species, observation: observation)
-      create(:measurement, species: species, observation: observation)
+      create(:measurement, species:, observation:)
+      create(:measurement, species:, observation:)
     end
 
     it "is expected to be distinct" do

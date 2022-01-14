@@ -15,7 +15,7 @@ module API::V1
         # This is vulnerable to timing attacks but we don't really have to care
         # since 1) the API is read-only 2) all data is public to start with
         # 3) anyone can just register and get a token.
-        User.find_by(token: token)
+        User.find_by(token:)
       end
     end
 

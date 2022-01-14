@@ -120,11 +120,11 @@ class Trend < ApplicationRecord
     trend_observations.where(year: to_remove).destroy_all
 
     observations.each do |year, value|
-      observation = trend_observations.where(year: year).first
+      observation = trend_observations.where(year:).first
       if observation
-        observation.update(value: value)
+        observation.update(value:)
       else
-        trend_observations.create(year: year, value: value)
+        trend_observations.create(year:, value:)
       end
     end
   end

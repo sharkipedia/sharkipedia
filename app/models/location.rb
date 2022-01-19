@@ -13,11 +13,11 @@ class Location < ApplicationRecord
 
   include PgSearch::Model
   pg_search_scope :search_by_name, against: [:name],
-                                   using: {
-                                     tsearch: {
-                                       prefix: true
-                                     }
-                                   }
+    using: {
+      tsearch: {
+        prefix: true
+      }
+    }
 
   def longitude
     lonlat.try :lon || lon

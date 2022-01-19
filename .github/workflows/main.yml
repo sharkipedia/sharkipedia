@@ -21,9 +21,7 @@ jobs:
           bundler-cache: true
 
       - name: Ruby linters
-        run: |
-          gem install standard
-          standardrb
+        run: bin/standardrb
 
   tests:
     name: Tests

@@ -120,7 +120,7 @@ RSpec.describe "Mass Import" do
       it "allows users to upload new versions" do
         sign_in contributor
         import = create("#{kind}_import", aasm_state: "changes_requested",
-                                          user: contributor)
+          user: contributor)
 
         visit import_path(import)
 

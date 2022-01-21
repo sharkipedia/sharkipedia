@@ -98,7 +98,7 @@ gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "bugsnag", "~> 6.24"
 
-gem "paper_trail", "~> 12.1"
+gem "paper_trail", "~> 12.2"
 
 gem "coffee-rails", "~> 5.0"
 

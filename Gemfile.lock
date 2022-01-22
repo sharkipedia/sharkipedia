@@ -240,7 +240,8 @@ GEM
       mini_portile2 (~> 2.7.0)
       racc (~> 1.4)
     orm_adapter (0.5.0)
-    pagy (5.8.1)
+    pagy (5.9.1)
+      activesupport
     paper_trail (12.2.0)
       activerecord (>= 5.2)
       request_store (~> 1.1)
@@ -465,7 +466,7 @@ DEPENDENCIES
   net-imap
   net-pop
   net-smtp
-  pagy (~> 5.8)
+  pagy (~> 5.9)
   paper_trail (~> 12.2)
   pg (~> 1.2)
   pg_search (~> 2.3)

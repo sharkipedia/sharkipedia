@@ -109,7 +109,7 @@ GEM
       execjs (~> 2.0)
     bcrypt (3.1.16)
     bindex (0.8.1)
-    bootsnap (1.10.1)
+    bootsnap (1.10.2)
       msgpack (~> 1.2)
     bugsnag (6.24.2)
       concurrent-ruby (~> 1.0)
@@ -219,7 +219,7 @@ GEM
     minitest (5.15.0)
     momentjs-rails (2.20.1)
       railties (>= 3.1)
-    msgpack (1.4.2)
+    msgpack (1.4.4)
     net-imap (0.2.3)
       digest
       net-protocol

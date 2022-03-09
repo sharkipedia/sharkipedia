@@ -310,7 +310,7 @@ GEM
       railties (>= 3.2)
       tilt
     redis (4.6.0)
-    redis-namespace (1.8.1)
+    redis-namespace (1.8.2)
       redis (>= 3.0.4)
     regexp_parser (2.2.1)
     request_store (1.5.1)
@@ -475,7 +475,7 @@ DEPENDENCIES
   rails (~> 6.1)
   rails-erd
   react-rails
-  redis-namespace (~> 1.8.1)
+  redis-namespace (~> 1.8.2)
   rgeo (~> 2.4.0)
   rgeo-geojson (~> 2.1.1)
   roo (~> 2.8.0)

@@ -1,6 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
-import XLSX from 'xlsx';
+import * as XLSX from 'xlsx/xlsx.mjs';
 import './style.scss'
 import CanvasDatagrid from '../CanvasDatagrid'
 

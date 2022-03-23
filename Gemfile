@@ -33,7 +33,7 @@ gem "devise", "~> 4.8"
 gem "administrate", "~> 0.17.0"
 gem "pundit", "~> 2.2"
 
-gem "roo", "~> 2.8.0"
+gem "roo", "~> 2.9.0"
 gem "rubyXL"
 gem "aws-sdk-s3", "~> 1.113", require: false
 

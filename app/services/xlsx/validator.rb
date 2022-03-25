@@ -72,10 +72,10 @@ module Xlsx
 
     def validate_column_headers
       template = case type
-                 when :traits
-                   @trait
-                 when :trends
-                   @trend
+      when :traits
+        @trait
+      when :trends
+        @trend
       end
 
       if @xlsx.headers == template.headers

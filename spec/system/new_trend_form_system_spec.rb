@@ -18,7 +18,13 @@ RSpec.describe "New Trend form" do
   # Import#notify_admins needs at least one admin
   let!(:admin) { create(:admin) }
 
-  it "allows users to create new trends" do
+  before do
+    # these are the examples on the homepage
+    create(:species, name: "Carcharhinus acronotus")
+    create(:trait, name: "Lmat50")
+  end
+
+  it "allows contributor to create new trends" do
     sign_in contributor
     visit new_trend_path
 
@@ -89,5 +95,20 @@ RSpec.describe "New Trend form" do
     expect(page).to have_content(location_name)
     expect(page).to have_content(latitude)
     expect(page).to have_content(longitude)
+  end
+
+  it "should not permit anonymous users to view the form" do
+    visit new_trend_path
+
+    expect(page).to have_content("You need to sign in or sign up before continuing.")
+    expect(current_path).to eq(new_user_session_path)
+  end
+
+  it "should not permit non-contributors to view the form" do
+    user = create(:user)
+    sign_in user
+
+    visit new_trend_path
+    expect(current_path).to eq(root_path)
   end
 end

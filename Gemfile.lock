@@ -295,7 +295,7 @@ GEM
       thor (~> 1.0)
     rainbow (3.1.1)
     rake (13.0.6)
-    ransack (2.6.0)
+    ransack (3.0.0)
       activerecord (>= 6.0.4)
       activesupport (>= 6.0.4)
       i18n
@@ -473,7 +473,7 @@ DEPENDENCIES
   pundit (~> 2.2)
   rails (~> 6.1)
   rails-erd
-  ransack (~> 2.6)
+  ransack (~> 3.0)
   react-rails
   redis-namespace (~> 1.8.2)
   rgeo (~> 2.4.0)

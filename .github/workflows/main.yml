@@ -2,10 +2,10 @@ name: CI
 on:
   pull_request:
     branches:
-      - 'master'
+      - "master"
   push:
     branches:
-      - 'master'
+      - "master"
 
 jobs:
   linters:
@@ -30,7 +30,7 @@ jobs:
       redis:
         image: redis
         ports:
-        - 6379:6379
+          - 6379:6379
         options: --entrypoint redis-server
 
       postgres:
@@ -48,49 +48,53 @@ jobs:
       SES_SMTP_EMAIL_ADDRESS: test@example.com
 
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: Setup Ruby and install gems
-      uses: ruby/setup-ruby@v1
-      with:
-        bundler-cache: true
+      - name: Setup Ruby and install gems
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
 
-    - name: Install PostgreSQL 11 client
-      run: |
-        sudo apt-get -yqq install libpq-dev
+      - name: Install PostgreSQL 11 client
+        run: |
+          sudo apt-get -yqq install libpq-dev
 
-    - name: Cache node_modules
-      uses: actions/cache@v2
-      with:
-        path: node_modules
-        key: yarn-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
-        restore-keys: |
-          yarn-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-
-    - name: Run yarn install
-      run: |
-        yarn install --pure-lockfile
+      - name: Cache node_modules
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: yarn-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            yarn-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-
+      - name: Run yarn install
+        run: |
+          yarn install --pure-lockfile
 
-    - name: Cache assets
-      uses: actions/cache@v2
-      with:
-        path: |
-          tmp/cache/webpacker
-          public/packs
-          public/packs-test
-        key: assets-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-${{ hashFiles('app/assets/**') }}
-        restore-keys: |
-          assets-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-
-    - name: Compile assets
-      run: |
-        bin/rails webpacker:compile
+      - name: Cache assets
+        uses: actions/cache@v2
+        with:
+          path: |
+            tmp/cache/webpacker
+            public/packs
+            public/packs-test
+          key: assets-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-${{ hashFiles('app/assets/**') }}
+          restore-keys: |
+            assets-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-
+      - name: Compile assets
+        run: |
+          bin/rails webpacker:compile
 
-    - name: Seed Database
-      run: |
-        bin/rails db:create db:schema:load
-        wget -q https://d3ci4pmn27yclp.cloudfront.net/eez.tgz
-        tar xvzf eez.tgz
-        cat eez_v11.sql | psql sharkipedia_test
+      - name: Seed Database
+        run: |
+          bin/rails db:create db:schema:load
+          wget -q https://d3ci4pmn27yclp.cloudfront.net/eez.tgz
+          tar xvzf eez.tgz
+          cat eez_v11.sql | psql sharkipedia_test
 
-    - name: Run Tests
-      run: |
-        bundle exec rails spec
+      - name: Run Tests
+        run: |
+          bundle exec rails spec
+
+      - name: Run FrontEnd Tests
+        run: |
+          yarn test

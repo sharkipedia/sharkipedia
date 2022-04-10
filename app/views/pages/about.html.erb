@@ -1,18 +1,15 @@
 <style>
 /* Bio image grid */
 
-.columnbio {
-  float: left;
-  width: 25%;
-  padding: 10px;
-  text-align: center;
+.rowbio {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
 }
 
-/* Clearfix (clear floats) */
-.rowbio::after {
-  content: "";
-  clear: both;
-  display: table;
+.columnbio {
+  padding: 1rem;
 }
 
 .roundrect {
@@ -21,6 +18,12 @@
 
 .imgborder {
   border: 30px solid rgba(0,0,0,0);
+}
+
+@media screen and (min-width: 700px) {
+  .rowbio {
+    justify-content: flex-start
+  }
 }
 
 </style>

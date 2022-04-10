@@ -97,4 +97,4 @@ jobs:
 
       - name: Run FrontEnd Tests
         run: |
-          yarn test
+          yarn test --passWithNoTests

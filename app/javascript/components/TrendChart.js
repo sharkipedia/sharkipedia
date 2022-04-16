@@ -76,7 +76,7 @@ class TrendChart extends React.Component {
     }
 
     return (
-      <div className="trend-chart">
+      <div className="trend-chart" data-testid="trend-chart">
         <Line data={data} options={options} legend={legend} />
       </div>
     );

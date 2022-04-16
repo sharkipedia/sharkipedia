@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-// This needs to be available to every test file that uses document methods like 'toBeInTheDocument'
+// jest-dom needs to be available to every test file that uses document methods like 'toBeInTheDocument'
 import "@testing-library/jest-dom";
 import TrendChart from "../../app/javascript/components/TrendChart";
 

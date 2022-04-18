@@ -5,6 +5,7 @@
     "test": "jest"
   },
   "jest": {
+    "testEnvironment": "jsdom",
     "roots": [
       "spec/javascript"
     ],
@@ -34,6 +35,8 @@
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "12.1.2",
     "jest": "^27.5.1",
     "webpack-dev-server": "^4.8.1"
   }

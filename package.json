@@ -37,7 +37,7 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "12.1.5",
-    "jest": "^27.5.1",
+    "jest": "^28.0.2",
     "webpack-dev-server": "^4.8.1"
   }
 }

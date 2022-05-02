@@ -1,6 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import TrendChart from './TrendChart'
+import YearValuePair from "./YearValuePair";
 
 class YearInput extends React.Component {
   constructor(props) {
@@ -49,41 +50,6 @@ class NumberOfYears extends React.Component {
                  name="trend[no_years]" id="trend_no_years"
                  placeholder="automatically calculated from start & end year"
                  value={this.props.number} />
-        </div>
-      </div>
-    );
-  }
-}
-
-class YearValuePair extends React.Component {
-  constructor(props) {
-    super(props)
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange(e) {
-    const year = document.getElementById(e.target.id.replace("value", "year")).value;
-    this.props.onYearChange(year, e.target.value);
-  }
-
-  render() {
-    const yearId = "trend_observations_year_" + this.props.year;
-    const valueId = "trend_observations_value_" + this.props.year;
-
-    return (
-      <div className="field is-horizontal">
-        <div className="field-body">
-          <div className="field">
-            <div className="control">
-              <input className="input" readOnly={true} tabIndex="-1" type="text" value={this.props.year} id={yearId} /><br />
-            </div>
-          </div>
-
-          <div className="field">
-            <div className="control">
-              <input className="input trend-value" step="any" type="text" value={this.props.value} id={valueId} onChange={this.handleChange} />
-            </div>
-          </div>
         </div>
       </div>
     );
@@ -213,7 +179,6 @@ class TrendDataInput extends React.Component {
     return (
       <div className="trend-data-input">
         <h3 className="subtitle is-4 is-spaced"> Observations </h3>
-
         <div className="columns">
           <div className="column">
             <YearInput name="start" year={this.state.startYear} onYearChange={this.handleStartYearChange} />

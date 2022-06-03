@@ -1,6 +1,10 @@
 <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
   <tbody>
     <tr>
+      <th>ID</th>
+      <td><%= reference.id %></td>
+    </tr>
+    <tr>
       <th>AuthorYear</th>
       <td id="author-year">
         <% if local_assigns.has_key? :render_links %>

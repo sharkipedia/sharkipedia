@@ -36,7 +36,7 @@ class TrendPolicy < ApplicationPolicy
         :species
       )
         .joins(:import)
-        .where('imports.aasm_state': "imported")
+        .where("imports.aasm_state": "imported")
     end
   end
 end

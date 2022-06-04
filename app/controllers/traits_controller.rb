@@ -10,7 +10,7 @@ class TraitsController < PreAuthController
 
     observations = Observation
       .joins(:import, :measurements)
-      .where('imports.aasm_state': "imported", 'measurements.trait_id': @trait)
+      .where("imports.aasm_state": "imported", "measurements.trait_id": @trait)
 
     order = if params[:order] == "references"
       "\"references\".name, species.name"

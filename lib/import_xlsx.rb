@@ -140,7 +140,7 @@ module ImportXlsx
           # TODO: find observation by resource name
           observation = Observation.joins(:references)
             .where(contributor_id:,
-              'references.name': resource_name)
+              "references.name": resource_name)
             .first
 
           observation ||= Observation.create! references: referenced_resources,

@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby File.read(".ruby-version").strip
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem "rails", "~> 6.1"
+gem "rails", "~> 7.0"
 # Use postgres as the database for Active Record
 gem "pg", "~> 1.4"
 # Use Puma as the app server
@@ -50,7 +50,7 @@ gem "redis-namespace", "~> 1.8.2"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem "activerecord-postgis-adapter", "~> 7.1.1"
+gem "activerecord-postgis-adapter", "~> 8.0.0"
 gem "rgeo", "~> 2.4.0"
 gem "rgeo-geojson", "~> 2.1.1"
 

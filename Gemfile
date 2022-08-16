@@ -45,7 +45,7 @@ gem "aasm", "~> 5.3"
 gem "after_commit_everywhere", "~> 1.2"
 
 gem "sidekiq", "< 7"
-gem "redis-namespace", "~> 1.8.2"
+gem "redis-namespace", "~> 1.9.0"
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

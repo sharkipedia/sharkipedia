@@ -303,7 +303,7 @@ GEM
       execjs
       railties (>= 3.2)
       tilt
-    redis (4.7.1)
+    redis (4.8.0)
     redis-namespace (1.9.0)
       redis (>= 4)
     regexp_parser (2.5.0)
@@ -379,10 +379,10 @@ GEM
     semantic_range (3.0.0)
     shoulda-matchers (5.1.0)
       activesupport (>= 5.2.0)
-    sidekiq (6.5.4)
-      connection_pool (>= 2.2.2)
+    sidekiq (6.5.6)
+      connection_pool (>= 2.2.5)
       rack (~> 2.0)
-      redis (>= 4.5.0)
+      redis (>= 4.5.0, < 5)
     spring (2.1.1)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)

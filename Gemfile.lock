@@ -212,7 +212,7 @@ GEM
     method_source (1.0.0)
     mini_mime (1.1.2)
     mini_portile2 (2.8.0)
-    minitest (5.16.2)
+    minitest (5.16.3)
     msgpack (1.5.4)
     net-imap (0.2.3)
       digest
@@ -377,7 +377,7 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2)
     semantic_range (3.0.0)
-    shoulda-matchers (5.1.0)
+    shoulda-matchers (5.2.0)
       activesupport (>= 5.2.0)
     sidekiq (6.5.6)
       connection_pool (>= 2.2.5)
@@ -479,7 +479,7 @@ DEPENDENCIES
   rubyXL
   sass-rails (~> 6.0)
   select2-rails (~> 4.0)!
-  shoulda-matchers (~> 5.1)
+  shoulda-matchers (~> 5.2)
   sidekiq (< 7)
   spring
   spring-watcher-listen (~> 2.0.0)

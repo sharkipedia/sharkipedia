@@ -41,7 +41,7 @@ gem "filterrific", "~> 5.2"
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
-gem "aasm", "~> 5.3"
+gem "aasm", "~> 5.4"
 gem "after_commit_everywhere", "~> 1.2"
 
 gem "sidekiq", "< 7"

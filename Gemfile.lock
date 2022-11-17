@@ -229,6 +229,7 @@ GEM
       digest
       net-protocol
       timeout
+    newrelic_rpm (8.13.0)
     nio4r (2.5.8)
     nokogiri (1.13.9)
       mini_portile2 (~> 2.8.0)
@@ -463,6 +464,7 @@ DEPENDENCIES
   net-imap
   net-pop
   net-smtp
+  newrelic_rpm
   pagy (~> 5.10)
   paper_trail (~> 13.0)
   pg (~> 1.4)

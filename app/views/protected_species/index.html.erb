@@ -1,0 +1,25 @@
+<h1 class="title">Protected Species</h1>
+
+<table class="table is-fullwidth is-bordered">
+  <thead>
+    <tr>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Species</th>
+      <th>CITES</th>
+      <th>CMS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @species.each do |species| %>
+      <tr>
+        <td><%= species.species_order.name %></td>
+        <td><%= species.species_family.name %></td>
+        <td><%= link_to species.name, species_path(species) %></td>
+        <td><%= "CITES (todo)" %></td>
+        <td><%= "CMS (todo)" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

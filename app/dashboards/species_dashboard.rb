@@ -18,6 +18,8 @@ class SpeciesDashboard < Administrate::BaseDashboard
     species_family: Field::BelongsTo,
     species_data_type: Field::BelongsTo,
     observations: Field::HasMany,
+    cms_status: Field::Enum,
+    cites_status: Field::Enum,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
   }.freeze
@@ -46,6 +48,8 @@ class SpeciesDashboard < Administrate::BaseDashboard
     :species_data_type,
     :iucn_code,
     :observations,
+    :cms_status,
+    :cites_status,
     :created_at,
     :updated_at
   ].freeze
@@ -62,7 +66,9 @@ class SpeciesDashboard < Administrate::BaseDashboard
     :species_family,
     :species_data_type,
     :iucn_code,
-    :species_superorder
+    :species_superorder,
+    :cms_status,
+    :cites_status
   ].freeze
 
   # Overwrite this method to customize how species are displayed

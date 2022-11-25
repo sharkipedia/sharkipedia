@@ -1,4 +1,7 @@
 class Species < ApplicationRecord
+  enum cms_status: [ :none, :appendix_1, :appendix_2 ], _prefix: true
+  enum cites_status: [ :none, :appendix_1, :appendix_2 ], _prefix: true
+
   include PgSearch::Model
   pg_search_scope :search_by_name, against: [:name],
     using: {

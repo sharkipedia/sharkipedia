@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_16_200623) do
+ActiveRecord::Schema.define(version: 2022_11_25_163944) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,42 @@ ActiveRecord::Schema.define(version: 2022_01_16_200623) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "eez_v11", primary_key: "fid", id: :serial, force: :cascade do |t|
+    t.float "mrgid"
+    t.string "geoname", limit: 80
+    t.float "mrgid_ter1"
+    t.string "pol_type", limit: 80
+    t.float "mrgid_sov1"
+    t.string "territory1", limit: 80
+    t.string "iso_ter1", limit: 80
+    t.string "sovereign1", limit: 80
+    t.float "mrgid_ter2"
+    t.float "mrgid_sov2"
+    t.string "territory2", limit: 80
+    t.string "iso_ter2", limit: 80
+    t.string "sovereign2", limit: 80
+    t.float "mrgid_ter3"
+    t.float "mrgid_sov3"
+    t.string "territory3", limit: 80
+    t.string "iso_ter3", limit: 80
+    t.string "sovereign3", limit: 80
+    t.float "x_1"
+    t.float "y_1"
+    t.float "mrgid_eez"
+    t.float "area_km2"
+    t.string "iso_sov1", limit: 80
+    t.string "iso_sov2", limit: 80
+    t.string "iso_sov3", limit: 80
+    t.bigint "un_sov1"
+    t.bigint "un_sov2"
+    t.bigint "un_sov3"
+    t.bigint "un_ter1"
+    t.bigint "un_ter2"
+    t.bigint "un_ter3"
+    t.geometry "geom", limit: {:srid=>4326, :type=>"multi_polygon"}
+    t.index ["geom"], name: "eez_v11_geom_geom_idx", using: :gist
   end
 
   create_table "fao_areas", force: :cascade do |t|
@@ -292,6 +328,8 @@ ActiveRecord::Schema.define(version: 2022_01_16_200623) do
     t.string "scientific_name"
     t.string "authorship"
     t.string "slug", null: false
+    t.integer "cites_status", default: 0
+    t.integer "cms_status", default: 0
     t.index ["slug"], name: "index_species_on_slug"
     t.index ["species_data_type_id"], name: "index_species_on_species_data_type_id"
     t.index ["species_family_id"], name: "index_species_on_species_family_id"

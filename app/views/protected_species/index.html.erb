@@ -16,8 +16,8 @@
         <td><%= species.species_order.name %></td>
         <td><%= species.species_family.name %></td>
         <td><%= link_to species.name, species_path(species) %></td>
-        <td><%= "CITES (todo)" %></td>
-        <td><%= "CMS (todo)" %></td>
+        <td><%= format_protected_status(species.cites_status) %></td>
+        <td><%= format_protected_status(species.cms_status) %></td>
       </tr>
     <% end %>
   </tbody>

@@ -9,4 +9,13 @@ module ProtectedSpeciesHelper
       "Appendix II"
     end
   end
+
+  def tooltip_text(status)
+    case status
+    when "appendix_1"
+      "Appendix I"
+    when "appendix_2"
+      "Appendix II"
+    end
+  end
 end

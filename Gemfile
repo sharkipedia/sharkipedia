@@ -44,7 +44,7 @@ gem "filterrific", "~> 5.2"
 gem "aasm", "~> 5.4"
 gem "after_commit_everywhere", "~> 1.2"
 
-gem "sidekiq", "< 7"
+gem "sidekiq", "< 8"
 gem "redis-namespace", "~> 1.9.0"
 
 # Use Capistrano for deployment

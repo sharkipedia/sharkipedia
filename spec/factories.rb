@@ -145,6 +145,14 @@ FactoryBot.define do
     species_order
     species_family
     species_data_type
+
+    factory :protected_species_cms do
+      cms_status { :appendix_1 }
+    end
+
+    factory :protected_species_cites do
+      cites_status { :appendix_2 }
+    end
   end
 
   factory :species_group do

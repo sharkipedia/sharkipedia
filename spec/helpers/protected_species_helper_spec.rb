@@ -1,15 +1,24 @@
 require "rails_helper"
 
-# Specs in this file have access to a helper object that includes
-# the ProtectedSpeciesHelper. For example:
-#
-# describe ProtectedSpeciesHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
 RSpec.describe ProtectedSpeciesHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "#format_protected_status" do
+    it "retuns nil when given status of none" do
+      expect(helper.format_protected_status("none")).to eq(nil)
+    end
+    it "retuns Appendix I when given status of appendix_1" do
+      expect(helper.format_protected_status("appendix_1")).to eq("Appendix I")
+    end
+    it "retuns Appendix II when given status of appendix_2" do
+      expect(helper.format_protected_status("appendix_2")).to eq("Appendix II")
+    end
+  end
+
+  describe "#tooltip_text" do
+    it "returns Appendix I when given a status of appendix_1" do
+      expect(helper.tooltip_text("appendix_1")).to eq("Appendix I")
+    end
+    it "returns Appendix II when given a status of appendix_2" do
+      expect(helper.tooltip_text("appendix_2")).to eq("Appendix II")
+    end
+  end
 end

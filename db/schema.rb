@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_25_163944) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_11_25_163944) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -21,7 +20,7 @@ ActiveRecord::Schema.define(version: 2022_11_25_163944) do
     t.string "record_type", null: false
     t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
@@ -33,7 +32,7 @@ ActiveRecord::Schema.define(version: 2022_11_25_163944) do
     t.text "metadata"
     t.bigint "byte_size", null: false
     t.string "checksum"
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.string "service_name", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
@@ -46,14 +45,14 @@ ActiveRecord::Schema.define(version: 2022_11_25_163944) do
 
   create_table "analysis_models", force: :cascade do |t|
     t.string "name", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "data_types", force: :cascade do |t|
     t.string "name", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "eez_v11", primary_key: "fid", id: :serial, force: :cascade do |t|
@@ -102,8 +101,8 @@ ActiveRecord::Schema.define(version: 2022_11_25_163944) do
     t.string "f_subdivision"
     t.string "f_subunit"
     t.string "name", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["f_code"], name: "index_fao_areas_on_f_code"
     t.index ["ocean_id"], name: "index_fao_areas_on_ocean_id"
   end
@@ -120,7 +119,7 @@ ActiveRecord::Schema.define(version: 2022_11_25_163944) do
     t.integer "sluggable_id", null: false
     t.string "sluggable_type", limit: 50
     t.string "scope"
-    t.datetime "created_at"
+    t.datetime "created_at", precision: nil
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
@@ -133,8 +132,8 @@ ActiveRecord::Schema.define(version: 2022_11_25_163944) do
     t.boolean "approved"
     t.bigint "approved_by_id"
     t.text "log"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "aasm_state"
     t.boolean "xlsx_valid"
     t.text "reason"
@@ -146,8 +145,8 @@ ActiveRecord::Schema.define(version: 2022_11_25_163944) do
     t.string "name"
     t.string "lat"
     t.string "lon"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.geography "lonlat", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}
     t.index ["lonlat"], name: "index_locations_on_lonlat", using: :gist
   end
@@ -155,8 +154,8 @@ ActiveRecord::Schema.define(version: 2022_11_25_163944) do
   create_table "longhurst_provinces", force: :cascade do |t|
     t.string "name"
     t.string "code"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["code"], name: "index_longhurst_provinces_on_code"
   end
 
@@ -164,8 +163,8 @@ ActiveRecord::Schema.define(version: 2022_11_25_163944) do
     t.string "region_type", null: false
     t.string "province", null: false
     t.integer "trend_reg_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "marine_ecoregions_worlds_trends", id: false, force: :cascade do |t|
@@ -179,8 +178,8 @@ ActiveRecord::Schema.define(version: 2022_11_25_163944) do
     t.string "name", null: false
     t.text "description"
     t.bigint "trait_class_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["trait_class_id"], name: "index_measurement_methods_on_trait_class_id"
   end
 
@@ -188,8 +187,8 @@ ActiveRecord::Schema.define(version: 2022_11_25_163944) do
     t.string "name", null: false
     t.text "description"
     t.bigint "trait_class_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["trait_class_id"], name: "index_measurement_models_on_trait_class_id"
   end
 
@@ -210,8 +209,8 @@ ActiveRecord::Schema.define(version: 2022_11_25_163944) do
     t.boolean "dubious"
     t.integer "validated"
     t.text "notes"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.bigint "validation_type_id"
     t.bigint "location_id", null: false
     t.bigint "longhurst_province_id"
@@ -236,8 +235,8 @@ ActiveRecord::Schema.define(version: 2022_11_25_163944) do
     t.string "access"
     t.boolean "hidden"
     t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "contributor_id"
     t.string "depth"
     t.bigint "import_id"
@@ -254,8 +253,8 @@ ActiveRecord::Schema.define(version: 2022_11_25_163944) do
 
   create_table "oceans", force: :cascade do |t|
     t.string "name", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "oceans_trends", id: false, force: :cascade do |t|
@@ -268,15 +267,15 @@ ActiveRecord::Schema.define(version: 2022_11_25_163944) do
   create_table "precision_types", force: :cascade do |t|
     t.string "name", null: false
     t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "references", force: :cascade do |t|
     t.string "name", null: false
     t.string "doi"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "data_source"
     t.string "year"
     t.string "suffix"
@@ -291,20 +290,20 @@ ActiveRecord::Schema.define(version: 2022_11_25_163944) do
   create_table "sampling_methods", force: :cascade do |t|
     t.string "name", null: false
     t.string "code"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "sex_types", force: :cascade do |t|
     t.string "name", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "source_observations", force: :cascade do |t|
     t.string "name", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "source_observations_trends", id: false, force: :cascade do |t|
@@ -318,8 +317,8 @@ ActiveRecord::Schema.define(version: 2022_11_25_163944) do
     t.string "name", null: false
     t.string "iucn_code"
     t.bigint "species_superorder_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.bigint "species_data_type_id"
     t.bigint "species_subclass_id"
     t.bigint "species_order_id"
@@ -340,8 +339,8 @@ ActiveRecord::Schema.define(version: 2022_11_25_163944) do
 
   create_table "species_data_types", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "species_families", force: :cascade do |t|
@@ -349,8 +348,8 @@ ActiveRecord::Schema.define(version: 2022_11_25_163944) do
     t.bigint "species_subclass_id"
     t.bigint "species_superorder_id"
     t.bigint "species_order_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["species_order_id"], name: "index_species_families_on_species_order_id"
     t.index ["species_subclass_id"], name: "index_species_families_on_species_subclass_id"
     t.index ["species_superorder_id"], name: "index_species_families_on_species_superorder_id"
@@ -358,16 +357,16 @@ ActiveRecord::Schema.define(version: 2022_11_25_163944) do
 
   create_table "species_groups", force: :cascade do |t|
     t.string "name", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "species_orders", force: :cascade do |t|
     t.string "name"
     t.bigint "species_superorder_id"
     t.bigint "species_subclass_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["species_subclass_id"], name: "index_species_orders_on_species_subclass_id"
     t.index ["species_superorder_id"], name: "index_species_orders_on_species_superorder_id"
   end
@@ -381,14 +380,14 @@ ActiveRecord::Schema.define(version: 2022_11_25_163944) do
 
   create_table "species_subclasses", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "species_superorders", force: :cascade do |t|
     t.string "name", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.bigint "species_subclass_id"
     t.index ["species_subclass_id"], name: "index_species_superorders_on_species_subclass_id"
   end
@@ -397,23 +396,23 @@ ActiveRecord::Schema.define(version: 2022_11_25_163944) do
     t.string "name", null: false
     t.text "description"
     t.bigint "trait_class_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["trait_class_id"], name: "index_standards_on_trait_class_id"
   end
 
   create_table "trait_classes", force: :cascade do |t|
     t.string "name", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "traits", force: :cascade do |t|
     t.string "name", null: false
     t.text "description"
     t.bigint "trait_class_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["trait_class_id"], name: "index_traits_on_trait_class_id"
   end
 
@@ -421,8 +420,8 @@ ActiveRecord::Schema.define(version: 2022_11_25_163944) do
     t.bigint "trend_id"
     t.string "year", null: false
     t.string "value", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["trend_id"], name: "index_trend_observations_on_trend_id"
   end
 
@@ -442,8 +441,8 @@ ActiveRecord::Schema.define(version: 2022_11_25_163944) do
     t.string "depth"
     t.string "figure_name"
     t.string "figure_data"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.bigint "reference_id"
     t.bigint "standard_id"
     t.integer "start_year"
@@ -480,40 +479,40 @@ ActiveRecord::Schema.define(version: 2022_11_25_163944) do
 
   create_table "unit_gears", force: :cascade do |t|
     t.string "name", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "unit_spatials", force: :cascade do |t|
     t.string "name", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "unit_times", force: :cascade do |t|
     t.string "name", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "unit_transformations", force: :cascade do |t|
     t.string "name", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
+    t.datetime "reset_password_sent_at", precision: nil
+    t.datetime "remember_created_at", precision: nil
     t.string "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
+    t.datetime "confirmed_at", precision: nil
+    t.datetime "confirmation_sent_at", precision: nil
     t.string "unconfirmed_email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "user_level", default: "user"
     t.string "name"
     t.string "token"
@@ -526,15 +525,15 @@ ActiveRecord::Schema.define(version: 2022_11_25_163944) do
   create_table "validation_types", force: :cascade do |t|
     t.string "name", null: false
     t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "value_types", force: :cascade do |t|
     t.string "name", null: false
     t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "versions", force: :cascade do |t|
@@ -543,7 +542,7 @@ ActiveRecord::Schema.define(version: 2022_11_25_163944) do
     t.string "event", null: false
     t.string "whodunnit"
     t.text "object"
-    t.datetime "created_at"
+    t.datetime "created_at", precision: nil
     t.text "object_changes"
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end

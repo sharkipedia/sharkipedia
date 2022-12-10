@@ -169,7 +169,7 @@
         </div>
       </div>
 
-      <%= render partial: 'observations/details', locals: { species: observation.species, references: observation.references, measurements: observation.measurements } %>
+      <%= render partial: 'observations/details', locals: { species: observation.species, references: observation.references, measurements: observation.measurements, hidden: observation.hidden, depth: observation.depth } %>
 
     <% end %>
   <% end %>

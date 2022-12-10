@@ -3,6 +3,19 @@
     <% species.each do |observation_species| %>
       <%= render partial: 'species/detail', locals: { species: observation_species, render_links: true } %>
     <% end %>
+    <h4 class="subtitle is-4">Observation</h4>
+    <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+      <tbody>
+        <tr>
+          <th>Depth</th>
+          <td><%= depth %>m</td>
+        </tr>
+        <tr>
+          <th>Hidden</th>
+          <td><%= hidden %></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
   <div class="column">
     <% references.each do |reference| %>

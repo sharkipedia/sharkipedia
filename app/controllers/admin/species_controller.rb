@@ -11,8 +11,8 @@ module Admin
     # end
 
     # Define a custom finder by overriding the `find_resource` method:
-    def find_resource(param)
-      Species.find_by!(slug: param)
+    def find_resource(slug)
+      Species.friendly.find(slug)
     end
 
     # See https://administrate-prototype.herokuapp.com/customizing_controller_actions

@@ -15,7 +15,6 @@ RSpec.describe "New Trend form" do
   let(:latitude) { "32.838512" }
   let(:longitude) { "-121.0736997" }
 
-  # Import#notify_admins needs at least one admin
   let!(:admin) { create(:admin) }
 
   before do

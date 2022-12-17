@@ -230,7 +230,7 @@ puts "# Importing References, this can take a few minutes"
 failed = []
 CSV.foreach("docs/shark-resources-190723.csv", headers: true) do |row|
   resource = Reference.new name: row["resource_id"], reference: row["resource"],
-    year: row["year"], doi: (row["DOI"] == "NA" ? nil : row["DOI"]),
+    year: row["year"], doi: ((row["DOI"] == "NA") ? nil : row["DOI"]),
     suffix: row["suffix"], data_source: row["source"]
   resource.save!
 rescue

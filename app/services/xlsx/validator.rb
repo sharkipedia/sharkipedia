@@ -193,7 +193,7 @@ module Xlsx
       name = (row["resource_name"] || row["AuthorYear"]).try(:strip)
       if name.blank?
         @valid = false
-        field = type == :traits ? "resource_name" : "AuthorYear"
+        field = (type == :traits) ? "resource_name" : "AuthorYear"
         @messages << "Row #{idx + 2}: No #{field} specified."
       end
 

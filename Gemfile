@@ -8,7 +8,7 @@ gem "rails", "~> 6.1"
 # Use postgres as the database for Active Record
 gem "pg", "~> 1.4"
 # Use Puma as the app server
-gem "puma", "~> 5.6"
+gem "puma", "~> 6.0"
 # Use SCSS for stylesheets
 gem "sass-rails", "~> 6.0"
 # Use Uglifier as compressor for JavaScript assets
@@ -82,7 +82,7 @@ group :development do
 end
 
 group :test do
-  gem "capybara", "~> 3.37.1"
+  gem "capybara", "~> 3.38"
   gem "webdrivers", "~> 5.2"
   gem "cuprite", "~> 0.13"
 

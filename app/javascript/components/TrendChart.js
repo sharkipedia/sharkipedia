@@ -3,7 +3,9 @@ import PropTypes from "prop-types"
 import { Line } from 'react-chartjs-2';
 
 const TrendChart = (props) => {
-  const years = props.observations.map(pair => new Date(pair[0]));
+	// In order to produce the correct year in the Date object, we passed it '7' to give it the month of August
+	// making sure that the conversion would be correct regardless of the browsers local timezone
+	const years = props.observations.map((pair) => new Date(pair[0], 7));
 
   const values = props.observations.map(pair => {
     if (pair[1] == "") {

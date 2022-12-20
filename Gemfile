@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby File.read(".ruby-version").strip
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem "rails", "~> 6.1"
+gem "rails", "~> 7.0"
 # Use postgres as the database for Active Record
 gem "pg", "~> 1.4"
 # Use Puma as the app server
@@ -50,7 +50,7 @@ gem "redis-namespace", "~> 1.9.0"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem "activerecord-postgis-adapter", "~> 7.1.1"
+gem "activerecord-postgis-adapter", "~> 8.0.0"
 gem "rgeo", "~> 2.4.0"
 gem "rgeo-geojson", "~> 2.1.1"
 
@@ -74,9 +74,6 @@ group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem "web-console", ">= 4.0.1"
   gem "listen", ">= 3.2", "< 3.8"
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem "spring"
-  gem "spring-watcher-listen", "~> 2.1.0"
   gem "rails-erd"
   gem "standard", require: false
 end

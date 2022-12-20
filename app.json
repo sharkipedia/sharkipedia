@@ -1,7 +1,7 @@
 {
     "name": "sharkipedia",
     "scripts": {
-      "postdeploy": "heroku pg:copy sharkipedia::DATABASE DATABASE -a $HEROKU_APP_NAME --confirm $HEROKU_APP_NAME && bundle exec rails db:gis:setup db:migrate"
+      "postdeploy": "heroku pg:copy sharkipedia::DATABASE DATABASE -a $HEROKU_APP_NAME --confirm $HEROKU_APP_NAME && bundle exec rails db:migrate"
     },
     "env": {
       "SECRET_KEY_BASE": {
@@ -27,6 +27,9 @@
     },
     {
       "url": "https://github.com/heroku/heroku-geo-buildpack"
+    },
+    {
+      "url": "heroku/nodejs"
     },
     {
       "url": "heroku/ruby"

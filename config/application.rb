@@ -9,7 +9,7 @@ Bundler.require(*Rails.groups)
 module Sharkipedia
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 6.1
+    config.load_defaults 7.0
 
     config.active_job.queue_adapter = :sidekiq
 

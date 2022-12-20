@@ -4,6 +4,9 @@
   "scripts": {
     "test": "jest"
   },
+  "engines": {
+    "node": "19.x"
+  },
   "jest": {
     "testEnvironment": "jsdom",
     "roots": [

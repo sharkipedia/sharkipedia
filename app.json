@@ -1,7 +1,7 @@
 {
     "name": "sharkipedia",
     "scripts": {
-      "postdeploy": "pg_dump $STAGING_DATABASE_URL | psql $DATABASE_URL && bundle exec rails db:gis:setup db:migrate"
+      "postdeploy": "heroku pg:copy sharkipedia::DATABASE DATABASE -a $HEROKU_APP_NAME --confirm $HEROKU_APP_NAME && bundle exec rails db:gis:setup db:migrate"
     },
     "env": {
       "SECRET_KEY_BASE": {
@@ -22,6 +22,9 @@
       "heroku-redis"
     ],
     "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-cli"
+    },
     {
       "url": "https://github.com/heroku/heroku-geo-buildpack"
     },

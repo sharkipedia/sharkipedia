@@ -5,7 +5,7 @@
     "test": "jest"
   },
   "engines": {
-    "node": "19.x"
+    "node": "16.x"
   },
   "jest": {
     "testEnvironment": "jsdom",

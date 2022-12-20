@@ -31,10 +31,8 @@
 1. Initialize the database `rake db:setup` (if this command throws an
     `role "username" does not exist` or `permission denied to create database`
     error, see above to create postgres user and give permission)
-1. Enable the PostGIS extension `rake db:gis:setup`
 1. Run the rails server `rails server`
 1. Connect to the application in your browser at `http://localhost:3000`
-
 
 ## Attributions
 

@@ -31,7 +31,7 @@ gem "devise", "~> 4.8"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 gem "administrate", "~> 0.18.0"
-gem "pundit", "~> 2.2"
+gem "pundit", "~> 2.3"
 
 gem "roo", "~> 2.9.0"
 gem "rubyXL"

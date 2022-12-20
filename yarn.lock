@@ -3941,6 +3941,11 @@ duplexify@^3.4.2, duplexify@^3.6.0:
     readable-stream "^2.0.0"
     stream-shift "^1.0.0"
 
+earcut@^2.2.3:
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/earcut/-/earcut-2.2.4.tgz#6d02fd4d68160c114825d06890a92ecaae60343a"
+  integrity sha512-/pjZsA1b4RPHbeWZQn66SWS8nZZWLQQ23oE3Eam7aroEFGEvwKAsJfZ9ytiEMycfzXWpca4FA9QIOehf7PocBQ==
+
 ee-first@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
@@ -6604,21 +6609,22 @@ ol-layerswitcher@^4.1.0:
   resolved "https://registry.yarnpkg.com/ol-layerswitcher/-/ol-layerswitcher-4.1.0.tgz#34a96652027f8c5f807b73f65520b156c86851ee"
   integrity sha512-Nzvi1JF+dkD8laL/EdC8dg0/WQBscAGNaQApsoiE2EfVuaBwLpBg8yrABsFSJF388bAFq0oYjBR61ZPNTWRI8g==
 
-ol-mapbox-style@^8.0.5:
-  version "8.2.0"
-  resolved "https://registry.yarnpkg.com/ol-mapbox-style/-/ol-mapbox-style-8.2.0.tgz#8814d4eab66ce94f2af10a96bfb06607792e7399"
-  integrity sha512-WyCiNUj5DiD3+MvgqXvxSf0mDUvagtlq9JQ97mHwDD1FliHt5G1333Lvqskg8psBfxijHSEWNHwqzBGnEUo1bw==
+ol-mapbox-style@9.1.0:
+  version "9.1.0"
+  resolved "https://registry.yarnpkg.com/ol-mapbox-style/-/ol-mapbox-style-9.1.0.tgz#1504b1a2c3cc23482c3c95cd55a1cf1d2ac8a451"
+  integrity sha512-R/XE6FdviaXNdnSw6ItHSEreMtQU68cwQCGv4Kl8yG0V1dZhnI5JWr8IOphJwffPVxfWTCnJb5aALGSB89MvhA==
   dependencies:
     "@mapbox/mapbox-gl-style-spec" "^13.23.1"
     mapbox-to-css-font "^2.4.1"
 
-ol@^6.15.1:
-  version "6.15.1"
-  resolved "https://registry.yarnpkg.com/ol/-/ol-6.15.1.tgz#364f459939ef71f970b2376a821a896529f65e3a"
-  integrity sha512-ZG2CKTpJ8Q+tPywYysVwPk+yevwJzlbwjRKhoCvd7kLVWMbfBl1O/+Kg/yrZZrhG9FNXbFH4GeOZ5yVRqo3P4w==
+ol@^7.1.0:
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/ol/-/ol-7.1.0.tgz#aab69a0539e59d6a4361cbc0f69f8b00c7298c9c"
+  integrity sha512-mAeV5Ca4mFhYaJoGWNZnIMN5VNnFTf63FgZjBiYu/DjQDGKNsD5QyvvqVziioVdOOgl6b8rPB/ypj2XNBinPwA==
   dependencies:
+    earcut "^2.2.3"
     geotiff "2.0.4"
-    ol-mapbox-style "^8.0.5"
+    ol-mapbox-style "9.1.0"
     pbf "3.2.1"
     rbush "^3.0.1"
 

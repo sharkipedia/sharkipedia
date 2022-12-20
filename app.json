@@ -29,6 +29,9 @@
       "url": "https://github.com/heroku/heroku-geo-buildpack"
     },
     {
+      "url": "heroku/nodejs"
+    },
+    {
       "url": "heroku/ruby"
     }
   ]

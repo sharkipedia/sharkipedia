@@ -49,7 +49,7 @@ const TrendChart = (props) => {
     tooltips: {
       callbacks: {
         title: (tooltipItem) => {
-          return new Date(tooltipItem[0].label).getFullYear() + 1;
+          return new Date(tooltipItem[0].label).getFullYear();
         }
       }
     },

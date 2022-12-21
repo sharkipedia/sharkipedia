@@ -22,6 +22,7 @@ class TraitsController < PreAuthController
     @measurements = @trait.measurements.includes(
       [
         :standard,
+        :species,
         :value_type,
         :location,
         observation: [

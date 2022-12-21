@@ -1,5 +1,6 @@
 class TraitsController < PreAuthController
   include Pagy::Backend
+  caches_action :show, :index, expires_in: 1.hour
 
   def index
     @trait_classes = TraitClass.includes(:traits).all
@@ -21,6 +22,7 @@ class TraitsController < PreAuthController
     @measurements = @trait.measurements.includes(
       [
         :standard,
+        :species,
         :value_type,
         :location,
         observation: [

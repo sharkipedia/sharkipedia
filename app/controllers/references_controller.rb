@@ -1,5 +1,6 @@
 class ReferencesController < PreAuthController
   include Pagy::Backend
+  caches_action :show, :index, expires_in: 1.hour
 
   def new
     ensure_contributor!

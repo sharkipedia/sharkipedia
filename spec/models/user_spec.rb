@@ -18,7 +18,7 @@ RSpec.describe User, type: :model do
     end
 
     before { ActiveJob::Base.queue_adapter = :test }
-    after { ActiveJob::Base.queue_adapter = :sidekiq }
+    after { ActiveJob::Base.queue_adapter = :good_job }
 
     it do
       expect { user }.to have_enqueued_mail(Devise::Mailer, :confirmation_instructions)

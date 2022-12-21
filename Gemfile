@@ -46,8 +46,7 @@ gem "filterrific", "~> 5.2"
 gem "aasm", "~> 5.4"
 gem "after_commit_everywhere", "~> 1.3"
 
-gem "sidekiq", "< 7"
-gem "redis-namespace", "~> 1.9.0"
+gem "good_job", "~> 3.7", ">= 3.7.2"
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

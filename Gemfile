@@ -59,7 +59,7 @@ gem "rgeo-geojson", "~> 2.1.1"
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", ">= 1.1.0", require: false
 
-gem "jsonapi.rb", "~> 2.0.0"
+gem "jsonapi.rb", "~> 2.0.1"
 gem "ransack", "~> 3.2"
 
 gem "net-smtp", require: false

@@ -146,6 +146,7 @@ GEM
     cuprite (0.14.3)
       capybara (~> 3.0)
       ferrum (~> 0.13.0)
+    date (3.3.3)
     devise (4.8.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -153,7 +154,6 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.5.0)
-    digest (3.1.1)
     erubi (1.11.0)
     execjs (2.8.1)
     factory_bot (6.2.0)
@@ -224,10 +224,9 @@ GEM
     mini_portile2 (2.8.0)
     minitest (5.16.3)
     msgpack (1.6.0)
-    net-imap (0.2.3)
-      digest
+    net-imap (0.3.3)
+      date
       net-protocol
-      strscan
     net-pop (0.1.2)
       net-protocol
     net-protocol (0.2.1)
@@ -401,7 +400,6 @@ GEM
       language_server-protocol (~> 3.17.0.2)
       rubocop (= 1.39.0)
       rubocop-performance (= 1.15.1)
-    strscan (3.0.1)
     thor (1.2.1)
     tilt (2.0.11)
     timeout (0.3.1)

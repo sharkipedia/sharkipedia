@@ -139,7 +139,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.10)
-    connection_pool (2.2.5)
+    connection_pool (2.3.0)
     crass (1.0.6)
     cuprite (0.14.3)
       capybara (~> 3.0)
@@ -452,6 +452,7 @@ DEPENDENCIES
   capybara (~> 3.38)
   capybara-select-2 (~> 0.5.1)
   coffee-rails (~> 5.0)
+  connection_pool (~> 2.3)
   cuprite (~> 0.14)
   devise (~> 4.8)
   factory_bot_rails (~> 6.2)
@@ -476,6 +477,7 @@ DEPENDENCIES
   rails-erd
   ransack (~> 3.2)
   react-rails
+  redis (~> 4.0)
   redis-namespace (~> 1.9.0)
   rgeo (~> 2.4.0)
   rgeo-geojson (~> 2.1.1)

@@ -1,6 +1,6 @@
 class SpeciesController < PreAuthController
   include Pagy::Backend
-  caches_action :show, :index, expires_in: 1.hour
+  caches_action :show, expires_in: 1.hour
 
   def index
     species = if params[:all]

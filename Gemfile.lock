@@ -168,7 +168,7 @@ GEM
       websocket-driver (>= 0.6, < 0.8)
     ffi (1.15.5)
     filterrific (5.2.3)
-    friendly_id (5.4.2)
+    friendly_id (5.5.0)
       activerecord (>= 4.0.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
@@ -464,7 +464,7 @@ DEPENDENCIES
   devise (~> 4.8)
   factory_bot_rails (~> 6.2)
   filterrific (~> 5.2)
-  friendly_id (~> 5.4.2)
+  friendly_id (~> 5.5.0)
   invisible_captcha (~> 2.0)
   jbuilder (~> 2.11)
   jsonapi-rspec

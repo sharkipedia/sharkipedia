@@ -1,8 +1,9 @@
-class ImportJob < ApplicationJob
+class AdminNotificationJob < ApplicationJob
   queue_as :default
 
   def perform
     return unless Rails.env.production?
+    return unless Import.pending_review.any?
 
     admins = User.admins
     emails = admins.map(&:email)

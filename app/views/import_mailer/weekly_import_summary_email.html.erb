@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Hello there and welcome to your weekly email digest.</p>
+
+    <% if @imports_pending_review.any? %>
+    <p>There are currently <%= @imports_pending_review.size %> imports to review.</p>
+
+    <% @grouped_imports_pending_review.each do |import_type, imports| %>
+      <p><%= import_type.capitalize %></p>
+      <ul>
+      <% imports.each do |import| %>
+        <li><%= link_to import.title, import %> created at <%= import.created_at %></li>
+      <% end %>
+      </ul>
+    <% end %>
+    <% end %>
+  </body>
+</html>

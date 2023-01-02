@@ -34,7 +34,7 @@ class Import < ApplicationRecord
 
     after_all_transitions :notify_uploader
 
-    event :validate_upload, after: :notify_admins do
+    event :validate_upload do
       transitions from: [:uploaded], to: :pending_review
     end
 
@@ -136,10 +136,6 @@ class Import < ApplicationRecord
 
   def notify_uploader
     ImportMailer.with(import: self).update_import_status_email.deliver_later
-  end
-
-  def notify_admins
-    ImportMailer.with(import: self).new_import_email.deliver_later
   end
 
   def do_publish

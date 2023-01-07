@@ -92,6 +92,9 @@ GEM
     after_commit_everywhere (1.3.0)
       activerecord (>= 4.2)
       activesupport
+    annotate (3.2.0)
+      activerecord (>= 3.2, < 8.0)
+      rake (>= 10.4, < 14.0)
     ast (2.4.2)
     aws-eventstream (1.2.0)
     aws-partitions (1.679.0)
@@ -459,6 +462,7 @@ DEPENDENCIES
   activerecord-postgis-adapter (~> 8.0.0)
   administrate (~> 0.18.0)
   after_commit_everywhere (~> 1.3)
+  annotate
   aws-sdk-s3 (~> 1.117)
   bootsnap (>= 1.1.0)
   bugsnag (~> 6.25)

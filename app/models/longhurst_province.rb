@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: longhurst_provinces
+#
+#  id         :bigint           not null, primary key
+#  code       :string
+#  name       :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+# Indexes
+#
+#  index_longhurst_provinces_on_code  (code)
+#
 class LonghurstProvince < ApplicationRecord
   validates :name, presence: true
   validates :code, presence: true, uniqueness: true

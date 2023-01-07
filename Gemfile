@@ -76,6 +76,7 @@ group :development do
   gem "web-console", ">= 4.0.1"
   gem "listen", ">= 3.2", "< 3.8"
   gem "rails-erd"
+  gem "annotate"
   gem "standard", require: false
 end
 

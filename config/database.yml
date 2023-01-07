@@ -6,7 +6,7 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   schema_search_path: public
 
-<% if File.exists?('config/database.local.yml') %>
+<% if File.exist?('config/database.local.yml') %>
   # I run postgis locally in a docker container
   # (https://github.com/postgis/docker-postgis)
   #

@@ -1,3 +1,25 @@
+# == Schema Information
+#
+# Table name: references
+#
+#  id          :bigint           not null, primary key
+#  author_year :string
+#  data_source :string
+#  doi         :string
+#  file_public :boolean
+#  name        :string           not null
+#  reference   :string
+#  slug        :string           not null
+#  suffix      :string
+#  year        :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+# Indexes
+#
+#  index_references_on_name  (name) UNIQUE
+#  index_references_on_slug  (slug)
+#
 class Reference < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged

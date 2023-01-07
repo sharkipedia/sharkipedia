@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: locations
+#
+#  id         :bigint           not null, primary key
+#  lat        :string
+#  lon        :string
+#  lonlat     :geography        point, 4326
+#  name       :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+# Indexes
+#
+#  index_locations_on_lonlat  (lonlat) USING gist
+#
 class Location < ApplicationRecord
   has_many :measurements
   has_many :observations, through: :measurements

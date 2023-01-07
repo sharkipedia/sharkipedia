@@ -1,3 +1,30 @@
+# == Schema Information
+#
+# Table name: imports
+#
+#  id             :bigint           not null, primary key
+#  aasm_state     :string
+#  approved       :boolean
+#  import_type    :string
+#  log            :text
+#  reason         :text
+#  title          :string           not null
+#  xlsx_valid     :boolean
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  approved_by_id :bigint
+#  user_id        :bigint
+#
+# Indexes
+#
+#  index_imports_on_approved_by_id  (approved_by_id)
+#  index_imports_on_user_id         (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (approved_by_id => users.id)
+#  fk_rails_...  (user_id => users.id)
+#
 require "./lib/import_xlsx"
 
 class Import < ApplicationRecord

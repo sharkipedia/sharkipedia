@@ -208,6 +208,7 @@ FactoryBot.define do
     species
     sex_type
     location
+    observation
     association :trait
   end
 

@@ -2,7 +2,7 @@
 
 ## Development setup
 
-1. Ensure you have ruby (version 3.1) installed, for instructions see the
+1. Ensure you have ruby (version 3.2) installed, for instructions see the
     [Install Rails Howto](http://installrails.com).
 1. Ensure you have [node.js](https://nodejs.org/en/) installed
 1. Ensure you have the postgresql database installed

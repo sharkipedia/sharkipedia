@@ -26,7 +26,7 @@ jQuery(document).on('turbolinks:load', function() {
   grid.style.width = '100%';
 
   var date = new Date().toISOString().slice(0,10);
-  var fname = 'shark-export-' + date + '.csv';
+  var fname = 'sharkipedia-export-' + date + '.csv';
   var a = document.getElementById("data-export-link");
   a.onclick = function() {
     XLSX.writeFile(wb, fname)

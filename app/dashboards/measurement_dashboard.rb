@@ -26,7 +26,7 @@ class MeasurementDashboard < Administrate::BaseDashboard
     precision_upper: Field::String,
     sample_size: Field::Number,
     dubious: Field::Boolean,
-    validated: Field::Number,
+    validated: Field::Boolean,
     notes: Field::Text,
     created_at: Field::DateTime,
     updated_at: Field::DateTime

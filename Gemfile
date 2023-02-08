@@ -35,7 +35,7 @@ gem "devise", "~> 4.8"
 gem "administrate", "~> 0.18.0"
 gem "pundit", "~> 2.3"
 
-gem "roo", "~> 2.9.0"
+gem "roo", "~> 2.10.0"
 gem "rubyXL"
 gem "aws-sdk-s3", "~> 1.119", require: false
 

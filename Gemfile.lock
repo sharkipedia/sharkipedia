@@ -343,7 +343,7 @@ GEM
       rgeo (>= 1.0.0)
     rgeo-geojson (2.1.1)
       rgeo (>= 1.0.0)
-    roo (2.9.0)
+    roo (2.10.0)
       nokogiri (~> 1)
       rubyzip (>= 1.3.0, < 3.0.0)
     rspec-core (3.12.0)
@@ -499,7 +499,7 @@ DEPENDENCIES
   redis (~> 5.0)
   rgeo (~> 2.4.0)
   rgeo-geojson (~> 2.1.1)
-  roo (~> 2.9.0)
+  roo (~> 2.10.0)
   rspec-rails (~> 6.0.1)
   rubyXL
   sass-rails (~> 6.0)

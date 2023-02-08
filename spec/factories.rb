@@ -226,7 +226,7 @@ FactoryBot.define do
     sample_size { 1 }
     value_type
     dubious { false }
-    validated { 0 }
+    validated { true }
     validation_type
     notes { "These are my awesome notes. Yo." }
   end

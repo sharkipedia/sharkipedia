@@ -172,7 +172,7 @@ GEM
       webrick (~> 1.7)
       websocket-driver (>= 0.6, < 0.8)
     ffi (1.15.5)
-    filterrific (5.2.3)
+    filterrific (5.2.4)
     friendly_id (5.5.0)
       activerecord (>= 4.0.0)
     fugit (1.8.1)

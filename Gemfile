@@ -59,7 +59,7 @@ gem "rgeo-geojson", "~> 2.1.1"
 gem "bootsnap", ">= 1.1.0", require: false
 
 gem "jsonapi.rb", "~> 2.0.1"
-gem "ransack", "~> 3.2"
+gem "ransack", "~> 4.0"
 
 gem "net-smtp", require: false
 gem "net-pop", require: false

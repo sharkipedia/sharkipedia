@@ -6552,10 +6552,10 @@ obuf@^1.0.0, obuf@^1.1.2:
   resolved "https://registry.yarnpkg.com/obuf/-/obuf-1.1.2.tgz#09bea3343d41859ebd446292d11c9d4db619084e"
   integrity sha512-PX1wu0AmAdPqOL1mWhqmlOd8kOIZQwGZw6rh7uby9fTc5lhaOWFLX3I6R1hrF9k3zUY40e6igsLGkDXK92LJNg==
 
-ol-layerswitcher@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/ol-layerswitcher/-/ol-layerswitcher-4.1.0.tgz#34a96652027f8c5f807b73f65520b156c86851ee"
-  integrity sha512-Nzvi1JF+dkD8laL/EdC8dg0/WQBscAGNaQApsoiE2EfVuaBwLpBg8yrABsFSJF388bAFq0oYjBR61ZPNTWRI8g==
+ol-layerswitcher@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/ol-layerswitcher/-/ol-layerswitcher-4.1.1.tgz#abd60daa94932c38b086299c37999e7a187a5da0"
+  integrity sha512-uqIqZCr/23GoOIOl2T1iPzcVBPweJZgkVHTrn8DLNCa3cCuX+aJzz0DhkA+qJjm5NqXO5uCvB7zpk9vWtRWmsQ==
 
 ol-mapbox-style@^9.2.0:
   version "9.2.4"

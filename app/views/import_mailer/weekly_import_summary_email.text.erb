@@ -1,0 +1,12 @@
+Hello there and welcome to your weekly email digest.
+
+<% if @imports_pending_review.any? %>
+There are currently <%= @imports_pending_review.size %> imports to review.
+
+<% @grouped_imports_pending_review.each do |import_type, imports| %>
+  <%= import_type.capitalize %>
+  <% imports.each do |import| %>
+    <%= import.title %> created at <%= import.created_at %> - <%= import_url(import) %>
+  <% end %>
+<% end %>
+<% end %>

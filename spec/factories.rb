@@ -27,6 +27,7 @@ FactoryBot.define do
 
   factory :reference do
     sequence(:name) { |n| "reference #{n}" }
+    sequence(:doi) { |n| "10.1000/xyz#{n}" }
   end
 
   factory :sex_type do
@@ -200,6 +201,8 @@ FactoryBot.define do
   factory :observation do
     user
     import
+    sequence(:contributor_id) { |n| "contributor_id=#{n}" }
+    sequence(:depth) { |n| "depth=#{n}" }
 
     after(:build) do |o|
       o.references << create(:reference)
@@ -216,7 +219,28 @@ FactoryBot.define do
     species
     sex_type
     location
+    observation
+    longhurst_province
+    sequence(:date) { |n| "2121-01-#{n}" }
     association :trait
+    trait_class
+    standard
+    measurement_method
+    measurement_model
+    sequence(:value) { |n| "value=#{n}" }
+    sequence(:precision) { |n| "precision=#{n}" }
+    precision_type
+    sequence(:precision_upper) { |n| "precision_upper=#{n}" }
+    sample_size { 1 }
+    value_type
+    dubious { false }
+    validated { true }
+    validation_type
+    notes { "These are my awesome notes. Yo." }
+  end
+
+  factory :validation_type do
+    sequence(:name) { |n| "name=#{n}" }
   end
 
   factory :trend do

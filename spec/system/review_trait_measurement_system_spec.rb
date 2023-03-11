@@ -19,7 +19,6 @@ RSpec.describe "Review a trait import" do
   let(:contributor) { create(:contributor) }
   let!(:import) { create(:traits_import, xlsx_file: nil, observations: [observation], user: contributor) }
 
-  # Import#notify_admins needs at least one admin
   let!(:admin) { create(:admin) }
 
   it "allows users to review trait imports" do

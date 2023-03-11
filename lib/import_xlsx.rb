@@ -171,7 +171,7 @@ module ImportXlsx
             precision_upper = row["precision_upper"]
             sample_size = row["sample_size"]
             dubious = row["dubious"]
-            validated = row["validated"]
+            validated = row["validated"].to_i == 1
             date = row["date"]
             validation_type = ValidationType.find_by name: row["validation_type"]
             notes = row["notes"]

@@ -16,7 +16,6 @@ RSpec.describe "New Trait Observation form" do
   let!(:value_type) { create(:value_type) }
   let!(:precision_type) { create(:precision_type) }
 
-  # Import#notify_admins needs at least one admin
   let!(:admin) { create(:admin) }
 
   def fill_measurement(value)

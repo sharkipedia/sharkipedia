@@ -1,3 +1,30 @@
+# == Schema Information
+#
+# Table name: imports
+#
+#  id             :bigint           not null, primary key
+#  aasm_state     :string
+#  approved       :boolean
+#  import_type    :string
+#  log            :text
+#  reason         :text
+#  title          :string           not null
+#  xlsx_valid     :boolean
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  approved_by_id :bigint
+#  user_id        :bigint
+#
+# Indexes
+#
+#  index_imports_on_approved_by_id  (approved_by_id)
+#  index_imports_on_user_id         (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (approved_by_id => users.id)
+#  fk_rails_...  (user_id => users.id)
+#
 require "./lib/import_xlsx"
 
 class Import < ApplicationRecord
@@ -34,7 +61,7 @@ class Import < ApplicationRecord
 
     after_all_transitions :notify_uploader
 
-    event :validate_upload, after: :notify_admins do
+    event :validate_upload do
       transitions from: [:uploaded], to: :pending_review
     end
 
@@ -136,10 +163,6 @@ class Import < ApplicationRecord
 
   def notify_uploader
     ImportMailer.with(import: self).update_import_status_email.deliver_later
-  end
-
-  def notify_admins
-    ImportMailer.with(import: self).new_import_email.deliver_later
   end
 
   def do_publish

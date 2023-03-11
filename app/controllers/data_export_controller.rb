@@ -27,9 +27,9 @@ class DataExportController < PreAuthController
       @species = []
       if params[:species]
         species_ids = params[:species].reject(&:blank?)
-        unless species_ids.blank?
-          data = data.where species_id: params[:species]
-          Species.where id: species_ids
+        data = if species_ids.any?
+          @species = Species.where id: species_ids
+          data.where({measurements: {species_id: @species}})
         end
       end
 

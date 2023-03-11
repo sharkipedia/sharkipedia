@@ -16,7 +16,6 @@ RSpec.describe "Mass Import" do
     create(:standard, name: "cm FL", trait_class: length)
     create(:sex_type, name: "Male")
 
-    # Import#notify_admins needs at least one admin
     admin
   end
 

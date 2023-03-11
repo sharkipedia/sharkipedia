@@ -10,7 +10,6 @@ RSpec.describe "Show an existing trend" do
   let(:contributor) { create(:contributor) }
   let!(:import) { create(:imported_trends) }
 
-  # Import#notify_admins needs at least one admin
   let!(:admin) { create(:admin) }
 
   it "allows users to view trends" do

@@ -8,7 +8,7 @@ gem "rails", "~> 7.0"
 # Use postgres as the database for Active Record
 gem "pg", "~> 1.4"
 # Use Puma as the app server
-gem "puma", "~> 6.0"
+gem "puma", "~> 6.1"
 # Use SCSS for stylesheets
 gem "sass-rails", "~> 6.0"
 # Use Uglifier as compressor for JavaScript assets
@@ -29,39 +29,38 @@ gem "connection_pool", "~> 2.3"
 gem "actionpack-action_caching", "~> 1.2"
 
 # Use devise for authentication
-gem "devise", "~> 4.8"
+gem "devise", "~> 4.9"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 gem "administrate", "~> 0.18.0"
 gem "administrate-field-enum"
 gem "pundit", "~> 2.2"
 
-gem "roo", "~> 2.9.0"
+gem "roo", "~> 2.10.0"
 gem "rubyXL"
-gem "aws-sdk-s3", "~> 1.117", require: false
+gem "aws-sdk-s3", "~> 1.119", require: false
 
 gem "filterrific", "~> 5.2"
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
-gem "aasm", "~> 5.4"
+gem "aasm", "~> 5.5"
 gem "after_commit_everywhere", "~> 1.3"
 
-gem "sidekiq", "< 7"
-gem "redis-namespace", "~> 1.9.0"
+gem "good_job", "~> 3.14"
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
 gem "activerecord-postgis-adapter", "~> 8.0.0"
-gem "rgeo", "~> 2.4.0"
+gem "rgeo", "~> 3.0.0"
 gem "rgeo-geojson", "~> 2.1.1"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", ">= 1.1.0", require: false
 
 gem "jsonapi.rb", "~> 2.0.1"
-gem "ransack", "~> 3.2"
+gem "ransack", "~> 4.0"
 
 gem "net-smtp", require: false
 gem "net-pop", require: false
@@ -76,8 +75,9 @@ end
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem "web-console", ">= 4.0.1"
-  gem "listen", ">= 3.2", "< 3.8"
+  gem "listen", ">= 3.2", "< 3.9"
   gem "rails-erd"
+  gem "annotate"
   gem "standard", require: false
 end
 
@@ -108,10 +108,10 @@ gem "underscore-rails", "~> 1.8"
 
 gem "pg_search", "~> 2.3"
 
-gem "pagy", "~> 5.10"
+gem "pagy", "~> 6.0"
 
 gem "invisible_captcha", "~> 2.0"
 
-gem "friendly_id", "~> 5.4.2"
+gem "friendly_id", "~> 5.5.0"
 
 gem "newrelic_rpm"

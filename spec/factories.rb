@@ -149,10 +149,12 @@ FactoryBot.define do
 
     factory :protected_species_cms do
       cms_status { :appendix_1 }
+      cms_status_year { 2022 }
     end
 
     factory :protected_species_cites do
       cites_status { :appendix_2 }
+      cites_status_year { 2022 }
     end
   end
 

@@ -53,6 +53,13 @@ class Species < ApplicationRecord
   friendly_id :name, use: :slugged
 
   validates :name, presence: true, uniqueness: true
+  validates :cites_status_year, numericality: {in: 1900..9999}, if: :cites_status_year
+  validates :cms_status_year, numericality: {in: 1900..9999}, if: :cms_status_year
+
+  validate :validate_cms_status_if_year
+  validate :validate_cites_status_if_year
+  validates :cites_status_year, presence: true, unless: :cites_status_none?
+  validates :cms_status_year, presence: true, unless: :cms_status_none?
 
   belongs_to :species_superorder
   belongs_to :species_data_type
@@ -68,5 +75,15 @@ class Species < ApplicationRecord
 
   def group_trends
     Trend.where(species_group: species_groups)
+  end
+
+  private
+
+  def validate_cms_status_if_year
+    errors.add(:cms_status, "can't be :none if a year is set") if cms_status_year && cms_status_none?
+  end
+
+  def validate_cites_status_if_year
+    errors.add(:cites_status, "can't be :none if a year is set") if cites_status_year && cites_status_none?
   end
 end

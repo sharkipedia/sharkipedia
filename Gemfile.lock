@@ -494,7 +494,7 @@ DEPENDENCIES
   pg (~> 1.4)
   pg_search (~> 2.3)
   puma (~> 6.1)
-  pundit (~> 2.3)
+  pundit (~> 2.2)
   rails (~> 7.0)
   rails-erd
   ransack (~> 4.0)

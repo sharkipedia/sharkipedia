@@ -109,7 +109,7 @@ gem "pg_search", "~> 2.3"
 
 gem "pagy", "~> 6.0"
 
-gem "invisible_captcha", "~> 2.0"
+gem "invisible_captcha", "~> 2.1"
 
 gem "friendly_id", "~> 5.5.0"
 

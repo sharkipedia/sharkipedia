@@ -9,7 +9,7 @@
 #  precision             :string
 #  precision_upper       :string
 #  sample_size           :integer
-#  validated             :integer
+#  validated             :boolean          not null
 #  value                 :string
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null

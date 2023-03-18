@@ -70,6 +70,7 @@ Rails.application.routes.draw do
   resources :observations
 
   resources :species, only: [:index, :show]
+  resources :protected_species, only: [:index]
   resources :references, only: [:index, :show, :new, :create]
 
   namespace :search do

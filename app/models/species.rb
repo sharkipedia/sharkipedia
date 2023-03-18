@@ -4,8 +4,10 @@
 #
 #  id                    :bigint           not null, primary key
 #  authorship            :string
-#  cites_status          :integer          default(0)
-#  cms_status            :integer          default(0)
+#  cites_status          :integer          default("none")
+#  cites_status_year     :string
+#  cms_status            :integer          default("none")
+#  cms_status_year       :string
 #  edge_scientific_name  :string
 #  iucn_code             :string
 #  name                  :string           not null
@@ -36,6 +38,9 @@
 #  fk_rails_...  (species_subclass_id => species_subclasses.id)
 #
 class Species < ApplicationRecord
+  enum cms_status: [:none, :appendix_1, :appendix_2], _prefix: true
+  enum cites_status: [:none, :appendix_1, :appendix_2, :appendix_3], _prefix: true
+
   include PgSearch::Model
   pg_search_scope :search_by_name, against: [:name],
     using: {
@@ -48,6 +53,15 @@ class Species < ApplicationRecord
   friendly_id :name, use: :slugged
 
   validates :name, presence: true, uniqueness: true
+  validates :cites_status_year, numericality: {in: 1900..9999}, if: :cites_status_year
+  validates :cms_status_year, numericality: {in: 1900..9999}, if: :cms_status_year
+
+  validate :validate_cms_status_if_year
+  validate :validate_cites_status_if_year
+  validates :cites_status_year, presence: true, unless: :cites_status_none?
+  validates :cms_status_year, presence: true, unless: :cms_status_none?
+
+  before_validation :reject_empty_years
 
   belongs_to :species_superorder
   belongs_to :species_data_type
@@ -63,5 +77,25 @@ class Species < ApplicationRecord
 
   def group_trends
     Trend.where(species_group: species_groups)
+  end
+
+  private
+
+  def reject_empty_years
+    if cites_status_year == ""
+      self.cites_status_year = nil
+    end
+
+    if cms_status_year == ""
+      self.cms_status_year = nil
+    end
+  end
+
+  def validate_cms_status_if_year
+    errors.add(:cms_status, "can't be :none if a year is set") if cms_status_year && cms_status_none?
+  end
+
+  def validate_cites_status_if_year
+    errors.add(:cites_status, "can't be :none if a year is set") if cites_status_year && cites_status_none?
   end
 end

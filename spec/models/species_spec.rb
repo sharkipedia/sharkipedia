@@ -19,5 +19,45 @@ RSpec.describe Species, type: :model do
   describe "validations" do
     it { should validate_presence_of(:name) }
     it { should validate_uniqueness_of(:name) }
+
+    describe "cites_status" do
+      it { expect(build(:protected_species_cites)).to be_valid }
+
+      it "should validate cites_status is not :none if cites_status_year is set" do
+        expect(build(:protected_species_cites, cites_status: :none, cites_status_year: 2000)).not_to be_valid
+      end
+
+      it "should validate cites_status is :none if cites_status_year is an empty string" do
+        expect(build(:protected_species_cites, cites_status: :none, cites_status_year: "")).to be_valid
+      end
+
+      it "should validate cites_status_year is not empty if cites_status" do
+        expect(build(:protected_species_cites, cites_status_year: nil)).not_to be_valid
+      end
+
+      it "should have a properly formatted year" do
+        expect(build(:protected_species_cites, cites_status_year: "shark")).not_to be_valid
+      end
+    end
+
+    describe "cms_status" do
+      it { expect(build(:protected_species_cms)).to be_valid }
+
+      it "should validate cms_status is not :none if cms_status_year is set" do
+        expect(build(:protected_species_cms, cms_status: :none)).not_to be_valid
+      end
+
+      it "should validate cites_status is :none if cms_status_year is an empty string" do
+        expect(build(:protected_species_cms, cms_status: :none, cms_status_year: "")).to be_valid
+      end
+
+      it "should validate cms_status_year is not empty if cms_status" do
+        expect(build(:protected_species_cms, cms_status_year: nil)).not_to be_valid
+      end
+
+      it "should have a properly formatted year" do
+        expect(build(:protected_species_cms, cms_status_year: "shark")).not_to be_valid
+      end
+    end
   end
 end

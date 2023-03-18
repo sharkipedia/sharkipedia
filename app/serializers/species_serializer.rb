@@ -4,8 +4,10 @@
 #
 #  id                    :bigint           not null, primary key
 #  authorship            :string
-#  cites_status          :integer          default(0)
-#  cms_status            :integer          default(0)
+#  cites_status          :integer          default("none")
+#  cites_status_year     :string
+#  cms_status            :integer          default("none")
+#  cms_status_year       :string
 #  edge_scientific_name  :string
 #  iucn_code             :string
 #  name                  :string           not null

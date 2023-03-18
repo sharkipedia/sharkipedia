@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_29_181824) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_11_162627) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -370,6 +370,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_29_181824) do
     t.string "slug", null: false
     t.integer "cites_status", default: 0
     t.integer "cms_status", default: 0
+    t.string "cms_status_year"
+    t.string "cites_status_year"
     t.index ["slug"], name: "index_species_on_slug"
     t.index ["species_data_type_id"], name: "index_species_on_species_data_type_id"
     t.index ["species_family_id"], name: "index_species_on_species_family_id"

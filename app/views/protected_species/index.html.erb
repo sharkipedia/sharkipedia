@@ -16,8 +16,8 @@
         <td><%= species.species_order.name %></td>
         <td><%= species.species_family.name %></td>
         <td><%= link_to species.name, species_path(species) %></td>
-        <td><%= content_tag(:span, format_protected_status(species.cites_status), data:{tooltip: tooltip_text(species.cites_status)}) %></td>
-        <td><%= content_tag(:span, format_protected_status(species.cms_status), data:{tooltip: tooltip_text(species.cms_status)}) %></td>
+        <td><%= content_tag(:span, format_protected_status(species.cites_status, species.cites_status_year), data:{tooltip: tooltip_text(species.cites_status)}) %></td>
+        <td><%= content_tag(:span, format_protected_status(species.cms_status, species.cms_status_year), data:{tooltip: tooltip_text(species.cms_status)}) %></td>
       </tr>
     <% end %>
   </tbody>

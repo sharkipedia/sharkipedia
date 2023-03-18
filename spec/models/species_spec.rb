@@ -24,7 +24,11 @@ RSpec.describe Species, type: :model do
       it { expect(build(:protected_species_cites)).to be_valid }
 
       it "should validate cites_status is not :none if cites_status_year is set" do
-        expect(build(:protected_species_cites, cites_status: :none)).not_to be_valid
+        expect(build(:protected_species_cites, cites_status: :none, cites_status_year: 2000)).not_to be_valid
+      end
+
+      it "should validate cites_status is :none if cites_status_year is an empty string" do
+        expect(build(:protected_species_cites, cites_status: :none, cites_status_year: "")).to be_valid
       end
 
       it "should validate cites_status_year is not empty if cites_status" do
@@ -41,6 +45,10 @@ RSpec.describe Species, type: :model do
 
       it "should validate cms_status is not :none if cms_status_year is set" do
         expect(build(:protected_species_cms, cms_status: :none)).not_to be_valid
+      end
+
+      it "should validate cites_status is :none if cms_status_year is an empty string" do
+        expect(build(:protected_species_cms, cms_status: :none, cms_status_year: "")).to be_valid
       end
 
       it "should validate cms_status_year is not empty if cms_status" do

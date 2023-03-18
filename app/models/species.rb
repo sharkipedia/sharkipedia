@@ -61,6 +61,8 @@ class Species < ApplicationRecord
   validates :cites_status_year, presence: true, unless: :cites_status_none?
   validates :cms_status_year, presence: true, unless: :cms_status_none?
 
+  before_validation :reject_empty_years
+
   belongs_to :species_superorder
   belongs_to :species_data_type
   belongs_to :species_subclass
@@ -78,6 +80,16 @@ class Species < ApplicationRecord
   end
 
   private
+
+  def reject_empty_years
+    if cites_status_year == ""
+      self.cites_status_year = nil
+    end
+
+    if cms_status_year == ""
+      self.cms_status_year = nil
+    end
+  end
 
   def validate_cms_status_if_year
     errors.add(:cms_status, "can't be :none if a year is set") if cms_status_year && cms_status_none?

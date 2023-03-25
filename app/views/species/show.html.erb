@@ -21,6 +21,7 @@
     <% end %>
     <p class="title is-6">External references for this species:</p>
     <%= link_to 'IUCN Red List', "https://www.iucnredlist.org/search?query=#{@species.name}&searchType=species", target: '_blank' %>
+    <%= international_species_status(@species)%>
   </div>
 </div>
 

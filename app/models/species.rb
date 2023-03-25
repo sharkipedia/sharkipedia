@@ -79,6 +79,10 @@ class Species < ApplicationRecord
     Trend.where(species_group: species_groups)
   end
 
+  def protected_species?
+    !cms_status_none? || !cites_status_none?
+  end
+
   private
 
   def reject_empty_years

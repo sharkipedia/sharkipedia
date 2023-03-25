@@ -60,4 +60,12 @@ RSpec.describe Species, type: :model do
       end
     end
   end
+
+  describe "#protected_species?" do
+    it { expect(build(:protected_species_cms)).to be_protected_species }
+
+    it { expect(build(:protected_species_cites)).to be_protected_species }
+
+    it { expect(build(:species)).not_to be_protected_species }
+  end
 end

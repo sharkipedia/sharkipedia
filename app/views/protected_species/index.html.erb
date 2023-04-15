@@ -1,9 +1,31 @@
 <h1 class="title">Species Regulated by International Treaties</h1>
 
+
 <table class="table is-fullwidth is-bordered">
   <thead>
     <tr>
-      <th>Order</th>
+      <th>
+        <div class="dropdown is-hoverable">
+        <div class="dropdown-trigger">
+          <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+            <span>Order</span>
+            <span class="icon is-small">
+              <i class="fas fa-angle-down" aria-hidden="true"></i>
+            </span>
+          </button>
+        </div>
+        <div class="dropdown-menu" id="dropdown-menu" role="menu">
+          <div class="dropdown-content">
+            <%= link_to "All", protected_species_path, class:"dropdown-item #{params[:filter].blank? ? 'is-active' : ''}" %> 
+            <hr class="dropdown-divider">
+            <% @species_orders.each do |order| %>
+
+                <%= link_to order, protected_species_path(filter: {order: order}), class:"dropdown-item #{ params.dig(:filter, :order) == order ? 'is-active': '' }" %> 
+            <% end %>
+          </div>
+        </div>
+      </div>
+      </th>
       <th>Family</th>
       <th>Species</th>
       <th>CITES</th>

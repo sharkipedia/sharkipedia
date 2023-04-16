@@ -19,7 +19,6 @@
             <%= link_to "All", protected_species_path, class:"dropdown-item #{params[:filter].blank? ? 'is-active' : ''}" %> 
             <hr class="dropdown-divider">
             <% @species_orders.each do |order| %>
-
                 <%= link_to order, protected_species_path(filter: {order: order}), class:"dropdown-item #{ params.dig(:filter, :order) == order ? 'is-active': '' }" %> 
             <% end %>
           </div>

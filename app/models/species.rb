@@ -75,6 +75,8 @@ class Species < ApplicationRecord
 
   has_and_belongs_to_many :species_groups
 
+  scope :protected_species, -> { where.not(cms_status: 0).or(where.not(cites_status: 0)) }
+
   def group_trends
     Trend.where(species_group: species_groups)
   end

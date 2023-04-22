@@ -74,4 +74,8 @@ module ProtectedSpeciesHelper
       protected_species_path
     end
   end
+
+  def has_filters?
+    !params[:filter].blank?
+  end
 end

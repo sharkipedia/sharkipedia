@@ -16,10 +16,10 @@
         </div>
         <div class="dropdown-menu" id="dropdown-menu" role="menu">
           <div class="dropdown-content">
-            <%= link_to "All", protected_species_path, class:"dropdown-item #{params[:filter].blank? ? 'is-active' : ''}" %>
+            <%= link_to "All", protected_species_path, class:"dropdown-item #{has_filters? ? '' : 'is-active'}" %>
             <hr class="dropdown-divider">
             <% @species_orders.each do |order| %>
-                <%= link_to order, format_protected_species_path(order: order), class:"dropdown-item #{ params.dig(:filter, :order) == order ? 'is-active': '' }" %> 
+                <%= link_to order, format_protected_species_path(order: order), class:"dropdown-item #{ @current_order == order ? 'is-active': '' }" %> 
             <% end %>
           </div>
         </div>
@@ -37,10 +37,10 @@
         </div>
         <div class="dropdown-menu" id="dropdown-menu" role="menu">
           <div class="dropdown-content">
-            <%= link_to "All", format_protected_species_path(order: @current_order), class:"dropdown-item #{params[:filter].blank? ? 'is-active' : ''}" %>
+            <%= link_to "All", format_protected_species_path(order: @current_order), class:"dropdown-item #{has_filters? ? '' : 'is-active'}" %>
             <hr class="dropdown-divider">
             <% @species_families.each do |family| %>
-                <%= link_to family, format_protected_species_path(order: @current_order, family: family), class:"dropdown-item #{ params.dig(:filter, :family) == family ? 'is-active': '' }" %>
+                <%= link_to family, format_protected_species_path(order: @current_order, family: family), class:"dropdown-item #{ @current_family == family ? 'is-active': '' }" %>
             <% end %>
           </div>
         </div>

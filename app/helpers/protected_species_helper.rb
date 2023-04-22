@@ -62,4 +62,16 @@ module ProtectedSpeciesHelper
       ""
     end
   end
+
+  def format_protected_species_path(order: nil, family: nil)
+    if order && family
+      protected_species_path(filter: {order: order, family: family})
+    elsif order
+      protected_species_path(filter: {order: order})
+    elsif family
+      protected_species_path(filter: {family: family})
+    else
+      protected_species_path
+    end
+  end
 end

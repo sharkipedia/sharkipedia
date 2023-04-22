@@ -2,9 +2,11 @@ document.addEventListener("turbolinks:load", () => {
   if (!checkController("protected_species")) {
     return;
   } else {
-    const dropdown = document.querySelector(".table .dropdown");
-    dropdown.addEventListener("click", () => {
-      dropdown.classList.toggle("is-active");
+    const dropdownButtons = document.querySelectorAll(".table .dropdown");
+    dropdownButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        button.classList.toggle("is-active");
+      });
     });
   }
 });

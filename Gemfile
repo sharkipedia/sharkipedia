@@ -6,7 +6,7 @@ ruby File.read(".ruby-version").strip
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 7.0"
 # Use postgres as the database for Active Record
-gem "pg", "~> 1.4"
+gem "pg", "~> 1.5"
 # Use Puma as the app server
 gem "puma", "~> 6.2"
 # Use SCSS for stylesheets

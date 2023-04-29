@@ -5,6 +5,13 @@
       <td><%= reference.id %></td>
     </tr>
     <tr>
+      <th>Author</th> 
+
+      <td id=<%= "author" %>>
+        <%= display_authors(reference.author) %>
+      </td>
+    </tr>
+    <tr>
       <th>AuthorYear</th>
       <td id="author-year">
         <% if local_assigns.has_key? :render_links %>
@@ -17,6 +24,46 @@
       </td>
     </tr>
     <tr>
+      <th>Title</th>
+      <td id="title"><%= reference.title %></td>
+    </tr>
+    <tr>
+      <th>Journal</th>
+      <td id="journal"><%= reference.journal %></td>
+    </tr>
+    <tr>
+      <th>Volume</th>
+      <td id="volume"><%= reference.volume %></td>
+    </tr>
+    <tr>
+      <th>Part/Supplement</th>
+      <td id="part-supplement"><%= reference.part_supplement %></td>
+    </tr>
+    <tr>
+      <th>Issue</th>
+      <td id="issue"><%= reference.issue %></td>
+    </tr>
+    <tr>
+      <th>Pages</th>
+      <td id="pages"><%= reference.pages %></td>
+    </tr>
+    <tr>
+      <th>Start Page</th>
+      <td id="start-page"><%= reference.start_page %></td>
+    </tr>
+    <tr>
+      <th>Errata</th>
+      <td id="errata"><%= reference.errata %></td>
+    </tr>
+    <tr>
+      <th>Epub Date</th>
+      <td id="epub-date><%= reference.epub_date %></td>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <td id="date"><%= reference.date %></td>
+    </tr>
+    <tr>
       <th>SourceYear</th>
       <td id="source-year"><%= reference.year %></td>
     </tr>
@@ -24,6 +71,7 @@
       <th>DataSource</th>
       <td id="data-source"><%= reference.data_source %></td>
     </tr>
+
     <tr>
       <th>doi</th>
       <td id="doi"><%= link_to_doi reference.doi %></td>

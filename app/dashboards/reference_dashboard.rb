@@ -10,6 +10,17 @@ class ReferenceDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     name: Field::String,
+    title: Field::String,
+    journal: Field::String,
+    volume: Field::String,
+    issue: Field::String,
+    part_supplement: Field::String,
+    pages: Field::String,
+    start_page: Field::Number,
+    errata: Field::String,
+    epub_date: Field::Date,
+    date: Field::Date,
+    author: Field::Text,
     doi: Field::String,
     year: Field::String,
     suffix: Field::String,
@@ -30,7 +41,18 @@ class ReferenceDashboard < Administrate::BaseDashboard
     :name,
     :doi,
     :data_source,
-    :observations
+    :observations,
+    :title,
+    :journal,
+    :volume,
+    :issue,
+    :part_supplement,
+    :pages,
+    :start_page,
+    :errata,
+    :epub_date,
+    :date,
+    :author
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -44,7 +66,18 @@ class ReferenceDashboard < Administrate::BaseDashboard
     :suffix,
     :reference,
     :file_public,
-    :observations
+    :observations,
+    :title,
+    :journal,
+    :volume,
+    :issue,
+    :part_supplement,
+    :pages,
+    :start_page,
+    :errata,
+    :epub_date,
+    :date,
+    :author
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -57,7 +90,18 @@ class ReferenceDashboard < Administrate::BaseDashboard
     :year,
     :suffix,
     :reference,
-    :file_public
+    :file_public,
+    :title,
+    :journal,
+    :volume,
+    :issue,
+    :part_supplement,
+    :pages,
+    :start_page,
+    :errata,
+    :epub_date,
+    :date,
+    :author
   ].freeze
 
   # Overwrite this method to customize how references are displayed

@@ -34,6 +34,81 @@
   </div>
 
   <div class="field">
+    <%= f.label :author, class: 'label' %>
+    <div class="control">
+      <%= f.text_field :author, class: 'input', placeholder: "Author 1, Author 2, Author 3" %><br />
+    </div>
+  </div>
+
+  <div class="field">
+    <%= f.label :title, class: 'label' %>
+    <div class="control">
+      <%= f.text_field :title, class: 'input'%><br />
+    </div>
+  </div>
+
+  <div class="field">
+    <%= f.label :journal, class: 'label' %>
+    <div class="control">
+      <%= f.text_field :journal, class: 'input'%><br />
+    </div>
+  </div>
+
+ <div class="columns">
+    <div class="column">
+      <div class="field">
+        <%= f.label :volume, class: 'label' %>
+        <div class="control">
+          <%= f.text_field :volume, class: 'input'%><br />
+        </div>
+      </div>
+    </div>
+      <div class="column">
+      <div class="field">
+        <%= f.label :issue, class: 'label' %>
+        <div class="control">
+          <%= f.text_field :issue, class: 'input'%><br />
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="field">
+        <%= f.label :pages, class: 'label' %>
+        <div class="control">
+          <%= f.text_field :pages, class: 'input'%><br />
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="field">
+        <%= f.label :start_page, class: 'label' %>
+        <div class="control">
+          <%= f.text_field :start_page, class: 'input'%><br />
+        </div>
+      </div>
+    </div>
+  </div>
+
+   <div class="columns">
+    <div class="column">
+      <div class="field">
+        <%= f.label :epub_date, class: 'label' %>
+        <div class="control">
+          <%= f.text_field :epub_date, class: 'input'%><br />
+        </div>
+      </div>
+    </div>
+      <div class="column">
+      <div class="field">
+        <%= f.label :errata, class: 'label' %>
+        <div class="control">
+          <%= f.text_field :errata, class: 'input'%><br />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
     <%= f.label :doi, class: 'label' %>
     <div class="control">
       <%= f.text_field :doi, class: 'input' %><br />

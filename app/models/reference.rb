@@ -2,18 +2,29 @@
 #
 # Table name: references
 #
-#  id          :bigint           not null, primary key
-#  author_year :string
-#  data_source :string
-#  doi         :string
-#  file_public :boolean
-#  name        :string           not null
-#  reference   :string
-#  slug        :string           not null
-#  suffix      :string
-#  year        :string
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id              :bigint           not null, primary key
+#  author          :text
+#  author_year     :string
+#  data_source     :string
+#  date            :date
+#  doi             :string
+#  epub_date       :date
+#  errata          :string
+#  file_public     :boolean
+#  issue           :string
+#  journal         :string
+#  name            :string           not null
+#  pages           :string
+#  part_supplement :string
+#  reference       :string
+#  slug            :string           not null
+#  start_page      :integer
+#  suffix          :string
+#  title           :string
+#  volume          :string
+#  year            :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
 #
 # Indexes
 #
@@ -23,6 +34,8 @@
 class Reference < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
+
+  serialize :author, Array
 
   validates :name, presence: true, uniqueness: true
 

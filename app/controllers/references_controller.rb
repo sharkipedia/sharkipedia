@@ -6,6 +6,7 @@ class ReferencesController < PreAuthController
     ensure_contributor!
 
     @reference = Reference.new
+    @reference.authors.build
   end
 
   def create
@@ -56,9 +57,8 @@ class ReferencesController < PreAuthController
   private
 
   def reference_params
-    params[:reference][:author] = params[:reference][:author].split(/\s*,\s*/)
     params.require(:reference).permit(:name, :doi, :data_source, :year,
       :suffix, :author_year, :reference,
-      :file_public, :reference_file, :author, :date, :epub_date, :errata, :issue, :journal, :pages, :part_supplement, :start_page, :title, :volume)
+      :file_public, :reference_file, :date, :epub_date, :errata, :issue, :journal, :pages, :part_supplement, :start_page, :title, :volume, authors_attributes: [:name])
   end
 end

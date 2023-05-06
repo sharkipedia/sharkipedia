@@ -6,9 +6,10 @@
     </tr>
     <tr>
       <th>Author</th> 
-
-      <td id=<%= "author" %>>
-        <%= display_authors(reference.author) %>
+      <td>
+        <% reference.authors.each do |author| %>
+         <%= author.name %>
+        <% end %>
       </td>
     </tr>
     <tr>

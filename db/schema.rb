@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_29_194950) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_06_154044) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -48,6 +48,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_29_194950) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "authors", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "authors_references", id: false, force: :cascade do |t|
+    t.bigint "author_id", null: false
+    t.bigint "reference_id", null: false
+    t.index ["author_id"], name: "index_authors_references_on_author_id"
+    t.index ["reference_id"], name: "index_authors_references_on_reference_id"
   end
 
   create_table "data_types", force: :cascade do |t|
@@ -369,7 +382,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_29_194950) do
     t.string "errata"
     t.date "epub_date"
     t.date "date"
-    t.text "author"
     t.index ["name"], name: "index_references_on_name", unique: true
     t.index ["slug"], name: "index_references_on_slug"
   end

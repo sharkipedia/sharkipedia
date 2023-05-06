@@ -33,12 +33,14 @@
     </div>
   </div>
 
-  <div class="field">
-    <%= f.label :author, class: 'label' %>
-    <div class="control">
-      <%= f.text_field :author, class: 'input', placeholder: "Author 1, Author 2, Author 3" %><br />
+   <%= f.fields_for :authors do |author_form| %>
+    <div class="field">
+      <%= author_form.label :name, class: 'label' %>
+      <div class="control">
+        <%= author_form.text_field :name, class: 'input', placeholder: "Author Name" %><br />
+      </div>
     </div>
-  </div>
+  <% end %>
 
   <div class="field">
     <%= f.label :title, class: 'label' %>

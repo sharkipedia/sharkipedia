@@ -33,14 +33,16 @@
     </div>
   </div>
 
-   <%= f.fields_for :authors do |author_form| %>
-    <div class="field">
-      <%= author_form.label :name, class: 'label' %>
-      <div class="control">
-        <%= author_form.text_field :name, class: 'input', placeholder: "Author Name" %><br />
-      </div>
-    </div>
-  <% end %>
+
+  <div id="authors">
+    <%= f.fields_for :authors do |author_form| %>
+      <%= render 'author_fields', form: author_form %>
+    <% end %>
+  </div>
+  <div class="add-author">
+    <%= link_to_add_nested(f, :authors, '#authors') %>
+  </div>
+
 
   <div class="field">
     <%= f.label :title, class: 'label' %>

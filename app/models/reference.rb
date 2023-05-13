@@ -46,7 +46,9 @@ class Reference < ApplicationRecord
 
   validates_with DOIValidator
 
-  accepts_nested_attributes_for :authors
+  accepts_nested_attributes_for :authors, reject_if: :all_blank, allow_destroy: true
+
+  before_validation :find_authors
 
   include PgSearch::Model
   pg_search_scope :search_by_name, against: [:name],
@@ -55,4 +57,12 @@ class Reference < ApplicationRecord
         prefix: true
       }
     }
+
+  private
+
+  def find_authors
+    self.authors = authors.map do |author|
+      Author.where(name: author.name).first_or_initialize
+    end
+  end
 end

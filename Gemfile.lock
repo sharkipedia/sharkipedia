@@ -64,7 +64,7 @@ GEM
     activerecord (7.0.4.3)
       activemodel (= 7.0.4.3)
       activesupport (= 7.0.4.3)
-    activerecord-postgis-adapter (8.0.1)
+    activerecord-postgis-adapter (8.0.2)
       activerecord (~> 7.0.0)
       rgeo-activerecord (~> 7.0.0)
     activestorage (7.0.4.3)
@@ -469,7 +469,7 @@ PLATFORMS
 DEPENDENCIES
   aasm (~> 5.5)
   actionpack-action_caching (~> 1.2)
-  activerecord-postgis-adapter (~> 8.0.0)
+  activerecord-postgis-adapter (~> 8.0.2)
   administrate (~> 0.18.0)
   administrate-field-enum
   after_commit_everywhere (~> 1.3)

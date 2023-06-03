@@ -11,27 +11,27 @@ $(document).on("turbolinks:load", function () {
   });
 
   const fetchAuthor = async function (inputValue, inputElement) {
-    const resp = await fetch(`http://localhost:3000/search/autocomplete?klass=author&term=${inputValue}`);
+    const resp = await fetch(`/search/autocomplete?klass=author&term=${inputValue}`);
     const results = await resp.json();
     if (results.length > 0) {
-      const { name } = results[0];
-      console.log(name);
+      console.log(results[0]);
+      return results.map((author) => ({ label: author.name, value: author.name }));
     }
-    // brain fried brrrmm
-    // TODO: Make this work in the input and not just in the console.log
-    // TODO: If author is found - associate them with reference - if author is not found, create them and then associate them with reference
-    // return transformed.slice(0, 5);
+
+    return [];
   };
 
-  // Function to add event listener for author inputs
-  const addAuthorInputEventListener = (inputElement) => {
-    inputElement.addEventListener("input", (e) => fetchAuthor(e.target.value, e.target));
-  };
-  // Attach the listener to the default author field on load
-  addAuthorInputEventListener(document.getElementById("reference_authors_attributes_0_name"));
+  // Gnarly hack to get bulmahead working with vanilla-nested
+  // https://github.com/arielj/vanilla-nested/blob/cab8f390dc99eed933952f6fcc14603bad30c6a8/app/assets/javascripts/vanilla_nested.js#L10
+  // Does a `data.html.replace(/_idx_placeholder_/g, Date.now());` before inserting it into the DOM
+  // So we need to use the same placeholder
+  bulmahead("reference_authors_attributes_0_name", "_idx_placeholder_", fetchAuthor, () => {}, 200);
 
   document.addEventListener("vanilla-nested:fields-added", function (e) {
     const newInput = document.querySelector(".added-by-vanilla-nested:last-of-type input");
-    addAuthorInputEventListener(newInput);
+    const inputId = newInput.getAttribute("id");
+    const regex = /\d+/g;
+    const menuId = inputId.match(regex)[0];
+    bulmahead(inputId, menuId, fetchAuthor, () => {}, 200);
   });
 });

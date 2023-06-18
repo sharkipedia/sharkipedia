@@ -3,7 +3,7 @@ require "system_helper"
 RSpec.describe "New Reference Form" do
   let(:contributor) { create(:contributor) }
   let(:admin) { create(:admin) }
-  let(:knownAuthor) { create(:author, name: "Known Author") }
+  let(:known_author) { create(:author, name: "Known Author") }
 
   before do
     # these are for the homepage and are required for the redirection of not logged in users
@@ -38,15 +38,16 @@ RSpec.describe "New Reference Form" do
 
     fill_in "reference_name", with: "A new reference"
 
-    fill_in "reference_authors_attributes_0_name", with: knownAuthor.name
+    fill_in "reference_authors_attributes_0_name", with: known_author.name[0..4]
     sleep 0.1
 
-    expect(page).to have_selector(".dropdown-item", text: knownAuthor.name)
+    expect(page).to have_selector(".dropdown-item", text: known_author.name)
+    find(".dropdown-item").click
 
     click_button "Create Reference"
 
     expect(page).to have_content("A new reference")
-    expect(page).to have_content(knownAuthor.name)
+    expect(page).to have_content(known_author.name)
   end
 
   it "creates a reference with a new author, and no dropdown suggestion for the author name" do

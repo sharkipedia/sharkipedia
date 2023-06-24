@@ -34,8 +34,6 @@ class Reference < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
 
-  serialize :author, Array
-
   validates :name, presence: true, uniqueness: true
 
   has_and_belongs_to_many :observations

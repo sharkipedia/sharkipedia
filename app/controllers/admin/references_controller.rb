@@ -16,14 +16,5 @@ module Admin
     def find_resource(slug)
       Reference.friendly.find(slug)
     end
-
-    # See https://administrate-prototype.herokuapp.com/customizing_controller_actions
-    # for more information
-    private
-
-    def process_author_input
-      author_input = params[:reference][:author]
-      params[:reference][:author] = author_input.split(/\s*,\s*/)
-    end
   end
 end

@@ -20,7 +20,7 @@ class ReferenceDashboard < Administrate::BaseDashboard
     errata: Field::String,
     epub_date: Field::Date,
     date: Field::Date,
-    author: Field::Text,
+    authors: Field::HasMany,
     doi: Field::String,
     year: Field::String,
     suffix: Field::String,
@@ -65,7 +65,7 @@ class ReferenceDashboard < Administrate::BaseDashboard
     :errata,
     :epub_date,
     :date,
-    :author
+    :authors
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -89,7 +89,7 @@ class ReferenceDashboard < Administrate::BaseDashboard
     :errata,
     :epub_date,
     :date,
-    :author
+    :authors
   ].freeze
 
   # Overwrite this method to customize how references are displayed

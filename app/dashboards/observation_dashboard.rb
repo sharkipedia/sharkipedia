@@ -10,7 +10,7 @@ class ObservationDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     user: Field::BelongsTo,
     references: Field::HasMany,
-    species: Field::BelongsTo,
+    species: Field::HasMany,
     measurements: Field::HasMany,
     id: Field::Number,
     contributor_id: Field::String,

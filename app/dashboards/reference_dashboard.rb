@@ -38,21 +38,9 @@ class ReferenceDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
-    :name,
-    :doi,
-    :data_source,
-    :observations,
     :title,
-    :journal,
-    :volume,
-    :issue,
-    :part_supplement,
-    :pages,
-    :start_page,
-    :errata,
-    :epub_date,
-    :date,
-    :author
+    :name,
+    :observations
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES

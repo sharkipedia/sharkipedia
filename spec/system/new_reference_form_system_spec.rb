@@ -2,7 +2,6 @@ require "system_helper"
 
 RSpec.describe "New Reference Form" do
   let(:contributor) { create(:contributor) }
-  let(:admin) { create(:admin) }
   let(:known_author) { create(:author, name: "Known Author") }
 
   before do

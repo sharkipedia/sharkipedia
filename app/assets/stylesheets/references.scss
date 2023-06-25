@@ -1,3 +1,47 @@
 // Place all the styles related to the references controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.references.new {
+  #authors {
+    .author-field {
+      margin: 1rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .author-field {
+      .label {
+        width: 100%;
+      }
+    }
+
+    .control.author-control {
+      width: calc(100% - 50px);
+    }
+
+    .vanilla-nested-remove {
+      color: white;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      padding: 7px 11px;
+      background-color: steelblue;
+      margin-left: 5px;
+      border-radius: 4px;
+      border: 1px;
+      transition: background-color 0.1s ease-in-out;
+    }
+    .vanilla-nested-remove:hover {
+      background-color: #842424;
+    }
+
+    .dropdown {
+      display: block;
+    }
+  }
+  .add-author {
+    padding-bottom: 0.75rem;
+  }
+}

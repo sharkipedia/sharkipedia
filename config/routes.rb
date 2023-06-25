@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   namespace :admin do
     resources :users
+    resources :authors
     resources :locations
     resources :longhurst_provinces
     resources :measurements

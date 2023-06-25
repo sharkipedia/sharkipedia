@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class ObservationDashboard < Administrate::BaseDashboard
+class AuthorDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -8,15 +8,10 @@ class ObservationDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    user: Field::BelongsTo,
-    references: Field::HasMany,
-    species: Field::HasMany,
-    measurements: Field::HasMany,
     id: Field::Number,
-    contributor_id: Field::String,
-    access: Field::String,
-    hidden: Field::Boolean,
-    depth: Field::String,
+    name: Field::String,
+    references: Field::HasMany,
+    versions: Field::HasMany,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
   }.freeze
@@ -26,47 +21,49 @@ class ObservationDashboard < Administrate::BaseDashboard
   #
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
-  COLLECTION_ATTRIBUTES = [
-    :contributor_id,
-    :references,
-    :species,
-    :measurements
+  COLLECTION_ATTRIBUTES = %i[
+    id
+    name
+    references
+    versions
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
-  SHOW_PAGE_ATTRIBUTES = [
-    :user,
-    :contributor_id,
-    :references,
-    :species,
-    :measurements,
-    :depth,
-    :id,
-    :access,
-    :hidden,
-    :created_at,
-    :updated_at
+  SHOW_PAGE_ATTRIBUTES = %i[
+    id
+    name
+    references
+    versions
+    created_at
+    updated_at
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
-  FORM_ATTRIBUTES = [
-    :user,
-    :contributor_id,
-    :references,
-    :species,
-    :measurements,
-    :access,
-    :hidden,
-    :depth
+  FORM_ATTRIBUTES = %i[
+    name
+    references
+    versions
   ].freeze
 
-  # Overwrite this method to customize how observations are displayed
+  # COLLECTION_FILTERS
+  # a hash that defines filters that can be used while searching via the search
+  # field of the dashboard.
+  #
+  # For example to add an option to search for open resources by typing "open:"
+  # in the search field:
+  #
+  #   COLLECTION_FILTERS = {
+  #     open: ->(resources) { resources.where(open: true) }
+  #   }.freeze
+  COLLECTION_FILTERS = {}.freeze
+
+  # Overwrite this method to customize how authors are displayed
   # across all pages of the admin dashboard.
   #
-  def display_resource(observation)
-    "#{observation.contributor_id} (#{observation.references.first.name})"
+  def display_resource(author)
+    author.name
   end
 end

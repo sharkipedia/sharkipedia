@@ -1,0 +1,15 @@
+<div class="wrapper-div">
+  <div class="author-field">
+    <%= form.label :name, class: 'label' %>
+    <div class="control author-control">
+      <div class="dropdown">
+        <div class="dropdown-trigger">
+          <%= form.text_field :name, class: 'input', placeholder: "Author Name" %>
+        </div>
+        <div class="dropdown-menu" id="_idx_placeholder_" role="menu"> </div>
+      </div>
+    </div>
+
+    <%= link_to_remove_nested(form) %>
+  </div>
+</div>

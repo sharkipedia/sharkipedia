@@ -10,6 +10,17 @@ class ReferenceDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     name: Field::String,
+    title: Field::String,
+    journal: Field::String,
+    volume: Field::String,
+    issue: Field::String,
+    part_supplement: Field::String,
+    pages: Field::String,
+    start_page: Field::Number,
+    errata: Field::String,
+    epub_date: Field::Date,
+    date: Field::Date,
+    authors: Field::HasMany,
     doi: Field::String,
     year: Field::String,
     suffix: Field::String,
@@ -27,9 +38,8 @@ class ReferenceDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
+    :title,
     :name,
-    :doi,
-    :data_source,
     :observations
   ].freeze
 
@@ -44,7 +54,18 @@ class ReferenceDashboard < Administrate::BaseDashboard
     :suffix,
     :reference,
     :file_public,
-    :observations
+    :observations,
+    :title,
+    :journal,
+    :volume,
+    :issue,
+    :part_supplement,
+    :pages,
+    :start_page,
+    :errata,
+    :epub_date,
+    :date,
+    :authors
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -57,7 +78,18 @@ class ReferenceDashboard < Administrate::BaseDashboard
     :year,
     :suffix,
     :reference,
-    :file_public
+    :file_public,
+    :title,
+    :journal,
+    :volume,
+    :issue,
+    :part_supplement,
+    :pages,
+    :start_page,
+    :errata,
+    :epub_date,
+    :date,
+    :authors
   ].freeze
 
   # Overwrite this method to customize how references are displayed

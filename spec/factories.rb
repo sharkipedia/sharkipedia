@@ -30,6 +30,10 @@ FactoryBot.define do
     sequence(:doi) { |n| "10.1000/xyz#{n}" }
   end
 
+  factory :author do
+    sequence(:name) { |n| "author #{n}" }
+  end
+
   factory :sex_type do
     sequence(:name) { |n| "sex type #{n}" }
   end

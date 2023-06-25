@@ -1,3 +1,5 @@
+<script src="https://cdn.rawgit.com/mattmezza/bulmahead/master/dist/bulmahead.bundle.js"></script>
+
 <h1 class="title is-3 is-spaced"> New Reference </h1>
 
 <%= form_with model: @reference do |f| %>
@@ -28,6 +30,85 @@
         <%= f.label :year, class: 'label' %>
         <div class="control">
           <%= f.text_field :year, class: 'input' %><br />
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="authors">
+    <%= f.fields_for :authors do |author_form| %>
+      <%= render 'author_fields', form: author_form %>
+    <% end %>
+  </div>
+  <div class="add-author">
+    <%= link_to_add_nested(f, :authors, '#authors') %>
+  </div>
+
+
+  <div class="field">
+    <%= f.label :title, class: 'label' %>
+    <div class="control">
+      <%= f.text_field :title, class: 'input'%><br />
+    </div>
+  </div>
+
+  <div class="field">
+    <%= f.label :journal, class: 'label' %>
+    <div class="control">
+      <%= f.text_field :journal, class: 'input'%><br />
+    </div>
+  </div>
+
+ <div class="columns">
+    <div class="column">
+      <div class="field">
+        <%= f.label :volume, class: 'label' %>
+        <div class="control">
+          <%= f.text_field :volume, class: 'input'%><br />
+        </div>
+      </div>
+    </div>
+      <div class="column">
+      <div class="field">
+        <%= f.label :issue, class: 'label' %>
+        <div class="control">
+          <%= f.text_field :issue, class: 'input'%><br />
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="field">
+        <%= f.label :pages, class: 'label' %>
+        <div class="control">
+          <%= f.text_field :pages, class: 'input'%><br />
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="field">
+        <%= f.label :start_page, class: 'label' %>
+        <div class="control">
+          <%= f.text_field :start_page, class: 'input'%><br />
+        </div>
+      </div>
+    </div>
+  </div>
+
+   <div class="columns">
+    <div class="column">
+      <div class="field">
+        <%= f.label :epub_date, class: 'label' %>
+        <div class="control">
+          <%= f.text_field :epub_date, class: 'input'%><br />
+        </div>
+      </div>
+    </div>
+      <div class="column">
+      <div class="field">
+        <%= f.label :errata, class: 'label' %>
+        <div class="control">
+          <%= f.text_field :errata, class: 'input'%><br />
         </div>
       </div>
     </div>
@@ -80,3 +161,4 @@
     </div>
   </div>
 <% end %>
+

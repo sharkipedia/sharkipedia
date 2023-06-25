@@ -16,28 +16,29 @@
 //= require underscore
 //= require select2
 //= require filterrific/filterrific-jquery
+//= require vanilla_nested
 //= require_tree .
 
 function checkController(name) {
-  return $('body').hasClass(name);
+  return $("body").hasClass(name);
 }
 
-function runSelect2 (klass) {
-  $('#' + klass.replace('[]', '_')).select2({
+function runSelect2(klass) {
+  $("#" + klass.replace("[]", "_")).select2({
     selectOnClose: true,
     ajax: {
-      url: '/search/autocomplete',
-      data: function(params) {
+      url: "/search/autocomplete",
+      data: function (params) {
         return {
-          klass: klass.replace('[]', ''),
+          klass: klass.replace("[]", ""),
           term: params.term
         };
       },
-      dataType: 'json',
+      dataType: "json",
       delay: 500,
-      processResults: function(data, params) {
+      processResults: function (data, params) {
         return {
-          results: _.map(data, function(el) {
+          results: _.map(data, function (el) {
             return {
               id: el.id,
               name: el.name,
@@ -48,42 +49,38 @@ function runSelect2 (klass) {
       },
       cache: true
     },
-    escapeMarkup: function(markup) {
+    escapeMarkup: function (markup) {
       return markup;
     },
     minimumInputLength: 2,
-    templateResult: function(e) {
+    templateResult: function (e) {
       if (e.name === undefined) {
-        return "<em>loading</em>"
+        return "<em>loading</em>";
       } else {
-        let description = e.description === null ? "" : " - " + e.description
-        return $(
-          '<span>' + e.name + description + '</span>'
-        )
+        let description = e.description === null ? "" : " - " + e.description;
+        return $("<span>" + e.name + description + "</span>");
       }
     },
-    templateSelection: function(item) {
+    templateSelection: function (item) {
       return item.name;
     }
   });
 }
 
-function isNumberKey(evt){
-  var charCode = (evt.which) ? evt.which : event.keyCode
-  if (charCode > 31 && (charCode < 48 || charCode > 57))
-    return false;
+function isNumberKey(evt) {
+  var charCode = evt.which ? evt.which : event.keyCode;
+  if (charCode > 31 && (charCode < 48 || charCode > 57)) return false;
   return true;
 }
 
-document.addEventListener('turbolinks:before-cache', function() {
-  $('.select2-hidden-accessible').select2('destroy');
-  $('#gridctr canvas-datagrid').remove()
+document.addEventListener("turbolinks:before-cache", function () {
+  $(".select2-hidden-accessible").select2("destroy");
+  $("#gridctr canvas-datagrid").remove();
 });
 
-document.addEventListener('turbolinks:load', function() {
-  $(".navbar-burger").click(function() {
+document.addEventListener("turbolinks:load", function () {
+  $(".navbar-burger").click(function () {
     $(".navbar-burger").toggleClass("is-active");
     $(".navbar-menu").toggleClass("is-active");
   });
 });
-

@@ -14,8 +14,5 @@ module Admin
     def find_resource(slug)
       Reference.friendly.find(slug)
     end
-
-    # See https://administrate-prototype.herokuapp.com/customizing_controller_actions
-    # for more information
   end
 end

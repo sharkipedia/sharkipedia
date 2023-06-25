@@ -1,7 +1,5 @@
 module Admin
   class ReferencesController < Admin::ApplicationController
-    before_action :process_author_input, only: [:update]
-
     # To customize the behavior of this controller,
     # you can overwrite any of the RESTful actions. For example:
     #

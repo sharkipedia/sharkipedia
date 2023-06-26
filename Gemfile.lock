@@ -438,7 +438,7 @@ GEM
       execjs (>= 0.3.0, < 3)
     underscore-rails (1.8.3)
     unicode-display_width (2.4.2)
-    vanilla_nested (1.7.0)
+    vanilla_nested (1.7.1)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.0)

@@ -9263,10 +9263,10 @@ v8-to-istanbul@^9.0.1:
     "@types/istanbul-lib-coverage" "^2.0.1"
     convert-source-map "^1.6.0"
 
-vanilla-nested@^1.7.0:
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/vanilla-nested/-/vanilla-nested-1.7.0.tgz#fc1e8193ea8c76dfe3df96903c382b421c959095"
-  integrity sha512-wA5Y+IoyzBNiMbvxdD6flN0iPCUi78beB2HzJ91G6iUB7S/WWCAiCgCZoCrlG4pHk4fJPIxyAgTVQHZA17CGSQ==
+vanilla-nested@^1.7.1:
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/vanilla-nested/-/vanilla-nested-1.7.1.tgz#e7a00723ffd6396d10e15053cd58b54f5bac8be6"
+  integrity sha512-z8nOa5n3bczhSno27TCABMc9qKjPcMP4iW6THqWxmtPZ8ZsFtoOl6XJGsqTvemkjSRpyFq4Zgqe7wZgCH9GHLw==
 
 vary@~1.1.2:
   version "1.1.2"

@@ -38,7 +38,7 @@ gem "pundit", "~> 2.2"
 
 gem "roo", "~> 2.10.0"
 gem "rubyXL"
-gem "aws-sdk-s3", "~> 1.126", require: false
+gem "aws-sdk-s3", "~> 1.127", require: false
 
 gem "filterrific", "~> 5.2"
 # Use ActiveStorage variant

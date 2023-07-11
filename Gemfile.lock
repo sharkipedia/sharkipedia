@@ -182,7 +182,7 @@ GEM
       raabro (~> 1.4)
     globalid (1.1.0)
       activesupport (>= 5.0)
-    good_job (3.15.14)
+    good_job (3.16.0)
       activejob (>= 6.0.0)
       activerecord (>= 6.0.0)
       concurrent-ruby (>= 1.0.2)
@@ -491,7 +491,7 @@ DEPENDENCIES
   factory_bot_rails (~> 6.2)
   filterrific (~> 5.2)
   friendly_id (~> 5.5.0)
-  good_job (~> 3.15)
+  good_job (~> 3.16)
   invisible_captcha (~> 2.1)
   jbuilder (~> 2.11)
   jsonapi-rspec

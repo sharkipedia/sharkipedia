@@ -34,7 +34,7 @@ gem "devise", "~> 4.9"
 # gem 'bcrypt', '~> 3.1.7'
 gem "administrate", "~> 0.18.0"
 gem "administrate-field-enum"
-gem "pundit", "~> 2.2"
+gem "pundit", "~> 2.3"
 
 gem "roo", "~> 2.10.0"
 gem "rubyXL"

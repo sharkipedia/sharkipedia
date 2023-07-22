@@ -10,11 +10,10 @@ $(document).on("turbolinks:load", function () {
     Turbolinks.visit("/references/" + data.id);
   });
 
-  const fetchAuthor = async function (inputValue, inputElement) {
+  const fetchAuthor = async function (inputValue) {
     const resp = await fetch(`/search/autocomplete?klass=author&term=${inputValue}`);
     const results = await resp.json();
     if (results.length > 0) {
-      console.log(results[0]);
       return results.map((author) => ({ label: author.name, value: author.name }));
     }
 

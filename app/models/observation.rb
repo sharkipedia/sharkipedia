@@ -47,4 +47,12 @@ class Observation < ApplicationRecord
 
     [species_names, references_names].reject(&:blank?).join(" - ")
   end
+
+  def published?
+    !hidden?
+  end
+
+  def toggle_publish_state
+    update(hidden: !hidden?)
+  end
 end

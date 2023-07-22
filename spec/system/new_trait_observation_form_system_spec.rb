@@ -49,6 +49,7 @@ RSpec.describe "New Trait Observation form" do
     select2 reference.name, css: "#reference_selector", search: true
     fill_in "Depth", with: "100"
 
+    check "hidden"
     # Measurement #1
     click_link "Add Measurement"
     within(:xpath, "//fieldset[@class='measurement'][1]") do
@@ -83,6 +84,10 @@ RSpec.describe "New Trait Observation form" do
     import.reload
 
     expect(import).to be_imported
+
+    click_button "Publish"
+
+    expect(page).to have_content("Unpublish")
 
     visit traits_path
 

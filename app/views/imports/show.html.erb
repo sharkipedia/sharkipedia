@@ -158,6 +158,7 @@
       <div class="columns">
         <div class="column">
           <h3 class="subtitle"><%= observation.title %></h3>
+          <%= button_to observation.published? ? 'Unpublish' : 'Publish', toggle_publish_state_observation_path(observation), class: 'button'%>
         </div>
 
         <div class="column is-one-third">

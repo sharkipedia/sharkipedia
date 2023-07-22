@@ -68,7 +68,9 @@ Rails.application.routes.draw do
 
   resources :trends
   resources :traits, only: [:index, :show]
-  resources :observations
+  resources :observations do
+    post "toggle_publish_state", on: :member
+  end
 
   resources :species, only: [:index, :show]
   resources :protected_species, only: [:index]

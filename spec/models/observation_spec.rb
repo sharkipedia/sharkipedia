@@ -47,6 +47,28 @@ RSpec.describe Observation, type: :model do
     it { is_expected.not_to include(hidden_observation) }
   end
 
+  describe "#published?" do
+    subject { observation.published? }
+    let!(:observation) { create(:observation) }
+
+    it { is_expected.to be_truthy }
+
+    context "when hidden" do
+      let!(:observation) { create(:observation, :unpublished) }
+
+      it { is_expected.to be_falsey }
+    end
+  end
+
+  describe "#toggle_publish_state" do
+    subject { observation.toggle_publish_state }
+    let!(:observation) { create(:observation) }
+
+    it "toggles the hidden attribute" do
+      expect { subject }.to change { observation.reload.published? }.from(true).to(false)
+    end
+  end
+
   describe "#species through measurements" do
     let(:species) { create(:species) }
     let(:observation) { create(:observation) }

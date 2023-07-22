@@ -23,6 +23,10 @@ class ObservationPolicy < ApplicationPolicy
     user.admin?
   end
 
+  def toggle_publish_state?
+    user.admin? || record.import&.user == user
+  end
+
   class Scope < Scope
     def resolve
       if user&.admin?

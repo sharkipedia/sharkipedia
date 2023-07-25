@@ -5,3 +5,15 @@
     margin-bottom: 10px;
   }
 }
+
+.column.title-publish {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 1rem;
+
+  h3 {
+    margin: 0;
+  }
+}

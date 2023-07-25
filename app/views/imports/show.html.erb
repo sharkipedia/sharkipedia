@@ -156,9 +156,9 @@
 
     <% @import.observations.each do |observation| %>
       <div class="columns">
-        <div class="column">
+        <div class="column title-publish">
           <h3 class="subtitle"><%= observation.title %></h3>
-          <%= button_to observation.published? ? 'Unpublish' : 'Publish', toggle_publish_state_observation_path(observation), class: 'button', id: "publish-toggle-button" %>
+          <%= button_to observation.published? ? 'Unpublish' : 'Publish', toggle_publish_state_observation_path(observation), class: "button #{observation.published? ? "is-warning" : "is-success"}", id: "publish-toggle-button"%>
         </div>
 
         <div class="column is-one-third">
@@ -175,3 +175,4 @@
     <% end %>
   <% end %>
 <% end %>
+

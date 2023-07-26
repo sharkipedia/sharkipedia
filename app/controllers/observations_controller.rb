@@ -71,6 +71,13 @@ class ObservationsController < ApplicationController
     end
   end
 
+  def toggle_publish_state
+    @observation = Observation.find params[:id]
+    authorize @observation
+    @observation.toggle_publish_state
+    redirect_to @observation.import
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.

@@ -12,36 +12,14 @@ Capybara.server = :puma, {Silent: true}
 #   )
 # end
 
-# I'd like to default to cuprite and use headless chrome. However, I'm seeing
-# errors with regards to the uploaded files when running in headless mode:
-#
-# After the excel sheet is uploaded, the sidkiq job retrieves the file and runs
-# various validations. When running the tests with cuprite I get the following
-# error from roo when it tries to open the excel sheet:
-#
-# ```
-# File /var/.../ActiveStorage-1-20200523-41006-b3ba89.xlsx has zero size.
-# Did you mean to pass the create flag?
-# ```
-#
-# RSpec.configure do |config|
-#   config.before(:each, type: :system) do
-#     driven_by :cuprite
-#   end
-#
-#   config.before(:each, type: :system, js: true) do
-#     driven_by :cuprite
-#   end
-# end
-
 # Things appear to work fine with selenium headless_chrome
 RSpec.configure do |config|
   config.before(:each, type: :system) do
-    driven_by :selenium, using: :headless_chrome
+    driven_by :cuprite
   end
 
   config.before(:each, type: :system, js: true) do
-    driven_by :selenium, using: :headless_chrome
+    driven_by :cuprite
   end
 
   config.include CapybaraSelect2

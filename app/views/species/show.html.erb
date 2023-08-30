@@ -25,6 +25,12 @@
   </div>
 </div>
 
+<div class="columns">
+  <div class="column">
+    <%= react_component("SpeciesRangeMap", { binomial: @species.name } ) %>
+  </div>
+</div>
+
 <% unless @grouped_measurements.blank? %>
   <h3 class='subtitle is-3'>Traits</h2>
 

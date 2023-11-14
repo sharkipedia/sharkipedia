@@ -114,6 +114,6 @@ gem "pagy", "~> 6.1"
 
 gem "invisible_captcha", "~> 2.1"
 
-gem "friendly_id", "~> 5.5.0"
+gem "friendly_id", "~> 5.5.1"
 
 gem "newrelic_rpm"

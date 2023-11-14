@@ -168,7 +168,7 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.5.0)
-    drb (2.1.1)
+    drb (2.2.0)
       ruby2_keywords
     erubi (1.12.0)
     et-orbi (1.2.7)
@@ -186,7 +186,7 @@ GEM
       websocket-driver (>= 0.6, < 0.8)
     ffi (1.15.5)
     filterrific (5.2.3)
-    friendly_id (5.5.0)
+    friendly_id (5.5.1)
       activerecord (>= 4.0.0)
     fugit (1.9.0)
       et-orbi (~> 1, >= 1.2.7)
@@ -256,7 +256,7 @@ GEM
     mini_portile2 (2.8.5)
     minitest (5.20.0)
     msgpack (1.7.2)
-    mutex_m (0.1.2)
+    mutex_m (0.2.0)
     net-imap (0.4.5)
       date
       net-protocol
@@ -521,7 +521,7 @@ DEPENDENCIES
   devise (~> 4.9)
   factory_bot_rails (~> 6.2)
   filterrific (~> 5.2)
-  friendly_id (~> 5.5.0)
+  friendly_id (~> 5.5.1)
   good_job (~> 3.21)
   invisible_captcha (~> 2.1)
   jbuilder (~> 2.11)

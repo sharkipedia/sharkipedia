@@ -371,7 +371,7 @@ GEM
       actionpack (>= 5.2)
       railties (>= 5.2)
     rexml (3.2.6)
-    rgeo (3.0.0)
+    rgeo (3.0.1)
     rgeo-activerecord (7.0.1)
       activerecord (>= 5.0)
       rgeo (>= 1.0.0)
@@ -543,7 +543,7 @@ DEPENDENCIES
   ransack (~> 4.1)
   react-rails
   redis (~> 5.0)
-  rgeo (~> 3.0.0)
+  rgeo (~> 3.0.1)
   rgeo-geojson (~> 2.1.1)
   roo (~> 2.10.0)
   rspec-rails (~> 6.0.3)

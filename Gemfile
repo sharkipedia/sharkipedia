@@ -53,7 +53,7 @@ gem "good_job", "~> 3.21"
 # gem 'capistrano-rails', group: :development
 
 gem "activerecord-postgis-adapter", "~> 9.0.1"
-gem "rgeo", "~> 3.0.0"
+gem "rgeo", "~> 3.0.1"
 gem "rgeo-geojson", "~> 2.1.1"
 
 # Reduces boot times through caching; required in config/boot.rb

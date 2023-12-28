@@ -355,7 +355,7 @@ module ImportXlsx
 
           # Latitude has a space at the end
           location = Location.find_or_create_by name: row["Dataset_location"],
-            lat: (row["Latitude"] || row["Latitude "]),
+            lat: row["Latitude"] || row["Latitude "],
             lon: row["Longitude"]
           self.log += "#{location.inspect}\n"
 

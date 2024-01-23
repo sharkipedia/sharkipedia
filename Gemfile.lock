@@ -437,7 +437,7 @@ GEM
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
     semantic_range (3.0.0)
-    shoulda-matchers (6.0.0)
+    shoulda-matchers (6.1.0)
       activesupport (>= 5.2.0)
     sprockets (4.2.0)
       concurrent-ruby (~> 1.0)
@@ -550,7 +550,7 @@ DEPENDENCIES
   rubyXL
   sass-rails (~> 6.0)
   select2-rails (~> 4.0)!
-  shoulda-matchers (~> 6.0)
+  shoulda-matchers (~> 6.1)
   standard
   turbolinks (~> 5)
   tzinfo-data

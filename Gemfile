@@ -32,7 +32,7 @@ gem "actionpack-action_caching", "~> 1.2"
 gem "devise", "~> 4.9"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-gem "administrate", "~> 0.19.0"
+gem "administrate", "~> 0.20.1"
 gem "administrate-field-enum"
 gem "pundit", "~> 2.3"
 

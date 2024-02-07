@@ -45,7 +45,7 @@ gem "filterrific", "~> 5.2"
 # gem 'mini_magick', '~> 4.8'
 
 gem "aasm", "~> 5.5"
-gem "after_commit_everywhere", "~> 1.3"
+gem "after_commit_everywhere", "~> 1.4"
 
 gem "good_job", "~> 3.23"
 

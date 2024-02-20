@@ -275,7 +275,7 @@ GEM
     nokogiri (1.16.2-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
-    pagy (6.4.3)
+    pagy (7.0.3)
     paper_trail (15.1.0)
       activerecord (>= 6.1)
       request_store (~> 1.4)
@@ -531,7 +531,7 @@ DEPENDENCIES
   net-pop
   net-smtp
   newrelic_rpm
-  pagy (~> 6.4)
+  pagy (~> 7.0)
   paper_trail (~> 15.1)
   pg (~> 1.5)
   pg_search (~> 2.3)

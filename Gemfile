@@ -91,7 +91,7 @@ group :test do
   gem "capybara-select-2", "~> 0.5.1"
 
   gem "factory_bot_rails", "~> 6.4"
-  gem "shoulda-matchers", "~> 6.1"
+  gem "shoulda-matchers", "~> 6.2"
 
   gem "jsonapi-rspec"
 end

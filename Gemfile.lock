@@ -202,7 +202,7 @@ GEM
       thor (>= 0.14.1)
     i18n (1.14.4)
       concurrent-ruby (~> 1.0)
-    invisible_captcha (2.2.0)
+    invisible_captcha (2.3.0)
       rails (>= 5.2)
     io-console (0.7.2)
     irb (1.12.0)
@@ -250,7 +250,7 @@ GEM
       net-imap
       net-pop
       net-smtp
-    marcel (1.0.2)
+    marcel (1.0.4)
     matrix (0.4.2)
     mini_mime (1.1.5)
     mini_portile2 (2.8.5)
@@ -520,7 +520,7 @@ DEPENDENCIES
   filterrific (~> 5.2)
   friendly_id (~> 5.5.1)
   good_job (~> 3.26)
-  invisible_captcha (~> 2.2)
+  invisible_captcha (~> 2.3)
   jbuilder (~> 2.11)
   jsonapi-rspec
   jsonapi.rb (~> 2.0.1)

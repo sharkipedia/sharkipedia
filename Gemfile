@@ -47,7 +47,7 @@ gem "filterrific", "~> 5.2"
 gem "aasm", "~> 5.5"
 gem "after_commit_everywhere", "~> 1.4"
 
-gem "good_job", "~> 3.26"
+gem "good_job", "~> 3.27"
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

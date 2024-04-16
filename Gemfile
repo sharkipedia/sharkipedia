@@ -24,7 +24,7 @@ gem "turbolinks", "~> 5"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem "jbuilder", "~> 2.11"
 # Use Redis adapter to run Action Cable in production
-gem "redis", "~> 5.1"
+gem "redis", "~> 5.2"
 gem "connection_pool", "~> 2.4"
 gem "actionpack-action_caching", "~> 1.2"
 

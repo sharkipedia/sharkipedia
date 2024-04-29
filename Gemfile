@@ -22,7 +22,7 @@ gem "react-rails"
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem "turbolinks", "~> 5"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem "jbuilder", "~> 2.11"
+gem "jbuilder", "~> 2.12"
 # Use Redis adapter to run Action Cable in production
 gem "redis", "~> 5.2"
 gem "connection_pool", "~> 2.4"

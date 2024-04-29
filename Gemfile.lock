@@ -208,7 +208,7 @@ GEM
     irb (1.12.0)
       rdoc
       reline (>= 0.4.2)
-    jbuilder (2.11.5)
+    jbuilder (2.12.0)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
     jmespath (1.6.2)
@@ -521,7 +521,7 @@ DEPENDENCIES
   friendly_id (~> 5.5.1)
   good_job (~> 3.28)
   invisible_captcha (~> 2.3)
-  jbuilder (~> 2.11)
+  jbuilder (~> 2.12)
   jsonapi-rspec
   jsonapi.rb (~> 2.0.1)
   listen (>= 3.2, < 3.10)

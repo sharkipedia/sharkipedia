@@ -52,7 +52,7 @@ gem "good_job", "~> 3.28"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem "activerecord-postgis-adapter", "~> 9.0.1"
+gem "activerecord-postgis-adapter", "~> 9.0.2"
 gem "rgeo", "~> 3.0.1"
 gem "rgeo-geojson", "~> 2.1.1"
 

@@ -6674,10 +6674,10 @@ ol-layerswitcher@^4.1.1:
   resolved "https://registry.yarnpkg.com/ol-layerswitcher/-/ol-layerswitcher-4.1.1.tgz#abd60daa94932c38b086299c37999e7a187a5da0"
   integrity sha512-uqIqZCr/23GoOIOl2T1iPzcVBPweJZgkVHTrn8DLNCa3cCuX+aJzz0DhkA+qJjm5NqXO5uCvB7zpk9vWtRWmsQ==
 
-ol@^9.2.3:
-  version "9.2.3"
-  resolved "https://registry.yarnpkg.com/ol/-/ol-9.2.3.tgz#c81052299aa96d63d74d91268c5f635d5b1cd3f2"
-  integrity sha512-zxCgrVUU9DWZZSa7eW2ukU6gp1ugX0K5bF+Gwuh/RKa2sQLdwOrIRjLt4NYAdM7jpHOdW1FaT68E8tosE/DC1g==
+ol@^9.2.4:
+  version "9.2.4"
+  resolved "https://registry.yarnpkg.com/ol/-/ol-9.2.4.tgz#07dcefdceb66ddbde13089bca136f4d4852b772b"
+  integrity sha512-bsbu4ObaAlbELMIZWnYEvX4Z9jO+OyCBshtODhDKmqYTPEfnKOX3RieCr97tpJkqWTZvyV4tS9UQDvHoCdxS+A==
   dependencies:
     color-rgba "^3.0.0"
     color-space "^2.0.1"

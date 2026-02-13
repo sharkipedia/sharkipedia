@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+set -e
+
+if ! command -v docker &> /dev/null; then
+  echo "Docker is not installed. Please install Docker Desktop for Mac."
+  exit 1
+fi
+
+# First run: build images and set up database
+if [ "$1" = "setup" ]; then
+  echo "==> Building Docker images..."
+  docker compose build
+
+  echo "==> Installing bundle dependencies..."
+  docker compose run --rm web bundle install
+
+  echo "==> Installing yarn dependencies..."
+  docker compose run --rm web yarn install
+
+  echo "==> Creating and loading database schema..."
+  docker compose run --rm web bin/rails db:create db:schema:load
+
+  echo "==> Setup complete! Run bin/dev to start the app."
+  exit 0
+fi
+
+# Start all services
+exec docker compose up "$@"

@@ -1,0 +1,83 @@
+services:
+  db:
+    image: imresamu/postgis:17-3.5
+    platform: linux/arm64
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  web:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bin/rails server -b 0.0.0.0"
+    volumes:
+      - .:/app
+      - bundle_cache:/usr/local/bundle
+      - node_modules:/app/node_modules
+      - packs:/app/public/packs
+    ports:
+      - "3000:3000"
+    environment:
+      RAILS_ENV: development
+      DATABASE_URL: postgis://postgres:postgres@db:5432/sharkipedia_development
+      REDIS_URL: redis://redis:6379/1
+      WEBPACKER_DEV_SERVER_HOST: webpacker
+    depends_on:
+      db:
+        condition: service_healthy
+    stdin_open: true
+    tty: true
+
+  webpacker:
+    build: .
+    command: bin/webpack-dev-server
+    volumes:
+      - .:/app
+      - bundle_cache:/usr/local/bundle
+      - node_modules:/app/node_modules
+      - packs:/app/public/packs
+    ports:
+      - "3035:3035"
+    environment:
+      RAILS_ENV: development
+      NODE_ENV: development
+      WEBPACKER_DEV_SERVER_HOST: 0.0.0.0
+
+  worker:
+    build: .
+    command: bundle exec good_job start
+    volumes:
+      - .:/app
+      - bundle_cache:/usr/local/bundle
+      - node_modules:/app/node_modules
+    environment:
+      RAILS_ENV: development
+      DATABASE_URL: postgis://postgres:postgres@db:5432/sharkipedia_development
+      REDIS_URL: redis://redis:6379/1
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
+  bundle_cache:
+  node_modules:
+  packs:

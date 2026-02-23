@@ -1,4 +1,4 @@
-FROM ruby:3.2.2-slim-bookworm
+FROM ruby:3.3.10-slim-bookworm
 
 # System dependencies for Rails + PostGIS + Node
 RUN apt-get update -qq && \
@@ -16,8 +16,8 @@ RUN apt-get update -qq && \
       shared-mime-info \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Node 16.x and Yarn
-RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - && \
+# Install Node 20.x and Yarn
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
     apt-get install -y --no-install-recommends nodejs && \
     npm install -g yarn && \
     rm -rf /var/lib/apt/lists/*

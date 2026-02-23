@@ -6,7 +6,7 @@ ruby File.read(".ruby-version").strip
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 7.1"
 # Use postgres as the database for Active Record
-gem "pg", "~> 1.5"
+gem "pg", "~> 1.6"
 # Use Puma as the app server
 gem "puma", "~> 6.4"
 # Use SCSS for stylesheets
@@ -32,11 +32,11 @@ gem "actionpack-action_caching", "~> 1.2"
 gem "devise", "~> 4.9"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-gem "administrate", "~> 0.19.0"
+gem "administrate", "~> 0.19"
 gem "administrate-field-enum"
-gem "pundit", "~> 2.3"
+gem "pundit", "~> 2.5"
 
-gem "roo", "~> 2.10.1"
+gem "roo", "~> 2.10"
 gem "rubyXL"
 gem "aws-sdk-s3", "~> 1.151", require: false
 
@@ -53,25 +53,20 @@ gem "good_job", "~> 3.29"
 # gem 'capistrano-rails', group: :development
 
 gem "activerecord-postgis-adapter", "~> 9.0.2"
-gem "rgeo", "~> 3.0.1"
-gem "rgeo-geojson", "~> 2.1.1"
+gem "rgeo", "~> 3.0"
+gem "rgeo-geojson", "~> 2.1"
 
 # Reduces boot times through caching; required in config/boot.rb
-gem "bootsnap", ">= 1.1.0", require: false
+gem "bootsnap", ">= 1.18", require: false
 
-gem "jsonapi.rb", "~> 2.0.1"
+gem "jsonapi.rb", "~> 2.0"
 gem "ransack", "~> 4.1"
-
-gem "net-smtp", require: false
-gem "net-pop", require: false
-gem "net-imap", require: false
 
 gem "vanilla_nested"
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
-  gem "rspec-rails", "~> 6.1.2"
+  gem "debug", platforms: [:mri, :mingw, :x64_mingw]
+  gem "rspec-rails", "~> 7.1"
 end
 
 group :development do
@@ -85,10 +80,10 @@ end
 
 group :test do
   gem "capybara", "~> 3.40"
-  gem "webdrivers", "~> 5.3"
   gem "cuprite", "~> 0.15"
+  gem "selenium-webdriver", "~> 4.27"
 
-  gem "capybara-select-2", "~> 0.5.1"
+  gem "capybara-select-2", "~> 0.5"
 
   gem "factory_bot_rails", "~> 6.4"
   gem "shoulda-matchers", "~> 6.2"
@@ -114,6 +109,6 @@ gem "pagy", "~> 8.4"
 
 gem "invisible_captcha", "~> 2.3"
 
-gem "friendly_id", "~> 5.5.1"
+gem "friendly_id", "~> 5.5"
 
 gem "newrelic_rpm"

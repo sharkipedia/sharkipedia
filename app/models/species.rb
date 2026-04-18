@@ -38,8 +38,8 @@
 #  fk_rails_...  (species_subclass_id => species_subclasses.id)
 #
 class Species < ApplicationRecord
-  enum cms_status: [:none, :appendix_1, :appendix_2], _prefix: true
-  enum cites_status: [:none, :appendix_1, :appendix_2, :appendix_3], _prefix: true
+  enum :cms_status, [:none, :appendix_1, :appendix_2], prefix: true
+  enum :cites_status, [:none, :appendix_1, :appendix_2, :appendix_3], prefix: true
 
   include PgSearch::Model
   pg_search_scope :search_by_name, against: [:name],

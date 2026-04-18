@@ -94,6 +94,15 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
+# Ruby 4 promoted several stdlib libraries to bundled gems; declare the ones
+# we rely on directly.
+gem "csv"
+gem "base64"
+gem "bigdecimal"
+gem "mutex_m"
+gem "drb"
+gem "ostruct"
+
 gem "bugsnag", "~> 6.27"
 
 gem "paper_trail", "~> 15.1"

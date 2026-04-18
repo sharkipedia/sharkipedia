@@ -15,7 +15,7 @@
 //= require turbolinks
 //= require underscore
 //= require select2
-//= require filterrific/filterrific-jquery
+//= require filterrific/filterrific
 //= require vanilla_nested
 //= require_tree .
 

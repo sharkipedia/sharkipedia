@@ -1,4 +1,4 @@
-FROM ruby:3.3.10-slim-bookworm
+FROM ruby:4.0.2-slim-bookworm
 
 # System dependencies for Rails + PostGIS + Node
 RUN apt-get update -qq && \
@@ -12,6 +12,7 @@ RUN apt-get update -qq && \
       proj-bin \
       gdal-bin \
       libgdal-dev \
+      libyaml-dev \
       postgresql-client \
       shared-mime-info \
     && rm -rf /var/lib/apt/lists/*
@@ -26,6 +27,9 @@ WORKDIR /app
 
 # Install Ruby dependencies first (layer caching)
 COPY Gemfile Gemfile.lock .ruby-version ./
+# The lockfile's BUNDLED WITH may predate Ruby 4; make sure we have a bundler
+# new enough to boot on the current Ruby.
+RUN gem update --system --silent && gem install bundler
 RUN bundle install --jobs 4
 
 # Install JS dependencies (layer caching)

@@ -1,7 +1,6 @@
 services:
   db:
     image: imresamu/postgis:17-3.5
-    platform: linux/arm64
     volumes:
       - postgres_data:/var/lib/postgresql/data
     environment:
@@ -37,11 +36,16 @@ services:
       - "3000:3000"
     environment:
       RAILS_ENV: development
-      DATABASE_URL: postgis://postgres:postgres@db:5432/sharkipedia_development
+      DB_HOST: db
+      DB_USER: postgres
+      DB_PASSWORD: postgres
       REDIS_URL: redis://redis:6379/1
       WEBPACKER_DEV_SERVER_HOST: webpacker
+      NODE_OPTIONS: --openssl-legacy-provider
     depends_on:
       db:
+        condition: service_healthy
+      redis:
         condition: service_healthy
     stdin_open: true
     tty: true
@@ -60,6 +64,7 @@ services:
       RAILS_ENV: development
       NODE_ENV: development
       WEBPACKER_DEV_SERVER_HOST: 0.0.0.0
+      NODE_OPTIONS: --openssl-legacy-provider
 
   worker:
     build: .
@@ -70,10 +75,14 @@ services:
       - node_modules:/app/node_modules
     environment:
       RAILS_ENV: development
-      DATABASE_URL: postgis://postgres:postgres@db:5432/sharkipedia_development
+      DB_HOST: db
+      DB_USER: postgres
+      DB_PASSWORD: postgres
       REDIS_URL: redis://redis:6379/1
     depends_on:
       db:
+        condition: service_healthy
+      redis:
         condition: service_healthy
 
 volumes:

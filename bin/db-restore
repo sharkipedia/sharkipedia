@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+# Restore a PostgreSQL custom-format dump into the development database.
+#
+# Usage:
+#   bin/db-restore <path-to-dump>
+#
+# The dump is streamed into the `db` container's pg_restore over stdin, so
+# the file stays on the host — no bind-mount or docker cp needed.
+#
+# Heroku dumps reference a `heroku` role and tag the restored database as
+# `environment=production` in ar_internal_metadata, which would cause Rails
+# to refuse destructive tasks against the dev DB. Both are handled below.
+
+set -euo pipefail
+
+if [ $# -ne 1 ]; then
+  echo "Usage: $0 <path-to-dump>" >&2
+  exit 1
+fi
+
+DUMP="$1"
+if [ ! -f "$DUMP" ]; then
+  echo "Dump file not found: $DUMP" >&2
+  exit 1
+fi
+
+cd "$(dirname "$0")/.."
+
+DB="sharkipedia_development"
+PSQL_USER="postgres"
+
+echo "==> Starting db container"
+docker compose up -d db
+until docker compose exec -T db pg_isready -U "$PSQL_USER" > /dev/null 2>&1; do
+  sleep 1
+done
+
+echo "==> Dropping and recreating $DB"
+docker compose exec -T db dropdb -U "$PSQL_USER" --if-exists --force "$DB"
+docker compose exec -T db createdb -U "$PSQL_USER" "$DB"
+
+# Heroku installs extensions into a dedicated "heroku_ext" schema. Pre-create
+# it so the CREATE EXTENSION ... WITH SCHEMA "heroku_ext" statements in the
+# dump succeed locally.
+docker compose exec -T db psql -U "$PSQL_USER" -d "$DB" -v ON_ERROR_STOP=1 \
+  -c "CREATE SCHEMA IF NOT EXISTS heroku_ext;"
+
+echo "==> Restoring $(basename "$DUMP") ($(du -h "$DUMP" | awk '{print $1}'))"
+docker compose exec -T db pg_restore \
+  -U "$PSQL_USER" \
+  -d "$DB" \
+  --no-owner \
+  --no-privileges \
+  --no-acl \
+  < "$DUMP"
+
+echo "==> Flipping ar_internal_metadata.environment -> development"
+docker compose exec -T db psql -U "$PSQL_USER" -d "$DB" -v ON_ERROR_STOP=1 \
+  -c "UPDATE ar_internal_metadata SET value='development', updated_at=NOW() WHERE key='environment';"
+
+echo "==> Done. Run 'bin/dev' to start the app."

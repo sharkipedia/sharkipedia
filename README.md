@@ -1,10 +1,53 @@
 # README
 
-## Development setup
+## Development setup (Docker — recommended)
 
-1. Ensure you have ruby (version 3.2) installed, for instructions see the
+The simplest way to run the app locally is with Docker. This works on Apple
+Silicon and Intel Macs, Linux, and Windows (via WSL2). You need
+[Docker Desktop](https://www.docker.com/products/docker-desktop/) (or a
+compatible runtime) and nothing else — Ruby, Node, and PostGIS all run inside
+containers.
+
+```bash
+# One-time: build images, install gems/node_modules, prepare the DB, and start the app.
+# Pass --skip-server if you only want to provision without booting.
+bin/setup
+
+# Start the app (web :3000, webpack-dev-server :3035, good_job worker, db, redis)
+bin/dev
+```
+
+Then open http://localhost:3000.
+
+### Common commands
+
+```bash
+docker compose run --rm web bin/rails console
+docker compose run --rm web bundle exec rspec
+docker compose run --rm web yarn test
+docker compose run --rm web bin/standardrb
+docker compose exec web bash           # shell into the running web container
+
+docker compose down                    # stop
+docker compose down -v                 # stop and wipe the database volume
+```
+
+### Notes
+
+- The `db` service uses a multi-arch PostGIS image that runs natively on both
+  Apple Silicon and x86_64, so no `platform:` override is needed.
+- Source code is bind-mounted into the container; edits on the host are picked
+  up live. Rails falls back to polling (`FileUpdateChecker`) when it detects
+  it's running inside Docker.
+- Gems and `node_modules` live in named volumes (`bundle_cache`, `node_modules`)
+  so they survive container rebuilds. After changing `Gemfile` or
+  `package.json` run `bin/setup` again.
+
+## Development setup (native)
+
+1. Ensure you have ruby (version 3.3) installed, for instructions see the
     [Install Rails Howto](http://installrails.com).
-1. Ensure you have [node.js](https://nodejs.org/en/) installed
+1. Ensure you have [node.js](https://nodejs.org/en/) (version 20.x) installed
 1. Ensure you have the postgresql database installed
     - macOS: `brew install postgresql` then follow instructions
     - windows: https://www.postgresql.org/download/windows/, then follow

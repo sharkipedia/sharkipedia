@@ -2,12 +2,40 @@
 
 ## Project Overview
 
-Rails 7.1 application (Ruby 3.2.2, Node 16.x) for managing shark/ray species data,
+Rails 7.1 application (Ruby 3.3.10, Node 20.x) for managing shark/ray species data,
 trait observations, population trends, and academic references. Uses PostGIS for
 geospatial queries, Webpacker 5.4 with React 17 for frontend components, and Devise/Pundit
 for authentication/authorization.
 
 ## Build & Run Commands
+
+### Docker (recommended)
+
+`bin/setup` provisions the stack; `bin/dev` boots it. Both wrap
+`docker compose` and work on Apple Silicon and Intel out of the box.
+
+```bash
+# One-shot: build images, install gems/node, prepare DB, start the app.
+# Add --skip-server to stop before booting.
+bin/setup
+
+# Start all services (web :3000, webpacker :3035, good_job worker, db, redis)
+bin/dev
+
+# Run commands inside the containers
+docker compose run --rm web bundle exec rspec
+docker compose run --rm web yarn test
+docker compose run --rm web bin/rails console
+docker compose run --rm web bin/standardrb
+docker compose exec web bash
+
+docker compose down              # stop
+docker compose down -v           # stop + wipe DB volume
+```
+
+After changing `Gemfile` or `package.json`, rerun `bin/setup`.
+
+### Native
 
 ```bash
 # Install dependencies
@@ -18,7 +46,7 @@ yarn install
 bin/rails db:create db:schema:load
 
 # Start development servers (web + webpack-dev-server + good_job worker)
-bin/dev                        # or: foreman start -f Procfile.dev
+foreman start -f Procfile.dev
 
 # Asset compilation
 bin/webpack

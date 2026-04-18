@@ -104,7 +104,7 @@ gem "ostruct"
 
 gem "bugsnag", "~> 6.27"
 
-gem "paper_trail", "~> 15.1"
+gem "paper_trail", "~> 17.0"
 
 gem "coffee-rails", "~> 5.0"
 

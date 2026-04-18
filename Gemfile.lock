@@ -294,6 +294,7 @@ GEM
       racc (~> 1.4)
     orm_adapter (0.5.0)
     ostruct (0.6.3)
+    package_json (0.2.0)
     pagy (8.6.3)
     paper_trail (15.2.0)
       activerecord (>= 6.1)
@@ -469,6 +470,12 @@ GEM
       rubyzip (>= 1.2.2, < 4.0)
       websocket (~> 1.0)
     semantic_range (3.1.1)
+    shakapacker (8.4.0)
+      activesupport (>= 5.2)
+      package_json
+      rack-proxy (>= 0.6.1)
+      railties (>= 5.2)
+      semantic_range (>= 2.3.0)
     shoulda-matchers (6.5.0)
       activesupport (>= 5.2.0)
     sprockets (4.2.2)
@@ -515,11 +522,6 @@ GEM
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
-    webpacker (5.4.4)
-      activesupport (>= 5.2)
-      rack-proxy (>= 0.6.1)
-      railties (>= 5.2)
-      semantic_range (>= 2.3.0)
     webrick (1.9.2)
     websocket (1.2.11)
     websocket-driver (0.8.0)
@@ -586,6 +588,7 @@ DEPENDENCIES
   sass-rails (~> 6.0)
   select2-rails (~> 4.0)!
   selenium-webdriver (~> 4.27)
+  shakapacker (~> 8.0)
   shoulda-matchers (~> 6.2)
   standard
   turbolinks (~> 5)
@@ -594,7 +597,6 @@ DEPENDENCIES
   underscore-rails (~> 1.8)
   vanilla_nested
   web-console (>= 4.0.1)
-  webpacker (~> 5.4)
 
 RUBY VERSION
   ruby 4.0.2

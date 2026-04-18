@@ -19,7 +19,7 @@ for authentication/authorization.
 # Add --skip-server to stop before booting.
 bin/setup
 
-# Start all services (web :3000, webpacker :3035, good_job worker, db, redis)
+# Start all services (web :3000, shakapacker :3035, good_job worker, db, redis)
 bin/dev
 
 # Run commands inside the containers
@@ -49,7 +49,7 @@ bin/rails db:create db:schema:load
 foreman start -f Procfile.dev
 
 # Asset compilation
-bin/webpack
+bin/shakapacker
 ```
 
 ## Lint Commands
@@ -162,7 +162,7 @@ yarn test --coverage
 
 ### Frontend
 
-- **Webpacker 5.4** (not jsbundling/importmaps).
+- **Shakapacker 8** (Webpacker's community successor; not jsbundling/importmaps).
 - **Bulma CSS** framework — use classes like `is-primary`, `columns`, `column`, `table`.
 - **ERB views** with React components embedded via `react_component` helper.
 - **Turbolinks** enabled for page navigation.

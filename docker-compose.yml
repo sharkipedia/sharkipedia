@@ -40,8 +40,7 @@ services:
       DB_USER: postgres
       DB_PASSWORD: postgres
       REDIS_URL: redis://redis:6379/1
-      WEBPACKER_DEV_SERVER_HOST: webpacker
-      NODE_OPTIONS: --openssl-legacy-provider
+      SHAKAPACKER_DEV_SERVER_HOST: webpacker
     depends_on:
       db:
         condition: service_healthy
@@ -52,7 +51,7 @@ services:
 
   webpacker:
     build: .
-    command: bin/webpack-dev-server
+    command: bin/shakapacker-dev-server
     volumes:
       - .:/app
       - bundle_cache:/usr/local/bundle
@@ -63,8 +62,7 @@ services:
     environment:
       RAILS_ENV: development
       NODE_ENV: development
-      WEBPACKER_DEV_SERVER_HOST: 0.0.0.0
-      NODE_OPTIONS: --openssl-legacy-provider
+      SHAKAPACKER_DEV_SERVER_HOST: 0.0.0.0
 
   worker:
     build: .

@@ -1,11 +1,11 @@
-# Note: You must restart bin/webpack-dev-server for changes to take effect
+# Note: You must restart bin/shakapacker-dev-server for changes to take effect
 
 default: &default
   source_path: app/javascript
   source_entry_path: packs
   public_root_path: public
   public_output_path: packs
-  cache_path: tmp/cache/webpacker
+  cache_path: tmp/cache/shakapacker
   webpack_compile_output: true
 
   # Additional paths webpack should lookup modules
@@ -54,23 +54,23 @@ development:
 
   # Reference: https://webpack.js.org/configuration/dev-server/
   dev_server:
-    https: false
+    # Defaults to HMR-less live reload.
+    hmr: false
     host: localhost
     port: 3035
-    public: localhost:3035
-    hmr: false
-    # Inline should be set to true if using HMR
-    inline: true
-    overlay: true
+    server: http
+    # Allow the dev server to accept requests from the Rails container via host "webpacker".
+    allowed_hosts: "all"
     compress: true
-    disable_host_check: true
-    use_local_ip: false
-    quiet: false
-    pretty: false
+    client:
+      overlay:
+        errors: true
+        warnings: false
     headers:
       'Access-Control-Allow-Origin': '*'
-    watch_options:
-      ignored: '**/node_modules/**'
+    static:
+      watch:
+        ignored: '**/node_modules/**'
 
 
 test:

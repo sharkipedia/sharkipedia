@@ -77,7 +77,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: |
-            tmp/cache/webpacker
+            tmp/cache/shakapacker
             public/packs
             public/packs-test
           key: assets-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-${{ hashFiles('app/assets/**') }}
@@ -85,7 +85,7 @@ jobs:
             assets-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-
       - name: Compile assets
         run: |
-          bin/rails webpacker:compile
+          bin/rails shakapacker:compile
 
       - name: Seed Database
         run: |

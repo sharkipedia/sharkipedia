@@ -15,7 +15,7 @@ gem "sass-rails", "~> 6.0"
 gem "uglifier", ">= 1.3.0"
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
-gem "webpacker", "~> 5.4"
+gem "shakapacker", "~> 8.0"
 
 gem "react-rails"
 

@@ -1,9 +1,11 @@
 FROM ruby:4.0.2-slim-bookworm
 
-# System dependencies for Rails + PostGIS + Node
+# System dependencies for Rails + PostGIS + Node + headless browser
 RUN apt-get update -qq && \
     apt-get install -y --no-install-recommends \
       build-essential \
+      chromium \
+      chromium-driver \
       curl \
       git \
       libpq-dev \

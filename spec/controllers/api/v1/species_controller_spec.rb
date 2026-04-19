@@ -10,6 +10,12 @@ RSpec.describe API::V1::SpeciesController, type: :controller do
       get :index
       expect(response).to have_http_status(:success)
     end
+
+    it "supports Ransack name_matches filter" do
+      get :index, params: {filter: {name_matches: species.name}}
+      expect(response).to have_http_status(:success)
+      expect(response.body).to match(/#{species.name}/)
+    end
   end
 
   describe "GET #show" do

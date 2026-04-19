@@ -85,6 +85,14 @@ class Species < ApplicationRecord
     !cms_status_none? || !cites_status_none?
   end
 
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[name edge_scientific_name]
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    []
+  end
+
   private
 
   def reject_empty_years

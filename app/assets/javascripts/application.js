@@ -84,3 +84,21 @@ document.addEventListener("turbolinks:load", function () {
     $(".navbar-menu").toggleClass("is-active");
   });
 });
+
+// Override filterrific's init to no-op on pages without a #filterrific_filter
+// form. The upstream version (5.2.7) dereferences the form unconditionally
+// and throws "Cannot read properties of null (reading 'querySelectorAll')".
+if (typeof Filterrific !== "undefined") {
+  Filterrific.init = function () {
+    var form = document.querySelector("#filterrific_filter");
+    if (!form) return;
+    form.querySelectorAll("input, textarea, select").forEach(function (input) {
+      input.addEventListener("change", Filterrific.submitFilterForm);
+    });
+    Filterrific.observe_field(
+      ".filterrific-periodically-observed",
+      0.5,
+      Filterrific.submitFilterForm
+    );
+  };
+}

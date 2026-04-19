@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+# Download the EEZ (Exclusive Economic Zone) geospatial dataset and load it
+# into a database. Mirrors what CI does so EEZ-dependent specs can pass
+# locally.
+#
+# Usage:
+#   bin/db-load-eez              # loads into sharkipedia_test (matches CI)
+#   bin/db-load-eez development  # or any other database on the same Postgres
+
+set -euo pipefail
+
+cd "$(dirname "$0")/.."
+
+TARGET_ENV="${1:-test}"
+DB="sharkipedia_${TARGET_ENV}"
+PSQL_USER="postgres"
+CACHE_DIR="tmp/eez"
+TGZ="${CACHE_DIR}/eez.tgz"
+SQL="${CACHE_DIR}/eez_v11.sql"
+URL="https://d3ci4pmn27yclp.cloudfront.net/eez.tgz"
+
+mkdir -p "$CACHE_DIR"
+
+if [ ! -f "$TGZ" ]; then
+  echo "==> Downloading EEZ dataset (~135 MB) to $TGZ"
+  curl -fL --progress-bar "$URL" -o "$TGZ"
+else
+  echo "==> Using cached $TGZ ($(du -h "$TGZ" | awk '{print $1}'))"
+fi
+
+if [ ! -f "$SQL" ]; then
+  echo "==> Extracting"
+  tar xzf "$TGZ" -C "$CACHE_DIR"
+fi
+
+echo "==> Ensuring db container is running"
+docker compose up -d db > /dev/null
+until docker compose exec -T db pg_isready -U "$PSQL_USER" > /dev/null 2>&1; do
+  sleep 1
+done
+
+echo "==> Dropping prior eez_v11 table (if any)"
+docker compose exec -T db psql -U "$PSQL_USER" -d "$DB" -v ON_ERROR_STOP=1 -c "DROP TABLE IF EXISTS public.eez_v11 CASCADE;" > /dev/null
+
+echo "==> Loading $SQL into $DB"
+# The dump was created by a user "max"; strip the ownership/ACL statements so
+# it loads cleanly as postgres.
+sed -e '/^ALTER .* OWNER TO /d' -e '/^GRANT .* TO /d' "$SQL" \
+  | docker compose exec -T db psql -U "$PSQL_USER" -d "$DB" -v ON_ERROR_STOP=1 > /dev/null
+
+echo "==> EEZ rows: $(docker compose exec -T db psql -U "$PSQL_USER" -d "$DB" -At -c 'SELECT COUNT(*) FROM public.eez_v11;')"
+echo "==> Done"

@@ -108,5 +108,39 @@ if (typeof Filterrific !== "undefined") {
     );
   };
 
+  // Upstream 5.2.7's observe_field sets a setInterval whose `removed()`
+  // check calls `input.closest('html').length == 0` — treating the
+  // Element return value like a jQuery collection. Once Turbolinks
+  // swaps the page, `closest('html')` returns null and the interval
+  // throws "Cannot read properties of null (reading 'length')" on
+  // every tick. Reimplement with a real detachment check.
+  Filterrific.observe_field = function (selector, frequency, callback) {
+    var intervalMs = frequency * 1000;
+    document.querySelectorAll(selector).forEach(function (input) {
+      var prev = input.value;
+      var timer;
+      var check = function () {
+        if (!input.isConnected) {
+          clearInterval(timer);
+          return;
+        }
+        var val = input.value;
+        if (prev !== val) {
+          prev = val;
+          if (typeof callback === "function") callback.call(input);
+        }
+      };
+      var reset = function () {
+        clearInterval(timer);
+        timer = setInterval(check, intervalMs);
+      };
+      check();
+      timer = setInterval(check, intervalMs);
+      input.addEventListener("keyup", reset);
+      input.addEventListener("click", reset);
+      input.addEventListener("mousemove", reset);
+    });
+  };
+
   document.addEventListener("turbolinks:load", Filterrific.init);
 }

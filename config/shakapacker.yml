@@ -68,6 +68,10 @@ development:
         warnings: false
     headers:
       'Access-Control-Allow-Origin': '*'
+      # Without this, Chrome's heuristic caching can pin a broken build in
+      # the disk cache indefinitely — users then keep seeing the old error
+      # even after the fix lands.
+      'Cache-Control': 'no-store'
     static:
       watch:
         ignored: '**/node_modules/**'

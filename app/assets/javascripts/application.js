@@ -88,7 +88,13 @@ document.addEventListener("turbolinks:load", function () {
 // Override filterrific's init to no-op on pages without a #filterrific_filter
 // form. The upstream version (5.2.7) dereferences the form unconditionally
 // and throws "Cannot read properties of null (reading 'querySelectorAll')".
+// filterrific.js has already registered the *original* init against
+// turbolinks:load and DOMContentLoaded, so we must detach those before
+// reassigning — otherwise the old reference keeps firing.
 if (typeof Filterrific !== "undefined") {
+  document.removeEventListener("turbolinks:load", Filterrific.init);
+  document.removeEventListener("DOMContentLoaded", Filterrific.init);
+
   Filterrific.init = function () {
     var form = document.querySelector("#filterrific_filter");
     if (!form) return;
@@ -101,4 +107,6 @@ if (typeof Filterrific !== "undefined") {
       Filterrific.submitFilterForm
     );
   };
+
+  document.addEventListener("turbolinks:load", Filterrific.init);
 }

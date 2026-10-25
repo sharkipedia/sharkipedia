@@ -2,9 +2,9 @@
 
 ## Project Overview
 
-Rails 7.1 application (Ruby 3.3.10, Node 20.x) for managing shark/ray species data,
+Rails 8.1 application (Ruby 4.0, Node 24 LTS) for managing shark/ray species data,
 trait observations, population trends, and academic references. Uses PostGIS for
-geospatial queries, Webpacker 5.4 with React 17 for frontend components, and Devise/Pundit
+geospatial queries, Shakapacker 10 with React 19 for frontend components, and Devise/Pundit
 for authentication/authorization.
 
 ## Build & Run Commands
@@ -104,7 +104,7 @@ yarn test --coverage
 
 ## Code Style — JavaScript
 
-- **React 17** functional components (arrow functions, not class components).
+- **React 19** functional components (arrow functions, not class components).
 - **PropTypes** for prop validation (no TypeScript).
 - **ES6 imports**: `import React from "react"`, `import PropTypes from "prop-types"`.
 - **Default exports** for React components.
@@ -150,7 +150,7 @@ yarn test --coverage
 
 ### Background Jobs
 
-- **GoodJob** (PostgreSQL-based) as ActiveJob backend.
+- **GoodJob 4** (PostgreSQL-based) as ActiveJob backend.
 - Cron jobs defined in `config/application.rb`.
 
 ### Data Layer
@@ -158,15 +158,18 @@ yarn test --coverage
 - **PostGIS** adapter with `rgeo`. Spatial queries use `ST_Intersects`.
 - **PaperTrail** enabled on all models via `ApplicationRecord` (`has_paper_trail`).
 - **FriendlyId** for URL slugs on `Species`.
-- **Pagy** for pagination (not Kaminari/will_paginate).
+- **Pagy 43** for pagination (not Kaminari/will_paginate). Controllers `include Pagy::Method`; views call `@pagy.series_nav(:bulma)`.
 
 ### Frontend
 
-- **Shakapacker 8** (Webpacker's community successor; not jsbundling/importmaps).
+- **Shakapacker 10** with Babel 8 (Webpacker's community successor; not jsbundling/importmaps).
 - **Bulma CSS** framework — use classes like `is-primary`, `columns`, `column`, `table`.
 - **ERB views** with React components embedded via `react_component` helper.
 - **Turbolinks** enabled for page navigation.
-- **Select2** for enhanced dropdowns, **Chart.js 2.x** for charts, **OpenLayers** for maps.
+- **Select2** for enhanced dropdowns, **Chart.js 4** for charts, **OpenLayers** for maps.
+- `package.json` `resolutions` forces `react_ujs` onto the app's React. Without it, react_ujs
+  pulls in its own React 18 and every component fails to mount.
+- Component CSS is extracted to files and loaded by `stylesheet_pack_tag` in the layout.
 
 ## Error Handling
 

@@ -6,7 +6,7 @@
     "test": "jest"
   },
   "engines": {
-    "node": ">=24"
+    "node": "24.x"
   },
   "babel": {
     "presets": [

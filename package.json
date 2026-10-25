@@ -15,7 +15,31 @@
     ],
     "plugins": [
       "babel-plugin-transform-react-remove-prop-types"
-    ]
+    ],
+    "env": {
+      "development": {
+        "plugins": [
+          [
+            "babel-plugin-polyfill-corejs3",
+            {
+              "method": "entry-global",
+              "version": "3.51"
+            }
+          ]
+        ]
+      },
+      "production": {
+        "plugins": [
+          [
+            "babel-plugin-polyfill-corejs3",
+            {
+              "method": "entry-global",
+              "version": "3.51"
+            }
+          ]
+        ]
+      }
+    }
   },
   "browserslist": [
     "defaults",
@@ -29,15 +53,19 @@
     "moduleDirectories": [
       "node_modules",
       "app/javascript"
-    ]
+    ],
+    "transform": {
+      "\\.[jt]sx?$": "babel-jest"
+    }
   },
   "dependencies": {
-    "@babel/core": "^7.25.0",
-    "@babel/plugin-transform-runtime": "^7.25.0",
-    "@babel/preset-env": "^7.25.0",
-    "@babel/preset-react": "^7.24.7",
-    "@babel/runtime": "^7.25.0",
+    "@babel/core": "^8",
+    "@babel/plugin-transform-runtime": "^8",
+    "@babel/preset-env": "^8",
+    "@babel/preset-react": "^8",
+    "@babel/runtime": "^8",
     "babel-loader": "^10",
+    "babel-plugin-polyfill-corejs3": "^1.0.0",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "canvas-datagrid": "^0.25.4",
     "chart.js": "^4.4.4",
@@ -77,6 +105,7 @@
     "@testing-library/dom": "^10",
     "@testing-library/jest-dom": "^7",
     "@testing-library/react": "^16",
+    "babel-jest": "^30",
     "jest": "^30",
     "jest-environment-jsdom": "^30",
     "webpack-dev-server": "^6"

@@ -7,7 +7,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    aasm (5.5.2)
+    aasm (6.0.0)
       concurrent-ruby (~> 1.0)
     action_text-trix (2.1.19)
       railties
@@ -154,7 +154,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.3.8)
-    connection_pool (2.5.5)
+    connection_pool (3.0.2)
     crass (1.0.8)
     csv (3.3.6)
     cuprite (0.19)
@@ -297,7 +297,7 @@ GEM
     prettyprint (0.2.1)
     prism (1.9.0)
     public_suffix (7.0.5)
-    puma (6.6.1)
+    puma (8.0.2)
       nio4r (~> 2.0)
     pundit (2.5.2)
       activesupport (>= 3.0.0)
@@ -349,7 +349,7 @@ GEM
       zeitwerk (~> 2.6)
     rainbow (3.1.1)
     rake (13.4.2)
-    ransack (4.4.3)
+    ransack (6.0.0)
       activerecord (>= 7.2)
       activesupport (>= 7.2)
       i18n
@@ -371,9 +371,9 @@ GEM
       execjs
       railties (>= 3.2)
       tilt
-    redis (5.4.1)
-      redis-client (>= 0.22.0)
-    redis-client (0.31.0)
+    redis (6.0.0)
+      redis-client (= 0.30.1)
+    redis-client (0.30.1)
       connection_pool
     regexp_parser (2.13.1)
     reline (0.7.0)
@@ -391,9 +391,12 @@ GEM
     rgeo-geojson (2.2.0)
       multi_json (~> 1.15)
       rgeo (>= 1.0.0)
-    roo (2.10.1)
+    roo (4.0.0)
+      base64 (~> 0.2)
+      csv (~> 3)
+      logger (~> 1)
       nokogiri (~> 1)
-      rubyzip (>= 1.3.0, < 3.0.0)
+      rubyzip (>= 3.0.0, < 4.0.0)
     rspec-core (3.13.6)
       rspec-support (~> 3.13.0)
     rspec-expectations (3.13.5)
@@ -402,14 +405,14 @@ GEM
     rspec-mocks (3.13.8)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.13.0)
-    rspec-rails (7.1.1)
-      actionpack (>= 7.0)
-      activesupport (>= 7.0)
-      railties (>= 7.0)
-      rspec-core (~> 3.13)
-      rspec-expectations (~> 3.13)
-      rspec-mocks (~> 3.13)
-      rspec-support (~> 3.13)
+    rspec-rails (8.0.4)
+      actionpack (>= 7.2)
+      activesupport (>= 7.2)
+      railties (>= 7.2)
+      rspec-core (>= 3.13.0, < 5.0.0)
+      rspec-expectations (>= 3.13.0, < 5.0.0)
+      rspec-mocks (>= 3.13.0, < 5.0.0)
+      rspec-support (>= 3.13.0, < 5.0.0)
     rspec-support (3.13.7)
     rubocop (1.91.0)
       json (>= 2.3)
@@ -430,10 +433,10 @@ GEM
       rubocop (>= 1.75.0, < 2.0)
       rubocop-ast (>= 1.47.1, < 2.0)
     ruby-progressbar (1.13.0)
-    rubyXL (3.4.34)
+    rubyXL (3.4.38)
       nokogiri (>= 1.10.8)
-      rubyzip (~> 2.4)
-    rubyzip (2.4.1)
+      rubyzip (>= 3.2.2)
+    rubyzip (3.7.0)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
     sassc (2.4.0)
@@ -457,8 +460,8 @@ GEM
       rack-proxy (>= 0.6.1)
       railties (>= 5.2)
       semantic_range (>= 2.3.0)
-    shoulda-matchers (6.5.0)
-      activesupport (>= 5.2.0)
+    shoulda-matchers (8.0.1)
+      activesupport (>= 7.2)
     sprockets (4.4.1)
       concurrent-ruby (~> 1.1)
       logger
@@ -516,7 +519,7 @@ PLATFORMS
   aarch64-linux
 
 DEPENDENCIES
-  aasm (~> 5.5)
+  aasm (~> 6.0)
   actionpack-action_caching (~> 1.2)
   activerecord-postgis-adapter (~> 11.1)
   administrate (~> 1.0)
@@ -530,7 +533,7 @@ DEPENDENCIES
   capybara (~> 3.40)
   capybara-select-2 (~> 0.5)
   coffee-rails (~> 5.0)
-  connection_pool (~> 2.4)
+  connection_pool (~> 3.0)
   csv
   cuprite (~> 0.15)
   debug
@@ -552,23 +555,23 @@ DEPENDENCIES
   paper_trail (~> 17.0)
   pg (~> 1.6)
   pg_search (~> 2.3)
-  puma (~> 6.4)
+  puma (~> 8.0)
   pundit (~> 2.5)
   rails (~> 8.1)
   rails-erd
-  ransack (~> 4.1)
+  ransack (~> 6.0)
   react-rails
-  redis (~> 5.2)
+  redis (~> 6.0)
   rgeo (~> 3.0)
   rgeo-geojson (~> 2.1)
-  roo (~> 2.10)
-  rspec-rails (~> 7.1)
+  roo (~> 4.0)
+  rspec-rails (~> 8.0)
   rubyXL
   sass-rails (~> 6.0)
   select2-rails (~> 4.0)!
   selenium-webdriver (~> 4.27)
   shakapacker (~> 8.0)
-  shoulda-matchers (~> 6.2)
+  shoulda-matchers (~> 8.0)
   standard
   turbolinks (~> 5)
   tzinfo-data

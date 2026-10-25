@@ -8,7 +8,7 @@ gem "rails", "~> 8.1"
 # Use postgres as the database for Active Record
 gem "pg", "~> 1.6"
 # Use Puma as the app server
-gem "puma", "~> 6.4"
+gem "puma", "~> 8.0"
 # Use SCSS for stylesheets
 gem "sass-rails", "~> 6.0"
 # Use Uglifier as compressor for JavaScript assets
@@ -24,8 +24,8 @@ gem "turbolinks", "~> 5"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem "jbuilder", "~> 2.12"
 # Use Redis adapter to run Action Cable in production
-gem "redis", "~> 5.2"
-gem "connection_pool", "~> 2.4"
+gem "redis", "~> 6.0"
+gem "connection_pool", "~> 3.0"
 gem "actionpack-action_caching", "~> 1.2"
 
 # Use devise for authentication
@@ -35,7 +35,7 @@ gem "devise", "~> 4.9"
 gem "administrate", "~> 1.0"
 gem "pundit", "~> 2.5"
 
-gem "roo", "~> 2.10"
+gem "roo", "~> 4.0"
 gem "rubyXL"
 gem "aws-sdk-s3", "~> 1.151", require: false
 
@@ -43,7 +43,7 @@ gem "filterrific", "~> 5.2"
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
-gem "aasm", "~> 5.5"
+gem "aasm", "~> 6.0"
 gem "after_commit_everywhere", "~> 1.4"
 
 gem "good_job", "~> 3.29"
@@ -59,13 +59,13 @@ gem "rgeo-geojson", "~> 2.1"
 gem "bootsnap", ">= 1.18", require: false
 
 gem "jsonapi.rb", "~> 2.0"
-gem "ransack", "~> 4.1"
+gem "ransack", "~> 6.0"
 
 gem "vanilla_nested"
 
 group :development, :test do
   gem "debug", platforms: [:mri, :mingw, :x64_mingw]
-  gem "rspec-rails", "~> 7.1"
+  gem "rspec-rails", "~> 8.0"
 end
 
 group :development do
@@ -85,7 +85,7 @@ group :test do
   gem "capybara-select-2", "~> 0.5"
 
   gem "factory_bot_rails", "~> 6.4"
-  gem "shoulda-matchers", "~> 6.2"
+  gem "shoulda-matchers", "~> 8.0"
 
   gem "jsonapi-rspec"
 end

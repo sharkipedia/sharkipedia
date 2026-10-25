@@ -29,7 +29,7 @@ gem "connection_pool", "~> 3.0"
 gem "actionpack-action_caching", "~> 1.2"
 
 # Use devise for authentication
-gem "devise", "~> 4.9"
+gem "devise", "~> 5.0"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 gem "administrate", "~> 1.0"

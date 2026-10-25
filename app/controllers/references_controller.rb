@@ -1,5 +1,5 @@
 class ReferencesController < PreAuthController
-  include Pagy::Backend
+  include Pagy::Method
 
   caches_action :show, :index, expires_in: 1.hour
 

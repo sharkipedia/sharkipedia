@@ -1,5 +1,5 @@
 class TrendsController < PreAuthController
-  include Pagy::Backend
+  include Pagy::Method
 
   before_action :authenticate_user!, only: [:new, :edit, :create, :update]
   before_action :set_trend, only: [:show, :destroy]

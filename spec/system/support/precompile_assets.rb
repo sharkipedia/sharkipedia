@@ -15,7 +15,7 @@ RSpec.configure do |config|
       start = Time.current
       begin
         # Silence Shakapacker output
-        $stdout.reopen(File.new("/dev/null", "w"))
+        $stdout.reopen(File.new(File::NULL, "w"))
         # next 3 lines to compile shakapacker before running our test suite
         require "rake"
         Rails.application.load_tasks

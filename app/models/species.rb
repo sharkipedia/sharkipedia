@@ -42,6 +42,7 @@ class Species < ApplicationRecord
   enum :cites_status, [:none, :appendix_1, :appendix_2, :appendix_3], prefix: true
 
   include PgSearch::Model
+
   pg_search_scope :search_by_name, against: [:name],
     using: {
       tsearch: {
@@ -50,6 +51,7 @@ class Species < ApplicationRecord
     }
 
   extend FriendlyId
+
   friendly_id :name, use: :slugged
 
   validates :name, presence: true, uniqueness: true

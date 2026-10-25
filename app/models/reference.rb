@@ -32,6 +32,7 @@
 #
 class Reference < ApplicationRecord
   extend FriendlyId
+
   friendly_id :name, use: :slugged
 
   validates :name, presence: true, uniqueness: true
@@ -49,6 +50,7 @@ class Reference < ApplicationRecord
   before_validation :find_authors
 
   include PgSearch::Model
+
   pg_search_scope :search_by_name, against: [:name],
     using: {
       tsearch: {

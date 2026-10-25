@@ -1,5 +1,6 @@
 class ObservationsController < ApplicationController
   include Pagy::Backend
+
   before_action :set_observation, only: [:show, :destroy]
   before_action :set_associations, only: [:new, :edit, :create, :update]
 

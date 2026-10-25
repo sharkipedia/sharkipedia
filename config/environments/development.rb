@@ -77,10 +77,10 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   # Fall back to polling in Docker where inotify doesn't work with bind mounts.
-  if File.exist?("/.dockerenv")
-    config.file_watcher = ActiveSupport::FileUpdateChecker
+  config.file_watcher = if File.exist?("/.dockerenv")
+    ActiveSupport::FileUpdateChecker
   else
-    config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+    ActiveSupport::EventedFileUpdateChecker
   end
 
   # Uncomment if you wish to allow Action Cable access from any origin.

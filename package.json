@@ -75,10 +75,10 @@
   },
   "devDependencies": {
     "@testing-library/dom": "^10",
-    "@testing-library/jest-dom": "^6.4.6",
+    "@testing-library/jest-dom": "^7",
     "@testing-library/react": "^16",
-    "jest": "^29.7.0",
-    "jest-environment-jsdom": "^29.7.0",
+    "jest": "^30",
+    "jest-environment-jsdom": "^30",
     "webpack-dev-server": "^6"
   },
   "resolutions": {

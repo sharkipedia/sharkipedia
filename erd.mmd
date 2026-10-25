@@ -1,0 +1,414 @@
+erDiagram
+	direction TB
+	"ActiveStorage::Attachment" {
+		string name
+		string record_type
+	}
+	"ActiveStorage::Blob" {
+		integer byte_size
+		string checksum
+		string content_type
+		string filename
+		string key
+		text metadata
+		string service_name
+	}
+	"ActiveStorage::VariantRecord" {
+		string variation_digest
+	}
+	AnalysisModel {
+		string name
+	}
+	Author {
+		string name
+	}
+	DataType {
+		string name
+	}
+	Eez {
+		float area_km2
+		geometry geom
+		string geoname
+		string iso_sov1
+		string iso_sov2
+		string iso_sov3
+		string iso_ter1
+		string iso_ter2
+		string iso_ter3
+		float mrgid
+		float mrgid_eez
+		float mrgid_sov1
+		float mrgid_sov2
+		float mrgid_sov3
+		float mrgid_ter1
+		float mrgid_ter2
+		float mrgid_ter3
+		string pol_type
+		string sovereign1
+		string sovereign2
+		string sovereign3
+		string territory1
+		string territory2
+		string territory3
+		integer un_sov1
+		integer un_sov2
+		integer un_sov3
+		integer un_ter1
+		integer un_ter2
+		integer un_ter3
+		float x_1
+		float y_1
+	}
+	FaoArea {
+		string f_area
+		string f_code
+		string f_division
+		string f_level
+		string f_subarea
+		string f_subdivision
+		string f_subunit
+		string name
+	}
+	"GoodJob::BatchRecord" {
+		integer callback_priority
+		text callback_queue_name
+		text description
+		datetime discarded_at
+		datetime enqueued_at
+		datetime finished_at
+		text on_discard
+		text on_finish
+		text on_success
+		jsonb serialized_properties
+	}
+	"GoodJob::DiscreteExecution" {
+		interval duration
+		text error
+		text error_backtrace
+		integer error_event
+		datetime finished_at
+		text job_class
+		uuid process_id
+		text queue_name
+		datetime scheduled_at
+		jsonb serialized_params
+	}
+	"GoodJob::Execution" {
+		uuid batch_callback_id
+		text concurrency_key
+		datetime cron_at
+		text cron_key
+		text error
+		integer error_event
+		integer executions_count
+		datetime finished_at
+		boolean is_discrete
+		text job_class
+		text labels
+		datetime locked_at
+		uuid locked_by_id
+		datetime performed_at
+		integer priority
+		text queue_name
+		uuid retried_good_job_id
+		datetime scheduled_at
+		jsonb serialized_params
+	}
+	"GoodJob::Job" {
+		text concurrency_key
+		datetime cron_at
+		text cron_key
+		text error
+		integer error_event
+		integer executions_count
+		datetime finished_at
+		uuid id
+		boolean is_discrete
+		text job_class
+		text labels
+		datetime locked_at
+		datetime performed_at
+		integer priority
+		text queue_name
+		uuid retried_good_job_id
+		datetime scheduled_at
+		jsonb serialized_params
+	}
+	"GoodJob::Process" {
+		integer lock_type
+		jsonb state
+	}
+	"GoodJob::Setting" {
+		text key
+		jsonb value
+	}
+	Import {
+		string aasm_state
+		boolean approved
+		string import_type
+		text log
+		text reason
+		string title
+		boolean xlsx_valid
+	}
+	Location {
+		string lat
+		string lon
+		geography lonlat
+		string name
+	}
+	LonghurstProvince {
+		string code
+		string name
+	}
+	MarineEcoregionsWorld {
+		string province
+		string region_type
+		integer trend_reg_id
+	}
+	Measurement {
+		string date
+		boolean dubious
+		text notes
+		string precision
+		string precision_upper
+		integer sample_size
+		boolean validated
+		string value
+	}
+	MeasurementMethod {
+		text description
+		string name
+	}
+	MeasurementModel {
+		text description
+		string name
+	}
+	Observation {
+		string access
+		string contributor_id
+		string depth
+		boolean hidden
+	}
+	Ocean {
+		string name
+	}
+	"PaperTrail::Version" {
+		string event
+		string item_type
+		text object
+		text object_changes
+		string whodunnit
+	}
+	PrecisionType {
+		text description
+		string name
+	}
+	Reference {
+		string author_year
+		string data_source
+		date date
+		string doi
+		date epub_date
+		string errata
+		boolean file_public
+		string issue
+		string journal
+		string name
+		string pages
+		string part_supplement
+		string reference
+		string slug
+		integer start_page
+		string suffix
+		string title
+		string volume
+		string year
+	}
+	SamplingMethod {
+		string code
+		string name
+	}
+	SexType {
+		string name
+	}
+	SourceObservation {
+		string name
+	}
+	Species {
+		string authorship
+		integer cites_status
+		string cites_status_year
+		integer cms_status
+		string cms_status_year
+		string edge_scientific_name
+		string iucn_code
+		string name
+		string scientific_name
+		string slug
+	}
+	SpeciesDataType {
+		string name
+	}
+	SpeciesFamily {
+		string name
+	}
+	SpeciesGroup {
+		string name
+	}
+	SpeciesOrder {
+		string name
+	}
+	SpeciesSubclass {
+		string name
+	}
+	SpeciesSuperorder {
+		string name
+	}
+	Standard {
+		text description
+		string name
+	}
+	Trait {
+		text description
+		string name
+	}
+	TraitClass {
+		string name
+	}
+	Trend {
+		integer actual_page
+		text comments
+		boolean data_mined
+		boolean dataset_map
+		string dataset_representativeness_experts
+		string depth
+		integer end_year
+		string experts_for_representativeness
+		string figure_data
+		string figure_name
+		string line_used
+		integer no_years
+		string page_and_figure_number
+		integer pdf_page
+		string sampling_method_info
+		integer start_year
+		integer time_min
+		text unit_freeform
+		boolean variance
+	}
+	TrendObservation {
+		string value
+		string year
+	}
+	UnitGear {
+		string name
+	}
+	UnitSpatial {
+		string name
+	}
+	UnitTime {
+		string name
+	}
+	UnitTransformation {
+		string name
+	}
+	User {
+		datetime confirmation_sent_at
+		string confirmation_token
+		datetime confirmed_at
+		string email
+		string encrypted_password
+		string name
+		datetime remember_created_at
+		datetime reset_password_sent_at
+		string reset_password_token
+		string token
+		string unconfirmed_email
+		string user_level
+	}
+	ValidationType {
+		text description
+		string name
+	}
+	ValueType {
+		text description
+		string name
+	}
+	"ActiveStorage::Blob" ||--|o "ActiveStorage::Attachment" : ""
+	"ActiveStorage::VariantRecord" ||--|o "ActiveStorage::Attachment" : ""
+	Import ||--|o "ActiveStorage::Attachment" : ""
+	Reference ||--|o "ActiveStorage::Attachment" : ""
+	Trend ||--|o "ActiveStorage::Attachment" : ""
+	"ActiveStorage::Blob" ||--}o "ActiveStorage::Attachment" : ""
+	"ActiveStorage::Blob" ||--}o "ActiveStorage::VariantRecord" : ""
+	"ActiveStorage::Blob" o|..|o "ActiveStorage::Blob" : ""
+	AnalysisModel o|--}o Trend : ""
+	Author o{--}o Reference : ""
+	Ocean ||--}o FaoArea : ""
+	FaoArea o{--}o Trend : ""
+	"GoodJob::BatchRecord" o|--}o "GoodJob::Execution" : ""
+	"GoodJob::BatchRecord" o|--}o "GoodJob::Job" : ""
+	"GoodJob::Execution" o|--}o "GoodJob::DiscreteExecution" : ""
+	"GoodJob::Job" o|--}o "GoodJob::DiscreteExecution" : ""
+	"GoodJob::Execution" ||--}o "GoodJob::DiscreteExecution" : ""
+	"GoodJob::Job" ||--}o "GoodJob::DiscreteExecution" : ""
+	"GoodJob::Job" o|--}o "GoodJob::Execution" : ""
+	"GoodJob::Process" o|--}o "GoodJob::Job" : ""
+	User ||--}o Import : ""
+	Import ||--}o Trend : ""
+	Import ||--}o Observation : ""
+	Import o|..|o "ActiveStorage::Blob" : ""
+	Location ||--}o Measurement : ""
+	Location o|..}o Observation : ""
+	Location ||--}o Trend : ""
+	LonghurstProvince o|--}o Measurement : ""
+	LonghurstProvince o|..}o Observation : ""
+	MarineEcoregionsWorld o{--}o Trend : ""
+	Observation ||--}o Measurement : ""
+	Species ||--}o Measurement : ""
+	SexType ||--}o Measurement : ""
+	Trait ||--}o Measurement : ""
+	Measurement o|..|o TraitClass : ""
+	Standard o|--}o Measurement : ""
+	MeasurementMethod o|--}o Measurement : ""
+	MeasurementModel o|--}o Measurement : ""
+	ValueType o|--}o Measurement : ""
+	ValidationType o|--}o Measurement : ""
+	PrecisionType o|--}o Measurement : ""
+	TraitClass ||--}o MeasurementMethod : ""
+	TraitClass ||--}o MeasurementModel : ""
+	User ||--}o Observation : ""
+	Observation o{--}| Reference : ""
+	Observation o|..}o Species : ""
+	Ocean o{--}o Trend : ""
+	Ocean o|..}o Species : ""
+	Reference ||--}o Trend : ""
+	Reference o|..|o "ActiveStorage::Blob" : ""
+	SourceObservation o{--}o Trend : ""
+	SpeciesSuperorder ||--}o Species : ""
+	SpeciesDataType ||--}o Species : ""
+	SpeciesSubclass ||--}o Species : ""
+	SpeciesOrder ||--}o Species : ""
+	SpeciesFamily ||--}o Species : ""
+	Species o|--}o Trend : ""
+	Species o{--}o SpeciesGroup : ""
+	SpeciesSubclass ||--}o SpeciesFamily : ""
+	SpeciesSuperorder ||--}o SpeciesFamily : ""
+	SpeciesOrder ||--}o SpeciesFamily : ""
+	SpeciesGroup o|--}o Trend : ""
+	SpeciesSuperorder ||--}o SpeciesOrder : ""
+	SpeciesSubclass ||--}o SpeciesOrder : ""
+	SpeciesSubclass ||--}o SpeciesSuperorder : ""
+	TraitClass o|--}o Standard : ""
+	Standard ||--}o Trend : ""
+	TraitClass ||--}o Trait : ""
+	User ||--}o Trend : ""
+	DataType ||--}o Trend : ""
+	SamplingMethod ||--}o Trend : ""
+	UnitTime o|--}o Trend : ""
+	UnitSpatial o|--}o Trend : ""
+	UnitGear o|--}o Trend : ""
+	UnitTransformation o|--}o Trend : ""
+	Trend ||--}o TrendObservation : ""
+	Trend o|..|o "ActiveStorage::Blob" : ""

@@ -1,4 +1,4 @@
-FROM ruby:4.0.2-slim-bookworm
+FROM ruby:4.0.7-slim-trixie
 
 # System dependencies for Rails + PostGIS + Node + headless browser
 RUN apt-get update -qq && \
@@ -19,8 +19,8 @@ RUN apt-get update -qq && \
       shared-mime-info \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Node 20.x and Yarn
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
+# Install Node 24.x and Yarn
+RUN curl -fsSL https://deb.nodesource.com/setup_24.x | bash - && \
     apt-get install -y --no-install-recommends nodejs && \
     npm install -g yarn && \
     rm -rf /var/lib/apt/lists/*

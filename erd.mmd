@@ -76,12 +76,19 @@ erDiagram
 		datetime discarded_at
 		datetime enqueued_at
 		datetime finished_at
+		datetime jobs_finished_at
 		text on_discard
 		text on_finish
 		text on_success
 		jsonb serialized_properties
 	}
+	"GoodJob::ConcurrencyClaim" {
+		text key
+		uuid locked_by_id
+		integer state
+	}
 	"GoodJob::DiscreteExecution" {
+		uuid active_job_id
 		interval duration
 		text error
 		text error_backtrace
@@ -94,23 +101,14 @@ erDiagram
 		jsonb serialized_params
 	}
 	"GoodJob::Execution" {
-		uuid batch_callback_id
-		text concurrency_key
-		datetime cron_at
-		text cron_key
+		interval duration
 		text error
+		text error_backtrace
 		integer error_event
-		integer executions_count
 		datetime finished_at
-		boolean is_discrete
 		text job_class
-		text labels
-		datetime locked_at
-		uuid locked_by_id
-		datetime performed_at
-		integer priority
+		uuid process_id
 		text queue_name
-		uuid retried_good_job_id
 		datetime scheduled_at
 		jsonb serialized_params
 	}
@@ -122,15 +120,13 @@ erDiagram
 		integer error_event
 		integer executions_count
 		datetime finished_at
-		uuid id
-		boolean is_discrete
 		text job_class
 		text labels
+		integer lock_type
 		datetime locked_at
 		datetime performed_at
 		integer priority
 		text queue_name
-		uuid retried_good_job_id
 		datetime scheduled_at
 		jsonb serialized_params
 	}
@@ -347,14 +343,10 @@ erDiagram
 	Author o{--}o Reference : ""
 	Ocean ||--}o FaoArea : ""
 	FaoArea o{--}o Trend : ""
-	"GoodJob::BatchRecord" o|--}o "GoodJob::Execution" : ""
 	"GoodJob::BatchRecord" o|--}o "GoodJob::Job" : ""
-	"GoodJob::Execution" o|--}o "GoodJob::DiscreteExecution" : ""
-	"GoodJob::Job" o|--}o "GoodJob::DiscreteExecution" : ""
-	"GoodJob::Execution" ||--}o "GoodJob::DiscreteExecution" : ""
-	"GoodJob::Job" ||--}o "GoodJob::DiscreteExecution" : ""
-	"GoodJob::Job" o|--}o "GoodJob::Execution" : ""
+	"GoodJob::Job" ||--}o "GoodJob::Execution" : ""
 	"GoodJob::Process" o|--}o "GoodJob::Job" : ""
+	"GoodJob::Job" o|--}o "GoodJob::ConcurrencyClaim" : ""
 	User ||--}o Import : ""
 	Import ||--}o Trend : ""
 	Import ||--}o Observation : ""

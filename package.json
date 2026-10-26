@@ -55,8 +55,31 @@
       "app/javascript"
     ],
     "transform": {
+      "/node_modules/.+\\.js$": [
+        "babel-jest",
+        {
+          "babelrc": false,
+          "configFile": false,
+          "presets": [
+            [
+              "@babel/preset-env",
+              {
+                "targets": {
+                  "node": "current"
+                }
+              }
+            ]
+          ]
+        }
+      ],
       "\\.[jt]sx?$": "babel-jest"
-    }
+    },
+    "moduleNameMapper": {
+      "\\.(css|scss)$": "<rootDir>/spec/javascript/styleMock.js"
+    },
+    "transformIgnorePatterns": [
+      "/node_modules/(?!(ol|ol-layerswitcher|color-space|color-rgba|color-parse|color-name|rbush|quickselect|earcut|pbf|geotiff)/)"
+    ]
   },
   "dependencies": {
     "@babel/core": "^8",

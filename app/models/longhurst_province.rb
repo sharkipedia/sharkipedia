@@ -4,6 +4,7 @@
 #
 #  id         :bigint           not null, primary key
 #  code       :string
+#  geom       :geometry         multipolygon, 4326
 #  name       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -11,6 +12,7 @@
 # Indexes
 #
 #  index_longhurst_provinces_on_code  (code)
+#  index_longhurst_provinces_on_geom  (geom) USING gist
 #
 class LonghurstProvince < ApplicationRecord
   validates :name, presence: true

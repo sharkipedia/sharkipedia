@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_25_153278) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_26_120000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -117,7 +117,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_25_153278) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.geometry "geom", limit: {srid: 4326, type: "multi_polygon"}
     t.index ["f_code"], name: "index_fao_areas_on_f_code"
+    t.index ["geom"], name: "index_fao_areas_on_geom", using: :gist
     t.index ["ocean_id"], name: "index_fao_areas_on_ocean_id"
   end
 
@@ -288,7 +290,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_25_153278) do
     t.string "code"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
+    t.geometry "geom", limit: {srid: 4326, type: "multi_polygon"}
     t.index ["code"], name: "index_longhurst_provinces_on_code"
+    t.index ["geom"], name: "index_longhurst_provinces_on_geom", using: :gist
   end
 
   create_table "marine_ecoregions_worlds", force: :cascade do |t|
@@ -297,6 +301,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_25_153278) do
     t.integer "trend_reg_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.geometry "geom", limit: {srid: 4326, type: "multi_polygon"}
+    t.index ["geom"], name: "index_marine_ecoregions_worlds_on_geom", using: :gist
   end
 
   create_table "marine_ecoregions_worlds_trends", id: false, force: :cascade do |t|

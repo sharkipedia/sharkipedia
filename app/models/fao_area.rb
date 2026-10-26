@@ -10,6 +10,7 @@
 #  f_subarea     :string
 #  f_subdivision :string
 #  f_subunit     :string
+#  geom          :geometry         multipolygon, 4326
 #  name          :string           not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -18,6 +19,7 @@
 # Indexes
 #
 #  index_fao_areas_on_f_code    (f_code)
+#  index_fao_areas_on_geom      (geom) USING gist
 #  index_fao_areas_on_ocean_id  (ocean_id)
 #
 # Foreign Keys

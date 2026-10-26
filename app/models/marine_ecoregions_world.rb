@@ -15,6 +15,8 @@
 #  index_marine_ecoregions_worlds_on_geom  (geom) USING gist
 #
 class MarineEcoregionsWorld < ApplicationRecord
+  include RegionGeometry
+
   validates :region_type, presence: true
   validates :province, presence: true
 

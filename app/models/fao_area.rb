@@ -27,6 +27,8 @@
 #  fk_rails_...  (ocean_id => oceans.id)
 #
 class FaoArea < ApplicationRecord
+  include RegionGeometry
+
   belongs_to :ocean
   validates :f_code, presence: true, uniqueness: true
   validates :f_level, presence: true

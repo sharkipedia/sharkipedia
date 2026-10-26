@@ -197,6 +197,8 @@ yarn test --coverage
 - Schema format: `db/schema.rb` (Ruby format, not SQL).
 - Extensions: `pgcrypto`, `plpgsql`, `postgis`.
 - EEZ geographic data loaded externally (not in seeds).
+- Marine region polygons (Longhurst, FAO, MEOW, PPOW) are loaded with
+  `bin/rails regions:load` (fetches from VLIZ and UNEP-WCMC; idempotent; not in seeds).
 
 ## CI Pipeline (GitHub Actions)
 

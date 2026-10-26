@@ -14,15 +14,6 @@ services:
       timeout: 5s
       retries: 5
 
-  redis:
-    image: redis:7-alpine
-    ports:
-      - "6379:6379"
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
 
   web:
     build: .
@@ -39,12 +30,9 @@ services:
       DB_HOST: db
       DB_USER: postgres
       DB_PASSWORD: postgres
-      REDIS_URL: redis://redis:6379/1
       SHAKAPACKER_DEV_SERVER_HOST: webpacker
     depends_on:
       db:
-        condition: service_healthy
-      redis:
         condition: service_healthy
     stdin_open: true
     tty: true
@@ -76,11 +64,8 @@ services:
       DB_HOST: db
       DB_USER: postgres
       DB_PASSWORD: postgres
-      REDIS_URL: redis://redis:6379/1
     depends_on:
       db:
-        condition: service_healthy
-      redis:
         condition: service_healthy
 
 volumes:

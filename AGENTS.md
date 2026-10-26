@@ -19,7 +19,7 @@ for authentication/authorization.
 # Add --skip-server to stop before booting.
 bin/setup
 
-# Start all services (web :3000, shakapacker :3035, good_job worker, db, redis)
+# Start all services (web :3000, shakapacker :3035, good_job worker, db)
 bin/dev
 
 # Run commands inside the containers
@@ -205,7 +205,7 @@ yarn test --coverage
 Two jobs on push/PR to `master`:
 
 1. **Linters**: `bin/standardrb`
-2. **Tests**: PostGIS + Redis services, schema load, `bundle exec rails spec`, `yarn test`
+2. **Tests**: PostGIS service, schema load, `bundle exec rails spec`, `yarn test`
 
 ## Key Files
 

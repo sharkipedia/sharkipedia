@@ -273,8 +273,6 @@ GEM
       timeout
     net-smtp (0.5.2)
       net-protocol
-    newrelic_rpm (10.9.1)
-      logger
     nio4r (2.7.5)
     nokogiri (1.19.4-aarch64-linux-gnu)
       racc (~> 1.4)
@@ -375,10 +373,6 @@ GEM
       execjs
       railties (>= 3.2)
       tilt
-    redis (6.0.0)
-      redis-client (= 0.30.1)
-    redis-client (0.30.1)
-      connection_pool
     regexp_parser (2.13.1)
     reline (0.7.0)
       io-console (~> 0.5)
@@ -538,7 +532,6 @@ DEPENDENCIES
   capybara (~> 3.40)
   capybara-select-2 (~> 0.5)
   coffee-rails (~> 5.0)
-  connection_pool (~> 3.0)
   csv
   cuprite (~> 0.15)
   debug
@@ -554,7 +547,6 @@ DEPENDENCIES
   jsonapi.rb (~> 2.0)
   listen (~> 3.10)
   mutex_m
-  newrelic_rpm
   ostruct
   pagy (~> 43.0)
   paper_trail (~> 17.0)
@@ -566,7 +558,6 @@ DEPENDENCIES
   rails-erd
   ransack (~> 6.0)
   react-rails
-  redis (~> 6.0)
   rgeo (~> 3.0)
   rgeo-geojson (~> 2.1)
   roo (~> 4.0)

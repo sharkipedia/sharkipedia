@@ -83,8 +83,6 @@ Rails.application.configure do
     ActiveSupport::EventedFileUpdateChecker
   end
 
-  # Uncomment if you wish to allow Action Cable access from any origin.
-  # config.action_cable.disable_request_forgery_protection = true
   config.good_job.execution_mode = :external
 end
 

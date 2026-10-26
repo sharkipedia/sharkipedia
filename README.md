@@ -13,7 +13,7 @@ containers.
 # Pass --skip-server if you only want to provision without booting.
 bin/setup
 
-# Start the app (web :3000, webpack-dev-server :3035, good_job worker, db, redis)
+# Start the app (web :3000, webpack-dev-server :3035, good_job worker, db)
 bin/dev
 ```
 

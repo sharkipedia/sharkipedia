@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  # Health check for kamal-proxy: 200 when the app boots, 500 otherwise.
+  get "up" => "rails/health#show", :as => :rails_health_check
+
   namespace :admin do
     resources :users
     resources :authors

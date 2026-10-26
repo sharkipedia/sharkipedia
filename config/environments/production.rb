@@ -20,9 +20,9 @@ Rails.application.configure do
   # or in config/master.key. This key is used to decrypt credentials (and other encrypted files).
   # config.require_master_key = true
 
-  # Disable serving static files from the `/public` folder by default since
-  # Apache or NGINX already handles this.
-  config.public_file_server.enabled = ENV["RAILS_SERVE_STATIC_FILES"].present?
+  # No NGINX in front: Puma serves /public (packs, assets) with long cache headers.
+  config.public_file_server.enabled = true
+  config.public_file_server.headers = {"cache-control" => "public, max-age=#{1.year.to_i}"}
 
   # Compress CSS using a preprocessor.
   # config.assets.css_compressor = :sass
@@ -40,8 +40,13 @@ Rails.application.configure do
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :amazon
 
-  # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
+  # TLS ends at Cloudflare; requests reach the app over plain HTTP through the
+  # tunnel and kamal-proxy. Treat them as HTTPS anyway, and keep HSTS and
+  # secure cookies. The health check stays plain HTTP.
+  config.assume_ssl = true
   config.force_ssl = true
+  config.ssl_options = {redirect: {exclude: ->(request) { request.path == "/up" }}}
+  config.silence_healthcheck_path = "/up"
 
   # Include generic and useful information about system operation, but avoid logging too much
   # information to avoid inadvertent exposure of personally identifiable information (PII).
@@ -79,11 +84,10 @@ Rails.application.configure do
   # require "syslog/logger"
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
-  if ENV["RAILS_LOG_TO_STDOUT"].present?
-    logger = ActiveSupport::Logger.new($stdout)
-    logger.formatter = config.log_formatter
-    config.logger = ActiveSupport::TaggedLogging.new(logger)
-  end
+  # Log to stdout; Docker keeps (and caps) the logs.
+  logger = ActiveSupport::Logger.new($stdout)
+  logger.formatter = config.log_formatter
+  config.logger = ActiveSupport::TaggedLogging.new(logger)
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
@@ -98,11 +102,9 @@ Rails.application.configure do
     enable_starttls_auto: true
   }
 
-  host = ENV["DEFAULT_URL_HOST"] ||
-    "#{ENV.fetch("HEROKU_APP_NAME")}.herokuapp.com"
   default_url = {
     protocol: "https",
-    host:
+    host: ENV.fetch("DEFAULT_URL_HOST")
   }
   config.action_mailer.default_url_options = default_url
   config.action_controller.default_url_options = default_url
@@ -133,7 +135,18 @@ Rails.application.configure do
   # Solid Errors stores exceptions in the primary database; browse them at
   # /admin/errors (admins only). Email only when an error is new or reopens.
   config.solid_errors.send_emails = ENV["SOLIDERRORS_EMAIL_TO"].present?
+  config.solid_errors.email_from = ENV["SMTP_EMAIL_ADDRESS"] || Rails.application.credentials.dig(:email, :email_address)
   config.solid_errors.email_every_occurrence = false
   config.solid_errors.email_subject_prefix = "[Sharkipedia]"
   config.solid_errors.destroy_after = 90.days
+
+  # Pull request previews (config/deploy.preview.yml) run this environment
+  # against a copy of the production database. They must not reach real
+  # people or real files: no mail, no cron, the development S3 bucket, and
+  # no search engine indexing.
+  if ENV["PREVIEW"].present?
+    config.action_mailer.delivery_method = :test
+    config.solid_errors.send_emails = false
+    config.action_dispatch.default_headers["X-Robots-Tag"] = "noindex, nofollow"
+  end
 end

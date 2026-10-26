@@ -132,8 +132,6 @@ GEM
     bindex (0.8.1)
     bootsnap (1.26.0)
       msgpack (~> 1.5)
-    bugsnag (6.30.0)
-      concurrent-ruby (~> 1.0)
     builder (3.3.0)
     capybara (3.40.0)
       addressable
@@ -460,6 +458,12 @@ GEM
       semantic_range (>= 2.3.0)
     shoulda-matchers (8.0.1)
       activesupport (>= 7.2)
+    solid_errors (0.9.1)
+      actionpack (>= 7.1)
+      actionview (>= 7.1)
+      activerecord (>= 7.1)
+      activesupport (>= 7.1)
+      railties (>= 7.1)
     sprockets (4.4.1)
       concurrent-ruby (~> 1.1)
       logger
@@ -528,7 +532,6 @@ DEPENDENCIES
   base64
   bigdecimal
   bootsnap (>= 1.18)
-  bugsnag (~> 6.27)
   capybara (~> 3.40)
   capybara-select-2 (~> 0.5)
   coffee-rails (~> 5.0)
@@ -568,6 +571,7 @@ DEPENDENCIES
   selenium-webdriver (~> 4.27)
   shakapacker (= 10.3.2)
   shoulda-matchers (~> 8.0)
+  solid_errors (~> 0.9)
   standard
   turbolinks (~> 5)
   tzinfo-data

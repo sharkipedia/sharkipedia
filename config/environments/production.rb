@@ -129,4 +129,11 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
+
+  # Solid Errors stores exceptions in the primary database; browse them at
+  # /admin/errors (admins only). Email only when an error is new or reopens.
+  config.solid_errors.send_emails = ENV["SOLIDERRORS_EMAIL_TO"].present?
+  config.solid_errors.email_every_occurrence = false
+  config.solid_errors.email_subject_prefix = "[Sharkipedia]"
+  config.solid_errors.destroy_after = 90.days
 end

@@ -100,7 +100,7 @@ gem "mutex_m"
 gem "drb"
 gem "ostruct"
 
-gem "bugsnag", "~> 6.27"
+gem "solid_errors", "~> 0.9"
 
 gem "paper_trail", "~> 17.0"
 

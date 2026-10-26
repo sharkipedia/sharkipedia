@@ -25,12 +25,9 @@ class ApplicationController < ActionController::Base
   private
 
   def record_not_found exception
-    if Rails.env.development?
-      raise exception
-    else
-      Bugsnag.notify(exception)
-      redirect_to root_path
-    end
+    raise exception if Rails.env.development?
+
+    redirect_to root_path
   end
 
   def user_not_authorized exception

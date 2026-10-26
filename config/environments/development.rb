@@ -84,7 +84,7 @@ Rails.application.configure do
   end
 
   config.good_job.execution_mode = :external
-end
 
-# URL generation for ActiveStorage requires this in development
-Rails.application.routes.default_url_options[:host] = "localhost:3000"
+  # Errors surface directly in development and test; don't record them.
+  config.solid_errors.enabled = false
+end

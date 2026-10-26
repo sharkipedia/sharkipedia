@@ -30,6 +30,10 @@ jobs:
       KAMAL_REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
       RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
       DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      # Only used when the db / tunnel accessories are first booted.
+      POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+      PREVIEW_DB_PASSWORD: ${{ secrets.PREVIEW_DB_PASSWORD }}
+      CLOUDFLARE_TUNNEL_TOKEN: ${{ secrets.CLOUDFLARE_TUNNEL_TOKEN }}
       SOLIDERRORS_EMAIL_TO: ${{ vars.SOLIDERRORS_EMAIL_TO }}
     steps:
       - uses: actions/checkout@v5
@@ -40,4 +44,6 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - run: kamal deploy
+      # setup = boot missing accessories (db, tunnel; running ones are
+      # skipped), then deploy.
+      - run: kamal setup

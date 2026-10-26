@@ -88,6 +88,6 @@ nightly to `/var/backups/sharkipedia` (14 days), plus Hetzner's server backups.
 3. Update the server's IP and host key in `config/deploy*.yml`, the workflows
    and `.github/actions/kamal-setup/action.yml`.
 4. `config/server/bootstrap-secrets.sh` (new deploy key and DB passwords).
-5. Actions → Server: `accessory boot db`, then `accessory boot tunnel`.
+5. Actions → Server: `accessory boot db`.
 6. Restore the latest dump into `sharkipedia_production`, then Actions →
-   Deploy → Run workflow.
+   Deploy → Run workflow (it boots the tunnel and deploys).

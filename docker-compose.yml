@@ -16,7 +16,7 @@ services:
 
 
   web:
-    build: .
+    build: {context: ., dockerfile: Dockerfile.dev}
     command: bash -c "rm -f tmp/pids/server.pid && bin/rails server -b 0.0.0.0"
     volumes:
       - .:/app
@@ -38,7 +38,7 @@ services:
     tty: true
 
   webpacker:
-    build: .
+    build: {context: ., dockerfile: Dockerfile.dev}
     command: bin/shakapacker-dev-server
     volumes:
       - .:/app
@@ -53,7 +53,7 @@ services:
       SHAKAPACKER_DEV_SERVER_HOST: 0.0.0.0
 
   worker:
-    build: .
+    build: {context: ., dockerfile: Dockerfile.dev}
     command: bundle exec good_job start
     volumes:
       - .:/app

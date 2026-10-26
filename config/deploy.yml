@@ -1,0 +1,84 @@
+# Production deploy (www.sharkipedia.xyz). Runs from GitHub Actions
+# (.github/workflows/deploy.yml); see docs/deploy.md.
+#
+# Traffic: Cloudflare -> tunnel (the "tunnel" accessory) -> kamal-proxy -> app.
+# Nothing on the server listens on a public port.
+service: sharkipedia
+image: sharkipedia/sharkipedia
+
+servers:
+  web:
+    - 100.89.83.34 # Hetzner CAX21, reached over Tailscale
+  worker:
+    hosts:
+      - 100.89.83.34
+    cmd: bundle exec good_job start
+
+proxy:
+  host: www.sharkipedia.xyz
+  app_port: 3000
+  ssl: false # Cloudflare terminates TLS
+  forward_headers: true
+  healthcheck:
+    path: /up
+  run:
+    publish: false # only the tunnel talks to kamal-proxy, over the Docker network
+
+registry:
+  server: ghcr.io
+  username: <%= ENV.fetch("KAMAL_REGISTRY_USERNAME", "sharkipedia") %>
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+
+builder:
+  arch: arm64 # native on GitHub's ubuntu-24.04-arm runners
+  cache:
+    type: gha
+    options: mode=max
+
+env:
+  clear:
+    DB_HOST: sharkipedia-db
+    DB_USER: sharkipedia
+    DB_NAME: sharkipedia_production
+    DEFAULT_URL_HOST: www.sharkipedia.xyz
+    RAILS_MAX_THREADS: 5
+    WEB_CONCURRENCY: 2
+    # Where Solid Errors sends new-error emails; empty disables them.
+    SOLIDERRORS_EMAIL_TO: "<%= ENV["SOLIDERRORS_EMAIL_TO"] %>"
+  secret:
+    - RAILS_MASTER_KEY
+    - DB_PASSWORD
+
+aliases:
+  console: app exec --interactive --reuse "bin/rails console"
+  shell: app exec --interactive --reuse "bash"
+  logs: app logs -f
+  dbc: accessory exec db --interactive --reuse "psql -U postgres sharkipedia_production"
+
+asset_path: /rails/public/packs
+
+accessories:
+  db:
+    image: imresamu/postgis:17-3.6-trixie
+    host: 100.89.83.34
+    cmd: postgres -c shared_buffers=512MB -c work_mem=16MB
+    env:
+      clear:
+        POSTGRES_USER: postgres
+      secret:
+        - POSTGRES_PASSWORD
+        - DB_PASSWORD
+        - PREVIEW_DB_PASSWORD
+    files:
+      - config/server/db-init.sh:/docker-entrypoint-initdb.d/10-sharkipedia.sh
+    directories:
+      - data:/var/lib/postgresql/data
+
+  tunnel:
+    image: cloudflare/cloudflared:2026.10.4
+    host: 100.89.83.34
+    cmd: tunnel --no-autoupdate run
+    env:
+      secret:
+        - TUNNEL_TOKEN

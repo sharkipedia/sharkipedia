@@ -174,8 +174,9 @@ yarn test --coverage
 ## Error Handling
 
 - `ApplicationController` rescues `Pundit::NotAuthorizedError` (redirect + flash)
-  and `ActiveRecord::RecordNotFound` (Bugsnag notify in production, redirect).
-- Background jobs rescue exceptions with `Bugsnag.notify(e)` and log to the import record.
+  and `ActiveRecord::RecordNotFound` (redirect to root; re-raised in development).
+- Errors are tracked with Solid Errors (primary database, `/admin/errors`, admins only). Report handled
+  exceptions with `Rails.error.report(e)`; imports also log them to the import record.
 - Use standard ActiveModel validations. Custom validators go in `app/validators/`.
 - The only custom validator is `DOIValidator` (validates DOI format on references).
 

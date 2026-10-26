@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # Base setup for the Sharkipedia server (Ubuntu 26.04, Hetzner Cloud).
 # Safe to re-run. Usage: ssh root@HOST 'bash -s' < config/server/setup.sh
+# On a fresh server, use the public IP; afterwards SSH works only via
+# Tailscale (root@sharkipedia).
 set -euo pipefail
 
 export DEBIAN_FRONTEND=noninteractive
@@ -54,12 +56,22 @@ EOF
 systemctl enable docker
 systemctl restart docker
 
-# Firewall: only SSH in. Web traffic arrives through the Cloudflare Tunnel
-# (outbound), so nothing else needs to be open. Docker-published ports bypass
-# ufw, so containers must not publish ports to the host.
+# Tailscale. The first run prints a login URL to approve in the admin console;
+# the policy file must define tag:server.
+if ! command -v tailscale >/dev/null; then
+  curl -fsSL https://tailscale.com/install.sh | sh
+fi
+if ! tailscale status >/dev/null 2>&1; then
+  tailscale up --advertise-tags=tag:server --hostname=sharkipedia
+fi
+
+# Firewall: SSH only over Tailscale, nothing open to the internet. Web
+# traffic arrives through the Cloudflare Tunnel (outbound). Docker-published
+# ports bypass ufw, so containers must not publish ports to the host.
 ufw default deny incoming
 ufw default allow outgoing
-ufw allow OpenSSH
+ufw allow in on tailscale0 to any port 22 proto tcp comment "SSH via Tailscale"
+ufw delete allow OpenSSH >/dev/null 2>&1 || true
 ufw --force enable
 
 timedatectl set-timezone UTC

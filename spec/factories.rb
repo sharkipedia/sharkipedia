@@ -1,4 +1,17 @@
 FactoryBot.define do
+  # Region models ignore their geom column in ActiveRecord, so set it in SQL.
+  trait :with_geom do
+    transient do
+      geom_wkt { "MULTIPOLYGON(((0 0, 10 0, 10 10, 0 10, 0 0)))" }
+    end
+
+    after(:create) do |record, evaluator|
+      record.class.where(id: record.id).update_all(
+        record.class.sanitize_sql_array(["geom = ST_GeomFromText(?, 4326)", evaluator.geom_wkt])
+      )
+    end
+  end
+
   factory :user do
     sequence(:name) { |n| "user #{n}" }
     sequence(:email) { |n| "user#{n}@example.com" }

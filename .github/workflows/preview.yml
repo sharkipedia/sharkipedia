@@ -1,0 +1,83 @@
+name: Preview
+
+# Deploys each pull request to https://pr-<number>.sharkipedia.xyz and removes
+# it when the PR closes.
+#
+# Only PRs from branches in this repository get a preview: GitHub doesn't give
+# workflows on pull requests from forks access to secrets or OIDC tokens, so
+# outside contributions can't deploy. A maintainer can push a fork's branch
+# here to preview it. Never switch this to `pull_request_target`.
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, closed]
+
+concurrency:
+  group: preview-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+permissions: {}
+
+env:
+  PR_NUMBER: ${{ github.event.pull_request.number }}
+  SERVER: root@100.89.83.34
+
+jobs:
+  deploy:
+    if: >-
+      github.event.action != 'closed' &&
+      github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-24.04-arm
+    environment:
+      name: preview-pr-${{ github.event.pull_request.number }}
+      url: https://pr-${{ github.event.pull_request.number }}.sharkipedia.xyz
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    env:
+      KAMAL_REGISTRY_USERNAME: ${{ github.actor }}
+      KAMAL_REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+      PREVIEW_DB_PASSWORD: ${{ secrets.PREVIEW_DB_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: ./.github/actions/kamal-setup
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Create the preview database
+        run: ssh "$SERVER" 'bash -s' -- create "$PR_NUMBER" < config/server/preview-db.sh
+
+      - run: kamal deploy -c config/deploy.preview.yml
+
+  teardown:
+    if: >-
+      github.event.action == 'closed' &&
+      github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-24.04-arm
+    permissions:
+      contents: read
+      deployments: write
+      id-token: write
+    env:
+      KAMAL_REGISTRY_PASSWORD: unused
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: ./.github/actions/kamal-setup
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - run: kamal app remove -c config/deploy.preview.yml
+
+      - name: Drop the preview database
+        run: ssh "$SERVER" 'bash -s' -- drop "$PR_NUMBER" < config/server/preview-db.sh
+
+      - name: Mark the preview deployments inactive
+        run: |
+          env="preview-pr-$PR_NUMBER"
+          for id in $(gh api "repos/$GITHUB_REPOSITORY/deployments?environment=$env" --jq '.[].id'); do
+            gh api -X POST "repos/$GITHUB_REPOSITORY/deployments/$id/statuses" -f state=inactive > /dev/null
+          done

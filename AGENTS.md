@@ -208,6 +208,15 @@ Two jobs on push/PR to `master`:
 1. **Linters**: `bin/standardrb`
 2. **Tests**: PostGIS service, schema load, `bundle exec rails spec`, `yarn test`
 
+## Deployment
+
+Kamal on one Hetzner server, deployed from GitHub Actions: production after CI
+passes on `master`, previews per PR at `pr-<n>.sharkipedia.xyz`. Production
+image: `Dockerfile` (development uses `Dockerfile.dev`). Config:
+`config/deploy.yml`, `config/deploy.preview.yml`, `config/server/`. Previews
+set `PREVIEW=true` (no mail, no cron, development S3 bucket). See
+`docs/deploy.md`.
+
 ## Key Files
 
 - `config/routes.rb` — all routes

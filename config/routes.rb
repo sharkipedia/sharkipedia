@@ -67,6 +67,9 @@ Rails.application.routes.draw do
   resources :locations, only: :create
 
   resources :trends
+  get "regions/:layer", to: "regions#show", as: :region,
+    constraints: {layer: /longhurst|fao|meow|ppow/},
+    defaults: {format: :geojson}
   resources :traits, only: [:index, :show]
   resources :observations do
     post "toggle_publish_state", on: :member

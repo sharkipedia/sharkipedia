@@ -13,6 +13,11 @@ module Sharkipedia
 
     config.active_job.queue_adapter = :good_job
 
+    # The region GeoJSON (/regions/*.geojson) is several hundred KB of
+    # coordinates and compresses ~5x; gzip it regardless of the proxy in front.
+    config.middleware.use Rack::Deflater,
+      if: ->(_env, _status, headers, _body) { headers["content-type"].to_s.start_with?("application/geo+json") }
+
     config.generators do |g|
       g.view_specs false
       g.javascript_engine :js

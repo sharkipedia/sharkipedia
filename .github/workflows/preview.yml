@@ -46,6 +46,15 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
+      # Normally a no-op: the production deploy boots these. Covers a fresh
+      # server, where previews may run before the first production deploy.
+      - name: Make sure the database and tunnel are running
+        run: kamal accessory boot all
+        env:
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          CLOUDFLARE_TUNNEL_TOKEN: ${{ secrets.CLOUDFLARE_TUNNEL_TOKEN }}
+
       - name: Create the preview database
         run: ssh "$SERVER" 'bash -s' -- create "$PR_NUMBER" < config/server/preview-db.sh
 

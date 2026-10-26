@@ -30,6 +30,9 @@ class TrendsController < PreAuthController
     authorize @trend
     @meow_regions = @trend.marine_ecoregions_worlds.meow.map(&:trend_reg_id)
     @ppow_regions = @trend.marine_ecoregions_worlds.ppow.map(&:trend_reg_id)
+    @longhurst_province = LonghurstProvince.containing(
+      longitude: @trend.location&.longitude, latitude: @trend.location&.latitude
+    )
 
     respond_to do |format|
       format.html

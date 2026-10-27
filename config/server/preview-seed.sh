@@ -8,7 +8,7 @@
 # records are left out.
 set -euo pipefail
 
-sql() { docker exec -i sharkipedia-db psql -v ON_ERROR_STOP=1 -U postgres -d "$1" -Atc "$2"; }
+sql() { docker exec sharkipedia-db psql -v ON_ERROR_STOP=1 -U postgres -d "$1" -Atc "$2"; }
 
 sql postgres "DROP DATABASE IF EXISTS sharkipedia_seed_new WITH (FORCE)"
 sql postgres "CREATE DATABASE sharkipedia_seed_new OWNER preview"

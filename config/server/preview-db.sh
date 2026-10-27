@@ -11,7 +11,7 @@ pr="$2"
 [[ "$pr" =~ ^[0-9]+$ ]] || { echo "PR number must be numeric" >&2; exit 1; }
 db="sharkipedia_pr_${pr}"
 
-sql() { docker exec -i sharkipedia-db psql -v ON_ERROR_STOP=1 -U postgres -d postgres -Atc "$1"; }
+sql() { docker exec sharkipedia-db psql -v ON_ERROR_STOP=1 -U postgres -d postgres -Atc "$1"; }
 
 case "$action" in
   create)

@@ -14,6 +14,10 @@ servers:
       - 100.89.83.34
     cmd: bundle exec good_job start
 
+# The first boot runs migrations (and seeds on an empty database) before
+# the app answers health checks.
+deploy_timeout: 300
+
 proxy:
   host: www.sharkipedia.xyz
   app_port: 3000

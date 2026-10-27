@@ -25,7 +25,8 @@ jobs:
   deploy:
     if: >-
       github.event.action != 'closed' &&
-      github.event.pull_request.head.repo.full_name == github.repository
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.event.pull_request.user.login != 'dependabot[bot]'
     runs-on: ubuntu-24.04-arm
     environment:
       name: preview-pr-${{ github.event.pull_request.number }}
@@ -63,7 +64,8 @@ jobs:
   teardown:
     if: >-
       github.event.action == 'closed' &&
-      github.event.pull_request.head.repo.full_name == github.repository
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.event.pull_request.user.login != 'dependabot[bot]'
     runs-on: ubuntu-24.04-arm
     permissions:
       contents: read

@@ -48,8 +48,8 @@ preview when the PR closes. Each preview gets its own database, copied from
 Previews run with `PREVIEW=true`: no email, no cron, the development S3
 bucket, `noindex`. Jobs run inside the web process.
 
-PRs from forks get no preview: GitHub withholds secrets and OIDC tokens from
-them. Push the branch to this repo to preview it. Don't change the trigger
+PRs from forks and from Dependabot get no preview: GitHub withholds secrets
+from them. Push the branch to this repo to preview it. Don't change the trigger
 to `pull_request_target`.
 
 Anyone who can push a branch here can run code on the server through a

@@ -51,5 +51,14 @@
       </div>
     </div>
 
+    <p class="has-text-centered mt-6 mb-1">
+      <%= link_to image_tag("cc-by-nc.svg", alt: "CC BY-NC 4.0", width: 88, height: 31),
+        "https://creativecommons.org/licenses/by-nc/4.0/", rel: "license" %>
+    </p>
+    <p class="has-text-centered is-size-7 has-text-grey">
+      Sharkipedia data is licensed under
+      <%= link_to "CC BY-NC 4.0", "https://creativecommons.org/licenses/by-nc/4.0/", rel: "license" %>.
+      <%= link_to "More about the license", about_path(anchor: "license") %>
+    </p>
   </div>
 </section>

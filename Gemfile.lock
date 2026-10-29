@@ -187,6 +187,8 @@ GEM
       concurrent-ruby (~> 1.1)
       websocket-driver (~> 0.7)
     ffi (1.17.4-aarch64-linux-gnu)
+    ffi (1.17.4-arm64-darwin)
+    ffi (1.17.4-x86_64-linux-gnu)
     filterrific (5.2.7)
     friendly_id (5.7.0)
       activerecord (>= 4.0.0)
@@ -274,6 +276,10 @@ GEM
     nio4r (2.7.5)
     nokogiri (1.19.4-aarch64-linux-gnu)
       racc (~> 1.4)
+    nokogiri (1.19.4-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.19.4-x86_64-linux-gnu)
+      racc (~> 1.4)
     orm_adapter (0.5.0)
     ostruct (0.6.3)
     package_json (0.2.0)
@@ -289,6 +295,8 @@ GEM
       ast (~> 2.4.1)
       racc
     pg (1.7.0-aarch64-linux)
+    pg (1.7.0-arm64-darwin)
+    pg (1.7.0-x86_64-linux)
     pg_search (2.4.0)
       activerecord (>= 8.0)
       activesupport (>= 8.0)
@@ -520,6 +528,8 @@ GEM
 
 PLATFORMS
   aarch64-linux
+  arm64-darwin
+  x86_64-linux
 
 DEPENDENCIES
   aasm (~> 6.0)

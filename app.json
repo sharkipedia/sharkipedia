@@ -1,7 +1,7 @@
 {
     "name": "sharkipedia",
     "scripts": {
-      "postdeploy": "heroku pg:copy sharkipedia::DATABASE DATABASE -a $HEROKU_APP_NAME --confirm $HEROKU_APP_NAME && bundle exec rails db:migrate"
+      "postdeploy": "heroku pg:copy sharkipedia::DATABASE DATABASE -a $HEROKU_APP_NAME --confirm DATABASE && bundle exec rails db:migrate"
     },
     "env": {
       "SECRET_KEY_BASE": {
@@ -18,8 +18,7 @@
       }
     },
     "addons": [
-      "heroku-postgresql",
-      "heroku-redis"
+      "heroku-postgresql"
     ],
     "buildpacks": [
     {

@@ -1,4 +1,4 @@
-FROM ruby:4.0.7-slim-trixie
+FROM ruby:4.0.9-slim-trixie
 
 # System dependencies for Rails + PostGIS + Node + headless browser
 RUN apt-get update -qq && \

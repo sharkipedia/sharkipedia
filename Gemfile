@@ -62,7 +62,7 @@ gem "ransack", "~> 6.0"
 gem "vanilla_nested"
 
 group :development, :test do
-  gem "debug", platforms: [:mri, :mingw, :x64_mingw]
+  gem "debug", platforms: %i[mri windows]
   gem "rspec-rails", "~> 8.0"
 end
 
@@ -89,7 +89,7 @@ group :test do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem "tzinfo-data", platforms: %i[windows jruby]
 
 # Ruby 4 promoted several stdlib libraries to bundled gems; declare the ones
 # we rely on directly.

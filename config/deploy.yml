@@ -80,7 +80,7 @@ accessories:
       - data:/var/lib/postgresql/data
 
   tunnel:
-    image: cloudflare/cloudflared:2026.10.4
+    image: cloudflare/cloudflared:2026.10.6
     host: 100.89.83.34
     cmd: tunnel --no-autoupdate run
     env:

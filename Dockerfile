@@ -2,7 +2,7 @@
 # Production image, deployed with Kamal (config/deploy.yml).
 # Development uses Dockerfile.dev via docker-compose.
 
-ARG RUBY_VERSION=4.0.7
+ARG RUBY_VERSION=4.0.9
 FROM docker.io/library/ruby:${RUBY_VERSION}-slim-trixie AS base
 
 WORKDIR /rails

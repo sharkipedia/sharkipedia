@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
 
       - name: Setup Ruby and install gems
         uses: ruby/setup-ruby@v1
@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       postgres:
-        image: postgis/postgis:17-3.5
+        image: postgis/postgis:17-3.6
         env:
           POSTGRES_PASSWORD: password
         ports:
@@ -42,7 +42,7 @@ jobs:
       SES_SMTP_EMAIL_ADDRESS: test@example.com
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
 
       - name: Setup Ruby and install gems
         uses: ruby/setup-ruby@v1
@@ -53,11 +53,11 @@ jobs:
         run: |
           sudo apt-get -yqq install libpq-dev
 
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v7
         with:
           node-version-file: '.nvmrc'
       - name: Cache node_modules
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: node_modules
           key: yarn-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
@@ -68,7 +68,7 @@ jobs:
           yarn install --pure-lockfile
 
       - name: Cache assets
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: |
             tmp/cache/shakapacker

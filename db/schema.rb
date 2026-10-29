@@ -10,10 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_06_154044) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_29_145056) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
-  enable_extension "plpgsql"
   enable_extension "postgis"
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -101,7 +101,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_06_154044) do
     t.bigint "un_ter1"
     t.bigint "un_ter2"
     t.bigint "un_ter3"
-    t.geometry "geom", limit: {:srid=>4326, :type=>"multi_polygon"}
+    t.geometry "geom", limit: {srid: 4326, type: "multi_polygon"}
     t.index ["geom"], name: "eez_v11_geom_geom_idx", using: :gist
   end
 
@@ -117,7 +117,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_06_154044) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.geometry "geom", limit: {srid: 4326, type: "multi_polygon"}
     t.index ["f_code"], name: "index_fao_areas_on_f_code"
+    t.index ["geom"], name: "index_fao_areas_on_geom", using: :gist
     t.index ["ocean_id"], name: "index_fao_areas_on_ocean_id"
   end
 
@@ -152,6 +154,22 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_06_154044) do
     t.datetime "enqueued_at"
     t.datetime "discarded_at"
     t.datetime "finished_at"
+    t.datetime "jobs_finished_at"
+    t.index ["created_at", "id"], name: "index_good_job_batches_on_created_at_and_id", order: :desc
+    t.index ["finished_at"], name: "index_good_job_batches_on_finished_at", where: "(finished_at IS NOT NULL)"
+  end
+
+  create_table "good_job_concurrency_claims", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.uuid "job_id", null: false
+    t.uuid "locked_by_id"
+    t.integer "state", limit: 2, null: false
+    t.text "key", null: false
+    t.index ["job_id"], name: "index_good_job_concurrency_claims_on_job_id"
+    t.index ["key", "job_id"], name: "index_good_job_concurrency_claims_on_key_and_job_id", unique: true
+    t.index ["key", "state", "created_at"], name: "index_good_job_concurrency_claims_for_promotion"
+    t.index ["locked_by_id"], name: "index_good_job_concurrency_claims_on_locked_by_id", where: "(locked_by_id IS NOT NULL)"
   end
 
   create_table "good_job_executions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -164,13 +182,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_06_154044) do
     t.datetime "scheduled_at"
     t.datetime "finished_at"
     t.text "error"
+    t.integer "error_event", limit: 2
+    t.text "error_backtrace", array: true
+    t.uuid "process_id"
+    t.interval "duration"
     t.index ["active_job_id", "created_at"], name: "index_good_job_executions_on_active_job_id_and_created_at"
+    t.index ["created_at"], name: "index_good_job_executions_on_created_at"
+    t.index ["process_id", "created_at"], name: "index_good_job_executions_on_process_id_and_created_at"
+    t.index ["scheduled_at"], name: "index_good_job_executions_on_scheduled_at"
   end
 
   create_table "good_job_processes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.jsonb "state"
+    t.integer "lock_type", limit: 2
   end
 
   create_table "good_job_settings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -201,16 +227,36 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_06_154044) do
     t.boolean "is_discrete"
     t.integer "executions_count"
     t.text "job_class"
+    t.integer "error_event", limit: 2
+    t.text "labels", array: true
+    t.uuid "locked_by_id"
+    t.datetime "locked_at"
+    t.integer "lock_type", limit: 2
     t.index ["active_job_id", "created_at"], name: "index_good_jobs_on_active_job_id_and_created_at"
-    t.index ["active_job_id"], name: "index_good_jobs_on_active_job_id"
     t.index ["batch_callback_id"], name: "index_good_jobs_on_batch_callback_id", where: "(batch_callback_id IS NOT NULL)"
+    t.index ["batch_callback_id"], name: "index_good_jobs_on_batch_callback_id_unfinished", where: "((batch_callback_id IS NOT NULL) AND (finished_at IS NULL))"
     t.index ["batch_id"], name: "index_good_jobs_on_batch_id", where: "(batch_id IS NOT NULL)"
+    t.index ["batch_id"], name: "index_good_jobs_on_batch_id_unfinished", where: "((batch_id IS NOT NULL) AND (finished_at IS NULL))"
+    t.index ["concurrency_key", "created_at"], name: "index_good_jobs_on_concurrency_key_and_created_at"
     t.index ["concurrency_key"], name: "index_good_jobs_on_concurrency_key_when_unfinished", where: "(finished_at IS NULL)"
-    t.index ["cron_key", "created_at"], name: "index_good_jobs_on_cron_key_and_created_at"
-    t.index ["cron_key", "cron_at"], name: "index_good_jobs_on_cron_key_and_cron_at", unique: true
-    t.index ["finished_at"], name: "index_good_jobs_jobs_on_finished_at", where: "((retried_good_job_id IS NULL) AND (finished_at IS NOT NULL))"
-    t.index ["priority", "created_at"], name: "index_good_jobs_jobs_on_priority_created_at_when_unfinished", order: { priority: "DESC NULLS LAST" }, where: "(finished_at IS NULL)"
-    t.index ["queue_name", "scheduled_at"], name: "index_good_jobs_on_queue_name_and_scheduled_at", where: "(finished_at IS NULL)"
+    t.index ["created_at"], name: "index_good_jobs_on_created_at"
+    t.index ["cron_key", "created_at"], name: "index_good_jobs_on_cron_key_and_created_at_cond", where: "(cron_key IS NOT NULL)"
+    t.index ["cron_key", "cron_at"], name: "index_good_jobs_on_cron_key_and_cron_at_cond", unique: true, order: { cron_at: "DESC NULLS LAST" }, where: "(cron_key IS NOT NULL)"
+    t.index ["finished_at"], name: "index_good_jobs_jobs_on_finished_at_only", where: "(finished_at IS NOT NULL)"
+    t.index ["finished_at"], name: "index_good_jobs_on_discarded", order: :desc, where: "((finished_at IS NOT NULL) AND (error IS NOT NULL))"
+    t.index ["id"], name: "index_good_jobs_on_unfinished_or_errored", where: "((finished_at IS NULL) OR (error IS NOT NULL))"
+    t.index ["job_class", "finished_at"], name: "index_good_jobs_on_discarded_job_class", where: "((finished_at IS NOT NULL) AND (error IS NOT NULL))"
+    t.index ["job_class"], name: "index_good_jobs_on_job_class"
+    t.index ["labels"], name: "index_good_jobs_on_labels", where: "(labels IS NOT NULL)", using: :gin
+    t.index ["locked_by_id"], name: "index_good_jobs_on_locked_by_id", where: "(locked_by_id IS NOT NULL)"
+    t.index ["priority", "created_at"], name: "index_good_job_jobs_for_candidate_lookup", where: "(finished_at IS NULL)"
+    t.index ["priority", "scheduled_at", "id"], name: "index_good_jobs_for_candidate_dequeue_unlocked", where: "((finished_at IS NULL) AND (locked_by_id IS NULL))"
+    t.index ["priority", "scheduled_at", "id"], name: "index_good_jobs_on_priority_scheduled_at_unfinished", where: "(finished_at IS NULL)"
+    t.index ["queue_name", "priority", "created_at"], name: "index_good_jobs_dequeue_by_queue", where: "((finished_at IS NULL) AND (locked_by_id IS NULL))"
+    t.index ["queue_name", "priority", "scheduled_at"], name: "index_good_jobs_dequeue_by_queue_scheduled_at", where: "((finished_at IS NULL) AND (locked_by_id IS NULL))"
+    t.index ["queue_name", "scheduled_at", "id"], name: "index_good_jobs_on_queue_name_priority_scheduled_at_unfinished", where: "(finished_at IS NULL)"
+    t.index ["queue_name"], name: "index_good_jobs_on_queue_name"
+    t.index ["scheduled_at", "queue_name"], name: "index_good_jobs_on_scheduled_at_and_queue_name"
     t.index ["scheduled_at"], name: "index_good_jobs_on_scheduled_at", where: "(finished_at IS NULL)"
   end
 
@@ -236,7 +282,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_06_154044) do
     t.string "lon"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
-    t.geography "lonlat", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}
+    t.geography "lonlat", limit: {srid: 4326, type: "st_point", geographic: true}
     t.index ["lonlat"], name: "index_locations_on_lonlat", using: :gist
   end
 
@@ -245,7 +291,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_06_154044) do
     t.string "code"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
+    t.geometry "geom", limit: {srid: 4326, type: "multi_polygon"}
     t.index ["code"], name: "index_longhurst_provinces_on_code"
+    t.index ["geom"], name: "index_longhurst_provinces_on_geom", using: :gist
   end
 
   create_table "marine_ecoregions_worlds", force: :cascade do |t|
@@ -254,6 +302,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_06_154044) do
     t.integer "trend_reg_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.geometry "geom", limit: {srid: 4326, type: "multi_polygon"}
+    t.index ["geom"], name: "index_marine_ecoregions_worlds_on_geom", using: :gist
   end
 
   create_table "marine_ecoregions_worlds_trends", id: false, force: :cascade do |t|
@@ -397,6 +447,28 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_06_154044) do
     t.string "name", null: false
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
+  end
+
+  create_table "solid_errors", force: :cascade do |t|
+    t.text "exception_class", null: false
+    t.text "message", null: false
+    t.text "severity", null: false
+    t.text "source"
+    t.datetime "resolved_at"
+    t.string "fingerprint", limit: 64, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fingerprint"], name: "index_solid_errors_on_fingerprint", unique: true
+    t.index ["resolved_at"], name: "index_solid_errors_on_resolved_at"
+  end
+
+  create_table "solid_errors_occurrences", force: :cascade do |t|
+    t.bigint "error_id", null: false
+    t.text "backtrace"
+    t.json "context"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["error_id"], name: "index_solid_errors_occurrences_on_error_id"
   end
 
   create_table "source_observations", force: :cascade do |t|
@@ -670,6 +742,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_06_154044) do
   add_foreign_key "measurements", "value_types"
   add_foreign_key "observations", "imports"
   add_foreign_key "observations", "users"
+  add_foreign_key "solid_errors_occurrences", "solid_errors", column: "error_id"
   add_foreign_key "species", "species_data_types"
   add_foreign_key "species", "species_families"
   add_foreign_key "species", "species_orders"
@@ -683,11 +756,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_06_154044) do
   add_foreign_key "standards", "trait_classes"
   add_foreign_key "traits", "trait_classes"
   add_foreign_key "trend_observations", "trends"
-  add_foreign_key "trends", "\"references\"", column: "reference_id"
   add_foreign_key "trends", "analysis_models"
   add_foreign_key "trends", "data_types"
   add_foreign_key "trends", "imports"
   add_foreign_key "trends", "locations"
+  add_foreign_key "trends", "references"
   add_foreign_key "trends", "sampling_methods"
   add_foreign_key "trends", "species"
   add_foreign_key "trends", "species_groups"

@@ -7,11 +7,11 @@ class ApplicationPolicy
   end
 
   def index?
-    user.admin?
+    user.editor?
   end
 
   def show?
-    user.admin?
+    user.editor?
   end
 
   def create?

@@ -10,6 +10,13 @@ $(document).on("turbolinks:load", function () {
     Turbolinks.visit("/references/" + data.id);
   });
 
+  // bulmahead is only loaded on references/new (see its view). Skip the
+  // autocomplete wiring everywhere else so the index / show pages don't
+  // blow up with "bulmahead is not defined".
+  if (typeof bulmahead === "undefined") {
+    return;
+  }
+
   const fetchAuthor = async function (inputValue) {
     const resp = await fetch(`/search/autocomplete?klass=author&term=${inputValue}`);
     const results = await resp.json();

@@ -1,241 +1,160 @@
-import React from "react"
+import React, { useEffect, useRef } from "react"
 import PropTypes from "prop-types"
-import 'ol/ol.css';
-import 'ol-layerswitcher/dist/ol-layerswitcher.css';
-import './style.scss'
-import Map from 'ol/Map';
-import View from 'ol/View';
-import LayerGroup from 'ol/layer/Group';
-import VectorLayer from 'ol/layer/Vector';
-import TileLayer from 'ol/layer/Tile';
-import TileWMS from 'ol/source/TileWMS';
-import Feature from 'ol/Feature';
-import SourceOSM from 'ol/source/OSM';
-import VectorSource from 'ol/source/Vector';
-import LayerSwitcher from 'ol-layerswitcher';
-import Point from 'ol/geom/Point';
-import {Circle as CircleStyle, Fill, Stroke, Style} from 'ol/style';
-import {fromLonLat} from 'ol/proj';
+import "ol/ol.css"
+import "ol-layerswitcher/dist/ol-layerswitcher.css"
+import "./style.scss"
+import Map from "ol/Map"
+import View from "ol/View"
+import LayerGroup from "ol/layer/Group"
+import VectorLayer from "ol/layer/Vector"
+import TileLayer from "ol/layer/Tile"
+import Feature from "ol/Feature"
+import SourceOSM from "ol/source/OSM"
+import VectorSource from "ol/source/Vector"
+import GeoJSON from "ol/format/GeoJSON"
+import LayerSwitcher from "ol-layerswitcher"
+import Point from "ol/geom/Point"
+import { Circle as CircleStyle, Fill, Stroke, Style } from "ol/style"
+import { fromLonLat } from "ol/proj"
 
-// http://www.marineregions.org/webservices.php
-const LONGHURST_WMS_URL = "https://geo.holmes-iv.com/geoserver/longhurst/wms";
+// Region polygons are served as GeoJSON by RegionsController
+// (/regions/:layer.geojson, optionally filtered with ?codes=a,b).
+export const regionUrl = (baseUrl, layer, codes) => {
+  const url = `${baseUrl}/${layer}.geojson`
+  return codes ? `${url}?codes=${codes.map(encodeURIComponent).join(",")}` : url
+}
 
-const PPOW_MEOW_WMS_URL = 'https://geo.holmes-iv.com/geoserver/ppow_meow_simplified/wms'
+const presentCodes = (codes) =>
+  (codes || []).filter((code) => code !== null && code !== undefined && code !== "").map(String)
 
-// FAO Statistical Areas for Fishery Purposes
-const FAO_WMS_URL = 'https://geo.holmes-iv.com/geoserver/fao_area/wms'
+// A vector source that fetches one or more GeoJSON urls. OpenLayers only
+// calls the loader once the layer is first rendered, so the hidden "all"
+// layers cost nothing until they are switched on.
+export const regionSource = (urls) => {
+  const format = new GeoJSON()
+  const source = new VectorSource({
+    loader: (extent, _resolution, projection, success, failure) => {
+      Promise.all(
+        urls.map((url) =>
+          fetch(url).then((response) => {
+            if (!response.ok) throw new Error(`${url}: ${response.status}`)
+            return response.json()
+          })
+        )
+      )
+        .then((collections) => {
+          const features = collections.flatMap((collection) =>
+            format.readFeatures(collection, { featureProjection: projection })
+          )
+          source.addFeatures(features)
+          success(features)
+        })
+        .catch(() => {
+          source.removeLoadedExtent(extent)
+          failure()
+        })
+    },
+  })
+  return source
+}
 
-class MarineRegionsMap extends React.Component {
-  constructor(props) {
-    super(props);
-    this.mapContainerRef = React.createRef();
-    this.state = { map: {} };
-  }
+const regionStyle = (stroke, fill) =>
+  new Style({
+    stroke: new Stroke({ color: stroke, width: 1 }),
+    fill: new Fill({ color: fill }),
+  })
 
-  componentDidMount() {
-    // LONGHURST REGIONS
-    // the "selected" layer
-    const longhurstCqlFilter = `INTERSECTS(the_geom, POINT(${this.props.longitude} ${this.props.latitude}))`;
-    const longhurstWMSFilteredImageLayer = new TileLayer({
-      title: 'dataset',
-      opacity: 0.6,
-      source: new TileWMS({
-        url: LONGHURST_WMS_URL,
-        params: {
-          LAYERS: 'longhurst:Longhurst_world_v4_2010',
-          STYLES: 'polygon_black',
-          CQL_FILTER: longhurstCqlFilter,
-        },
-        serverType: 'geoserver',
-        crossOrigin: 'anonymous'
-      })
-    });
+const ALL_STYLE = regionStyle("#000", "rgba(0, 0, 0, 0.05)")
 
-    const longhurstWMSAllImageLayer = new TileLayer({
-      title: 'all',
-      visible: false,
-      opacity: 0.1,
-      source: new TileWMS({
-        url: LONGHURST_WMS_URL,
-        params: {
-          STYLES: 'black_line',
-          LAYERS: 'longhurst:Longhurst_world_v4_2010'
-        },
-        serverType: 'geoserver',
-        crossOrigin: 'anonymous'
-      })
-    });
+// Each group keeps the old switcher layout: a hidden "all" layer with faint
+// outlines of every polygon, and a "dataset" layer with the trend's regions.
+const regionGroup = (title, allUrls, datasetUrls, datasetStyle) =>
+  new LayerGroup({
+    title,
+    layers: [
+      new VectorLayer({ title: "all", visible: false, opacity: 0.4, style: ALL_STYLE, source: regionSource(allUrls) }),
+      new VectorLayer({ title: "dataset", opacity: 0.6, style: datasetStyle, source: regionSource(datasetUrls) }),
+    ],
+  })
 
-    const longhurstGroup = new LayerGroup({
-      title: "Longhurst Provinces",
-      layers: [
-        longhurstWMSAllImageLayer,
-        longhurstWMSFilteredImageLayer
-      ]
-    });
+const filteredUrls = (baseUrl, layer, codes) => {
+  const present = presentCodes(codes)
+  return present.length > 0 ? [regionUrl(baseUrl, layer, present)] : []
+}
 
-    const ppow_meow_tiled = new TileLayer({
-      title: 'all',
-      visible: false,
-      opacity: 0.1,
-      source: new TileWMS({
-        url: PPOW_MEOW_WMS_URL,
-        params: {
-          'LAYERS': 'ppow_meow_simplified:ppow_meow_simplified',
-          'TILED': true,
-        },
-        serverType: 'geoserver',
-        crossOrigin: 'anonymous'
-      })
-    })
+export const buildRegionGroups = ({ baseUrl, fao_areas, longhurst, meow, ppow }) => [
+  regionGroup(
+    "FAO areas",
+    [regionUrl(baseUrl, "fao")],
+    filteredUrls(baseUrl, "fao", fao_areas),
+    regionStyle("#1f4e9c", "rgba(31, 78, 156, 0.35)")
+  ),
+  regionGroup(
+    "Longhurst Provinces",
+    [regionUrl(baseUrl, "longhurst")],
+    filteredUrls(baseUrl, "longhurst", [longhurst]),
+    regionStyle("#000", "rgba(0, 0, 0, 0.3)")
+  ),
+  // MEOW (coastal) and PPOW (pelagic) provinces share one group, as before.
+  regionGroup(
+    "Marine Ecoregions of the World",
+    [regionUrl(baseUrl, "meow"), regionUrl(baseUrl, "ppow")],
+    [...filteredUrls(baseUrl, "meow", meow), ...filteredUrls(baseUrl, "ppow", ppow)],
+    regionStyle("#0b6e4f", "rgba(11, 110, 79, 0.35)")
+  ),
+]
 
-    const ppow_meow_filter = (ids, kind) => {
-      if (ids.length > 0) {
-        return `("FIRST_Numb" IN (${ids.map(e => `'${e}'`).join(', ')}) AND "Type" = '${kind}')`;
-      } else {
-        return undefined;
-      }
-    };
+const MarineRegionsMap = ({
+  latitude,
+  longitude,
+  meow = [],
+  ppow = [],
+  fao_areas = [],
+  longhurst = null,
+  regionsBaseUrl = "/regions",
+}) => {
+  const mapContainerRef = useRef(null)
 
-    let regionCqlFilter = [
-      ppow_meow_filter(this.props.meow, 'coastal'),
-      ppow_meow_filter(this.props.ppow, 'pelagic')
-    ].filter(e => e != undefined).join(" OR ");
-
-    if (regionCqlFilter === '') {
-      regionCqlFilter = '1 = 0';
-    }
-
-    const filteredPPOWMEOWLayer = new TileLayer({
-      title: 'dataset',
-      opacity: 0.6,
-      source: new TileWMS({
-        url: PPOW_MEOW_WMS_URL,
-        params: {
-          'LAYERS': 'ppow_meow_simplified:ppow_meow_simplified',
-          'TILED': true,
-          'CQL_FILTER': regionCqlFilter,
-        },
-        serverType: 'geoserver',
-        crossOrigin: 'anonymous'
-      })
-    })
-
-    const ppowmeowGroup = new LayerGroup({
-      title: 'Marine Ecoregions of the World',
-      layers: [
-        ppow_meow_tiled,
-        filteredPPOWMEOWLayer
-      ]
-    });
-
-    // FAO REGIONS
-    const faoWMSLayer = new TileLayer({
-      title: 'all',
-      visible: false,
-      opacity: 0.1,
-      source: new TileWMS({
-        url: FAO_WMS_URL,
-        params: {
-          LAYERS: 'FAO_AREAS',
-          CQL_FILTER: `F_LEVEL = 'MAJOR'`
-        },
-        serverType: 'geoserver',
-        crossOrigin: 'anonymous'
-      })
-    });
-
-    const f_code_cqlFilter = `F_CODE in (${this.props.fao_areas.map(e => `'${e}'`).join(', ')})`
-
-    const filteredFaoLayer = new TileLayer({
-      title: 'dataset',
-      opacity: 0.4,
-      source: new TileWMS({
-        url: FAO_WMS_URL,
-        params: {
-          LAYERS: 'FAO_AREAS',
-          CQL_FILTER: f_code_cqlFilter,
-          STYLES: 'fao_area:fao_style_active',
-        },
-        serverType: 'geoserver',
-        crossOrigin: 'anonymous'
-      })
-    });
-
-    const faoGroup = new LayerGroup({
-      title: 'FAO areas',
-      layers: [
-        faoWMSLayer,
-        filteredFaoLayer
-      ]
-    });
-
+  useEffect(() => {
     // https://openlayers.org/en/latest/doc/faq.html#why-is-the-order-of-a-coordinate-lon-lat-and-not-lat-lon-
-    const trendCoordinates = [this.props.longitude, this.props.latitude]
-    const trendLocation = fromLonLat(trendCoordinates);
+    const trendLocation = fromLonLat([longitude, latitude])
 
     const measurementMarker = new VectorLayer({
       source: new VectorSource({
-        features: [
-          new Feature({
-            type: 'geoMarker',
-            geometry: new Point(trendLocation)
-          })
-        ]}),
+        features: [new Feature({ type: "geoMarker", geometry: new Point(trendLocation) })],
+      }),
       style: new Style({
         image: new CircleStyle({
           radius: 7,
-          fill: new Fill({color: 'black'}),
-          stroke: new Stroke({
-            color: 'white', width: 2
-          })
-        })
-      })
-    });
+          fill: new Fill({ color: "black" }),
+          stroke: new Stroke({ color: "white", width: 2 }),
+        }),
+      }),
+    })
 
     const map = new Map({
-      target: this.mapContainerRef.current,
+      target: mapContainerRef.current,
       layers: [
         new LayerGroup({
-          title: 'Base map',
-          layers: [
-            new TileLayer({
-              title: 'OSM',
-              type: 'base',
-              visible: true,
-              source: new SourceOSM()
-            })
-          ]
+          title: "Base map",
+          layers: [new TileLayer({ title: "OSM", type: "base", visible: true, source: new SourceOSM() })],
         }),
         new LayerGroup({
-          title: 'Marine Regions',
-          layers: [
-            faoGroup,
-            longhurstGroup,
-            ppowmeowGroup
-          ]
+          title: "Marine Regions",
+          layers: buildRegionGroups({ baseUrl: regionsBaseUrl, fao_areas, longhurst, meow, ppow }),
         }),
-        measurementMarker
+        measurementMarker,
       ],
-      view: new View({
-        center: trendLocation,
-        zoom: 6
-      })
-    });
+      view: new View({ center: trendLocation, zoom: 6 }),
+    })
+    map.addControl(new LayerSwitcher())
 
-    const layerSwitcher = new LayerSwitcher();
-    map.addControl(layerSwitcher);
+    return () => map.setTarget(undefined)
+    // Props come from the server-rendered page and never change; build the
+    // map once on mount.
+  }, [])
 
-    this.setState({
-      map: map,
-    });
-  }
-
-  render() {
-    return(
-      <div ref={this.mapContainerRef} className="longhurtsMap"></div>
-    )
-  }
+  return <div ref={mapContainerRef} className="longhurtsMap" data-testid="marine-regions-map"></div>
 }
 
 MarineRegionsMap.propTypes = {
@@ -244,5 +163,8 @@ MarineRegionsMap.propTypes = {
   meow: PropTypes.array,
   ppow: PropTypes.array,
   fao_areas: PropTypes.array,
-};
+  longhurst: PropTypes.string,
+  regionsBaseUrl: PropTypes.string,
+}
+
 export default MarineRegionsMap

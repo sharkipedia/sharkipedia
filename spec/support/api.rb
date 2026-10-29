@@ -4,7 +4,7 @@ module ApiMacros
       user = FactoryBot.create(:user)
       user.confirm
       @request.headers["Authorization"] = "Token #{user.token}"
-      sign_in user
+      sign_in user, scope: :user
     end
   end
 end

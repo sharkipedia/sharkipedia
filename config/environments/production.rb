@@ -40,11 +40,6 @@ Rails.application.configure do
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :amazon
 
-  # Mount Action Cable outside main process or domain.
-  # config.action_cable.mount_path = nil
-  # config.action_cable.url = 'wss://example.com/cable'
-  # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
-
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   config.force_ssl = true
 
@@ -57,7 +52,8 @@ Rails.application.configure do
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
-  config.cache_store = :redis_cache_store, {url: ENV["REDIS_URL"], pool_size: 5, pool_timeout: 5}
+  # One small server and little traffic: an in-process cache is enough.
+  config.cache_store = :memory_store, {size: 64.megabytes}
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
   # config.active_job.queue_adapter     = :resque
@@ -133,4 +129,11 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
+
+  # Solid Errors stores exceptions in the primary database; browse them at
+  # /admin/errors (admins only). Email only when an error is new or reopens.
+  config.solid_errors.send_emails = ENV["SOLIDERRORS_EMAIL_TO"].present?
+  config.solid_errors.email_every_occurrence = false
+  config.solid_errors.email_subject_prefix = "[Sharkipedia]"
+  config.solid_errors.destroy_after = 90.days
 end

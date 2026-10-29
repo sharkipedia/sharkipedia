@@ -1,5 +1,4 @@
 module SpeciesHelper
-  include Pagy::Frontend
   include ProtectedSpeciesHelper
 
   def international_species_status(species)

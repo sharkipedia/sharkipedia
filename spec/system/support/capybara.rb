@@ -3,6 +3,20 @@ require "capybara/cuprite"
 
 Capybara.server = :puma, {Silent: true}
 
+# In the Docker image the Chromium binary lives at /usr/bin/chromium, not the
+# default /usr/bin/google-chrome that Selenium Manager looks for.
+Capybara.register_driver :headless_chromium do |app|
+  options = Selenium::WebDriver::Chrome::Options.new
+  options.binary = ENV["CHROME_BIN"] if ENV["CHROME_BIN"]
+  options.binary = "/usr/bin/chromium" if File.exist?("/usr/bin/chromium")
+  options.add_argument("--headless=new")
+  options.add_argument("--no-sandbox")
+  options.add_argument("--disable-dev-shm-usage")
+  options.add_argument("--disable-gpu")
+  options.add_argument("--window-size=1400,1400")
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+end
+
 # Capybara.javascript_driver = :cuprite
 # Capybara.register_driver(:cuprite) do |app|
 #   Capybara::Cuprite::Driver.new(app,
@@ -37,11 +51,11 @@ Capybara.server = :puma, {Silent: true}
 # Things appear to work fine with selenium headless_chrome
 RSpec.configure do |config|
   config.before(:each, type: :system) do
-    driven_by :selenium, using: :headless_chrome
+    driven_by :headless_chromium
   end
 
   config.before(:each, type: :system, js: true) do
-    driven_by :selenium, using: :headless_chrome
+    driven_by :headless_chromium
   end
 
   config.include CapybaraSelect2

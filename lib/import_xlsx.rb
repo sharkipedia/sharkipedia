@@ -221,7 +221,7 @@ module ImportXlsx
         end
       end
     rescue => e
-      Bugsnag.notify(e)
+      Rails.error.report(e)
 
       self.log += "ERROR: Import failed!\n"
       self.log += "#{e}\n"
@@ -464,7 +464,7 @@ module ImportXlsx
         end
       end
     rescue => e
-      Bugsnag.notify(e)
+      Rails.error.report(e)
 
       self.log += "ERROR: Import failed!\n"
       self.log += "#{e}\n"

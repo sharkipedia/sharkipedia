@@ -32,4 +32,17 @@ RSpec.describe "Show an existing trend" do
     expect(page).to have_content(trend1.reference.name)
     expect(page).to have_content(trend1.oceans.first.name)
   end
+
+  it "draws the marine regions map with the trend's Longhurst province" do
+    trend = import.trends.first
+    lon, lat = trend.location.longitude, trend.location.latitude
+    create(:longhurst_province, :with_geom, code: "TEST",
+      geom_wkt: "MULTIPOLYGON(((#{lon - 1} #{lat - 1}, #{lon + 1} #{lat - 1}, #{lon + 1} #{lat + 1}, #{lon - 1} #{lat + 1}, #{lon - 1} #{lat - 1})))")
+
+    visit trend_path(trend)
+
+    expect(page).to have_css("[data-testid=marine-regions-map] .ol-viewport")
+    props = JSON.parse(find("[data-react-class=MarineRegionsMap]", visible: :all)["data-react-props"])
+    expect(props["longhurst"]).to eq("TEST")
+  end
 end

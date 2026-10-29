@@ -15,7 +15,7 @@
 //= require turbolinks
 //= require underscore
 //= require select2
-//= require filterrific/filterrific-jquery
+//= require filterrific/filterrific
 //= require vanilla_nested
 //= require_tree .
 
@@ -84,3 +84,63 @@ document.addEventListener("turbolinks:load", function () {
     $(".navbar-menu").toggleClass("is-active");
   });
 });
+
+// Override filterrific's init to no-op on pages without a #filterrific_filter
+// form. The upstream version (5.2.7) dereferences the form unconditionally
+// and throws "Cannot read properties of null (reading 'querySelectorAll')".
+// filterrific.js has already registered the *original* init against
+// turbolinks:load and DOMContentLoaded, so we must detach those before
+// reassigning — otherwise the old reference keeps firing.
+if (typeof Filterrific !== "undefined") {
+  document.removeEventListener("turbolinks:load", Filterrific.init);
+  document.removeEventListener("DOMContentLoaded", Filterrific.init);
+
+  Filterrific.init = function () {
+    var form = document.querySelector("#filterrific_filter");
+    if (!form) return;
+    form.querySelectorAll("input, textarea, select").forEach(function (input) {
+      input.addEventListener("change", Filterrific.submitFilterForm);
+    });
+    Filterrific.observe_field(
+      ".filterrific-periodically-observed",
+      0.5,
+      Filterrific.submitFilterForm
+    );
+  };
+
+  // Upstream 5.2.7's observe_field sets a setInterval whose `removed()`
+  // check calls `input.closest('html').length == 0` — treating the
+  // Element return value like a jQuery collection. Once Turbolinks
+  // swaps the page, `closest('html')` returns null and the interval
+  // throws "Cannot read properties of null (reading 'length')" on
+  // every tick. Reimplement with a real detachment check.
+  Filterrific.observe_field = function (selector, frequency, callback) {
+    var intervalMs = frequency * 1000;
+    document.querySelectorAll(selector).forEach(function (input) {
+      var prev = input.value;
+      var timer;
+      var check = function () {
+        if (!input.isConnected) {
+          clearInterval(timer);
+          return;
+        }
+        var val = input.value;
+        if (prev !== val) {
+          prev = val;
+          if (typeof callback === "function") callback.call(input);
+        }
+      };
+      var reset = function () {
+        clearInterval(timer);
+        timer = setInterval(check, intervalMs);
+      };
+      check();
+      timer = setInterval(check, intervalMs);
+      input.addEventListener("keyup", reset);
+      input.addEventListener("click", reset);
+      input.addEventListener("mousemove", reset);
+    });
+  };
+
+  document.addEventListener("turbolinks:load", Filterrific.init);
+}

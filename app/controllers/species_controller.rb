@@ -1,5 +1,6 @@
 class SpeciesController < PreAuthController
-  include Pagy::Backend
+  include Pagy::Method
+
   caches_action :show, expires_in: 1.hour
 
   def index

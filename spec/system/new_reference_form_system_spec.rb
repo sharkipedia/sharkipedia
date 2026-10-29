@@ -81,17 +81,17 @@ RSpec.describe "New Reference Form" do
     fill_in "reference_authors_attributes_0_name", with: "Brand New Author"
 
     find(".vanilla-nested-add").click
-    sleep 0.1
     expect(page).to have_selector(".added-by-vanilla-nested", count: 1)
-    second_author_input = find(".added-by-vanilla-nested input")
 
-    second_author_input.fill_in with: "Second Author"
+    within(".added-by-vanilla-nested") do
+      fill_in "Name", with: "Second Author"
+    end
 
     expect {
       click_button "Create Reference"
+      expect(page).to have_content("A new reference")
     }.to change(Author, :count).by(2)
 
-    expect(page).to have_content("A new reference")
     expect(page).to have_content("Brand New Author")
     expect(page).to have_content("Second Author")
   end

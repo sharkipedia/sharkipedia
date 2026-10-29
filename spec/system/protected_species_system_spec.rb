@@ -20,25 +20,32 @@ RSpec.describe "List of protected species" do
   end
 
   it "allows the user to filter by order and family" do
+    order = protected_species_cms.species_order.name
+    family = protected_species_cms.species_family.name
+
     visit protected_species_path
 
     click_button "Order"
     click_on protected_species_cms.species_order.name
+    expect(page).to have_current_path(protected_species_path(filter: {order: order}))
 
     expect(page).not_to have_content(protected_species_cites.name)
 
     click_button "Family"
     click_on protected_species_cms.species_family.name
+    expect(page).to have_current_path(protected_species_path(filter: {order: order, family: family}))
 
     expect(page).not_to have_content(protected_species_cms2.name)
 
     click_button "Family"
     click_on "All"
+    expect(page).to have_current_path(protected_species_path(filter: {order: order}))
 
     expect(page).to have_content(protected_species_cms2.name)
 
     click_button "Order"
     click_on "All"
+    expect(page).to have_current_path(protected_species_path)
 
     expect(page).to have_content(protected_species_cites.name)
   end

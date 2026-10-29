@@ -76,12 +76,15 @@ Rails.application.configure do
 
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
-  config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+  # Fall back to polling in Docker where inotify doesn't work with bind mounts.
+  config.file_watcher = if File.exist?("/.dockerenv")
+    ActiveSupport::FileUpdateChecker
+  else
+    ActiveSupport::EventedFileUpdateChecker
+  end
 
-  # Uncomment if you wish to allow Action Cable access from any origin.
-  # config.action_cable.disable_request_forgery_protection = true
   config.good_job.execution_mode = :external
-end
 
-# URL generation for ActiveStorage requires this in development
-Rails.application.routes.default_url_options[:host] = "localhost:3000"
+  # Errors surface directly in development and test; don't record them.
+  config.solid_errors.enabled = false
+end

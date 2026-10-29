@@ -38,10 +38,11 @@
 #  fk_rails_...  (species_subclass_id => species_subclasses.id)
 #
 class Species < ApplicationRecord
-  enum cms_status: [:none, :appendix_1, :appendix_2], _prefix: true
-  enum cites_status: [:none, :appendix_1, :appendix_2, :appendix_3], _prefix: true
+  enum :cms_status, [:none, :appendix_1, :appendix_2], prefix: true
+  enum :cites_status, [:none, :appendix_1, :appendix_2, :appendix_3], prefix: true
 
   include PgSearch::Model
+
   pg_search_scope :search_by_name, against: [:name],
     using: {
       tsearch: {
@@ -50,6 +51,7 @@ class Species < ApplicationRecord
     }
 
   extend FriendlyId
+
   friendly_id :name, use: :slugged
 
   validates :name, presence: true, uniqueness: true
@@ -83,6 +85,14 @@ class Species < ApplicationRecord
 
   def protected_species?
     !cms_status_none? || !cites_status_none?
+  end
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[name edge_scientific_name]
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    []
   end
 
   private

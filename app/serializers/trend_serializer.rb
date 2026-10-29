@@ -62,7 +62,7 @@
 #  fk_rails_...  (data_type_id => data_types.id)
 #  fk_rails_...  (import_id => imports.id)
 #  fk_rails_...  (location_id => locations.id)
-#  fk_rails_...  (reference_id => "references".id)
+#  fk_rails_...  (reference_id => references.id)
 #  fk_rails_...  (sampling_method_id => sampling_methods.id)
 #  fk_rails_...  (species_group_id => species_groups.id)
 #  fk_rails_...  (species_id => species.id)

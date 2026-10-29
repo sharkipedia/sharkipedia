@@ -10,6 +10,7 @@
 #  f_subarea     :string
 #  f_subdivision :string
 #  f_subunit     :string
+#  geom          :geometry         multipolygon, 4326
 #  name          :string           not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -18,6 +19,7 @@
 # Indexes
 #
 #  index_fao_areas_on_f_code    (f_code)
+#  index_fao_areas_on_geom      (geom) USING gist
 #  index_fao_areas_on_ocean_id  (ocean_id)
 #
 # Foreign Keys
@@ -25,6 +27,8 @@
 #  fk_rails_...  (ocean_id => oceans.id)
 #
 class FaoArea < ApplicationRecord
+  include RegionGeometry
+
   belongs_to :ocean
   validates :f_code, presence: true, uniqueness: true
   validates :f_level, presence: true

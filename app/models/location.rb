@@ -28,6 +28,7 @@ class Location < ApplicationRecord
                                  less_than_or_equal_to: 180}, allow_blank: true
 
   include PgSearch::Model
+
   pg_search_scope :search_by_name, against: [:name],
     using: {
       tsearch: {

@@ -1,0 +1,17 @@
+.git
+.github
+.bundle
+.env
+log/*
+tmp/*
+storage/*
+node_modules
+public/packs
+public/packs-test
+public/assets
+.byebug_history
+.DS_Store
+yarn-error.log
+yarn-debug.log*
+erd.pdf
+docs/

@@ -2,6 +2,12 @@ Rails.application.routes.draw do
   # Health check for kamal-proxy: 200 when the app boots, 500 otherwise.
   get "up" => "rails/health#show", :as => :rails_health_check
 
+  # sharkipedia.org -> www.sharkipedia.org
+  constraints(host: "sharkipedia.org") do
+    match "(*path)", via: :all,
+      to: redirect { |_params, request| "https://www.sharkipedia.org#{request.fullpath}" }
+  end
+
   namespace :admin do
     resources :users
     resources :authors

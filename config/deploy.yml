@@ -1,8 +1,8 @@
-# Production deploy (www.sharkipedia.xyz). Runs from GitHub Actions
+# Production deploy (www.sharkipedia.org). Runs from GitHub Actions
 # (.github/workflows/deploy.yml); see docs/deploy.md.
 #
-# Traffic: Cloudflare -> tunnel (the "tunnel" accessory) -> kamal-proxy -> app.
-# Nothing on the server listens on a public port.
+# Traffic: visitor -> kamal-proxy (ports 80/443, Let's Encrypt) -> app.
+# sharkipedia.org redirects to www (config/routes.rb).
 service: sharkipedia
 image: sharkipedia/sharkipedia
 
@@ -19,14 +19,13 @@ servers:
 deploy_timeout: 300
 
 proxy:
-  host: www.sharkipedia.xyz
+  hosts:
+    - www.sharkipedia.org
+    - sharkipedia.org
   app_port: 3000
-  ssl: false # Cloudflare terminates TLS
-  forward_headers: true
+  ssl: true
   healthcheck:
     path: /up
-  run:
-    publish: false # only the tunnel talks to kamal-proxy, over the Docker network
 
 registry:
   server: ghcr.io
@@ -45,7 +44,7 @@ env:
     DB_HOST: sharkipedia-db
     DB_USER: sharkipedia
     DB_NAME: sharkipedia_production
-    DEFAULT_URL_HOST: www.sharkipedia.xyz
+    DEFAULT_URL_HOST: www.sharkipedia.org
     RAILS_MAX_THREADS: 5
     WEB_CONCURRENCY: 2
     # Where Solid Errors sends new-error emails; empty disables them.
@@ -78,11 +77,3 @@ accessories:
       - config/server/db-init.sh:/docker-entrypoint-initdb.d/10-sharkipedia.sh
     directories:
       - data:/var/lib/postgresql/data
-
-  tunnel:
-    image: cloudflare/cloudflared:2026.10.6
-    host: 100.89.83.34
-    cmd: tunnel --no-autoupdate run
-    env:
-      secret:
-        - TUNNEL_TOKEN

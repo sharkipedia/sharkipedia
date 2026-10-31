@@ -65,12 +65,12 @@ if ! tailscale status >/dev/null 2>&1; then
   tailscale up --advertise-tags=tag:server --hostname=sharkipedia
 fi
 
-# Firewall: SSH only over Tailscale, nothing open to the internet. Web
-# traffic arrives through the Cloudflare Tunnel (outbound). Docker-published
-# ports bypass ufw, so containers must not publish ports to the host.
+# Firewall: SSH only over Tailscale; HTTP(S) for kamal-proxy. Docker-published
+# ports bypass ufw, so no other container may publish ports to the host.
 ufw default deny incoming
 ufw default allow outgoing
 ufw allow in on tailscale0 to any port 22 proto tcp comment "SSH via Tailscale"
+ufw allow 80,443/tcp comment "kamal-proxy"
 ufw delete allow OpenSSH >/dev/null 2>&1 || true
 ufw --force enable
 

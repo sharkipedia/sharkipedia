@@ -211,7 +211,7 @@ Two jobs on push/PR to `master`:
 ## Deployment
 
 Kamal on one Hetzner server, deployed from GitHub Actions: production after CI
-passes on `master`, previews per PR at `pr-<n>.sharkipedia.xyz`. Production
+passes on `master`, previews per PR at `pr-<n>.sharkipedia.org`. Production
 image: `Dockerfile` (development uses `Dockerfile.dev`). Config:
 `config/deploy.yml`, `config/deploy.preview.yml`, `config/server/`. Previews
 set `PREVIEW=true` (no mail, no cron, development S3 bucket). See

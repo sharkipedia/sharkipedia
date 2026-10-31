@@ -1,4 +1,4 @@
-# Pull request previews: https://pr-<number>.sharkipedia.xyz
+# Pull request previews: https://pr-<number>.sharkipedia.org
 # Deployed by .github/workflows/preview.yml with
 #   PR_NUMBER=42 kamal deploy -c config/deploy.preview.yml
 #
@@ -19,14 +19,11 @@ servers:
 deploy_timeout: 300
 
 proxy:
-  host: pr-<%= pr %>.sharkipedia.xyz
+  host: pr-<%= pr %>.sharkipedia.org
   app_port: 3000
-  ssl: false
-  forward_headers: true
+  ssl: true
   healthcheck:
     path: /up
-  run:
-    publish: false # only the tunnel talks to kamal-proxy, over the Docker network
 
 registry:
   server: ghcr.io
@@ -46,7 +43,7 @@ env:
     DB_HOST: sharkipedia-db
     DB_USER: preview
     DB_NAME: sharkipedia_pr_<%= pr %>
-    DEFAULT_URL_HOST: pr-<%= pr %>.sharkipedia.xyz
+    DEFAULT_URL_HOST: pr-<%= pr %>.sharkipedia.org
     # One process: Puma runs the background jobs too.
     GOOD_JOB_EXECUTION_MODE: async
     WEB_CONCURRENCY: 0

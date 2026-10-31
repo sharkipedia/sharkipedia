@@ -40,9 +40,9 @@ Rails.application.configure do
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :amazon
 
-  # TLS ends at Cloudflare; requests reach the app over plain HTTP through the
-  # tunnel and kamal-proxy. Treat them as HTTPS anyway, and keep HSTS and
-  # secure cookies. The health check stays plain HTTP.
+  # TLS ends at kamal-proxy; requests reach the app over plain HTTP. Treat
+  # them as HTTPS anyway, and keep HSTS and secure cookies. The health check
+  # stays plain HTTP.
   config.assume_ssl = true
   config.force_ssl = true
   config.ssl_options = {redirect: {exclude: ->(request) { request.path == "/up" }}}

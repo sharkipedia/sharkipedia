@@ -1,0 +1,47 @@
+name: Deploy
+
+# Production deploy after CI passes on master. Also runnable by hand.
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+    branches: [master]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push')
+    runs-on: ubuntu-24.04-arm
+    environment:
+      name: production
+      url: https://www.sharkipedia.org
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    env:
+      KAMAL_REGISTRY_USERNAME: ${{ github.actor }}
+      KAMAL_REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      # Only used when the db accessory is first booted.
+      POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+      PREVIEW_DB_PASSWORD: ${{ secrets.PREVIEW_DB_PASSWORD }}
+      SOLIDERRORS_EMAIL_TO: ${{ vars.SOLIDERRORS_EMAIL_TO }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+
+      - uses: ./.github/actions/kamal-setup
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      # setup = boot the db accessory if it's missing, then deploy.
+      - run: kamal setup

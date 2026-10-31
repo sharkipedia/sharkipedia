@@ -1,0 +1,56 @@
+# Pull request previews: https://pr-<number>.sharkipedia.org
+# Deployed by .github/workflows/preview.yml with
+#   PR_NUMBER=42 kamal deploy -c config/deploy.preview.yml
+#
+# Each preview is its own Kamal service on the production server, with its
+# own database copied from a nightly snapshot of production. It connects as
+# the "preview" role, which has no access to the production database. Mail,
+# cron and the production S3 bucket are off (PREVIEW in production.rb).
+<% pr = Integer(ENV.fetch("PR_NUMBER")) %>
+service: sharkipedia-pr-<%= pr %>
+image: sharkipedia/sharkipedia
+
+servers:
+  web:
+    - 100.89.83.34
+
+# The first boot runs migrations (and seeds on an empty database) before
+# the app answers health checks.
+deploy_timeout: 300
+
+proxy:
+  host: pr-<%= pr %>.sharkipedia.org
+  app_port: 3000
+  ssl: true
+  healthcheck:
+    path: /up
+
+registry:
+  server: ghcr.io
+  username: <%= ENV.fetch("KAMAL_REGISTRY_USERNAME", "sharkipedia") %>
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+
+builder:
+  arch: arm64
+  cache:
+    type: gha
+    options: mode=max
+
+env:
+  clear:
+    PREVIEW: "true"
+    DB_HOST: sharkipedia-db
+    DB_USER: preview
+    DB_NAME: sharkipedia_pr_<%= pr %>
+    DEFAULT_URL_HOST: pr-<%= pr %>.sharkipedia.org
+    # One process: Puma runs the background jobs too.
+    GOOD_JOB_EXECUTION_MODE: async
+    WEB_CONCURRENCY: 0
+    RAILS_MAX_THREADS: 3
+  secret:
+    - RAILS_MASTER_KEY
+    - DB_PASSWORD:PREVIEW_DB_PASSWORD
+
+# Keep old images out of the way; previews are redeployed often.
+retain_containers: 2

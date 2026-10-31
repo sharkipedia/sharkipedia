@@ -14,4 +14,12 @@ public/assets
 yarn-error.log
 yarn-debug.log*
 erd.pdf
-docs/
+docs/user-flows
+docs/*.pdf
+/config/master.key
+/config/database.local.yml
+/.kamal/secrets*
+/coverage
+/spec
+/Dockerfile*
+/docker-compose.yml

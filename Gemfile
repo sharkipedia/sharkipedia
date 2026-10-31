@@ -73,6 +73,7 @@ group :development do
   gem "rails-erd"
   gem "annotaterb"
   gem "standard", require: false
+  gem "kamal", "~> 2.12", require: false
 end
 
 group :test do

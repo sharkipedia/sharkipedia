@@ -1,0 +1,42 @@
+name: Kamal setup
+description: Ruby + Kamal, a Tailscale connection to the server, SSH and buildx.
+
+inputs:
+  ssh-private-key:
+    description: Deploy key for root on the server
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - uses: ruby/setup-ruby@v1
+
+    # Just Kamal, at the version in Gemfile.lock; the app's bundle isn't needed.
+    - name: Install Kamal
+      shell: bash
+      run: gem install kamal --no-document -v "$(sed -n 's/^    kamal (\(.*\))$/\1/p' Gemfile.lock)"
+
+    # Joins the tailnet as an ephemeral tag:ci node via GitHub's OIDC token
+    # (no stored secret). The policy only lets tag:ci reach the server on
+    # port 22. The job needs `permissions: id-token: write`.
+    - uses: tailscale/github-action@v4
+      with:
+        oauth-client-id: TpvCmEVtreA1CNTRL-kJPhEtMkU821CNTRL
+        audience: api.tailscale.com/TpvCmEVtreA1CNTRL-kJPhEtMkU821CNTRL
+        tags: tag:ci
+        ping: 100.89.83.34
+
+    - uses: webfactory/ssh-agent@v0.10.0
+      with:
+        ssh-private-key: ${{ inputs.ssh-private-key }}
+
+    - name: Trust the server's host key
+      shell: bash
+      run: |
+        mkdir -p ~/.ssh
+        echo "100.89.83.34 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMY+Gs8G6VQykt+Y7WEutUc2k3Qkw4CJw7NCjqfJnVXi" >> ~/.ssh/known_hosts
+
+    - uses: docker/setup-buildx-action@v4
+
+    # Exposes the cache service to Kamal's buildx (builder cache type: gha).
+    - uses: crazy-max/ghaction-github-runtime@v4

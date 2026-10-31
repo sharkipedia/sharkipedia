@@ -37,5 +37,9 @@ test:
 
 <% end %>
 
+# On the server: DB_HOST / DB_USER / DB_PASSWORD / DB_NAME (config/deploy*.yml).
+# DATABASE_URL still works and takes precedence.
 production:
-  url: <%= ENV['DATABASE_URL'].try(:sub, /^postgres/, "postgis") %>
+  <<: *default
+  database: <%= ENV.fetch("DB_NAME", "sharkipedia_production") %>
+  url: <%= ENV["DATABASE_URL"]&.sub(/^postgres/, "postgis") %>

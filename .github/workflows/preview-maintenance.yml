@@ -1,0 +1,48 @@
+name: Preview maintenance
+
+# Nightly: refresh the database snapshot new previews start from, and remove
+# previews whose pull request is no longer open (in case a teardown failed).
+on:
+  schedule:
+    - cron: "15 4 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: preview-maintenance
+
+permissions:
+  contents: read
+  pull-requests: read
+  id-token: write
+
+env:
+  SERVER: root@100.89.83.34
+  KAMAL_REGISTRY_PASSWORD: unused
+
+jobs:
+  maintain:
+    runs-on: ubuntu-24.04-arm
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: ./.github/actions/kamal-setup
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Refresh the preview seed database
+        run: ssh "$SERVER" 'bash -s' < config/server/preview-seed.sh
+
+      - name: Remove previews of closed pull requests
+        run: |
+          open=" $(gh pr list --state open --limit 500 --json number --jq '.[].number' | tr '\n' ' ') "
+          containers=$(ssh "$SERVER" "docker ps -a --format '{{.Label \"service\"}}'" | sed -n 's/^sharkipedia-pr-\([0-9]*\)$/\1/p')
+          databases=$(ssh "$SERVER" "docker exec sharkipedia-db psql -U postgres -Atc \"SELECT datname FROM pg_database\"" | sed -n 's/^sharkipedia_pr_\([0-9]*\)$/\1/p')
+          for pr in $(echo $containers $databases | tr ' ' '\n' | sort -u); do
+            if [[ "$open" != *" $pr "* ]]; then
+              echo "Removing preview for closed PR #$pr"
+              PR_NUMBER=$pr kamal app remove -c config/deploy.preview.yml || true
+              ssh "$SERVER" 'bash -s' -- drop "$pr" < config/server/preview-db.sh
+            fi
+          done

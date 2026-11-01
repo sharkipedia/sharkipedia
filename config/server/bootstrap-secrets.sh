@@ -26,9 +26,7 @@ done
 
 gh secret set RAILS_MASTER_KEY -R "$repo" < config/master.key
 
-# Nightly database dump on the server (see backup.sh).
-scp -q config/server/backup.sh "$server":/usr/local/bin/sharkipedia-backup
-ssh "$server" 'chmod 755 /usr/local/bin/sharkipedia-backup &&
-  echo "30 3 * * * root /usr/local/bin/sharkipedia-backup" > /etc/cron.d/sharkipedia-backup'
+# Nightly database dump to the server and S3 (see backup.sh).
+config/server/install-backup.sh
 
 gh secret list -R "$repo"

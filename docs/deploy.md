@@ -87,7 +87,8 @@ and uploads it to the S3 bucket `sharkipedia-db-backups` (us-east-1).
 Install or update it with `config/server/install-backup.sh`.
 
 The bucket blocks public access, keeps object versions and expires dumps
-(and old versions) after 90 days. The server uploads as the IAM user
+(and old versions) after 90 days. `config/server/aws-backup-bucket.sh`
+creates it and the IAM user. The server uploads as the IAM user
 `sharkipedia-backup`, which may only `s3:PutObject` into the bucket, so a
 compromised server can't delete or read old backups. To rotate its key, create
 a new one in IAM, run `config/server/install-backup.sh --keys`, then delete

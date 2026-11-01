@@ -20,5 +20,5 @@ env_file=/etc/sharkipedia/backup-s3.env
 if [ -f "$env_file" ]; then
   bucket=$(sed -n 's/^BACKUP_S3_BUCKET=//p' "$env_file")
   docker run --rm --env-file "$env_file" -v "$dir:/backup:ro" amazon/aws-cli:2.39.3 \
-    s3 cp "/backup/$name" "s3://$bucket/$name" --storage-class STANDARD_IA --only-show-errors
+    s3 cp "/backup/$name" "s3://$bucket/$name" --only-show-errors
 fi

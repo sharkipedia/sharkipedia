@@ -15,11 +15,11 @@ aws s3api put-public-access-block --bucket "$bucket" --public-access-block-confi
 aws s3api put-bucket-versioning --bucket "$bucket" --versioning-configuration Status=Enabled
 aws s3api put-bucket-lifecycle-configuration --bucket "$bucket" --lifecycle-configuration '{
   "Rules": [{
-    "ID": "expire-after-90-days",
+    "ID": "expire-after-14-days",
     "Status": "Enabled",
     "Filter": {},
-    "Expiration": {"Days": 90},
-    "NoncurrentVersionExpiration": {"NoncurrentDays": 90},
+    "Expiration": {"Days": 14},
+    "NoncurrentVersionExpiration": {"NoncurrentDays": 1},
     "AbortIncompleteMultipartUpload": {"DaysAfterInitiation": 7}
   }]
 }'

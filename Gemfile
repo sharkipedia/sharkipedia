@@ -78,7 +78,7 @@ end
 
 group :test do
   gem "capybara", "~> 3.40"
-  gem "cuprite", "~> 0.15"
+  gem "cuprite", "~> 0.20"
   gem "selenium-webdriver", "~> 4.27"
 
   gem "capybara-select-2", "~> 0.5"

@@ -1,7 +1,7 @@
 require "csv"
 require "roo"
 
-if Rails.env.development? || ENV["HEROKU_APP_NAME"] =~ /staging/
+if Rails.env.development?
   admin = User.new email: "admin@example.com", password: "123123123",
     name: "Admin", user_level: "admin", confirmed_at: Time.now.utc
   admin.skip_confirmation_notification!

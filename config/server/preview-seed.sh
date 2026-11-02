@@ -12,7 +12,7 @@ sql() { docker exec sharkipedia-db psql -v ON_ERROR_STOP=1 -U postgres -d "$1" -
 
 sql postgres "DROP DATABASE IF EXISTS sharkipedia_seed_new WITH (FORCE)"
 sql postgres "CREATE DATABASE sharkipedia_seed_new OWNER preview"
-sql sharkipedia_seed_new "CREATE SCHEMA IF NOT EXISTS heroku_ext; CREATE EXTENSION IF NOT EXISTS postgis; CREATE EXTENSION IF NOT EXISTS pgcrypto;"
+sql sharkipedia_seed_new "CREATE EXTENSION IF NOT EXISTS postgis; CREATE EXTENSION IF NOT EXISTS pgcrypto;"
 
 # pg_restore reports harmless errors for the extensions that already exist
 # (the preview role can't comment on them), so check the result instead of

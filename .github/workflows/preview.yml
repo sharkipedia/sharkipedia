@@ -60,6 +60,11 @@ jobs:
 
       - run: kamal deploy -c config/deploy.preview.yml
 
+      # kamal-proxy gets the Let's Encrypt certificate on the first HTTPS
+      # request; make that request here so the first visitor doesn't wait.
+      - name: Get the TLS certificate
+        run: curl -fsS --retry 5 --retry-all-errors --max-time 60 -o /dev/null "https://pr-$PR_NUMBER.sharkipedia.org/up"
+
   teardown:
     if: >-
       github.event.action == 'closed' &&

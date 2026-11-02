@@ -1,14 +1,22 @@
 version: 2
 updates:
+  # One weekly PR per ecosystem for minor and patch updates; major updates
+  # still get their own PRs.
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "weekly"
+    groups:
+      npm:
+        update-types: ["minor", "patch"]
     assignees:
       - "coffeejunk"
   - package-ecosystem: bundler
     directory: "/"
     schedule:
-      interval: daily
+      interval: weekly
+    groups:
+      bundler:
+        update-types: ["minor", "patch"]
     assignees:
       - "coffeejunk"

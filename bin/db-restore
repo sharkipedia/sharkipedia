@@ -7,9 +7,10 @@
 # The dump is streamed into the `db` container's pg_restore over stdin, so
 # the file stays on the host — no bind-mount or docker cp needed.
 #
-# Heroku dumps reference a `heroku` role and tag the restored database as
-# `environment=production` in ar_internal_metadata, which would cause Rails
-# to refuse destructive tasks against the dev DB. Both are handled below.
+# Production dumps (see "Backups" in docs/deploy.md) reference production
+# roles and tag the database as `environment=production` in
+# ar_internal_metadata, which would cause Rails to refuse destructive tasks
+# against the dev DB. Both are handled below.
 
 set -euo pipefail
 
@@ -39,9 +40,9 @@ echo "==> Dropping and recreating $DB"
 docker compose exec -T db dropdb -U "$PSQL_USER" --if-exists --force "$DB"
 docker compose exec -T db createdb -U "$PSQL_USER" "$DB"
 
-# Heroku installs extensions into a dedicated "heroku_ext" schema. Pre-create
-# it so the CREATE EXTENSION ... WITH SCHEMA "heroku_ext" statements in the
-# dump succeed locally.
+# The production database came from Heroku, which installs extensions into a
+# "heroku_ext" schema. Pre-create it so CREATE EXTENSION ... WITH SCHEMA
+# "heroku_ext" statements in the dump succeed locally.
 docker compose exec -T db psql -U "$PSQL_USER" -d "$DB" -v ON_ERROR_STOP=1 \
   -c "CREATE SCHEMA IF NOT EXISTS heroku_ext;"
 

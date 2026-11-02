@@ -121,7 +121,7 @@
     "webpack-assets-manifest": "^6",
     "webpack-cli": "^7",
     "webpack-merge": "^6.0.1",
-    "webpack-sources": "^3.2.3",
+    "webpack-sources": "^3.7.0",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {

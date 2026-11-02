@@ -23,10 +23,9 @@ REVOKE ALL ON DATABASE sharkipedia_seed FROM PUBLIC;
 SQL
 
 # Extensions need a superuser; create them up front so the app roles never
-# need one. heroku_ext only exists so dumps taken on Heroku restore cleanly.
+# need one.
 for db in sharkipedia_production sharkipedia_seed; do
   psql -v ON_ERROR_STOP=1 -U "$POSTGRES_USER" -d "$db" <<'SQL'
-CREATE SCHEMA IF NOT EXISTS heroku_ext;
 CREATE EXTENSION IF NOT EXISTS postgis;
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
 SQL

@@ -40,12 +40,6 @@ echo "==> Dropping and recreating $DB"
 docker compose exec -T db dropdb -U "$PSQL_USER" --if-exists --force "$DB"
 docker compose exec -T db createdb -U "$PSQL_USER" "$DB"
 
-# The production database came from Heroku, which installs extensions into a
-# "heroku_ext" schema. Pre-create it so CREATE EXTENSION ... WITH SCHEMA
-# "heroku_ext" statements in the dump succeed locally.
-docker compose exec -T db psql -U "$PSQL_USER" -d "$DB" -v ON_ERROR_STOP=1 \
-  -c "CREATE SCHEMA IF NOT EXISTS heroku_ext;"
-
 echo "==> Restoring $(basename "$DUMP") ($(du -h "$DUMP" | awk '{print $1}'))"
 docker compose exec -T db pg_restore \
   -U "$PSQL_USER" \

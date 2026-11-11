@@ -35,7 +35,7 @@ gem "pundit", "~> 2.5"
 
 gem "roo", "~> 4.0"
 gem "rubyXL"
-gem "aws-sdk-s3", "~> 1.237", require: false
+gem "aws-sdk-s3", "~> 1.239", require: false
 
 gem "filterrific", "~> 5.2"
 # Use ActiveStorage variant
@@ -63,7 +63,7 @@ gem "vanilla_nested"
 
 group :development, :test do
   gem "debug", platforms: %i[mri windows]
-  gem "rspec-rails", "~> 8.0"
+  gem "rspec-rails", "~> 8.1"
 end
 
 group :development do
@@ -78,7 +78,7 @@ end
 
 group :test do
   gem "capybara", "~> 3.40"
-  gem "cuprite", "~> 0.15"
+  gem "cuprite", "~> 0.20"
   gem "selenium-webdriver", "~> 4.27"
 
   gem "capybara-select-2", "~> 0.5"
@@ -112,7 +112,7 @@ gem "underscore-rails", "~> 1.8"
 
 gem "pg_search", "~> 2.3"
 
-gem "pagy", "~> 43.0"
+gem "pagy", "~> 43.8"
 
 gem "invisible_captcha", "~> 2.3"
 

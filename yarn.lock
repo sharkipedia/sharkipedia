@@ -3268,10 +3268,10 @@ caniuse-lite@^1.0.30001810, caniuse-lite@^1.0.30001819:
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001820.tgz#bbed68c45bb4c4316084594ba044ba56e68bfae7"
   integrity sha512-gfWD6MxqVCqAOwmODfZf7DchWvlrA+SRdNX7ceLfg3xRqe5ssjjpF7EgslC/0tiLiNTajdaNN/q8c/5u/7Gz8w==
 
-canvas-datagrid@^0.26:
-  version "0.26.0"
-  resolved "https://registry.yarnpkg.com/canvas-datagrid/-/canvas-datagrid-0.26.0.tgz#2c8a06e462ec23b26f591662f4755b6313ba14cb"
-  integrity sha512-lzfdf/OoNNd1HmhrlYOuVkHK+mkCSNz0Knu4vxpwYCwEx81MWyysh8ItlDi2WAVnC5f6+pOhFWf4FGT87WKqNA==
+canvas-datagrid@^0.27:
+  version "0.27.1"
+  resolved "https://registry.yarnpkg.com/canvas-datagrid/-/canvas-datagrid-0.27.1.tgz#2b9cb70b6fe9344e72914b1fc2fa41ee624b47d7"
+  integrity sha512-HQkJ87eOnz4WWsPudOuK9UMW24B5rdrrqBkkCYezixsUdY/xai4r6VyILIYUKaMLCKij6EuqAgR2s3Eqr/r1ZA==
   dependencies:
     is-printable-key-event "1.0.0"
 
@@ -6029,10 +6029,10 @@ sass-loader@^17:
   resolved "https://registry.yarnpkg.com/sass-loader/-/sass-loader-17.1.0.tgz#1100c176be08afd664baeecbb542aa02fd85d9c1"
   integrity sha512-EZ/u/bLkAErTKvIq/f81Bz6tgL/5Brt8hWOABdTsVdO+nX0PWx2rQhR6fyxVME+MhnQrrwecMDlm2G1y07hhpQ==
 
-sass@^1.107.1:
-  version "1.107.1"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.107.1.tgz#a8a461744666e31f8973041a6b9ae7fcb265befd"
-  integrity sha512-aJ1/LvxOOb04YhmiBjzZn3jVwdHKol+OVhoMV6fFl02fF9T3i+5Mg9l/CnzqtM+NX5Jn5o3lAbs/ZJivTCLHfQ==
+sass@^1.108.1:
+  version "1.108.1"
+  resolved "https://registry.yarnpkg.com/sass/-/sass-1.108.1.tgz#169e456df9ad50bac4593435a207106a59b645a1"
+  integrity sha512-sIYgSvOPeD9wABwDS/ofNjHASSck+7h3jLkk7wG1NPFL3XeS6vOQjBlAFSmRV09kZr1yt/Tuayt6kKtBbLjHNQ==
   dependencies:
     chokidar "^5.0.0"
     immutable "^5.1.5"

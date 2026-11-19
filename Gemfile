@@ -8,7 +8,7 @@ gem "rails", "~> 8.1"
 # Use postgres as the database for Active Record
 gem "pg", "~> 1.6"
 # Use Puma as the app server
-gem "puma", "~> 8.0"
+gem "puma", "~> 8.1"
 # Use SCSS for stylesheets
 gem "sass-rails", "~> 6.0"
 # Use Uglifier as compressor for JavaScript assets
@@ -35,7 +35,7 @@ gem "pundit", "~> 2.5"
 
 gem "roo", "~> 4.0"
 gem "rubyXL"
-gem "aws-sdk-s3", "~> 1.239", require: false
+gem "aws-sdk-s3", "~> 1.242", require: false
 
 gem "filterrific", "~> 5.2"
 # Use ActiveStorage variant
@@ -57,7 +57,7 @@ gem "rgeo-geojson", "~> 2.1"
 gem "bootsnap", ">= 1.18", require: false
 
 gem "jsonapi.rb", "~> 2.0"
-gem "ransack", "~> 6.0"
+gem "ransack", "~> 6.1"
 
 gem "vanilla_nested"
 

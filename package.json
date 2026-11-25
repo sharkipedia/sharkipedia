@@ -103,7 +103,7 @@
     "postcss": "^8.5.33",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-import": "^17",
-    "postcss-loader": "^8.1.1",
+    "postcss-loader": "^8.2.2",
     "postcss-preset-env": "^11",
     "prop-types": "^15.8.1",
     "react": "^19",
@@ -121,7 +121,7 @@
     "webpack-assets-manifest": "^6",
     "webpack-cli": "^7",
     "webpack-merge": "^6.0.1",
-    "webpack-sources": "^3.7.0",
+    "webpack-sources": "^3.7.1",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {

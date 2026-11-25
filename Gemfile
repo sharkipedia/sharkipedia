@@ -35,7 +35,7 @@ gem "pundit", "~> 2.5"
 
 gem "roo", "~> 4.0"
 gem "rubyXL"
-gem "aws-sdk-s3", "~> 1.242", require: false
+gem "aws-sdk-s3", "~> 1.245", require: false
 
 gem "filterrific", "~> 5.2"
 # Use ActiveStorage variant
@@ -79,7 +79,7 @@ end
 group :test do
   gem "capybara", "~> 3.40"
   gem "cuprite", "~> 0.20"
-  gem "selenium-webdriver", "~> 4.27"
+  gem "selenium-webdriver", "~> 4.53"
 
   gem "capybara-select-2", "~> 0.5"
 
